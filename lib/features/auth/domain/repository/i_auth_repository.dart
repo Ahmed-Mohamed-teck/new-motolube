@@ -1,10 +1,12 @@
-import 'package:newmotorlube/features/auth/domain/entity/user_entity.dart';
+import '../../data/model/register_request.dart';
+import '../../data/model/register_response.dart';
+import '../../data/model/send_otp_request.dart';
+import '../../data/model/send_otp_response.dart';
+import '../../data/model/verify_otp_request.dart';
+import '../../data/model/verify_otp_response.dart';
 
 abstract class IAuthRepository {
-  Future<bool> isRegisteredUser({required String phoneNumber});
-  Future<bool> sendOtp({required String phoneNumber});
-  Future<UserEntity> verifyOtp({
-    required String phoneNumber,
-    required String otp,
-  });
+  Future<SendOtpResponse> sendOtp(SendOtpRequest request);
+  Future<RegisterResponse> register(RegisterRequest request);
+  Future<VerifyOtpResponse> verifyOtp(VerifyOtpRequest request);
 }

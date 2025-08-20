@@ -1,27 +1,28 @@
-import 'package:newmotorlube/features/auth/domain/repository/i_auth_repository.dart';
-import '../../domain/entity/user_entity.dart';
-import '../data_source/i_auth_remote_data_source.dart';
+import '../data_source/auth_remote_data_source.dart';
+import '../model/register_request.dart';
+import '../model/register_response.dart';
+import '../model/send_otp_request.dart';
+import '../model/send_otp_response.dart';
+import '../model/verify_otp_request.dart';
+import '../model/verify_otp_response.dart';
+import '../../domain/repository/i_auth_repository.dart';
 
-class AuthRepositoryImpl extends IAuthRepository {
-  final IAuthRemoteDataSource remoteDataSource;
-
-  AuthRepositoryImpl(this.remoteDataSource);
+class AuthRepositoryImpl implements IAuthRepository {
+  final IAuthRemoteDataSource remote;
+  AuthRepositoryImpl(this.remote);
 
   @override
-  Future<bool> isRegisteredUser({required String phoneNumber}) {
-    return remoteDataSource.isRegisteredUser(phoneNumber: phoneNumber);
+  Future<SendOtpResponse> sendOtp(SendOtpRequest request) {
+    return remote.sendOtp(request);
   }
 
   @override
-  Future<bool> sendOtp({required String phoneNumber}) {
-    return remoteDataSource.sendOtp(phoneNumber: phoneNumber);
+  Future<RegisterResponse> register(RegisterRequest request) {
+    return remote.register(request);
   }
 
   @override
-  Future<UserEntity> verifyOtp({
-    required String phoneNumber,
-    required String otp,
-  }) {
-    return remoteDataSource.verifyOtp(phoneNumber: phoneNumber, otp: otp);
+  Future<VerifyOtpResponse> verifyOtp(VerifyOtpRequest request) {
+    return remote.verifyOtp(request);
   }
 }
