@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "359150204861",
+    "project_id": "motorlube-qa",
+    "storage_bucket": "motorlube-qa.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:359150204861:android:556e7431191f50047884d4",
+        "android_client_info": {
+          "package_name": "com.example.newmotorlube"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcXe4wjqGvj6znqEHcBMokVx2GOwHbG28"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
