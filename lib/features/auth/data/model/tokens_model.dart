@@ -1,9 +1,10 @@
+import '../../domain/entity/tokens.dart';
+
 class TokensModel {
   final String firebaseToken;
   final String jwtToken;
   final String tokenType;
   final int expiresIn;
-
   TokensModel({
     required this.firebaseToken,
     required this.jwtToken,
@@ -16,5 +17,12 @@ class TokensModel {
         jwtToken: json['jwtToken'] as String,
         tokenType: json['tokenType'] as String,
         expiresIn: json['expiresIn'] as int,
+      );
+
+  Tokens toEntity() => Tokens(
+        firebaseToken: firebaseToken,
+        jwtToken: jwtToken,
+        tokenType: tokenType,
+        expiresIn: expiresIn,
       );
 }

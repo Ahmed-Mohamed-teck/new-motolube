@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../provider/otp_auth_provider.dart';
-import '../state/otp_login_state.dart';
-import '../widgets/otp_input.dart';
+import '../../provider/auth_providers.dart';
+import '../view_model/auth_state.dart';
+import '../widget/otp_input.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -25,42 +25,54 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(otpLoginNotifierProvider);
-    final notifier = ref.read(otpLoginNotifierProvider.notifier);
+    final state = ref.watch(authViewModelProvider);
+    final vm = ref.read(authViewModelProvider.notifier);
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (state.errorMessage != null) {
+    ref.listen<AuthState>(authViewModelProvider, (prev, next) {
+      if (next is ErrorState) {
         ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(state.errorMessage!)));
+            .showSnackBar(SnackBar(content: Text(next.message)));
       }
-      if (state.isAuthenticated) {
+      if (prev is VerifyingState && next is IdleState) {
         Navigator.pushReplacementNamed(context, 'baseHomeScreen');
       }
     });
 
-    final showName = state.status == OtpLoginStatus.registration ||
-        state.status == OtpLoginStatus.registering;
-    final showOtp = state.status == OtpLoginStatus.awaitingOtp ||
-        state.status == OtpLoginStatus.verifyingOtp;
+    final showName = state is RegistrationState;
+    final showOtp = state is AwaitingOtpState || state is VerifyingState;
 
     String buttonText = 'Login';
     VoidCallback? buttonAction;
-    final loadingStates = {
-      OtpLoginStatus.checkingOrSendingOtp,
-      OtpLoginStatus.registering,
-      OtpLoginStatus.verifyingOtp,
-    };
-    final isLoading = loadingStates.contains(state.status);
+    final isLoading = state is CheckingState || state is VerifyingState;
 
     if (showOtp) {
-      buttonText = 'Verify & Proceed';
-      buttonAction = isLoading ? null : notifier.verifyOtp;
+      buttonText = 'Verify';
+      buttonAction = isLoading ? null : vm.onVerifyPressed;
     } else if (showName) {
       buttonText = 'Register';
-      buttonAction = isLoading ? null : notifier.register;
+      buttonAction = isLoading
+          ? null
+          : () => vm.onRegisterPressed(
+                name: _nameController.text,
+                phone: _phoneController.text,
+              );
     } else {
       buttonText = 'Login';
-      buttonAction = isLoading ? null : notifier.sendOtp;
+      buttonAction = isLoading
+          ? null
+          : () => vm.onLoginPressed(_phoneController.text);
+    }
+
+    String phone = '';
+    int secondsRemaining = 0;
+    String? otpError;
+    if (state is AwaitingOtpState) {
+      phone = state.phone;
+      secondsRemaining = state.remainingSeconds;
+      otpError = state.errorMessage;
+    } else if (state is VerifyingState) {
+      phone = state.phone;
+      secondsRemaining = state.remainingSeconds;
     }
 
     return Scaffold(
@@ -73,37 +85,40 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             TextField(
               controller: _phoneController,
               keyboardType: TextInputType.phone,
-              decoration:
-                  const InputDecoration(labelText: 'Phone', hintText: '+9665XXXXXXXX'),
-              onChanged: notifier.updatePhone,
+              decoration: const InputDecoration(
+                labelText: 'Phone',
+                hintText: '+9665XXXXXXXX',
+              ),
             ),
             if (showName) ...[
               const SizedBox(height: 12),
               TextField(
                 controller: _nameController,
                 decoration: const InputDecoration(labelText: 'Name'),
-                onChanged: notifier.updateName,
               ),
             ],
             if (showOtp) ...[
               const SizedBox(height: 12),
-              Text('Enter the OTP sent to ${state.phone}'),
+              Text('Enter the OTP sent to $phone'),
+              if (otpError != null) ...[
+                const SizedBox(height: 8),
+                Text(otpError, style: const TextStyle(color: Colors.red)),
+              ],
               const SizedBox(height: 12),
               OtpInput(
                 length: 6,
-                onChanged: notifier.updateOtp,
+                onChanged: vm.onOtpChanged,
               ),
               const SizedBox(height: 8),
-              Text('Expires in ${state.secondsRemaining}s'),
+              Text('Expires in ${secondsRemaining}s'),
               const SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text("Don't receive the OTP?"),
                   TextButton(
-                    onPressed: state.secondsRemaining > 0
-                        ? null
-                        : () => notifier.resendOtp(),
+                    onPressed:
+                        secondsRemaining > 0 ? null : () => vm.onResendOtp(),
                     child: const Text('Resend OTP'),
                   ),
                 ],
