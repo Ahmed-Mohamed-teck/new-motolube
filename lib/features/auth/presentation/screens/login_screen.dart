@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../provider/otp_auth_provider.dart';
 import '../state/otp_login_state.dart';
+import '../widgets/otp_input.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -14,13 +15,11 @@ class LoginScreen extends ConsumerStatefulWidget {
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _phoneController = TextEditingController();
   final _nameController = TextEditingController();
-  final _otpController = TextEditingController();
 
   @override
   void dispose() {
     _phoneController.dispose();
     _nameController.dispose();
-    _otpController.dispose();
     super.dispose();
   }
 
@@ -54,7 +53,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final isLoading = loadingStates.contains(state.status);
 
     if (showOtp) {
-      buttonText = 'Verify';
+      buttonText = 'Verify & Proceed';
       buttonAction = isLoading ? null : notifier.verifyOtp;
     } else if (showName) {
       buttonText = 'Register';
@@ -88,19 +87,26 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             ],
             if (showOtp) ...[
               const SizedBox(height: 12),
-              TextField(
-                controller: _otpController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: 'OTP'),
+              Text('Enter the OTP sent to ${state.phone}'),
+              const SizedBox(height: 12),
+              OtpInput(
+                length: 6,
                 onChanged: notifier.updateOtp,
               ),
               const SizedBox(height: 8),
               Text('Expires in ${state.secondsRemaining}s'),
-              TextButton(
-                onPressed: state.secondsRemaining > 0
-                    ? null
-                    : () => notifier.resendOtp(),
-                child: const Text('Resend OTP'),
+              const SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Don't receive the OTP?"),
+                  TextButton(
+                    onPressed: state.secondsRemaining > 0
+                        ? null
+                        : () => notifier.resendOtp(),
+                    child: const Text('Resend OTP'),
+                  ),
+                ],
               ),
             ],
             const SizedBox(height: 24),
