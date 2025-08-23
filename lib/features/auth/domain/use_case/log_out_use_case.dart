@@ -1,11 +1,10 @@
-import 'package:newmotorlube/core/storage/secure_store.dart';
+import '../repository/i_auth_local_repository.dart';
 
 class LogoutUseCase {
-  final SecureStore _secureStore;
+  final IAuthLocalRepository _repository;
+  LogoutUseCase(this._repository);
 
-  LogoutUseCase(this._secureStore);
-
-  Future<void> call() async {
-    await _secureStore.clear();
+  Future<void> call() {
+    return _repository.clear();
   }
 }
