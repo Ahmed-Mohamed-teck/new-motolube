@@ -22,6 +22,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "authenticationErrorMessage":
+            MessageLookupByLibrary.simpleMessage("حدث خطأ اثناء المصادقة"),
         "basicServices":
             MessageLookupByLibrary.simpleMessage("الخدمات الأساسية"),
         "batteires": MessageLookupByLibrary.simpleMessage("بطاريات السيارات"),
@@ -30,13 +32,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "carEvaluation": MessageLookupByLibrary.simpleMessage("تقييم السيارات"),
         "carRepair": MessageLookupByLibrary.simpleMessage("إصلاح السيارات"),
         "carWash": MessageLookupByLibrary.simpleMessage("غسيل السيارات"),
+        "comment": MessageLookupByLibrary.simpleMessage("تعليق"),
         "contactUsAppbar": MessageLookupByLibrary.simpleMessage("اتصل بنا"),
         "contactUsNav": MessageLookupByLibrary.simpleMessage("اتصل بنا"),
+        "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
         "endDate": MessageLookupByLibrary.simpleMessage("تاريخ الانتهاء"),
         "enterPromotionNameHint":
             MessageLookupByLibrary.simpleMessage("أدخل اسم العرض"),
+        "enterProperValue":
+            MessageLookupByLibrary.simpleMessage("يرجى إدخال قيمة صحيحة"),
+        "enterValidEmail": MessageLookupByLibrary.simpleMessage(
+            "يرجى إدخال بريد إلكتروني صالح"),
         "errorSavingPromotion": MessageLookupByLibrary.simpleMessage(
             "حدث خطأ أثناء حفظ العرض، يرجى المحاولة مرة أخرى لاحقًا."),
+        "errorTitle": MessageLookupByLibrary.simpleMessage("خطأ"),
         "fillAllFields":
             MessageLookupByLibrary.simpleMessage("يرجى ملء جميع الحقول"),
         "flatTyre": MessageLookupByLibrary.simpleMessage("إصلاح الإطارات"),
@@ -47,6 +56,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "loginWelcomeMessage": MessageLookupByLibrary.simpleMessage(
             "مرحبا بك، سجل دخولك لموتورلوب"),
+        "mailUsAt": MessageLookupByLibrary.simpleMessage("راسلنا على"),
+        "maintenanceNav": MessageLookupByLibrary.simpleMessage("الصيانة"),
         "majorServices":
             MessageLookupByLibrary.simpleMessage("الخدمات الرئيسية"),
         "mobileServices":
@@ -54,6 +65,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "more": MessageLookupByLibrary.simpleMessage("المزيد"),
         "moreAppbar": MessageLookupByLibrary.simpleMessage("المزيد"),
         "moreNav": MessageLookupByLibrary.simpleMessage("المزيد"),
+        "myCarsNav": MessageLookupByLibrary.simpleMessage("سياراتي"),
+        "name": MessageLookupByLibrary.simpleMessage("الاسم"),
         "next": MessageLookupByLibrary.simpleMessage("التالي"),
         "oiling": MessageLookupByLibrary.simpleMessage("الزيت"),
         "onBoardingDescription1": MessageLookupByLibrary.simpleMessage(
@@ -85,6 +98,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "skip": MessageLookupByLibrary.simpleMessage("تخطى"),
         "start": MessageLookupByLibrary.simpleMessage("ابدأ"),
         "startDate": MessageLookupByLibrary.simpleMessage("تاريخ البدء"),
+        "submit": MessageLookupByLibrary.simpleMessage("إرسال"),
         "towiling": MessageLookupByLibrary.simpleMessage("تولينغ"),
         "yourCars": MessageLookupByLibrary.simpleMessage("سياراتك")
       };

@@ -1,25 +1,14 @@
-class UserEntity{
-  String id;
-  String? name;
-  String? email;
-  bool isEmergencyTech;
-  String? photoUrl;
-  UserType userType;
-  String mobileNo;
-
-  UserEntity({
-    required this.id,
-    required this.userType,
-    required this.isEmergencyTech,
-    required this.mobileNo,
+class User {
+  final String userId;
+  final String? name;
+  final String mobileNo;
+  final String? email;
+  final bool isVerified;
+  const User({
+    required this.userId,
     this.name,
+    required this.mobileNo,
     this.email,
-    this.photoUrl,
+    required this.isVerified,
   });
-}
-
-enum UserType{
-  customer,
-  technician,
-  manager,
 }

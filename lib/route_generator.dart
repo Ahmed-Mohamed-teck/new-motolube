@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:newmotorlube/features/customer_cars/presentation/screen/customer_car_details_screen.dart';
 import 'package:newmotorlube/features/promotions/presentation/screen/create_promotion_screen.dart';
-import 'features/auth/presentation/screens/login_screen.dart';
+import 'features/auth/presentation/screens/auth_screen.dart';
 import 'features/home/presentaion/screen/base_home_screen.dart';
 import 'features/onboarding/presentation/screens/onboarding_screen.dart';
 import 'features/our_service/presentation/our_presentation_screen.dart';

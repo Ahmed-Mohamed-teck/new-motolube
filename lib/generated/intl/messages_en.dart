@@ -22,6 +22,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "authenticationErrorMessage": MessageLookupByLibrary.simpleMessage(
+            "An error occurred during authentication"),
         "basicServices": MessageLookupByLibrary.simpleMessage("Basic Services"),
         "batteires": MessageLookupByLibrary.simpleMessage("Batteries"),
         "bestOffers": MessageLookupByLibrary.simpleMessage("Best Offers"),
@@ -29,13 +31,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "carEvaluation": MessageLookupByLibrary.simpleMessage("Car Evaluation"),
         "carRepair": MessageLookupByLibrary.simpleMessage("Car Repair"),
         "carWash": MessageLookupByLibrary.simpleMessage("Car Wash"),
+        "comment": MessageLookupByLibrary.simpleMessage("Comment"),
         "contactUsAppbar": MessageLookupByLibrary.simpleMessage("Contanct Us"),
         "contactUsNav": MessageLookupByLibrary.simpleMessage("Contact Us"),
+        "email": MessageLookupByLibrary.simpleMessage("Email"),
         "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
         "enterPromotionNameHint":
             MessageLookupByLibrary.simpleMessage("Enter promotion name"),
+        "enterProperValue":
+            MessageLookupByLibrary.simpleMessage("Please enter a proper value"),
+        "enterValidEmail":
+            MessageLookupByLibrary.simpleMessage("Please enter a valid email"),
         "errorSavingPromotion": MessageLookupByLibrary.simpleMessage(
             "An error occurred while saving the promotion, please try again later."),
+        "errorTitle": MessageLookupByLibrary.simpleMessage("Error"),
         "fillAllFields":
             MessageLookupByLibrary.simpleMessage("Please fill all fields"),
         "flatTyre": MessageLookupByLibrary.simpleMessage("Flat Tyre"),
@@ -46,12 +55,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("login"),
         "loginWelcomeMessage": MessageLookupByLibrary.simpleMessage(
             "welcome back, Loging Motorlube"),
+        "mailUsAt": MessageLookupByLibrary.simpleMessage("Mail us at"),
+        "maintenanceNav": MessageLookupByLibrary.simpleMessage("Maintenance"),
         "majorServices": MessageLookupByLibrary.simpleMessage("Major Services"),
         "mobileServices":
             MessageLookupByLibrary.simpleMessage("Mobile Services"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
         "moreAppbar": MessageLookupByLibrary.simpleMessage("More"),
         "moreNav": MessageLookupByLibrary.simpleMessage("More"),
+        "myCarsNav": MessageLookupByLibrary.simpleMessage("My Cars"),
+        "name": MessageLookupByLibrary.simpleMessage("Name"),
         "next": MessageLookupByLibrary.simpleMessage("next"),
         "oiling": MessageLookupByLibrary.simpleMessage("Oiling"),
         "onBoardingDescription1": MessageLookupByLibrary.simpleMessage(
@@ -83,6 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "start": MessageLookupByLibrary.simpleMessage("start"),
         "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
+        "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "towiling": MessageLookupByLibrary.simpleMessage("Towiling"),
         "yourCars": MessageLookupByLibrary.simpleMessage("Your Cars")
       };

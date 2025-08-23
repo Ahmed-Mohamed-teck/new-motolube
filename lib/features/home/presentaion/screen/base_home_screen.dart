@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:newmotorlube/core/providers/global_lang_provider.dart';
+import 'package:newmotorlube/features/auth/provider/auth_provider.dart';
 import 'package:newmotorlube/features/home/presentaion/screen/customer_home_screen.dart';
 import 'package:newmotorlube/features/home/presentaion/screen/manager_home_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 import '../../../../core/utils/theme/app_colors.dart';
 import '../../../../generated/l10n.dart';
+import '../../../contact_us/presentation/screen/contact_us_screen.dart';
+import '../../../customer_cars/presentation/screen/customer_car_details_screen.dart';
+import '../../../maintanance/presentation/screen/book_maintanance_screen.dart';
 
 
-class BaseHomeScreen extends StatefulWidget {
+class BaseHomeScreen extends ConsumerStatefulWidget {
   const BaseHomeScreen({super.key});
 
   @override
-  State<BaseHomeScreen> createState() => _BaseHomeScreenState();
+  ConsumerState<BaseHomeScreen> createState() => _BaseHomeScreenState();
 }
 
-class _BaseHomeScreenState extends State<BaseHomeScreen> {
+class _BaseHomeScreenState extends ConsumerState<BaseHomeScreen> {
   int _currentIndex = 0;
   String appBarTitle = "";
 
@@ -30,6 +35,8 @@ class _BaseHomeScreenState extends State<BaseHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authState = ref.watch(authViewModelProvider);
+    final authVm = ref.read(authViewModelProvider.notifier);
     return  Scaffold(
       appBar: AppBar(
         title: Text(appBarTitle,style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -39,6 +46,7 @@ class _BaseHomeScreenState extends State<BaseHomeScreen> {
           icon:  SvgPicture.asset("assets/svg/notification-icon.svg"),
           onPressed: () {
             //   todo go to notification screen
+            authVm.unAuthenticate();
           },
         ),
       ),
@@ -46,10 +54,11 @@ class _BaseHomeScreenState extends State<BaseHomeScreen> {
         context,
         controller: PersistentTabController(initialIndex: _currentIndex),
         screens: [
-          // CustomerHomeScreen(),
-          ManagerHomeScreen(),
-          Center(child: Text("contact us")),
-          Center(child: Text("profile content")),
+          CustomerHomeScreen(),
+          // ManagerHomeScreen(),
+          CustomerCarDetailsScreen(),
+          BookMaintananceScreen(),
+          ContactUsScreen(),
           Center(child: Text("more content")),
         ],
         onItemSelected: (int index) {
@@ -79,14 +88,20 @@ class _BaseHomeScreenState extends State<BaseHomeScreen> {
             inactiveColorPrimary: Colors.grey,
           ),
           PersistentBottomNavBarItem(
-            icon: const Icon(Icons.support_agent),
-            title: S.of(context).contactUsNav,
+            icon: const Icon(Icons.car_repair_sharp),
+            title: S.of(context).myCarsNav,
             activeColorPrimary: AppColors.lightPrimary,
             inactiveColorPrimary: Colors.grey,
           ),
           PersistentBottomNavBarItem(
-            icon: const Icon(Icons.person),
-            title: S.of(context).profileNav,
+            icon: const Icon(Icons.add_circle_outline),
+            title: S.of(context).maintenanceNav,
+            activeColorPrimary: AppColors.lightPrimary,
+            inactiveColorPrimary: Colors.grey,
+          ),
+          PersistentBottomNavBarItem(
+            icon: const Icon(Icons.phone_in_talk),
+            title: S.of(context).contactUsNav,
             activeColorPrimary: AppColors.lightPrimary,
             inactiveColorPrimary: Colors.grey,
           ),

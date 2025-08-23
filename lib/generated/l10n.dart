@@ -120,11 +120,11 @@ class S {
     );
   }
 
-  /// `Contact Us`
-  String get contactUsNav {
+  /// `My Cars`
+  String get myCarsNav {
     return Intl.message(
-      'Contact Us',
-      name: 'contactUsNav',
+      'My Cars',
+      name: 'myCarsNav',
       desc: '',
       args: [],
     );
@@ -515,6 +515,116 @@ class S {
     return Intl.message(
       'login',
       name: 'login',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get name {
+    return Intl.message(
+      'Name',
+      name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a proper value`
+  String get enterProperValue {
+    return Intl.message(
+      'Please enter a proper value',
+      name: 'enterProperValue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get email {
+    return Intl.message(
+      'Email',
+      name: 'email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid email`
+  String get enterValidEmail {
+    return Intl.message(
+      'Please enter a valid email',
+      name: 'enterValidEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Comment`
+  String get comment {
+    return Intl.message(
+      'Comment',
+      name: 'comment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit`
+  String get submit {
+    return Intl.message(
+      'Submit',
+      name: 'submit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Mail us at`
+  String get mailUsAt {
+    return Intl.message(
+      'Mail us at',
+      name: 'mailUsAt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Maintenance`
+  String get maintenanceNav {
+    return Intl.message(
+      'Maintenance',
+      name: 'maintenanceNav',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact Us`
+  String get contactUsNav {
+    return Intl.message(
+      'Contact Us',
+      name: 'contactUsNav',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An error occurred during authentication`
+  String get authenticationErrorMessage {
+    return Intl.message(
+      'An error occurred during authentication',
+      name: 'authenticationErrorMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error`
+  String get errorTitle {
+    return Intl.message(
+      'Error',
+      name: 'errorTitle',
       desc: '',
       args: [],
     );

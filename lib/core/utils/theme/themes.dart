@@ -21,7 +21,17 @@ ThemeData getThemeData(
     highlightColor: Colors.transparent,
     splashColor: Colors.transparent,
     dialogTheme: const DialogThemeData(backgroundColor: Colors.white),
-
+colorScheme: const ColorScheme.light(
+  primary: AppColors.lightPrimary,
+    primaryContainer: AppColors.lightPrimaryVariant,
+    secondary: AppColors.lightSecondary,
+    surface: AppColors.lightSurface,
+    error: AppColors.lightError,
+    onPrimary: AppColors.lightOnPrimary,
+    onSecondary: AppColors.lightOnSecondary,
+    onSurface: AppColors.lightOnSurface,
+    onError: AppColors.lightOnError,
+  ),
     extensions: [
       AppColorsTheme.light(),
       AppTextTheme(
@@ -57,7 +67,11 @@ ThemeData getThemeData(
         borderRadius: BorderRadius.circular(8),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(10.0),
+        borderSide: BorderSide(
+          color: Theme.of(context).colorScheme.secondary, // Highlight color
+          width: 2.0, // Thicker border for focus
+        ),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
@@ -107,4 +121,7 @@ ThemeData getThemeData(
       backgroundColor: Colors.white,
     ),
   );
+
+
+
   }

@@ -6,7 +6,7 @@
   "onBoardingDescription2": "We use the latest and best solutions to advance the field of car service to provide a unique experience that has never been experienced before.",
   "onBoardingDescription3": "What’s guarding your vehicle’s undercarriage? At Motor Lube, we don’t just protect – we armor your car with Revive Premium Wax-Based Undercoat Treatment.",
   "homeNav": "Home",
-  "contactUsNav": "Contact Us",
+  "myCarsNav": "My Cars",
   "profileNav": "Profile",
   "moreNav": "More",
   "homeAppbar": "Home",
@@ -45,6 +45,17 @@
   "skip": "Skip",
   "loginWelcomeMessage": "welcome back, Loging Motorlube",
   "phoneNumber": "phoneNumber",
-  "login": "login"
+  "login": "login",
+  "name": "Name",
+  "enterProperValue": "Please enter a proper value",
+  "email": "Email",
+  "enterValidEmail": "Please enter a valid email",
+  "comment": "Comment",
+  "submit": "Submit",
+  "mailUsAt": "Mail us at",
+  "maintenanceNav": "Maintenance",
+  "contactUsNav": "Contact Us",
+  "authenticationErrorMessage": "An error occurred during authentication",
+  "errorTitle": "Error"
 
 }

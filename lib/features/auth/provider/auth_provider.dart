@@ -1,63 +1,52 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:newmotorlube/core/providers/secure_storage.dart';
+import 'package:newmotorlube/features/auth/domain/use_case/is_registered_user.dart';
+import 'package:newmotorlube/features/auth/domain/use_case/log_out_use_case.dart';
 import '../../../core/providers/dio_provider.dart';
 import '../data/data_source/auth_remote_data_source.dart';
+import '../data/data_source/i_auth_remote_data_source.dart';
 import '../data/repository/auth_repository.dart';
 import '../domain/repository/i_auth_repository.dart';
-import '../domain/use_case/is_registered_user_use_case.dart';
-import '../presentation/state/auth_flow_state.dart';
-import '../presentation/state/auth_state.dart';
-import '../presentation/state/login_phone_state.dart';
-import '../presentation/state/otp_state.dart';
-import '../presentation/state/register_state.dart';
-import '../presentation/view_model/auth_flow_state_controller.dart';
+import '../domain/use_case/get_user_info_use_case.dart';
+import '../domain/use_case/register_user_use_case.dart';
+import '../domain/use_case/send_otp_use_case.dart';
+import '../domain/use_case/verify_otp_use_case.dart';
+import '../presentation/view_model/auth_state.dart';
 import '../presentation/view_model/auth_view_model.dart';
-import '../presentation/view_model/login_phone_view_model.dart';
-import '../presentation/view_model/otp_view_model.dart';
-import '../presentation/view_model/register_view_model.dart';
 
-final authViewModelProvider =
-StateNotifierProvider<AuthViewModel, AuthState>((ref) {
-  return AuthViewModel(
-    isRegisteredUserUseCase: ref.read(isRegisteredUserUseCaseProvider),
-  );
-});
-
-final authRemoteDataSourceProvider = Provider<AuthRemoteDataSourceImpl>((ref) {
-  return AuthRemoteDataSourceImpl(ref.read(dioProvider)); // Replace with the actual instantiation logic
-});
-
-final authRepositoryImplProvider = Provider<AuthRepositoryImpl>((ref) {
-  return AuthRepositoryImpl(
-    ref.read(authRemoteDataSourceProvider), // Ensure this is properly instantiated
-  ); // Ensure this is properly instantiated
+final authRemoteDataSourceProvider = Provider<AuthRemoteDataSource>((ref) {
+  return AuthRemoteDataSourceImpl(ref.read(dioProvider));
 });
 
 final authRepositoryProvider = Provider<IAuthRepository>((ref) {
-  return ref.read(authRepositoryImplProvider);
+  return AuthRepositoryImpl(ref.read(authRemoteDataSourceProvider));
 });
 
-final isRegisteredUserUseCaseProvider = Provider<IsRegisteredUserUseCase>(
-      (ref) => IsRegisteredUserUseCase(ref.read(authRepositoryProvider)),
+final isRegisterUseCaseProvider = Provider<IsRegisteredUserUseCase>((ref) {
+  return IsRegisteredUserUseCase(ref.read(authRepositoryProvider));
+});
+
+final logoutUseCase = Provider<LogoutUseCase>((ref) {
+  return LogoutUseCase(ref.read(secureStoreProvider));
+});
+
+
+final sendOtpUseCaseProvider = Provider<SendOtpUseCase>((ref) {
+  return SendOtpUseCase(ref.read(authRepositoryProvider));
+});
+
+final registerUserUseCaseProvider = Provider<RegisterUserUseCase>((ref) {
+  return RegisterUserUseCase(ref.read(authRepositoryProvider));
+});
+
+final verifyOtpUseCaseProvider = Provider<VerifyOtpUseCase>((ref) {
+  return VerifyOtpUseCase(ref.read(authRepositoryProvider));
+});
+
+final getUserInfoUseCaseProvider = Provider<GetUserInfoUseCase>((ref) {
+  return GetUserInfoUseCase(ref.read(authRepositoryProvider));
+});
+
+final authViewModelProvider = NotifierProvider<AuthViewModel, AuthState>(
+      () => AuthViewModel(),
 );
-
-
-
-
-
-// //////////
-
-final authFlowProvider =
-StateNotifierProvider<AuthFlowController, AuthFlowState>((ref) {
-  return AuthFlowController(ref);
-});
-
-
-final loginPhoneProvider =
-StateNotifierProvider<LoginPhoneVM, LoginPhoneState>((ref) => LoginPhoneVM());
-
-final registerProvider =
-StateNotifierProvider<RegisterVM, RegisterState>((ref) => RegisterVM());
-
-final otpProvider =
-StateNotifierProvider<OtpVM, OtpState>((ref) => OtpVM(ref));
-
