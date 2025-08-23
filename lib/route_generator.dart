@@ -5,7 +5,7 @@ import 'features/auth/presentation/screens/auth_screen.dart';
 import 'features/home/presentaion/screen/base_home_screen.dart';
 import 'features/onboarding/presentation/screens/onboarding_screen.dart';
 import 'features/our_service/presentation/our_presentation_screen.dart';
-import 'features/splash/view/splash_screen.dart';
+import 'features/splash/presentation/screens/splash_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
