@@ -32,6 +32,8 @@ class SecureStore {
   Future<String?> readToken() => _storage.read(key: 'jwtToken');
   Future<String?> readFcmToken() => _storage.read(key: 'firebaseToken');
   Future<String?> phoneNumber() => _storage.read(key: 'userMobileNumber');
+  Future<String?> userName() => _storage.read(key: 'userName');
+  Future<String?> userEmail() => _storage.read(key: 'userEmail');
 
 
   Future<void> clear() async {
