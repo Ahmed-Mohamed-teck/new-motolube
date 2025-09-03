@@ -4,5 +4,6 @@ const String sendOtpEndPoint = '$baseUrl/UserManagement/sendOtp';
 const String registerEndPoint = '$baseUrl/UserManagement/register';
 const String verifyOtpEndPoint = '$baseUrl/UserManagement/verifyOtp';
 const String isUserRegisteredEndPoint = '$baseUrl/UserManagement/login';
-
+const String getManufacturersEndPoint = '$baseUrl/MotorLubeApp/getManufacturers';
+String getCarModelsEndPoint(String model) => '$baseUrl/MotorLubeApp/getBrands/$model';
 String getUserInfoEndPoint(String phone) => '$baseUrl/UserManagement/user?mobileNumber=$phone';

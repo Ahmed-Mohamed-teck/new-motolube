@@ -63,7 +63,7 @@ class AppColorsTheme extends ThemeExtension<AppColorsTheme> {
   factory AppColorsTheme.light() => const AppColorsTheme(
     primary: Color(0xFFFFB600),
     primaryVariant: Color(0xFFC79100),
-    secondary: Color(0xFFB6B6B6),
+    secondary: Color(0xFF202D45),
     background: Color(0xFFf9fafd),
     surface: Color(0xFFFFFFFF),
     error: Color(0xFFD32F2F),

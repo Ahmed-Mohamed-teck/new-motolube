@@ -22,6 +22,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "Profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "addCar": MessageLookupByLibrary.simpleMessage("Add Car"),
+        "areYouOwnerThisCar": MessageLookupByLibrary.simpleMessage(
+            "Are you the owner of this car?"),
         "authenticationErrorMessage": MessageLookupByLibrary.simpleMessage(
             "An error occurred during authentication"),
         "basicServices": MessageLookupByLibrary.simpleMessage("Basic Services"),
@@ -29,13 +33,34 @@ class MessageLookup extends MessageLookupByLibrary {
         "bestOffers": MessageLookupByLibrary.simpleMessage("Best Offers"),
         "carDetailing": MessageLookupByLibrary.simpleMessage("Car Detailing"),
         "carEvaluation": MessageLookupByLibrary.simpleMessage("Car Evaluation"),
+        "carInfo": MessageLookupByLibrary.simpleMessage("Car Info"),
         "carRepair": MessageLookupByLibrary.simpleMessage("Car Repair"),
         "carWash": MessageLookupByLibrary.simpleMessage("Car Wash"),
+        "characterVinLimit":
+            MessageLookupByLibrary.simpleMessage("VIN must be 17 characters"),
+        "characterVinLimitError":
+            MessageLookupByLibrary.simpleMessage("VIN must be 17 characters"),
         "comment": MessageLookupByLibrary.simpleMessage("Comment"),
+        "companyName": MessageLookupByLibrary.simpleMessage("Company Name"),
+        "companyNameError":
+            MessageLookupByLibrary.simpleMessage("Please enter company name"),
+        "companyNameHint":
+            MessageLookupByLibrary.simpleMessage("e.g. MotorLube Co."),
         "contactUsAppbar": MessageLookupByLibrary.simpleMessage("Contanct Us"),
         "contactUsNav": MessageLookupByLibrary.simpleMessage("Contact Us"),
+        "crn": MessageLookupByLibrary.simpleMessage(
+            "Commercial Registration Number (CRN)"),
+        "crnError": MessageLookupByLibrary.simpleMessage(
+            "Please enter Commercial Registration Number (CRN)"),
+        "crnHint": MessageLookupByLibrary.simpleMessage("e.g. 1234567890"),
+        "crnLengthError":
+            MessageLookupByLibrary.simpleMessage("CRN must be 10 digits"),
+        "didntReceiveOtp":
+            MessageLookupByLibrary.simpleMessage("Didn\'t receive the OTP?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
+        "enterOtpSentTo":
+            MessageLookupByLibrary.simpleMessage("Enter the OTP sent to"),
         "enterPromotionNameHint":
             MessageLookupByLibrary.simpleMessage("Enter promotion name"),
         "enterProperValue":
@@ -45,6 +70,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "errorSavingPromotion": MessageLookupByLibrary.simpleMessage(
             "An error occurred while saving the promotion, please try again later."),
         "errorTitle": MessageLookupByLibrary.simpleMessage("Error"),
+        "expiresIn": MessageLookupByLibrary.simpleMessage("Expires in"),
         "fillAllFields":
             MessageLookupByLibrary.simpleMessage("Please fill all fields"),
         "flatTyre": MessageLookupByLibrary.simpleMessage("Flat Tyre"),
@@ -58,14 +84,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "mailUsAt": MessageLookupByLibrary.simpleMessage("Mail us at"),
         "maintenanceNav": MessageLookupByLibrary.simpleMessage("Maintenance"),
         "majorServices": MessageLookupByLibrary.simpleMessage("Major Services"),
+        "manufacturer": MessageLookupByLibrary.simpleMessage("Manufacturer"),
         "mobileServices":
             MessageLookupByLibrary.simpleMessage("Mobile Services"),
+        "model": MessageLookupByLibrary.simpleMessage("Model"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
         "moreAppbar": MessageLookupByLibrary.simpleMessage("More"),
         "moreNav": MessageLookupByLibrary.simpleMessage("More"),
         "myCarsNav": MessageLookupByLibrary.simpleMessage("My Cars"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "next": MessageLookupByLibrary.simpleMessage("next"),
+        "no": MessageLookupByLibrary.simpleMessage("No"),
+        "notValidUserEmail":
+            MessageLookupByLibrary.simpleMessage("User email is not valid"),
         "oiling": MessageLookupByLibrary.simpleMessage("Oiling"),
         "onBoardingDescription1": MessageLookupByLibrary.simpleMessage(
             "Skip the hassle of workshop visits! Our expert mobile auto service brings professional maintenance & repairs right to your location."),
@@ -80,7 +111,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "onBoardingTitle3":
             MessageLookupByLibrary.simpleMessage("Following Dealer Standards"),
         "ourServices": MessageLookupByLibrary.simpleMessage("Our Services"),
-        "phoneNumber": MessageLookupByLibrary.simpleMessage("phoneNumber"),
+        "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "plate": MessageLookupByLibrary.simpleMessage("Plate"),
+        "plateLetters": MessageLookupByLibrary.simpleMessage("Plate Letters"),
+        "plateNumbers": MessageLookupByLibrary.simpleMessage("Plate Numbers"),
         "profileAppbar": MessageLookupByLibrary.simpleMessage("Profile"),
         "profileNav": MessageLookupByLibrary.simpleMessage("Profile"),
         "promotionDescription":
@@ -88,16 +122,31 @@ class MessageLookup extends MessageLookupByLibrary {
         "promotionName": MessageLookupByLibrary.simpleMessage("Promotion Name"),
         "promotionSavedSuccessfully": MessageLookupByLibrary.simpleMessage(
             "Promotion saved successfully"),
+        "register": MessageLookupByLibrary.simpleMessage("Register"),
+        "resendOTP": MessageLookupByLibrary.simpleMessage("Resend OTP"),
         "savePromotion": MessageLookupByLibrary.simpleMessage("Save Promotion"),
         "selectEndDate":
             MessageLookupByLibrary.simpleMessage("Select End Date"),
+        "selectManufacturer":
+            MessageLookupByLibrary.simpleMessage("Select Manufacturer"),
+        "selectModel": MessageLookupByLibrary.simpleMessage("Select Model"),
         "selectStartDate":
             MessageLookupByLibrary.simpleMessage("Select Start Date"),
+        "selectYear": MessageLookupByLibrary.simpleMessage("Select Year"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "start": MessageLookupByLibrary.simpleMessage("start"),
         "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "towiling": MessageLookupByLibrary.simpleMessage("Towiling"),
+        "userEmail": MessageLookupByLibrary.simpleMessage("User Email"),
+        "userEmailHint":
+            MessageLookupByLibrary.simpleMessage("Enter user email"),
+        "userName": MessageLookupByLibrary.simpleMessage("User Name"),
+        "userNameHint": MessageLookupByLibrary.simpleMessage("Enter user name"),
+        "verify": MessageLookupByLibrary.simpleMessage("Verify"),
+        "vin": MessageLookupByLibrary.simpleMessage("VIN"),
+        "year": MessageLookupByLibrary.simpleMessage("Year"),
+        "yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "yourCars": MessageLookupByLibrary.simpleMessage("Your Cars")
       };
 }

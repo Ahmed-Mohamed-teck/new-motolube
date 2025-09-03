@@ -554,19 +554,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       Row(
                         children: [
                           // Country code
-                          Container(
-                            width: 84,
-                            padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey.shade400),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: const Text(
-                              '+966',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                          const SizedBox(width: 12),
+
 
                           // Phone input
                           Expanded(
@@ -589,11 +577,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
                       if (showName) ...[
                         const SizedBox(height: 16),
-                        const Text('اسم المستخدم'),
+                        Text(appLang.userName),
                         const SizedBox(height: 8),
                         TextFormField(
                           decoration: InputDecoration(
-                            hintText: "أدخل اسم المستخدم",
+                            hintText: appLang.userNameHint,
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 14, horizontal: 12),
                             border: OutlineInputBorder(
@@ -603,9 +591,21 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           onChanged: (s) => _nameController.text = s,
                         ),
                         const SizedBox(height: 12),
+                        Text(appLang.userEmail),
+                        const SizedBox(height: 8),
                         TextFormField(
+                          validator: (state) {
+                            if (state == null || state.isEmpty) {
+                              return appLang.userEmailHint;
+                            }
+                            final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+                            if (!emailRegex.hasMatch(state)) {
+                              return appLang.notValidUserEmail;
+                            }
+                            return null;
+                          },
                           decoration: InputDecoration(
-                            hintText: "البريد الالكتروني",
+                            hintText: appLang.userEmail,
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 14, horizontal: 12),
                             border: OutlineInputBorder(
@@ -620,7 +620,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     // ================== OTP View (6 digits) ==================
                     if (showOtpUI) ...[
                       Text(
-                        'Enter the OTP sent to $phone',
+                        '${appLang.enterOtpSentTo} $phone',
                         textAlign: TextAlign.center,
                         style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                       ),
@@ -637,10 +637,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               focusNode: _otpNodes[i],
                               textAlign: TextAlign.center,
                               keyboardType: TextInputType.number,
-                              // inputFormatters: const [
-                              //   FilteringTextInputFormatter.digitsOnly,
-                              //   LengthLimitingTextInputFormatter(1),
-                              // ],
+                              inputFormatters:  [
+                                FilteringTextInputFormatter.digitsOnly,
+                                LengthLimitingTextInputFormatter(1),
+                              ],
                               onChanged: (v) {
                                 if (v.isNotEmpty && i < 5) {
                                   _otpNodes[i + 1].requestFocus();
@@ -683,14 +683,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
 
                       Text(
-                        'Expires in ${secondsRemaining}s',
+                        '${appLang.expiresIn} ${secondsRemaining}s',
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 8),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text("Don’t receive the OTP?"),
+                           Text(appLang.didntReceiveOtp),
                           TextButton(
                             onPressed: (state is VerifyingState) || secondsRemaining > 0
                                 ? null
@@ -702,7 +702,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               setState(() {});
                               vm.onResendOtp();
                             },
-                            child: const Text('Resend OTP'),
+                            child:  Text(appLang.resendOTP),
                           ),
                         ],
                       ),
@@ -729,7 +729,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
                             : Text(
-                          showOtp ? 'Verify' : (showName ? 'Register' : 'Login'),
+                          showOtp ? appLang.verify : (showName ? appLang.register : appLang.login),
                           style: const TextStyle(fontSize: 16),
                         ),
                       ),

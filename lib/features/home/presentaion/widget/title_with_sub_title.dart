@@ -5,10 +5,9 @@ import '../../../app/app_color_theme.dart';
 
 class TitleWithSubTitle extends StatelessWidget {
   final String title;
-  final String? subTitle;
+  final Widget? subTitle;
   final bool withSubTitle;
   final TextStyle? titleStyle;
-  final TextStyle? subTitleStyle;
   final VoidCallback? onSubTitleTap;
 
   const TitleWithSubTitle({
@@ -17,7 +16,6 @@ class TitleWithSubTitle extends StatelessWidget {
     this.subTitle,
     this.withSubTitle = false,
     this.titleStyle,
-    this.subTitleStyle,
     this.onSubTitleTap,
   }):assert(!withSubTitle || subTitle != null,'subTitle cannot be null when withSubTitle is true');
 
@@ -37,13 +35,8 @@ class TitleWithSubTitle extends StatelessWidget {
               visible: withSubTitle,
               child: InkWell(
                 onTap: onSubTitleTap,
-                child: Text(subTitle!,style: subTitleStyle ??
-                    Theme.of(context).textTheme.labelLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).extension<AppColorsTheme>()!.primaryVariant,
-                    )
-                  ,),
-              ))
+                child: subTitle),
+              )
         ],
       ),
     );
