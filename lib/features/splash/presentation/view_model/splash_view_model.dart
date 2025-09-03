@@ -23,7 +23,6 @@ class SplashViewModel extends Notifier<SplashState> {
       }
     });
 
-    ref.read(authViewModelProvider.notifier).authenticating();
 
     return const SplashInitial();
   }

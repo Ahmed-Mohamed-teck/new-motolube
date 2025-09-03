@@ -22,10 +22,11 @@ class HomeServiceCard extends StatelessWidget {
        children: [
         
          SizedBox(
-          width: 50,
-          height: 50,
+          width: 40,
+          height: 40,
           child: SvgPicture.asset(
             iconPath,
+
             width: 50,
             height: 50,
             fit: BoxFit.contain,

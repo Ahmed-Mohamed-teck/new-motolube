@@ -12,9 +12,9 @@ class HomeServiceGrid extends StatelessWidget {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       crossAxisCount: 4,
-      mainAxisSpacing: 4.0,
-      crossAxisSpacing: 4.0,
-      childAspectRatio: .7,
+      mainAxisSpacing: 2.0,
+      crossAxisSpacing: 2.0,
+      childAspectRatio: .75,
       padding: EdgeInsets.all(8.0),
       children: [
         HomeServiceCard(iconPath: 'assets/svg/service-icon-1.svg', title: S.of(context).basicServices),

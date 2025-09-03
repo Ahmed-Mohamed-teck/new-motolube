@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:newmotorlube/features/customer_cars/presentation/screen/customer_car_details_screen.dart';
 import 'package:newmotorlube/features/promotions/presentation/screen/create_promotion_screen.dart';
 import 'features/auth/presentation/screens/auth_screen.dart';
 import 'features/home/presentaion/screen/base_home_screen.dart';
 import 'features/onboarding/presentation/screens/onboarding_screen.dart';
-import 'features/our_service/presentation/our_presentation_screen.dart';
+import 'features/profile/presentation/screen/profile_screen.dart';
 import 'features/splash/presentation/screens/splash_screen.dart';
+import 'features/user_cars/domain/entity/car_entity.dart';
+import 'features/user_cars/presentation/screen/add_new_car_screen.dart';
+import 'features/user_cars/presentation/screen/user_car_details_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -28,15 +30,19 @@ class RouteGenerator {
       case 'baseHomeScreen':
         return MaterialPageRoute(builder: (_) => const BaseHomeScreen());
 
-      case 'ourServicesScreen':
-        return MaterialPageRoute(builder: (_) => const OurServicesScreen());
-
-      case 'customerCarDetailsScreen':
-        return MaterialPageRoute(builder: (_) => const CustomerCarDetailsScreen());
+      case 'userCarDetailsScreen':
+        return MaterialPageRoute(builder: (_) =>  UserCarDetailsScreen(
+          car: args as CarEntity,
+        ));
 
       case 'createPromotionScreen':
         return MaterialPageRoute(builder: (_) => const CreatePromotionScreen());
 
+      case 'profileScreen':
+        return MaterialPageRoute(builder: (_) => const ProfileScreen());
+
+      case 'addNewCarScreen':
+        return MaterialPageRoute(builder: (_) => const AddNewCarScreen());
 
 
 
@@ -46,28 +52,7 @@ class RouteGenerator {
     return _errorRoute('Main');
   }
 
-  /// Returns Widgets for use with persistent_bottom_nav_bar
-  static Widget getWidgetFromRoute(String? routeName, Object? args) {
-    switch (routeName) {
-      // case '/':
-      //   return BasePage(currentIndex: 0, key: UniqueKey());
 
-      // case 'login':
-      //   return const AuthPage();
-
-
-      // case 'bookingConfirmation':
-      //   if (args is BookingModel) {
-      //     return BookingConfirmation(booking: args);
-      //   }
-      //   return _errorWidget('Invalid arguments for bookingConfirmation');
-
-
-
-      default:
-        return _errorWidget('Unknown route: $routeName');
-    }
-  }
 
   /// Error Widget for invalid navigation
   static Widget _errorWidget(String message) {

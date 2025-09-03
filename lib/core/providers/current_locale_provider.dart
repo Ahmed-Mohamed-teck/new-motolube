@@ -4,6 +4,9 @@ import 'package:newmotorlube/core/providers/general_providers.dart';
 class CurrentLocaleProvider extends StateNotifier<String> {
   CurrentLocaleProvider() : super('en'); // Default locale
 
+
+  String get currentLocale => state;
+
   Future<void> init() async {
     final savedLocale = appPrefsWithCache.getString('currentLocale') ?? 'en';
     state = savedLocale;

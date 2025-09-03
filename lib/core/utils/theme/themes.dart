@@ -42,7 +42,7 @@ colorScheme: const ColorScheme.light(
     // <------------------------------------------------ App Bar Theme Theme
     appBarTheme:  AppBarTheme(
       elevation: 0,
-      backgroundColor: AppColors.lightSurface,
+      backgroundColor: AppColors.lightOnPrimary,
     ),
 
     datePickerTheme: DatePickerThemeData(

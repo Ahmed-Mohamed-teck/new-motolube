@@ -500,10 +500,10 @@ class S {
     );
   }
 
-  /// `phoneNumber`
+  /// `Phone Number`
   String get phoneNumber {
     return Intl.message(
-      'phoneNumber',
+      'Phone Number',
       name: 'phoneNumber',
       desc: '',
       args: [],
@@ -625,6 +625,366 @@ class S {
     return Intl.message(
       'Error',
       name: 'errorTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile`
+  String get Profile {
+    return Intl.message(
+      'Profile',
+      name: 'Profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Car`
+  String get addCar {
+    return Intl.message(
+      'Add Car',
+      name: 'addCar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Plate`
+  String get plate {
+    return Intl.message(
+      'Plate',
+      name: 'plate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Plate Letters`
+  String get plateLetters {
+    return Intl.message(
+      'Plate Letters',
+      name: 'plateLetters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Plate Numbers`
+  String get plateNumbers {
+    return Intl.message(
+      'Plate Numbers',
+      name: 'plateNumbers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Car Info`
+  String get carInfo {
+    return Intl.message(
+      'Car Info',
+      name: 'carInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Manufacturer`
+  String get selectManufacturer {
+    return Intl.message(
+      'Select Manufacturer',
+      name: 'selectManufacturer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Model`
+  String get model {
+    return Intl.message(
+      'Model',
+      name: 'model',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Model`
+  String get selectModel {
+    return Intl.message(
+      'Select Model',
+      name: 'selectModel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Year`
+  String get year {
+    return Intl.message(
+      'Year',
+      name: 'year',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Year`
+  String get selectYear {
+    return Intl.message(
+      'Select Year',
+      name: 'selectYear',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `VIN`
+  String get vin {
+    return Intl.message(
+      'VIN',
+      name: 'vin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `VIN must be 17 characters`
+  String get characterVinLimit {
+    return Intl.message(
+      'VIN must be 17 characters',
+      name: 'characterVinLimit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `VIN must be 17 characters`
+  String get characterVinLimitError {
+    return Intl.message(
+      'VIN must be 17 characters',
+      name: 'characterVinLimitError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you the owner of this car?`
+  String get areYouOwnerThisCar {
+    return Intl.message(
+      'Are you the owner of this car?',
+      name: 'areYouOwnerThisCar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No`
+  String get no {
+    return Intl.message(
+      'No',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Company Name`
+  String get companyName {
+    return Intl.message(
+      'Company Name',
+      name: 'companyName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `e.g. MotorLube Co.`
+  String get companyNameHint {
+    return Intl.message(
+      'e.g. MotorLube Co.',
+      name: 'companyNameHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter company name`
+  String get companyNameError {
+    return Intl.message(
+      'Please enter company name',
+      name: 'companyNameError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Commercial Registration Number (CRN)`
+  String get crn {
+    return Intl.message(
+      'Commercial Registration Number (CRN)',
+      name: 'crn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `e.g. 1234567890`
+  String get crnHint {
+    return Intl.message(
+      'e.g. 1234567890',
+      name: 'crnHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Manufacturer`
+  String get manufacturer {
+    return Intl.message(
+      'Manufacturer',
+      name: 'manufacturer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter Commercial Registration Number (CRN)`
+  String get crnError {
+    return Intl.message(
+      'Please enter Commercial Registration Number (CRN)',
+      name: 'crnError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CRN must be 10 digits`
+  String get crnLengthError {
+    return Intl.message(
+      'CRN must be 10 digits',
+      name: 'crnLengthError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify`
+  String get verify {
+    return Intl.message(
+      'Verify',
+      name: 'verify',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register`
+  String get register {
+    return Intl.message(
+      'Register',
+      name: 'register',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User Name`
+  String get userName {
+    return Intl.message(
+      'User Name',
+      name: 'userName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter user name`
+  String get userNameHint {
+    return Intl.message(
+      'Enter user name',
+      name: 'userNameHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User Email`
+  String get userEmail {
+    return Intl.message(
+      'User Email',
+      name: 'userEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter user email`
+  String get userEmailHint {
+    return Intl.message(
+      'Enter user email',
+      name: 'userEmailHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User email is not valid`
+  String get notValidUserEmail {
+    return Intl.message(
+      'User email is not valid',
+      name: 'notValidUserEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter the OTP sent to`
+  String get enterOtpSentTo {
+    return Intl.message(
+      'Enter the OTP sent to',
+      name: 'enterOtpSentTo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expires in`
+  String get expiresIn {
+    return Intl.message(
+      'Expires in',
+      name: 'expiresIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Didn't receive the OTP?`
+  String get didntReceiveOtp {
+    return Intl.message(
+      'Didn\'t receive the OTP?',
+      name: 'didntReceiveOtp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Resend OTP`
+  String get resendOTP {
+    return Intl.message(
+      'Resend OTP',
+      name: 'resendOTP',
       desc: '',
       args: [],
     );
