@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:newmotorlube/core/providers/global_lang_provider.dart';
+import 'package:newmotorlube/core/providers/secure_storage.dart';
 import 'package:newmotorlube/core/utils/extensions/extensions.dart';
 import 'package:newmotorlube/features/auth/presentation/view_model/auth_state.dart';
 import 'package:newmotorlube/features/auth/provider/auth_provider.dart';
@@ -13,6 +14,29 @@ class ProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _ProfileScreenState extends ConsumerState<ProfileScreen> {
+  String? _name;
+  String? _phone;
+  String? _email;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadProfileData();
+  }
+
+  Future<void> _loadProfileData() async {
+    final store = ref.read(secureStoreProvider);
+    final name = await store.userName();
+    final phone = await store.phoneNumber();
+    final email = await store.userEmail();
+    if (mounted) {
+      setState(() {
+        _name = name;
+        _phone = phone;
+        _email = email;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,9 +88,9 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           ),
           const SizedBox(height: 30),
           // User Information
-          _buildInfoTile(Icons.person, 'Name', 'John Doe'),
-          _buildInfoTile(Icons.phone, 'Phone', '+1234567890'),
-          _buildInfoTile(Icons.email, 'Email', 'john.doe@example.com'),
+          _buildInfoTile(Icons.person, appLang.name, _name ?? ''),
+          _buildInfoTile(Icons.phone, appLang.phoneNumber, _phone ?? ''),
+          _buildInfoTile(Icons.email, appLang.email, _email ?? ''),
           const SizedBox(height: 40),
           // Edit Profile Button
           ElevatedButton.icon(
