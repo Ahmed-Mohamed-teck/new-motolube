@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import '../../../../core/widget/image_loader.dart';
@@ -58,6 +60,7 @@ class CarCard extends StatelessWidget {
               elevation: 0,
               color: theme.colorScheme.surface,
               surfaceTintColor: theme.colorScheme.surfaceTint,
+              clipBehavior: Clip.antiAlias,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
                 side: BorderSide(
@@ -80,9 +83,14 @@ class CarCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 8),
-                    Icon(
-                      isRTL ? Icons.chevron_left : Icons.chevron_right,
-                      color: theme.colorScheme.onSurfaceVariant,
+                    Transform(
+                      alignment: Alignment.center,
+                      transform: Matrix4.rotationY(isRTL ? math.pi : 0),
+                      child: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 16,
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
                     ),
                   ],
                 ),
