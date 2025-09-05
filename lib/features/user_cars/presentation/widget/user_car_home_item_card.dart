@@ -46,6 +46,7 @@ class HomeCarOutlinedCard extends StatelessWidget {
         ),
       ),
       child: Column(
+        
         mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -64,7 +65,7 @@ class HomeCarOutlinedCard extends StatelessWidget {
               // // DETAILS (fills remainder; internally kept ultra-compact)
               Padding(
                 // Remove bottom padding so the card height hugs the content
-                padding: const EdgeInsets.fromLTRB(10, 8, 10, 0),
+                padding: const EdgeInsets.all(12),
                 child: _DetailsCompact(
                   model: model,
                   plate: plate,
@@ -72,6 +73,7 @@ class HomeCarOutlinedCard extends StatelessWidget {
                   onBook: onBook,
                 ),
               ),
+              const SizedBox(height: 8),
             ],
           )
     );
