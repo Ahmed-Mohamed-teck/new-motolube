@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:newmotorlube/features/user_cars/presentation/widget/user_car_list_item.dart';
 
 class BookServiceScreen extends StatefulWidget {
@@ -12,6 +15,8 @@ class _HorizontalStepperScreenState extends State<BookServiceScreen> {
   int _currentStep = 0;
   int? _selectedCar;
   int? _selectedService;
+  LatLng? _selectedLocation;
+  final MapController _mapController = MapController();
 
   final List<Map<String, String>> _cars = [
     {
@@ -39,7 +44,7 @@ class _HorizontalStepperScreenState extends State<BookServiceScreen> {
   List<Widget> get _stepContents => [
         _buildCarStep(),
         _buildServiceStep(),
-        const Center(child: Text('Step 3 Content', style: TextStyle(fontSize: 20))),
+        _buildLocationStep(),
         const Center(child: Text('Step 4 Content', style: TextStyle(fontSize: 20))),
       ];
 
@@ -112,6 +117,89 @@ class _HorizontalStepperScreenState extends State<BookServiceScreen> {
       },
       separatorBuilder: (_, __) => const SizedBox(height: 12),
     );
+  }
+
+  Widget _buildLocationStep() {
+    final markers = <Marker>[
+      if (_selectedLocation != null)
+        Marker(
+          point: _selectedLocation!,
+          width: 40,
+          height: 40,
+          child: const Icon(
+            Icons.location_pin,
+            size: 40,
+            color: Colors.red,
+          ),
+        ),
+    ];
+
+    return Stack(
+      children: [
+        FlutterMap(
+          mapController: _mapController,
+          options: MapOptions(
+            initialCenter: _selectedLocation ?? const LatLng(24.7136, 46.6753),
+            initialZoom: 13,
+            onTap: (tapPos, latlng) => setState(() => _selectedLocation = latlng),
+          ),
+          children: [
+            TileLayer(
+              urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+              // Use the real applicationId to avoid OSM tile server blocks
+              userAgentPackageName: 'com.example.newmotorlube',
+            ),
+            MarkerLayer(markers: markers),
+          ],
+        ),
+        Positioned(
+          top: 16,
+          right: 16,
+          child: FloatingActionButton.small(
+            onPressed: _requestCurrentLocation,
+            child: const Icon(Icons.my_location),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Future<void> _requestCurrentLocation() async {
+    var permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      final allow = await showDialog<bool>(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Location Permission'),
+          content: const Text(
+              'We need your location to show it on the map.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('Deny'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text('Allow'),
+            ),
+          ],
+        ),
+      );
+      if (allow != true) {
+        return;
+      }
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
+        return;
+      }
+    }
+
+    final position = await Geolocator.getCurrentPosition();
+    final latlng = LatLng(position.latitude, position.longitude);
+    setState(() => _selectedLocation = latlng);
+    _mapController.move(latlng, 15);
   }
 
   @override
