@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "addCar": MessageLookupByLibrary.simpleMessage("Add Car"),
+        "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
         "areYouOwnerThisCar": MessageLookupByLibrary.simpleMessage(
             "Are you the owner of this car?"),
         "authenticationErrorMessage": MessageLookupByLibrary.simpleMessage(
@@ -43,7 +44,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "characterVinLimitError":
             MessageLookupByLibrary.simpleMessage("VIN must be 17 characters"),
         "comment": MessageLookupByLibrary.simpleMessage("Comment"),
-        "english": MessageLookupByLibrary.simpleMessage("English"),
         "companyName": MessageLookupByLibrary.simpleMessage("Company Name"),
         "companyNameError":
             MessageLookupByLibrary.simpleMessage("Please enter company name"),
@@ -62,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Didn\'t receive the OTP?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
+        "english": MessageLookupByLibrary.simpleMessage("English"),
         "enterOtpSentTo":
             MessageLookupByLibrary.simpleMessage("Enter the OTP sent to"),
         "enterPromotionNameHint":
@@ -77,7 +78,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fillAllFields":
             MessageLookupByLibrary.simpleMessage("Please fill all fields"),
         "flatTyre": MessageLookupByLibrary.simpleMessage("Flat Tyre"),
-        "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
         "homeAppbar": MessageLookupByLibrary.simpleMessage("Home"),
         "homeNav": MessageLookupByLibrary.simpleMessage("Home"),
         "insuranceClaims":

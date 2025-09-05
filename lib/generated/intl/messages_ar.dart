@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
         "addCar": MessageLookupByLibrary.simpleMessage("إضافة سيارة"),
+        "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
         "areYouOwnerThisCar":
             MessageLookupByLibrary.simpleMessage("هل أنت مالك هذه السيارة؟"),
         "authenticationErrorMessage":
@@ -37,14 +38,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "carInfo": MessageLookupByLibrary.simpleMessage("معلومات السيارة"),
         "carRepair": MessageLookupByLibrary.simpleMessage("إصلاح السيارات"),
         "carWash": MessageLookupByLibrary.simpleMessage("غسيل السيارات"),
-        "changeLanguage":
-            MessageLookupByLibrary.simpleMessage("تغيير اللغة"),
+        "changeLanguage": MessageLookupByLibrary.simpleMessage("تغيير اللغة"),
         "characterVinLimit":
             MessageLookupByLibrary.simpleMessage("رقم الهيكل 17 حرفًا"),
         "characterVinLimitError": MessageLookupByLibrary.simpleMessage(
             "رقم الهيكل يجب أن يكون 17 حرفًا"),
         "comment": MessageLookupByLibrary.simpleMessage("تعليق"),
-        "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
         "companyName": MessageLookupByLibrary.simpleMessage("اسم الشركة"),
         "companyNameError":
             MessageLookupByLibrary.simpleMessage("يرجى إدخال اسم الشركة"),
@@ -62,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("لم تستلم رمز التحقق؟"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
         "endDate": MessageLookupByLibrary.simpleMessage("تاريخ الانتهاء"),
+        "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
         "enterOtpSentTo":
             MessageLookupByLibrary.simpleMessage("أدخل رمز التحقق المرسل إلى"),
         "enterPromotionNameHint":
@@ -77,7 +77,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "fillAllFields":
             MessageLookupByLibrary.simpleMessage("يرجى ملء جميع الحقول"),
         "flatTyre": MessageLookupByLibrary.simpleMessage("إصلاح الإطارات"),
-        "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
         "homeAppbar": MessageLookupByLibrary.simpleMessage("الرئيسية"),
         "homeNav": MessageLookupByLibrary.simpleMessage("الرئيسية"),
         "insuranceClaims":

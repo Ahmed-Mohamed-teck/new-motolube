@@ -85,7 +85,7 @@ class CarCard extends StatelessWidget {
                     const SizedBox(width: 8),
                     Transform(
                       alignment: Alignment.center,
-                      transform: Matrix4.rotationY(isRTL ? math.pi : 0),
+                      transform: Matrix4.rotationY(isRTL ? 270 : 0),
                       child: Icon(
                         Icons.arrow_forward_ios,
                         size: 16,
