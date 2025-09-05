@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:newmotorlube/features/user_cars/presentation/widget/user_car_home_item_card.dart';
+import 'package:newmotorlube/features/user_cars/presentation/widget/user_car_list_item.dart';
 
 class BookServiceScreen extends StatefulWidget {
   const BookServiceScreen({super.key});
@@ -60,40 +60,34 @@ class _HorizontalStepperScreenState extends State<BookServiceScreen> {
   }
 
   Widget _buildCarStep() {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: List.generate(_cars.length, (index) {
-          final car = _cars[index];
-          final isSelected = _selectedCar == index;
-          return Padding(
-            padding: EdgeInsets.only(right: index == _cars.length - 1 ? 0 : 12),
-            child: GestureDetector(
-              onTap: () => setState(() => _selectedCar = index),
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: isSelected ? Colors.amber : Colors.transparent,
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: SizedBox(
-                  width: 200,
-                  child: HomeCarOutlinedCard(
-                    imageUrl: car['image']!,
-                    model: car['model']!,
-                    plate: car['plate']!,
-                    chassis: car['chassis']!,
-                    heroTag: 'car-$index',
-                    onBook: null,
-                  ),
-                ),
+    return ListView.separated(
+      itemCount: _cars.length,
+      itemBuilder: (context, index) {
+        final car = _cars[index];
+        final isSelected = _selectedCar == index;
+        return GestureDetector(
+          onTap: () => setState(() => _selectedCar = index),
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: isSelected ? Colors.amber : Colors.transparent,
+                width: 2,
               ),
+              borderRadius: BorderRadius.circular(16),
             ),
-          );
-        }),
-      ),
+            child: CarCard(
+              car: CarInfo(
+                imageUrl: car['image']!,
+                model: car['model']!,
+                plate: car['plate']!,
+                chassis: car['chassis']!,
+              ),
+              heroTag: 'car-$index',
+            ),
+          ),
+        );
+      },
+      separatorBuilder: (_, __) => const SizedBox(height: 12),
     );
   }
 
