@@ -92,7 +92,10 @@
   "enterOtpSentTo":"أدخل رمز التحقق المرسل إلى",
   "expiresIn": "ينتهي في",
   "didntReceiveOtp": "لم تستلم رمز التحقق؟",
-  "resendOTP": "إعادة إرسال رمز التحقق"
+  "resendOTP": "إعادة إرسال رمز التحقق",
 
+  "changeLanguage": "تغيير اللغة",
+  "english": "الإنجليزية",
+  "arabic": "العربية"
 
 }

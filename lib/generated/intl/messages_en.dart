@@ -36,11 +36,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "carInfo": MessageLookupByLibrary.simpleMessage("Car Info"),
         "carRepair": MessageLookupByLibrary.simpleMessage("Car Repair"),
         "carWash": MessageLookupByLibrary.simpleMessage("Car Wash"),
+        "changeLanguage":
+            MessageLookupByLibrary.simpleMessage("Change Language"),
         "characterVinLimit":
             MessageLookupByLibrary.simpleMessage("VIN must be 17 characters"),
         "characterVinLimitError":
             MessageLookupByLibrary.simpleMessage("VIN must be 17 characters"),
         "comment": MessageLookupByLibrary.simpleMessage("Comment"),
+        "english": MessageLookupByLibrary.simpleMessage("English"),
         "companyName": MessageLookupByLibrary.simpleMessage("Company Name"),
         "companyNameError":
             MessageLookupByLibrary.simpleMessage("Please enter company name"),
@@ -74,6 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "fillAllFields":
             MessageLookupByLibrary.simpleMessage("Please fill all fields"),
         "flatTyre": MessageLookupByLibrary.simpleMessage("Flat Tyre"),
+        "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
         "homeAppbar": MessageLookupByLibrary.simpleMessage("Home"),
         "homeNav": MessageLookupByLibrary.simpleMessage("Home"),
         "insuranceClaims":

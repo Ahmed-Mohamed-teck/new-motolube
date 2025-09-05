@@ -94,5 +94,9 @@
   "didntReceiveOtp": "Didn't receive the OTP?",
   "resendOTP": "Resend OTP"
 
+  ,"changeLanguage": "Change Language",
+  "english": "English",
+  "arabic": "Arabic"
+
 
 }
