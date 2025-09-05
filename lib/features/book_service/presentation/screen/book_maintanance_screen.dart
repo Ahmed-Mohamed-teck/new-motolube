@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newmotorlube/features/user_cars/presentation/widget/user_car_home_item_card.dart';
 
 class BookServiceScreen extends StatefulWidget {
   const BookServiceScreen({super.key});
@@ -9,13 +10,38 @@ class BookServiceScreen extends StatefulWidget {
 
 class _HorizontalStepperScreenState extends State<BookServiceScreen> {
   int _currentStep = 0;
+  int? _selectedCar;
+  int? _selectedService;
 
-  final List<Widget> _stepContents = const [
-    Center(child: Text('Step 1 Content', style: TextStyle(fontSize: 20))),
-    Center(child: Text('Step 2 Content', style: TextStyle(fontSize: 20))),
-    Center(child: Text('Step 3 Content', style: TextStyle(fontSize: 20))),
-    Center(child: Text('Step 4 Content', style: TextStyle(fontSize: 20))),
+  final List<Map<String, String>> _cars = [
+    {
+      'image': 'https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg',
+      'model': 'Nissan Sunny 2022',
+      'plate': 'ABC-1234',
+      'chassis': 'JTNBE46KX63012345',
+    },
+    {
+      'image': 'https://images.pexels.com/photos/210017/pexels-photo-210017.jpeg',
+      'model': 'Toyota Camry 2022',
+      'plate': 'XYZ-9876',
+      'chassis': 'JTNBE46KX63012345',
+    },
   ];
+
+  final List<String> _services = [
+    'Basic Services',
+    'Major Services',
+    'Car Repair',
+    'Batteries',
+    'Car Wash',
+  ];
+
+  List<Widget> get _stepContents => [
+        _buildCarStep(),
+        _buildServiceStep(),
+        const Center(child: Text('Step 3 Content', style: TextStyle(fontSize: 20))),
+        const Center(child: Text('Step 4 Content', style: TextStyle(fontSize: 20))),
+      ];
 
   void _goToNext() {
     if (_currentStep < 3) {
@@ -33,9 +59,65 @@ class _HorizontalStepperScreenState extends State<BookServiceScreen> {
     }
   }
 
+  Widget _buildCarStep() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: List.generate(_cars.length, (index) {
+          final car = _cars[index];
+          final isSelected = _selectedCar == index;
+          return Padding(
+            padding: EdgeInsets.only(right: index == _cars.length - 1 ? 0 : 12),
+            child: GestureDetector(
+              onTap: () => setState(() => _selectedCar = index),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: isSelected ? Colors.amber : Colors.transparent,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: SizedBox(
+                  width: 200,
+                  child: HomeCarOutlinedCard(
+                    imageUrl: car['image']!,
+                    model: car['model']!,
+                    plate: car['plate']!,
+                    chassis: car['chassis']!,
+                    heroTag: 'car-$index',
+                    onBook: null,
+                  ),
+                ),
+              ),
+            ),
+          );
+        }),
+      ),
+    );
+  }
+
+  Widget _buildServiceStep() {
+    return ListView.separated(
+      itemCount: _services.length,
+      itemBuilder: (context, index) {
+        final isSelected = _selectedService == index;
+        return Card(
+          color: isSelected ? Colors.amber[100] : null,
+          child: ListTile(
+            title: Text(_services[index]),
+            onTap: () => setState(() => _selectedService = index),
+          ),
+        );
+      },
+      separatorBuilder: (_, __) => const SizedBox(height: 12),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final isLast = _currentStep == _stepContents.length - 1;
+    final steps = _stepContents;
+    final isLast = _currentStep == steps.length - 1;
     final isFirst = _currentStep == 0;
 
     return Scaffold(
@@ -46,7 +128,7 @@ class _HorizontalStepperScreenState extends State<BookServiceScreen> {
             height: 72,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: List.generate(_stepContents.length, (index) {
+              children: List.generate(steps.length, (index) {
                 final isActive = index == _currentStep;
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -87,7 +169,7 @@ class _HorizontalStepperScreenState extends State<BookServiceScreen> {
                 key: ValueKey<int>(_currentStep),
                 padding: const EdgeInsets.all(24),
                 width: double.infinity,
-                child: _stepContents[_currentStep],
+                child: steps[_currentStep],
               ),
             ),
           ),
