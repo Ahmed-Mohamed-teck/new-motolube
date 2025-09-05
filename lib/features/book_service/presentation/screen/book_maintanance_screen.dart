@@ -146,7 +146,8 @@ class _HorizontalStepperScreenState extends State<BookServiceScreen> {
           children: [
             TileLayer(
               urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-              userAgentPackageName: 'com.example.app',
+              // Use the real applicationId to avoid OSM tile server blocks
+              userAgentPackageName: 'com.example.newmotorlube',
             ),
             MarkerLayer(markers: markers),
           ],
