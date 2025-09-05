@@ -45,9 +45,15 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>CADisableMinimumFrameDurationOnPhone</key>
-	<true/>
-	<key>UIApplicationSupportsIndirectInputEvents</key>
-	<true/>
+        <key>CADisableMinimumFrameDurationOnPhone</key>
+        <true/>
+        <key>UIApplicationSupportsIndirectInputEvents</key>
+        <true/>
+        <key>NSLocalNetworkUsageDescription</key>
+        <string>Used to connect to the Flutter debug service.</string>
+        <key>NSBonjourServices</key>
+        <array>
+                <string>_dartobservatory._tcp</string>
+        </array>
 </dict>
 </plist>
