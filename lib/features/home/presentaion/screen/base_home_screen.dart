@@ -15,6 +15,7 @@ import '../../../auth/presentation/view_model/auth_state.dart';
 import '../../../book_service/presentation/screen/book_maintanance_screen.dart';
 import '../../../contact_us/presentation/screen/contact_us_screen.dart';
 import '../../../user_cars/presentation/screen/user_cars_list_screen.dart';
+import '../../../more/presentation/screen/more_screen.dart';
 
 final currentNavBottomIndexProvider = StateProvider<int>((ref) {
   return 0; // Default index
@@ -82,7 +83,7 @@ class _BaseHomeScreenState extends ConsumerState<BaseHomeScreen> {
               UserCarsListScreen(),
               BookServiceScreen(),
               ContactUsScreen(),
-              Center(child: Text("more content")),
+              MoreScreen(),
             ],
             onItemSelected: (int index) {
               ref.read(currentNavBottomIndexProvider.notifier).state = index;
