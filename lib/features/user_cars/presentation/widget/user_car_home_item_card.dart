@@ -49,11 +49,11 @@ class HomeCarOutlinedCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // IMAGE (fills its flex)
+              // IMAGE (responsive to available width)
               Hero(
                 tag: heroTag ?? ValueKey(imageUrl),
-                child: SizedBox(
-                  height: 120,
+                child: AspectRatio(
+                  aspectRatio: 16 / 9,
                   child: ImageLoader(
                     url: imageUrl,
                     placeholder: const _ImageErrorTile(),
