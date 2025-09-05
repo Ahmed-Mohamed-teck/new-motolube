@@ -32,24 +32,24 @@ class HomeCarOutlinedCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
-    final chassisDisplay =  chassis;
+    final theme = Theme.of(context);
+    final chassisDisplay = chassis;
 
     return Card(
-      elevation: 2,
+      elevation: 0,
+      color: theme.colorScheme.surface,
+      surfaceTintColor: theme.colorScheme.surfaceTint,
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(16),
         side: BorderSide(
-          width: .5,
+          color: theme.colorScheme.outlineVariant.withOpacity(0.5),
         ),
       ),
       child: Column(
-        
         mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
               // IMAGE (responsive to available width)
               Hero(
                 tag: heroTag ?? ValueKey(imageUrl),
