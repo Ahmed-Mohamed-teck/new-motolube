@@ -100,6 +100,12 @@ class _HorizontalStepperScreenState extends State<BookServiceScreen> {
           color: isSelected ? Colors.amber[100] : null,
           child: ListTile(
             title: Text(_services[index]),
+            subtitle: const Text('17 SAR'),
+            leading: Icon(
+              Icons.build_circle,
+              color: isSelected ? Colors.amber : Colors.grey[600],
+              size: 40,
+            ),
             onTap: () => setState(() => _selectedService = index),
           ),
         );
