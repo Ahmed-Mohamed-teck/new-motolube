@@ -63,7 +63,8 @@ class HomeCarOutlinedCard extends StatelessWidget {
               //
               // // DETAILS (fills remainder; internally kept ultra-compact)
               Padding(
-                padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
+                // Remove bottom padding so the card height hugs the content
+                padding: const EdgeInsets.fromLTRB(10, 8, 10, 0),
                 child: _DetailsCompact(
                   model: model,
                   plate: plate,
@@ -140,9 +141,16 @@ class _DetailsCompact extends StatelessWidget {
         if (onBook != null)
           Align(
             alignment: Alignment.centerRight,
-            child: OutlinedButton(onPressed:onBook,
-                child:
-                Text('Book Now'.toUpperCase())),
+            child: OutlinedButton(
+              onPressed: onBook,
+              style: OutlinedButton.styleFrom(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                minimumSize: Size.zero,
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
+              child: Text('Book Now'.toUpperCase()),
+            ),
           ),
       ],
     );
