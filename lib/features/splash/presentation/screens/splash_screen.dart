@@ -6,7 +6,6 @@ import 'package:newmotorlube/core/providers/global_lang_provider.dart';
 import 'package:newmotorlube/core/utils/constant.dart';
 
 import '../../../../main.dart';
-import '../../../auth/provider/auth_provider.dart';
 import '../../provider/splash_provider.dart';
 import '../view_model/splash_state.dart';
 
@@ -27,7 +26,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(authViewModelProvider.notifier).authenticating();
+      ref.read(splashViewModelProvider.notifier).init();
     });
   }
 

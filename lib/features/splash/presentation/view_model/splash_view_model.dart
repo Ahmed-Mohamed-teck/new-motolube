@@ -15,7 +15,7 @@ class SplashViewModel extends Notifier<SplashState> {
 
     ref.listen<AuthState>(authViewModelProvider, (previous, next) {
       if (next is AuthenticatedState) {
-        _handleAuthenticated();
+        state = const SplashNavigateState('baseHomeScreen');
       } else if (next is UnauthenticatedState) {
         state = const SplashNavigateState('loginScreen');
       } else if (next is AuthenticationFailedState) {
@@ -23,12 +23,15 @@ class SplashViewModel extends Notifier<SplashState> {
       }
     });
 
-
     return const SplashInitial();
   }
 
-  Future<void> _handleAuthenticated() async {
+  Future<void> init() async {
     final route = await _checkOnboardingUseCase();
-    state = SplashNavigateState(route);
+    if (route == 'onBoardingScreen') {
+      state = SplashNavigateState(route);
+    } else {
+      await ref.read(authViewModelProvider.notifier).authenticating();
+    }
   }
 }
