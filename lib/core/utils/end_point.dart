@@ -5,5 +5,7 @@ const String registerEndPoint = '$baseUrl/UserManagement/register';
 const String verifyOtpEndPoint = '$baseUrl/UserManagement/verifyOtp';
 const String isUserRegisteredEndPoint = '$baseUrl/UserManagement/login';
 const String getManufacturersEndPoint = '$baseUrl/MotorLubeApp/getManufacturers';
+const String addVehicleEndPoint = '$baseUrl/MotorLubeApp/addVehicle';
 String getCarModelsEndPoint(String model) => '$baseUrl/MotorLubeApp/getBrands/$model';
+String getCarsForCustomerEndPoint(String customerOracleId) => '$baseUrl/MotorLubeApp/customer/vehicles?customerId=$customerOracleId';
 String getUserInfoEndPoint(String phone) => '$baseUrl/UserManagement/user?mobileNumber=$phone';

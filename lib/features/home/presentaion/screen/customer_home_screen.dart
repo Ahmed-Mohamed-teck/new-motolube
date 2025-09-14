@@ -25,7 +25,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
         children: [
           Promotions(imageUrls: [
             'https://firebasestorage.googleapis.com/v0/b/motorlube.appspot.com/o/promotions%2F58ead032-5398-4d41-9e4a-1478bdd3db13.png?alt=media&token=f5f9615c-10e2-430b-b5e1-1c4c0f48e1d2',
-                        'https://firebasestorage.googleapis.com/v0/b/motorlube.appspot.com/o/promotions%2F58ead032-5398-4d41-9e4a-1478bdd3db13.png?alt=media&token=f5f9615c-10e2-430b-b5e1-1c4c0f48e1d2',
+            'https://firebasestorage.googleapis.com/v0/b/motorlube.appspot.com/o/promotions%2F58ead032-5398-4d41-9e4a-1478bdd3db13.png?alt=media&token=f5f9615c-10e2-430b-b5e1-1c4c0f48e1d2',
             'https://firebasestorage.googleapis.com/v0/b/motorlube.appspot.com/o/promotions%2F58ead032-5398-4d41-9e4a-1478bdd3db13.png?alt=media&token=f5f9615c-10e2-430b-b5e1-1c4c0f48e1d2',
 
           ],),

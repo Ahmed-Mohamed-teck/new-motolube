@@ -13,6 +13,7 @@ class SaveAuthSessionUseCase {
       tokenType: result.tokens.tokenType,
       expiresIn: result.tokens.expiresIn,
       userId: result.user.userId,
+      oracleId: result.user.oracleId,
       userName: result.user.name ?? '',
       userMobileNumber: result.user.mobileNo,
       userEmail: result.user.email,

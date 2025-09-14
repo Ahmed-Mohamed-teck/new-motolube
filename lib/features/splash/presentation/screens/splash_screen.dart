@@ -36,17 +36,16 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       if (state is SplashNavigateState) {
         navigatorKey.currentState!.pushReplacementNamed(state.route);
       } else if (state is SplashErrorState) {
-        // Future.microtask(() {
-        //   showDialog(
-        //     context: context,
-        //     barrierColor: Colors.transparent,
-        //     builder: (context) => AlertDialog(
-        //       title: Text(appLang.errorTitle),
-        //       content: Text(state.message),
-        //     ),
-        //   );
-        // });
-        Navigator.of(context).pushReplacementNamed('baseHomeScreen');
+        Future.microtask(() {
+          showDialog(
+            context: context,
+            barrierColor: Colors.transparent,
+            builder: (context) => AlertDialog(
+              title: Text(appLang.errorTitle),
+              content: Text(state.message),
+            ),
+          );
+        });
       }
     });
 

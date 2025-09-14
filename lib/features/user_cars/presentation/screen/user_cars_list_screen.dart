@@ -24,13 +24,12 @@ class UserCarsListScreen extends StatelessWidget {
             heroTag: 'camry-1',
             onTap: () {
               // Navigate to car details
-              navigatorKey.currentState!.pushNamed('userCarDetailsScreen', arguments: CarEntity(id: "dsfsdafkjsdjfgksadkljf",
-                oraIdStage: "oraIdStage",
-                oraPartyId: "oraPartyId",
-                oraVehicleId: "oraVehicleId",
+              navigatorKey.currentState!.pushNamed('userCarDetailsScreen', arguments: CarEntity(
+                vehicleId: "vehicleId",
+                mileage: "15000",
                 arabicPlate: "9876XRR".characters.toList(),
                 englishPlate: "9876XRR".characters.toList(),
-                carModel: "MG% STD", creationDate: "creationDate",
+                carModel: "MG% STD", 
                 manufacturer: "MG", modelYear: "2023",
                 carImages: [ "https://cdn.pixabay.com/photo/2012/05/29/00/43/car-49278_1280.jpg", "https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_1280.jpg"],
                 vinNumber: "vinNumber",));

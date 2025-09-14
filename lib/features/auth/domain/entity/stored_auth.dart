@@ -2,10 +2,15 @@ class StoredAuth {
   final String jwtToken;
   final String firebaseToken;
   final String phoneNumber;
+  final String userId;
+  final String oracleId;
+  
 
   const StoredAuth({
     required this.jwtToken,
     required this.firebaseToken,
     required this.phoneNumber,
+    required this.userId,
+    required this.oracleId,
   });
 }

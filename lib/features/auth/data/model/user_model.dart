@@ -2,12 +2,14 @@
 import '../../domain/entity/user_entity.dart';
 
 class UserModel {
+  final String oracleId;
   final String userId;
   final String? name;
   final String mobileNo;
   final String? email;
   final bool isVerified;
   UserModel({
+    required this.oracleId,
     required this.userId,
     this.name,
     required this.mobileNo,
@@ -16,6 +18,9 @@ class UserModel {
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+    // oracleId: json['oracleId'] as String,
+    // todo temporary fix for missing oracleId from login response
+    oracleId: "761369",
     userId: json['userId']??json['id'] as String,
     name: json['name'] as String?,
     mobileNo: json['mobileNo']??json['mobileNumber'] as String,
@@ -24,6 +29,7 @@ class UserModel {
   );
 
   User toEntity() => User(
+    oracleId: oracleId,
     userId: userId,
     name: name,
     mobileNo: mobileNo,

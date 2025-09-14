@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -9,6 +10,8 @@ import 'package:newmotorlube/core/providers/current_locale_provider.dart';
 import 'package:newmotorlube/core/providers/global_lang_provider.dart';
 import 'package:newmotorlube/features/user_cars/presentation/view_model/manufacturers_state.dart';
 import 'package:newmotorlube/features/user_cars/provider/user_cars_provider.dart';
+import 'package:newmotorlube/features/user_cars/domain/entity/car_entity.dart';
+import 'package:newmotorlube/features/user_cars/presentation/view_model/add_user_car_state.dart';
 
 import '../../../../core/providers/plate_chars_provider.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -33,17 +36,13 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
   final _vinCtrl = TextEditingController();
   final _plateNumberCtrl = TextEditingController();
 
-  // Owner/company controllers
-  final _companyNameCtrl = TextEditingController();
-  final _crnCtrl = TextEditingController();
+ 
 
   // Simple dropdown state
   int? _selectedYear;
   String? _plateL1, _plateL2, _plateL3 ,_plateL4, _plateL5, _plateL6, _plateL7;
 
-  // Ownership
-  bool _ownsThisCar = true; // if false => show company + CRN fields
-  XFile? _crnImage;
+  
 
   // Image upload error state
   bool _imagesError = false;
@@ -69,7 +68,7 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
     _plateNumbers = CharListProvider.getPlateNumbers(ref.read(currentLocaleProvider));
     // fetch manufacturers
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(manufacturersViewModelProvider.notifier).fetchManufacturers();
+      ref.read(manufacturersViewModelProvider.notifier).fetchManufacturers();      
     });
   }
 
@@ -78,8 +77,6 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
     _modelCtrl.dispose();
     _vinCtrl.dispose();
     _plateNumberCtrl.dispose();
-    _companyNameCtrl.dispose();
-    _crnCtrl.dispose();
     super.dispose();
   }
 
@@ -132,77 +129,27 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
     );
   }
 
-  // --- CRN Image pickers -----------------------------------------------------
+ 
 
-  Future<void> _pickCrn(ImageSource source) async {
-    final x = await _picker.pickImage(source: source, imageQuality: 90);
-    if (x != null) {
-      setState(() => _crnImage = x);
-    }
-  }
-
-  void _showCrnSheet() {
-    showModalBottomSheet(
-      context: context,
-      showDragHandle: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-      ),
-      builder: (_) {
-        return SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                leading: const Icon(Icons.photo_camera_outlined),
-                title: const Text('Scan CRN with camera'),
-                onTap: () {
-                  Navigator.pop(context);
-                  _pickCrn(ImageSource.camera);
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.photo_library_outlined),
-                title: const Text('Upload CRN from gallery'),
-                onTap: () {
-                  Navigator.pop(context);
-                  _pickCrn(ImageSource.gallery);
-                },
-              ),
-              if (_crnImage != null)
-                ListTile(
-                  leading: const Icon(Icons.delete_outline),
-                  title: const Text('Remove CRN image'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    setState(() => _crnImage = null);
-                  },
-                ),
-            ],
-          ),
-        );
-      },
-    );
-  }
+  
 
   void _removeImage(int index) {
     setState(() => _carImages.removeAt(index));
   }
 
-  void _save() {
+  void _save() async {
     final formOk = _formKey.currentState?.validate() ?? false;
 
-    // Extra validation when “owns this car” is YES
-    if (!_ownsThisCar) {
-      if (_crnImage == null) {
+    
+
+    if (formOk) {
+      if (_plateL1 == null || _plateL2 == null || _plateL3 == null ||
+          _plateL4 == null || _plateL5 == null || _plateL6 == null || _plateL7 == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Please attach the CRN image.')),
+          const SnackBar(content: Text('Please complete plate fields')),
         );
         return;
       }
-    }
-
-    if (formOk) {
 
       if(_carImages.isEmpty) {
         setState(() => _imagesError = true);
@@ -211,17 +158,118 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
         setState(() => _imagesError = false);
       }
 
-      // TODO: hook into your ViewModel/use case layer
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Vehicle saved (UI demo).')),
-      );
+      // Build CarEntity and dispatch add
+      try {
+        final car = await _buildCarEntity();
+        await ref.read(addUserCarViewModelProvider.notifier).addCar(car);
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(e.toString())),
+        );
+      }
     }
+  }
+
+  Future<CarEntity> _buildCarEntity() async {
+    // Map selected letters/numbers to both Arabic and English
+    String l1 = _plateL1!;
+    String l2 = _plateL2!;
+    String l3 = _plateL3!;
+    String n1 = _plateL4!;
+    String n2 = _plateL5!;
+    String n3 = _plateL6!;
+    String n4 = _plateL7!;
+
+    String mapArabicLetter(String ch) {
+      final iAr = CharListProvider.arabicChars.indexOf(ch);
+      if (iAr != -1) return ch;
+      final iEn = CharListProvider.englishChars.indexOf(ch);
+      if (iEn != -1) return CharListProvider.arabicChars[iEn];
+      throw Exception('Invalid plate letter');
+    }
+
+    String mapEnglishLetter(String ch) {
+      final iEn = CharListProvider.englishChars.indexOf(ch);
+      if (iEn != -1) return ch;
+      final iAr = CharListProvider.arabicChars.indexOf(ch);
+      if (iAr != -1) return CharListProvider.englishChars[iAr];
+      throw Exception('Invalid plate letter');
+    }
+
+    String mapArabicNumber(String ch) {
+      final iAr = CharListProvider.arabicNumbers.indexOf(ch);
+      if (iAr != -1) return ch;
+      final iEn = CharListProvider.numbers.indexOf(ch);
+      if (iEn != -1) return CharListProvider.arabicNumbers[iEn];
+      throw Exception('Invalid plate number');
+    }
+
+    String mapEnglishNumber(String ch) {
+      final iEn = CharListProvider.numbers.indexOf(ch);
+      if (iEn != -1) return ch;
+      final iAr = CharListProvider.arabicNumbers.indexOf(ch);
+      if (iAr != -1) return CharListProvider.numbers[iAr];
+      throw Exception('Invalid plate number');
+    }
+
+    final arabicPlate = <String>[
+      mapArabicLetter(l1),
+      mapArabicLetter(l2),
+      mapArabicLetter(l3),
+      mapArabicNumber(n1),
+      mapArabicNumber(n2),
+      mapArabicNumber(n3),
+      mapArabicNumber(n4),
+    ];
+
+    final englishPlate = <String>[
+      mapEnglishLetter(l1),
+      mapEnglishLetter(l2),
+      mapEnglishLetter(l3),
+      mapEnglishNumber(n1),
+      mapEnglishNumber(n2),
+      mapEnglishNumber(n3),
+      mapEnglishNumber(n4),
+    ];
+
+    // Convert images to Base64
+    final imagesBase64 = <String>[];
+    for (final xf in _carImages) {
+      final bytes = await xf.readAsBytes();
+      imagesBase64.add(base64Encode(bytes));
+    }
+
+    return CarEntity(
+      vehicleId: '', // to be assigned by backend
+      mileage: '0', // initial mileage
+      arabicPlate: arabicPlate,
+      englishPlate: englishPlate,
+      carModel: _modelCtrl.text,
+      manufacturer: _selectedManufacturer!,
+      modelYear: _selectedYear!.toString(),
+      carImages: imagesBase64,
+      vinNumber: _vinCtrl.text,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final manufacturersState = ref.watch(manufacturersViewModelProvider);
     final carBrandsState = ref.watch(carBrandsViewModelProvider);
+    final addState = ref.watch(addUserCarViewModelProvider);
+
+    ref.listen<AddUserCarState>(addUserCarViewModelProvider, (prev, next) {
+        if (next is AddUserCarSuccess) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Car added successfully')),
+          );
+          Navigator.of(context).pop(true);
+        } else if (next is AddUserCarError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(next.message)),
+          );
+        }
+      });
     return Scaffold(
       appBar: InternalAppBar(title: appLang.addCar,),
       body: SafeArea(
@@ -436,80 +484,7 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
                       ),
 
                       const SizedBox(height: 16),
-                      // --- Ownership question -------------------------------------------------
-                      _LabeledField(
-                        label: appLang.areYouOwnerThisCar,
-                        child: Wrap(
-                          spacing: 8,
-                          children: [
-                            ChoiceChip(
-                              label:  Text(appLang.no),
-                              selected: !_ownsThisCar,
-                              onSelected: (_) => setState(() => _ownsThisCar = false),
-                            ),
-                            ChoiceChip(
-                              label:  Text(appLang.yes),
-                              selected: _ownsThisCar,
-                              onSelected: (_) => setState(() => _ownsThisCar = true),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      // --- Extra fields when YES ----------------------------------------------
-                      AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 220),
-                        switchInCurve: Curves.easeOut,
-                        switchOutCurve: Curves.easeIn,
-                        child: !_ownsThisCar
-                            ? Column(
-                          key: const ValueKey('owner-extra'),
-                          children: [
-                            const SizedBox(height: 12),
-                            _LabeledField(
-                              label: appLang.companyName,
-                              child: TextFormField(
-                                controller: _companyNameCtrl,
-                                textInputAction: TextInputAction.next,
-                                decoration: _input(appLang.companyNameHint),
-                                validator: (v) {
-                                  if (_ownsThisCar) return null;
-                                  return (v == null || v.trim().isEmpty) ? appLang.companyNameError : null;
-                                },
-                              ),
-                            ),
-                            const SizedBox(height: 12),
-                            _LabeledField(
-                              label: appLang.crn,
-                              child: TextFormField(
-                                controller: _crnCtrl,
-                                keyboardType: TextInputType.number,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly,
-                                  LengthLimitingTextInputFormatter(10), // typical KSA length
-                                ],
-                                decoration: _input(appLang.crnHint),
-                                validator: (v) {
-                                  if (_ownsThisCar) return null;
-                                  if (v == null || v.isEmpty) return appLang.crnError;
-                                  if (v.length < 8) return appLang.crnLengthError;
-                                  return null;
-                                },
-                              ),
-                            ),
-                            const SizedBox(height: 12),
-                            _LabeledField(
-                              label: 'CRN Image',
-                              child: _CrnImageField(
-                                file: _crnImage != null ? File(_crnImage!.path) : null,
-                                onPick: _showCrnSheet,
-                                onRemove: () => setState(() => _crnImage = null),
-                              ),
-                            ),
-                          ],
-                        )
-                            : const SizedBox.shrink(),
-                      ),
+                      
                     ],
                   ),
                 ),
@@ -559,8 +534,14 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
         child: SizedBox(
           height: 48,
           child: FilledButton.icon(
-            onPressed: _save,
-            icon: const Icon(Icons.save_outlined),
+            onPressed: addState is AddUserCarLoading ? null : _save,
+            icon: addState is AddUserCarLoading
+                ? const SizedBox(
+                    height: 20,
+                    width: 20,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                : const Icon(Icons.save_outlined),
             label: const Text('Save Vehicle'),
           ),
         ),
@@ -871,6 +852,3 @@ class _CircleBtn extends StatelessWidget {
     );
   }
 }
-
-
-

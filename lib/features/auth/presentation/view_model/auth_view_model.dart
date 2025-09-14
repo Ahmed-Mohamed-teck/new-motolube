@@ -108,6 +108,7 @@ class AuthViewModel extends Notifier<AuthState> {
         jwtToken: result.tokens.jwtToken,
         firebaseToken: result.tokens.firebaseToken,
         user: User(
+          oracleId: result.user.oracleId,
           userId: result.user.userId,
           name: result.user.name,
           mobileNo: result.user.mobileNo,
@@ -164,6 +165,7 @@ class AuthViewModel extends Notifier<AuthState> {
           jwtToken: stored.jwtToken,
           firebaseToken: stored.firebaseToken,
           user: User(
+            oracleId: user.oracleId,
             userId: user.userId,
             name: user.name,
             mobileNo: user.mobileNo,

@@ -14,6 +14,7 @@ class SecureStore {
     required String firebaseToken,
     required String tokenType,
     required int expiresIn,
+    required String oracleId,
     required String userId,
     required String userName,
     required String userMobileNumber,
@@ -24,6 +25,7 @@ class SecureStore {
     await _storage.write(key: 'tokenType', value: tokenType);
     await _storage.write(key: 'expiresIn', value: expiresIn.toString());
     await _storage.write(key: 'userId', value: userId);
+    await _storage.write(key: 'oracleId', value: oracleId);
     await _storage.write(key: 'userName', value: userName);
     await _storage.write(key: 'userMobileNumber', value: userMobileNumber);
     await _storage.write(key: 'userEmail', value: userEmail ?? '');
@@ -34,6 +36,8 @@ class SecureStore {
   Future<String?> phoneNumber() => _storage.read(key: 'userMobileNumber');
   Future<String?> userName() => _storage.read(key: 'userName');
   Future<String?> userEmail() => _storage.read(key: 'userEmail');
+  Future<String?> userId() => _storage.read(key: 'userId');
+  Future<String?> oracleId() => _storage.read(key: 'oracleId');
 
 
   Future<void> clear() async {

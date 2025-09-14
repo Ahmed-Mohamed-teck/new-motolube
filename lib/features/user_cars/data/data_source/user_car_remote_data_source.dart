@@ -1,6 +1,7 @@
 
 import 'package:dio/dio.dart';
 import 'package:newmotorlube/core/providers/dio_provider.dart';
+import 'package:newmotorlube/features/auth/domain/repository/i_auth_local_repository.dart';
 import 'package:newmotorlube/features/user_cars/data/model/car_brand_model.dart';
 import 'package:newmotorlube/features/user_cars/data/model/manufacture_model.dart';
 
@@ -10,13 +11,22 @@ import 'i_user_car_remote_data_source.dart';
 
 class UserCarsRemoteDataSourceImpl extends IUserCarRemoteDataSource{
   final Dio dio;
+  final IAuthLocalRepository _authLocalRepository;
 
-  UserCarsRemoteDataSourceImpl(this.dio);
+  UserCarsRemoteDataSourceImpl(this.dio, this._authLocalRepository);
 
   @override
   Future<void> addCar({required CarModel car}) async{
     try{
-      print(car.toJson());
+      final storedAuth = await _authLocalRepository.getStoredAuth();
+      final oracleId = storedAuth?.oracleId;
+      if (oracleId == null || oracleId.isEmpty) {
+        throw Exception('Missing oracleId in stored auth');
+      }
+      await dio.post(
+        addVehicleEndPoint,
+        data: car.toJson(oracleId),
+      );
     }catch(e){
       rethrow;
     }
@@ -35,9 +45,45 @@ class UserCarsRemoteDataSourceImpl extends IUserCarRemoteDataSource{
   }
 
   @override
-  Future<List<CarModel>> getCars({required String customerId}) {
-    // TODO: implement getCars
-    throw UnimplementedError();
+  Future<List<CarModel>> getCars({required String customerId}) async {
+    try {
+      String id = customerId;
+      if (id.isEmpty) {
+        final storedAuth = await _authLocalRepository.getStoredAuth();
+        id = storedAuth?.oracleId ?? '';
+      }
+      if (id.isEmpty) {
+        throw Exception('Missing customerId');
+      }
+
+      final res = await dio.get(getCarsForCustomerEndPoint(id));
+      final data = res.data;
+
+      List<dynamic> rawList;
+      if (data is List) {
+        rawList = data;
+      } else if (data is Map<String, dynamic>) {
+        final maybeList = data['vehicles'] ?? data['data'] ?? data['items'];
+        if (maybeList is List) {
+          rawList = maybeList;
+        } else {
+          rawList = const [];
+        }
+      } else {
+        rawList = const [];
+      }
+
+      final cars = rawList
+          .map((e) => CarModel.fromJson(Map<String, dynamic>.from(e as Map)))
+          .toList();
+
+      if (cars.isEmpty) {
+        throw Exception('No cars found');
+      }
+      return cars;
+    } on DioException {
+      rethrow;
+    }
   }
 
   @override

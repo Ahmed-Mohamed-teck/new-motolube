@@ -4,6 +4,7 @@ class AuthSession {
   final String tokenType;
   final int expiresIn;
   final String userId;
+  final String oracleId;
   final String userName;
   final String userMobileNumber;
   final String? userEmail;
@@ -14,6 +15,7 @@ class AuthSession {
     required this.tokenType,
     required this.expiresIn,
     required this.userId,
+    required this.oracleId,
     required this.userName,
     required this.userMobileNumber,
     this.userEmail,
