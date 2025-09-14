@@ -257,19 +257,22 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
     final manufacturersState = ref.watch(manufacturersViewModelProvider);
     final carBrandsState = ref.watch(carBrandsViewModelProvider);
     final addState = ref.watch(addUserCarViewModelProvider);
-
-    ref.listen<AddUserCarState>(addUserCarViewModelProvider, (prev, next) {
-        if (next is AddUserCarSuccess) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Car added successfully')),
-          );
-          Navigator.of(context).pop(true);
-        } else if (next is AddUserCarError) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(next.message)),
-          );
-        }
+    if (addState is AddUserCarSuccess) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Car added successfully')),
+        );
+        Navigator.of(context).pop(true);
       });
+    } else if (addState is AddUserCarError) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(addState.message)),
+        );
+        // Reset to avoid repeated snackbars on rebuilds
+        ref.read(addUserCarViewModelProvider.notifier).reset();
+      });
+    }
     return Scaffold(
       appBar: InternalAppBar(title: appLang.addCar,),
       body: SafeArea(
