@@ -1,46 +1,75 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../main.dart';
-import '../../domain/entity/car_entity.dart';
+import '../../provider/user_cars_provider.dart';
+import '../view_model/user_cars_state.dart';
 import '../widget/user_car_list_item.dart';
 
-class UserCarsListScreen extends StatelessWidget {
+class UserCarsListScreen extends ConsumerWidget {
   const UserCarsListScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return  Scaffold(
-      body: ListView.builder(
-        itemCount: 2, // Example item count
-        itemBuilder: (context, index) {
-          return CarCard(
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(userCarsViewModelProvider);
 
-            car: const CarInfo(
-              imageUrl: 'https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg',
-              model: 'Toyota Camry 2022',
-              plate: 'ABC-1234',
-              chassis: 'JTNBE46KX63012345',
-            ),
-            heroTag: 'camry-1',
-            onTap: () {
-              // Navigate to car details
-              navigatorKey.currentState!.pushNamed('userCarDetailsScreen', arguments: CarEntity(
-                vehicleId: "vehicleId",
-                mileage: "15000",
-                arabicPlate: "9876XRR".characters.toList(),
-                englishPlate: "9876XRR".characters.toList(),
-                carModel: "MG% STD", 
-                manufacturer: "MG", modelYear: "2023",
-                carImages: [ "https://cdn.pixabay.com/photo/2012/05/29/00/43/car-49278_1280.jpg", "https://cdn.pixabay.com/photo/2015/01/19/13/51/car-604019_1280.jpg"],
-                vinNumber: "vinNumber",));
-            },
-            onLongPress: () {
-              // e.g., copy plate to clipboard or show context menu
-            },
+    if (state is UserCarsInitial) {
+      Future.microtask(
+          () => ref.read(userCarsViewModelProvider.notifier).fetchUserCars());
+    }
 
-          );
-        },
-      ),
-    );
+    Widget body;
+    if (state is UserCarsLoading || state is UserCarsInitial) {
+      body = const Center(child: CircularProgressIndicator());
+    } else if (state is UserCarsLoaded) {
+      final cars = state.cars;
+      if (cars.isEmpty) {
+        body = const Center(child: Text('No cars found'));
+      } else {
+        body = ListView.separated(
+          padding: const EdgeInsets.all(16),
+          itemCount: cars.length,
+          separatorBuilder: (_, __) => const SizedBox(height: 12),
+          itemBuilder: (context, index) {
+            final car = cars[index];
+            final imageUrl = car.carImages.isNotEmpty ? car.carImages.first : '';
+            final model = '${car.manufacturer} ${car.modelYear}'.trim();
+            final plate = car.englishPlate.join();
+            final chassis = car.vinNumber;
+            final heroTag = 'list-car-${car.vehicleId}';
+
+            return CarCard(
+              car: CarInfo(
+                imageUrl: imageUrl,
+                model: model,
+                plate: plate,
+                chassis: chassis,
+              ),
+              heroTag: heroTag,
+              onTap: () {
+                navigatorKey.currentState!.pushNamed(
+                  'userCarDetailsScreen',
+                  arguments: car,
+                );
+              },
+            );
+          },
+        );
+      }
+    } else if (state is UserCarsError) {
+      body = Center(
+        child: Text(
+          state.message,
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium
+              ?.copyWith(color: Theme.of(context).colorScheme.error),
+        ),
+      );
+    } else {
+      body = const SizedBox.shrink();
+    }
+
+    return Scaffold(body: body);
   }
 }

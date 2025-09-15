@@ -1,37 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:newmotorlube/features/user_cars/presentation/widget/user_car_list_item.dart';
+import 'package:newmotorlube/features/user_cars/provider/user_cars_provider.dart';
+import 'package:newmotorlube/features/user_cars/presentation/view_model/user_cars_state.dart';
 
-class BookServiceScreen extends StatefulWidget {
+class BookServiceScreen extends ConsumerStatefulWidget {
   const BookServiceScreen({super.key});
 
   @override
-  State<BookServiceScreen> createState() => _HorizontalStepperScreenState();
+  ConsumerState<BookServiceScreen> createState() => _HorizontalStepperScreenState();
 }
 
-class _HorizontalStepperScreenState extends State<BookServiceScreen> {
+class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
   int _currentStep = 0;
   int? _selectedCar;
   int? _selectedService;
   LatLng? _selectedLocation;
   final MapController _mapController = MapController();
 
-  final List<Map<String, String>> _cars = [
-    {
-      'image': 'https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg',
-      'model': 'Nissan Sunny 2022',
-      'plate': 'ABC-1234',
-      'chassis': 'JTNBE46KX63012345',
-    },
-    {
-      'image': 'https://images.pexels.com/photos/210017/pexels-photo-210017.jpeg',
-      'model': 'Toyota Camry 2022',
-      'plate': 'XYZ-9876',
-      'chassis': 'JTNBE46KX63012345',
-    },
-  ];
+  // Cars are now provided by userCarsViewModelProvider
 
   final List<String> _services = [
     'Basic Services',
@@ -65,35 +55,70 @@ class _HorizontalStepperScreenState extends State<BookServiceScreen> {
   }
 
   Widget _buildCarStep() {
-    return ListView.separated(
-      itemCount: _cars.length,
-      itemBuilder: (context, index) {
-        final car = _cars[index];
-        final isSelected = _selectedCar == index;
-        return GestureDetector(
-          onTap: () => setState(() => _selectedCar = index),
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: isSelected ? Colors.amber : Colors.transparent,
-                width: 2,
+    // Use the shared user cars ViewModel
+    return Consumer(builder: (context, ref, _) {
+      final state = ref.watch(userCarsViewModelProvider);
+
+      if (state is UserCarsInitial) {
+        Future.microtask(
+            () => ref.read(userCarsViewModelProvider.notifier).fetchUserCars());
+      }
+
+      if (state is UserCarsLoading || state is UserCarsInitial) {
+        return const Center(child: CircularProgressIndicator());
+      } else if (state is UserCarsLoaded) {
+        final cars = state.cars;
+        if (cars.isEmpty) {
+          return const Center(child: Text('No cars found'));
+        }
+        return ListView.separated(
+          itemCount: cars.length,
+          separatorBuilder: (_, __) => const SizedBox(height: 12),
+          itemBuilder: (context, index) {
+            final car = cars[index];
+            final isSelected = _selectedCar == index;
+            final imageUrl = car.carImages.isNotEmpty ? car.carImages.first : '';
+            final model = '${car.manufacturer} ${car.modelYear}'.trim();
+            final plate = car.englishPlate.join();
+            final chassis = car.vinNumber;
+
+            return GestureDetector(
+              onTap: () => setState(() => _selectedCar = index),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: isSelected ? Colors.amber : Colors.transparent,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: CarCard(
+                  car: CarInfo(
+                    imageUrl: imageUrl,
+                    model: model,
+                    plate: plate,
+                    chassis: chassis,
+                  ),
+                  heroTag: 'maint-car-${car.vehicleId}-$index',
+                ),
               ),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: CarCard(
-              car: CarInfo(
-                imageUrl: car['image']!,
-                model: car['model']!,
-                plate: car['plate']!,
-                chassis: car['chassis']!,
-              ),
-              heroTag: 'car-$index',
-            ),
+            );
+          },
+        );
+      } else if (state is UserCarsError) {
+        return Center(
+          child: Text(
+            state.message,
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium
+                ?.copyWith(color: Theme.of(context).colorScheme.error),
           ),
         );
-      },
-      separatorBuilder: (_, __) => const SizedBox(height: 12),
-    );
+      }
+
+      return const SizedBox.shrink();
+    });
   }
 
   Widget _buildServiceStep() {
