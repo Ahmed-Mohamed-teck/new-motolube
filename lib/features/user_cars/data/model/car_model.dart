@@ -29,9 +29,13 @@ class CarModel extends CarEntity {
       carModel: json['modeL_NUMBER'] as String? ?? '',
       manufacturer: json['manufactureR_NAME'] as String? ?? '',
       modelYear: json['yeaR_MANUFACTURED'] as String? ?? '',
-      carImages: (json['photoUrl'] as List<dynamic> ? ?? [])
-          .map((item) => item as String)
-          .toList(),
+      carImages: [
+        if (json['photoUrl'] != null && (json['photoUrl'] as String).isNotEmpty)
+          json['photoUrl'] as String
+      ],
+      // carImages: (json['photoUrl'] as List<dynamic> ? ?? [])
+      //     .map((item) => item as String)
+      //     .toList(),
       vinNumber: json['vin'] as String? ?? '',
     );
   }
@@ -58,7 +62,7 @@ class CarModel extends CarEntity {
       'model_number': carModel,
       'manufacturer_name': manufacturer,
       'year_manufactured': modelYear,
-      'photoBase64': carImages,
+      'photoBase64': carImages.toList(),
       'vin': vinNumber,
     };
   }

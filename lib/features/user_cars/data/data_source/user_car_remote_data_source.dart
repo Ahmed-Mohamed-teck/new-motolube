@@ -63,7 +63,7 @@ class UserCarsRemoteDataSourceImpl extends IUserCarRemoteDataSource{
       if (data is List) {
         rawList = data;
       } else if (data is Map<String, dynamic>) {
-        final maybeList = data['vehicles'] ?? data['data'] ?? data['items'];
+        final maybeList = data['data'];
         if (maybeList is List) {
           rawList = maybeList;
         } else {
