@@ -48,7 +48,9 @@ class AuthViewModel extends Notifier<AuthState> {
     state = const CheckingState();
     _phone = phone;
     try {
-      final isRegistered = await ref.read(isRegisterUseCaseProvider).call(phone);
+      final isRegistered = await ref
+          .read(isRegisterUseCaseProvider)
+          .call(phone);
       if (isRegistered) {
         final info = await _sendOtpUseCase(phone);
         _startTimer(info.expiresIn);
@@ -67,7 +69,11 @@ class AuthViewModel extends Notifier<AuthState> {
     }
   }
 
-  Future<void> onRegisterPressed({required String name, required String phone, String? email}) async {
+  Future<void> onRegisterPressed({
+    required String name,
+    required String phone,
+    String? email,
+  }) async {
     state = const CheckingState();
     try {
       await _registerUserUseCase(name: name, phone: phone, email: email);
@@ -114,6 +120,7 @@ class AuthViewModel extends Notifier<AuthState> {
           mobileNo: result.user.mobileNo,
           email: result.user.email,
           isVerified: result.user.isVerified,
+          userType: result.user.userType,
         ),
       );
     } on InvalidOtpException {
@@ -171,6 +178,7 @@ class AuthViewModel extends Notifier<AuthState> {
             mobileNo: user.mobileNo,
             email: user.email,
             isVerified: user.isVerified,
+            userType: user.userType,
           ),
         );
       } catch (e) {

@@ -14,5 +14,9 @@ String getCarsForCustomerEndPoint(String customerOracleId) =>
     '$baseUrl/MotorLubeApp/customer/vehicles?customerId=$customerOracleId';
 String getUserInfoEndPoint(String phone) =>
     '$baseUrl/UserManagement/user?mobileNumber=$phone';
+const String setTechnicianLocationEndPoint =
+    '$baseUrl/MotorLubeApp/technician/setlocation';
+const String searchNearbyTechniciansEndPoint =
+    '$baseUrl/MotorLubeApp/technician/search/nearby';
 String getPackagesForVehicleEndPoint(String customerId, String vehicleId) =>
     '$packagesBaseUrl/MotorLubeApp/getPackagesForVehicle/$customerId/$vehicleId/0';

@@ -5,6 +5,8 @@ class User {
   final String mobileNo;
   final String? email;
   final bool isVerified;
+  final int userType;
+
   const User({
     required this.oracleId,
     required this.userId,
@@ -12,5 +14,6 @@ class User {
     required this.mobileNo,
     this.email,
     required this.isVerified,
+    required this.userType,
   });
 }

@@ -4,7 +4,7 @@ class StoredAuth {
   final String phoneNumber;
   final String userId;
   final String oracleId;
-  
+  final int userType;
 
   const StoredAuth({
     required this.jwtToken,
@@ -12,5 +12,6 @@ class StoredAuth {
     required this.phoneNumber,
     required this.userId,
     required this.oracleId,
+    required this.userType,
   });
 }

@@ -5,10 +5,6 @@ class SecureStore {
   final FlutterSecureStorage _storage;
   const SecureStore(this._storage);
 
-
-
-
-
   Future<void> saveAuth({
     required String jwtToken,
     required String firebaseToken,
@@ -19,6 +15,7 @@ class SecureStore {
     required String userName,
     required String userMobileNumber,
     String? userEmail,
+    required int userType,
   }) async {
     await _storage.write(key: 'jwtToken', value: jwtToken);
     await _storage.write(key: 'firebaseToken', value: firebaseToken);
@@ -29,6 +26,7 @@ class SecureStore {
     await _storage.write(key: 'userName', value: userName);
     await _storage.write(key: 'userMobileNumber', value: userMobileNumber);
     await _storage.write(key: 'userEmail', value: userEmail ?? '');
+    await _storage.write(key: 'userType', value: userType.toString());
   }
 
   Future<String?> readToken() => _storage.read(key: 'jwtToken');
@@ -38,7 +36,7 @@ class SecureStore {
   Future<String?> userEmail() => _storage.read(key: 'userEmail');
   Future<String?> userId() => _storage.read(key: 'userId');
   Future<String?> oracleId() => _storage.read(key: 'oracleId');
-
+  Future<String?> userType() => _storage.read(key: 'userType');
 
   Future<void> clear() async {
     await _storage.deleteAll();

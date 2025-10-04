@@ -19,6 +19,7 @@ class AuthLocalRepositoryImpl implements IAuthLocalRepository {
       userName: session.userName,
       userMobileNumber: session.userMobileNumber,
       userEmail: session.userEmail,
+      userType: session.userType,
     );
   }
 
@@ -30,7 +31,16 @@ class AuthLocalRepositoryImpl implements IAuthLocalRepository {
     final phone = await _secureStore.phoneNumber() ?? '';
     final userId = await _secureStore.userId() ?? '';
     final oracleId = await _secureStore.oracleId() ?? '';
-    return StoredAuth(jwtToken: jwt, firebaseToken: fcm, phoneNumber: phone, userId: userId, oracleId: oracleId);
+    final typeString = await _secureStore.userType();
+    final userType = int.tryParse(typeString ?? '') ?? 1;
+    return StoredAuth(
+      jwtToken: jwt,
+      firebaseToken: fcm,
+      phoneNumber: phone,
+      userId: userId,
+      oracleId: oracleId,
+      userType: userType,
+    );
   }
 
   @override

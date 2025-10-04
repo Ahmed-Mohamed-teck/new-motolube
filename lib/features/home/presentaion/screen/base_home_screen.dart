@@ -43,52 +43,38 @@ class _BaseHomeScreenState extends ConsumerState<BaseHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authState = ref.watch(authViewModelProvider);
+    final isTechUser =
+        authState is AuthenticatedState && authState.user.userType == 2;
 
-    ref.listen(currentNavBottomIndexProvider, (_, currentIndex) {
-      // Update the appBarTitle based on the current index
-      switch (currentIndex) {
-        case 0:
-          _tabController.index = 0;
-          break;
-        case 1:
-          _tabController.index = 1;
-          break;
-        case 2:
-          _tabController.index = 2;
-          break;
-        case 3:
-          _tabController.index = 3;
-          break;
-        case 4:
-          _tabController.index = 4;
-          break;
-        default:
-          appBarTitle = S.of(context).homeAppbar; // Default title
-      }
-    });
-    return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus(); // Dismiss the keyboard if it's open
-      },
-      child: Scaffold(
-        appBar: HomeAppBar(),
-        body: NetworkStatusWidget(
-          child: PersistentTabView(
-            context,
-            controller: _tabController,
-            screens: [
+    final screens =
+        isTechUser
+            ? const [CustomerHomeScreen(), MoreScreen()]
+            : const [
               CustomerHomeScreen(),
-              // ManagerHomeScreen(),
-              // AddNewCarScreen(),
               UserCarsListScreen(),
               BookServiceScreen(),
               ContactUsScreen(),
               MoreScreen(),
-            ],
-            onItemSelected: (int index) {
-              ref.read(currentNavBottomIndexProvider.notifier).state = index;
-            },
-            items: [
+            ];
+
+    final items =
+        isTechUser
+            ? [
+              PersistentBottomNavBarItem(
+                icon: const Icon(Icons.home),
+                title: S.of(context).homeNav,
+                activeColorPrimary: AppColors.lightPrimary,
+                inactiveColorPrimary: Colors.grey,
+              ),
+              PersistentBottomNavBarItem(
+                icon: const Icon(Icons.more_vert),
+                title: S.of(context).moreNav,
+                activeColorPrimary: AppColors.lightPrimary,
+                inactiveColorPrimary: Colors.grey,
+              ),
+            ]
+            : [
               PersistentBottomNavBarItem(
                 icon: const Icon(Icons.home),
                 title: S.of(context).homeNav,
@@ -119,7 +105,35 @@ class _BaseHomeScreenState extends ConsumerState<BaseHomeScreen> {
                 activeColorPrimary: AppColors.lightPrimary,
                 inactiveColorPrimary: Colors.grey,
               ),
-            ],
+            ];
+
+    final maxIndex = screens.length - 1;
+    if (_tabController.index > maxIndex) {
+      _tabController.jumpToTab(0);
+      ref.read(currentNavBottomIndexProvider.notifier).state = 0;
+    }
+
+    ref.listen<int>(currentNavBottomIndexProvider, (_, currentIndex) {
+      final targetIndex = currentIndex.clamp(0, maxIndex).toInt();
+      if (_tabController.index != targetIndex) {
+        _tabController.jumpToTab(targetIndex);
+      }
+    });
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus(); // Dismiss the keyboard if it's open
+      },
+      child: Scaffold(
+        appBar: HomeAppBar(),
+        body: NetworkStatusWidget(
+          child: PersistentTabView(
+            context,
+            controller: _tabController,
+            screens: screens,
+            onItemSelected: (int index) {
+              ref.read(currentNavBottomIndexProvider.notifier).state = index;
+            },
+            items: items,
             navBarStyle: NavBarStyle.style3,
           ),
         ),

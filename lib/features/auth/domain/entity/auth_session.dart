@@ -8,6 +8,7 @@ class AuthSession {
   final String userName;
   final String userMobileNumber;
   final String? userEmail;
+  final int userType;
 
   const AuthSession({
     required this.jwtToken,
@@ -19,5 +20,6 @@ class AuthSession {
     required this.userName,
     required this.userMobileNumber,
     this.userEmail,
+    required this.userType,
   });
 }
