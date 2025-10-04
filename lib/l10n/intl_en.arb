@@ -96,7 +96,11 @@
 
   ,"changeLanguage": "Change Language",
   "english": "English",
-  "arabic": "Arabic"
+  "arabic": "Arabic",
+  "bookServiceStepSelectVehicle": "Select Vehicle",
+  "bookServiceStepChoosePackage": "Choose Package",
+  "bookServiceStepPickLocation": "Pick Location",
+  "bookServiceStepSelectTechnician": "Select Technician"
 
 
 }

@@ -25,6 +25,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "Profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
         "addCar": MessageLookupByLibrary.simpleMessage("إضافة سيارة"),
         "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
+        "bookServiceStepChoosePackage":
+            MessageLookupByLibrary.simpleMessage("اختر الباقة"),
+        "bookServiceStepPickLocation":
+            MessageLookupByLibrary.simpleMessage("حدد الموقع"),
+        "bookServiceStepSelectTechnician":
+            MessageLookupByLibrary.simpleMessage("اختر الفني"),
+        "bookServiceStepSelectVehicle":
+            MessageLookupByLibrary.simpleMessage("اختر السيارة"),
         "areYouOwnerThisCar":
             MessageLookupByLibrary.simpleMessage("هل أنت مالك هذه السيارة؟"),
         "authenticationErrorMessage":

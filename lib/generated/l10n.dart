@@ -990,6 +990,46 @@ class S {
     );
   }
 
+  /// `Select Vehicle`
+  String get bookServiceStepSelectVehicle {
+    return Intl.message(
+      'Select Vehicle',
+      name: 'bookServiceStepSelectVehicle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose Package`
+  String get bookServiceStepChoosePackage {
+    return Intl.message(
+      'Choose Package',
+      name: 'bookServiceStepChoosePackage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick Location`
+  String get bookServiceStepPickLocation {
+    return Intl.message(
+      'Pick Location',
+      name: 'bookServiceStepPickLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Technician`
+  String get bookServiceStepSelectTechnician {
+    return Intl.message(
+      'Select Technician',
+      name: 'bookServiceStepSelectTechnician',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Change Language`
   String get changeLanguage {
     return Intl.message(

@@ -64,7 +64,10 @@ class TechnicianRemoteDataSource implements ITechnicianRemoteDataSource {
           })
           .whereType<TechnicianSummaryModel>()
           .toList();
-    } on DioException {
+    } on DioException catch (error) {
+      if (error.response?.statusCode == 404) {
+        return const <TechnicianSummaryModel>[];
+      }
       rethrow;
     }
   }
@@ -110,7 +113,10 @@ class TechnicianRemoteDataSource implements ITechnicianRemoteDataSource {
       return rawList
           .map((raw) => TechnicianSlotModel.fromDynamic(raw))
           .toList();
-    } on DioException {
+    } on DioException catch (error) {
+      if (error.response?.statusCode == 404) {
+        return const <TechnicianSlotModel>[];
+      }
       rethrow;
     }
   }

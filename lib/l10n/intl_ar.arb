@@ -96,7 +96,11 @@
 
   "changeLanguage": "تغيير اللغة",
   "english": "الإنجليزية",
-  "arabic": "العربية"
+  "arabic": "العربية",
+  "bookServiceStepSelectVehicle": "اختر السيارة",
+  "bookServiceStepChoosePackage": "اختر الباقة",
+  "bookServiceStepPickLocation": "حدد الموقع",
+  "bookServiceStepSelectTechnician": "اختر الفني"
   
 
 }

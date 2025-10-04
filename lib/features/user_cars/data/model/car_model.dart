@@ -21,6 +21,17 @@ class CarModel extends CarEntity {
   });
 
   factory CarModel.fromJson(Map<String, dynamic> json) {
+
+
+    final List<String> images = (json['photoUrl'] as String?)
+            ?.split(',')
+            .map<String>((e) => e.trim())
+            .where((e) => e.isNotEmpty)
+            .toList() ??
+        [];
+
+
+
     return CarModel(
       vehicleId: json['vehiclE_ID'] as String,
       mileage: json['mileage'] as String? ?? '0',
@@ -29,10 +40,7 @@ class CarModel extends CarEntity {
       carModel: json['modeL_NUMBER'] as String? ?? '',
       manufacturer: json['manufactureR_NAME'] as String? ?? '',
       modelYear: json['yeaR_MANUFACTURED'] as String? ?? '',
-      carImages: [
-        if (json['photoUrl'] != null && (json['photoUrl'] as String).isNotEmpty)
-          json['photoUrl'] as String
-      ],
+      carImages: images,
       // carImages: (json['photoUrl'] as List<dynamic> ? ?? [])
       //     .map((item) => item as String)
       //     .toList(),

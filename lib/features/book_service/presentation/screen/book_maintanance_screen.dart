@@ -17,6 +17,7 @@ import 'package:newmotorlube/features/technician/presentation/view_model/technic
 import 'package:newmotorlube/features/technician/presentation/view_model/technician_slots_state.dart';
 import 'package:newmotorlube/features/technician/domain/entity/technician_slot_entity.dart';
 import 'package:newmotorlube/features/technician/domain/entity/technician_summary_entity.dart';
+import 'package:newmotorlube/generated/l10n.dart';
 
 class BookServiceScreen extends ConsumerStatefulWidget {
   const BookServiceScreen({super.key});
@@ -569,7 +570,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'No technicians were found within the selected radius.',
+              'No available technician in this region.',
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),
@@ -972,6 +973,17 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
   @override
   Widget build(BuildContext context) {
     final steps = _stepContents;
+    final l10n = S.of(context);
+    final stepLabels = <String>[
+      l10n.bookServiceStepSelectVehicle,
+      l10n.bookServiceStepChoosePackage,
+      l10n.bookServiceStepPickLocation,
+      l10n.bookServiceStepSelectTechnician,
+    ];
+    assert(
+      stepLabels.length == steps.length,
+      'Step labels should match the number of step contents.',
+    );
     final isLast = _currentStep == steps.length - 1;
     final isFirst = _currentStep == 0;
 
@@ -1003,7 +1015,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Step ${index + 1}',
+                      stepLabels[index],
                       style: TextStyle(
                         fontSize: 12,
                         fontWeight:

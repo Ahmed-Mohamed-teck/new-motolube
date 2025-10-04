@@ -1,10 +1,12 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:newmotorlube/core/providers/current_locale_provider.dart';
 import 'package:newmotorlube/core/providers/global_lang_provider.dart';
@@ -18,7 +20,6 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 
 import '../../../../core/widget/internal_app_bar.dart';
 import '../view_model/car_brands_state.dart';
-
 
 class AddNewCarScreen extends ConsumerStatefulWidget {
   const AddNewCarScreen({super.key});
@@ -36,13 +37,9 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
   final _vinCtrl = TextEditingController();
   final _plateNumberCtrl = TextEditingController();
 
- 
-
   // Simple dropdown state
   int? _selectedYear;
-  String? _plateL1, _plateL2, _plateL3 ,_plateL4, _plateL5, _plateL6, _plateL7;
-
-  
+  String? _plateL1, _plateL2, _plateL3, _plateL4, _plateL5, _plateL6, _plateL7;
 
   // Image upload error state
   bool _imagesError = false;
@@ -54,21 +51,24 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
   // Lists
   late final List<int> _years = List.generate(
     40,
-        (i) => DateTime.now().year - i,
+    (i) => DateTime.now().year - i,
   );
 
   late final List<String> _plateChars;
   late final List<String> _plateNumbers;
 
-
   @override
   void initState() {
     super.initState();
-    _plateChars = CharListProvider.getPlateChars(ref.read(currentLocaleProvider));
-    _plateNumbers = CharListProvider.getPlateNumbers(ref.read(currentLocaleProvider));
+    _plateChars = CharListProvider.getPlateChars(
+      ref.read(currentLocaleProvider),
+    );
+    _plateNumbers = CharListProvider.getPlateNumbers(
+      ref.read(currentLocaleProvider),
+    );
     // fetch manufacturers
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(manufacturersViewModelProvider.notifier).fetchManufacturers();      
+      ref.read(manufacturersViewModelProvider.notifier).fetchManufacturers();
     });
   }
 
@@ -81,17 +81,46 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
   }
 
   Future<void> _pickCamera() async {
-    final x = await _picker.pickImage(source: ImageSource.camera, imageQuality: 85);
+    final x = await _picker.pickImage(source: ImageSource.camera);
     if (x != null) {
       setState(() => _carImages.add(x));
     }
   }
 
   Future<void> _pickGallery() async {
-    final xs = await _picker.pickMultiImage(imageQuality: 85);
+    final xs = await _picker.pickMultiImage();
     if (xs.isNotEmpty) {
       setState(() => _carImages.addAll(xs));
     }
+  }
+
+  Future<Uint8List> _compressImage(XFile file) async {
+    final bytes = await file.readAsBytes();
+    final decoded = img.decodeImage(bytes);
+    if (decoded == null) {
+      return bytes;
+    }
+
+    const maxDimension = 1280;
+    img.Image processed = decoded;
+    if (decoded.width > maxDimension || decoded.height > maxDimension) {
+      if (decoded.width >= decoded.height) {
+        processed = img.copyResize(
+          decoded,
+          width: maxDimension,
+          interpolation: img.Interpolation.cubic,
+        );
+      } else {
+        processed = img.copyResize(
+          decoded,
+          height: maxDimension,
+          interpolation: img.Interpolation.cubic,
+        );
+      }
+    }
+
+    final encoded = img.encodeJpg(processed, quality: 70);
+    return Uint8List.fromList(encoded);
   }
 
   void _showImageSheet() {
@@ -129,10 +158,6 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
     );
   }
 
- 
-
-  
-
   void _removeImage(int index) {
     setState(() => _carImages.removeAt(index));
   }
@@ -140,18 +165,21 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
   void _save() async {
     final formOk = _formKey.currentState?.validate() ?? false;
 
-    
-
     if (formOk) {
-      if (_plateL1 == null || _plateL2 == null || _plateL3 == null ||
-          _plateL4 == null || _plateL5 == null || _plateL6 == null || _plateL7 == null) {
+      if (_plateL1 == null ||
+          _plateL2 == null ||
+          _plateL3 == null ||
+          _plateL4 == null ||
+          _plateL5 == null ||
+          _plateL6 == null ||
+          _plateL7 == null) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Please complete plate fields')),
         );
         return;
       }
 
-      if(_carImages.isEmpty) {
+      if (_carImages.isEmpty) {
         setState(() => _imagesError = true);
         return;
       } else {
@@ -163,9 +191,9 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
         final car = await _buildCarEntity();
         await ref.read(addUserCarViewModelProvider.notifier).addCar(car);
       } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(e.toString())),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(e.toString())));
       }
     }
   }
@@ -235,8 +263,8 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
     // Convert images to Base64
     final imagesBase64 = <String>[];
     for (final xf in _carImages) {
-      final bytes = await xf.readAsBytes();
-      imagesBase64.add(base64Encode(bytes));
+      final compressed = await _compressImage(xf);
+      imagesBase64.add(base64Encode(compressed));
     }
 
     return CarEntity(
@@ -259,90 +287,99 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
     final addState = ref.watch(addUserCarViewModelProvider);
     if (addState is AddUserCarSuccess) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Car added successfully')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(const SnackBar(content: Text('Car added successfully')));
         Navigator.of(context).pop(true);
       });
     } else if (addState is AddUserCarError) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(addState.message)),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(addState.message)));
         // Reset to avoid repeated snackbars on rebuilds
         ref.read(addUserCarViewModelProvider.notifier).reset();
       });
     }
     return Scaffold(
-      appBar: InternalAppBar(title: appLang.addCar,),
+      appBar: InternalAppBar(title: appLang.addCar),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding:  EdgeInsets.all(16),
+          padding: EdgeInsets.all(16),
           child: Column(
             children: [
               _SectionCard(
-                title: appLang.plate, icon: Icons.numbers, child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Letters Section
-                  Text(appLang.plateLetters, style: TextStyle(fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    children: [
-                      _PlateLetterDropdown(
-                        value: _plateL1,
-                        letters: _plateChars,
-                        onChanged: (v) => setState(() => _plateL1 = v),
-                      ),
-                      _PlateLetterDropdown(
-                        value: _plateL2,
-                        letters: _plateChars,
-                        onChanged: (v) => setState(() => _plateL2 = v),
-                      ),
-                      _PlateLetterDropdown(
-                        value: _plateL3,
-                        letters: _plateChars,
-                        onChanged: (v) => setState(() => _plateL3 = v),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
+                title: appLang.plate,
+                icon: Icons.numbers,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Letters Section
+                    Text(
+                      appLang.plateLetters,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        _PlateLetterDropdown(
+                          value: _plateL1,
+                          letters: _plateChars,
+                          onChanged: (v) => setState(() => _plateL1 = v),
+                        ),
+                        _PlateLetterDropdown(
+                          value: _plateL2,
+                          letters: _plateChars,
+                          onChanged: (v) => setState(() => _plateL2 = v),
+                        ),
+                        _PlateLetterDropdown(
+                          value: _plateL3,
+                          letters: _plateChars,
+                          onChanged: (v) => setState(() => _plateL3 = v),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
 
-                  // Numbers Section
-                  Text(appLang.plateNumbers, style: TextStyle(fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    children: [
-                      _PlateLetterDropdown(
-                        value: _plateL4,
-                        letters: _plateNumbers,
-                        onChanged: (v) => setState(() => _plateL4 = v),
-                      ),
-                      _PlateLetterDropdown(
-                        value: _plateL5,
-                        letters: _plateNumbers,
-                        onChanged: (v) => setState(() => _plateL5 = v),
-                      ),
-                      _PlateLetterDropdown(
-                        value: _plateL6,
-                        letters: _plateNumbers,
-                        onChanged: (v) => setState(() => _plateL6 = v),
-                      ),
-                      _PlateLetterDropdown(
-                        value: _plateL7,
-                        letters: _plateNumbers,
-                        onChanged: (v) => setState(() => _plateL7 = v),
-                      ),
-                    ],
-                  ),
-                ],
-              ),),
+                    // Numbers Section
+                    Text(
+                      appLang.plateNumbers,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        _PlateLetterDropdown(
+                          value: _plateL4,
+                          letters: _plateNumbers,
+                          onChanged: (v) => setState(() => _plateL4 = v),
+                        ),
+                        _PlateLetterDropdown(
+                          value: _plateL5,
+                          letters: _plateNumbers,
+                          onChanged: (v) => setState(() => _plateL5 = v),
+                        ),
+                        _PlateLetterDropdown(
+                          value: _plateL6,
+                          letters: _plateNumbers,
+                          onChanged: (v) => setState(() => _plateL6 = v),
+                        ),
+                        _PlateLetterDropdown(
+                          value: _plateL7,
+                          letters: _plateNumbers,
+                          onChanged: (v) => setState(() => _plateL7 = v),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
               const SizedBox(height: 16),
 
               // === Car Info Section ===
@@ -354,7 +391,8 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      if (manufacturersState is ManufacturersLoading || manufacturersState is ManufacturersInitial)
+                      if (manufacturersState is ManufacturersLoading ||
+                          manufacturersState is ManufacturersInitial)
                         Column(
                           children: [
                             _LabeledField(
@@ -369,53 +407,70 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
                       else if (manufacturersState is ManufacturersError)
                         Text('Error loading manufacturers')
                       else if (manufacturersState is ManufacturersLoaded) ...[
-                          // compute a safe value that exists in the list
-                          Builder(builder: (context) {
+                        // compute a safe value that exists in the list
+                        Builder(
+                          builder: (context) {
                             final list = manufacturersState.manufacturers;
-                            final String? safeValue = list.any((m) => m.name == _selectedManufacturer)
-                                ? _selectedManufacturer
-                                : null;
+                            final String? safeValue =
+                                list.any((m) => m.name == _selectedManufacturer)
+                                    ? _selectedManufacturer
+                                    : null;
 
-                             return _LabeledField(
-                                label: appLang.manufacturer,
-                               child: DropdownButtonFormField2<String>(
+                            return _LabeledField(
+                              label: appLang.manufacturer,
+                              child: DropdownButtonFormField2<String>(
                                 value: safeValue,
                                 isExpanded: true,
                                 decoration: _input(null),
-                                hint:  Text(appLang.selectManufacturer),
-                                 dropdownStyleData: const DropdownStyleData(
-                                   isOverButton: false,                // don’t cover the button
-                                   offset: Offset(0, 6),               // small push downward
-                                   useRootNavigator: true,             // helpful in sheets/complex trees
-                                   maxHeight: 300,                     // optional: keep the list scrollable
-                                 ),
-                                items: list
-                                    .map((m) => DropdownMenuItem<String>(
-                                  value: m.name,
-                                  child: Text(m.name),
-                                ))
-                                    .toList(),
+                                hint: Text(appLang.selectManufacturer),
+                                dropdownStyleData: const DropdownStyleData(
+                                  isOverButton: false, // don’t cover the button
+                                  offset: Offset(0, 6), // small push downward
+                                  useRootNavigator:
+                                      true, // helpful in sheets/complex trees
+                                  maxHeight:
+                                      300, // optional: keep the list scrollable
+                                ),
+                                items:
+                                    list
+                                        .map(
+                                          (m) => DropdownMenuItem<String>(
+                                            value: m.name,
+                                            child: Text(m.name),
+                                          ),
+                                        )
+                                        .toList(),
                                 onChanged: (value) {
                                   setState(() {
                                     _selectedManufacturer = value;
-                                    ref.read(carBrandsViewModelProvider.notifier).fetCarBrands(carModelId: value ?? '');
+                                    ref
+                                        .read(
+                                          carBrandsViewModelProvider.notifier,
+                                        )
+                                        .fetCarBrands(carModelId: value ?? '');
                                   });
                                 },
-                                validator: (v) => v == null ? appLang.selectManufacturer : null,
-                                                           ),
-                             );
-                          }),
-                        ]
-                      else
+                                validator:
+                                    (v) =>
+                                        v == null
+                                            ? appLang.selectManufacturer
+                                            : null,
+                              ),
+                            );
+                          },
+                        ),
+                      ] else
                         const SizedBox(),
 
                       const SizedBox(height: 12),
-                      if (manufacturersState is ManufacturersLoaded && _selectedManufacturer != null) ...[
+                      if (manufacturersState is ManufacturersLoaded &&
+                          _selectedManufacturer != null) ...[
                         _LabeledField(
                           label: appLang.model,
                           child: Builder(
                             builder: (context) {
-                              if (carBrandsState is CarBrandsLoading || carBrandsState is CarBrandsInitial) {
+                              if (carBrandsState is CarBrandsLoading ||
+                                  carBrandsState is CarBrandsInitial) {
                                 return SpinKitThreeBounce(
                                   color: Theme.of(context).colorScheme.primary,
                                   size: 20,
@@ -424,27 +479,38 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
                                 return const Text('Error loading car models');
                               } else if (carBrandsState is CarBrandsLoaded) {
                                 final carBrands = carBrandsState.carBrands;
-                                final String? safeValue = carBrands.any((brand) => brand.name == _modelCtrl.text)
-                                    ? _modelCtrl.text
-                                    : null;
+                                final String? safeValue =
+                                    carBrands.any(
+                                          (brand) =>
+                                              brand.name == _modelCtrl.text,
+                                        )
+                                        ? _modelCtrl.text
+                                        : null;
 
                                 return DropdownButtonFormField<String>(
                                   value: safeValue,
                                   isExpanded: true,
                                   decoration: _input(null),
                                   hint: Text(appLang.selectModel),
-                                  items: carBrands
-                                      .map((brand) => DropdownMenuItem<String>(
-                                    value: brand.name,
-                                    child: Text(brand.name),
-                                  ))
-                                      .toList(),
+                                  items:
+                                      carBrands
+                                          .map(
+                                            (brand) => DropdownMenuItem<String>(
+                                              value: brand.name,
+                                              child: Text(brand.name),
+                                            ),
+                                          )
+                                          .toList(),
                                   onChanged: (value) {
                                     setState(() {
                                       _modelCtrl.text = value ?? '';
                                     });
                                   },
-                                  validator: (v) => v == null ? appLang.selectModel : null,
+                                  validator:
+                                      (v) =>
+                                          v == null
+                                              ? appLang.selectModel
+                                              : null,
                                 );
                               } else {
                                 return const SizedBox();
@@ -459,11 +525,18 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
                         child: DropdownButtonFormField<int>(
                           value: _selectedYear,
                           decoration: _input(null),
-                          items: _years
-                              .map((y) => DropdownMenuItem(value: y, child: Text('$y')))
-                              .toList(),
+                          items:
+                              _years
+                                  .map(
+                                    (y) => DropdownMenuItem(
+                                      value: y,
+                                      child: Text('$y'),
+                                    ),
+                                  )
+                                  .toList(),
                           onChanged: (v) => setState(() => _selectedYear = v),
-                          validator: (v) => v == null ? appLang.selectYear : null,
+                          validator:
+                              (v) => v == null ? appLang.selectYear : null,
                         ),
                       ),
 
@@ -476,26 +549,27 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
                           textInputAction: TextInputAction.done,
                           decoration: _input(appLang.characterVinLimit),
                           validator: (v) {
-                            if (v == null || v.trim().isEmpty) return appLang.characterVinLimitError;
-                            if (v.length != 17) return appLang.characterVinLimitError;
+                            if (v == null || v.trim().isEmpty)
+                              return appLang.characterVinLimitError;
+                            if (v.length != 17)
+                              return appLang.characterVinLimitError;
                             return null;
                           },
                           inputFormatters: [
-                            LengthLimitingTextInputFormatter(17), // Limit input to 17 characters
+                            LengthLimitingTextInputFormatter(
+                              17,
+                            ), // Limit input to 17 characters
                           ],
                         ),
                       ),
 
                       const SizedBox(height: 16),
-                      
                     ],
                   ),
                 ),
               ),
 
               const SizedBox(height: 16),
-
-
 
               // === Car Images Section ===
               _SectionCard(
@@ -514,17 +588,18 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
                       onRemove: _removeImage,
                     ),
                     Visibility(
-                        visible: _imagesError,
-                        child: const Padding(
-                          padding: EdgeInsets.only(top: 8),
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              'Please add at least one image.',
-                              style: TextStyle(color: Colors.red, fontSize: 12),
-                            ),
+                      visible: _imagesError,
+                      child: const Padding(
+                        padding: EdgeInsets.only(top: 8),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            'Please add at least one image.',
+                            style: TextStyle(color: Colors.red, fontSize: 12),
                           ),
-                        )),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -538,13 +613,14 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
           height: 48,
           child: FilledButton.icon(
             onPressed: addState is AddUserCarLoading ? null : _save,
-            icon: addState is AddUserCarLoading
-                ? const SizedBox(
-                    height: 20,
-                    width: 20,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  )
-                : const Icon(Icons.save_outlined),
+            icon:
+                addState is AddUserCarLoading
+                    ? const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                    : const Icon(Icons.save_outlined),
             label: const Text('Save Vehicle'),
           ),
         ),
@@ -598,7 +674,9 @@ class _SectionCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     title,
-                    style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
                 if (action != null) action!,
@@ -659,13 +737,18 @@ class _PlateLetterDropdown extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide(color: Colors.grey.shade300),
           ),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 12,
+            vertical: 14,
+          ),
         ),
-        items: letters
-            .map((l) => DropdownMenuItem<String>(value: l, child: Text(l)))
-            .toList(),
+        items:
+            letters
+                .map((l) => DropdownMenuItem<String>(value: l, child: Text(l)))
+                .toList(),
         onChanged: onChanged,
-        validator: (v) => v == null ? '' : null, // handled in the number validator
+        validator:
+            (v) => v == null ? '' : null, // handled in the number validator
       ),
     );
   }
@@ -688,10 +771,7 @@ class _ImagesGrid extends StatelessWidget {
       _AddTile(onTap: onAdd),
       ...List.generate(images.length, (i) {
         final xf = images[i];
-        return _ImageTile(
-          file: File(xf.path),
-          onRemove: () => onRemove(i),
-        );
+        return _ImageTile(file: File(xf.path), onRemove: () => onRemove(i));
       }),
     ];
 
@@ -724,9 +804,7 @@ class _AddTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: Colors.grey.shade300),
         ),
-        child: const Center(
-          child: Icon(Icons.add_a_photo_outlined, size: 28),
-        ),
+        child: const Center(child: Icon(Icons.add_a_photo_outlined, size: 28)),
       ),
     );
   }
