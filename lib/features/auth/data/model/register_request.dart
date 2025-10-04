@@ -2,14 +2,16 @@ class RegisterRequest {
   final String? email;
   final bool isEmergencyTech;
   final String mobileNumber;
-  final String name;
+  final String firstName;
+  final String lastName;
   final int userType;
 
   RegisterRequest({
     this.email,
     required this.isEmergencyTech,
     required this.mobileNumber,
-    required this.name,
+    required this.firstName,
+    required this.lastName,
     required this.userType,
   });
 
@@ -17,7 +19,8 @@ class RegisterRequest {
     'email': email,
     'isEmergencyTech': isEmergencyTech,
     'mobileNumber': mobileNumber,
-    'name': name,
+    'firstName': firstName,
+    'lastName': lastName,
     'userType': userType,
   };
 }

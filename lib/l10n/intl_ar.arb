@@ -86,6 +86,10 @@
   "register": "تسجيل",
   "userName": "اسم المستخدم",
   "userNameHint": "أدخل اسم المستخدم",
+  "firstName": "الاسم الأول",
+  "firstNameHint": "أدخل الاسم الأول",
+  "lastName": "اسم العائلة",
+  "lastNameHint": "أدخل اسم العائلة",
   "userEmail": "البريد الإلكتروني للمستخدم",
     "userEmailHint": "أدخل البريد الإلكتروني للمستخدم",
   "notValidUserEmail": "البريد الإلكتروني للمستخدم غير صالح",
@@ -100,7 +104,8 @@
   "bookServiceStepSelectVehicle": "اختر السيارة",
   "bookServiceStepChoosePackage": "اختر الباقة",
   "bookServiceStepPickLocation": "حدد الموقع",
-  "bookServiceStepSelectTechnician": "اختر الفني"
-  
-
+  "bookServiceStepSelectTechnician": "اختر الفني",
+  "noCarsFound": "لم يتم العثور على سيارات",
+  "PleaseLoginToViewYourCarsMessage": "يرجى تسجيل الدخول لعرض سياراتك",
+  "logInToContinue": "سجل الدخول للمتابعة"
 }

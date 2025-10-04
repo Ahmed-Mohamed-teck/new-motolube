@@ -15,7 +15,8 @@ class LoginScreen extends ConsumerStatefulWidget {
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _phoneController = TextEditingController();
-  final _nameController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
   final _emailController = TextEditingController();
 
   // 6-digit OTP controllers/focus nodes
@@ -31,7 +32,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   void dispose() {
     _phoneController.dispose();
-    _nameController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
     _emailController.dispose();
     for (final c in _otpCtrls) c.dispose();
     for (final n in _otpNodes) n.dispose();
@@ -103,35 +105,34 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final showOtpUI =
         showOtp || _stayOnOtp || (state is CheckingState && _wasOnOtpBefore);
 
-    String buttonText = 'Login';
+    String buttonText = appLang.login;
     VoidCallback? buttonAction;
     final isLoading = state is CheckingState || state is VerifyingState;
 
     if (showOtp) {
-      buttonText = 'Verify';
+      buttonText = appLang.verify;
       buttonAction = isLoading ? null : vm.onVerifyPressed;
     } else if (showName) {
-      buttonText = 'Register';
+      buttonText = appLang.register;
       buttonAction = isLoading
           ? null
           : () => vm.onRegisterPressed(
-        name: _nameController.text,
+        firstName: _firstNameController.text,
+        lastName: _lastNameController.text,
         phone: _phoneController.text,
         email: _emailController.text,
       );
     } else {
-      buttonText = 'Login';
+      buttonText = appLang.login;
       buttonAction =
       isLoading ? null : () => vm.onLoginPressed(_phoneController.text);
     }
 
     String phone = '';
     int secondsRemaining = 0;
-    String? otpError;
     if (state is AwaitingOtpState) {
       phone = state.phone;
       secondsRemaining = state.remainingSeconds;
-      otpError = state.errorMessage;
     } else if (state is VerifyingState) {
       phone = state.phone;
       secondsRemaining = state.remainingSeconds;
@@ -231,23 +232,38 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
                       if (showName) ...[
                         const SizedBox(height: 16),
-                        Text(appLang.userName),
+                        Text(appLang.firstName),
                         const SizedBox(height: 8),
                         TextFormField(
+                          controller: _firstNameController,
                           decoration: InputDecoration(
-                            hintText: appLang.userNameHint,
+                            hintText: appLang.firstNameHint,
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 14, horizontal: 12),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          onChanged: (s) => _nameController.text = s,
+                        ),
+                        const SizedBox(height: 12),
+                        Text(appLang.lastName),
+                        const SizedBox(height: 8),
+                        TextFormField(
+                          controller: _lastNameController,
+                          decoration: InputDecoration(
+                            hintText: appLang.lastNameHint,
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 14, horizontal: 12),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
                         ),
                         const SizedBox(height: 12),
                         Text(appLang.userEmail),
                         const SizedBox(height: 8),
                         TextFormField(
+                          controller: _emailController,
                           validator: (state) {
                             if (state == null || state.isEmpty) {
                               return appLang.userEmailHint;
@@ -266,7 +282,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
-                          onChanged: (s) => _emailController.text = s,
                         ),
                       ],
                     ],
@@ -383,7 +398,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
                             : Text(
-                          showOtp ? appLang.verify : (showName ? appLang.register : appLang.login),
+                          buttonText,
                           style: const TextStyle(fontSize: 16),
                         ),
                       ),
@@ -398,4 +413,3 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     );
   }
 }
-

@@ -70,13 +70,19 @@ class AuthViewModel extends Notifier<AuthState> {
   }
 
   Future<void> onRegisterPressed({
-    required String name,
+    required String firstName,
+    required String lastName,
     required String phone,
     String? email,
   }) async {
     state = const CheckingState();
     try {
-      await _registerUserUseCase(name: name, phone: phone, email: email);
+      await _registerUserUseCase(
+        firstName: firstName,
+        lastName: lastName,
+        phone: phone,
+        email: email,
+      );
       final info = await _sendOtpUseCase(phone);
       _phone = phone;
       _startTimer(info.expiresIn);
@@ -116,6 +122,8 @@ class AuthViewModel extends Notifier<AuthState> {
         user: User(
           oracleId: result.user.oracleId,
           userId: result.user.userId,
+          firstName: result.user.firstName,
+          lastName: result.user.lastName,
           name: result.user.name,
           mobileNo: result.user.mobileNo,
           email: result.user.email,
@@ -174,6 +182,8 @@ class AuthViewModel extends Notifier<AuthState> {
           user: User(
             oracleId: user.oracleId,
             userId: user.userId,
+            firstName: user.firstName,
+            lastName: user.lastName,
             name: user.name,
             mobileNo: user.mobileNo,
             email: user.email,

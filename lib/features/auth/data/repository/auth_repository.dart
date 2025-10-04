@@ -25,12 +25,18 @@ class AuthRepositoryImpl implements IAuthRepository {
   }
 
   @override
-  Future<RegisterResult> register({required String name, required String phone, String? email}) async {
+  Future<RegisterResult> register({
+    required String firstName,
+    required String lastName,
+    required String phone,
+    String? email,
+  }) async {
     final req = RegisterRequest(
       email: email,
       isEmergencyTech: false,
       mobileNumber: phone,
-      name: name,
+      firstName: firstName,
+      lastName: lastName,
       userType: 1,
     );
     final res = await remote.register(req);

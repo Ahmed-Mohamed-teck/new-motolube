@@ -5,7 +5,17 @@ class RegisterUserUseCase {
   final IAuthRepository repository;
   RegisterUserUseCase(this.repository);
 
-  Future<RegisterResult> call({required String name, required String phone, String? email}) {
-    return repository.register(name: name, phone: phone, email: email);
+  Future<RegisterResult> call({
+    required String firstName,
+    required String lastName,
+    required String phone,
+    String? email,
+  }) {
+    return repository.register(
+      firstName: firstName,
+      lastName: lastName,
+      phone: phone,
+      email: email,
+    );
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:newmotorlube/core/widget/error_widget.dart';
 import 'package:newmotorlube/features/auth/provider/auth_provider.dart';
 import 'package:newmotorlube/features/book_service/presentation/view_model/service_packages_state.dart';
 import 'package:newmotorlube/features/book_service/provider/book_service_provider.dart';
@@ -862,29 +863,12 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
     final location = _selectedLocation!;
     final selectedPackage = _selectedPackage!;
 
-    final header = Padding(
-      padding: const EdgeInsets.only(bottom: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Searching within ${_searchRadiusKm.toStringAsFixed(0)} km of '
-            '(${location.latitude.toStringAsFixed(6)}, '
-            '${location.longitude.toStringAsFixed(6)})',
-          ),
-          const SizedBox(height: 4),
-          Text(
-            'Service: ${selectedPackage.packageNameEn.isNotEmpty ? selectedPackage.packageNameEn : selectedPackage.packageNameAr}',
-            style: const TextStyle(fontWeight: FontWeight.w600),
-          ),
-        ],
-      ),
-    );
+    
 
     Widget buildBody(Widget child) {
       return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [header, const SizedBox(height: 12), Expanded(child: child)],
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [const SizedBox(height: 12), Expanded(child: child)],
       );
     }
 
@@ -894,20 +878,9 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
 
     if (searchState is TechnicianSearchError) {
       return buildBody(
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Could not load technicians.\n${searchState.message}',
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 12),
-            OutlinedButton(
-              onPressed: _retryTechnicianSearch,
-              child: const Text('Try Again'),
-            ),
-          ],
-        ),
+         ErrorStateWidget(
+        onRetry: _retryTechnicianSearch,
+      ),
       );
     }
 
@@ -915,6 +888,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
       return buildBody(
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
               'No available technician in this region.',
@@ -928,6 +902,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
           ],
         ),
       );
+      
     }
 
     if (searchState is TechnicianSearchLoaded) {

@@ -86,6 +86,10 @@
   "register": "Register",
   "userName": "User Name",
   "userNameHint": "Enter user name",
+  "firstName": "First Name",
+  "firstNameHint": "Enter first name",
+  "lastName": "Last Name",
+  "lastNameHint": "Enter last name",
   "userEmail": "User Email",
     "userEmailHint": "Enter user email",
   "notValidUserEmail": "User email is not valid",
@@ -100,7 +104,9 @@
   "bookServiceStepSelectVehicle": "Select Vehicle",
   "bookServiceStepChoosePackage": "Choose Package",
   "bookServiceStepPickLocation": "Pick Location",
-  "bookServiceStepSelectTechnician": "Select Technician"
-
-
+  "bookServiceStepSelectTechnician": "Select Technician",
+  "noCarsFound": "No cars found",
+  "PleaseLoginToViewYourCarsMessage": "Please login to view your cars",
+  "logInToContinue": "Log in to continue"
+  
 }
