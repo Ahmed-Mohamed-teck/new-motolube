@@ -1,3 +1,4 @@
+import '../entity/technician_slot_entity.dart';
 import '../entity/technician_summary_entity.dart';
 
 abstract class ITechnicianRepository {
@@ -7,5 +8,10 @@ abstract class ITechnicianRepository {
     required int maxResults,
     required double radiusKm,
     required String serviceId,
+  });
+
+  Future<List<TechnicianSlotEntity>> getAvailableSlots({
+    required String technicianId,
+    required String date,
   });
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:newmotorlube/features/auth/provider/auth_provider.dart';
 import 'package:newmotorlube/features/book_service/presentation/view_model/service_packages_state.dart';
@@ -13,6 +14,8 @@ import 'package:newmotorlube/features/user_cars/provider/user_cars_provider.dart
 import 'package:newmotorlube/features/user_cars/presentation/view_model/user_cars_state.dart';
 import 'package:newmotorlube/features/technician/provider/technician_provider.dart';
 import 'package:newmotorlube/features/technician/presentation/view_model/technician_search_state.dart';
+import 'package:newmotorlube/features/technician/presentation/view_model/technician_slots_state.dart';
+import 'package:newmotorlube/features/technician/domain/entity/technician_slot_entity.dart';
 import 'package:newmotorlube/features/technician/domain/entity/technician_summary_entity.dart';
 
 class BookServiceScreen extends ConsumerStatefulWidget {
@@ -31,6 +34,9 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
   CarEntity? _selectedCarEntity;
   String? _customerId;
   LatLng? _selectedLocation;
+  TechnicianSummaryEntity? _selectedTechnician;
+  TechnicianSlotEntity? _selectedSlot;
+  DateTime _selectedSlotDate = DateTime.now();
   final MapController _mapController = MapController();
   static const int _maxTechnicianResults = 20;
   static const double _searchRadiusKm = 25;
@@ -107,11 +113,75 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
 
   void _resetTechnicianSearch() {
     ref.read(technicianSearchViewModelProvider.notifier).reset();
+    ref.read(technicianSlotsViewModelProvider.notifier).reset();
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      _selectedTechnician = null;
+      _selectedSlot = null;
+    });
   }
 
   void _handleLocationSelection(LatLng latlng) {
     setState(() => _selectedLocation = latlng);
     _resetTechnicianSearch();
+  }
+
+  String _formatDateForApi(DateTime date) {
+    final formatter = DateFormat('dd-MMM-yyyy');
+    return formatter.format(date).toUpperCase();
+  }
+
+  String _formatDateForDisplay(DateTime date) {
+    return DateFormat('EEE, dd MMM yyyy').format(date);
+  }
+
+  void _fetchSlotsForTechnician({String? technicianId}) {
+    final targetTechnicianId = technicianId ?? _selectedTechnician?.techId;
+    if (targetTechnicianId == null || targetTechnicianId.isEmpty) {
+      return;
+    }
+    final formattedDate = _formatDateForApi(_selectedSlotDate);
+    ref
+        .read(technicianSlotsViewModelProvider.notifier)
+        .fetch(technicianId: targetTechnicianId, date: formattedDate);
+  }
+
+  void _onTechnicianSelected(TechnicianSummaryEntity technician) {
+    setState(() {
+      _selectedTechnician = technician;
+      _selectedSlot = null;
+    });
+    _fetchSlotsForTechnician(technicianId: technician.techId);
+  }
+
+  void _onSlotSelected(TechnicianSlotEntity slot) {
+    setState(() {
+      _selectedSlot = slot;
+    });
+  }
+
+  Future<void> _pickSlotDate() async {
+    final now = DateTime.now();
+    final initialDate =
+        _selectedSlotDate.isBefore(now) ? now : _selectedSlotDate;
+    final selected = await showDatePicker(
+      context: context,
+      initialDate: initialDate,
+      firstDate: now,
+      lastDate: now.add(const Duration(days: 365)),
+    );
+    if (selected != null) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _selectedSlotDate = selected;
+        _selectedSlot = null;
+      });
+      _fetchSlotsForTechnician();
+    }
   }
 
   Future<void> _goToNext() async {
@@ -513,7 +583,16 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
     }
 
     if (searchState is TechnicianSearchLoaded) {
-      return buildBody(_buildTechnicianGrid(searchState.technicians));
+      return buildBody(
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(child: _buildTechnicianGrid(searchState.technicians)),
+            const SizedBox(height: 16),
+            _buildTechnicianSlotsSection(),
+          ],
+        ),
+      );
     }
 
     return buildBody(
@@ -549,86 +628,274 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
         ),
         itemBuilder: (context, index) {
           final technician = technicians[index];
-          return _buildTechnicianCard(technician);
+          final isSelected = _selectedTechnician?.techId == technician.techId;
+          return _buildTechnicianCard(
+            technician,
+            isSelected: isSelected,
+            onTap: () => _onTechnicianSelected(technician),
+          );
         },
       ),
     );
   }
 
-  Widget _buildTechnicianCard(TechnicianSummaryEntity technician) {
+  Widget _buildTechnicianCard(
+    TechnicianSummaryEntity technician, {
+    required bool isSelected,
+    required VoidCallback onTap,
+  }) {
     final distance = technician.calculatedDistance;
     final rating = technician.rating;
-    final serviceName = technician.techNameAr;
-    
+    final primaryName =
+        technician.techNameEn.isNotEmpty
+            ? technician.techNameEn
+            : technician.techNameAr;
+    final secondaryName =
+        technician.techNameEn.isNotEmpty
+            ? technician.techNameAr
+            : technician.techNameEn;
+    final photoUrl = technician.techPhotoUrl.trim();
+    final hasPhoto = photoUrl.isNotEmpty;
 
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 24,
-                  backgroundImage:
-                      (technician.techPhotoUrl != null &&
-                              technician.techPhotoUrl!.isNotEmpty)
-                          ? NetworkImage(technician.techPhotoUrl!)
-                              as ImageProvider
-                          : null,
-                  backgroundColor: Colors.grey.shade200,
-                  child:
-                      (technician.techPhotoUrl == null ||
-                              technician.techPhotoUrl!.isEmpty)
-                          ? const Icon(Icons.person, color: Colors.grey)
-                          : null,
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    technician.techNameAr,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Text(
-              serviceName,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(
-                context,
-              ).textTheme.bodyMedium?.copyWith(color: Colors.grey[700]),
-            ),
-            const Spacer(),
-            if (distance != null)
+      elevation: isSelected ? 4 : 2,
+      color: isSelected ? Colors.amber.shade50 : null,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(
+          color: isSelected ? Colors.amber : Colors.transparent,
+          width: 2,
+        ),
+      ),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(16),
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Row(
                 children: [
-                  const Icon(Icons.place, size: 18, color: Colors.amber),
-                  const SizedBox(width: 4),
-                  Text(
-                    '${distance.toStringAsFixed(distance >= 10 ? 0 : 1)} km away',
+                  CircleAvatar(
+                    radius: 24,
+                    backgroundImage:
+                        hasPhoto
+                            ? NetworkImage(photoUrl) as ImageProvider
+                            : null,
+                    backgroundColor: Colors.grey.shade200,
+                    child:
+                        hasPhoto
+                            ? null
+                            : const Icon(Icons.person, color: Colors.grey),
                   ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      primaryName,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                  if (isSelected)
+                    const Icon(Icons.check_circle, color: Colors.amber),
                 ],
               ),
-            if (rating != null)
-              Row(
-                children: [
-                  const Icon(Icons.star, size: 18, color: Colors.amber),
-                  const SizedBox(width: 4),
-                  Text(rating.toStringAsFixed(1)),
-                ],
-              ),
-          ],
+              const SizedBox(height: 12),
+              if (secondaryName.isNotEmpty && secondaryName != primaryName)
+                Text(
+                  secondaryName,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(color: Colors.grey[700]),
+                ),
+              const Spacer(),
+              if (distance != null)
+                Row(
+                  children: [
+                    const Icon(Icons.place, size: 18, color: Colors.amber),
+                    const SizedBox(width: 4),
+                    Text(
+                      '${distance.toStringAsFixed(distance >= 10 ? 0 : 1)} km away',
+                    ),
+                  ],
+                ),
+              if (rating != null)
+                Row(
+                  children: [
+                    const Icon(Icons.star, size: 18, color: Colors.amber),
+                    const SizedBox(width: 4),
+                    Text(rating.toStringAsFixed(1)),
+                  ],
+                ),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  Widget _buildTechnicianSlotsSection() {
+    final technician = _selectedTechnician;
+    final slotsState = ref.watch(technicianSlotsViewModelProvider);
+
+    if (technician == null) {
+      return const Text('Tap a technician to see their available time slots.');
+    }
+
+    bool matchesCurrentTech(String technicianId) =>
+        technician.techId == technicianId;
+
+    Widget content;
+    if (slotsState is TechnicianSlotsInitial) {
+      content = const Text(
+        'Tap a technician to see their available time slots.',
+      );
+    } else if (slotsState is TechnicianSlotsLoading) {
+      content =
+          matchesCurrentTech(slotsState.technicianId)
+              ? const Padding(
+                padding: EdgeInsets.symmetric(vertical: 12),
+                child: Center(child: CircularProgressIndicator()),
+              )
+              : const SizedBox.shrink();
+    } else if (slotsState is TechnicianSlotsLoaded) {
+      content =
+          matchesCurrentTech(slotsState.technicianId)
+              ? _buildSlotChips(slotsState.slots)
+              : const SizedBox.shrink();
+    } else if (slotsState is TechnicianSlotsEmpty) {
+      content =
+          matchesCurrentTech(slotsState.technicianId)
+              ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('No slots available for the selected date.'),
+                  TextButton(
+                    onPressed: _fetchSlotsForTechnician,
+                    child: const Text('Refresh'),
+                  ),
+                ],
+              )
+              : const SizedBox.shrink();
+    } else if (slotsState is TechnicianSlotsError) {
+      content =
+          matchesCurrentTech(slotsState.technicianId)
+              ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Could not load slots.\n${slotsState.message}',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.error,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: _fetchSlotsForTechnician,
+                    child: const Text('Try Again'),
+                  ),
+                ],
+              )
+              : const SizedBox.shrink();
+    } else {
+      content = const SizedBox.shrink();
+    }
+
+    final displayName =
+        technician.techNameEn.isNotEmpty
+            ? technician.techNameEn
+            : technician.techNameAr;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                'Available slots for $displayName',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            ),
+            TextButton.icon(
+              onPressed: _pickSlotDate,
+              icon: const Icon(Icons.calendar_today, size: 18),
+              label: Text(_formatDateForDisplay(_selectedSlotDate)),
+            ),
+          ],
+        ),
+        const SizedBox(height: 8),
+        content,
+      ],
+    );
+  }
+
+  Widget _buildSlotChips(List<TechnicianSlotEntity> slots) {
+    if (slots.isEmpty) {
+      return const Text('No slots available for the selected date.');
+    }
+
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children:
+            slots.map((slot) {
+              final label = _slotLabel(slot);
+              final isSelected = _isSlotSelected(slot);
+              return Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: ChoiceChip(
+                  label: Text(label),
+                  selected: isSelected,
+                  onSelected: (selected) {
+                    if (selected) {
+                      _onSlotSelected(slot);
+                    }
+                  },
+                ),
+              );
+            }).toList(),
+      ),
+    );
+  }
+
+  bool _isSlotSelected(TechnicianSlotEntity slot) {
+    final current = _selectedSlot;
+    if (current == null) {
+      return false;
+    }
+    if (current.slotTime?.isNotEmpty == true &&
+        slot.slotTime?.isNotEmpty == true) {
+      if (current.slotTime == slot.slotTime) {
+        return true;
+      }
+    }
+    if (current.slotId.isNotEmpty && slot.slotId.isNotEmpty) {
+      return current.slotId == slot.slotId;
+    }
+    return current.label == slot.label;
+  }
+
+  String _slotLabel(TechnicianSlotEntity slot) {
+    final slotTime = slot.slotTime?.trim();
+    if (slotTime != null && slotTime.isNotEmpty) {
+      return slotTime;
+    }
+    final start = slot.startTime?.trim();
+    final end = slot.endTime?.trim();
+    if (start != null && start.isNotEmpty && end != null && end.isNotEmpty) {
+      return '$start - $end';
+    }
+    if (start != null && start.isNotEmpty) {
+      return start;
+    }
+    if (end != null && end.isNotEmpty) {
+      return end;
+    }
+    return slot.label;
   }
 
   String _resolveServiceId(ServicePackageEntity package) {

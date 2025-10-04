@@ -18,5 +18,7 @@ const String setTechnicianLocationEndPoint =
     '$baseUrl/MotorLubeApp/technician/setlocation';
 const String searchNearbyTechniciansEndPoint =
     '$baseUrl/MotorLubeApp/technician/search/nearby';
+const String getTechnicianAvailableSlotsEndPoint =
+    '$baseUrl/MotorLubeApp/technician/getAvailableSlot';
 String getPackagesForVehicleEndPoint(String customerId, String vehicleId) =>
     '$packagesBaseUrl/MotorLubeApp/getPackagesForVehicle/$customerId/$vehicleId/0';

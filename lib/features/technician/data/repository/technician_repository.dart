@@ -1,3 +1,4 @@
+import '../../domain/entity/technician_slot_entity.dart';
 import '../../domain/entity/technician_summary_entity.dart';
 import '../../domain/repository/i_technician_repository.dart';
 import '../data_source/i_technician_remote_data_source.dart';
@@ -21,6 +22,18 @@ class TechnicianRepository implements ITechnicianRepository {
       maxResults: maxResults,
       radiusKm: radiusKm,
       serviceId: serviceId,
+    );
+    return models.map((model) => model.toEntity()).toList();
+  }
+
+  @override
+  Future<List<TechnicianSlotEntity>> getAvailableSlots({
+    required String technicianId,
+    required String date,
+  }) async {
+    final models = await _remoteDataSource.getAvailableSlots(
+      technicianId: technicianId,
+      date: date,
     );
     return models.map((model) => model.toEntity()).toList();
   }

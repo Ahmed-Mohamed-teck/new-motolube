@@ -1,3 +1,4 @@
+import '../model/technician_slot_model.dart';
 import '../model/technician_summary_model.dart';
 
 abstract class ITechnicianRemoteDataSource {
@@ -7,5 +8,10 @@ abstract class ITechnicianRemoteDataSource {
     required int maxResults,
     required double radiusKm,
     required String serviceId,
+  });
+
+  Future<List<TechnicianSlotModel>> getAvailableSlots({
+    required String technicianId,
+    required String date,
   });
 }

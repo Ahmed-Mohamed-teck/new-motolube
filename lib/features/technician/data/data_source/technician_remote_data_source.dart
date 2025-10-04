@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../../../../core/utils/end_point.dart';
+import '../model/technician_slot_model.dart';
 import '../model/technician_summary_model.dart';
 import 'i_technician_remote_data_source.dart';
 
@@ -62,6 +63,52 @@ class TechnicianRemoteDataSource implements ITechnicianRemoteDataSource {
             return null;
           })
           .whereType<TechnicianSummaryModel>()
+          .toList();
+    } on DioException {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<TechnicianSlotModel>> getAvailableSlots({
+    required String technicianId,
+    required String date,
+  }) async {
+    try {
+      final response = await _dio.get(
+        getTechnicianAvailableSlotsEndPoint,
+        queryParameters: <String, dynamic>{
+          'TechnicianId': technicianId,
+          'Date': date,
+        },
+      );
+
+      final data = response.data;
+      final List<dynamic> rawList;
+
+      if (data is List) {
+        rawList = data;
+      } else if (data is Map<String, dynamic>) {
+        final maybeList =
+            data['data'] ??
+            data['slots'] ??
+            data['items'] ??
+            data['result'] ??
+            data['results'] ??
+            data['availableSlots'];
+        if (maybeList is List) {
+          rawList = maybeList;
+        } else if (maybeList is Map<String, dynamic>) {
+          rawList = maybeList.values.toList();
+        } else {
+          rawList = [data];
+        }
+      } else {
+        rawList = const [];
+      }
+
+      return rawList
+          .map((raw) => TechnicianSlotModel.fromDynamic(raw))
           .toList();
     } on DioException {
       rethrow;
