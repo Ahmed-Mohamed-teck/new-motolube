@@ -18,6 +18,7 @@ import 'package:newmotorlube/features/technician/presentation/view_model/technic
 import 'package:newmotorlube/features/technician/domain/entity/technician_slot_entity.dart';
 import 'package:newmotorlube/features/technician/domain/entity/technician_summary_entity.dart';
 import 'package:newmotorlube/generated/l10n.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class BookServiceScreen extends ConsumerStatefulWidget {
   const BookServiceScreen({super.key});
@@ -25,6 +26,352 @@ class BookServiceScreen extends ConsumerStatefulWidget {
   @override
   ConsumerState<BookServiceScreen> createState() =>
       _HorizontalStepperScreenState();
+}
+
+class _CarStepSkeletonList extends StatelessWidget {
+  const _CarStepSkeletonList();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      itemCount: 3,
+      separatorBuilder: (_, __) => const SizedBox(height: 12),
+      itemBuilder: (_, __) => const _CarStepSkeleton(),
+    );
+  }
+}
+
+class _CarStepSkeleton extends StatelessWidget {
+  const _CarStepSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final baseColor = theme.colorScheme.surfaceVariant.withOpacity(0.5);
+
+    return Skeletonizer(
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Row(
+            children: [
+              Skeleton.leaf(
+                child: Container(
+                  width: 72,
+                  height: 72,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: baseColor,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Skeleton.leaf(
+                      child: Container(
+                        height: 14,
+                        width: double.infinity,
+                        color: baseColor,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Skeleton.leaf(
+                      child: Container(
+                        height: 12,
+                        width: 140,
+                        color: baseColor,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Skeleton.leaf(
+                      child: Container(
+                        height: 12,
+                        width: 110,
+                        color: baseColor,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 12),
+              Skeleton.leaf(
+                child: Container(
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: baseColor,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ServicePackagesSkeletonList extends StatelessWidget {
+  const _ServicePackagesSkeletonList();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      itemCount: 4,
+      separatorBuilder: (_, __) => const SizedBox(height: 12),
+      itemBuilder: (_, __) => const _ServicePackageSkeleton(),
+    );
+  }
+}
+
+class _ServicePackageSkeleton extends StatelessWidget {
+  const _ServicePackageSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final baseColor = theme.colorScheme.surfaceVariant.withOpacity(0.5);
+
+    return Skeletonizer(
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        child: ListTile(
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 12,
+          ),
+          leading: Skeleton.leaf(
+            child: Container(
+              width: 46,
+              height: 46,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: baseColor,
+              ),
+            ),
+          ),
+          title: Skeleton.leaf(
+            child: Container(
+              height: 14,
+              width: double.infinity,
+              color: baseColor,
+            ),
+          ),
+          subtitle: Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Skeleton.leaf(
+                  child: Container(height: 12, width: 160, color: baseColor),
+                ),
+                const SizedBox(height: 8),
+                Skeleton.leaf(
+                  child: Container(height: 12, width: 90, color: baseColor),
+                ),
+              ],
+            ),
+          ),
+          trailing: Skeleton.leaf(
+            child: Container(
+              width: 28,
+              height: 28,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(14),
+                color: baseColor,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _TechnicianGridSkeleton extends StatelessWidget {
+  const _TechnicianGridSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      padding: const EdgeInsets.only(bottom: 16, top: 8, left: 4, right: 4),
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 16,
+        crossAxisSpacing: 16,
+        childAspectRatio: 0.78,
+      ),
+      itemCount: 4,
+      itemBuilder: (_, __) => const _TechnicianCardSkeleton(),
+    );
+  }
+}
+
+class _TechnicianCardSkeleton extends StatelessWidget {
+  const _TechnicianCardSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final baseColor = theme.colorScheme.surfaceVariant.withOpacity(0.5);
+
+    return Skeletonizer(
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Skeleton.leaf(
+                    child: Container(
+                      width: 48,
+                      height: 48,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: baseColor,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Skeleton.leaf(
+                          child: Container(
+                            height: 14,
+                            width: double.infinity,
+                            color: baseColor,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Skeleton.leaf(
+                          child: Container(
+                            height: 12,
+                            width: 100,
+                            color: baseColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Skeleton.leaf(
+                    child: Container(
+                      width: 24,
+                      height: 24,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: baseColor,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Skeleton.leaf(
+                child: Container(
+                  height: 12,
+                  width: double.infinity,
+                  color: baseColor,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Skeleton.leaf(
+                child: Container(height: 12, width: 140, color: baseColor),
+              ),
+              const Spacer(),
+              Row(
+                children: [
+                  Skeleton.leaf(
+                    child: Container(
+                      width: 18,
+                      height: 18,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: baseColor,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+                  Skeleton.leaf(
+                    child: Container(height: 12, width: 80, color: baseColor),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Skeleton.leaf(
+                    child: Container(
+                      width: 18,
+                      height: 18,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: baseColor,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+                  Skeleton.leaf(
+                    child: Container(height: 12, width: 56, color: baseColor),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SlotChipsSkeleton extends StatelessWidget {
+  const _SlotChipsSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final baseColor = theme.colorScheme.surfaceVariant.withOpacity(0.5);
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Skeletonizer(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: List.generate(5, (index) {
+              final width = 60 + (index * 12);
+              return Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: Chip(
+                  label: Skeleton.leaf(
+                    child: Container(
+                      width: width.toDouble(),
+                      height: 16,
+                      color: baseColor,
+                    ),
+                  ),
+                ),
+              );
+            }),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
@@ -274,7 +621,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
         }
 
         if (state is UserCarsLoading || state is UserCarsInitial) {
-          return const Center(child: CircularProgressIndicator());
+          return const _CarStepSkeletonList();
         } else if (state is UserCarsLoaded) {
           final cars = state.cars;
           if (cars.isEmpty) {
@@ -353,7 +700,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
 
     if (packagesState is ServicePackagesInitial ||
         packagesState is ServicePackagesLoading) {
-      return const Center(child: CircularProgressIndicator());
+      return const _ServicePackagesSkeletonList();
     }
 
     if (packagesState is ServicePackagesError) {
@@ -542,7 +889,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
     }
 
     if (searchState is TechnicianSearchLoading) {
-      return buildBody(const Center(child: CircularProgressIndicator()));
+      return buildBody(const _TechnicianGridSkeleton());
     }
 
     if (searchState is TechnicianSearchError) {
@@ -758,10 +1105,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
     } else if (slotsState is TechnicianSlotsLoading) {
       content =
           matchesCurrentTech(slotsState.technicianId)
-              ? const Padding(
-                padding: EdgeInsets.symmetric(vertical: 12),
-                child: Center(child: CircularProgressIndicator()),
-              )
+              ? const _SlotChipsSkeleton()
               : const SizedBox.shrink();
     } else if (slotsState is TechnicianSlotsLoaded) {
       content =

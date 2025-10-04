@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../../../../core/utils/end_point.dart';
+import '../../domain/exception/service_packages_exception.dart';
 import '../model/service_package_model.dart';
 import 'i_book_service_remote_data_source.dart';
 
@@ -27,8 +28,24 @@ class BookServiceRemoteDataSource implements IBookServiceRemoteDataSource {
             ),
           )
           .toList();
-    } on DioException catch (e) {
-      throw Exception(e.message);
+    } on DioException catch (error) {
+      if (error.type == DioExceptionType.connectionError ||
+          error.type == DioExceptionType.connectionTimeout ||
+          error.type == DioExceptionType.receiveTimeout) {
+        throw ServicePackagesException.networkError();
+      }
+
+      if (error.response?.statusCode == 500) {
+        throw ServicePackagesException.serverError();
+      }
+
+      final message =
+          error.response?.statusMessage ??
+          error.message ??
+          'Failed to fetch service packages.';
+      throw ServicePackagesException(message);
+    } catch (_) {
+      throw ServicePackagesException.unexpected();
     }
   }
 

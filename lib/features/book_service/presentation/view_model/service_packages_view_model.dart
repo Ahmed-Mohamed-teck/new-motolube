@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../domain/exception/service_packages_exception.dart';
 import '../../domain/use_case/get_packages_for_vehicle_use_case.dart';
 import 'service_packages_state.dart';
 
@@ -24,12 +25,20 @@ class ServicePackagesViewModel extends StateNotifier<ServicePackagesState> {
       } else {
         state = ServicePackagesLoaded(packages);
       }
-    } catch (e) {
-      state = ServicePackagesError(e.toString());
+    } catch (error) {
+      final message = _mapErrorToMessage(error);
+      state = ServicePackagesError(message);
     }
   }
 
   void reset() {
     state = const ServicePackagesInitial();
+  }
+
+  String _mapErrorToMessage(Object error) {
+    if (error is ServicePackagesException) {
+      return error.message;
+    }
+    return 'Unable to load service packages. Please try again.';
   }
 }
