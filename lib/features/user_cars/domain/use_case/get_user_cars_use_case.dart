@@ -7,8 +7,7 @@ class GetUserCarsUseCase {
 
   GetUserCarsUseCase(this._repository);
 
-  Future<List<CarEntity>> call() {
-    return _repository.getUserCars();
+  Future<List<CarEntity>> call({String? customerId}) {
+    return _repository.getUserCars(customerId: customerId);
   }
 }
-

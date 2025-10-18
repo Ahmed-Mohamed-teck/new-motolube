@@ -46,7 +46,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   void _focusFirstOtp() {
     if (_otpNodes.isNotEmpty) {
-      Future.microtask(() => _otpNodes.first.requestFocus());
+      Future.microtask(() {
+        final isRtl = Directionality.of(context) == TextDirection.rtl;
+        final firstNode = isRtl ? _otpNodes.last : _otpNodes.first;
+        firstNode.requestFocus();
+      });
     }
   }
 
@@ -311,10 +315,21 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 LengthLimitingTextInputFormatter(1),
                               ],
                               onChanged: (v) {
-                                if (v.isNotEmpty && i < 5) {
-                                  _otpNodes[i + 1].requestFocus();
-                                } else if (v.isEmpty && i > 0) {
-                                  _otpNodes[i - 1].requestFocus();
+                                final isRtl = Directionality.of(context) == TextDirection.rtl;
+                                if (v.isNotEmpty) {
+                                  // Move to next field
+                                  if (isRtl) {
+                                    if (i > 0) _otpNodes[i - 1].requestFocus();
+                                  } else {
+                                    if (i < 5) _otpNodes[i + 1].requestFocus();
+                                  }
+                                } else {
+                                  // Move to previous field on delete
+                                  if (isRtl) {
+                                    if (i < 5) _otpNodes[i + 1].requestFocus();
+                                  } else {
+                                    if (i > 0) _otpNodes[i - 1].requestFocus();
+                                  }
                                 }
                                 _notifyOtp(); // ← won't be cleared now unless resend triggered
                               },

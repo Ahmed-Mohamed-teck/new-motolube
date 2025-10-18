@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../main.dart';
+import '../../../auth/provider/auth_provider.dart';
+import '../../../auth/presentation/view_model/auth_state.dart';
 import '../../provider/user_cars_provider.dart';
 import '../view_model/user_cars_state.dart';
 import '../widget/user_car_list_item.dart';
@@ -11,11 +13,24 @@ class UserCarsListScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final authState = ref.watch(authViewModelProvider);
     final state = ref.watch(userCarsViewModelProvider);
 
-    if (state is UserCarsInitial) {
-      Future.microtask(
-          () => ref.read(userCarsViewModelProvider.notifier).fetchUserCars());
+    if (authState is AuthenticatedState && state is UserCarsInitial) {
+      final customerId = authState.user.oracleId;
+      if (customerId.isNotEmpty) {
+        Future.microtask(
+          () => ref
+              .read(userCarsViewModelProvider.notifier)
+              .fetchUserCars(customerId: customerId),
+        );
+      }
+    }
+
+    if (authState is! AuthenticatedState) {
+      return const Scaffold(
+        body: Center(child: Text('Please sign in to view your cars')),
+      );
     }
 
     Widget body;

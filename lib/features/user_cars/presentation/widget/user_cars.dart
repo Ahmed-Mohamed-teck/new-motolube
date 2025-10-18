@@ -37,10 +37,14 @@ class UserCars extends ConsumerWidget {
 
     // Only attempt to fetch data when authenticated
     if (authState is AuthenticatedState && state is UserCarsInitial) {
-      // Schedule to avoid rebuild loops
-      Future.microtask(
-        () => ref.read(userCarsViewModelProvider.notifier).fetchUserCars(),
-      );
+      final customerId = authState.user.oracleId;
+      if (customerId.isNotEmpty) {
+        Future.microtask(
+          () => ref
+              .read(userCarsViewModelProvider.notifier)
+              .fetchUserCars(customerId: customerId),
+        );
+      }
     }
 
     Widget content;
@@ -298,7 +302,6 @@ class EmptyCarsCard extends StatelessWidget {
     );
   }
 }
-
 
 
 

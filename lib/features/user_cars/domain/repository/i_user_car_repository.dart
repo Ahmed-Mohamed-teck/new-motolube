@@ -7,7 +7,7 @@ import '../entity/car_entity.dart';
 abstract class IUserCarRepository {
   Future<void> addCar({required CarEntity car});
   Future<void> deleteCar({required String carId});
-  Future<List<CarEntity>> getUserCars();
+  Future<List<CarEntity>> getUserCars({String? customerId});
   Future<List<ManufactureEntity>> getManufacturers();
   Future<List<CarBrandEntity>> getCarBrands({required String carModelId});
 }

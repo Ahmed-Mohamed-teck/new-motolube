@@ -5,6 +5,7 @@ import '../data/data_source/book_service_remote_data_source.dart';
 import '../data/data_source/i_book_service_remote_data_source.dart';
 import '../data/repository/book_service_repository.dart';
 import '../domain/repository/i_book_service_repository.dart';
+import '../domain/use_case/create_appointment_use_case.dart';
 import '../domain/use_case/get_packages_for_vehicle_use_case.dart';
 import '../presentation/view_model/service_packages_state.dart';
 import '../presentation/view_model/service_packages_view_model.dart';
@@ -21,6 +22,13 @@ final bookServiceRepositoryProvider = Provider<IBookServiceRepository>((ref) {
 final getPackagesForVehicleUseCaseProvider =
     Provider<GetPackagesForVehicleUseCase>((ref) {
       return GetPackagesForVehicleUseCase(
+        ref.read(bookServiceRepositoryProvider),
+      );
+    });
+
+final createAppointmentUseCaseProvider =
+    Provider<CreateAppointmentUseCase>((ref) {
+      return CreateAppointmentUseCase(
         ref.read(bookServiceRepositoryProvider),
       );
     });

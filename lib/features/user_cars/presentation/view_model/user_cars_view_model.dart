@@ -7,14 +7,22 @@ class UserCarsViewModel extends StateNotifier<UserCarsState> {
 
   UserCarsViewModel(this._getUserCarsUseCase) : super(const UserCarsInitial());
 
-  Future<void> fetchUserCars() async {
+  Future<void> fetchUserCars({String? customerId}) async {
+    if (state is UserCarsLoading) {
+      return;
+    }
+
     state = const UserCarsLoading();
     try {
-      final cars = await _getUserCarsUseCase();
+      final sanitizedCustomerId =
+          (customerId != null && customerId.trim().isNotEmpty)
+              ? customerId.trim()
+              : null;
+      final cars =
+          await _getUserCarsUseCase(customerId: sanitizedCustomerId);
       state = UserCarsLoaded(cars);
     } catch (e) {
       state = UserCarsError(e.toString());
     }
   }
 }
-

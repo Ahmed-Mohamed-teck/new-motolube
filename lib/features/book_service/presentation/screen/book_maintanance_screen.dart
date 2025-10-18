@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:newmotorlube/core/widget/error_widget.dart';
 import 'package:newmotorlube/features/auth/provider/auth_provider.dart';
+import 'package:newmotorlube/features/book_service/domain/entity/create_appointment_result.dart';
 import 'package:newmotorlube/features/book_service/presentation/view_model/service_packages_state.dart';
 import 'package:newmotorlube/features/book_service/provider/book_service_provider.dart';
 import 'package:newmotorlube/features/book_service/domain/entity/service_package_entity.dart';
@@ -13,11 +14,13 @@ import 'package:newmotorlube/features/user_cars/domain/entity/car_entity.dart';
 import 'package:newmotorlube/features/user_cars/presentation/widget/user_car_list_item.dart';
 import 'package:newmotorlube/features/user_cars/provider/user_cars_provider.dart';
 import 'package:newmotorlube/features/user_cars/presentation/view_model/user_cars_state.dart';
+import 'package:newmotorlube/features/auth/presentation/view_model/auth_state.dart';
 import 'package:newmotorlube/features/technician/provider/technician_provider.dart';
 import 'package:newmotorlube/features/technician/presentation/view_model/technician_search_state.dart';
 import 'package:newmotorlube/features/technician/presentation/view_model/technician_slots_state.dart';
 import 'package:newmotorlube/features/technician/domain/entity/technician_slot_entity.dart';
 import 'package:newmotorlube/features/technician/domain/entity/technician_summary_entity.dart';
+import 'package:newmotorlube/features/upcoming_service/provider/upcoming_service_provider.dart';
 import 'package:newmotorlube/generated/l10n.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -386,6 +389,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
   TechnicianSummaryEntity? _selectedTechnician;
   TechnicianSlotEntity? _selectedSlot;
   DateTime _selectedSlotDate = DateTime.now();
+  bool _isBooking = false;
   final MapController _mapController = MapController();
   static const int _maxTechnicianResults = 20;
   static const double _searchRadiusKm = 25;
@@ -480,6 +484,10 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
   String _formatDateForApi(DateTime date) {
     final formatter = DateFormat('dd-MMM-yyyy');
     return formatter.format(date).toUpperCase();
+  }
+
+  String _formatDateForAppointment(DateTime date) {
+    return DateFormat('dd-MMM-yyyy').format(date).toLowerCase();
   }
 
   String _formatDateForDisplay(DateTime date) {
@@ -609,16 +617,160 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
     }
   }
 
+  Future<void> _handleBooking() async {
+    final car = _selectedCarEntity;
+    final package = _selectedPackage;
+    final location = _selectedLocation;
+    final technician = _selectedTechnician;
+    final slot = _selectedSlot;
+
+    if (car == null ||
+        package == null ||
+        location == null ||
+        technician == null ||
+        slot == null) {
+      _showSnack('Please complete all steps before booking.');
+      return;
+    }
+
+    final customerId = await _ensureCustomerId();
+    if (customerId == null || customerId.isEmpty) {
+      return;
+    }
+
+    final packageId =
+        package.packageId.trim().isNotEmpty
+            ? package.packageId.trim()
+            : package.packageCode.trim();
+    if (packageId.isEmpty) {
+      _showSnack('Unable to determine the selected package.');
+      return;
+    }
+
+    final branchId = technician.branchId.trim();
+    if (branchId.isEmpty) {
+      _showSnack('Unable to determine the technician branch.');
+      return;
+    }
+
+    final userId = technician.techId.trim();
+    if (userId.isEmpty) {
+      _showSnack('Unable to determine the technician information.');
+      return;
+    }
+
+    final vehicleId = car.vehicleId.trim();
+    if (vehicleId.isEmpty) {
+      _showSnack('Unable to determine the selected vehicle.');
+      return;
+    }
+
+    final bookingDate = _formatDateForAppointment(_selectedSlotDate);
+    final slotLabel = _slotLabel(slot);
+    final slotTimeRaw = slot.slotTime?.trim();
+    final slotValue =
+        slotTimeRaw != null && slotTimeRaw.isNotEmpty ? slotTimeRaw : slotLabel;
+    final mileage = car.mileage.trim().isNotEmpty ? car.mileage.trim() : '0';
+    final latitude = location.latitude.toStringAsFixed(6);
+    final longitude = location.longitude.toStringAsFixed(6);
+
+    setState(() {
+      _isBooking = true;
+    });
+
+    try {
+      final createAppointment = ref.read(createAppointmentUseCaseProvider);
+      final CreateAppointmentResult result = await createAppointment(
+        bookingDate: bookingDate,
+        branchId: branchId,
+        userId: userId,
+        latitude: latitude,
+        longitude: longitude,
+        mileage: mileage,
+        partyId: customerId,
+        vehicleId: vehicleId,
+        packageId: packageId,
+        selectedSlot: slotValue,
+        isImmediateAppointment: false,
+        slotTime: slotValue,
+      );
+
+      if (!mounted) {
+        return;
+      }
+
+      if (result.isSuccessful) {
+        await showDialog<void>(
+          context: context,
+          builder:
+              (dialogContext) => AlertDialog(
+                title: const Text('Appointment Confirmed'),
+                content: Text(result.displayMessage),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(dialogContext).pop(),
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
+        );
+        if (!mounted) {
+          return;
+        }
+        ref.invalidate(upcomingServiceViewModelProvider);
+        await ref
+            .read(upcomingServiceViewModelProvider.notifier)
+            .fetchUpcomingServices();
+      } else {
+        _showSnack(result.displayMessage);
+      }
+    } catch (error) {
+      if (!mounted) {
+        return;
+      }
+      _showSnack(
+        error.toString().isNotEmpty
+            ? error.toString()
+            : 'Failed to create appointment. Please try again.',
+      );
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isBooking = false;
+        });
+      }
+    }
+  }
+
+  void _showSnack(String message) {
+    if (!mounted) {
+      return;
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
+
   Widget _buildCarStep() {
     // Use the shared user cars ViewModel
     return Consumer(
       builder: (context, ref, _) {
+        final authState = ref.watch(authViewModelProvider);
         final state = ref.watch(userCarsViewModelProvider);
 
-        if (state is UserCarsInitial) {
-          Future.microtask(
-            () => ref.read(userCarsViewModelProvider.notifier).fetchUserCars(),
-          );
+        if (authState is AuthenticatedState && state is UserCarsInitial) {
+          final customerId = authState.user.oracleId;
+          if (customerId.isNotEmpty) {
+            Future.microtask(
+              () => ref
+                  .read(userCarsViewModelProvider.notifier)
+                  .fetchUserCars(customerId: customerId),
+            );
+          }
+        }
+
+        if (authState is! AuthenticatedState) {
+          return const Center(child: Text('Please sign in to select a car'));
         }
 
         if (state is UserCarsLoading || state is UserCarsInitial) {
@@ -863,8 +1015,6 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
     final location = _selectedLocation!;
     final selectedPackage = _selectedPackage!;
 
-    
-
     Widget buildBody(Widget child) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -877,11 +1027,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
     }
 
     if (searchState is TechnicianSearchError) {
-      return buildBody(
-         ErrorStateWidget(
-        onRetry: _retryTechnicianSearch,
-      ),
-      );
+      return buildBody(ErrorStateWidget(onRetry: _retryTechnicianSearch));
     }
 
     if (searchState is TechnicianSearchEmpty) {
@@ -902,7 +1048,6 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
           ],
         ),
       );
-      
     }
 
     if (searchState is TechnicianSearchLoaded) {
@@ -1305,6 +1450,39 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
     );
     final isLast = _currentStep == steps.length - 1;
     final isFirst = _currentStep == 0;
+    final canSubmit = _selectedTechnician != null && _selectedSlot != null;
+
+    final actionButtons = <Widget>[];
+    if (!isFirst) {
+      actionButtons.add(
+        OutlinedButton(onPressed: _goToPrevious, child: const Text('Back')),
+      );
+    }
+
+    if (isLast) {
+      actionButtons.add(
+        ElevatedButton(
+          onPressed: (!canSubmit || _isBooking) ? null : _handleBooking,
+          child:
+              _isBooking
+                  ? const SizedBox(
+                    width: 18,
+                    height: 18,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                  : const Text('Book'),
+        ),
+      );
+    } else {
+      actionButtons.add(
+        ElevatedButton(onPressed: _goToNext, child: const Text('Next')),
+      );
+    }
+
+    final mainAxisAlignment =
+        actionButtons.length > 1
+            ? MainAxisAlignment.spaceBetween
+            : (!isFirst ? MainAxisAlignment.start : MainAxisAlignment.end);
 
     return Scaffold(
       body: Column(
@@ -1372,23 +1550,8 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
                 vertical: 12,
               ),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  if (!isFirst)
-                    OutlinedButton(
-                      onPressed: _goToPrevious,
-                      child: const Text('Back'),
-                    ),
-                  ElevatedButton(
-                    onPressed:
-                        isLast
-                            ? null
-                            : () {
-                              _goToNext();
-                            },
-                    child: Text(isLast ? 'Done' : 'Next'),
-                  ),
-                ],
+                mainAxisAlignment: mainAxisAlignment,
+                children: actionButtons,
               ),
             ),
           ),

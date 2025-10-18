@@ -28,7 +28,7 @@ android {
         applicationId = "com.example.newmotorlube"
 
         // Override the Flutter default if you need a specific minSdk (most plugins need 23+)
-        minSdk = 23
+        minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
 
         versionCode = flutter.versionCode

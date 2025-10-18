@@ -25,9 +25,10 @@ class UserCarRepository extends IUserCarRepository {
   }
 
   @override
-  Future<List<CarEntity>> getUserCars() async{
-    // Assuming the remote data source returns a list of CarModel
-    List<CarModel> carModels = await _remoteDataSource.getCars(customerId: '');
+  Future<List<CarEntity>> getUserCars({String? customerId}) async {
+    final resolvedCustomerId = customerId ?? '';
+    final List<CarModel> carModels =
+        await _remoteDataSource.getCars(customerId: resolvedCustomerId);
     return carModels.map((carModel) => CarModel.fromEntity(carModel)).toList();
   }
 

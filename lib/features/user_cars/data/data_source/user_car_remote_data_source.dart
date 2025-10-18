@@ -82,7 +82,7 @@ class UserCarsRemoteDataSourceImpl extends IUserCarRemoteDataSource{
       }
       return cars;
     } on DioException {
-      rethrow;
+      return [];
     }
   }
 

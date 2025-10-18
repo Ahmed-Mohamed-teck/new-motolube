@@ -2,7 +2,6 @@ class StoredAuth {
   final String jwtToken;
   final String firebaseToken;
   final String phoneNumber;
-  final String userId;
   final String oracleId;
   final int userType;
 
@@ -10,7 +9,6 @@ class StoredAuth {
     required this.jwtToken,
     required this.firebaseToken,
     required this.phoneNumber,
-    required this.userId,
     required this.oracleId,
     required this.userType,
   });

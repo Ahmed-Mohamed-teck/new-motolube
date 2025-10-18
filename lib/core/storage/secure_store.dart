@@ -11,7 +11,6 @@ class SecureStore {
     required String tokenType,
     required int expiresIn,
     required String oracleId,
-    required String userId,
     required String userName,
     required String userMobileNumber,
     String? userEmail,
@@ -21,7 +20,6 @@ class SecureStore {
     await _storage.write(key: 'firebaseToken', value: firebaseToken);
     await _storage.write(key: 'tokenType', value: tokenType);
     await _storage.write(key: 'expiresIn', value: expiresIn.toString());
-    await _storage.write(key: 'userId', value: userId);
     await _storage.write(key: 'oracleId', value: oracleId);
     await _storage.write(key: 'userName', value: userName);
     await _storage.write(key: 'userMobileNumber', value: userMobileNumber);

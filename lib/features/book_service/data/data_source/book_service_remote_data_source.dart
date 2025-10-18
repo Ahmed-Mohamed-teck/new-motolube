@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 
 import '../../../../core/utils/end_point.dart';
 import '../../domain/exception/service_packages_exception.dart';
+import '../model/create_appointment_response_model.dart';
 import '../model/service_package_model.dart';
 import 'i_book_service_remote_data_source.dart';
 
@@ -60,5 +61,49 @@ class BookServiceRemoteDataSource implements IBookServiceRemoteDataSource {
       }
     }
     return const [];
+  }
+
+  @override
+  Future<CreateAppointmentResponseModel> createAppointment({
+    required Map<String, dynamic> payload,
+  }) async {
+    try {
+      final response = await _dio.post(
+        createAppointmentEndPoint,
+        data: payload,
+      );
+      final data = response.data;
+      if (data is Map<String, dynamic>) {
+        return CreateAppointmentResponseModel.fromJson(data);
+      }
+      if (data is Map) {
+        return CreateAppointmentResponseModel.fromJson(
+          Map<String, dynamic>.from(data as Map),
+        );
+      }
+      throw Exception('Invalid response format for create appointment.');
+    } on DioException catch (error) {
+      final responseData = error.response?.data;
+      String? message;
+      if (responseData is Map<String, dynamic>) {
+        message =
+            (responseData['infoDescriptionEn'] as String?) ??
+            (responseData['infoDescription'] as String?) ??
+            (responseData['infoType'] as String?) ??
+            (responseData['message'] as String?);
+      } else if (responseData is String) {
+        message = responseData;
+      }
+      message ??= error.message;
+      throw Exception(
+        message ?? 'Failed to create appointment. Please try again.',
+      );
+    } catch (error) {
+      throw Exception(
+        error.toString().isNotEmpty
+            ? error.toString()
+            : 'Failed to create appointment. Please try again.',
+      );
+    }
   }
 }

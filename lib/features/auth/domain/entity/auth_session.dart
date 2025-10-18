@@ -3,7 +3,6 @@ class AuthSession {
   final String firebaseToken;
   final String tokenType;
   final int expiresIn;
-  final String userId;
   final String oracleId;
   final String userName;
   final String userMobileNumber;
@@ -15,7 +14,6 @@ class AuthSession {
     required this.firebaseToken,
     required this.tokenType,
     required this.expiresIn,
-    required this.userId,
     required this.oracleId,
     required this.userName,
     required this.userMobileNumber,

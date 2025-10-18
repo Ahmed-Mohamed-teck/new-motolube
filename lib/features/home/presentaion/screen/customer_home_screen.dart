@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:newmotorlube/core/providers/global_lang_provider.dart';
 import 'package:newmotorlube/features/auth/presentation/view_model/auth_state.dart';
 import 'package:newmotorlube/features/auth/provider/auth_provider.dart';
+import 'package:newmotorlube/features/upcoming_service/presentation/widget/upcoming_service_section.dart';
 import '../../../../main.dart';
 import '../../../promotions/presentation/widget/promotions.dart';
 import '../../../user_cars/presentation/widget/user_cars.dart';
@@ -75,6 +76,17 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
               ),
               HomeServiceGrid(),
 
+              const SizedBox(height: 16),
+              TitleWithSubTitle(
+                withSubTitle: false,
+                title: 'Upcoming Service',
+                subTitle: null,
+              ),
+              const SizedBox(height: 16),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                child: UpcomingServiceSection(),
+              ),
               const SizedBox(height: 16),
               TitleWithSubTitle(
                 withSubTitle: isAuthenticated,

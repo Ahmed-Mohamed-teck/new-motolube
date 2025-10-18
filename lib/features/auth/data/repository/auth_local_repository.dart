@@ -14,7 +14,6 @@ class AuthLocalRepositoryImpl implements IAuthLocalRepository {
       firebaseToken: session.firebaseToken,
       tokenType: session.tokenType,
       expiresIn: session.expiresIn,
-      userId: session.userId,
       oracleId: session.oracleId,
       userName: session.userName,
       userMobileNumber: session.userMobileNumber,
@@ -29,7 +28,6 @@ class AuthLocalRepositoryImpl implements IAuthLocalRepository {
     if (jwt == null) return null;
     final fcm = await _secureStore.readFcmToken() ?? '';
     final phone = await _secureStore.phoneNumber() ?? '';
-    final userId = await _secureStore.userId() ?? '';
     final oracleId = await _secureStore.oracleId() ?? '';
     final typeString = await _secureStore.userType();
     final userType = int.tryParse(typeString ?? '') ?? 1;
@@ -37,7 +35,6 @@ class AuthLocalRepositoryImpl implements IAuthLocalRepository {
       jwtToken: jwt,
       firebaseToken: fcm,
       phoneNumber: phone,
-      userId: userId,
       oracleId: oracleId,
       userType: userType,
     );
