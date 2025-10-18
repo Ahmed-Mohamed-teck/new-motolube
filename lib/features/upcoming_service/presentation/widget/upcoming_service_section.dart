@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:newmotorlube/features/home/presentaion/screen/base_home_screen.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+import '../../../../generated/l10n.dart';
 import '../../../auth/provider/auth_provider.dart';
 import '../../../auth/presentation/view_model/auth_state.dart';
 import '../../domain/entity/upcoming_service_entity.dart';
@@ -57,7 +58,7 @@ class UpcomingServiceSection extends ConsumerWidget {
         return const _UpcomingServiceEmpty();
       }
       final children = services
-          .map(_mapToBookingCard)
+          .map((service) => _mapToBookingCard(context, service))
           .expand((widget) => [widget, const SizedBox(height: 12)])
           .toList();
       if (children.isNotEmpty) {
@@ -78,31 +79,40 @@ class UpcomingServiceSection extends ConsumerWidget {
   }
 }
 
-BookingSummaryCard _mapToBookingCard(UpcomingServiceEntity service) {
-  final dateLabel = _formatDate(service);
+Widget _mapToBookingCard(BuildContext context, UpcomingServiceEntity service) {
+  final s = S.of(context);
+  final dateLabel = _formatDate(context, service);
   final timeLabel = _formatTime(service);
   final branchLabel = _valueOrFallback(
     service.branchLabel.isNotEmpty ? service.branchLabel : service.location ?? '',
-    fallback: 'Location to be confirmed',
+    fallback: s.upcomingServicesLocationFallback,
   );
   final technicianLabel = _valueOrFallback(
     service.technicianLabel,
-    fallback: 'Technician to be assigned',
+    fallback: s.upcomingServicesTechnicianFallback,
   );
   final plateText = _valueOrFallback(
     service.plateText,
-    fallback: 'Plate unavailable',
+    fallback: s.upcomingServicesPlateFallback,
   );
+  final carCandidate =
+      service.carTitle.isNotEmpty ? service.carTitle : service.serviceName;
   final carTitle = _valueOrFallback(
-    service.carTitle,
-    fallback: service.serviceName,
+    carCandidate,
+    fallback: s.upcomingServicesVehiclePlaceholder,
   );
+  final packageCandidate = service.packageTitle.isNotEmpty
+      ? service.packageTitle
+      : service.serviceName;
   final package = _valueOrFallback(
-    service.packageTitle,
-    fallback: service.serviceName,
+    packageCandidate,
+    fallback: s.upcomingServicesServicePlaceholder,
   );
-  final status = service.status.trim().isNotEmpty ? service.status : 'Pending';
-  final statusColors = _statusColorsForStatus(status);
+  final statusRaw = service.status.trim();
+  final statusLabel = _statusLabel(context, statusRaw);
+  final statusColors = _statusColorsForStatus(
+    statusRaw.isEmpty ? 'pending' : statusRaw,
+  );
 
   return BookingSummaryCard(
     carTitle: carTitle,
@@ -112,13 +122,19 @@ BookingSummaryCard _mapToBookingCard(UpcomingServiceEntity service) {
     timeLabel: timeLabel,
     locationLabel: branchLabel,
     technicianLabel: technicianLabel,
-    statusText: status,
+    statusText: statusLabel,
     statusBg: statusColors.$1,
     statusFg: statusColors.$2,
+    onTap: () {
+      Navigator.of(context, rootNavigator: true).pushNamed(
+        'bookingDetailScreen',
+        arguments: service,
+      );
+    },
   );
 }
 
-String _formatDate(UpcomingServiceEntity service) {
+String _formatDate(BuildContext context, UpcomingServiceEntity service) {
   final date = service.appointmentDate;
   if (date != null) {
     return DateFormat('dd MMM yyyy').format(date);
@@ -127,7 +143,7 @@ String _formatDate(UpcomingServiceEntity service) {
   if (raw.isNotEmpty) {
     return raw;
   }
-  return 'Date to be confirmed';
+  return S.of(context).upcomingServicesDateFallback;
 }
 
 String _formatTime(UpcomingServiceEntity service) {
@@ -145,6 +161,18 @@ String _formatTime(UpcomingServiceEntity service) {
 String _valueOrFallback(String value, {required String fallback}) {
   final trimmed = value.trim();
   return trimmed.isNotEmpty ? trimmed : fallback;
+}
+
+String _statusLabel(BuildContext context, String status) {
+  final s = S.of(context);
+  final lower = status.toLowerCase();
+  if (lower.contains('expired')) return s.upcomingServicesStatusExpired;
+  if (lower.contains('upcoming')) return s.upcomingServicesStatusUpcoming;
+  if (lower.contains('pending')) return s.upcomingServicesStatusPending;
+  if (lower.contains('complete')) return s.upcomingServicesStatusCompleted;
+  if (lower.contains('cancel')) return s.upcomingServicesStatusCancelled;
+  if (lower.contains('new')) return s.upcomingServicesStatusNew;
+  return status.isEmpty ? s.upcomingServicesStatusPending : status;
 }
 
 (Color, Color) _statusColorsForStatus(String status) {
@@ -170,16 +198,17 @@ class _UpcomingServiceLoadingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final baseFg = theme.colorScheme.onSurfaceVariant;
+    final s = S.of(context);
     return Skeletonizer(
       child: BookingSummaryCard(
-        carTitle: 'Loading vehicle',
+        carTitle: s.upcomingServicesLoadingVehicle,
         plate: '0000 AAA',
-        packageTitle: 'Loading package title',
+        packageTitle: s.upcomingServicesLoadingPackage,
         dateLabel: '00 Mon 0000',
         timeLabel: '00:00 AM',
-        locationLabel: 'Loading location',
-        technicianLabel: 'Loading technician',
-        statusText: 'Loading',
+        locationLabel: s.upcomingServicesLoadingLocation,
+        technicianLabel: s.upcomingServicesLoadingTechnician,
+        statusText: s.upcomingServicesLoadingStatus,
         statusBg: theme.colorScheme.surfaceVariant,
         statusFg: baseFg,
       ),
@@ -213,7 +242,7 @@ class _UpcomingServiceEmpty extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: Text(
-                'No upcoming services scheduled.',
+                S.of(context).upcomingServicesEmptyMessage,
                 style: theme.textTheme.bodyLarge,
               ),
             ),
@@ -252,7 +281,7 @@ class _UpcomingServiceErrorCard extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: Text(
-                'Unable to load upcoming services.\n$message',
+                '${S.of(context).upcomingServicesErrorPrefix}\n$message',
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: theme.colorScheme.error,
                 ),
@@ -296,7 +325,7 @@ class _LoginPromptCard extends StatelessWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
-                    'Log in to view your upcoming services.',
+                    S.of(context).upcomingServicesLoginPrompt,
                     style: theme.textTheme.bodyLarge,
                   ),
                 ),
@@ -307,7 +336,7 @@ class _LoginPromptCard extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: onTap,
-                child: const Text('Log in'),
+                child: Text(S.of(context).upcomingServicesViewButton),
               ),
             ),
           ],

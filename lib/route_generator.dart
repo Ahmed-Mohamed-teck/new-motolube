@@ -6,6 +6,8 @@ import 'features/onboarding/presentation/screens/onboarding_screen.dart';
 import 'features/profile/presentation/screen/profile_screen.dart';
 import 'features/splash/presentation/screens/splash_screen.dart';
 import 'features/user_cars/domain/entity/car_entity.dart';
+import 'features/upcoming_service/domain/entity/upcoming_service_entity.dart';
+import 'features/upcoming_service/presentation/screen/booking_detail_screen.dart';
 import 'features/user_cars/presentation/screen/add_new_car_screen.dart';
 import 'features/user_cars/presentation/screen/user_car_details_screen.dart';
 
@@ -44,7 +46,12 @@ class RouteGenerator {
       case 'addNewCarScreen':
         return MaterialPageRoute(builder: (_) => const AddNewCarScreen());
 
-
+      case 'bookingDetailScreen':
+        return MaterialPageRoute(
+          builder: (_) => BookingDetailScreen(
+            service: args as UpcomingServiceEntity,
+          ),
+        );
 
       default:
         _errorRoute('Default');

@@ -189,6 +189,79 @@ class MessageLookup extends MessageLookupByLibrary {
     "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
     "submit": MessageLookupByLibrary.simpleMessage("Submit"),
     "towiling": MessageLookupByLibrary.simpleMessage("Towiling"),
+    "upcomingServicesAssignedTechnicianLabel":
+        MessageLookupByLibrary.simpleMessage("Assigned Technician"),
+    "upcomingServicesBookingDetailsTitle": MessageLookupByLibrary.simpleMessage(
+      "Booking Details",
+    ),
+    "upcomingServicesDateFallback": MessageLookupByLibrary.simpleMessage(
+      "Date to be confirmed",
+    ),
+    "upcomingServicesEmptyMessage": MessageLookupByLibrary.simpleMessage(
+      "No upcoming services scheduled.",
+    ),
+    "upcomingServicesErrorPrefix": MessageLookupByLibrary.simpleMessage(
+      "Unable to load upcoming services.",
+    ),
+    "upcomingServicesLoadingLocation": MessageLookupByLibrary.simpleMessage(
+      "Loading location",
+    ),
+    "upcomingServicesLoadingPackage": MessageLookupByLibrary.simpleMessage(
+      "Loading package title",
+    ),
+    "upcomingServicesLoadingStatus": MessageLookupByLibrary.simpleMessage(
+      "Loading",
+    ),
+    "upcomingServicesLoadingTechnician": MessageLookupByLibrary.simpleMessage(
+      "Loading technician",
+    ),
+    "upcomingServicesLoadingVehicle": MessageLookupByLibrary.simpleMessage(
+      "Loading vehicle",
+    ),
+    "upcomingServicesLocationFallback": MessageLookupByLibrary.simpleMessage(
+      "Location to be confirmed",
+    ),
+    "upcomingServicesLoginPrompt": MessageLookupByLibrary.simpleMessage(
+      "Log in to view your upcoming services.",
+    ),
+    "upcomingServicesPlateFallback": MessageLookupByLibrary.simpleMessage(
+      "Plate unavailable",
+    ),
+    "upcomingServicesServiceLocationLabel":
+        MessageLookupByLibrary.simpleMessage("Service Location"),
+    "upcomingServicesServicePackageLabel": MessageLookupByLibrary.simpleMessage(
+      "Service Package",
+    ),
+    "upcomingServicesServicePlaceholder": MessageLookupByLibrary.simpleMessage(
+      "Service",
+    ),
+    "upcomingServicesStatusCancelled": MessageLookupByLibrary.simpleMessage(
+      "Cancelled",
+    ),
+    "upcomingServicesStatusCompleted": MessageLookupByLibrary.simpleMessage(
+      "Completed",
+    ),
+    "upcomingServicesStatusExpired": MessageLookupByLibrary.simpleMessage(
+      "Expired",
+    ),
+    "upcomingServicesStatusNew": MessageLookupByLibrary.simpleMessage(
+      "New Booking",
+    ),
+    "upcomingServicesStatusPending": MessageLookupByLibrary.simpleMessage(
+      "Pending",
+    ),
+    "upcomingServicesStatusUpcoming": MessageLookupByLibrary.simpleMessage(
+      "Upcoming",
+    ),
+    "upcomingServicesTechnicianFallback": MessageLookupByLibrary.simpleMessage(
+      "Technician to be assigned",
+    ),
+    "upcomingServicesVehiclePlaceholder": MessageLookupByLibrary.simpleMessage(
+      "Vehicle",
+    ),
+    "upcomingServicesViewButton": MessageLookupByLibrary.simpleMessage(
+      "Log in",
+    ),
     "userEmail": MessageLookupByLibrary.simpleMessage("User Email"),
     "userEmailHint": MessageLookupByLibrary.simpleMessage("Enter user email"),
     "userName": MessageLookupByLibrary.simpleMessage("User Name"),

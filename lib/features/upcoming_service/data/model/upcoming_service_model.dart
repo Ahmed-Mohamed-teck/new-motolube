@@ -46,13 +46,13 @@ class UpcomingServiceModel extends UpcomingServiceEntity {
 
     return UpcomingServiceModel(
       appointmentId: appointmentId,
-      serviceName: serviceName.isEmpty ? 'Service' : serviceName,
+      serviceName: serviceName,
       status: status,
       appointmentDateText: rawDate,
       appointmentDate: parsedDate,
       timeSlot: timeSlot,
       location: location.isEmpty ? null : location,
-      carTitle: vehicleName.isEmpty ? 'Vehicle' : vehicleName,
+      carTitle: vehicleName,
       plateText: plate,
       packageTitle: package.isEmpty ? serviceName : package,
       branchLabel: location,

@@ -185,6 +185,79 @@ class MessageLookup extends MessageLookupByLibrary {
     "startDate": MessageLookupByLibrary.simpleMessage("تاريخ البدء"),
     "submit": MessageLookupByLibrary.simpleMessage("إرسال"),
     "towiling": MessageLookupByLibrary.simpleMessage("تولينغ"),
+    "upcomingServicesAssignedTechnicianLabel":
+        MessageLookupByLibrary.simpleMessage("الفني المعتمد"),
+    "upcomingServicesBookingDetailsTitle": MessageLookupByLibrary.simpleMessage(
+      "تفاصيل الحجز",
+    ),
+    "upcomingServicesDateFallback": MessageLookupByLibrary.simpleMessage(
+      "سيتم تأكيد التاريخ لاحقًا",
+    ),
+    "upcomingServicesEmptyMessage": MessageLookupByLibrary.simpleMessage(
+      "لا توجد خدمات قادمة مجدولة.",
+    ),
+    "upcomingServicesErrorPrefix": MessageLookupByLibrary.simpleMessage(
+      "تعذر تحميل الخدمات القادمة.",
+    ),
+    "upcomingServicesLoadingLocation": MessageLookupByLibrary.simpleMessage(
+      "جارٍ تحميل الموقع",
+    ),
+    "upcomingServicesLoadingPackage": MessageLookupByLibrary.simpleMessage(
+      "جارٍ تحميل اسم الباقة",
+    ),
+    "upcomingServicesLoadingStatus": MessageLookupByLibrary.simpleMessage(
+      "جارٍ التحميل",
+    ),
+    "upcomingServicesLoadingTechnician": MessageLookupByLibrary.simpleMessage(
+      "جارٍ تحميل اسم الفني",
+    ),
+    "upcomingServicesLoadingVehicle": MessageLookupByLibrary.simpleMessage(
+      "جارٍ تحميل السيارة",
+    ),
+    "upcomingServicesLocationFallback": MessageLookupByLibrary.simpleMessage(
+      "سيتم تأكيد الموقع لاحقًا",
+    ),
+    "upcomingServicesLoginPrompt": MessageLookupByLibrary.simpleMessage(
+      "سجّل الدخول لعرض خدماتك القادمة.",
+    ),
+    "upcomingServicesPlateFallback": MessageLookupByLibrary.simpleMessage(
+      "اللوحة غير متاحة",
+    ),
+    "upcomingServicesServiceLocationLabel":
+        MessageLookupByLibrary.simpleMessage("موقع الخدمة"),
+    "upcomingServicesServicePackageLabel": MessageLookupByLibrary.simpleMessage(
+      "باقة الخدمة",
+    ),
+    "upcomingServicesServicePlaceholder": MessageLookupByLibrary.simpleMessage(
+      "الخدمة",
+    ),
+    "upcomingServicesStatusCancelled": MessageLookupByLibrary.simpleMessage(
+      "ملغاة",
+    ),
+    "upcomingServicesStatusCompleted": MessageLookupByLibrary.simpleMessage(
+      "مكتملة",
+    ),
+    "upcomingServicesStatusExpired": MessageLookupByLibrary.simpleMessage(
+      "منتهية",
+    ),
+    "upcomingServicesStatusNew": MessageLookupByLibrary.simpleMessage(
+      "حجز جديد",
+    ),
+    "upcomingServicesStatusPending": MessageLookupByLibrary.simpleMessage(
+      "قيد الانتظار",
+    ),
+    "upcomingServicesStatusUpcoming": MessageLookupByLibrary.simpleMessage(
+      "قادمة",
+    ),
+    "upcomingServicesTechnicianFallback": MessageLookupByLibrary.simpleMessage(
+      "سيتم تعيين الفني لاحقًا",
+    ),
+    "upcomingServicesVehiclePlaceholder": MessageLookupByLibrary.simpleMessage(
+      "المركبة",
+    ),
+    "upcomingServicesViewButton": MessageLookupByLibrary.simpleMessage(
+      "تسجيل الدخول",
+    ),
     "userEmail": MessageLookupByLibrary.simpleMessage(
       "البريد الإلكتروني للمستخدم",
     ),

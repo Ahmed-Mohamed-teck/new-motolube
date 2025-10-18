@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../generated/l10n.dart';
+
 class BookingSummaryCard extends StatelessWidget {
   const BookingSummaryCard({
     super.key,
@@ -10,9 +12,10 @@ class BookingSummaryCard extends StatelessWidget {
     required this.timeLabel,
     required this.locationLabel,
     required this.technicianLabel,
-    this.statusText = 'Expired',
+    this.statusText = '',
     this.statusBg = const Color(0xFFFDE7E6),
     this.statusFg = const Color(0xFFBE3A2E),
+    this.onTap,
   });
 
   final String carTitle;
@@ -25,116 +28,130 @@ class BookingSummaryCard extends StatelessWidget {
   final String statusText;
   final Color statusBg;
   final Color statusFg;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final onSurfaceSubtle = theme.colorScheme.onSurface.withOpacity(.7);
+    final borderRadius = BorderRadius.circular(18);
+    final plateLabel = S.of(context).plate;
+    final statusLabel = statusText.isEmpty ? null : statusText;
 
-    return Container(
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(18),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(.05),
-            blurRadius: 14,
-            offset: const Offset(0, 6),
+    return Material(
+      color: theme.colorScheme.surface,
+      elevation: 0,
+      borderRadius: borderRadius,
+      child: InkWell(
+        borderRadius: borderRadius,
+        onTap: onTap,
+        child: Container(
+          decoration: BoxDecoration(
+            color: theme.colorScheme.surface,
+            borderRadius: borderRadius,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(.05),
+                blurRadius: 14,
+                offset: const Offset(0, 6),
+              ),
+            ],
+            border: Border.all(color: theme.dividerColor.withOpacity(.2)),
           ),
-        ],
-        border: Border.all(color: theme.dividerColor.withOpacity(.2)),
-      ),
-      padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(
-                Icons.directions_car_filled_rounded,
-                size: 22,
-                color: theme.colorScheme.primary,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.directions_car_filled_rounded,
+                    size: 22,
+                    color: theme.colorScheme.primary,
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      carTitle,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w800,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  if (statusLabel != null)
+                    Container(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: statusBg,
+                        borderRadius: BorderRadius.circular(999),
+                      ),
+                      child: Text(
+                        statusLabel,
+                        style: theme.textTheme.labelMedium?.copyWith(
+                          color: statusFg,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                ],
               ),
-              const SizedBox(width: 8),
-              Expanded(
+              const SizedBox(height: 6),
+              Padding(
+                padding: const EdgeInsets.only(left: 30),
                 child: Text(
-                  carTitle,
-                  style: theme.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w800,
+                  '$plateLabel: $plate',
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: onSurfaceSubtle,
+                    fontWeight: FontWeight.w600,
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              const SizedBox(width: 8),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                decoration: BoxDecoration(
-                  color: statusBg,
-                  borderRadius: BorderRadius.circular(999),
+              const SizedBox(height: 14),
+              _Line(
+                icon: Icons.build_rounded,
+                label: packageTitle,
+                labelStyle: theme.textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: theme.colorScheme.onSurface,
                 ),
-                child: Text(
-                  statusText,
-                  style: theme.textTheme.labelMedium?.copyWith(
-                    color: statusFg,
-                    fontWeight: FontWeight.w700,
-                  ),
+              ),
+              const SizedBox(height: 10),
+              _Line(
+                icon: Icons.event_rounded,
+                label: '$dateLabel • $timeLabel',
+                labelStyle: theme.textTheme.bodyLarge?.copyWith(
+                  color: theme.colorScheme.onSurface,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 10),
+              _Line(
+                icon: Icons.location_on_rounded,
+                label: locationLabel,
+                labelStyle: theme.textTheme.bodyLarge?.copyWith(
+                  color: onSurfaceSubtle,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 10),
+              _Line(
+                icon: Icons.engineering_rounded,
+                label: technicianLabel,
+                labelStyle: theme.textTheme.bodyLarge?.copyWith(
+                  color: theme.colorScheme.onSurface,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 6),
-          Padding(
-            padding: const EdgeInsets.only(left: 30),
-            child: Text(
-              'Plate: $plate',
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: onSurfaceSubtle,
-                fontWeight: FontWeight.w600,
-              ),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          const SizedBox(height: 14),
-          _Line(
-            icon: Icons.build_rounded,
-            label: packageTitle,
-            labelStyle: theme.textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.w700,
-              color: theme.colorScheme.onSurface,
-            ),
-          ),
-          const SizedBox(height: 10),
-          _Line(
-            icon: Icons.event_rounded,
-            label: '$dateLabel • $timeLabel',
-            labelStyle: theme.textTheme.bodyLarge?.copyWith(
-              color: theme.colorScheme.onSurface,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(height: 10),
-          _Line(
-            icon: Icons.location_on_rounded,
-            label: locationLabel,
-            labelStyle: theme.textTheme.bodyLarge?.copyWith(
-              color: onSurfaceSubtle,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(height: 10),
-          _Line(
-            icon: Icons.engineering_rounded,
-            label: technicianLabel,
-            labelStyle: theme.textTheme.bodyLarge?.copyWith(
-              color: theme.colorScheme.onSurface,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

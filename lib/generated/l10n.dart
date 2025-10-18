@@ -883,6 +883,256 @@ class S {
       args: [],
     );
   }
+
+  /// `Booking Details`
+  String get upcomingServicesBookingDetailsTitle {
+    return Intl.message(
+      'Booking Details',
+      name: 'upcomingServicesBookingDetailsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Service Package`
+  String get upcomingServicesServicePackageLabel {
+    return Intl.message(
+      'Service Package',
+      name: 'upcomingServicesServicePackageLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Service Location`
+  String get upcomingServicesServiceLocationLabel {
+    return Intl.message(
+      'Service Location',
+      name: 'upcomingServicesServiceLocationLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Assigned Technician`
+  String get upcomingServicesAssignedTechnicianLabel {
+    return Intl.message(
+      'Assigned Technician',
+      name: 'upcomingServicesAssignedTechnicianLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Location to be confirmed`
+  String get upcomingServicesLocationFallback {
+    return Intl.message(
+      'Location to be confirmed',
+      name: 'upcomingServicesLocationFallback',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Technician to be assigned`
+  String get upcomingServicesTechnicianFallback {
+    return Intl.message(
+      'Technician to be assigned',
+      name: 'upcomingServicesTechnicianFallback',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Plate unavailable`
+  String get upcomingServicesPlateFallback {
+    return Intl.message(
+      'Plate unavailable',
+      name: 'upcomingServicesPlateFallback',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date to be confirmed`
+  String get upcomingServicesDateFallback {
+    return Intl.message(
+      'Date to be confirmed',
+      name: 'upcomingServicesDateFallback',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pending`
+  String get upcomingServicesStatusPending {
+    return Intl.message(
+      'Pending',
+      name: 'upcomingServicesStatusPending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expired`
+  String get upcomingServicesStatusExpired {
+    return Intl.message(
+      'Expired',
+      name: 'upcomingServicesStatusExpired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upcoming`
+  String get upcomingServicesStatusUpcoming {
+    return Intl.message(
+      'Upcoming',
+      name: 'upcomingServicesStatusUpcoming',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completed`
+  String get upcomingServicesStatusCompleted {
+    return Intl.message(
+      'Completed',
+      name: 'upcomingServicesStatusCompleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancelled`
+  String get upcomingServicesStatusCancelled {
+    return Intl.message(
+      'Cancelled',
+      name: 'upcomingServicesStatusCancelled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Booking`
+  String get upcomingServicesStatusNew {
+    return Intl.message(
+      'New Booking',
+      name: 'upcomingServicesStatusNew',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loading vehicle`
+  String get upcomingServicesLoadingVehicle {
+    return Intl.message(
+      'Loading vehicle',
+      name: 'upcomingServicesLoadingVehicle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loading package title`
+  String get upcomingServicesLoadingPackage {
+    return Intl.message(
+      'Loading package title',
+      name: 'upcomingServicesLoadingPackage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loading location`
+  String get upcomingServicesLoadingLocation {
+    return Intl.message(
+      'Loading location',
+      name: 'upcomingServicesLoadingLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loading technician`
+  String get upcomingServicesLoadingTechnician {
+    return Intl.message(
+      'Loading technician',
+      name: 'upcomingServicesLoadingTechnician',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loading`
+  String get upcomingServicesLoadingStatus {
+    return Intl.message(
+      'Loading',
+      name: 'upcomingServicesLoadingStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No upcoming services scheduled.`
+  String get upcomingServicesEmptyMessage {
+    return Intl.message(
+      'No upcoming services scheduled.',
+      name: 'upcomingServicesEmptyMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to load upcoming services.`
+  String get upcomingServicesErrorPrefix {
+    return Intl.message(
+      'Unable to load upcoming services.',
+      name: 'upcomingServicesErrorPrefix',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log in to view your upcoming services.`
+  String get upcomingServicesLoginPrompt {
+    return Intl.message(
+      'Log in to view your upcoming services.',
+      name: 'upcomingServicesLoginPrompt',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Log in`
+  String get upcomingServicesViewButton {
+    return Intl.message(
+      'Log in',
+      name: 'upcomingServicesViewButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Service`
+  String get upcomingServicesServicePlaceholder {
+    return Intl.message(
+      'Service',
+      name: 'upcomingServicesServicePlaceholder',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vehicle`
+  String get upcomingServicesVehiclePlaceholder {
+    return Intl.message(
+      'Vehicle',
+      name: 'upcomingServicesVehiclePlaceholder',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
