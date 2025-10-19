@@ -29,6 +29,17 @@ class _CarDetailsScreenState extends State<UserCarDetailsScreen> {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
     final hasImages = car.carImages.isNotEmpty;
+    String valueOrDash(String value) => value.trim().isEmpty ? '--' : value.trim();
+    final combinedName =
+        '${car.manufacturer} ${car.carModel}'.trim().replaceAll(RegExp(r'\s+'), ' ');
+    final carName = combinedName.isNotEmpty ? combinedName : car.carModel;
+    final carModel = car.carModel;
+    final manufacturer = car.manufacturer;
+    final plate = car.englishPlate.isNotEmpty
+        ? car.englishPlate.join()
+        : car.arabicPlate.join();
+    final vin = car.vinNumber;
+    final year = car.modelYear;
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
@@ -229,15 +240,35 @@ class _CarDetailsScreenState extends State<UserCarDetailsScreen> {
                 child: _Card(
                   child: Column(
                     children:  [
-                      _InfoTile(title: 'Car name', value: '', icon: Icons.directions_car_filled),
+                      _InfoTile(
+                        title: 'Car name',
+                        value: valueOrDash(carName),
+                        icon: Icons.directions_car_filled,
+                      ),
                       _Divider(),
-                      _InfoTile(title: 'Car model', value: '', icon: Icons.view_in_ar),
+                      _InfoTile(
+                        title: 'Car model',
+                        value: valueOrDash(carModel.isNotEmpty ? carModel : manufacturer),
+                        icon: Icons.view_in_ar,
+                      ),
                       _Divider(),
-                      _InfoTile(title: 'Plate', value: '', icon: Icons.credit_card),
+                      _InfoTile(
+                        title: 'Plate',
+                        value: valueOrDash(plate),
+                        icon: Icons.credit_card,
+                      ),
                       _Divider(),
-                      _InfoTile(title: 'Chassis (VIN)', value: '', icon: Icons.qr_code_2),
+                      _InfoTile(
+                        title: 'Chassis (VIN)',
+                        value: valueOrDash(vin),
+                        icon: Icons.qr_code_2,
+                      ),
                       _Divider(),
-                      _InfoTile(title: 'Year of manufacture', value: '', icon: Icons.event),
+                      _InfoTile(
+                        title: 'Year of manufacture',
+                        value: valueOrDash(year),
+                        icon: Icons.event,
+                      ),
                     ],
                   ),
                 ),
@@ -441,4 +472,3 @@ class _ThumbImage extends StatelessWidget {
       borderRadius: BorderRadius.circular(12), child: ImageLoader(url: src, placeholder: Center(child: Icon(Icons.broken_image))));
   }
 }
-

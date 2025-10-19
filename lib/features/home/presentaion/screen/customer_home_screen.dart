@@ -6,6 +6,7 @@ import 'package:newmotorlube/features/auth/provider/auth_provider.dart';
 import 'package:newmotorlube/features/upcoming_service/presentation/widget/upcoming_service_section.dart';
 import '../../../../main.dart';
 import '../../../promotions/presentation/widget/promotions.dart';
+import '../../../user_cars/provider/user_cars_provider.dart';
 import '../../../user_cars/presentation/widget/user_cars.dart';
 import '../widget/home_service_grid.dart';
 import '../widget/title_with_sub_title.dart';
@@ -29,8 +30,12 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
         VoidCallback? onYourCarsTap;
         if (isAuthenticated) {
           addCarAction = IconButton(
-            onPressed: () {
-              navigatorKey.currentState!.pushNamed('addNewCarScreen');
+            onPressed: () async {
+              final result =
+                  await navigatorKey.currentState!.pushNamed('addNewCarScreen');
+              if (result == true) {
+                ref.invalidate(userCarsViewModelProvider);
+              }
             },
             icon: Icon(
               Icons.add_circle,

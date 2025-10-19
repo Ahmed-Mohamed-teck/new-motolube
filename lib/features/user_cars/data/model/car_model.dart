@@ -41,9 +41,6 @@ class CarModel extends CarEntity {
       manufacturer: json['manufactureR_NAME'] as String? ?? '',
       modelYear: json['yeaR_MANUFACTURED'] as String? ?? '',
       carImages: images,
-      // carImages: (json['photoUrl'] as List<dynamic> ? ?? [])
-      //     .map((item) => item as String)
-      //     .toList(),
       vinNumber: json['vin'] as String? ?? '',
     );
   }

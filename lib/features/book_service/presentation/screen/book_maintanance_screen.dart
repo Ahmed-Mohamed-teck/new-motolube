@@ -14,6 +14,7 @@ import 'package:newmotorlube/features/user_cars/domain/entity/car_entity.dart';
 import 'package:newmotorlube/features/user_cars/presentation/widget/user_car_list_item.dart';
 import 'package:newmotorlube/features/user_cars/provider/user_cars_provider.dart';
 import 'package:newmotorlube/features/user_cars/presentation/view_model/user_cars_state.dart';
+import 'package:newmotorlube/features/home/presentaion/screen/base_home_screen.dart';
 import 'package:newmotorlube/features/auth/presentation/view_model/auth_state.dart';
 import 'package:newmotorlube/features/technician/provider/technician_provider.dart';
 import 'package:newmotorlube/features/technician/presentation/view_model/technician_search_state.dart';
@@ -476,6 +477,26 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
     });
   }
 
+  void _resetBookingFlow() {
+    ref.read(servicePackagesViewModelProvider.notifier).reset();
+    ref.read(technicianSearchViewModelProvider.notifier).reset();
+    ref.read(technicianSlotsViewModelProvider.notifier).reset();
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      _currentStep = 0;
+      _selectedCar = null;
+      _selectedService = null;
+      _selectedPackage = null;
+      _selectedCarEntity = null;
+      _selectedLocation = null;
+      _selectedTechnician = null;
+      _selectedSlot = null;
+      _selectedSlotDate = DateTime.now();
+    });
+  }
+
   void _handleLocationSelection(LatLng latlng) {
     setState(() => _selectedLocation = latlng);
     _resetTechnicianSearch();
@@ -721,6 +742,8 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
         await ref
             .read(upcomingServiceViewModelProvider.notifier)
             .fetchUpcomingServices();
+        _resetBookingFlow();
+        ref.read(currentNavBottomIndexProvider.notifier).state = 0;
       } else {
         _showSnack(result.displayMessage);
       }
