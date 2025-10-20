@@ -132,5 +132,57 @@
   "upcomingServicesLoginPrompt": "سجّل الدخول لعرض خدماتك القادمة.",
   "upcomingServicesViewButton": "تسجيل الدخول",
   "upcomingServicesServicePlaceholder": "الخدمة",
-  "upcomingServicesVehiclePlaceholder": "المركبة"
+  "upcomingServicesVehiclePlaceholder": "المركبة",
+  "upcomingService": "الخدمة القادمة",
+  "back": "رجوع",
+  "book": "احجز",
+  "commonErrorTitle": "حدث خطأ ما",
+  "commonErrorDescription": "يرجى التحقق من اتصالك بالإنترنت أو إعادة المحاولة.",
+  "commonRetry": "إعادة المحاولة",
+  "userCarsTakePhoto": "التقاط صورة",
+  "userCarsChooseFromGallery": "اختر من المعرض (متعدد)",
+  "userCarsCompletePlateFields": "يرجى إكمال حقول اللوحة",
+  "userCarsInvalidPlateLetter": "حرف اللوحة غير صالح",
+  "userCarsInvalidPlateNumber": "رقم اللوحة غير صالح",
+  "userCarsAddedSuccessfully": "تمت إضافة السيارة بنجاح",
+  "userCarsErrorLoadingManufacturers": "حدث خطأ أثناء تحميل الشركات المصنعة",
+  "userCarsErrorLoadingModels": "حدث خطأ أثناء تحميل موديلات السيارات",
+  "userCarsImagesSectionTitle": "صور السيارة",
+  "userCarsAddPhotos": "أضف صورًا",
+  "userCarsAddImageRequirement": "يرجى إضافة صورة واحدة على الأقل.",
+  "userCarsSaving": "جارٍ الحفظ...",
+  "userCarsSaveVehicle": "حفظ المركبة",
+  "userCarsAddCrnImage": "أضف صورة السجل التجاري",
+  "userCarsCarDetailsTitle": "تفاصيل السيارة",
+  "userCarsCarName": "اسم السيارة",
+  "userCarsCarModelLabel": "موديل السيارة",
+  "userCarsChassisVin": "رقم الهيكل (VIN)",
+  "userCarsYearOfManufacture": "سنة الصنع",
+  "userCarsEditInfo": "تعديل المعلومات",
+  "userCarsDeleteCar": "حذف السيارة",
+  "userCarsChassis": "رقم الهيكل",
+  "userCarsBookNow": "احجز الآن",
+  "userCarsCopy": "نسخ",
+  "userCarsCopiedToClipboard": "تم النسخ إلى الحافظة",
+  "userCarsLicensePlateSemantics": "لوحة المركبة {plate}",
+  "@userCarsLicensePlateSemantics": {
+    "description": "تسمية تسهل الوصول تعرّف برقم اللوحة",
+    "placeholders": {
+      "plate": {
+        "type": "String"
+      }
+    }
+  },
+  "userCarsCardSemantics": "بطاقة سيارة لـ {model}، لوحة {plate}",
+  "@userCarsCardSemantics": {
+    "description": "تسمية تسهل الوصول تصف بطاقة السيارة",
+    "placeholders": {
+      "model": {
+        "type": "String"
+      },
+      "plate": {
+        "type": "String"
+      }
+    }
+  }
 }

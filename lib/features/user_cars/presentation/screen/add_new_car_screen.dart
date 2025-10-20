@@ -43,6 +43,7 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
 
   // Image upload error state
   bool _imagesError = false;
+  bool _isPreparingSubmission = false;
 
   // Images state
   final ImagePicker _picker = ImagePicker();
@@ -137,7 +138,7 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
             children: [
               ListTile(
                 leading: const Icon(Icons.photo_camera_outlined),
-                title: const Text('Take a photo'),
+                title: Text(appLang.userCarsTakePhoto),
                 onTap: () {
                   Navigator.pop(context);
                   _pickCamera();
@@ -145,7 +146,7 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
               ),
               ListTile(
                 leading: const Icon(Icons.photo_library_outlined),
-                title: const Text('Choose from gallery (multiple)'),
+                title: Text(appLang.userCarsChooseFromGallery),
                 onTap: () {
                   Navigator.pop(context);
                   _pickGallery();
@@ -163,6 +164,42 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
   }
 
   void _save() async {
+    if (_isPreparingSubmission) return;
+
+    final manufacturersState = ref.read(manufacturersViewModelProvider);
+    final carBrandsState = ref.read(carBrandsViewModelProvider);
+
+    if (manufacturersState is ManufacturersError) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(appLang.userCarsErrorLoadingManufacturers)),
+      );
+      return;
+    }
+    if (manufacturersState is! ManufacturersLoaded) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(appLang.selectManufacturer)),
+      );
+      return;
+    }
+    if (_selectedManufacturer == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(appLang.selectManufacturer)),
+      );
+      return;
+    }
+    if (carBrandsState is CarBrandsError) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(appLang.userCarsErrorLoadingModels)),
+      );
+      return;
+    }
+    if (_modelCtrl.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(appLang.selectModel)),
+      );
+      return;
+    }
+
     final formOk = _formKey.currentState?.validate() ?? false;
 
     if (formOk) {
@@ -174,11 +211,12 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
           _plateL6 == null ||
           _plateL7 == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Please complete plate fields')),
+          SnackBar(
+            content: Text(appLang.userCarsCompletePlateFields),
+          ),
         );
         return;
       }
-
       if (_carImages.isEmpty) {
         setState(() => _imagesError = true);
         return;
@@ -188,12 +226,17 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
 
       // Build CarEntity and dispatch add
       try {
+        setState(() => _isPreparingSubmission = true);
         final car = await _buildCarEntity();
         await ref.read(addUserCarViewModelProvider.notifier).addCar(car);
       } catch (e) {
         ScaffoldMessenger.of(
           context,
         ).showSnackBar(SnackBar(content: Text(e.toString())));
+      } finally {
+        if (mounted) {
+          setState(() => _isPreparingSubmission = false);
+        }
       }
     }
   }
@@ -213,7 +256,7 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
       if (iAr != -1) return ch;
       final iEn = CharListProvider.englishChars.indexOf(ch);
       if (iEn != -1) return CharListProvider.arabicChars[iEn];
-      throw Exception('Invalid plate letter');
+      throw Exception(appLang.userCarsInvalidPlateLetter);
     }
 
     String mapEnglishLetter(String ch) {
@@ -221,7 +264,7 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
       if (iEn != -1) return ch;
       final iAr = CharListProvider.arabicChars.indexOf(ch);
       if (iAr != -1) return CharListProvider.englishChars[iAr];
-      throw Exception('Invalid plate letter');
+      throw Exception(appLang.userCarsInvalidPlateLetter);
     }
 
     String mapArabicNumber(String ch) {
@@ -229,7 +272,7 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
       if (iAr != -1) return ch;
       final iEn = CharListProvider.numbers.indexOf(ch);
       if (iEn != -1) return CharListProvider.arabicNumbers[iEn];
-      throw Exception('Invalid plate number');
+      throw Exception(appLang.userCarsInvalidPlateNumber);
     }
 
     String mapEnglishNumber(String ch) {
@@ -237,7 +280,7 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
       if (iEn != -1) return ch;
       final iAr = CharListProvider.arabicNumbers.indexOf(ch);
       if (iAr != -1) return CharListProvider.numbers[iAr];
-      throw Exception('Invalid plate number');
+      throw Exception(appLang.userCarsInvalidPlateNumber);
     }
 
     final arabicPlate = <String>[
@@ -285,11 +328,14 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
     final manufacturersState = ref.watch(manufacturersViewModelProvider);
     final carBrandsState = ref.watch(carBrandsViewModelProvider);
     final addState = ref.watch(addUserCarViewModelProvider);
+    final isBusy = _isPreparingSubmission || addState is AddUserCarLoading;
     if (addState is AddUserCarSuccess) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(const SnackBar(content: Text('Car added successfully')));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(
+          SnackBar(content: Text(appLang.userCarsAddedSuccessfully)),
+        );
         Navigator.of(context).pop(true);
       });
     } else if (addState is AddUserCarError) {
@@ -405,7 +451,7 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
                           ],
                         )
                       else if (manufacturersState is ManufacturersError)
-                        Text('Error loading manufacturers')
+                        Text(appLang.userCarsErrorLoadingManufacturers)
                       else if (manufacturersState is ManufacturersLoaded) ...[
                         // compute a safe value that exists in the list
                         Builder(
@@ -443,12 +489,15 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
                                 onChanged: (value) {
                                   setState(() {
                                     _selectedManufacturer = value;
+                                    _modelCtrl.clear();
+                                  });
+                                  if (value != null) {
                                     ref
                                         .read(
                                           carBrandsViewModelProvider.notifier,
                                         )
-                                        .fetCarBrands(carModelId: value ?? '');
-                                  });
+                                        .fetCarBrands(carModelId: value);
+                                  }
                                 },
                                 validator:
                                     (v) =>
@@ -476,22 +525,34 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
                                   size: 20,
                                 );
                               } else if (carBrandsState is CarBrandsError) {
-                                return const Text('Error loading car models');
+                                return Text(appLang.userCarsErrorLoadingModels);
                               } else if (carBrandsState is CarBrandsLoaded) {
                                 final carBrands = carBrandsState.carBrands;
+                                final hasBrands = carBrands.isNotEmpty;
                                 final String? safeValue =
                                     carBrands.any(
-                                          (brand) =>
-                                              brand.name == _modelCtrl.text,
-                                        )
+                                      (brand) => brand.name == _modelCtrl.text,
+                                    )
                                         ? _modelCtrl.text
                                         : null;
+                                final shouldClearSelection =
+                                    (!hasBrands || safeValue == null) &&
+                                    _modelCtrl.text.isNotEmpty;
+                                if (shouldClearSelection) {
+                                  WidgetsBinding.instance.addPostFrameCallback(
+                                    (_) {
+                                      if (!mounted) return;
+                                      setState(_modelCtrl.clear);
+                                    },
+                                  );
+                                }
 
                                 return DropdownButtonFormField<String>(
                                   value: safeValue,
                                   isExpanded: true,
                                   decoration: _input(null),
                                   hint: Text(appLang.selectModel),
+                                  disabledHint: Text(appLang.selectModel),
                                   items:
                                       carBrands
                                           .map(
@@ -501,16 +562,20 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
                                             ),
                                           )
                                           .toList(),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _modelCtrl.text = value ?? '';
-                                    });
+                                  onChanged:
+                                      hasBrands
+                                          ? (value) {
+                                            setState(() {
+                                              _modelCtrl.text = value ?? '';
+                                            });
+                                          }
+                                          : null,
+                                  validator: (v) {
+                                    if (!hasBrands) return null;
+                                    return v == null
+                                        ? appLang.selectModel
+                                        : null;
                                   },
-                                  validator:
-                                      (v) =>
-                                          v == null
-                                              ? appLang.selectModel
-                                              : null,
                                 );
                               } else {
                                 return const SizedBox();
@@ -573,12 +638,12 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
 
               // === Car Images Section ===
               _SectionCard(
-                title: 'Car Images',
+                title: appLang.userCarsImagesSectionTitle,
                 icon: Icons.photo_library_outlined,
                 action: TextButton.icon(
                   onPressed: _showImageSheet,
                   icon: const Icon(Icons.add),
-                  label: const Text('Add Photos'),
+                  label: Text(appLang.userCarsAddPhotos),
                 ),
                 child: Column(
                   children: [
@@ -589,13 +654,16 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
                     ),
                     Visibility(
                       visible: _imagesError,
-                      child: const Padding(
-                        padding: EdgeInsets.only(top: 8),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 8),
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            'Please add at least one image.',
-                            style: TextStyle(color: Colors.red, fontSize: 12),
+                            appLang.userCarsAddImageRequirement,
+                            style: const TextStyle(
+                              color: Colors.red,
+                              fontSize: 12,
+                            ),
                           ),
                         ),
                       ),
@@ -612,16 +680,18 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
         child: SizedBox(
           height: 48,
           child: FilledButton.icon(
-            onPressed: addState is AddUserCarLoading ? null : _save,
+            onPressed: isBusy ? null : _save,
             icon:
-                addState is AddUserCarLoading
+                isBusy
                     ? const SizedBox(
                       height: 20,
                       width: 20,
                       child: CircularProgressIndicator(strokeWidth: 2),
                     )
                     : const Icon(Icons.save_outlined),
-            label: const Text('Save Vehicle'),
+            label: Text(
+              isBusy ? appLang.userCarsSaving : appLang.userCarsSaveVehicle,
+            ),
           ),
         ),
       ),
@@ -871,13 +941,13 @@ class _CrnImageField extends StatelessWidget {
             border: Border.all(color: Colors.grey.shade300),
             color: Colors.grey.shade50,
           ),
-          child: const Center(
+          child: Center(
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.upload_file_outlined),
-                SizedBox(width: 8),
-                Text('Add CRN image'),
+                const Icon(Icons.upload_file_outlined),
+                const SizedBox(width: 8),
+                Text(appLang.userCarsAddCrnImage),
               ],
             ),
           ),

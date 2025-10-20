@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newmotorlube/core/providers/global_lang_provider.dart';
 import 'package:newmotorlube/core/widget/image_loader.dart';
 import 'package:newmotorlube/core/widget/internal_app_bar.dart';
 import '../../domain/entity/car_entity.dart';
@@ -43,7 +44,7 @@ class _CarDetailsScreenState extends State<UserCarDetailsScreen> {
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
-      appBar: InternalAppBar(title: 'Car details'),
+      appBar: InternalAppBar(title: appLang.userCarsCarDetailsTitle),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -241,31 +242,31 @@ class _CarDetailsScreenState extends State<UserCarDetailsScreen> {
                   child: Column(
                     children:  [
                       _InfoTile(
-                        title: 'Car name',
+                        title: appLang.userCarsCarName,
                         value: valueOrDash(carName),
                         icon: Icons.directions_car_filled,
                       ),
                       _Divider(),
                       _InfoTile(
-                        title: 'Car model',
+                        title: appLang.userCarsCarModelLabel,
                         value: valueOrDash(carModel.isNotEmpty ? carModel : manufacturer),
                         icon: Icons.view_in_ar,
                       ),
                       _Divider(),
                       _InfoTile(
-                        title: 'Plate',
+                        title: appLang.plate,
                         value: valueOrDash(plate),
                         icon: Icons.credit_card,
                       ),
                       _Divider(),
                       _InfoTile(
-                        title: 'Chassis (VIN)',
+                        title: appLang.userCarsChassisVin,
                         value: valueOrDash(vin),
                         icon: Icons.qr_code_2,
                       ),
                       _Divider(),
                       _InfoTile(
-                        title: 'Year of manufacture',
+                        title: appLang.userCarsYearOfManufacture,
                         value: valueOrDash(year),
                         icon: Icons.event,
                       ),
@@ -286,7 +287,7 @@ class _CarDetailsScreenState extends State<UserCarDetailsScreen> {
                       child: FilledButton.icon(
                         onPressed: () {/* TODO: open edit flow */},
                         icon: const Icon(Icons.edit),
-                        label: const Text('Edit info'),
+                        label: Text(appLang.userCarsEditInfo),
                         style: FilledButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
@@ -299,7 +300,7 @@ class _CarDetailsScreenState extends State<UserCarDetailsScreen> {
                       child: OutlinedButton.icon(
                         onPressed: () {/* TODO: confirm delete */},
                         icon: const Icon(Icons.delete_forever),
-                        label: const Text('Delete car'),
+                        label: Text(appLang.userCarsDeleteCar),
                         style: OutlinedButton.styleFrom(
                           foregroundColor: Colors.red,
                           side: const BorderSide(color: Colors.redAccent),

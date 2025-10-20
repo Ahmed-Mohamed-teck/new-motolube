@@ -4,6 +4,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:newmotorlube/core/providers/global_lang_provider.dart';
 import 'package:newmotorlube/core/widget/error_widget.dart';
 import 'package:newmotorlube/features/auth/provider/auth_provider.dart';
 import 'package:newmotorlube/features/book_service/domain/entity/create_appointment_result.dart';
@@ -1272,21 +1273,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
     } else if (slotsState is TechnicianSlotsError) {
       content =
           matchesCurrentTech(slotsState.technicianId)
-              ? Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Could not load slots.\n${slotsState.message}',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.error,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: _fetchSlotsForTechnician,
-                    child: const Text('Try Again'),
-                  ),
-                ],
-              )
+              ? ErrorStateWidget(onRetry: _fetchSlotsForTechnician)
               : const SizedBox.shrink();
     } else {
       content = const SizedBox.shrink();
@@ -1478,7 +1465,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
     final actionButtons = <Widget>[];
     if (!isFirst) {
       actionButtons.add(
-        OutlinedButton(onPressed: _goToPrevious, child: const Text('Back')),
+        OutlinedButton(onPressed: _goToPrevious, child:  Text(appLang.back)),
       );
     }
 
@@ -1493,12 +1480,12 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
                     height: 18,
                     child: CircularProgressIndicator(strokeWidth: 2),
                   )
-                  : const Text('Book'),
+                  :  Text(appLang.book),
         ),
       );
     } else {
       actionButtons.add(
-        ElevatedButton(onPressed: _goToNext, child: const Text('Next')),
+        ElevatedButton(onPressed: _goToNext, child:  Text(appLang.next)),
       );
     }
 

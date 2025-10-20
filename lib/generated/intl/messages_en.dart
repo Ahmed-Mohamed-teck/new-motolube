@@ -20,6 +20,10 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(model, plate) => "Car card for ${model}, plate ${plate}";
+
+  static String m1(plate) => "License plate ${plate}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "PleaseLoginToViewYourCarsMessage": MessageLookupByLibrary.simpleMessage(
@@ -34,9 +38,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "authenticationErrorMessage": MessageLookupByLibrary.simpleMessage(
       "An error occurred during authentication",
     ),
+    "back": MessageLookupByLibrary.simpleMessage("Back"),
     "basicServices": MessageLookupByLibrary.simpleMessage("Basic Services"),
     "batteires": MessageLookupByLibrary.simpleMessage("Batteries"),
     "bestOffers": MessageLookupByLibrary.simpleMessage("Best Offers"),
+    "book": MessageLookupByLibrary.simpleMessage("Book"),
     "bookServiceStepChoosePackage": MessageLookupByLibrary.simpleMessage(
       "Choose Package",
     ),
@@ -62,6 +68,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "VIN must be 17 characters",
     ),
     "comment": MessageLookupByLibrary.simpleMessage("Comment"),
+    "commonErrorDescription": MessageLookupByLibrary.simpleMessage(
+      "Please check your internet connection or try again.",
+    ),
+    "commonErrorTitle": MessageLookupByLibrary.simpleMessage(
+      "Something went wrong",
+    ),
+    "commonRetry": MessageLookupByLibrary.simpleMessage("Retry"),
     "companyName": MessageLookupByLibrary.simpleMessage("Company Name"),
     "companyNameError": MessageLookupByLibrary.simpleMessage(
       "Please enter company name",
@@ -189,6 +202,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
     "submit": MessageLookupByLibrary.simpleMessage("Submit"),
     "towiling": MessageLookupByLibrary.simpleMessage("Towiling"),
+    "upcomingService": MessageLookupByLibrary.simpleMessage("Upcoming Service"),
     "upcomingServicesAssignedTechnicianLabel":
         MessageLookupByLibrary.simpleMessage("Assigned Technician"),
     "upcomingServicesBookingDetailsTitle": MessageLookupByLibrary.simpleMessage(
@@ -261,6 +275,59 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "upcomingServicesViewButton": MessageLookupByLibrary.simpleMessage(
       "Log in",
+    ),
+    "userCarsAddCrnImage": MessageLookupByLibrary.simpleMessage(
+      "Add CRN image",
+    ),
+    "userCarsAddImageRequirement": MessageLookupByLibrary.simpleMessage(
+      "Please add at least one image.",
+    ),
+    "userCarsAddPhotos": MessageLookupByLibrary.simpleMessage("Add Photos"),
+    "userCarsAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Car added successfully",
+    ),
+    "userCarsBookNow": MessageLookupByLibrary.simpleMessage("Book Now"),
+    "userCarsCarDetailsTitle": MessageLookupByLibrary.simpleMessage(
+      "Car details",
+    ),
+    "userCarsCarModelLabel": MessageLookupByLibrary.simpleMessage("Car model"),
+    "userCarsCarName": MessageLookupByLibrary.simpleMessage("Car name"),
+    "userCarsCardSemantics": m0,
+    "userCarsChassis": MessageLookupByLibrary.simpleMessage("Chassis"),
+    "userCarsChassisVin": MessageLookupByLibrary.simpleMessage("Chassis (VIN)"),
+    "userCarsChooseFromGallery": MessageLookupByLibrary.simpleMessage(
+      "Choose from gallery (multiple)",
+    ),
+    "userCarsCompletePlateFields": MessageLookupByLibrary.simpleMessage(
+      "Please complete plate fields",
+    ),
+    "userCarsCopiedToClipboard": MessageLookupByLibrary.simpleMessage(
+      "Copied to clipboard",
+    ),
+    "userCarsCopy": MessageLookupByLibrary.simpleMessage("Copy"),
+    "userCarsDeleteCar": MessageLookupByLibrary.simpleMessage("Delete car"),
+    "userCarsEditInfo": MessageLookupByLibrary.simpleMessage("Edit info"),
+    "userCarsErrorLoadingManufacturers": MessageLookupByLibrary.simpleMessage(
+      "Error loading manufacturers",
+    ),
+    "userCarsErrorLoadingModels": MessageLookupByLibrary.simpleMessage(
+      "Error loading car models",
+    ),
+    "userCarsImagesSectionTitle": MessageLookupByLibrary.simpleMessage(
+      "Car Images",
+    ),
+    "userCarsInvalidPlateLetter": MessageLookupByLibrary.simpleMessage(
+      "Invalid plate letter",
+    ),
+    "userCarsInvalidPlateNumber": MessageLookupByLibrary.simpleMessage(
+      "Invalid plate number",
+    ),
+    "userCarsLicensePlateSemantics": m1,
+    "userCarsSaveVehicle": MessageLookupByLibrary.simpleMessage("Save Vehicle"),
+    "userCarsSaving": MessageLookupByLibrary.simpleMessage("Saving..."),
+    "userCarsTakePhoto": MessageLookupByLibrary.simpleMessage("Take a photo"),
+    "userCarsYearOfManufacture": MessageLookupByLibrary.simpleMessage(
+      "Year of manufacture",
     ),
     "userEmail": MessageLookupByLibrary.simpleMessage("User Email"),
     "userEmailHint": MessageLookupByLibrary.simpleMessage("Enter user email"),

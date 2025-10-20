@@ -28,7 +28,8 @@ class UserCars extends ConsumerWidget {
     if (authState is UnauthenticatedState) {
       return  EmptyCarsCard(
         onTap: () {
-          ref.read(currentNavBottomIndexProvider.notifier).state = 4;
+          navigatorKey.currentState?.pushNamed('loginScreen');
+
         },
       );
     }
@@ -195,7 +196,10 @@ class _EmptyCars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('No cars found', style: Theme.of(context).textTheme.bodyMedium);
+    return Text(
+      appLang.noCarsFound,
+      style: Theme.of(context).textTheme.bodyMedium,
+    );
   }
 }
 
@@ -302,6 +306,5 @@ class EmptyCarsCard extends StatelessWidget {
     );
   }
 }
-
 
 

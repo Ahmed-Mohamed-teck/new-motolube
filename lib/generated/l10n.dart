@@ -1133,6 +1133,311 @@ class S {
       args: [],
     );
   }
+
+  /// `Upcoming Service`
+  String get upcomingService {
+    return Intl.message(
+      'Upcoming Service',
+      name: 'upcomingService',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Back`
+  String get back {
+    return Intl.message('Back', name: 'back', desc: '', args: []);
+  }
+
+  /// `Book`
+  String get book {
+    return Intl.message('Book', name: 'book', desc: '', args: []);
+  }
+
+  /// `Something went wrong`
+  String get commonErrorTitle {
+    return Intl.message(
+      'Something went wrong',
+      name: 'commonErrorTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please check your internet connection or try again.`
+  String get commonErrorDescription {
+    return Intl.message(
+      'Please check your internet connection or try again.',
+      name: 'commonErrorDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Retry`
+  String get commonRetry {
+    return Intl.message('Retry', name: 'commonRetry', desc: '', args: []);
+  }
+
+  /// `Take a photo`
+  String get userCarsTakePhoto {
+    return Intl.message(
+      'Take a photo',
+      name: 'userCarsTakePhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose from gallery (multiple)`
+  String get userCarsChooseFromGallery {
+    return Intl.message(
+      'Choose from gallery (multiple)',
+      name: 'userCarsChooseFromGallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please complete plate fields`
+  String get userCarsCompletePlateFields {
+    return Intl.message(
+      'Please complete plate fields',
+      name: 'userCarsCompletePlateFields',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid plate letter`
+  String get userCarsInvalidPlateLetter {
+    return Intl.message(
+      'Invalid plate letter',
+      name: 'userCarsInvalidPlateLetter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid plate number`
+  String get userCarsInvalidPlateNumber {
+    return Intl.message(
+      'Invalid plate number',
+      name: 'userCarsInvalidPlateNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Car added successfully`
+  String get userCarsAddedSuccessfully {
+    return Intl.message(
+      'Car added successfully',
+      name: 'userCarsAddedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error loading manufacturers`
+  String get userCarsErrorLoadingManufacturers {
+    return Intl.message(
+      'Error loading manufacturers',
+      name: 'userCarsErrorLoadingManufacturers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error loading car models`
+  String get userCarsErrorLoadingModels {
+    return Intl.message(
+      'Error loading car models',
+      name: 'userCarsErrorLoadingModels',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Car Images`
+  String get userCarsImagesSectionTitle {
+    return Intl.message(
+      'Car Images',
+      name: 'userCarsImagesSectionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Photos`
+  String get userCarsAddPhotos {
+    return Intl.message(
+      'Add Photos',
+      name: 'userCarsAddPhotos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please add at least one image.`
+  String get userCarsAddImageRequirement {
+    return Intl.message(
+      'Please add at least one image.',
+      name: 'userCarsAddImageRequirement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Saving...`
+  String get userCarsSaving {
+    return Intl.message(
+      'Saving...',
+      name: 'userCarsSaving',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save Vehicle`
+  String get userCarsSaveVehicle {
+    return Intl.message(
+      'Save Vehicle',
+      name: 'userCarsSaveVehicle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add CRN image`
+  String get userCarsAddCrnImage {
+    return Intl.message(
+      'Add CRN image',
+      name: 'userCarsAddCrnImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Car details`
+  String get userCarsCarDetailsTitle {
+    return Intl.message(
+      'Car details',
+      name: 'userCarsCarDetailsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Car name`
+  String get userCarsCarName {
+    return Intl.message(
+      'Car name',
+      name: 'userCarsCarName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Car model`
+  String get userCarsCarModelLabel {
+    return Intl.message(
+      'Car model',
+      name: 'userCarsCarModelLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chassis (VIN)`
+  String get userCarsChassisVin {
+    return Intl.message(
+      'Chassis (VIN)',
+      name: 'userCarsChassisVin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Year of manufacture`
+  String get userCarsYearOfManufacture {
+    return Intl.message(
+      'Year of manufacture',
+      name: 'userCarsYearOfManufacture',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit info`
+  String get userCarsEditInfo {
+    return Intl.message(
+      'Edit info',
+      name: 'userCarsEditInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete car`
+  String get userCarsDeleteCar {
+    return Intl.message(
+      'Delete car',
+      name: 'userCarsDeleteCar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chassis`
+  String get userCarsChassis {
+    return Intl.message('Chassis', name: 'userCarsChassis', desc: '', args: []);
+  }
+
+  /// `Book Now`
+  String get userCarsBookNow {
+    return Intl.message(
+      'Book Now',
+      name: 'userCarsBookNow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Copy`
+  String get userCarsCopy {
+    return Intl.message('Copy', name: 'userCarsCopy', desc: '', args: []);
+  }
+
+  /// `Copied to clipboard`
+  String get userCarsCopiedToClipboard {
+    return Intl.message(
+      'Copied to clipboard',
+      name: 'userCarsCopiedToClipboard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `License plate {plate}`
+  String userCarsLicensePlateSemantics(String plate) {
+    return Intl.message(
+      'License plate $plate',
+      name: 'userCarsLicensePlateSemantics',
+      desc: 'Semantics label announcing a license plate value',
+      args: [plate],
+    );
+  }
+
+  /// `Car card for {model}, plate {plate}`
+  String userCarsCardSemantics(String model, String plate) {
+    return Intl.message(
+      'Car card for $model, plate $plate',
+      name: 'userCarsCardSemantics',
+      desc: 'Semantics label describing a car card item',
+      args: [model, plate],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -5,6 +5,7 @@ import 'package:newmotorlube/features/home/presentaion/screen/base_home_screen.d
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../generated/l10n.dart';
+import '../../../../main.dart';
 import '../../../auth/provider/auth_provider.dart';
 import '../../../auth/presentation/view_model/auth_state.dart';
 import '../../domain/entity/upcoming_service_entity.dart';
@@ -37,7 +38,7 @@ class UpcomingServiceSection extends ConsumerWidget {
     if (authState is UnauthenticatedState) {
       return _LoginPromptCard(
         onTap: () {
-          ref.read(currentNavBottomIndexProvider.notifier).state = 4;
+          navigatorKey.currentState?.pushNamed('loginScreen');
         },
       );
     }

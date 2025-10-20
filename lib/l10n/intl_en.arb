@@ -132,6 +132,58 @@
   "upcomingServicesLoginPrompt": "Log in to view your upcoming services.",
   "upcomingServicesViewButton": "Log in",
   "upcomingServicesServicePlaceholder": "Service",
-  "upcomingServicesVehiclePlaceholder": "Vehicle"
+  "upcomingServicesVehiclePlaceholder": "Vehicle",
+  "upcomingService": "Upcoming Service",
+  "back": "Back",
+  "book": "Book",
+  "commonErrorTitle": "Something went wrong",
+  "commonErrorDescription": "Please check your internet connection or try again.",
+  "commonRetry": "Retry",
+  "userCarsTakePhoto": "Take a photo",
+  "userCarsChooseFromGallery": "Choose from gallery (multiple)",
+  "userCarsCompletePlateFields": "Please complete plate fields",
+  "userCarsInvalidPlateLetter": "Invalid plate letter",
+  "userCarsInvalidPlateNumber": "Invalid plate number",
+  "userCarsAddedSuccessfully": "Car added successfully",
+  "userCarsErrorLoadingManufacturers": "Error loading manufacturers",
+  "userCarsErrorLoadingModels": "Error loading car models",
+  "userCarsImagesSectionTitle": "Car Images",
+  "userCarsAddPhotos": "Add Photos",
+  "userCarsAddImageRequirement": "Please add at least one image.",
+  "userCarsSaving": "Saving...",
+  "userCarsSaveVehicle": "Save Vehicle",
+  "userCarsAddCrnImage": "Add CRN image",
+  "userCarsCarDetailsTitle": "Car details",
+  "userCarsCarName": "Car name",
+  "userCarsCarModelLabel": "Car model",
+  "userCarsChassisVin": "Chassis (VIN)",
+  "userCarsYearOfManufacture": "Year of manufacture",
+  "userCarsEditInfo": "Edit info",
+  "userCarsDeleteCar": "Delete car",
+  "userCarsChassis": "Chassis",
+  "userCarsBookNow": "Book Now",
+  "userCarsCopy": "Copy",
+  "userCarsCopiedToClipboard": "Copied to clipboard",
+  "userCarsLicensePlateSemantics": "License plate {plate}",
+  "@userCarsLicensePlateSemantics": {
+    "description": "Semantics label announcing a license plate value",
+    "placeholders": {
+      "plate": {
+        "type": "String"
+      }
+    }
+  },
+  "userCarsCardSemantics": "Car card for {model}, plate {plate}",
+  "@userCarsCardSemantics": {
+    "description": "Semantics label describing a car card item",
+    "placeholders": {
+      "model": {
+        "type": "String"
+      },
+      "plate": {
+        "type": "String"
+      }
+    }
+  }
   
 }

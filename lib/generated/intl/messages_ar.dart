@@ -20,6 +20,10 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
+  static String m0(model, plate) => "بطاقة سيارة لـ ${model}، لوحة ${plate}";
+
+  static String m1(plate) => "لوحة المركبة ${plate}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "PleaseLoginToViewYourCarsMessage": MessageLookupByLibrary.simpleMessage(
@@ -34,9 +38,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "authenticationErrorMessage": MessageLookupByLibrary.simpleMessage(
       "حدث خطأ اثناء المصادقة",
     ),
+    "back": MessageLookupByLibrary.simpleMessage("رجوع"),
     "basicServices": MessageLookupByLibrary.simpleMessage("الخدمات الأساسية"),
     "batteires": MessageLookupByLibrary.simpleMessage("بطاريات السيارات"),
     "bestOffers": MessageLookupByLibrary.simpleMessage("أفضل العروض"),
+    "book": MessageLookupByLibrary.simpleMessage("احجز"),
     "bookServiceStepChoosePackage": MessageLookupByLibrary.simpleMessage(
       "اختر الباقة",
     ),
@@ -62,6 +68,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "رقم الهيكل يجب أن يكون 17 حرفًا",
     ),
     "comment": MessageLookupByLibrary.simpleMessage("تعليق"),
+    "commonErrorDescription": MessageLookupByLibrary.simpleMessage(
+      "يرجى التحقق من اتصالك بالإنترنت أو إعادة المحاولة.",
+    ),
+    "commonErrorTitle": MessageLookupByLibrary.simpleMessage("حدث خطأ ما"),
+    "commonRetry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
     "companyName": MessageLookupByLibrary.simpleMessage("اسم الشركة"),
     "companyNameError": MessageLookupByLibrary.simpleMessage(
       "يرجى إدخال اسم الشركة",
@@ -185,6 +196,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "startDate": MessageLookupByLibrary.simpleMessage("تاريخ البدء"),
     "submit": MessageLookupByLibrary.simpleMessage("إرسال"),
     "towiling": MessageLookupByLibrary.simpleMessage("تولينغ"),
+    "upcomingService": MessageLookupByLibrary.simpleMessage("الخدمة القادمة"),
     "upcomingServicesAssignedTechnicianLabel":
         MessageLookupByLibrary.simpleMessage("الفني المعتمد"),
     "upcomingServicesBookingDetailsTitle": MessageLookupByLibrary.simpleMessage(
@@ -257,6 +269,63 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "upcomingServicesViewButton": MessageLookupByLibrary.simpleMessage(
       "تسجيل الدخول",
+    ),
+    "userCarsAddCrnImage": MessageLookupByLibrary.simpleMessage(
+      "أضف صورة السجل التجاري",
+    ),
+    "userCarsAddImageRequirement": MessageLookupByLibrary.simpleMessage(
+      "يرجى إضافة صورة واحدة على الأقل.",
+    ),
+    "userCarsAddPhotos": MessageLookupByLibrary.simpleMessage("أضف صورًا"),
+    "userCarsAddedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "تمت إضافة السيارة بنجاح",
+    ),
+    "userCarsBookNow": MessageLookupByLibrary.simpleMessage("احجز الآن"),
+    "userCarsCarDetailsTitle": MessageLookupByLibrary.simpleMessage(
+      "تفاصيل السيارة",
+    ),
+    "userCarsCarModelLabel": MessageLookupByLibrary.simpleMessage(
+      "موديل السيارة",
+    ),
+    "userCarsCarName": MessageLookupByLibrary.simpleMessage("اسم السيارة"),
+    "userCarsCardSemantics": m0,
+    "userCarsChassis": MessageLookupByLibrary.simpleMessage("رقم الهيكل"),
+    "userCarsChassisVin": MessageLookupByLibrary.simpleMessage(
+      "رقم الهيكل (VIN)",
+    ),
+    "userCarsChooseFromGallery": MessageLookupByLibrary.simpleMessage(
+      "اختر من المعرض (متعدد)",
+    ),
+    "userCarsCompletePlateFields": MessageLookupByLibrary.simpleMessage(
+      "يرجى إكمال حقول اللوحة",
+    ),
+    "userCarsCopiedToClipboard": MessageLookupByLibrary.simpleMessage(
+      "تم النسخ إلى الحافظة",
+    ),
+    "userCarsCopy": MessageLookupByLibrary.simpleMessage("نسخ"),
+    "userCarsDeleteCar": MessageLookupByLibrary.simpleMessage("حذف السيارة"),
+    "userCarsEditInfo": MessageLookupByLibrary.simpleMessage("تعديل المعلومات"),
+    "userCarsErrorLoadingManufacturers": MessageLookupByLibrary.simpleMessage(
+      "حدث خطأ أثناء تحميل الشركات المصنعة",
+    ),
+    "userCarsErrorLoadingModels": MessageLookupByLibrary.simpleMessage(
+      "حدث خطأ أثناء تحميل موديلات السيارات",
+    ),
+    "userCarsImagesSectionTitle": MessageLookupByLibrary.simpleMessage(
+      "صور السيارة",
+    ),
+    "userCarsInvalidPlateLetter": MessageLookupByLibrary.simpleMessage(
+      "حرف اللوحة غير صالح",
+    ),
+    "userCarsInvalidPlateNumber": MessageLookupByLibrary.simpleMessage(
+      "رقم اللوحة غير صالح",
+    ),
+    "userCarsLicensePlateSemantics": m1,
+    "userCarsSaveVehicle": MessageLookupByLibrary.simpleMessage("حفظ المركبة"),
+    "userCarsSaving": MessageLookupByLibrary.simpleMessage("جارٍ الحفظ..."),
+    "userCarsTakePhoto": MessageLookupByLibrary.simpleMessage("التقاط صورة"),
+    "userCarsYearOfManufacture": MessageLookupByLibrary.simpleMessage(
+      "سنة الصنع",
     ),
     "userEmail": MessageLookupByLibrary.simpleMessage(
       "البريد الإلكتروني للمستخدم",

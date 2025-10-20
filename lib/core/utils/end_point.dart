@@ -26,3 +26,6 @@ const String getCustomerAppointmentsEndPoint =
     '$baseUrl/MotorLubeApp/getCustomerAppointment';
 const String createAppointmentEndPoint =
     '$baseUrl/MotorLubeApp/createAppointment';
+const String paymentBaseUrl =
+    'https://unheedfully-proteinic-karri.ngrok-free.dev/api';
+const String initiatePaymentEndPoint = '$paymentBaseUrl/Payments/initiate';

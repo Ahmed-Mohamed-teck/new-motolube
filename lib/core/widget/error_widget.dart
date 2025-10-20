@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newmotorlube/core/providers/global_lang_provider.dart';
 
 class ErrorStateWidget extends StatelessWidget {
   final VoidCallback onRetry;
@@ -35,19 +36,19 @@ class ErrorStateWidget extends StatelessWidget {
               color: Color(0xFF8A8A8A),
             ),
             const SizedBox(height: 16),
-            const Text(
-              'Something went wrong',
-              style: TextStyle(
+            Text(
+              appLang.commonErrorTitle,
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
                 color: Colors.black87,
               ),
             ),
             const SizedBox(height: 8),
-            const Text(
-              'Please check your internet connection or try again.',
+            Text(
+              appLang.commonErrorDescription,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 color: Colors.black54,
               ),
@@ -64,9 +65,9 @@ class ErrorStateWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   elevation: 0,
                 ),
-                child: const Text(
-                  'Retry',
-                  style: TextStyle(
+                child: Text(
+                  appLang.commonRetry,
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                     color: Colors.white,

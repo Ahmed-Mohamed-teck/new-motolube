@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:newmotorlube/core/providers/global_lang_provider.dart';
 
 import '../../../../core/widget/image_loader.dart';
 
@@ -48,7 +49,7 @@ class CarCard extends StatelessWidget {
     final isRTL = Directionality.of(context) == TextDirection.rtl;
 
     return Semantics(
-      label: 'Car card for ${car.model}, plate ${car.plate}',
+      label: appLang.userCarsCardSemantics(car.model, car.plate),
       button: onTap != null || onLongPress != null,
       child: InkWell(
         onTap: onTap,
@@ -176,7 +177,7 @@ class _InfoColumn extends StatelessWidget {
         _InfoChip(
           icon: Icons.confirmation_number_outlined,
           label: plate,
-          semanticsLabel: 'License plate $plate',
+          semanticsLabel: appLang.userCarsLicensePlateSemantics(plate),
         ),
         const SizedBox(height: 6),
 

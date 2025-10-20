@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:newmotorlube/core/providers/global_lang_provider.dart';
 import 'package:newmotorlube/core/utils/extensions/extensions.dart';
 import '../../../../core/widget/image_loader.dart';
 
@@ -84,7 +85,7 @@ class HomeCarOutlinedCard extends StatelessWidget {
   static void _copy(BuildContext context, String text) async {
     await Clipboard.setData(ClipboardData(text: text));
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Copied to clipboard')),
+      SnackBar(content: Text(appLang.userCarsCopiedToClipboard)),
     );
   }
 }
@@ -125,7 +126,7 @@ class _DetailsCompact extends StatelessWidget {
 
         _SpecRow(
           icon: Icons.confirmation_number_outlined,
-          label: 'Plate',
+          label: appLang.plate,
           value: plate,
           onCopy:  () => HomeCarOutlinedCard._copy(context, plate),
         ),
@@ -133,7 +134,7 @@ class _DetailsCompact extends StatelessWidget {
 
         _SpecRow(
           icon: Icons.qr_code_2,
-          label: 'Chassis',
+          label: appLang.userCarsChassis,
           value: chassisDisplay,
           onCopy: () => HomeCarOutlinedCard._copy(context, chassisDisplay),
         ),
@@ -151,7 +152,7 @@ class _DetailsCompact extends StatelessWidget {
                 minimumSize: Size.zero,
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
-              child: Text('Book Now'.toUpperCase()),
+              child: Text(appLang.userCarsBookNow),
             ),
           ),
       ],
@@ -200,7 +201,7 @@ class _SpecRow extends StatelessWidget {
         ),
         if (onCopy != null)
           IconButton(
-            tooltip: 'Copy',
+            tooltip: appLang.userCarsCopy,
             onPressed: onCopy,
             icon: const Icon(Icons.copy, size: 13),
             visualDensity: VisualDensity.compact,
@@ -222,11 +223,6 @@ class _ImageErrorTile extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
 
 
 

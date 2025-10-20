@@ -93,7 +93,7 @@ class UserCarsRemoteDataSourceImpl extends IUserCarRemoteDataSource{
   }
 
   @override
-  Future<List<ManufactureModel>> getManufacturers() async{
+  Future<List<ManufactureModel>> getManufacturers() async {
     try {
       final res = await dio.get(getManufacturersEndPoint);
       final data = res.data as Map<String, dynamic>;
@@ -108,14 +108,11 @@ class UserCarsRemoteDataSourceImpl extends IUserCarRemoteDataSource{
   }
 
   @override
-  Future<List<CarBrandModel>> getCarModels({required String carModelId}) async{
+  Future<List<CarBrandModel>> getCarModels({required String carModelId}) async {
     try {
       final res = await dio.get(getCarModelsEndPoint(carModelId));
       final data = res.data as Map<String, dynamic>;
       final List<CarBrandModel> carBrands = CarBrandsModel.fromJson(data).carBrands;
-      if(carBrands.isEmpty){
-        throw Exception('No car brands found');
-      }
       return carBrands;
     } on DioException {
       rethrow;

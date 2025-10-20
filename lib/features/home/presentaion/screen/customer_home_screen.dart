@@ -84,7 +84,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
               const SizedBox(height: 16),
               TitleWithSubTitle(
                 withSubTitle: false,
-                title: 'Upcoming Service',
+                title: appLang.upcomingService,
                 subTitle: null,
               ),
               const SizedBox(height: 16),

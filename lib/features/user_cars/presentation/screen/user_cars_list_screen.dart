@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/providers/global_lang_provider.dart';
 import '../../../../main.dart';
 import '../../../auth/provider/auth_provider.dart';
 import '../../../auth/presentation/view_model/auth_state.dart';
@@ -28,8 +29,8 @@ class UserCarsListScreen extends ConsumerWidget {
     }
 
     if (authState is! AuthenticatedState) {
-      return const Scaffold(
-        body: Center(child: Text('Please sign in to view your cars')),
+      return Scaffold(
+        body: Center(child: Text(appLang.PleaseLoginToViewYourCarsMessage)),
       );
     }
 
@@ -39,7 +40,7 @@ class UserCarsListScreen extends ConsumerWidget {
     } else if (state is UserCarsLoaded) {
       final cars = state.cars;
       if (cars.isEmpty) {
-        body = const Center(child: Text('No cars found'));
+        body = Center(child: Text(appLang.noCarsFound));
       } else {
         body = ListView.separated(
           padding: const EdgeInsets.all(16),

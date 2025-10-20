@@ -1,18 +1,158 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../core/widget/internal_app_bar.dart';
 import '../../../../generated/l10n.dart';
+import '../../../payment/domain/entity/payment_initiation_request.dart';
+import '../../../payment/presentation/screen/payment_webview_screen.dart';
+import '../../../payment/presentation/state/payment_state.dart';
+import '../../../payment/provider/payment_provider.dart';
 import '../../domain/entity/upcoming_service_entity.dart';
 
-class BookingDetailScreen extends StatelessWidget {
+class BookingDetailScreen extends ConsumerStatefulWidget {
   const BookingDetailScreen({super.key, required this.service});
 
   final UpcomingServiceEntity service;
 
   @override
+  ConsumerState<BookingDetailScreen> createState() =>
+      _BookingDetailScreenState();
+}
+
+class _BookingDetailScreenState
+    extends ConsumerState<BookingDetailScreen> {
+  Future<void> _handlePayment() async {
+    final request = _buildDummyRequest();
+    final result = await ref
+        .read(paymentViewModelProvider.notifier)
+        .initiatePayment(request);
+
+    if (!mounted) {
+      return;
+    }
+
+    if (result == null) {
+      final state = ref.read(paymentViewModelProvider);
+      if (state is PaymentFailure) {
+        _showSnack(state.message);
+      }
+      return;
+    }
+
+    if (result.paymentUrl.isEmpty) {
+      _showSnack('Missing payment URL. Please try again later.');
+      ref.read(paymentViewModelProvider.notifier).reset();
+      return;
+    }
+
+    final outcome =
+        await Navigator.of(context).push<PaymentWebViewResult>(
+      MaterialPageRoute(
+        builder: (_) => PaymentWebViewScreen(
+          paymentUrl: result.paymentUrl,
+        ),
+      ),
+    );
+
+    if (!mounted) {
+      return;
+    }
+
+    switch (outcome) {
+      case PaymentWebViewResult.success:
+        await _showStatusDialog(
+          title: 'Payment Successful',
+          message: 'Your payment has been completed successfully.',
+        );
+        break;
+      case PaymentWebViewResult.failure:
+        await _showStatusDialog(
+          title: 'Payment Failed',
+          message: 'The payment was not completed. Please try again.',
+          isSuccess: false,
+        );
+        break;
+      case PaymentWebViewResult.cancelled:
+      case null:
+        break;
+    }
+
+    if (mounted) {
+      ref.read(paymentViewModelProvider.notifier).reset();
+    }
+  }
+
+  PaymentInitiationRequest _buildDummyRequest() {
+    final service = widget.service;
+    return PaymentInitiationRequest(
+      amount: 0.01,
+      currency: 'SAR',
+      orderId: service.appointmentId.isNotEmpty
+          ? service.appointmentId
+          : 'demo-order',
+      customerId: 'demo-customer',
+      customerEmail: 'user@example.com',
+      metadata: const PaymentMetadata(
+        appVersion: '1.0.0',
+        platform: 'flutter',
+        locale: 'en-US',
+        deviceId: 'demo-device',
+        userAgent: 'newmotorlube-app',
+      ),
+      appliedCoupon: 'string',
+      discount: 0,
+    );
+  }
+
+  Future<void> _showStatusDialog({
+    required String title,
+    required String message,
+    bool isSuccess = true,
+  }) {
+    return showDialog<void>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Row(
+            children: [
+              Icon(
+                isSuccess ? Icons.check_circle : Icons.error,
+                color: isSuccess ? Colors.green : Colors.red,
+              ),
+              const SizedBox(width: 8),
+              Text(title),
+            ],
+          ),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showSnack(String message) {
+    if (message.isEmpty) {
+      return;
+    }
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(content: Text(message)),
+      );
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final service = widget.service;
     final s = S.of(context);
+    final paymentState = ref.watch(paymentViewModelProvider);
+    final isProcessingPayment = paymentState is PaymentLoading;
     final carCandidate =
         service.carTitle.isNotEmpty ? service.carTitle : service.serviceName;
     final carTitle = _valueOrFallback(
@@ -130,6 +270,28 @@ class BookingDetailScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(height: 24),
+              // ElevatedButton(
+              //   onPressed: isProcessingPayment ? null : _handlePayment,
+              //   child: isProcessingPayment
+              //       ? const SizedBox(
+              //           width: 20,
+              //           height: 20,
+              //           child: CircularProgressIndicator(strokeWidth: 2),
+              //         )
+              //       : const Text('Pay Now'),
+              // ),
+              // const SizedBox(height: 8),
+              // Text(
+              //   'Using demo payment details for testing.',
+              //   textAlign: TextAlign.center,
+              //   style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              //         color: Theme.of(context)
+              //             .colorScheme
+              //             .onSurface
+              //             .withOpacity(0.6),
+              //       ),
+              // ),
             ],
           ),
         ),
