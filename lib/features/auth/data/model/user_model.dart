@@ -1,4 +1,5 @@
 import '../../domain/entity/user_entity.dart';
+import '../../domain/entity/user_type.dart';
 
 class UserModel {
   final String oracleId;
@@ -8,7 +9,7 @@ class UserModel {
   final String mobileNo;
   final String? email;
   final bool isVerified;
-  final int userType;
+  final UserType userType;
 
   UserModel({
     required this.oracleId,
@@ -33,7 +34,7 @@ class UserModel {
     mobileNo: json['mobileNo'] ?? json['mobileNumber'] as String,
     email: json['email'] as String?,
     isVerified: json['isVerified'] as bool? ?? false,
-    userType: json['userType'] as int? ?? 1,
+    userType: UserType.fromValue(json['userType'] as int? ?? 1),
   );
 
   User toEntity() => User(

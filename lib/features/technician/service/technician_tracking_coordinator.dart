@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart' as permissions;
 
+import '../../auth/domain/entity/user_type.dart';
 import '../../auth/presentation/view_model/auth_state.dart';
 import '../../auth/provider/auth_provider.dart';
 import 'technician_location_service.dart';
@@ -58,7 +59,8 @@ class _TechnicianTrackingCoordinatorState
       return;
     }
 
-    if (state is! AuthenticatedState || state.user.userType != 2) {
+    if (state is! AuthenticatedState ||
+        state.user.userType != UserType.technician) {
       if (_trackingActive) {
         await TechnicianLocationService.stopTracking();
         _trackingActive = false;

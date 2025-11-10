@@ -1,6 +1,7 @@
 import '../../../../core/storage/secure_store.dart';
 import '../../domain/entity/auth_session.dart';
 import '../../domain/entity/stored_auth.dart';
+import '../../domain/entity/user_type.dart';
 import '../../domain/repository/i_auth_local_repository.dart';
 
 class AuthLocalRepositoryImpl implements IAuthLocalRepository {
@@ -18,7 +19,7 @@ class AuthLocalRepositoryImpl implements IAuthLocalRepository {
       userName: session.userName,
       userMobileNumber: session.userMobileNumber,
       userEmail: session.userEmail,
-      userType: session.userType,
+      userType: session.userType.value,
     );
   }
 
@@ -30,7 +31,9 @@ class AuthLocalRepositoryImpl implements IAuthLocalRepository {
     final phone = await _secureStore.phoneNumber() ?? '';
     final oracleId = await _secureStore.oracleId() ?? '';
     final typeString = await _secureStore.userType();
-    final userType = int.tryParse(typeString ?? '') ?? 1;
+    final userType = UserType.fromValue(
+      int.tryParse(typeString ?? '') ?? UserType.customer.value,
+    );
     return StoredAuth(
       jwtToken: jwt,
       firebaseToken: fcm,

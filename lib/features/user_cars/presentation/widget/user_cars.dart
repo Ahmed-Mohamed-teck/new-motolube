@@ -48,6 +48,70 @@ class UserCars extends ConsumerWidget {
       }
     }
 
+    if (state is UserCarsLoaded) {
+      final cars = state.cars;
+      if (cars.isEmpty) {
+        return const _EmptyCars();
+      }
+
+      final content = Row(
+        children:
+            cars
+                .map((car) {
+                  final String imageUrl =
+                      car.carImages.isNotEmpty ? car.carImages.first : '';
+                  final String model =
+                      '${car.manufacturer} ${car.modelYear}'.trim();
+                  final String plate = car.englishPlate.join();
+                  final String chassis = car.vinNumber;
+                  final heroTag = 'car-${car.vehicleId}';
+
+                  return GestureDetector(
+                    onTap: () {
+                      navigatorKey.currentState!.pushNamed(
+                        'userCarDetailsScreen',
+                        arguments: CarEntity(
+                          vehicleId: car.vehicleId,
+                          mileage: car.mileage,
+                          arabicPlate: car.arabicPlate,
+                          englishPlate: car.englishPlate,
+                          carModel: car.carModel,
+                          manufacturer: car.manufacturer,
+                          modelYear: car.modelYear,
+                          carImages: car.carImages,
+                          vinNumber: car.vinNumber,
+                        ),
+                      );
+                    },
+                    child: SizedBox(
+                      width: 200,
+                      child: HomeCarOutlinedCard(
+                        imageUrl: imageUrl,
+                        model: model,
+                        plate: plate,
+                        chassis: chassis,
+                        onBook: () {
+                          ref
+                              .read(currentNavBottomIndexProvider.notifier)
+                              .state = 2;
+                        },
+                        heroTag: heroTag,
+                        key: ValueKey(heroTag),
+                      ),
+                    ),
+                  );
+                })
+                .expand((w) => [w, const SizedBox(width: 12)])
+                .toList()
+              ..removeLast(),
+      );
+
+      return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: content,
+      );
+    }
+
     Widget content;
     if (state is UserCarsLoading || state is UserCarsInitial) {
       content = Row(
@@ -58,63 +122,6 @@ class UserCars extends ConsumerWidget {
                 .toList()
               ..removeLast(),
       );
-    } else if (state is UserCarsLoaded) {
-      final cars = state.cars;
-      if (cars.isEmpty) {
-        content = const _EmptyCars();
-      } else {
-        content = Row(
-          children:
-              cars
-                  .map((car) {
-                    final String imageUrl =
-                        car.carImages.isNotEmpty ? car.carImages.first : '';
-                    final String model =
-                        '${car.manufacturer} ${car.modelYear}'.trim();
-                    final String plate = car.englishPlate.join();
-                    final String chassis = car.vinNumber;
-                    final heroTag = 'car-${car.vehicleId}';
-
-                    return GestureDetector(
-                      onTap: () {
-                        navigatorKey.currentState!.pushNamed(
-                          'userCarDetailsScreen',
-                          arguments: CarEntity(
-                            vehicleId: car.vehicleId,
-                            mileage: car.mileage,
-                            arabicPlate: car.arabicPlate,
-                            englishPlate: car.englishPlate,
-                            carModel: car.carModel,
-                            manufacturer: car.manufacturer,
-                            modelYear: car.modelYear,
-                            carImages: car.carImages,
-                            vinNumber: car.vinNumber,
-                          ),
-                        );
-                      },
-                      child: SizedBox(
-                        width: 200,
-                        child: HomeCarOutlinedCard(
-                          imageUrl: imageUrl,
-                          model: model,
-                          plate: plate,
-                          chassis: chassis,
-                          onBook: () {
-                            ref
-                                .read(currentNavBottomIndexProvider.notifier)
-                                .state = 2;
-                          },
-                          heroTag: heroTag,
-                          key: ValueKey(heroTag),
-                        ),
-                      ),
-                    );
-                  })
-                  .expand((w) => [w, const SizedBox(width: 12)])
-                  .toList()
-                ..removeLast(),
-        );
-      }
     } else if (state is UserCarsError) {
       content = Text(
         state.message,
@@ -196,9 +203,44 @@ class _EmptyCars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      appLang.noCarsFound,
-      style: Theme.of(context).textTheme.bodyMedium,
+    final theme = Theme.of(context);
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final width = constraints.maxWidth.isFinite
+            ? constraints.maxWidth
+            : MediaQuery.of(context).size.width;
+        return SizedBox(
+          width: width,
+          child: Card(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+              side: BorderSide(
+                color: theme.colorScheme.outlineVariant.withOpacity(0.3),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.directions_car_outlined,
+                    color: theme.colorScheme.primary,
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      appLang.noCarsFound,
+                      style: theme.textTheme.bodyLarge,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -306,5 +348,3 @@ class EmptyCarsCard extends StatelessWidget {
     );
   }
 }
-
-

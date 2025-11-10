@@ -1,9 +1,11 @@
+import 'user_type.dart';
+
 class StoredAuth {
   final String jwtToken;
   final String firebaseToken;
   final String phoneNumber;
   final String oracleId;
-  final int userType;
+  final UserType userType;
 
   const StoredAuth({
     required this.jwtToken,

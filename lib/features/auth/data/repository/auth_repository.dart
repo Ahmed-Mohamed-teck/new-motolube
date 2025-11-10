@@ -1,6 +1,7 @@
 import '../../domain/entity/otp_info.dart';
 import '../../domain/entity/register_result.dart';
 import '../../domain/entity/user_entity.dart';
+import '../../domain/entity/user_type.dart';
 import '../../domain/entity/verify_otp_result.dart';
 import '../../domain/repository/i_auth_repository.dart';
 import '../data_source/i_auth_remote_data_source.dart';
@@ -37,7 +38,7 @@ class AuthRepositoryImpl implements IAuthRepository {
       mobileNumber: phone,
       firstName: firstName,
       lastName: lastName,
-      userType: 1,
+      userType: UserType.customer,
     );
     final res = await remote.register(req);
     return res.toEntity();

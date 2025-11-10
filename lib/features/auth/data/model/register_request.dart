@@ -1,10 +1,12 @@
+import '../../domain/entity/user_type.dart';
+
 class RegisterRequest {
   final String? email;
   final bool isEmergencyTech;
   final String mobileNumber;
   final String firstName;
   final String lastName;
-  final int userType;
+  final UserType userType;
 
   RegisterRequest({
     this.email,
@@ -21,6 +23,6 @@ class RegisterRequest {
     'mobileNumber': mobileNumber,
     'firstName': firstName,
     'lastName': lastName,
-    'userType': userType,
+    'userType': userType.value,
   };
 }

@@ -64,15 +64,15 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
               ),
               const SizedBox(height: 16),
               TitleWithSubTitle(
-                withSubTitle: true,
+                // withSubTitle: true,
                 title: appLang.ourServices,
-                subTitle: Text(
-                  appLang.more,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                // subTitle: Text(
+                //   appLang.more,
+                //   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                //     color: Theme.of(context).colorScheme.primary,
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                // ),
                 onSubTitleTap: () {
                   Navigator.of(
                     navigatorKey.currentContext!,

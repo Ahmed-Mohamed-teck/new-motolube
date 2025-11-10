@@ -1,3 +1,5 @@
+import 'user_type.dart';
+
 class User {
   final String oracleId;
   final String? firstName;
@@ -6,7 +8,7 @@ class User {
   final String mobileNo;
   final String? email;
   final bool isVerified;
-  final int userType;
+  final UserType userType;
 
   const User({
     required this.oracleId,

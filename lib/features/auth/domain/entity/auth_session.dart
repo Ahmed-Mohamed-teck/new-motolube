@@ -1,3 +1,5 @@
+import 'user_type.dart';
+
 class AuthSession {
   final String jwtToken;
   final String firebaseToken;
@@ -7,7 +9,7 @@ class AuthSession {
   final String userName;
   final String userMobileNumber;
   final String? userEmail;
-  final int userType;
+  final UserType userType;
 
   const AuthSession({
     required this.jwtToken,
