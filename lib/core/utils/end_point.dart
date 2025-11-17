@@ -24,6 +24,17 @@ String getPackagesForVehicleEndPoint(String customerId, String vehicleId) =>
     '$packagesBaseUrl/MotorLubeApp/getPackagesForVehicle/$customerId/$vehicleId/0';
 const String getCustomerAppointmentsEndPoint =
     '$baseUrl/MotorLubeApp/getCustomerAppointment';
+const String getTechnicianAppointmentsEndPoint =
+    '$baseUrl/MotorLubeApp/getUserAppointment';
+const String getBookingStatusesEndPoint =
+    '$baseUrl/MotorLubeApp/getBookingStatus';
+const String updateAppointmentStatusEndPoint =
+    '$baseUrl/MotorLubeApp/updateStatusAppointment';
+const String createServiceRequestBaseEndPoint =
+    '$baseUrl/MotorLubeApp/createSR';
+String getPackagesBySrEndPoint(String srNumber) =>
+    '$baseUrl/MotorLubeApp/getPackagesBySR/${Uri.encodeComponent(srNumber)}';
 const String createAppointmentEndPoint =
     '$baseUrl/MotorLubeApp/createAppointment';
-const String initiatePaymentEndPoint = 'https://interface.taajeer.com:1027/Payments/initiate';
+const String initiatePaymentEndPoint =
+    'https://interface.taajeer.com:1027/Payments/initiate';

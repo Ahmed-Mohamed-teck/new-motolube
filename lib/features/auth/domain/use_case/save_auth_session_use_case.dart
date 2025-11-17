@@ -10,6 +10,7 @@ class SaveAuthSessionUseCase {
     final session = AuthSession(
       jwtToken: result.tokens.jwtToken,
       firebaseToken: result.tokens.firebaseToken,
+      fireBaseId: result.user.fireBaseId,
       tokenType: result.tokens.tokenType,
       expiresIn: result.tokens.expiresIn,
       oracleId: result.user.oracleId,

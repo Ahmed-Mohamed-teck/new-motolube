@@ -3,6 +3,7 @@ import 'user_type.dart';
 class AuthSession {
   final String jwtToken;
   final String firebaseToken;
+  final String fireBaseId;
   final String tokenType;
   final int expiresIn;
   final String oracleId;
@@ -14,6 +15,7 @@ class AuthSession {
   const AuthSession({
     required this.jwtToken,
     required this.firebaseToken,
+    required this.fireBaseId,
     required this.tokenType,
     required this.expiresIn,
     required this.oracleId,

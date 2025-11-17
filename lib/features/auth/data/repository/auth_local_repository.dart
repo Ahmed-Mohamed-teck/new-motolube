@@ -13,6 +13,7 @@ class AuthLocalRepositoryImpl implements IAuthLocalRepository {
     return _secureStore.saveAuth(
       jwtToken: session.jwtToken,
       firebaseToken: session.firebaseToken,
+      fireBaseId: session.fireBaseId,
       tokenType: session.tokenType,
       expiresIn: session.expiresIn,
       oracleId: session.oracleId,
@@ -28,6 +29,7 @@ class AuthLocalRepositoryImpl implements IAuthLocalRepository {
     final jwt = await _secureStore.readToken();
     if (jwt == null) return null;
     final fcm = await _secureStore.readFcmToken() ?? '';
+    final fireBaseId = await _secureStore.fireBaseId() ?? '';
     final phone = await _secureStore.phoneNumber() ?? '';
     final oracleId = await _secureStore.oracleId() ?? '';
     final typeString = await _secureStore.userType();
@@ -37,6 +39,7 @@ class AuthLocalRepositoryImpl implements IAuthLocalRepository {
     return StoredAuth(
       jwtToken: jwt,
       firebaseToken: fcm,
+      fireBaseId: fireBaseId,
       phoneNumber: phone,
       oracleId: oracleId,
       userType: userType,

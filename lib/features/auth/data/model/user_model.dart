@@ -10,6 +10,7 @@ class UserModel {
   final String? email;
   final bool isVerified;
   final UserType userType;
+  final String fireBaseId;
 
   UserModel({
     required this.oracleId,
@@ -20,6 +21,7 @@ class UserModel {
     this.email,
     required this.isVerified,
     required this.userType,
+    this.fireBaseId = '',
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
@@ -35,6 +37,7 @@ class UserModel {
     email: json['email'] as String?,
     isVerified: json['isVerified'] as bool? ?? false,
     userType: UserType.fromValue(json['userType'] as int? ?? 1),
+    fireBaseId: (json['fireBaseId'] ?? json['firebaseId'] ?? '').toString(),
   );
 
   User toEntity() => User(
@@ -46,6 +49,7 @@ class UserModel {
     email: email,
     isVerified: isVerified,
     userType: userType,
+    fireBaseId: fireBaseId,
   );
 }
 

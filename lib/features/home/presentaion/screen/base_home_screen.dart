@@ -17,6 +17,7 @@ import '../../../contact_us/presentation/screen/contact_us_screen.dart';
 import '../../../user_cars/presentation/screen/user_cars_list_screen.dart';
 import '../../../more/presentation/screen/more_screen.dart';
 import '../../../auth/domain/entity/user_type.dart';
+import '../../../technician/presentation/screen/technician_home_screen.dart';
 
 final currentNavBottomIndexProvider = StateProvider<int>((ref) {
   return 0; // Default index
@@ -45,71 +46,71 @@ class _BaseHomeScreenState extends ConsumerState<BaseHomeScreen> {
   @override
   Widget build(BuildContext context) {
     final authState = ref.watch(authViewModelProvider);
-    final UserType userType = authState is AuthenticatedState
-        ? authState.user.userType
-        : UserType.customer;
+    final UserType userType =
+        authState is AuthenticatedState
+            ? authState.user.userType
+            : UserType.customer;
     final bool isCustomer = userType == UserType.customer;
 
-    final screens = isCustomer
-        ? const [
-            CustomerHomeScreen(),
-            UserCarsListScreen(),
-            BookServiceScreen(),
-            ContactUsScreen(),
-            MoreScreen(),
-          ]
-        : [
-            _RoleSpecificHome(userType: userType),
-            const MoreScreen(),
-          ];
+    final screens =
+        isCustomer
+            ? const [
+              CustomerHomeScreen(),
+              UserCarsListScreen(),
+              BookServiceScreen(),
+              ContactUsScreen(),
+              MoreScreen(),
+            ]
+            : [_RoleSpecificHome(userType: userType), const MoreScreen()];
 
-    final items = isCustomer
-        ? [
-            PersistentBottomNavBarItem(
-              icon: const Icon(Icons.home),
-              title: S.of(context).homeNav,
-              activeColorPrimary: AppColors.lightPrimary,
-              inactiveColorPrimary: Colors.grey,
-            ),
-            PersistentBottomNavBarItem(
-              icon: const Icon(Icons.car_repair_sharp),
-              title: S.of(context).myCarsNav,
-              activeColorPrimary: AppColors.lightPrimary,
-              inactiveColorPrimary: Colors.grey,
-            ),
-            PersistentBottomNavBarItem(
-              icon: const Icon(Icons.add_circle_outline),
-              title: S.of(context).maintenanceNav,
-              activeColorPrimary: AppColors.lightPrimary,
-              inactiveColorPrimary: Colors.grey,
-            ),
-            PersistentBottomNavBarItem(
-              icon: const Icon(Icons.phone_in_talk),
-              title: S.of(context).contactUsNav,
-              activeColorPrimary: AppColors.lightPrimary,
-              inactiveColorPrimary: Colors.grey,
-            ),
-            PersistentBottomNavBarItem(
-              icon: const Icon(Icons.more_vert),
-              title: S.of(context).moreNav,
-              activeColorPrimary: AppColors.lightPrimary,
-              inactiveColorPrimary: Colors.grey,
-            ),
-          ]
-        : [
-            PersistentBottomNavBarItem(
-              icon: const Icon(Icons.home),
-              title: S.of(context).homeNav,
-              activeColorPrimary: AppColors.lightPrimary,
-              inactiveColorPrimary: Colors.grey,
-            ),
-            PersistentBottomNavBarItem(
-              icon: const Icon(Icons.more_vert),
-              title: S.of(context).moreNav,
-              activeColorPrimary: AppColors.lightPrimary,
-              inactiveColorPrimary: Colors.grey,
-            ),
-          ];
+    final items =
+        isCustomer
+            ? [
+              PersistentBottomNavBarItem(
+                icon: const Icon(Icons.home),
+                title: S.of(context).homeNav,
+                activeColorPrimary: AppColors.lightPrimary,
+                inactiveColorPrimary: Colors.grey,
+              ),
+              PersistentBottomNavBarItem(
+                icon: const Icon(Icons.car_repair_sharp),
+                title: S.of(context).myCarsNav,
+                activeColorPrimary: AppColors.lightPrimary,
+                inactiveColorPrimary: Colors.grey,
+              ),
+              PersistentBottomNavBarItem(
+                icon: const Icon(Icons.add_circle_outline),
+                title: S.of(context).maintenanceNav,
+                activeColorPrimary: AppColors.lightPrimary,
+                inactiveColorPrimary: Colors.grey,
+              ),
+              PersistentBottomNavBarItem(
+                icon: const Icon(Icons.phone_in_talk),
+                title: S.of(context).contactUsNav,
+                activeColorPrimary: AppColors.lightPrimary,
+                inactiveColorPrimary: Colors.grey,
+              ),
+              PersistentBottomNavBarItem(
+                icon: const Icon(Icons.more_vert),
+                title: S.of(context).moreNav,
+                activeColorPrimary: AppColors.lightPrimary,
+                inactiveColorPrimary: Colors.grey,
+              ),
+            ]
+            : [
+              PersistentBottomNavBarItem(
+                icon: const Icon(Icons.home),
+                title: S.of(context).homeNav,
+                activeColorPrimary: AppColors.lightPrimary,
+                inactiveColorPrimary: Colors.grey,
+              ),
+              PersistentBottomNavBarItem(
+                icon: const Icon(Icons.more_vert),
+                title: S.of(context).moreNav,
+                activeColorPrimary: AppColors.lightPrimary,
+                inactiveColorPrimary: Colors.grey,
+              ),
+            ];
 
     final maxIndex = screens.length - 1;
     if (_tabController.index > maxIndex) {
@@ -151,24 +152,27 @@ class _RoleSpecificHome extends StatelessWidget {
 
   final UserType userType;
 
-  String get _message {
-    switch (userType) {
-      case UserType.customer:
-        return 'Customer user';
-      case UserType.technician:
-        return 'Technician user';
-      case UserType.manager:
-        return 'Manager user';
-      case UserType.creditManager:
-        return 'Credit manager user';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    if (userType == UserType.technician) {
+      return const TechnicianHomeScreen();
+    }
+
+    String message;
+    switch (userType) {
+      case UserType.manager:
+        message = 'Manager user';
+        break;
+      case UserType.creditManager:
+        message = 'Credit manager user';
+        break;
+      default:
+        message = 'Customer user';
+    }
+
     return Center(
       child: Text(
-        _message,
+        message,
         style: Theme.of(context).textTheme.headlineSmall,
         textAlign: TextAlign.center,
       ),

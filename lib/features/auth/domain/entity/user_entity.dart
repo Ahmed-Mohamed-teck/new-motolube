@@ -9,6 +9,7 @@ class User {
   final String? email;
   final bool isVerified;
   final UserType userType;
+  final String fireBaseId;
 
   const User({
     required this.oracleId,
@@ -19,5 +20,6 @@ class User {
     this.email,
     required this.isVerified,
     required this.userType,
+    this.fireBaseId = '',
   });
 }
