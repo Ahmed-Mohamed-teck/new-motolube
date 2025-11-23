@@ -3,16 +3,24 @@ import 'package:newmotorlube/core/utils/extensions/extensions.dart';
 
 class InternalAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final VoidCallback? onBack;
 
-  const InternalAppBar({super.key,required this.title});
+  const InternalAppBar({
+    super.key,
+    required this.title,
+    this.onBack,
+  });
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       centerTitle: true,
       leading: IconButton(
-        icon:  Icon(Icons.arrow_back,color: context.theme.colorScheme.onSurface,),
-        onPressed: () => Navigator.of(context).pop(),
+        icon: Icon(
+          Icons.arrow_back,
+          color: context.theme.colorScheme.onSurface,
+        ),
+        onPressed: onBack ?? () => Navigator.of(context).pop(),
       ),
       title: Text(
         title,

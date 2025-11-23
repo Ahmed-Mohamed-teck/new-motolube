@@ -1,5 +1,4 @@
 const String baseUrl = 'https://interface.taajeer.com:1027/api';
-const String packagesBaseUrl = 'https://interface.taajeer.com:1026/api';
 const String isRegisteredUserEndPoint = '$baseUrl/UserManagement/login';
 const String sendOtpEndPoint = '$baseUrl/UserManagement/sendOtp';
 const String registerEndPoint = '$baseUrl/UserManagement/register';
@@ -21,7 +20,7 @@ const String searchNearbyTechniciansEndPoint =
 const String getTechnicianAvailableSlotsEndPoint =
     '$baseUrl/MotorLubeApp/technician/getAvailableSlot';
 String getPackagesForVehicleEndPoint(String customerId, String vehicleId) =>
-    '$packagesBaseUrl/MotorLubeApp/getPackagesForVehicle/$customerId/$vehicleId/0';
+    '$baseUrl/MotorLubeApp/getPackagesForVehicle/$customerId/$vehicleId/0';
 const String getCustomerAppointmentsEndPoint =
     '$baseUrl/MotorLubeApp/getCustomerAppointment';
 const String getTechnicianAppointmentsEndPoint =

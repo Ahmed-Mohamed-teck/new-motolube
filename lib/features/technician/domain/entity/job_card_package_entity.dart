@@ -4,6 +4,8 @@ class JobCardPackageEntity {
   final String packageNameAr;
   final String packageNameEn;
   final String packageShortName;
+  final String lineId;
+  final String campaignLineId;
   final double linePrice;
   final double totalPrice;
   final double totalTax;
@@ -19,6 +21,8 @@ class JobCardPackageEntity {
     required this.packageNameAr,
     required this.packageNameEn,
     required this.packageShortName,
+    required this.lineId,
+    required this.campaignLineId,
     required this.linePrice,
     required this.totalPrice,
     required this.totalTax,

@@ -7,6 +7,8 @@ class JobCardPackageModel extends JobCardPackageEntity {
     required super.packageNameAr,
     required super.packageNameEn,
     required super.packageShortName,
+    required super.lineId,
+    required super.campaignLineId,
     required super.linePrice,
     required super.totalPrice,
     required super.totalTax,
@@ -24,6 +26,20 @@ class JobCardPackageModel extends JobCardPackageEntity {
     }
 
     String _stringFor(String key) => (json[key] ?? '').toString();
+    String _resolveLineId() {
+      const possibleKeys = [
+        'lineId',
+        'LineId',
+        'srLineId',
+        'srlineid',
+        'packageLineId',
+      ];
+      for (final key in possibleKeys) {
+        final value = (json[key] ?? '').toString();
+        if (value.trim().isNotEmpty) return value;
+      }
+      return '';
+    }
     bool _boolFlag(String key) {
       final raw = (json[key] ?? '').toString().trim().toUpperCase();
       if (raw.isEmpty) return false;
@@ -36,6 +52,8 @@ class JobCardPackageModel extends JobCardPackageEntity {
       packageNameAr: _stringFor('packageNameAr'),
       packageNameEn: _stringFor('packageNameEn'),
       packageShortName: _stringFor('packageShortName'),
+      lineId: _resolveLineId(),
+      campaignLineId: _stringFor('campaignLineId'),
       linePrice: _doubleFor(json['linePrice']),
       totalPrice: _doubleFor(json['totalPrice']),
       totalTax: _doubleFor(json['totalTax']),
@@ -54,6 +72,8 @@ class JobCardPackageModel extends JobCardPackageEntity {
       packageNameAr: packageNameAr,
       packageNameEn: packageNameEn,
       packageShortName: packageShortName,
+      lineId: lineId,
+      campaignLineId: campaignLineId,
       linePrice: linePrice,
       totalPrice: totalPrice,
       totalTax: totalTax,

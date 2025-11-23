@@ -269,7 +269,7 @@ class _TechnicianHomeScreenState extends ConsumerState<TechnicianHomeScreen> {
   Future<void> _openAppointmentDetails(
     TechnicianAppointmentEntity appointment,
   ) async {
-    final updated = await Navigator.of(context).push<bool>(
+    final updated = await Navigator.of(context, rootNavigator: true).push<bool>(
       MaterialPageRoute(
         builder:
             (_) => TechnicianAppointmentDetailsScreen(appointment: appointment),
@@ -285,32 +285,7 @@ class _TechnicianHomeScreenState extends ConsumerState<TechnicianHomeScreen> {
     }
   }
 
-  static Color _statusColor(TechnicianAppointmentEntity appointment) {
-    final raw = appointment.statusColorValue;
-    if (raw != null) {
-      return Color(raw);
-    }
-    final label = appointment.statusLabel.toLowerCase();
-    if (label.contains('complete')) return const Color(0xFF16A34A);
-    if (label.contains('progress')) return const Color(0xFFF97316);
-    if (label.contains('cancel')) return const Color(0xFFDC2626);
-    if (label.contains('expire')) return const Color(0xFF9CA3AF);
-    return AppColors.lightPrimary;
-  }
 
-  static String _timeRangeText(TechnicianAppointmentEntity appointment) {
-    final parts = <String>[];
-    final date = appointment.bookingDate;
-    if (date != null) {
-      parts.add(DateFormat('EEE, dd MMM yyyy').format(date));
-    } else if (appointment.bookingDateText.trim().isNotEmpty) {
-      parts.add(appointment.bookingDateText.trim());
-    }
-    if (appointment.slotTime.trim().isNotEmpty) {
-      parts.add(appointment.slotTime.trim());
-    }
-    return parts.isNotEmpty ? parts.join(' • ') : 'Schedule not set';
-  }
 }
 
 class _AppointmentsListView extends StatelessWidget {

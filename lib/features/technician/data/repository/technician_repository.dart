@@ -1,6 +1,10 @@
 import '../../domain/entity/booking_status.dart';
+import '../../domain/entity/custom_package_category_entity.dart';
+import '../../domain/entity/custom_package_item_entity.dart';
 import '../../domain/entity/job_card_entity.dart';
 import '../../domain/entity/job_card_package_entity.dart';
+import '../../domain/entity/job_card_package_line_entity.dart';
+import '../../domain/entity/operation_result_entity.dart';
 import '../../domain/entity/technician_appointment_entity.dart';
 import '../../domain/entity/technician_slot_entity.dart';
 import '../../domain/entity/technician_summary_entity.dart';
@@ -98,10 +102,127 @@ class TechnicianRepository implements ITechnicianRepository {
   }
 
   @override
+  Future<List<JobCardEntity>> completeServiceRequest({
+    required String srNumber,
+    required String userId,
+  }) async {
+    final models = await _remoteDataSource.completeServiceRequest(
+      srNumber: srNumber,
+      userId: userId,
+    );
+    return models.map((model) => model.toEntity()).toList();
+  }
+
+  @override
   Future<List<JobCardPackageEntity>> getJobCardPackages({
     required String srNumber,
   }) async {
     final models = await _remoteDataSource.getJobCardPackages(
+      srNumber: srNumber,
+    );
+    return models.map((model) => model.toEntity()).toList();
+  }
+
+  @override
+  Future<List<CustomPackageCategoryEntity>> getCustomPackageCategories() async {
+    final models = await _remoteDataSource.getCustomPackageCategories();
+    return models.map((model) => model.toEntity()).toList();
+  }
+
+  @override
+  Future<List<CustomPackageItemEntity>> getCustomPackageItems({
+    required String jobCardNumber,
+    required String categoryId,
+  }) async {
+    final models = await _remoteDataSource.getCustomPackageItems(
+      jobCardNumber: jobCardNumber,
+      categoryId: categoryId,
+    );
+    return models.map((model) => model.toEntity()).toList();
+  }
+
+  @override
+  Future<OperationResultEntity> addCustomPackageItem({
+    required String jobCardNumber,
+    required String lineId,
+    required String categoryId,
+    required String inventoryItemId,
+    required String qty,
+    required String userId,
+  }) {
+    return _remoteDataSource.addItemToCustomPackage(
+      jobCardNumber: jobCardNumber,
+      lineId: lineId,
+      categoryId: categoryId,
+      inventoryItemId: inventoryItemId,
+      qty: qty,
+      userId: userId,
+    );
+  }
+
+  @override
+  Future<OperationResultEntity> deleteCustomPackageItem({
+    required String srLineId,
+  }) {
+    return _remoteDataSource.deleteCustomPackageItem(srLineId: srLineId);
+  }
+
+  @override
+  Future<List<JobCardPackageLineEntity>> getJobCardPackageLines({
+    required String srNumber,
+    String? packageId,
+  }) async {
+    final models = await _remoteDataSource.getJobCardPackageLines(
+      srNumber: srNumber,
+      packageId: packageId,
+    );
+    return models.map((model) => model.toEntity()).toList();
+  }
+
+  @override
+  Future<OperationResultEntity> addPackageToJobCard({
+    required String srNumber,
+    required String packageId,
+    required String userId,
+    String campaignLineId = '',
+  }) {
+    return _remoteDataSource.addPackageToJobCard(
+      srNumber: srNumber,
+      packageId: packageId,
+      userId: userId,
+      campaignLineId: campaignLineId,
+    );
+  }
+
+  @override
+  Future<OperationResultEntity> deletePackageFromJobCard({
+    required String packageLineId,
+    required String userId,
+  }) {
+    return _remoteDataSource.deletePackageFromJobCard(
+      packageLineId: packageLineId,
+      userId: userId,
+    );
+  }
+
+  @override
+  Future<OperationResultEntity> postChecklist({
+    required String srNumber,
+    required String checklistId,
+    required Map<String, dynamic> data,
+  }) {
+    return _remoteDataSource.postChecklist(
+      srNumber: srNumber,
+      checklistId: checklistId,
+      data: data,
+    );
+  }
+
+  @override
+  Future<List<JobCardPackageEntity>> getPackagesOfJobCard({
+    required String srNumber,
+  }) async {
+    final models = await _remoteDataSource.getPackagesOfJobCard(
       srNumber: srNumber,
     );
     return models.map((model) => model.toEntity()).toList();

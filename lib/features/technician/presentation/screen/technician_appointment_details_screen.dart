@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:newmotorlube/core/widget/internal_app_bar.dart';
 
 import '../../../auth/provider/auth_provider.dart';
+import '../../../auth/presentation/view_model/auth_state.dart';
 import '../../domain/entity/booking_status.dart';
 import '../../domain/entity/job_card_package_entity.dart';
 import '../../domain/entity/technician_appointment_entity.dart';
 import '../../domain/utils/job_card_utils.dart';
 import '../../provider/technician_provider.dart';
+import '../view_model/job_card_operation_state.dart';
 import '../view_model/technician_appointment_update_state.dart';
+import 'technician_checklist_screen.dart';
+import 'technician_job_card_management_screen.dart';
 
 class TechnicianAppointmentDetailsScreen extends ConsumerStatefulWidget {
   const TechnicianAppointmentDetailsScreen({
@@ -29,6 +34,7 @@ class _TechnicianAppointmentDetailsScreenState
   late int _initialStatusId;
   bool _hasUpdates = false;
   bool _isCreatingSr = false;
+  bool _isCompletingSr = false;
   int? _pendingStatusId;
   String _srNumber = '';
   String? _selectedPackageId;
@@ -93,6 +99,26 @@ class _TechnicianAppointmentDetailsScreenState
         }
       },
     );
+    ref.listen<JobCardOperationState>(
+      jobCardOperationViewModelProvider,
+      (previous, next) {
+        if (next is JobCardOperationSuccess &&
+            next.operationType == JobCardOperationType.addPackage) {
+          if (!mounted) return;
+          _showSnack(next.message);
+          final sr = _sanitizeSrNumber();
+          if (sr != null && sr.isNotEmpty) {
+            ref.invalidate(technicianJobCardPackagesProvider(sr));
+          }
+          ref.read(jobCardOperationViewModelProvider.notifier).reset();
+        } else if (next is JobCardOperationFailure &&
+            next.operationType == JobCardOperationType.addPackage) {
+          if (!mounted) return;
+          _showSnack(_humanizeMessage(next.message));
+          ref.read(jobCardOperationViewModelProvider.notifier).reset();
+        }
+      },
+    );
 
     final updateState = ref.watch(technicianAppointmentUpdateViewModelProvider);
     final isUpdating = updateState is TechnicianAppointmentUpdateLoading;
@@ -105,7 +131,7 @@ class _TechnicianAppointmentDetailsScreenState
       error: (error, _) => error.toString(),
     );
     final statusesLoading = statusesAsync.isLoading;
-    final isProcessing = isUpdating || _isCreatingSr;
+    final isProcessing = isUpdating || _isCreatingSr || _isCompletingSr;
     final srNumber = _sanitizeSrNumber();
     final hasOpenJobCard = _hasOpenJobCard;
     final shouldFetchPackages = srNumber != null;
@@ -113,6 +139,10 @@ class _TechnicianAppointmentDetailsScreenState
         shouldFetchPackages
             ? ref.watch(technicianJobCardPackagesProvider(srNumber!))
             : null;
+    final jobCardOperationState = ref.watch(jobCardOperationViewModelProvider);
+    final isAddingPackage =
+        jobCardOperationState is JobCardOperationLoading &&
+        jobCardOperationState.operationType == JobCardOperationType.addPackage;
 
     List<TechnicianBookingStatus> orderedStatuses = statuses;
     if (statuses.isNotEmpty) {
@@ -140,11 +170,9 @@ class _TechnicianAppointmentDetailsScreenState
         return false;
       },
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Maintenance Request'),
-          leading: BackButton(
-            onPressed: () => Navigator.of(context).pop(_hasUpdates),
-          ),
+        appBar: InternalAppBar(
+          title: 'Appointment Details',
+          onBack: () => Navigator.of(context).pop(_hasUpdates),
         ),
         body: ListView(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
@@ -162,18 +190,48 @@ class _TechnicianAppointmentDetailsScreenState
               packagesAsync.when(
                 data: (packages) {
                   _syncSelectedPackage(packages);
-                  return _JobCardPackagesSection(
-                    srNumber: srNumber!,
-                    packages: packages,
-                    selectedPackageId: _selectedPackageId,
-                    onPackageChanged: (package) {
-                      if (_selectedPackageId == package.packageId) return;
-                      setState(() => _selectedPackageId = package.packageId);
-                    },
-                    onRetry:
-                        () => ref.invalidate(
-                          technicianJobCardPackagesProvider(srNumber),
+                  return Column(
+                    children: [
+                      _JobCardPackagesSection(
+                        srNumber: srNumber!,
+                        packages: packages,
+                        selectedPackageId: _selectedPackageId,
+                        onPackageChanged: (package) {
+                          if (_selectedPackageId == package.packageId) return;
+                          setState(() => _selectedPackageId = package.packageId);
+                        },
+                        onAddPackage: _canManageJobCard ? _handleAddPackage : null,
+                        isAddInProgress: isAddingPackage,
+                        canAddPackage: _canManageJobCard,
+                        onRetry:
+                            () => ref.invalidate(
+                              technicianJobCardPackagesProvider(srNumber),
+                            ),
+                      ),
+                      if (_canManageJobCard) ...[
+                        const SizedBox(height: 8),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Wrap(
+                            alignment: WrapAlignment.end,
+                            spacing: 8,
+                            runSpacing: 8,
+                            children: [
+                              OutlinedButton.icon(
+                                onPressed: _openChecklistScreen,
+                                icon: const Icon(Icons.checklist),
+                                label: const Text('Vehicle checklist'),
+                              ),
+                              TextButton.icon(
+                                onPressed: _openJobCardManagementScreen,
+                                icon: const Icon(Icons.admin_panel_settings_outlined),
+                                label: const Text('Manage packages'),
+                              ),
+                            ],
+                          ),
                         ),
+                      ],
+                    ],
                   );
                 },
                 loading:
@@ -232,6 +290,96 @@ class _TechnicianAppointmentDetailsScreenState
     );
   }
 
+  Future<void> _handleAddPackage(JobCardPackageEntity package) async {
+    final srNumber = _sanitizeSrNumber();
+    if (srNumber == null || srNumber.isEmpty) {
+      _showSnack('Job card number unavailable.');
+      return;
+    }
+    final userId = await _fetchFirebaseId();
+    if (userId.isEmpty) {
+      _showSnack('Unable to determine technician identifier.');
+      return;
+    }
+    await ref.read(jobCardOperationViewModelProvider.notifier).addPackage(
+      srNumber: srNumber,
+      packageId: package.packageId,
+      userId: userId,
+      campaignLineId: package.campaignLineId,
+    );
+  }
+
+  Future<void> _openJobCardManagementScreen() async {
+    final srNumber = _sanitizeSrNumber();
+    if (srNumber == null || srNumber.isEmpty) {
+      _showSnack('Job card number unavailable.');
+      return;
+    }
+    final userId = await _fetchFirebaseId();
+    if (userId.isEmpty) {
+      _showSnack('Unable to determine technician identifier.');
+      return;
+    }
+    await Navigator.of(context, rootNavigator: true).push(
+      MaterialPageRoute(
+        builder:
+            (context) => TechnicianJobCardManagementScreen(
+              srNumber: srNumber,
+              userId: userId,
+            ),
+      ),
+    );
+  }
+
+  Future<void> _openChecklistScreen() async {
+    final srNumber = _sanitizeSrNumber();
+    if (srNumber == null || srNumber.isEmpty) {
+      _showSnack('Job card number unavailable.');
+      return;
+    }
+    await Navigator.of(context, rootNavigator: true).push(
+      MaterialPageRoute(
+        builder:
+            (context) => TechnicianChecklistScreen(
+              appointment: widget.appointment,
+            ),
+      ),
+    );
+  }
+
+  Future<String> _fetchFirebaseId() async {
+    final authState = ref.read(authViewModelProvider);
+    if (authState is AuthenticatedState) {
+      final firebaseId = authState.user.fireBaseId.trim();
+      if (firebaseId.isNotEmpty) return firebaseId;
+    }
+    final authRepo = ref.read(authLocalRepositoryProvider);
+    final stored = await authRepo.getStoredAuth();
+    if (stored != null && stored.fireBaseId.trim().isNotEmpty) {
+      return stored.fireBaseId.trim();
+    }
+    return '';
+  }
+
+  String _resolveUserId() {
+    final authState = ref.read(authViewModelProvider);
+    if (authState is AuthenticatedState) {
+      final firebaseId = authState.user.fireBaseId.trim();
+      if (firebaseId.isNotEmpty) return firebaseId;
+      final oracleId = authState.user.oracleId.trim();
+      if (oracleId.isNotEmpty) return oracleId;
+    }
+    return '';
+  }
+
+
+  bool get _canManageJobCard {
+    final sr = _sanitizeSrNumber();
+    if (sr == null || sr.isEmpty) return false;
+    final userId = _resolveUserId();
+    return userId.isNotEmpty;
+  }
+
   Future<void> _submit(int statusId) async {
     await ref
         .read(technicianAppointmentUpdateViewModelProvider.notifier)
@@ -270,6 +418,13 @@ class _TechnicianAppointmentDetailsScreenState
       }
     }
 
+    if (_isCompleteJobCardStatus(status)) {
+      final completed = await _completeServiceRequest();
+      if (!completed) {
+        return;
+      }
+    }
+
     _pendingStatusId = statusId;
     await _submit(statusId);
   }
@@ -280,6 +435,15 @@ class _TechnicianAppointmentDetailsScreenState
       return true;
     }
     return status.code == '6';
+  }
+
+  bool _isCompleteJobCardStatus(TechnicianBookingStatus status) {
+    final normalized = _normalizeStatusLabel(status.label);
+    if (normalized.contains('completejobcard') ||
+        normalized.contains('closejobcard')) {
+      return true;
+    }
+    return status.code.trim() == '7';
   }
 
   bool get _hasOpenJobCard {
@@ -432,6 +596,41 @@ class _TechnicianAppointmentDetailsScreenState
     } finally {
       if (mounted) {
         setState(() => _isCreatingSr = false);
+      }
+    }
+  }
+
+  Future<bool> _completeServiceRequest() async {
+    final sr = _sanitizeSrNumber();
+    if (sr == null || sr.isEmpty) {
+      _showSnack('Job card number is missing.');
+      return false;
+    }
+    final userId = await _fetchFirebaseId();
+    if (userId.isEmpty) {
+      _showSnack('User identifier is missing.');
+      return false;
+    }
+    setState(() => _isCompletingSr = true);
+    try {
+      final results = await ref.read(completeServiceRequestUseCaseProvider)(
+        srNumber: sr,
+        userId: userId,
+      );
+      if (results.isNotEmpty) {
+        final normalized = sanitizeJobCardId(results.first.srNumber);
+        if (normalized != null && mounted) {
+          setState(() => _srNumber = normalized);
+        }
+      }
+      _showSnack('Job card completed successfully.');
+      return true;
+    } catch (error) {
+      _showSnack(_humanizeMessage(error.toString()));
+      return false;
+    } finally {
+      if (mounted) {
+        setState(() => _isCompletingSr = false);
       }
     }
   }
@@ -784,6 +983,9 @@ class _JobCardPackagesSection extends StatelessWidget {
     required this.onRetry,
     required this.selectedPackageId,
     required this.onPackageChanged,
+    this.onAddPackage,
+    this.canAddPackage = false,
+    this.isAddInProgress = false,
   });
 
   final String srNumber;
@@ -791,6 +993,9 @@ class _JobCardPackagesSection extends StatelessWidget {
   final VoidCallback onRetry;
   final String? selectedPackageId;
   final ValueChanged<JobCardPackageEntity> onPackageChanged;
+  final ValueChanged<JobCardPackageEntity>? onAddPackage;
+  final bool canAddPackage;
+  final bool isAddInProgress;
 
   @override
   Widget build(BuildContext context) {
@@ -881,11 +1086,32 @@ class _JobCardPackagesSection extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 16),
-              if (selected != null)
+              if (selected != null) ...[
                 _SelectedPackageDetails(
                   package: selected,
                   currencyFormat: currencyFormat,
                 ),
+                if (canAddPackage &&
+                    onAddPackage != null) ...[
+                  const SizedBox(height: 8),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: FilledButton.icon(
+                      onPressed:
+                          isAddInProgress ? null : () => onAddPackage?.call(selected),
+                      icon:
+                          isAddInProgress
+                              ? const SizedBox(
+                                width: 16,
+                                height: 16,
+                                child: CircularProgressIndicator(strokeWidth: 2),
+                              )
+                              : const Icon(Icons.add_circle_outline),
+                      label: const Text('Add package to job card'),
+                    ),
+                  ),
+                ],
+              ],
             ],
           ],
         ),

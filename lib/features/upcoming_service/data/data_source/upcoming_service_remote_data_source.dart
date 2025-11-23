@@ -24,7 +24,7 @@ class UpcomingServiceRemoteDataSourceImpl
           'CustomerId': userId,
           'FromDate': fromDate,
           'ToDate': toDate,
-          'Status_Id': statusId,
+          'Status_Id': '7',
         },
       );
 

@@ -1,0 +1,87 @@
+version: 1
+rules:
+  - id: architecture
+    description: Shared guidance for the Flutter + Riverpod codebase.
+    globs:
+      - "lib/**"
+      - "pubspec.yaml"
+    instructions: |
+      * Keep the feature-first clean architecture that splits code into `data/`, `domain/`, `presentation/`, and `provider/` folders (see `lib/features/auth` or `lib/features/user_cars` for the reference layout). Domain entities such as `lib/features/user_cars/domain/entity/car_entity.dart` stay Flutter-free and all business rules flow through callable use cases.
+      * Everything in the presentation layer is driven by Riverpod 2.6. Use `StateNotifier`/`Notifier` atoms (e.g. `authViewModelProvider` or `servicePackagesViewModelProvider`) and expose transient widget state through those notifiers instead of ad-hoc `setState` mutations.
+      * Register dependencies inside the feature provider file (for example `lib/features/technician/provider/technician_provider.dart`) so widgets can `ref.read` repositories/use cases instead of instantiating them manually.
+      * Observe localization discipline: user-facing strings should come from `generated/l10n.dart` (`S.of(context)` or `localizationProvider`) so the `CurrentLocaleProvider` + `appPrefsWithCache` combination in `lib/core/providers/current_locale_provider.dart` remains the single place that stores/updates the locale.
+      * Reuse shared UI utilities such as `home_app_bar.dart`, skeleton widgets in `book_maintanance_screen.dart`, and theming produced by `core/utils/theme/themes.dart` so the app keeps a consistent look.
+
+  - id: localization
+    description: Translation handling for every feature.
+    globs:
+      - "lib/**"
+      - "assets/l10n/**"
+    instructions: |
+      * Treat internationalization as first-class: any new widget, dialog, snackbar, or error must source its copy from `generated/l10n.dart` (via `S.of(context)` or `ref.watch(localizationProvider)`); do not inline strings unless they are non-user-facing constants.
+      * When you introduce new text, add matching entries to the ARB files in `lib/l10n` and regenerate `l10n.dart` so both Arabic and English stay in sync.
+      * Honor the current locale stored in `CurrentLocaleProvider`—never force a locale or bypass `currentLocaleProvider` when reacting to language changes.
+      * If an API response already provides localized copy (e.g., `infoDescriptionEn`), select the variant that matches `currentLocaleProvider` or convert it to a translated string via ARB to keep UX consistent.
+
+  - id: networking_and_storage
+    description: HTTP layer, tokens, and endpoint handling.
+    globs:
+      - "lib/core/providers/dio_provider.dart"
+      - "lib/core/storage/**"
+      - "lib/core/utils/end_point.dart"
+      - "lib/features/**/data/**"
+    instructions: |
+      * All remote calls must use the shared `dioProvider`/`DioClient` (`lib/core/providers/dio_provider.dart`) so that the interceptor can inject the JWT from `secureStoreProvider` automatically. Never construct a bare `Dio()` inside a widget or repository.
+      * Compose URLs via helpers in `lib/core/utils/end_point.dart`; if you add a new backend endpoint, declare it there and keep every path relative to `baseUrl`.
+      * Remote data sources are responsible for normalizing backend payloads into strongly typed models. Follow patterns like `_extractPackages` in `book_service_remote_data_source.dart` or the list parsing inside `user_car_remote_data_source.dart` so repositories always return domain entities.
+      * When an API requires the authenticated user, pull IDs/tokens from the relevant repository or use case (e.g. `UserCarsRemoteDataSourceImpl` reads the oracle id from `authLocalRepositoryProvider`). Never access `SecureStore` directly from UI code.
+      * Convert transport errors into domain-specific exceptions (`ServicePackagesException`, `AuthException`, etc.) and allow view models to translate those exceptions into user-friendly copy.
+
+  - id: authentication
+    description: OTP/login flow and persisted auth state.
+    globs:
+      - "lib/features/auth/**"
+    instructions: |
+      * `AuthRemoteDataSourceImpl` owns every HTTP call related to registration, OTP validation, and user info (`lib/features/auth/data/data_source/auth_remote_data_source.dart`). Extend it when the API surface grows and keep error mapping close to the transport layer.
+      * Persist/clear sessions through `SaveAuthSessionUseCase` and `AuthLocalRepositoryImpl`, which write to `SecureStore`. That keeps the interceptor and `TechnicianLocationService` in sync with the authenticated identity.
+      * Expand `AuthViewModel` (`lib/features/auth/presentation/view_model/auth_view_model.dart`) and the corresponding `AuthState` classes instead of introducing unrelated providers; screens such as `customer_home_screen.dart` and `more_screen.dart` listen to that single source of truth.
+
+  - id: user_cars
+    description: Managing cars, brands, and manufacturer data.
+    globs:
+      - "lib/features/user_cars/**"
+    instructions: |
+      * Domain objects live under `lib/features/user_cars/domain/entity` (`CarEntity`, `ManufactureEntity`, `CarBrandEntity`). Keep them serializable and immutable; all JSON mapping belongs to `CarModel`/`ManufactureModel`/`CarBrandModel` in the data layer.
+      * `UserCarsRemoteDataSourceImpl` already handles deriving the `oracleId` from stored auth when a `customerId` is optional. Follow that pattern for new endpoints so repository consumers never worry about auth fallbacks.
+      * Every mutation/read path should be funneled through a use case declared in `lib/features/user_cars/domain/use_case`. Wire it in `user_cars_provider.dart`, then expose presentation state through dedicated `StateNotifier`s like `UserCarsViewModel` or `AddUserCarViewModel`.
+      * UI screens (see `user_cars_list_screen.dart` or `add_new_car_screen.dart`) react to sealed states defined in `presentation/view_model/*.dart`. Extend those state classes when you introduce new flows (empty, validation errors, etc.) instead of mixing booleans or nullable fields.
+
+  - id: book_service
+    description: Booking and appointment creation UX.
+    globs:
+      - "lib/features/book_service/**"
+    instructions: |
+      * `BookServiceRemoteDataSource` + `BookServiceRepository` own all booking-network concerns, including package retrieval and appointment creation. Keep payload construction inside repositories/use cases so widgets only pass strongly typed arguments.
+      * `BookServiceScreen` coordinates multiple providers: `user_cars_provider.dart` for car selection, `servicePackagesViewModelProvider` for package discovery, `technician_provider.dart` for technician slots, and `auth_provider.dart` for user identity. When adding steps to the horizontal flow, route data through those existing providers to keep UI rebuilds predictable.
+      * Maintain skeleton loaders (`_CarStepSkeleton` / `_ServicePackageSkeleton`) and gracefully handle empty states by emitting `ServicePackagesEmpty` or tailored error messages from `ServicePackagesViewModel`.
+      * When constructing appointment payloads, reuse `CreateAppointmentUseCase` so request/response validation stays centralized and errors can be surfaced consistently via `ServicePackagesState` or a dedicated notifier.
+
+  - id: technician_feature
+    description: Technician search, appointments, job cards, and package customization.
+    globs:
+      - "lib/features/technician/**"
+    instructions: |
+      * All technician dependencies are declared in `lib/features/technician/provider/technician_provider.dart`. Add new remote calls by extending `ITechnicianRemoteDataSource`, implementing them in `technician_remote_data_source.dart`, bubbling them through `ITechnicianRepository`, and exposing a matching use case/provider.
+      * Job-card mutations are orchestrated via `JobCardOperationViewModel` and the `JobCardOperationState`/`JobCardOperationType` sealed classes. When a new operation type is needed, add it there so listeners like `TechnicianCustomPackageScreen` can react uniformly (show loading indicators, success banners, etc.).
+      * Reuse helpers such as `sanitizeJobCardId`/`findJobCardId` in `lib/features/technician/domain/utils/job_card_utils.dart` instead of duplicating parsing logic, and keep line identifiers in sync with server responses by following the `_linesRequest` caching key pattern.
+      * Screens such as `technician_custom_package_screen.dart` or `technician_appointment_details_screen.dart` should never call repositories directly—drive everything from providers so test doubles can be injected and the views remain declarative.
+
+  - id: technician_tracking
+    description: Background technician location updates.
+    globs:
+      - "lib/features/technician/service/**"
+      - "lib/main.dart"
+    instructions: |
+      * `TechnicianTrackingCoordinator` is the only component responsible for starting/stopping location tracking. If you need to tweak background behavior, do it there so every screen automatically inherits the change through the `MaterialApp.builder`.
+      * Permission flows rely on `Geolocator` and `permission_handler` (`_ensureLocationPermission` / `_ensureNotificationPermission`). Update both the dialog copy and localization keys when adjusting the UX, and keep any new prompts non-blocking so sign-out logic can still stop tracking.
+      * `TechnicianLocationService` depends on the authenticated technician’s oracle id and JWT; read those from the active `AuthState` rather than hitting storage directly so the coordinator can react to state changes (sign-in, sign-out, technician vs. customer) in real time.
