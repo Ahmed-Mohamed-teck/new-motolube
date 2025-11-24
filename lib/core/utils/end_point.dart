@@ -36,4 +36,4 @@ String getPackagesBySrEndPoint(String srNumber) =>
 const String createAppointmentEndPoint =
     '$baseUrl/MotorLubeApp/createAppointment';
 const String initiatePaymentEndPoint =
-    'https://interface.taajeer.com:1027/Payments/initiate';
+    'https://interface.taajeer.com:1027/api/Payments/initiate';

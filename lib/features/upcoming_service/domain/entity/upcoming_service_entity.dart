@@ -11,6 +11,10 @@ class UpcomingServiceEntity {
   final String packageTitle;
   final String branchLabel;
   final String technicianLabel;
+  final String srNumber;
+  final double srTotal;
+  final String couponNumber;
+  final double discount;
 
   const UpcomingServiceEntity({
     required this.appointmentId,
@@ -25,6 +29,10 @@ class UpcomingServiceEntity {
     this.packageTitle = '',
     this.branchLabel = '',
     this.technicianLabel = '',
+    this.srNumber = '',
+    this.srTotal = 0,
+    this.couponNumber = '',
+    this.discount = 0,
   });
 
   bool get hasSchedule => appointmentDate != null || appointmentDateText.isNotEmpty;

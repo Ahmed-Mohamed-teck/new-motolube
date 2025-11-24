@@ -4,9 +4,14 @@ import 'package:webview_flutter/webview_flutter.dart';
 enum PaymentWebViewResult { success, failure, cancelled }
 
 class PaymentWebViewScreen extends StatefulWidget {
-  const PaymentWebViewScreen({super.key, required this.paymentUrl});
+  const PaymentWebViewScreen({
+    super.key,
+    required this.paymentUrl,
+    this.bearerToken,
+  });
 
   final String paymentUrl;
+  final String? bearerToken;
 
   @override
   State<PaymentWebViewScreen> createState() => _PaymentWebViewScreenState();
@@ -21,6 +26,12 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
   @override
   void initState() {
     super.initState();
+    final headers = <String, String>{};
+    final token = widget.bearerToken?.trim();
+    if (token != null && token.isNotEmpty) {
+      headers['Authorization'] = 'Bearer $token';
+    }
+
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setBackgroundColor(const Color(0xFFF5F5F5))
@@ -41,7 +52,7 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
           },
         ),
       )
-      ..loadRequest(Uri.parse(widget.paymentUrl));
+      ..loadRequest(Uri.parse(widget.paymentUrl), headers: headers);
   }
 
   NavigationDecision _handleNavigation(String url) {

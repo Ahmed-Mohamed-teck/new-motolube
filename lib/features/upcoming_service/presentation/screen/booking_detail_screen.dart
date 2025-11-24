@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 
 import '../../../../core/widget/internal_app_bar.dart';
 import '../../../../generated/l10n.dart';
+import '../../../auth/presentation/view_model/auth_state.dart';
+import '../../../auth/provider/auth_provider.dart';
 import '../../../payment/domain/entity/payment_initiation_request.dart';
 import '../../../payment/presentation/screen/payment_webview_screen.dart';
 import '../../../payment/presentation/state/payment_state.dart';
@@ -23,7 +25,7 @@ class BookingDetailScreen extends ConsumerStatefulWidget {
 class _BookingDetailScreenState
     extends ConsumerState<BookingDetailScreen> {
   Future<void> _handlePayment() async {
-    final request = _buildDummyRequest();
+    final request = _buildPaymentRequest();
     final result = await ref
         .read(paymentViewModelProvider.notifier)
         .initiatePayment(request);
@@ -46,11 +48,19 @@ class _BookingDetailScreenState
       return;
     }
 
+    final storedAuth = await ref
+        .read(authLocalRepositoryProvider)
+        .getStoredAuth();
+    final bearerToken = storedAuth?.jwtToken.trim();
+
     final outcome =
         await Navigator.of(context).push<PaymentWebViewResult>(
       MaterialPageRoute(
         builder: (_) => PaymentWebViewScreen(
           paymentUrl: result.paymentUrl,
+          bearerToken: bearerToken != null && bearerToken.isNotEmpty
+              ? bearerToken
+              : null,
         ),
       ),
     );
@@ -83,26 +93,47 @@ class _BookingDetailScreenState
     }
   }
 
-  PaymentInitiationRequest _buildDummyRequest() {
+  PaymentInitiationRequest _buildPaymentRequest() {
     final service = widget.service;
+    final srNumber = service.srNumber.trim();
+    final orderId =
+        srNumber.isNotEmpty
+            ? srNumber
+            : service.appointmentId.isNotEmpty
+            ? service.appointmentId
+            : 'order-${DateTime.now().millisecondsSinceEpoch}';
+
+    final amount = service.srTotal > 0 ? service.srTotal : 0;
+    final appliedCoupon = service.couponNumber.trim();
+
     return PaymentInitiationRequest(
-      amount: 0.01,
+      amount: amount.toDouble(),
       currency: 'SAR',
-      orderId: service.appointmentId.isNotEmpty
-          ? service.appointmentId
-          : 'demo-order',
-      customerId: 'demo-customer',
-      customerEmail: 'user@example.com',
+      orderId: orderId,
+      customerId:
+          service.appointmentId.isNotEmpty ? service.appointmentId : orderId,
+      customerEmail: _resolveCustomerEmail(),
       metadata: const PaymentMetadata(
         appVersion: '1.0.0',
         platform: 'flutter',
         locale: 'en-US',
-        deviceId: 'demo-device',
+        deviceId: 'mobile-device',
         userAgent: 'newmotorlube-app',
       ),
-      appliedCoupon: 'string',
-      discount: 0,
+      appliedCoupon: appliedCoupon.isNotEmpty ? appliedCoupon : null,
+      discount: service.discount,
     );
+  }
+
+  String _resolveCustomerEmail() {
+    final authState = ref.read(authViewModelProvider);
+    if (authState is AuthenticatedState) {
+      final email = authState.user.email?.trim();
+      if (email != null && email.isNotEmpty) {
+        return email;
+      }
+    }
+    return 'customer@example.com';
   }
 
   Future<void> _showStatusDialog({
@@ -271,27 +302,16 @@ class _BookingDetailScreenState
                 ),
               ),
               const SizedBox(height: 24),
-              // ElevatedButton(
-              //   onPressed: isProcessingPayment ? null : _handlePayment,
-              //   child: isProcessingPayment
-              //       ? const SizedBox(
-              //           width: 20,
-              //           height: 20,
-              //           child: CircularProgressIndicator(strokeWidth: 2),
-              //         )
-              //       : const Text('Pay Now'),
-              // ),
-              // const SizedBox(height: 8),
-              // Text(
-              //   'Using demo payment details for testing.',
-              //   textAlign: TextAlign.center,
-              //   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              //         color: Theme.of(context)
-              //             .colorScheme
-              //             .onSurface
-              //             .withOpacity(0.6),
-              //       ),
-              // ),
+              ElevatedButton(
+                onPressed: isProcessingPayment ? null : _handlePayment,
+                child: isProcessingPayment
+                    ? const SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Text('Pay Now'),
+              ),
             ],
           ),
         ),

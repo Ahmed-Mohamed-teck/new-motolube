@@ -14,6 +14,10 @@ class UpcomingServiceModel extends UpcomingServiceEntity {
     super.packageTitle,
     super.branchLabel,
     super.technicianLabel,
+    super.srNumber,
+    super.srTotal,
+    super.couponNumber,
+    super.discount,
   });
 
   factory UpcomingServiceModel.fromJson(Map<String, dynamic> json) {
@@ -44,6 +48,19 @@ class UpcomingServiceModel extends UpcomingServiceEntity {
 
     final technician = (json['tech_name_en'] ?? '').toString();
 
+    final srNumber = _stringFor(json, const [
+      'sr_number',
+      'srNumber',
+      'srnumber',
+      'job_card_number',
+      'jobCardNumber',
+    ]);
+
+    final srTotal = _doubleFor(json['sr_total'] ?? json['srTotal']);
+
+    final coupon = _stringFor(json, const ['coupon', 'coupon_number', 'couponNumber']);
+    final discount = _doubleFor(json['discount']);
+
     return UpcomingServiceModel(
       appointmentId: appointmentId,
       serviceName: serviceName,
@@ -57,6 +74,10 @@ class UpcomingServiceModel extends UpcomingServiceEntity {
       packageTitle: package.isEmpty ? serviceName : package,
       branchLabel: location,
       technicianLabel: technician,
+      srNumber: srNumber,
+      srTotal: srTotal,
+      couponNumber: coupon,
+      discount: discount,
     );
   }
 
@@ -74,6 +95,27 @@ class UpcomingServiceModel extends UpcomingServiceEntity {
       packageTitle: entity.packageTitle,
       branchLabel: entity.branchLabel,
       technicianLabel: entity.technicianLabel,
+      srNumber: entity.srNumber,
+      srTotal: entity.srTotal,
+      couponNumber: entity.couponNumber,
+      discount: entity.discount,
     );
   }
+}
+
+String _stringFor(Map<String, dynamic> json, List<String> keys) {
+  for (final key in keys) {
+    if (!json.containsKey(key)) continue;
+    final value = json[key];
+    if (value == null) continue;
+    final text = value.toString().trim();
+    if (text.isNotEmpty) return text;
+  }
+  return '';
+}
+
+double _doubleFor(dynamic value) {
+  if (value == null) return 0;
+  if (value is num) return value.toDouble();
+  return double.tryParse(value.toString()) ?? 0;
 }
