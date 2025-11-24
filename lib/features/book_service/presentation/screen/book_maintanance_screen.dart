@@ -396,6 +396,19 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
   static const int _maxTechnicianResults = 20;
   static const double _searchRadiusKm = 25;
 
+  @override
+  void initState() {
+    super.initState();
+
+    final preselected = ref.read(preselectedBookServiceCarProvider);
+    if (preselected != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _applyPreselectedCar(preselected);
+        ref.read(preselectedBookServiceCarProvider.notifier).state = null;
+      });
+    }
+  }
+
   // Cars are now provided by userCarsViewModelProvider
 
   List<Widget> get _stepContents => [
@@ -496,6 +509,24 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
       _selectedSlot = null;
       _selectedSlotDate = DateTime.now();
     });
+  }
+
+  void _applyPreselectedCar(CarEntity car) {
+    ref.read(servicePackagesViewModelProvider.notifier).reset();
+    ref.read(technicianSearchViewModelProvider.notifier).reset();
+    ref.read(technicianSlotsViewModelProvider.notifier).reset();
+    setState(() {
+      _selectedCarEntity = car;
+      _selectedCar = null; // Sync with index once cars load.
+      _selectedService = null;
+      _selectedPackage = null;
+      _selectedLocation = null;
+      _selectedTechnician = null;
+      _selectedSlot = null;
+      _selectedSlotDate = DateTime.now();
+      _currentStep = 1; // Jump to "Choose Package".
+    });
+    _fetchPackagesForSelectedCar();
   }
 
   void _handleLocationSelection(LatLng latlng) {
@@ -775,6 +806,25 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
     );
   }
 
+  void _syncSelectedCarSelection(List<CarEntity> cars) {
+    final selectedCar = _selectedCarEntity;
+    if (selectedCar == null) {
+      return;
+    }
+    final matchIndex =
+        cars.indexWhere((car) => car.vehicleId == selectedCar.vehicleId);
+    if (matchIndex != -1 && _selectedCar != matchIndex) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) {
+          return;
+        }
+        setState(() {
+          _selectedCar = matchIndex;
+        });
+      });
+    }
+  }
+
   Widget _buildCarStep() {
     // Use the shared user cars ViewModel
     return Consumer(
@@ -804,6 +854,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
           if (cars.isEmpty) {
             return const Center(child: Text('No cars found'));
           }
+          _syncSelectedCarSelection(cars);
           return ListView.separated(
             itemCount: cars.length,
             separatorBuilder: (_, __) => const SizedBox(height: 12),
@@ -1446,6 +1497,16 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<CarEntity?>(
+      preselectedBookServiceCarProvider,
+      (previous, next) {
+        if (next != null) {
+          _applyPreselectedCar(next);
+          ref.read(preselectedBookServiceCarProvider.notifier).state = null;
+        }
+      },
+    );
+
     final steps = _stepContents;
     final l10n = S.of(context);
     final stepLabels = <String>[

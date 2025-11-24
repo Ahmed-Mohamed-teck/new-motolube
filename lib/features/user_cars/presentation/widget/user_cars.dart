@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:newmotorlube/core/providers/global_lang_provider.dart';
 import 'package:newmotorlube/features/auth/provider/auth_provider.dart';
 import 'package:newmotorlube/features/auth/presentation/view_model/auth_state.dart';
+import 'package:newmotorlube/features/book_service/provider/book_service_provider.dart';
 import 'package:newmotorlube/features/home/presentaion/screen/base_home_screen.dart';
 import 'package:newmotorlube/features/user_cars/presentation/widget/user_car_home_item_card.dart';
 import 'package:newmotorlube/main.dart';
@@ -91,6 +92,9 @@ class UserCars extends ConsumerWidget {
                         plate: plate,
                         chassis: chassis,
                         onBook: () {
+                          ref
+                              .read(preselectedBookServiceCarProvider.notifier)
+                              .state = car;
                           ref
                               .read(currentNavBottomIndexProvider.notifier)
                               .state = 2;

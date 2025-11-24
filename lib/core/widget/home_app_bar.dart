@@ -41,6 +41,7 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
     return AppBar(
       centerTitle: true,
+      leadingWidth: 160,
       title: Text(
         appBarTitle,
         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
@@ -59,25 +60,37 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
           },
         ),
       ],
-      leading: SizedBox(
-        width: 100,
-        child: Row(
-          children: [
-            IconButton(
-              icon: const Icon(Icons.person_outline, color: Colors.black),
-              onPressed: () {
-                navigatorKey.currentState?.pushNamed(
-                  authState is AuthenticatedState
-                      ? 'profileScreen'
-                      : 'loginScreen',
-                );
-              },
-            ),
-            const SizedBox(width: 8),
-            // Text("hello \n Ahmed >" ,style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            //   color: Theme.of(context).colorScheme.onSurface,
-            // ),),
-          ],
+      leading: InkWell(
+        onTap: () {
+          navigatorKey.currentState?.pushNamed(
+            authState is AuthenticatedState
+                ? 'profileScreen'
+                : 'loginScreen',
+          );
+        },
+        borderRadius: BorderRadius.circular(32),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.person_outline,
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+              const SizedBox(width: 8),
+              Flexible(
+                child: Text(
+                  _resolveProfileLabel(authState),
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -85,4 +98,32 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
+  String _resolveProfileLabel(AuthState authState) {
+    if (authState is! AuthenticatedState) {
+      return appLang.login;
+    }
+
+    final user = authState.user;
+    final name = user.name?.trim();
+    if (name != null && name.isNotEmpty) {
+      final parts = name.split(RegExp(r'\s+'));
+      if (parts.isNotEmpty) {
+        return parts.first;
+      }
+      return name;
+    }
+
+    final firstName = user.firstName?.trim();
+    if (firstName != null && firstName.isNotEmpty) {
+      return firstName;
+    }
+
+    final lastName = user.lastName?.trim();
+    if (lastName != null && lastName.isNotEmpty) {
+      return lastName;
+    }
+
+    return user.mobileNo;
+  }
 }

@@ -9,6 +9,7 @@ import '../domain/use_case/create_appointment_use_case.dart';
 import '../domain/use_case/get_packages_for_vehicle_use_case.dart';
 import '../presentation/view_model/service_packages_state.dart';
 import '../presentation/view_model/service_packages_view_model.dart';
+import '../../user_cars/domain/entity/car_entity.dart';
 
 final bookServiceRemoteDataSourceProvider =
     Provider<IBookServiceRemoteDataSource>((ref) {
@@ -40,4 +41,10 @@ final servicePackagesViewModelProvider = StateNotifierProvider.autoDispose<
   return ServicePackagesViewModel(
     ref.read(getPackagesForVehicleUseCaseProvider),
   );
+});
+
+/// Allows other screens (e.g. home) to preselect a car and jump straight
+/// into the booking flow on the maintenance tab.
+final preselectedBookServiceCarProvider = StateProvider<CarEntity?>((ref) {
+  return null;
 });
