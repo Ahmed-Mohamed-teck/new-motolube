@@ -726,30 +726,36 @@ class _TechnicianAppointmentDetailsScreenState
             ? Colors.grey.shade300
             : color.withOpacity(0.45);
 
-    return ChoiceChip(
-      label: Text(
-        status.label.isNotEmpty ? status.label : 'Status ${status.code}',
+    return IgnorePointer(
+      ignoring: !enabled,
+      child: ChoiceChip(
+        label: Text(
+          status.label.isNotEmpty ? status.label : 'Status ${status.code}',
+        ),
+        selected: isSelected,
+        onSelected: (_) {
+          if (!enabled) return;
+          onTap();
+        },
+        selectedColor: color.withOpacity(0.2),
+        backgroundColor: background,
+        side: BorderSide(color: borderColor),
+        labelStyle: TextStyle(
+          color:
+              isSelected
+                  ? color
+                  : isPast
+                  ? Colors.grey.shade500
+                  : Colors.grey.shade700,
+          fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
+        ),
+        avatar:
+            isPast
+                ? const Icon(Icons.check_circle, size: 16, color: Colors.green)
+                : isCurrent
+                ? Icon(Icons.flag, size: 16, color: color)
+                : null,
       ),
-      selected: isSelected,
-      onSelected: enabled ? (_) => onTap() : null,
-      selectedColor: color.withOpacity(0.2),
-      backgroundColor: background,
-      side: BorderSide(color: borderColor),
-      labelStyle: TextStyle(
-        color:
-            isSelected
-                ? color
-                : isPast
-                ? Colors.grey.shade500
-                : Colors.grey.shade700,
-        fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
-      ),
-      avatar:
-          isPast
-              ? const Icon(Icons.check_circle, size: 16, color: Colors.green)
-              : isCurrent
-              ? Icon(Icons.flag, size: 16, color: color)
-              : null,
     );
   }
 }
@@ -1060,6 +1066,7 @@ class _JobCardPackagesSection extends StatelessWidget {
             else ...[
               DropdownButtonFormField<String>(
                 value: selected?.packageId ?? packages.first.packageId,
+                isExpanded: true,
                 decoration: const InputDecoration(
                   labelText: 'Select package',
                   border: OutlineInputBorder(),
@@ -1073,6 +1080,7 @@ class _JobCardPackagesSection extends StatelessWidget {
                               pkg.displayName.isNotEmpty
                                   ? pkg.displayName
                                   : 'Package ${pkg.packageCode}',
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
                         )
@@ -1188,23 +1196,7 @@ class _SelectedPackageDetails extends StatelessWidget {
           'Line price',
           currencyFormat.format(package.linePrice),
         ),
-        _PackageDetailRow(
-          'Total price',
-          currencyFormat.format(package.totalPrice),
-        ),
-        _PackageDetailRow('Total tax', currencyFormat.format(package.totalTax)),
-        _PackageDetailRow(
-          'Total discount',
-          package.totalDiscount > 0
-              ? '- ${currencyFormat.format(package.totalDiscount)}'
-              : '0.00',
-        ),
-        _PackageDetailRow(
-          'List price',
-          currencyFormat.format(package.totalListPrice),
-        ),
-        if (package.packageShortName.isNotEmpty)
-          _PackageDetailRow('Short name', package.packageShortName),
+        
       ],
     );
   }

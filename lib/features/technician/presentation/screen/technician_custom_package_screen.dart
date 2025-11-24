@@ -34,7 +34,7 @@ class _TechnicianCustomPackageScreenState
   bool _isResolvingLineId = false;
   String? _lineIdError;
   final TextEditingController _qtyController = TextEditingController(text: '1');
-  final TextEditingController _srLineIdController = TextEditingController();
+  String? _deletingLineId;
 
   @override
   void initState() {
@@ -52,7 +52,6 @@ class _TechnicianCustomPackageScreenState
   @override
   void dispose() {
     _qtyController.dispose();
-    _srLineIdController.dispose();
     super.dispose();
   }
 
@@ -115,6 +114,9 @@ class _TechnicianCustomPackageScreenState
             onRetry: () => ref.invalidate(
               jobCardPackageLinesProvider(request),
             ),
+            onDeleteLine: _onDeleteLine,
+            isDeleteLoading: isDeleteLoading,
+            deletingLineId: _deletingLineId,
           ),
           const SizedBox(height: 16),
           Text(
@@ -198,40 +200,6 @@ class _TechnicianCustomPackageScreenState
                 ),
               ),
             ),
-          const SizedBox(height: 32),
-          Text(
-            'Delete items',
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            'Enter the SR line ID for the item you want to remove.',
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: Colors.grey.shade600,
-            ),
-          ),
-          const SizedBox(height: 8),
-          TextFormField(
-            controller: _srLineIdController,
-            decoration: const InputDecoration(
-              labelText: 'SR Line ID',
-              border: OutlineInputBorder(),
-            ),
-          ),
-          const SizedBox(height: 16),
-          OutlinedButton.icon(
-            onPressed: isDeleteLoading ? null : _onDeleteItem,
-            icon: isDeleteLoading
-                ? const SizedBox(
-                    width: 16,
-                    height: 16,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  )
-                : const Icon(Icons.delete_outline),
-            label: const Text('Delete item'),
-          ),
         ],
       ),
     );
@@ -431,12 +399,43 @@ class _TechnicianCustomPackageScreenState
         );
   }
 
-  Future<void> _onDeleteItem() async {
-    final srLineId = _srLineIdController.text.trim();
-    if (srLineId.isEmpty) {
-      _showSnack('Enter the SR line ID to delete.');
+  Future<void> _onDeleteLine(JobCardPackageLineEntity line) async {
+    if (_deletingLineId != null) {
+      _showSnack('Please wait for the current delete action to finish.');
       return;
     }
+    final srLineId = line.srLineId.trim().isNotEmpty
+        ? line.srLineId.trim()
+        : line.lineId.trim().isNotEmpty
+            ? line.lineId.trim()
+            : line.packageLineId.trim();
+    if (srLineId.isEmpty) {
+      _showSnack('Line identifier unavailable for this item.');
+      return;
+    }
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Remove item'),
+          content: Text(
+            'Delete "${line.itemDescription.isNotEmpty ? line.itemDescription : line.itemCode}" from this package?',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('Cancel'),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text('Delete'),
+            ),
+          ],
+        );
+      },
+    );
+    if (confirmed != true) return;
+    setState(() => _deletingLineId = srLineId);
     FocusScope.of(context).unfocus();
     await ref
         .read(jobCardOperationViewModelProvider.notifier)
@@ -457,7 +456,7 @@ class _TechnicianCustomPackageScreenState
         _qtyController.text = '1';
       });
     } else if (state.operationType == JobCardOperationType.deleteCustomItem) {
-      _srLineIdController.clear();
+      setState(() => _deletingLineId = null);
     }
     ref.invalidate(
       technicianJobCardPackagesProvider(widget.jobCardNumber),
@@ -470,6 +469,7 @@ class _TechnicianCustomPackageScreenState
     ref
         .read(jobCardOperationViewModelProvider.notifier)
         .reset();
+    setState(() => _deletingLineId = null);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(state.message)),
     );
@@ -589,10 +589,16 @@ class _PackageLinesSection extends StatelessWidget {
   const _PackageLinesSection({
     required this.linesAsync,
     required this.onRetry,
+    required this.onDeleteLine,
+    required this.isDeleteLoading,
+    required this.deletingLineId,
   });
 
   final AsyncValue<List<JobCardPackageLineEntity>> linesAsync;
   final VoidCallback onRetry;
+  final Future<void> Function(JobCardPackageLineEntity) onDeleteLine;
+  final bool isDeleteLoading;
+  final String? deletingLineId;
 
   @override
   Widget build(BuildContext context) {
@@ -633,31 +639,69 @@ class _PackageLinesSection extends StatelessWidget {
                   children:
                       lines
                           .map(
-                            (line) => ListTile(
-                              contentPadding: EdgeInsets.zero,
-                              title: Text(
-                                line.itemCode.isNotEmpty
-                                    ? line.itemCode
-                                    : 'Line ${line.lineNumber}',
-                              ),
-                              subtitle: Text(line.itemDescription),
-                              trailing: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('Qty: ${line.quantity}'),
-                                  if (line.lineId.isNotEmpty)
-                                    Text(
-                                      'Line ID: ${line.lineId}',
-                                      style: Theme.of(
-                                        context,
-                                      ).textTheme.bodySmall?.copyWith(
-                                        color: Colors.grey.shade600,
+                            (line) {
+                              final srLine =
+                                  line.srLineId.trim().isNotEmpty
+                                      ? line.srLineId.trim()
+                                      : line.lineId.trim().isNotEmpty
+                                          ? line.lineId.trim()
+                                          : line.packageLineId.trim();
+                              final isDeleting =
+                                  isDeleteLoading &&
+                                  deletingLineId != null &&
+                                  srLine == deletingLineId;
+                              return ListTile(
+                                contentPadding: EdgeInsets.zero,
+                                title: Text(
+                                  line.itemCode.isNotEmpty
+                                      ? line.itemCode
+                                      : 'Line ${line.lineNumber}',
+                                ),
+                                subtitle: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(line.itemDescription),
+                                    if (srLine.isNotEmpty)
+                                      Text(
+                                        'SR Line ID: $srLine',
+                                        style: Theme.of(
+                                          context,
+                                        ).textTheme.bodySmall?.copyWith(
+                                          color: Colors.grey.shade600,
+                                        ),
                                       ),
+                                  ],
+                                ),
+                                trailing: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text('Qty: ${line.quantity}'),
+                                    const SizedBox(height: 6),
+                                    IconButton(
+                                      tooltip: 'Delete item',
+                                      onPressed:
+                                          isDeleting
+                                              ? null
+                                              : () => onDeleteLine(line),
+                                      icon:
+                                          isDeleting
+                                              ? const SizedBox(
+                                                width: 18,
+                                                height: 18,
+                                                child: CircularProgressIndicator(
+                                                  strokeWidth: 2,
+                                                ),
+                                              )
+                                              : const Icon(Icons.delete_outline),
+                                      constraints: const BoxConstraints(),
+                                      padding: EdgeInsets.zero,
+                                      visualDensity: VisualDensity.compact,
                                     ),
-                                ],
-                              ),
-                            ),
+                                  ],
+                                ),
+                              );
+                            },
                           )
                           .toList(),
                 );

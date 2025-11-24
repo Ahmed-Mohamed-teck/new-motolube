@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:newmotorlube/core/widget/internal_app_bar.dart';
 
 import '../../domain/entity/job_card_package_entity.dart';
@@ -35,6 +36,7 @@ class _TechnicianJobCardManagementScreenState
   final TextEditingController _linesFilterController =
       TextEditingController();
 
+  String? _selectedPackageId;
   String? _linesPackageId;
   String? _deletingPackageLineId;
 
@@ -78,6 +80,9 @@ class _TechnicianJobCardManagementScreenState
     final packagesAsync = ref.watch(
       packagesOfJobCardProvider(widget.srNumber),
     );
+    final availablePackagesAsync = ref.watch(
+      technicianJobCardPackagesProvider(widget.srNumber),
+    );
 
     final linesAsync = ref.watch(
       jobCardPackageLinesProvider(
@@ -106,6 +111,55 @@ class _TechnicianJobCardManagementScreenState
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
         children: [
+          availablePackagesAsync.when(
+            data: (packages) {
+              _syncSelectedPackage(packages);
+              return _JobCardPackagesSection(
+                srNumber: widget.srNumber,
+                packages: packages,
+                selectedPackageId: _selectedPackageId,
+                onPackageChanged: (package) {
+                  if (_selectedPackageId == package.packageId) return;
+                  setState(() => _selectedPackageId = package.packageId);
+                },
+                onAddPackage:
+                    widget.userId.isNotEmpty ? _handleAddPackage : null,
+                canAddPackage: widget.userId.isNotEmpty,
+                isAddInProgress: addingPackage,
+                onRetry:
+                    () => ref.invalidate(
+                      technicianJobCardPackagesProvider(widget.srNumber),
+                    ),
+              );
+            },
+            loading:
+                () => const Card(
+                  child: Padding(
+                    padding: EdgeInsets.all(16),
+                    child: LinearProgressIndicator(minHeight: 2),
+                  ),
+                ),
+            error:
+                (error, _) => Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: _JobCardPackagesMessage(
+                      icon: Icons.error_outline,
+                      message: _humanizeMessage(error.toString()),
+                      action: TextButton(
+                        onPressed:
+                            () => ref.invalidate(
+                              technicianJobCardPackagesProvider(
+                                widget.srNumber,
+                              ),
+                            ),
+                        child: const Text('Retry'),
+                      ),
+                    ),
+                  ),
+                ),
+          ),
+          const SizedBox(height: 16),
           _PackagesCard(
             packagesAsync: packagesAsync,
             onRetry: () =>
@@ -118,8 +172,6 @@ class _TechnicianJobCardManagementScreenState
             isDeleting: deletingPackage,
           ),
           const SizedBox(height: 16),
-
-
         ],
       ),
     );
@@ -127,6 +179,24 @@ class _TechnicianJobCardManagementScreenState
 
 
 
+
+  Future<void> _handleAddPackage(JobCardPackageEntity package) async {
+    final srNumber = widget.srNumber.trim();
+    if (srNumber.isEmpty) {
+      _showSnack('Job card number unavailable.');
+      return;
+    }
+    if (widget.userId.isEmpty) {
+      _showSnack('Unable to determine technician identifier.');
+      return;
+    }
+    await ref.read(jobCardOperationViewModelProvider.notifier).addPackage(
+      srNumber: srNumber,
+      packageId: package.packageId,
+      userId: widget.userId,
+      campaignLineId: package.campaignLineId,
+    );
+  }
 
   Future<void> _openCustomPackageManager(
     JobCardPackageEntity package,
@@ -250,10 +320,356 @@ class _TechnicianJobCardManagementScreenState
     _showSnack(message);
   }
 
+  void _syncSelectedPackage(List<JobCardPackageEntity> packages) {
+    final hasExisting =
+        _selectedPackageId != null &&
+        packages.any((pkg) => pkg.packageId == _selectedPackageId);
+    final desiredId =
+        hasExisting
+            ? _selectedPackageId
+            : packages.isNotEmpty
+            ? packages.first.packageId
+            : null;
+    if (desiredId == _selectedPackageId) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      setState(() => _selectedPackageId = desiredId);
+    });
+  }
+
   void _showSnack(String message) {
     if (message.isEmpty || !mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text(message)),
+    );
+  }
+}
+
+class _JobCardPackagesSection extends StatelessWidget {
+  const _JobCardPackagesSection({
+    required this.srNumber,
+    required this.packages,
+    required this.onRetry,
+    required this.selectedPackageId,
+    required this.onPackageChanged,
+    this.onAddPackage,
+    this.canAddPackage = false,
+    this.isAddInProgress = false,
+  });
+
+  final String srNumber;
+  final List<JobCardPackageEntity> packages;
+  final VoidCallback onRetry;
+  final String? selectedPackageId;
+  final ValueChanged<JobCardPackageEntity> onPackageChanged;
+  final ValueChanged<JobCardPackageEntity>? onAddPackage;
+  final bool canAddPackage;
+  final bool isAddInProgress;
+
+  @override
+  Widget build(BuildContext context) {
+    final currencyFormat = NumberFormat.currency(
+      locale: 'en',
+      symbol: 'SAR ',
+      decimalDigits: 2,
+    );
+
+    JobCardPackageEntity? _findPackage(String? id) {
+      if (id == null) return null;
+      for (final pkg in packages) {
+        if (pkg.packageId == id) return pkg;
+      }
+      return null;
+    }
+
+    final selected =
+        _findPackage(selectedPackageId) ??
+        (packages.isNotEmpty ? packages.first : null);
+
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Job card packages',
+                        style: Theme.of(context).textTheme.titleMedium
+                            ?.copyWith(fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        srNumber,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Colors.grey.shade600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                IconButton(
+                  tooltip: 'Refresh packages',
+                  onPressed: onRetry,
+                  icon: const Icon(Icons.refresh),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            if (packages.isEmpty)
+              _JobCardPackagesMessage(
+                icon: Icons.inventory_2_outlined,
+                message: 'No packages found for this job card.',
+              )
+            else ...[
+              DropdownButtonFormField<String>(
+                value: selected?.packageId ?? packages.first.packageId,
+                isExpanded: true,
+                decoration: const InputDecoration(
+                  labelText: 'Select package',
+                  border: OutlineInputBorder(),
+                ),
+                items:
+                    packages
+                        .map(
+                          (pkg) => DropdownMenuItem<String>(
+                            value: pkg.packageId,
+                            child: Text(
+                              pkg.displayName.isNotEmpty
+                                  ? pkg.displayName
+                                  : 'Package ${pkg.packageCode}',
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        )
+                        .toList(),
+                onChanged: (value) {
+                  if (value == null) return;
+                  final pkg = packages.firstWhere(
+                    (element) => element.packageId == value,
+                  );
+                  onPackageChanged(pkg);
+                },
+              ),
+              const SizedBox(height: 16),
+              if (selected != null) ...[
+                _SelectedPackageDetails(
+                  package: selected,
+                  currencyFormat: currencyFormat,
+                ),
+                if (canAddPackage &&
+                    onAddPackage != null) ...[
+                  const SizedBox(height: 8),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: FilledButton.icon(
+                      onPressed:
+                          isAddInProgress ? null : () => onAddPackage?.call(selected),
+                      icon:
+                          isAddInProgress
+                              ? const SizedBox(
+                                width: 16,
+                                height: 16,
+                                child: CircularProgressIndicator(strokeWidth: 2),
+                              )
+                              : const Icon(Icons.add_circle_outline),
+                      label: const Text('Add package to job card'),
+                    ),
+                  ),
+                ],
+              ],
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SelectedPackageDetails extends StatelessWidget {
+  const _SelectedPackageDetails({
+    required this.package,
+    required this.currencyFormat,
+  });
+
+  final JobCardPackageEntity package;
+  final NumberFormat currencyFormat;
+
+  double get _effectivePrice {
+    if (package.totalPrice > 0) return package.totalPrice;
+    if (package.linePrice > 0) return package.linePrice;
+    if (package.totalListPrice > 0) return package.totalListPrice;
+    return 0;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final price = _effectivePrice;
+    final priceText = price > 0 ? currencyFormat.format(price) : 'Included';
+    final tags = <Widget>[];
+    if (package.isEmergency) {
+      tags.add(const _PackageTag(label: 'Emergency', color: Color(0xFFB42318)));
+    }
+    if (package.isCustomPackage) {
+      tags.add(const _PackageTag(label: 'Custom', color: Color(0xFF027A48)));
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                package.displayName.isNotEmpty
+                    ? package.displayName
+                    : 'Package ${package.packageCode}',
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+              ),
+            ),
+            const SizedBox(width: 12),
+            Text(
+              priceText,
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+            ),
+          ],
+        ),
+        const SizedBox(height: 4),
+        Text(
+          'Code: ${package.packageCode}',
+          style: Theme.of(
+            context,
+          ).textTheme.bodySmall?.copyWith(color: Colors.grey.shade600),
+        ),
+        if (tags.isNotEmpty) ...[
+          const SizedBox(height: 8),
+          Wrap(spacing: 6, runSpacing: 4, children: tags),
+        ],
+        const SizedBox(height: 12),
+        _PackageDetailRow(
+          'Line price',
+          currencyFormat.format(package.linePrice),
+        ),
+        _PackageDetailRow(
+          'Total price',
+          currencyFormat.format(package.totalPrice),
+        ),
+        _PackageDetailRow('Total tax', currencyFormat.format(package.totalTax)),
+        _PackageDetailRow(
+          'Total discount',
+          package.totalDiscount > 0
+              ? '- ${currencyFormat.format(package.totalDiscount)}'
+              : '0.00',
+        ),
+        _PackageDetailRow(
+          'List price',
+          currencyFormat.format(package.totalListPrice),
+        ),
+        if (package.packageShortName.isNotEmpty)
+          _PackageDetailRow('Short name', package.packageShortName),
+      ],
+    );
+  }
+}
+
+class _PackageDetailRow extends StatelessWidget {
+  const _PackageDetailRow(this.label, this.value);
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Row(
+        children: [
+          SizedBox(
+            width: 110,
+            child: Text(
+              label,
+              style: Theme.of(
+                context,
+              ).textTheme.bodySmall?.copyWith(color: Colors.grey.shade600),
+            ),
+          ),
+          Expanded(
+            child: Text(value, style: Theme.of(context).textTheme.bodyMedium),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _JobCardPackagesMessage extends StatelessWidget {
+  const _JobCardPackagesMessage({
+    required this.icon,
+    required this.message,
+    this.action,
+  });
+
+  final IconData icon;
+  final String message;
+  final Widget? action;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(icon, color: Colors.grey.shade500),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                message,
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(color: Colors.grey.shade700),
+              ),
+              if (action != null) ...[const SizedBox(height: 8), action!],
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _PackageTag extends StatelessWidget {
+  const _PackageTag({required this.label, required this.color});
+
+  final String label;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.12),
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: color.withOpacity(0.2)),
+      ),
+      child: Text(
+        label,
+        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+          color: color,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
     );
   }
 }
