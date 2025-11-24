@@ -212,6 +212,7 @@ class _BookingDetailScreenState
       service.technicianLabel,
       fallback: s.upcomingServicesTechnicianFallback,
     );
+    final requiresPayment = _requiresPayment(service);
 
     return Scaffold(
       appBar: InternalAppBar(title: s.upcomingServicesBookingDetailsTitle),
@@ -301,17 +302,47 @@ class _BookingDetailScreenState
                   ],
                 ),
               ),
-              const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: isProcessingPayment ? null : _handlePayment,
-                child: isProcessingPayment
-                    ? const SizedBox(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    : const Text('Pay Now'),
-              ),
+              if (requiresPayment) ...[
+                const SizedBox(height: 12),
+                _SectionCard(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const _SectionLabel('Checkout details'),
+                      const SizedBox(height: 12),
+                      _KeyValueRow(
+                        label: 'Amount due',
+                        value: _formatCurrency(service.srTotal),
+                      ),
+                      if (service.discount > 0) ...[
+                        const SizedBox(height: 10),
+                        _KeyValueRow(
+                          label: 'Discount',
+                          value: '-${_formatCurrency(service.discount)}',
+                        ),
+                      ],
+                      if (service.couponNumber.trim().isNotEmpty) ...[
+                        const SizedBox(height: 10),
+                        _KeyValueRow(
+                          label: 'Applied coupon',
+                          value: service.couponNumber.trim(),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: isProcessingPayment ? null : _handlePayment,
+                  child: isProcessingPayment
+                      ? const SizedBox(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : const Text('Pay Now'),
+                ),
+              ],
             ],
           ),
         ),
@@ -520,4 +551,52 @@ String _initials(String value) {
     return parts.first[0].toUpperCase();
   }
   return (parts.first[0] + parts.last[0]).toUpperCase();
+}
+
+bool _requiresPayment(UpcomingServiceEntity service) {
+  final label = service.status.toLowerCase();
+  final isComplete = label.contains('completedjobcard');
+  return isComplete ;
+}
+
+String _formatCurrency(double amount) {
+  final formatter = NumberFormat.currency(
+    symbol: 'SAR ',
+    decimalDigits: 2,
+  );
+  return formatter.format(amount);
+}
+
+class _KeyValueRow extends StatelessWidget {
+  const _KeyValueRow({
+    required this.label,
+    required this.value,
+  });
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Row(
+      children: [
+        Expanded(
+          child: Text(
+            label,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: theme.textTheme.bodyMedium?.color?.withOpacity(0.7),
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        Text(
+          value,
+          style: theme.textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ],
+    );
+  }
 }

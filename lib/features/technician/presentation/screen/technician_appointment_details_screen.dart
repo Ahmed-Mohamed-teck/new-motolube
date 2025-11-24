@@ -1216,6 +1216,7 @@ class _PackageDetailRow extends StatelessWidget {
         children: [
           SizedBox(
             width: 110,
+
             child: Text(
               label,
               style: Theme.of(
