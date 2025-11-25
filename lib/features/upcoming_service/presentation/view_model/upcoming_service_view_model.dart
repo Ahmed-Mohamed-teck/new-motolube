@@ -10,13 +10,21 @@ class UpcomingServiceViewModel
 
   final GetUpcomingServicesUseCase _getUpcomingServicesUseCase;
 
-  Future<void> fetchUpcomingServices() async {
+  Future<void> fetchUpcomingServices({
+    DateTime? fromDate,
+    DateTime? toDate,
+    int? statusId,
+  }) async {
     if (state is UpcomingServiceLoading) {
       return;
     }
     state = const UpcomingServiceLoading();
     try {
-      final services = await _getUpcomingServicesUseCase();
+      final services = await _getUpcomingServicesUseCase(
+        fromDate: fromDate,
+        toDate: toDate,
+        statusId: statusId,
+      );
       if (services.isEmpty) {
         state = const UpcomingServiceEmpty();
       } else {

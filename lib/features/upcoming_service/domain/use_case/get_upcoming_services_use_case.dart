@@ -6,7 +6,15 @@ class GetUpcomingServicesUseCase {
 
   const GetUpcomingServicesUseCase(this._repository);
 
-  Future<List<UpcomingServiceEntity>> call() {
-    return _repository.getUpcomingServices();
+  Future<List<UpcomingServiceEntity>> call({
+    DateTime? fromDate,
+    DateTime? toDate,
+    int? statusId,
+  }) {
+    return _repository.getUpcomingServices(
+      fromDate: fromDate,
+      toDate: toDate,
+      statusId: statusId,
+    );
   }
 }
