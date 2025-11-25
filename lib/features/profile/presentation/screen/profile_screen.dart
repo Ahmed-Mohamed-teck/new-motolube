@@ -44,102 +44,107 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     final authVm = ref.read(authViewModelProvider.notifier);
     return Scaffold(
       appBar: AppBar(
-          title: Text(appLang.profileAppbar,
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),),
-      leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.black),
-            onPressed: () => Navigator.of(context).pop(),
-      ),),
-          body: Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: authState is AuthenticatedState ? Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(height: 20),
-          // Profile Photo
-          Center(
-            child: Stack(
-              children: [
-                CircleAvatar(
-                  radius: 60,
-                  backgroundImage: const AssetImage('assets/images/default_avatar.png'),
-                  backgroundColor: Colors.grey[300],
-                ),
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: Container(
-                    padding: const EdgeInsets.all(4),
-                    decoration: BoxDecoration(
-                      color: context.appColors.secondary,
-                      shape: BoxShape.circle,
-                    ),
-                    child:  Icon(
-                      Icons.camera_alt,
-                      color: context.appColors.surface,
-                      size: 20,
+        title: Text(
+          appLang.profileAppbar,
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_outlined, color: Colors.black),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: authState is AuthenticatedState
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 20),
+                  Center(
+                    child: Stack(
+                      children: [
+                        CircleAvatar(
+                          radius: 60,
+                          backgroundImage: const AssetImage('assets/images/default_avatar.png'),
+                          backgroundColor: Colors.grey[300],
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: context.appColors.secondary,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              Icons.camera_alt,
+                              color: context.appColors.surface,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 30),
-          // User Information
-          _buildInfoTile(Icons.person, appLang.name, _name ?? ''),
-          _buildInfoTile(Icons.phone, appLang.phoneNumber, _phone ?? ''),
-          _buildInfoTile(Icons.email, appLang.email, _email ?? ''),
-          const SizedBox(height: 40),
-          // Edit Profile Button
-          ElevatedButton.icon(
-            onPressed: () {
-              // Navigate to edit profile screen
-            },
-            icon: const Icon(Icons.edit),
-            label: const Text('Edit Profile'),
-            style: ElevatedButton.styleFrom(
-              minimumSize: const Size(double.infinity, 45),
-            ),
-          ),
-          const SizedBox(height: 16),
-          // Logout Button
-          OutlinedButton.icon(
-            onPressed: () {
-              authVm.unAuthenticate();
-            },
-            icon: const Icon(Icons.logout),
-            label: const Text('Logout'),
-            style: OutlinedButton.styleFrom(
-              minimumSize: const Size(double.infinity, 45),
-              foregroundColor: Colors.red,
-            ),
-          ),
-        ],
-      ):Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Icon(Icons.person, size: 100, color: Colors.grey),
-          const SizedBox(height: 20),
-          Text(
-            'Please log in to view your profile',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  color: Colors.grey,
-                ),
-          ),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              // Navigate to login screen
-              Navigator.pushReplacementNamed(context, 'loginScreen');
-            },
-            child: const Text('Login'),
-          ),
-        ],
-      )
-    ),
-
+                  const SizedBox(height: 30),
+                  _buildInfoTile(Icons.person, appLang.name, _name ?? ''),
+                  _buildInfoTile(Icons.phone, appLang.phoneNumber, _phone ?? ''),
+                  _buildInfoTile(Icons.email, appLang.email, _email ?? ''),
+                  const SizedBox(height: 40),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      // Navigate to edit profile screen
+                    },
+                    icon: const Icon(Icons.edit),
+                    label: const Text('Edit Profile'),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 45),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  OutlinedButton.icon(
+                    onPressed: () async {
+                      await authVm.unAuthenticate();
+                      if (!mounted) return;
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        'loginScreen',
+                        (route) => false,
+                      );
+                    },
+                    icon: const Icon(Icons.logout),
+                    label: const Text('Logout'),
+                    style: OutlinedButton.styleFrom(
+                      minimumSize: const Size(double.infinity, 45),
+                      foregroundColor: Colors.red,
+                    ),
+                  ),
+                ],
+              )
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.person, size: 100, color: Colors.grey),
+                  const SizedBox(height: 20),
+                  Text(
+                    'Please log in to view your profile',
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          color: Colors.grey,
+                        ),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(context, 'loginScreen');
+                    },
+                    child: const Text('Login'),
+                  ),
+                ],
+              ),
+      ),
     );
   }
 
