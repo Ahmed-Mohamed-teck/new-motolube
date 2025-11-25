@@ -14,9 +14,6 @@ class UpcomingServiceRepository implements IUpcomingServiceRepository {
   final IAuthLocalRepository _authLocalRepository;
 
   static const _defaultUserId = '7744';
-  static const _defaultFromDate = '01-Jan-2025';
-  static const _defaultToDate = '01-Dec-2025';
-  static const _defaultStatusId = '1';
 
   @override
   Future<List<UpcomingServiceEntity>> getUpcomingServices() async {
@@ -34,9 +31,6 @@ class UpcomingServiceRepository implements IUpcomingServiceRepository {
 
     final models = await _remoteDataSource.getUpcomingServices(
       userId: userId,
-      fromDate: _defaultFromDate,
-      toDate: _defaultToDate,
-      statusId: _defaultStatusId,
     );
 
     return List<UpcomingServiceEntity>.from(models);

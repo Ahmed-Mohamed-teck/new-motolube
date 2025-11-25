@@ -13,18 +13,12 @@ class UpcomingServiceRemoteDataSourceImpl
   @override
   Future<List<UpcomingServiceModel>> getUpcomingServices({
     required String userId,
-    required String fromDate,
-    required String toDate,
-    required String statusId,
   }) async {
     try {
       final res = await dio.get(
         getCustomerAppointmentsEndPoint,
         queryParameters: {
           'CustomerId': userId,
-          'FromDate': fromDate,
-          'ToDate': toDate,
-          'Status_Id': '7',
         },
       );
 
