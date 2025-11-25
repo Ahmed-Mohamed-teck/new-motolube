@@ -83,9 +83,20 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
 
               const SizedBox(height: 16),
               TitleWithSubTitle(
-                withSubTitle: false,
+                withSubTitle: true,
                 title: appLang.upcomingService,
-                subTitle: null,
+                subTitle: Text(
+                  'All',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                onSubTitleTap: () {
+                  Navigator.of(
+                    navigatorKey.currentContext!,
+                  ).pushNamed('customerAppointmentsScreen');
+                },
               ),
               const SizedBox(height: 16),
               const Padding(
