@@ -11,6 +11,7 @@ import '../../../payment/presentation/screen/payment_webview_screen.dart';
 import '../../../payment/presentation/state/payment_state.dart';
 import '../../../payment/provider/payment_provider.dart';
 import '../../domain/entity/upcoming_service_entity.dart';
+import '../../../../core/utils/helper_fuc.dart';
 
 class BookingDetailScreen extends ConsumerStatefulWidget {
   const BookingDetailScreen({super.key, required this.service});
@@ -58,6 +59,7 @@ class _BookingDetailScreenState
       MaterialPageRoute(
         builder: (_) => PaymentWebViewScreen(
           paymentUrl: result.paymentUrl,
+          payFortParameters: result.payFortParameters,
           bearerToken: bearerToken != null && bearerToken.isNotEmpty
               ? bearerToken
               : null,
@@ -178,6 +180,51 @@ class _BookingDetailScreenState
       );
   }
 
+  void _openChat() {
+    final bookingId = _bookingIdForChat(widget.service);
+    if (bookingId == null) {
+      _showSnack('Missing booking id for chat.');
+      return;
+    }
+
+    Navigator.of(context, rootNavigator: true).pushNamed(
+      'chatScreen',
+      arguments: bookingId,
+    );
+  }
+
+  String? _bookingIdForChat(UpcomingServiceEntity service) {
+    final candidates = [
+      service.appointmentId,
+      service.srNumber,
+    ];
+    for (final candidate in candidates) {
+      final id = candidate.trim();
+      if (id.isNotEmpty) return id;
+    }
+    return null;
+  }
+
+  int? _parseStatusId(String status) {
+    final trimmed = status.trim();
+    if (trimmed.isEmpty) return null;
+
+    final mapped = getStatusIdFromStatusName(trimmed);
+    if (mapped != 0) return mapped;
+
+    final direct = int.tryParse(trimmed);
+    if (direct != null) return direct;
+
+    final match = RegExp(r'\d+').firstMatch(trimmed);
+    return match != null ? int.tryParse(match.group(0)!) : null;
+  }
+
+  bool _shouldShowChatIcon(UpcomingServiceEntity service) {
+    final statusId = _parseStatusId(service.status);
+    if (statusId == null) return false;
+    return statusId >= 1 && statusId <= 7;
+  }
+
   @override
   Widget build(BuildContext context) {
     final service = widget.service;
@@ -213,9 +260,21 @@ class _BookingDetailScreenState
       fallback: s.upcomingServicesTechnicianFallback,
     );
     final requiresPayment = _requiresPayment(service);
+    final showChatIcon = _shouldShowChatIcon(service);
 
     return Scaffold(
-      appBar: InternalAppBar(title: s.upcomingServicesBookingDetailsTitle),
+      appBar: InternalAppBar(
+        title: s.upcomingServicesBookingDetailsTitle,
+        actions: [
+          if (showChatIcon)
+            IconButton(
+              color: Theme.of(context).colorScheme.primary,
+              icon: const Icon(Icons.chat_bubble_outline),
+              onPressed: _openChat,
+              tooltip: 'Chat',
+            ),
+        ],
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16),

@@ -11,6 +11,7 @@ import 'features/upcoming_service/presentation/screen/booking_detail_screen.dart
 import 'features/upcoming_service/presentation/screen/customer_appointments_screen.dart';
 import 'features/user_cars/presentation/screen/add_new_car_screen.dart';
 import 'features/user_cars/presentation/screen/user_car_details_screen.dart';
+import 'features/chat/presentation/screen/chat_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -51,6 +52,12 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => BookingDetailScreen(
             service: args as UpcomingServiceEntity,
+          ),
+        );
+      case 'chatScreen':
+        return MaterialPageRoute(
+          builder: (_) => ChatScreen(
+            bookingId: args is String ? args : null,
           ),
         );
       case 'customerAppointmentsScreen':

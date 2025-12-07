@@ -1,5 +1,6 @@
 import '../../domain/entity/payment_initiation_request.dart';
 import '../../domain/entity/payment_initiation_result.dart';
+import '../../domain/entity/payment_status_result.dart';
 import '../../domain/repository/i_payment_repository.dart';
 import '../data_source/i_payment_remote_data_source.dart';
 import '../model/payment_initiation_request_model.dart';
@@ -31,5 +32,10 @@ class PaymentRepository implements IPaymentRepository {
         discount: request.discount,
       ),
     );
+  }
+
+  @override
+  Future<PaymentStatusResult> getPaymentStatus(String transactionId) {
+    return _remoteDataSource.getPaymentStatus(transactionId);
   }
 }

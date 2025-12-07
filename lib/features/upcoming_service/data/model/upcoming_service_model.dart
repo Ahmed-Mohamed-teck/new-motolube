@@ -21,7 +21,9 @@ class UpcomingServiceModel extends UpcomingServiceEntity {
   });
 
   factory UpcomingServiceModel.fromJson(Map<String, dynamic> json) {
-    final appointmentId = (json['bookingId'] ?? '').toString();
+    final appointmentId = _stringFor(json, const [
+      'bookingid',
+    ]);
 
     final serviceName = (json['package_name_en'] ?? '').toString();
 

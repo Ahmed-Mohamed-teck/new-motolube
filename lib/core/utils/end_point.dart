@@ -37,3 +37,5 @@ const String createAppointmentEndPoint =
     '$baseUrl/MotorLubeApp/createAppointment';
 const String initiatePaymentEndPoint =
     'https://interface.taajeer.com:1027/api/Payments/initiate';
+String getPaymentStatusEndPoint(String transactionId) =>
+    '$baseUrl/Payments/status?transactionId=${Uri.encodeComponent(transactionId)}';

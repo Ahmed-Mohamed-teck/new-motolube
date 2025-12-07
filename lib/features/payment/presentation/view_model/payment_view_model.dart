@@ -2,14 +2,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/entity/payment_initiation_request.dart';
 import '../../domain/entity/payment_initiation_result.dart';
+import '../../domain/entity/payment_status_result.dart';
 import '../../domain/use_case/initiate_payment_use_case.dart';
+import '../../domain/use_case/check_payment_status_use_case.dart';
 import '../state/payment_state.dart';
 
 class PaymentViewModel extends StateNotifier<PaymentState> {
-  PaymentViewModel(this._initiatePaymentUseCase)
+  PaymentViewModel(
+    this._initiatePaymentUseCase,
+    this._checkPaymentStatusUseCase,
+  )
       : super(const PaymentInitial());
 
   final InitiatePaymentUseCase _initiatePaymentUseCase;
+  final CheckPaymentStatusUseCase _checkPaymentStatusUseCase;
 
   Future<PaymentInitiationResult?> initiatePayment(
     PaymentInitiationRequest request,
@@ -27,6 +33,12 @@ class PaymentViewModel extends StateNotifier<PaymentState> {
       );
       return null;
     }
+  }
+
+  Future<PaymentStatusResult> checkPaymentStatus(
+    String transactionId,
+  ) {
+    return _checkPaymentStatusUseCase(transactionId: transactionId);
   }
 
   void reset() {

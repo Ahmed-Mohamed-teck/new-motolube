@@ -4,11 +4,13 @@ import 'package:newmotorlube/core/utils/extensions/extensions.dart';
 class InternalAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final VoidCallback? onBack;
+  final List<Widget>? actions;
 
   const InternalAppBar({
     super.key,
     required this.title,
     this.onBack,
+    this.actions,
   });
 
   @override
@@ -29,6 +31,7 @@ class InternalAppBar extends StatelessWidget implements PreferredSizeWidget {
           fontWeight: FontWeight.w500,
         ),
       ),
+      actions: actions,
     );
   }
 
