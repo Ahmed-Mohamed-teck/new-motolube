@@ -184,6 +184,23 @@
         "type": "String"
       }
     }
+  },
+  "managerHomeTitle": "Manager",
+  "managerHomeCouponsTitle": "Coupons",
+  "managerHomeCouponsDescription": "Create discount coupons",
+  "managerHomeRatingsTitle": "Ratings",
+  "managerHomeRatingsDescription": "View customer ratings",
+  "managerHomePromotionsTitle": "Promotions",
+  "managerHomePromotionsDescription": "Promotion control panel",
+  "managerHomeCreatePromotionTitle": "Create Promotion",
+  "managerHomeCreatePromotionDescription": "Add a new promotion",
+  "managerHomeRouteUnavailable": "Route \"{route}\" is not available.",
+  "@managerHomeRouteUnavailable": {
+    "placeholders": {
+      "route": {
+        "type": "String"
+      }
+    }
   }
   
 }

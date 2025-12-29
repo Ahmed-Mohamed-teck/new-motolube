@@ -184,5 +184,22 @@
         "type": "String"
       }
     }
+  },
+  "managerHomeTitle": "الإدارة",
+  "managerHomeCouponsTitle": "الكوبونات",
+  "managerHomeCouponsDescription": "إنشاء كوبونات خصم",
+  "managerHomeRatingsTitle": "التقييمات",
+  "managerHomeRatingsDescription": "عرض تقييمات العملاء",
+  "managerHomePromotionsTitle": "العروض الترويجية",
+  "managerHomePromotionsDescription": "لوحة تحكم العروض",
+  "managerHomeCreatePromotionTitle": "إنشاء عرض",
+  "managerHomeCreatePromotionDescription": "إضافة عرض ترويجي جديد",
+  "managerHomeRouteUnavailable": "المسار \"{route}\" غير متاح.",
+  "@managerHomeRouteUnavailable": {
+    "placeholders": {
+      "route": {
+        "type": "String"
+      }
+    }
   }
 }

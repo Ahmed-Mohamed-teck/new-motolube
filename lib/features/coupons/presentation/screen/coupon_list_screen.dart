@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/widget/internal_app_bar.dart';
 import '../../../auth/data/repository/auth_local_repository.dart';
@@ -16,6 +17,8 @@ class CouponListScreen extends ConsumerStatefulWidget {
 }
 
 class _CouponListScreenState extends ConsumerState<CouponListScreen> {
+  bool _requestedInitialLoad = false;
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(couponNotifierProvider);
@@ -60,14 +63,10 @@ class _CouponListScreenState extends ConsumerState<CouponListScreen> {
 
   Widget _buildBody(CouponState state) {
     if (state is CouponInitial) {
-      // Trigger load on first build.
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        ref.read(couponNotifierProvider.notifier).load();
-      });
-      return const Center(child: CircularProgressIndicator());
+      _triggerInitialLoad();
     }
-    if (state is CouponLoading) {
-      return const Center(child: CircularProgressIndicator());
+    if (state is CouponInitial || state is CouponLoading) {
+      return const _CouponListSkeleton();
     }
     if (state is CouponError) {
       return Center(child: Text(state.message));
@@ -97,6 +96,54 @@ class _CouponListScreenState extends ConsumerState<CouponListScreen> {
       );
     }
     return const SizedBox.shrink();
+  }
+
+  void _triggerInitialLoad() {
+    if (_requestedInitialLoad) return;
+    _requestedInitialLoad = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(couponNotifierProvider.notifier).load();
+    });
+  }
+}
+
+class _CouponListSkeleton extends StatelessWidget {
+  const _CouponListSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    return Skeletonizer(
+      child: ListView.separated(
+        padding: const EdgeInsets.all(16),
+        itemCount: 4,
+        separatorBuilder: (_, __) => const SizedBox(height: 12),
+        itemBuilder: (_, __) => Card(
+          child: ListTile(
+            title: Container(
+              height: 14,
+              width: 180,
+              color: Colors.grey.shade300,
+            ),
+            subtitle: Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Container(
+                height: 12,
+                width: 140,
+                color: Colors.grey.shade300,
+              ),
+            ),
+            trailing: Container(
+              width: 28,
+              height: 28,
+              decoration: BoxDecoration(
+                color: Colors.grey.shade300,
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 

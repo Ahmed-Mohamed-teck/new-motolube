@@ -20,9 +20,11 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(model, plate) => "Car card for ${model}, plate ${plate}";
+  static String m0(route) => "Route \"${route}\" is not available.";
 
-  static String m1(plate) => "License plate ${plate}";
+  static String m1(model, plate) => "Car card for ${model}, plate ${plate}";
+
+  static String m2(plate) => "License plate ${plate}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -117,6 +119,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "mailUsAt": MessageLookupByLibrary.simpleMessage("Mail us at"),
         "maintenanceNav": MessageLookupByLibrary.simpleMessage("Maintenance"),
         "majorServices": MessageLookupByLibrary.simpleMessage("Major Services"),
+        "managerHomeCouponsDescription":
+            MessageLookupByLibrary.simpleMessage("Create discount coupons"),
+        "managerHomeCouponsTitle":
+            MessageLookupByLibrary.simpleMessage("Coupons"),
+        "managerHomeCreatePromotionDescription":
+            MessageLookupByLibrary.simpleMessage("Add a new promotion"),
+        "managerHomeCreatePromotionTitle":
+            MessageLookupByLibrary.simpleMessage("Create Promotion"),
+        "managerHomePromotionsDescription":
+            MessageLookupByLibrary.simpleMessage("Promotion control panel"),
+        "managerHomePromotionsTitle":
+            MessageLookupByLibrary.simpleMessage("Promotions"),
+        "managerHomeRatingsDescription":
+            MessageLookupByLibrary.simpleMessage("View customer ratings"),
+        "managerHomeRatingsTitle":
+            MessageLookupByLibrary.simpleMessage("Ratings"),
+        "managerHomeRouteUnavailable": m0,
+        "managerHomeTitle": MessageLookupByLibrary.simpleMessage("Manager"),
         "manufacturer": MessageLookupByLibrary.simpleMessage("Manufacturer"),
         "mobileServices":
             MessageLookupByLibrary.simpleMessage("Mobile Services"),
@@ -237,7 +257,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "userCarsCarModelLabel":
             MessageLookupByLibrary.simpleMessage("Car model"),
         "userCarsCarName": MessageLookupByLibrary.simpleMessage("Car name"),
-        "userCarsCardSemantics": m0,
+        "userCarsCardSemantics": m1,
         "userCarsChassis": MessageLookupByLibrary.simpleMessage("Chassis"),
         "userCarsChassisVin":
             MessageLookupByLibrary.simpleMessage("Chassis (VIN)"),
@@ -260,7 +280,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Invalid plate letter"),
         "userCarsInvalidPlateNumber":
             MessageLookupByLibrary.simpleMessage("Invalid plate number"),
-        "userCarsLicensePlateSemantics": m1,
+        "userCarsLicensePlateSemantics": m2,
         "userCarsSaveVehicle":
             MessageLookupByLibrary.simpleMessage("Save Vehicle"),
         "userCarsSaving": MessageLookupByLibrary.simpleMessage("Saving..."),

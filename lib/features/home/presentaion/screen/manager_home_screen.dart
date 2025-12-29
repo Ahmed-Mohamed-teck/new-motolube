@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newmotorlube/generated/l10n.dart';
 import 'package:newmotorlube/main.dart';
 
 class ManagerHomeScreen extends StatelessWidget {
@@ -6,6 +7,7 @@ class ManagerHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = S.of(context);
     final cards = <_ManagerCard>[
       // _ManagerCard(
       //   title: 'Customers',
@@ -22,29 +24,29 @@ class ManagerHomeScreen extends StatelessWidget {
       //   routeName: 'adminTechPage',
       // ),
       _ManagerCard(
-        title: 'Coupons',
-        description: 'Create discount coupons',
+        title: l10n.managerHomeCouponsTitle,
+        description: l10n.managerHomeCouponsDescription,
         icon: Icons.discount,
         color: Colors.amber,
         routeName: 'couponListPage',
       ),
       _ManagerCard(
-        title: 'Ratings',
-        description: 'View customer ratings',
+        title: l10n.managerHomeRatingsTitle,
+        description: l10n.managerHomeRatingsDescription,
         icon: Icons.rate_review,
         color: Colors.black87,
         routeName: 'ratingResultsPage',
       ),
       _ManagerCard(
-        title: 'Promotions',
-        description: 'Promotion control panel',
+        title: l10n.managerHomePromotionsTitle,
+        description: l10n.managerHomePromotionsDescription,
         icon: Icons.campaign,
         color: Colors.purple,
         routeName: 'promotionControlPanel',
       ),
       _ManagerCard(
-        title: 'Create Promotion',
-        description: 'Add a new promotion',
+        title: l10n.managerHomeCreatePromotionTitle,
+        description: l10n.managerHomeCreatePromotionDescription,
         icon: Icons.add_circle,
         color: Colors.teal,
         routeName: 'createPromotionScreen',
@@ -53,7 +55,7 @@ class ManagerHomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Manager'),
+        title: Text(l10n.managerHomeTitle),
         centerTitle: true,
       ),
       body: Padding(
@@ -151,7 +153,11 @@ class _ManagerOptionCard extends StatelessWidget {
           .pushNamed(card.routeName);
     } catch (_) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Route "${card.routeName}" is not available.')),
+        SnackBar(
+          content: Text(
+            S.of(context).managerHomeRouteUnavailable(card.routeName),
+          ),
+        ),
       );
     }
   }

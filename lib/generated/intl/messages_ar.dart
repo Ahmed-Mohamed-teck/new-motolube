@@ -20,9 +20,11 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
-  static String m0(model, plate) => "بطاقة سيارة لـ ${model}، لوحة ${plate}";
+  static String m0(route) => "المسار \"${route}\" غير متاح.";
 
-  static String m1(plate) => "لوحة المركبة ${plate}";
+  static String m1(model, plate) => "بطاقة سيارة لـ ${model}، لوحة ${plate}";
+
+  static String m2(plate) => "لوحة المركبة ${plate}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -117,6 +119,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "maintenanceNav": MessageLookupByLibrary.simpleMessage("الصيانة"),
         "majorServices":
             MessageLookupByLibrary.simpleMessage("الخدمات الرئيسية"),
+        "managerHomeCouponsDescription":
+            MessageLookupByLibrary.simpleMessage("إنشاء كوبونات خصم"),
+        "managerHomeCouponsTitle":
+            MessageLookupByLibrary.simpleMessage("الكوبونات"),
+        "managerHomeCreatePromotionDescription":
+            MessageLookupByLibrary.simpleMessage("إضافة عرض ترويجي جديد"),
+        "managerHomeCreatePromotionTitle":
+            MessageLookupByLibrary.simpleMessage("إنشاء عرض"),
+        "managerHomePromotionsDescription":
+            MessageLookupByLibrary.simpleMessage("لوحة تحكم العروض"),
+        "managerHomePromotionsTitle":
+            MessageLookupByLibrary.simpleMessage("العروض الترويجية"),
+        "managerHomeRatingsDescription":
+            MessageLookupByLibrary.simpleMessage("عرض تقييمات العملاء"),
+        "managerHomeRatingsTitle":
+            MessageLookupByLibrary.simpleMessage("التقييمات"),
+        "managerHomeRouteUnavailable": m0,
+        "managerHomeTitle": MessageLookupByLibrary.simpleMessage("الإدارة"),
         "manufacturer": MessageLookupByLibrary.simpleMessage("الشركة المصنعة"),
         "mobileServices":
             MessageLookupByLibrary.simpleMessage("الخدمات المتنقلة"),
@@ -239,7 +259,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "userCarsCarModelLabel":
             MessageLookupByLibrary.simpleMessage("موديل السيارة"),
         "userCarsCarName": MessageLookupByLibrary.simpleMessage("اسم السيارة"),
-        "userCarsCardSemantics": m0,
+        "userCarsCardSemantics": m1,
         "userCarsChassis": MessageLookupByLibrary.simpleMessage("رقم الهيكل"),
         "userCarsChassisVin":
             MessageLookupByLibrary.simpleMessage("رقم الهيكل (VIN)"),
@@ -265,7 +285,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("حرف اللوحة غير صالح"),
         "userCarsInvalidPlateNumber":
             MessageLookupByLibrary.simpleMessage("رقم اللوحة غير صالح"),
-        "userCarsLicensePlateSemantics": m1,
+        "userCarsLicensePlateSemantics": m2,
         "userCarsSaveVehicle":
             MessageLookupByLibrary.simpleMessage("حفظ المركبة"),
         "userCarsSaving": MessageLookupByLibrary.simpleMessage("جارٍ الحفظ..."),

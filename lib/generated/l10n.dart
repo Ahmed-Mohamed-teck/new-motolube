@@ -1709,6 +1709,106 @@ class S {
       args: [model, plate],
     );
   }
+
+  /// `Manager`
+  String get managerHomeTitle {
+    return Intl.message(
+      'Manager',
+      name: 'managerHomeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Coupons`
+  String get managerHomeCouponsTitle {
+    return Intl.message(
+      'Coupons',
+      name: 'managerHomeCouponsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create discount coupons`
+  String get managerHomeCouponsDescription {
+    return Intl.message(
+      'Create discount coupons',
+      name: 'managerHomeCouponsDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ratings`
+  String get managerHomeRatingsTitle {
+    return Intl.message(
+      'Ratings',
+      name: 'managerHomeRatingsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `View customer ratings`
+  String get managerHomeRatingsDescription {
+    return Intl.message(
+      'View customer ratings',
+      name: 'managerHomeRatingsDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Promotions`
+  String get managerHomePromotionsTitle {
+    return Intl.message(
+      'Promotions',
+      name: 'managerHomePromotionsTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Promotion control panel`
+  String get managerHomePromotionsDescription {
+    return Intl.message(
+      'Promotion control panel',
+      name: 'managerHomePromotionsDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create Promotion`
+  String get managerHomeCreatePromotionTitle {
+    return Intl.message(
+      'Create Promotion',
+      name: 'managerHomeCreatePromotionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add a new promotion`
+  String get managerHomeCreatePromotionDescription {
+    return Intl.message(
+      'Add a new promotion',
+      name: 'managerHomeCreatePromotionDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Route "{route}" is not available.`
+  String managerHomeRouteUnavailable(String route) {
+    return Intl.message(
+      'Route "$route" is not available.',
+      name: 'managerHomeRouteUnavailable',
+      desc: '',
+      args: [route],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
