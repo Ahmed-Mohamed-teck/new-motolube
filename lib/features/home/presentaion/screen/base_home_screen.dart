@@ -5,6 +5,7 @@ import 'package:newmotorlube/core/providers/global_lang_provider.dart';
 import 'package:newmotorlube/core/widget/home_app_bar.dart';
 import 'package:newmotorlube/features/auth/provider/auth_provider.dart';
 import 'package:newmotorlube/features/home/presentaion/screen/customer_home_screen.dart';
+import 'package:newmotorlube/features/home/presentaion/screen/manager_home_screen.dart';
 import 'package:newmotorlube/main.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
@@ -156,6 +157,9 @@ class _RoleSpecificHome extends StatelessWidget {
   Widget build(BuildContext context) {
     if (userType == UserType.technician) {
       return const TechnicianHomeScreen();
+    }
+    else if(userType == UserType.manager){
+      return const ManagerHomeScreen();
     }
 
     String message;

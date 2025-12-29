@@ -26,8 +26,18 @@ class PromotionRepositoryImpl implements IPromotionRepository {
   Future<String> uploadImage(File imageFile) {
     return remoteDataSource.uploadImage(imageFile);
   }
-}
 
+  @override
+  Future<List<PromotionEntity>> fetchPromotions() async {
+    final models = await remoteDataSource.fetchPromotions();
+    return models;
+  }
+
+  @override
+  Future<void> deletePromotion(String promotionId) {
+    return remoteDataSource.deletePromotion(promotionId);
+  }
+}
 
 
 

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 import '../../../../core/providers/global_lang_provider.dart';
+import '../../../../core/widget/internal_app_bar.dart';
 import '../../../app/app_color_theme.dart';
 import '../../domain/entity/promotion_entity.dart';
 import '../view_model/promotion_view_model.dart';
@@ -100,13 +101,7 @@ class _CreatePromotionScreenState extends ConsumerState<CreatePromotionScreen> {
     final isLoading = ref.watch(promotionViewModelProvider).isLoading;
 
     return Scaffold(
-      appBar: AppBar(
-          automaticallyImplyLeading: true,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          title: Text('promotion',style: Theme.of(context).textTheme.headlineMedium,)),
+      appBar: const InternalAppBar(title: 'promotion'),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(

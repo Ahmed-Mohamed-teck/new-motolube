@@ -13,7 +13,12 @@ class PromotionRemoteDataSourceImpl implements IPromotionRemoteDataSource {
 
   @override
   Future<void> uploadPromotion(PromotionModel promotion) async {
-    await firestore.collection('promotions').add(promotion.toJson());
+    final docId = promotion.id.isNotEmpty
+        ? promotion.id
+        : const Uuid().v4();
+    await firestore.collection('promotions').doc(docId).set(
+          promotion.toJson()..['id'] = docId,
+        );
   }
 
   @override
@@ -22,5 +27,21 @@ class PromotionRemoteDataSourceImpl implements IPromotionRemoteDataSource {
     final ref = storage.ref().child('promotions/$fileId.png');
     await ref.putFile(imageFile);
     return await ref.getDownloadURL();
+  }
+
+  @override
+  Future<List<PromotionModel>> fetchPromotions() async {
+    final snapshot = await firestore
+        .collection('promotions')
+        .orderBy('createdAt', descending: true)
+        .get();
+    return snapshot.docs
+        .map((doc) => PromotionModel.fromJson(doc.data(), documentId: doc.id))
+        .toList();
+  }
+
+  @override
+  Future<void> deletePromotion(String promotionId) {
+    return firestore.collection('promotions').doc(promotionId).delete();
   }
 }

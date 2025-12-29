@@ -11,9 +11,15 @@ class PromotionModel extends PromotionEntity {
     required super.imageUrl,
   });
 
-  factory PromotionModel.fromJson(Map<String, dynamic> json) {
+  factory PromotionModel.fromJson(
+    Map<String, dynamic> json, {
+    String? documentId,
+  }) {
+    final fallbackId = (documentId ?? '').isNotEmpty
+        ? documentId!
+        : (json['id'] as String? ?? '');
     return PromotionModel(
-      id: json['id'],
+      id: fallbackId,
       name: json['name'],
       description: json['description'],
       startDate: (json['startDate'] as Timestamp).toDate(),
@@ -24,10 +30,11 @@ class PromotionModel extends PromotionEntity {
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'name': name,
       'description': description,
-      'startDate': startDate,
-      'endDate': endDate,
+      'startDate': Timestamp.fromDate(startDate),
+      'endDate': Timestamp.fromDate(endDate),
       'imageUrl': imageUrl,
       'createdAt': DateTime.now(),
     };
