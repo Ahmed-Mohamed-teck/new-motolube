@@ -13,6 +13,7 @@ import 'features/upcoming_service/presentation/screen/customer_appointments_scre
 import 'features/user_cars/presentation/screen/add_new_car_screen.dart';
 import 'features/user_cars/presentation/screen/user_car_details_screen.dart';
 import 'features/chat/presentation/screen/chat_screen.dart';
+import 'features/coupons/presentation/screen/coupon_list_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -42,6 +43,8 @@ class RouteGenerator {
 
       case 'createPromotionScreen':
         return MaterialPageRoute(builder: (_) => const CreatePromotionScreen());
+      case 'couponListPage':
+        return MaterialPageRoute(builder: (_) => const CouponListScreen());
       case 'promotionControlPanel':
         return MaterialPageRoute(builder: (_) => const PromotionsListScreen());
 

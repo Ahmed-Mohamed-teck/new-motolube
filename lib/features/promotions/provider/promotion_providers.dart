@@ -36,7 +36,8 @@ final deletePromotionUseCaseProvider = Provider<DeletePromotionUseCase>(
       (ref) => DeletePromotionUseCase(ref.read(promotionRepositoryProvider)),
 );
 
-final promotionListProvider = StateNotifierProvider<PromotionListNotifier, AsyncValue<List<PromotionEntity>>>(
+final promotionListProvider = StateNotifierProvider.autoDispose<
+    PromotionListNotifier, ViewState>(
       (ref) => PromotionListNotifier(
     fetchUseCase: ref.read(fetchPromotionsUseCaseProvider),
     deleteUseCase: ref.read(deletePromotionUseCaseProvider),

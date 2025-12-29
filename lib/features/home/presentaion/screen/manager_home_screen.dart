@@ -7,20 +7,20 @@ class ManagerHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cards = <_ManagerCard>[
-      _ManagerCard(
-        title: 'Customers',
-        description: 'Customers control panel',
-        icon: Icons.person,
-        color: Colors.blue,
-        routeName: 'adminCustomersPage',
-      ),
-      _ManagerCard(
-        title: 'Technicians',
-        description: 'Technicians control panel',
-        icon: Icons.engineering,
-        color: Colors.green,
-        routeName: 'adminTechPage',
-      ),
+      // _ManagerCard(
+      //   title: 'Customers',
+      //   description: 'Customers control panel',
+      //   icon: Icons.person,
+      //   color: Colors.blue,
+      //   routeName: 'adminCustomersPage',
+      // ),
+      // _ManagerCard(
+      //   title: 'Technicians',
+      //   description: 'Technicians control panel',
+      //   icon: Icons.engineering,
+      //   color: Colors.green,
+      //   routeName: 'adminTechPage',
+      // ),
       _ManagerCard(
         title: 'Coupons',
         description: 'Create discount coupons',

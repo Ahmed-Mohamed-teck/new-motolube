@@ -1,16 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/widget/internal_app_bar.dart';
 import '../../domain/entity/promotion_entity.dart';
 import '../../provider/promotion_providers.dart';
+import '../view_model/promotion_list_notifier.dart';
 
-class PromotionsListScreen extends ConsumerWidget {
+class PromotionsListScreen extends ConsumerStatefulWidget {
   const PromotionsListScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<PromotionsListScreen> createState() =>
+      _PromotionsListScreenState();
+}
+
+class _PromotionsListScreenState extends ConsumerState<PromotionsListScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _ensureLoaded();
+    });
+  }
+
+  void _ensureLoaded() {
+    final notifier = ref.read(promotionListProvider.notifier);
+    notifier.load();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final state = ref.watch(promotionListProvider);
     final notifier = ref.read(promotionListProvider.notifier);
 
@@ -24,34 +45,42 @@ class PromotionsListScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: state.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (err, _) => _ErrorView(
-          message: 'Failed to load promotions',
-          onRetry: notifier.load,
-        ),
-        data: (promotions) {
-          if (promotions.isEmpty) {
-            return const Center(child: Text('No promotions found.'));
-          }
-          return RefreshIndicator(
-            onRefresh: notifier.load,
-            child: ListView.separated(
-              padding: const EdgeInsets.all(16),
-              itemBuilder: (context, index) {
-                final promotion = promotions[index];
-                return _PromotionCard(
-                  promotion: promotion,
-                  onDelete: () => notifier.delete(promotion.id),
-                );
-              },
-              separatorBuilder: (_, __) => const SizedBox(height: 12),
-              itemCount: promotions.length,
-            ),
-          );
-        },
-      ),
+      body: _buildBody(state, notifier),
     );
+  }
+
+  Widget _buildBody(ViewState state, PromotionListNotifier notifier) {
+    if (state is LoadingViewState || state is InitialViewState) {
+      return const _PromotionsSkeleton();
+    }
+    if (state is ErrorViewState) {
+      return _ErrorView(
+        message: state.errorMessage ?? 'Failed to load promotions',
+        onRetry: notifier.load,
+      );
+    }
+    if (state is EmptyViewState) {
+      return const Center(child: Text('No promotions found.'));
+    }
+    if (state is LoadedViewState<List<PromotionEntity>>) {
+      final promotions = state.data;
+      return RefreshIndicator(
+        onRefresh: notifier.load,
+        child: ListView.separated(
+          padding: const EdgeInsets.all(16),
+          itemBuilder: (context, index) {
+            final promotion = promotions[index];
+            return _PromotionCard(
+              promotion: promotion,
+              onDelete: () => notifier.delete(promotion.id),
+            );
+          },
+          separatorBuilder: (_, __) => const SizedBox(height: 12),
+          itemCount: promotions.length,
+        ),
+      );
+    }
+    return const SizedBox.shrink();
   }
 }
 
@@ -125,6 +154,74 @@ class _PromotionCard extends StatelessWidget {
               tooltip: 'Delete',
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _PromotionsSkeleton extends StatelessWidget {
+  const _PromotionsSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    return Skeletonizer(
+      child: ListView.separated(
+        padding: const EdgeInsets.all(16),
+        itemCount: 4,
+        separatorBuilder: (_, __) => const SizedBox(height: 12),
+        itemBuilder: (_, __) => Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 72,
+                  height: 72,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade300,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 14,
+                        width: 180,
+                        color: Colors.grey.shade300,
+                      ),
+                      const SizedBox(height: 8),
+                      Container(
+                        height: 12,
+                        width: 140,
+                        color: Colors.grey.shade300,
+                      ),
+                      const SizedBox(height: 10),
+                      Container(
+                        height: 12,
+                        width: 120,
+                        color: Colors.grey.shade300,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade300,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

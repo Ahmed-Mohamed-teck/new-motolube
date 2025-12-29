@@ -37,5 +37,19 @@ const String createAppointmentEndPoint =
     '$baseUrl/MotorLubeApp/createAppointment';
 const String initiatePaymentEndPoint =
     'https://interface.taajeer.com:1027/api/Payments/initiate';
+const String getCouponsEndPoint =
+    '$baseUrl/MotorLubeApp/GetCuoponList/x';
+String addCouponEndPoint({
+  required String appUserId,
+  required String companyName,
+  required String fromDate,
+  required String toDate,
+  required String discountRate,
+  required String couponCounts,
+  required String domain,
+}) {
+  return '$baseUrl/MotorLubeApp/AddCouponHeader/'
+      '$appUserId/$companyName/$fromDate/$toDate/$discountRate/$couponCounts/$domain';
+}
 String getPaymentStatusEndPoint(String transactionId) =>
     '$baseUrl/Payments/status?transactionId=${Uri.encodeComponent(transactionId)}';
