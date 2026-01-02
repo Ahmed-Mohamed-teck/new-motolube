@@ -34,11 +34,9 @@ class AuthRepositoryImpl implements IAuthRepository {
   }) async {
     final req = RegisterRequest(
       email: email,
-      isEmergencyTech: false,
       mobileNumber: phone,
       firstName: firstName,
       lastName: lastName,
-      userType: UserType.customer,
     );
     final res = await remote.register(req);
     return res.toEntity();
@@ -55,6 +53,8 @@ class AuthRepositoryImpl implements IAuthRepository {
     final res = await remote.getUserInfo(phoneNumber);
     return res.toEntity();
   }
+
+
 
 
 }

@@ -11,6 +11,7 @@ class UserModel {
   final bool isVerified;
   final UserType userType;
   final String fireBaseId;
+  final String? customer_id;
 
   UserModel({
     required this.oracleId,
@@ -22,6 +23,7 @@ class UserModel {
     required this.isVerified,
     required this.userType,
     this.fireBaseId = '',
+    this.customer_id = '',
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
@@ -38,6 +40,9 @@ class UserModel {
     isVerified: json['isVerified'] as bool? ?? false,
     userType: UserType.fromValue(json['userType'] as int? ?? 1),
     fireBaseId: (json['fireBaseId'] ?? json['firebaseId'] ?? '').toString(),
+    customer_id:
+        (json['customer_id'] ?? json['customerId'] ?? json['customerID'] ?? '')
+            .toString(),
   );
 
   User toEntity() => User(
@@ -50,6 +55,7 @@ class UserModel {
     isVerified: isVerified,
     userType: userType,
     fireBaseId: fireBaseId,
+    customer_id: customer_id,
   );
 }
 

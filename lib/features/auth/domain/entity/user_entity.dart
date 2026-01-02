@@ -10,6 +10,7 @@ class User {
   final bool isVerified;
   final UserType userType;
   final String fireBaseId;
+  final String? customer_id;
 
   const User({
     required this.oracleId,
@@ -21,5 +22,6 @@ class User {
     required this.isVerified,
     required this.userType,
     this.fireBaseId = '',
+    this.customer_id = '',
   });
 }
