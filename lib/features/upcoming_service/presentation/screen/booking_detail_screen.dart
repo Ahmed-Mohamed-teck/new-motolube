@@ -181,9 +181,10 @@ class _BookingDetailScreenState
   }
 
   void _openChat() {
+    final s = S.of(context);
     final bookingId = _bookingIdForChat(widget.service);
     if (bookingId == null) {
-      _showSnack('Missing booking id for chat.');
+      _showSnack(s.chatMissingBookingId);
       return;
     }
 
@@ -271,7 +272,7 @@ class _BookingDetailScreenState
               color: Theme.of(context).colorScheme.primary,
               icon: const Icon(Icons.chat_bubble_outline),
               onPressed: _openChat,
-              tooltip: 'Chat',
+              tooltip: s.chatTitle,
             ),
         ],
       ),

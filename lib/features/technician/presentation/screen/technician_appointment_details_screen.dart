@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:newmotorlube/core/widget/internal_app_bar.dart';
+import 'package:newmotorlube/generated/l10n.dart';
 
 import '../../../auth/provider/auth_provider.dart';
 import '../../../auth/presentation/view_model/auth_state.dart';
@@ -164,6 +165,8 @@ class _TechnicianAppointmentDetailsScreenState
       }
     }
 
+    final showChatAction = widget.appointment.bookingId.trim().isNotEmpty;
+
     return WillPopScope(
       onWillPop: () async {
         Navigator.of(context).pop(_hasUpdates);
@@ -173,6 +176,15 @@ class _TechnicianAppointmentDetailsScreenState
         appBar: InternalAppBar(
           title: 'Appointment Details',
           onBack: () => Navigator.of(context).pop(_hasUpdates),
+          actions: [
+            if (showChatAction)
+              IconButton(
+                icon: const Icon(Icons.chat_bubble_outline),
+                color: Theme.of(context).colorScheme.primary,
+                tooltip: S.of(context).chatTitle,
+                onPressed: _openChat,
+              ),
+          ],
         ),
         body: ListView(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
@@ -640,6 +652,18 @@ class _TechnicianAppointmentDetailsScreenState
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  void _openChat() {
+    final bookingId = widget.appointment.bookingId.trim();
+    if (bookingId.isEmpty) {
+      _showSnack(S.of(context).chatMissingBookingId);
+      return;
+    }
+    Navigator.of(context, rootNavigator: true).pushNamed(
+      'chatScreen',
+      arguments: bookingId,
+    );
   }
 
   String _humanizeMessage(String message) {

@@ -62,6 +62,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("رقم الهيكل 17 حرفًا"),
         "characterVinLimitError": MessageLookupByLibrary.simpleMessage(
             "رقم الهيكل يجب أن يكون 17 حرفًا"),
+        "chatEmptyMessage": MessageLookupByLibrary.simpleMessage(
+            "لا توجد رسائل بعد. ابدأ المحادثة."),
+        "chatErrorLoading":
+            MessageLookupByLibrary.simpleMessage("تعذر تحميل رسائل المحادثة."),
+        "chatInputHint": MessageLookupByLibrary.simpleMessage("اكتب رسالة"),
+        "chatLoginRequired": MessageLookupByLibrary.simpleMessage(
+            "يرجى تسجيل الدخول للتحدث مع الفني."),
+        "chatMissingBookingId":
+            MessageLookupByLibrary.simpleMessage("معرّف الحجز مفقود للمحادثة."),
+        "chatSendLabel": MessageLookupByLibrary.simpleMessage("إرسال"),
+        "chatTitle": MessageLookupByLibrary.simpleMessage("المحادثة"),
+        "chatUnavailable": MessageLookupByLibrary.simpleMessage(
+            "المحادثة غير متاحة لهذا الحجز."),
         "comment": MessageLookupByLibrary.simpleMessage("تعليق"),
         "commonErrorDescription": MessageLookupByLibrary.simpleMessage(
             "يرجى التحقق من اتصالك بالإنترنت أو إعادة المحاولة."),

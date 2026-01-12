@@ -62,6 +62,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("VIN must be 17 characters"),
         "characterVinLimitError":
             MessageLookupByLibrary.simpleMessage("VIN must be 17 characters"),
+        "chatEmptyMessage": MessageLookupByLibrary.simpleMessage(
+            "No messages yet. Start the conversation."),
+        "chatErrorLoading": MessageLookupByLibrary.simpleMessage(
+            "Unable to load chat messages."),
+        "chatInputHint": MessageLookupByLibrary.simpleMessage("Type a message"),
+        "chatLoginRequired": MessageLookupByLibrary.simpleMessage(
+            "Please sign in to chat with your technician."),
+        "chatMissingBookingId": MessageLookupByLibrary.simpleMessage(
+            "Missing booking id for chat."),
+        "chatSendLabel": MessageLookupByLibrary.simpleMessage("Send"),
+        "chatTitle": MessageLookupByLibrary.simpleMessage("Chat"),
+        "chatUnavailable": MessageLookupByLibrary.simpleMessage(
+            "Chat is not available for this booking."),
         "comment": MessageLookupByLibrary.simpleMessage("Comment"),
         "commonErrorDescription": MessageLookupByLibrary.simpleMessage(
             "Please check your internet connection or try again."),

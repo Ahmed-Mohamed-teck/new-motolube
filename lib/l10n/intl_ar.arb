@@ -201,5 +201,13 @@
         "type": "String"
       }
     }
-  }
+  },
+  "chatTitle": "المحادثة",
+  "chatUnavailable": "المحادثة غير متاحة لهذا الحجز.",
+  "chatLoginRequired": "يرجى تسجيل الدخول للتحدث مع الفني.",
+  "chatEmptyMessage": "لا توجد رسائل بعد. ابدأ المحادثة.",
+  "chatInputHint": "اكتب رسالة",
+  "chatSendLabel": "إرسال",
+  "chatErrorLoading": "تعذر تحميل رسائل المحادثة.",
+  "chatMissingBookingId": "معرّف الحجز مفقود للمحادثة."
 }

@@ -128,6 +128,7 @@ class AuthViewModel extends Notifier<AuthState> {
           email: result.user.email,
           isVerified: result.user.isVerified,
           userType: result.user.userType,
+          fireBaseId: result.user.fireBaseId,
           customer_id: result.user.customer_id,
         ),
       );
@@ -184,15 +185,17 @@ class AuthViewModel extends Notifier<AuthState> {
             firstName: user.firstName,
             lastName: user.lastName,
             name: user.name,
-          mobileNo: user.mobileNo,
-          email: user.email,
-          isVerified: user.isVerified,
-          userType: user.userType,
-          customer_id: user.customer_id,
-        ),
-      );
-    } catch (e) {
-      state = AuthenticationFailedState(appLang.authenticationErrorMessage);
+            mobileNo: user.mobileNo,
+            email: user.email,
+            isVerified: user.isVerified,
+            userType: user.userType,
+            fireBaseId:
+                user.fireBaseId.isNotEmpty ? user.fireBaseId : stored.fireBaseId,
+            customer_id: user.customer_id,
+          ),
+        );
+      } catch (e) {
+        state = AuthenticationFailedState(appLang.authenticationErrorMessage);
       }
     } else {
       state = const UnauthenticatedState();

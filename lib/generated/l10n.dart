@@ -1809,6 +1809,86 @@ class S {
       args: [route],
     );
   }
+
+  /// `Chat`
+  String get chatTitle {
+    return Intl.message(
+      'Chat',
+      name: 'chatTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chat is not available for this booking.`
+  String get chatUnavailable {
+    return Intl.message(
+      'Chat is not available for this booking.',
+      name: 'chatUnavailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please sign in to chat with your technician.`
+  String get chatLoginRequired {
+    return Intl.message(
+      'Please sign in to chat with your technician.',
+      name: 'chatLoginRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No messages yet. Start the conversation.`
+  String get chatEmptyMessage {
+    return Intl.message(
+      'No messages yet. Start the conversation.',
+      name: 'chatEmptyMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type a message`
+  String get chatInputHint {
+    return Intl.message(
+      'Type a message',
+      name: 'chatInputHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send`
+  String get chatSendLabel {
+    return Intl.message(
+      'Send',
+      name: 'chatSendLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to load chat messages.`
+  String get chatErrorLoading {
+    return Intl.message(
+      'Unable to load chat messages.',
+      name: 'chatErrorLoading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Missing booking id for chat.`
+  String get chatMissingBookingId {
+    return Intl.message(
+      'Missing booking id for chat.',
+      name: 'chatMissingBookingId',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -201,6 +201,13 @@
         "type": "String"
       }
     }
-  }
-  
+  },
+  "chatTitle": "Chat",
+  "chatUnavailable": "Chat is not available for this booking.",
+  "chatLoginRequired": "Please sign in to chat with your technician.",
+  "chatEmptyMessage": "No messages yet. Start the conversation.",
+  "chatInputHint": "Type a message",
+  "chatSendLabel": "Send",
+  "chatErrorLoading": "Unable to load chat messages.",
+  "chatMissingBookingId": "Missing booking id for chat."
 }
