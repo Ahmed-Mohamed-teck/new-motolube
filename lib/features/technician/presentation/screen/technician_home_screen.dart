@@ -27,7 +27,7 @@ class _TechnicianHomeScreenState extends ConsumerState<TechnicianHomeScreen> {
 
   DateTime? _fromDate;
   DateTime? _toDate;
-  int? _statusId = _defaultStatusId;
+  Set<int> _selectedStatusIds = {_defaultStatusId};
   String? _lastFetchedUserId;
 
   @override
@@ -55,7 +55,7 @@ class _TechnicianHomeScreenState extends ConsumerState<TechnicianHomeScreen> {
           userId: userId,
           fromDate: _fromDate,
           toDate: _toDate,
-          statusId: (_statusId ?? _defaultStatusId).toString(),
+          statusIds: _effectiveStatusIds(),
         );
   }
 
@@ -177,12 +177,20 @@ class _TechnicianHomeScreenState extends ConsumerState<TechnicianHomeScreen> {
   }
 
   String _statusLabelFor(List<TechnicianBookingStatus> statuses) {
-    final currentId = _statusId ?? _defaultStatusId;
-    final match = _statusById(statuses, currentId);
-    if (match != null && match.label.isNotEmpty) {
-      return match.label;
+    final ids = _effectiveStatusIds();
+    final labels = <String>[];
+    for (final id in ids) {
+      final match = _statusById(statuses, id);
+      if (match != null && match.label.isNotEmpty) {
+        labels.add(match.label);
+      }
     }
-    return 'Status ID $currentId';
+    if (labels.isEmpty) {
+      if (ids.length == 1) return 'Status ID ${ids.first}';
+      return '${ids.length} statuses selected';
+    }
+    if (labels.length <= 2) return labels.join(', ');
+    return '${labels.take(2).join(', ')} +${labels.length - 2} more';
   }
 
   TechnicianBookingStatus? _statusById(
@@ -229,7 +237,7 @@ class _TechnicianHomeScreenState extends ConsumerState<TechnicianHomeScreen> {
   }
 
   void _showStatusSelector(List<TechnicianBookingStatus> statuses) {
-    showModalBottomSheet<void>(
+    showModalBottomSheet<Set<int>>(
       context: context,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
@@ -237,16 +245,16 @@ class _TechnicianHomeScreenState extends ConsumerState<TechnicianHomeScreen> {
       builder: (context) {
         return StatusPickerSheet(
           statuses: statuses,
-          selectedId: _statusId ?? _defaultStatusId,
-          onSelected: (status) {
-            setState(() {
-              _statusId = int.tryParse(status.code) ?? _defaultStatusId;
-            });
-            Navigator.of(context).pop();
-          },
+          selectedIds: _effectiveStatusIds().toSet(),
         );
       },
-    );
+    ).then((selection) {
+      if (!mounted || selection == null) return;
+      setState(() {
+        _selectedStatusIds =
+            selection.isEmpty ? {_defaultStatusId} : selection;
+      });
+    });
   }
 
   void _retryStatuses() {
@@ -257,7 +265,7 @@ class _TechnicianHomeScreenState extends ConsumerState<TechnicianHomeScreen> {
     setState(() {
       _fromDate = null;
       _toDate = null;
-      _statusId = _defaultStatusId;
+      _selectedStatusIds = {_defaultStatusId};
     });
   }
 
@@ -285,6 +293,10 @@ class _TechnicianHomeScreenState extends ConsumerState<TechnicianHomeScreen> {
     }
   }
 
+  List<int> _effectiveStatusIds() {
+    if (_selectedStatusIds.isEmpty) return [_defaultStatusId];
+    return _selectedStatusIds.toList()..sort();
+  }
 
 }
 

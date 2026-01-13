@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
+import '../../domain/entity/technician_appointment_entity.dart';
 import '../../domain/use_case/get_technician_appointments_use_case.dart';
 import 'technician_appointments_state.dart';
 
@@ -18,6 +19,7 @@ class TechnicianAppointmentsViewModel
     DateTime? fromDate,
     DateTime? toDate,
     String statusId = _defaultStatusId,
+    List<int>? statusIds,
   }) async {
     if (userId.trim().isEmpty) {
       state = TechnicianAppointmentsError(
@@ -32,6 +34,11 @@ class TechnicianAppointmentsViewModel
       return;
     }
 
+    final statusIdList =
+        (statusIds != null && statusIds.isNotEmpty)
+            ? statusIds
+            : _parseStatusIds(statusId);
+
     final now = DateTime.now();
     final startDate = fromDate ?? DateTime(now.year, 1, 1);
     final endDate = toDate ?? DateTime(now.year, 12, 31);
@@ -43,24 +50,31 @@ class TechnicianAppointmentsViewModel
       userId: userId,
       fromDate: formattedFrom,
       toDate: formattedTo,
-      statusId: statusId,
+      statusId: statusIdList.map((e) => e.toString()).join(','),
     );
 
     state = TechnicianAppointmentsLoading(context: context);
 
     try {
-      final appointments = await _getAppointments(
-        userId: userId,
-        fromDate: formattedFrom,
-        toDate: formattedTo,
-        statusId: statusId,
-      );
+      final merged = <String, TechnicianAppointmentEntity>{};
+      for (final id in statusIdList) {
+        final appointments = await _getAppointments(
+          userId: userId,
+          fromDate: formattedFrom,
+          toDate: formattedTo,
+          statusId: id.toString(),
+        );
+        for (final appointment in appointments) {
+          merged[appointment.bookingId] = appointment;
+        }
+      }
+      final combinedAppointments = merged.values.toList();
       if (!mounted) return;
-      if (appointments.isEmpty) {
+      if (combinedAppointments.isEmpty) {
         state = TechnicianAppointmentsEmpty(context: context);
       } else {
         state = TechnicianAppointmentsLoaded(
-          appointments: appointments,
+          appointments: combinedAppointments,
           context: context,
         );
       }
@@ -75,5 +89,23 @@ class TechnicianAppointmentsViewModel
 
   void reset() {
     state = const TechnicianAppointmentsInitial();
+  }
+
+  List<int> _parseStatusIds(String statusId) {
+    final parts = statusId.split(',').map((e) => e.trim()).where(
+      (element) => element.isNotEmpty,
+    );
+    final parsed = <int>[];
+    for (final part in parts) {
+      final value = int.tryParse(part);
+      if (value != null) {
+        parsed.add(value);
+      }
+    }
+    if (parsed.isEmpty) {
+      final fallback = int.tryParse(_defaultStatusId) ?? 0;
+      return fallback > 0 ? [fallback] : <int>[12];
+    }
+    return parsed;
   }
 }

@@ -242,7 +242,7 @@ class _CustomerAppointmentsScreenState
   }
 
   void _showStatusSelector(List<TechnicianBookingStatus> statuses) {
-    showModalBottomSheet<void>(
+    showModalBottomSheet<Set<int>>(
       context: context,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
@@ -250,16 +250,16 @@ class _CustomerAppointmentsScreenState
       builder: (context) {
         return StatusPickerSheet(
           statuses: statuses,
-          selectedId: _statusId ?? -1,
-          onSelected: (status) {
-            setState(() {
-              _statusId = int.tryParse(status.code);
-            });
-            Navigator.of(context).pop();
-          },
+          selectedIds: _statusId != null ? {_statusId!} : <int>{},
+          allowMultiple: false,
         );
       },
-    );
+    ).then((selection) {
+      if (!mounted || selection == null) return;
+      setState(() {
+        _statusId = selection.isEmpty ? null : selection.first;
+      });
+    });
   }
 
   void _retryStatuses() {
