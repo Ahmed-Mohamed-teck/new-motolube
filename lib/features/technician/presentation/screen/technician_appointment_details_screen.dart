@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:newmotorlube/core/widget/internal_app_bar.dart';
 import 'package:newmotorlube/generated/l10n.dart';
 
+import '../../../../core/utils/helper_fuc.dart';
 import '../../../auth/provider/auth_provider.dart';
 import '../../../auth/presentation/view_model/auth_state.dart';
 import '../../domain/entity/booking_status.dart';
@@ -33,6 +34,7 @@ class _TechnicianAppointmentDetailsScreenState
     extends ConsumerState<TechnicianAppointmentDetailsScreen> {
   late int _selectedStatusId;
   late int _initialStatusId;
+  late String _initialStatusCode;
   bool _hasUpdates = false;
   bool _isCreatingSr = false;
   bool _isCompletingSr = false;
@@ -43,9 +45,8 @@ class _TechnicianAppointmentDetailsScreenState
   @override
   void initState() {
     super.initState();
-    final initialId =
-        int.tryParse(widget.appointment.bookingStatus.code) ??
-        TechnicianHomeScreenDefaults.statusId;
+    final initialId = _resolveInitialStatusId();
+    _initialStatusCode = _resolveInitialStatusCode();
     _initialStatusId = initialId;
     _selectedStatusId = initialId;
     _srNumber =
@@ -57,6 +58,15 @@ class _TechnicianAppointmentDetailsScreenState
   @override
   void didUpdateWidget(covariant TechnicianAppointmentDetailsScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
+    if (oldWidget.appointment.bookingStatus.code !=
+            widget.appointment.bookingStatus.code ||
+        oldWidget.appointment.bookingStatus.label !=
+            widget.appointment.bookingStatus.label) {
+      final parsedId = _resolveInitialStatusId();
+      _initialStatusCode = _resolveInitialStatusCode();
+      _initialStatusId = parsedId;
+      _selectedStatusId = parsedId;
+    }
     final latest =
         _sanitizeSrNumber(widget.appointment.srNumber) ??
         _extractSrFromRaw(widget.appointment.raw);
@@ -507,7 +517,8 @@ class _TechnicianAppointmentDetailsScreenState
 
   int? _statusIndex(List<TechnicianBookingStatus> statuses, int statusId) {
     for (var i = 0; i < statuses.length; i++) {
-      if (int.tryParse(statuses[i].code) == statusId) {
+      final parsed = _parseStatusInt(statuses[i].code);
+      if (parsed != null && parsed == statusId) {
         return i;
       }
     }
@@ -528,13 +539,36 @@ class _TechnicianAppointmentDetailsScreenState
     return null;
   }
 
+  int? _statusIndexByCode(
+    List<TechnicianBookingStatus> statuses,
+    String code,
+  ) {
+    final normalized = _normalizeStatusCode(code);
+    if (normalized.isEmpty) return null;
+    for (var i = 0; i < statuses.length; i++) {
+      if (_normalizeStatusCode(statuses[i].code) == normalized) {
+        return i;
+      }
+    }
+    return null;
+  }
+
   int? _resolveCurrentStatusIndex(List<TechnicianBookingStatus> statuses) {
+    final byCode = _statusIndexByCode(
+      statuses,
+      widget.appointment.bookingStatus.code,
+    );
+    if (byCode != null) return byCode;
+    final bySelected = _statusIndex(statuses, _selectedStatusId);
+    if (bySelected != null) return bySelected;
+    final byId = _statusIndex(statuses, _initialStatusId);
+    if (byId != null) return byId;
     final byLabel = _statusIndexByLabel(
       statuses,
       widget.appointment.statusLabel,
     );
     if (byLabel != null) return byLabel;
-    return _statusIndex(statuses, _initialStatusId);
+    return null;
   }
 
   int _statusIdAtIndex(List<TechnicianBookingStatus> statuses, int index) {
@@ -545,6 +579,10 @@ class _TechnicianAppointmentDetailsScreenState
   }
 
   int _resolveCurrentStatusId(List<TechnicianBookingStatus> statuses) {
+    final selectedIndex = _statusIndex(statuses, _selectedStatusId);
+    if (selectedIndex != null) {
+      return _statusIdAtIndex(statuses, selectedIndex);
+    }
     final index = _resolveCurrentStatusIndex(statuses);
     if (index != null) {
       return _statusIdAtIndex(statuses, index);
@@ -556,8 +594,80 @@ class _TechnicianAppointmentDetailsScreenState
     return value.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '');
   }
 
+  int _resolveInitialStatusId() {
+    final codeId = _parseStatusInt(widget.appointment.bookingStatus.code);
+    if (codeId != null) return codeId;
+    final labelId = _parseStatusInt(widget.appointment.bookingStatus.label);
+    if (labelId != null) return labelId;
+    return TechnicianHomeScreenDefaults.statusId;
+  }
+
+  String _resolveInitialStatusCode() {
+    final rawCode = widget.appointment.bookingStatus.code.trim();
+    if (rawCode.isNotEmpty) return rawCode;
+    final label = widget.appointment.bookingStatus.label.trim();
+    if (label.isNotEmpty) return label;
+    return '';
+  }
+
   int _parseStatusId(TechnicianBookingStatus status) {
-    return int.tryParse(status.code) ?? TechnicianHomeScreenDefaults.statusId;
+    return _parseStatusInt(status.code) ?? TechnicianHomeScreenDefaults.statusId;
+  }
+
+  int? _parseStatusInt(String? code) {
+    final raw = code?.trim() ?? '';
+    if (raw.isEmpty) return null;
+
+    final canonical = _canonicalStatusKey(raw);
+    if (canonical != null) {
+      final mapped = getStatusIdFromStatusName(canonical);
+      if (mapped != 0) return mapped;
+    }
+
+    final mapped = getStatusIdFromStatusName(raw);
+    if (mapped != 0) return mapped;
+
+    final intVal = int.tryParse(raw);
+    if (intVal != null) return intVal;
+
+    final doubleVal = double.tryParse(raw);
+    if (doubleVal != null) return doubleVal.toInt();
+
+    final digits = RegExp(r'-?\d+').firstMatch(raw);
+    if (digits != null) {
+      final fromDigits = int.tryParse(digits.group(0)!);
+      if (fromDigits != null) return fromDigits;
+    }
+
+    return null;
+  }
+
+  String _normalizeStatusCode(String? code) {
+    final raw = code?.trim() ?? '';
+    if (raw.isEmpty) return '';
+    final parsed = _parseStatusInt(raw);
+    if (parsed != null) return parsed.toString();
+    return raw.toLowerCase();
+  }
+
+  String? _canonicalStatusKey(String raw) {
+    final normalized = raw.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '');
+    if (normalized.isEmpty) return null;
+    const map = {
+      'newbooking': 'newBooking',
+      'accepted': 'accepted',
+      'rejected': 'rejected',
+      'drivetocustomer': 'driveToCustomer',
+      'arrived': 'arrived',
+      'openjobcard': 'openJobCard',
+      'completedjobcard': 'completedJobCard',
+      'invoicedpaid': 'invoicedPaid',
+      'cancelled': 'cancelled',
+      'needapproval': 'needApproval',
+      'companyrejected': 'companyRejected',
+      'expired': 'expired',
+    };
+    return map[normalized];
   }
 
   Future<bool> _createServiceRequest() async {
