@@ -3,6 +3,7 @@ import 'package:newmotorlube/core/providers/global_lang_provider.dart';
 import 'package:newmotorlube/core/widget/image_loader.dart';
 import 'package:newmotorlube/core/widget/internal_app_bar.dart';
 import '../../domain/entity/car_entity.dart';
+import 'add_new_car_screen.dart';
 
 class UserCarDetailsScreen extends StatefulWidget {
   const UserCarDetailsScreen({super.key, required this.car});
@@ -285,25 +286,19 @@ class _CarDetailsScreenState extends State<UserCarDetailsScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: FilledButton.icon(
-                        onPressed: () {/* TODO: open edit flow */},
+                        onPressed: () async {
+                          final updated = await Navigator.of(context).push<bool>(
+                            MaterialPageRoute(
+                              builder: (_) => AddNewCarScreen(existingCar: car),
+                            ),
+                          );
+                          if (updated == true && mounted) {
+                            Navigator.of(context).pop(true);
+                          }
+                        },
                         icon: const Icon(Icons.edit),
                         label: Text(appLang.userCarsEditInfo),
                         style: FilledButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 14),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    SizedBox(
-                      width: double.infinity,
-                      child: OutlinedButton.icon(
-                        onPressed: () {/* TODO: confirm delete */},
-                        icon: const Icon(Icons.delete_forever),
-                        label: Text(appLang.userCarsDeleteCar),
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: Colors.red,
-                          side: const BorderSide(color: Colors.redAccent),
                           padding: const EdgeInsets.symmetric(vertical: 14),
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                         ),

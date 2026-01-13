@@ -1,11 +1,12 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:http/http.dart' as http;
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:newmotorlube/core/providers/current_locale_provider.dart';
@@ -22,13 +23,17 @@ import '../../../../core/widget/internal_app_bar.dart';
 import '../view_model/car_brands_state.dart';
 
 class AddNewCarScreen extends ConsumerStatefulWidget {
-  const AddNewCarScreen({super.key});
+  final CarEntity? existingCar;
+
+  const AddNewCarScreen({super.key, this.existingCar});
 
   @override
   ConsumerState<AddNewCarScreen> createState() => _AddNewCarScreenState();
 }
 
 class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
+  bool get _isEditing => widget.existingCar != null;
+
   final _formKey = GlobalKey<FormState>();
 
   // Text controllers
@@ -48,6 +53,7 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
   // Images state
   final ImagePicker _picker = ImagePicker();
   final List<XFile> _carImages = [];
+  final List<String> _existingImages = [];
 
   // Lists
   late final List<int> _years = List.generate(
@@ -61,15 +67,17 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
   @override
   void initState() {
     super.initState();
-    _plateChars = CharListProvider.getPlateChars(
-      ref.read(currentLocaleProvider),
-    );
-    _plateNumbers = CharListProvider.getPlateNumbers(
-      ref.read(currentLocaleProvider),
-    );
+
     // fetch manufacturers
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(manufacturersViewModelProvider.notifier).fetchManufacturers();
+      _plateChars = CharListProvider.getPlateChars(
+        ref.read(currentLocaleProvider),
+      );
+      _plateNumbers = CharListProvider.getPlateNumbers(
+        ref.read(currentLocaleProvider),
+      );
+      _prefillIfEditing();
     });
   }
 
@@ -79,6 +87,114 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
     _vinCtrl.dispose();
     _plateNumberCtrl.dispose();
     super.dispose();
+  }
+
+  void _prefillIfEditing() {
+    final car = widget.existingCar;
+    if (car == null) return;
+
+    _selectedManufacturer = car.manufacturer.isNotEmpty ? car.manufacturer : null;
+    _modelCtrl.text = car.carModel;
+    _vinCtrl.text = car.vinNumber;
+    _selectedYear = int.tryParse(car.modelYear);
+
+    // Normalize plate values to current locale lists
+    String? mapLetter(String ch) {
+      final trimmed = ch.trim();
+      if (trimmed.isEmpty) return null;
+      final upper = trimmed.toUpperCase();
+
+      // If already matches current locale
+      final direct = _plateChars.firstWhere(
+        (c) => c.toUpperCase() == upper,
+        orElse: () => '',
+      );
+      if (direct.isNotEmpty) return direct;
+
+      final iEn = CharListProvider.englishChars.indexWhere(
+        (c) => c.toUpperCase() == upper,
+      );
+      final iAr = CharListProvider.arabicChars.indexWhere(
+        (c) => c == trimmed,
+      );
+      if (_plateChars == CharListProvider.arabicChars && iEn != -1) {
+        return CharListProvider.arabicChars[iEn];
+      }
+      if (_plateChars == CharListProvider.englishChars && iAr != -1) {
+        return CharListProvider.englishChars[iAr];
+      }
+      return null;
+    }
+
+    String? mapNumber(String ch) {
+      final trimmed = ch.trim();
+      if (trimmed.isEmpty) return null;
+
+      final direct = _plateNumbers.firstWhere(
+        (c) => c == trimmed,
+        orElse: () => '',
+      );
+      if (direct.isNotEmpty) return direct;
+
+      final iEn = CharListProvider.numbers.indexOf(trimmed);
+      final iAr = CharListProvider.arabicNumbers.indexOf(trimmed);
+      if (_plateNumbers == CharListProvider.arabicNumbers && iEn != -1) {
+        return CharListProvider.arabicNumbers[iEn];
+      }
+      if (_plateNumbers == CharListProvider.numbers && iAr != -1) {
+        return CharListProvider.numbers[iAr];
+      }
+      return null;
+    }
+
+    final plateRaw =
+        car.englishPlate.isNotEmpty ? car.englishPlate : car.arabicPlate;
+    final plate = plateRaw.where((c) => c.trim().isNotEmpty).toList();
+    bool isLetter(String ch) {
+      final trimmed = ch.trim();
+      if (trimmed.isEmpty) return false;
+      final upper = trimmed.toUpperCase();
+      return CharListProvider.englishChars.any((c) => c.toUpperCase() == upper) ||
+          CharListProvider.arabicChars.contains(trimmed);
+    }
+
+    bool isNumber(String ch) {
+      final trimmed = ch.trim();
+      if (trimmed.isEmpty) return false;
+      return CharListProvider.numbers.contains(trimmed) ||
+          CharListProvider.arabicNumbers.contains(trimmed);
+    }
+
+    if (plate.length >= 7) {
+      final startsWithLetter = isLetter(plate[0]) && isLetter(plate[1]) && isLetter(plate[2]);
+      final startsWithNumber = isNumber(plate[0]) && isNumber(plate[1]) && isNumber(plate[2]) && isNumber(plate[3]);
+
+      if (startsWithLetter) {
+        // Letters first, then numbers
+        _plateL1 = mapLetter(plate[0]);
+        _plateL2 = mapLetter(plate[1]);
+        _plateL3 = mapLetter(plate[2]);
+        _plateL4 = mapNumber(plate[3]);
+        _plateL5 = mapNumber(plate[4]);
+        _plateL6 = mapNumber(plate[5]);
+        _plateL7 = mapNumber(plate[6]);
+      } else if (startsWithNumber) {
+        // Numbers first, then letters
+        _plateL1 = mapLetter(plate[4]);
+        _plateL2 = mapLetter(plate[5]);
+        _plateL3 = mapLetter(plate[6]);
+        _plateL4 = mapNumber(plate[0]);
+        _plateL5 = mapNumber(plate[1]);
+        _plateL6 = mapNumber(plate[2]);
+        _plateL7 = mapNumber(plate[3]);
+      }
+    }
+
+    setState(() {
+      _existingImages.addAll(car.carImages);
+      
+    });
+    
   }
 
   Future<void> _pickCamera() async {
@@ -145,11 +261,13 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
                 },
               ),
               ListTile(
+
                 leading: const Icon(Icons.photo_library_outlined),
                 title: Text(appLang.userCarsChooseFromGallery),
                 onTap: () {
                   Navigator.pop(context);
                   _pickGallery();
+
                 },
               ),
             ],
@@ -161,6 +279,31 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
 
   void _removeImage(int index) {
     setState(() => _carImages.removeAt(index));
+  }
+
+  Future<List<String>> _convertExistingImagesToBase64({bool allowEmpty = false}) async {
+    final List<String> converted = [];
+    for (final src in _existingImages) {
+      final trimmed = src.trim();
+      if (trimmed.isEmpty) continue;
+      final isUrl = trimmed.toLowerCase().startsWith('http');
+      if (!isUrl) {
+        converted.add(trimmed);
+        continue;
+      }
+      try {
+        final res = await http.get(Uri.parse(trimmed));
+        if (res.statusCode == 200 && res.bodyBytes.isNotEmpty) {
+          converted.add(base64Encode(res.bodyBytes));
+        }
+      } catch (_) {
+        // ignore failed fetch; we will validate later if nothing converts
+      }
+    }
+    if (converted.isEmpty && !allowEmpty) {
+      throw Exception(appLang.userCarsAddImageRequirement);
+    }
+    return converted;
   }
 
   void _save() async {
@@ -217,7 +360,8 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
         );
         return;
       }
-      if (_carImages.isEmpty) {
+      final hasImagesForSubmission = _carImages.isNotEmpty || _existingImages.isNotEmpty;
+      if (!hasImagesForSubmission) {
         setState(() => _imagesError = true);
         return;
       } else {
@@ -228,7 +372,12 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
       try {
         setState(() => _isPreparingSubmission = true);
         final car = await _buildCarEntity();
-        await ref.read(addUserCarViewModelProvider.notifier).addCar(car);
+        final notifier = ref.read(addUserCarViewModelProvider.notifier);
+        if (_isEditing) {
+          await notifier.updateCar(car);
+        } else {
+          await notifier.addCar(car);
+        }
       } catch (e) {
         ScaffoldMessenger.of(
           context,
@@ -310,15 +459,24 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
       imagesBase64.add(base64Encode(compressed));
     }
 
+    final existingImagesBase64 = _existingImages.isNotEmpty
+        ? await _convertExistingImagesToBase64(allowEmpty: imagesBase64.isEmpty)
+        : <String>[];
+
+    final imagesForSubmission = [
+      ...existingImagesBase64,
+      ...imagesBase64,
+    ];
+
     return CarEntity(
-      vehicleId: '', // to be assigned by backend
-      mileage: '0', // initial mileage
+      vehicleId: widget.existingCar?.vehicleId ?? '', // to be assigned by backend
+      mileage: widget.existingCar?.mileage ?? '0', // initial mileage
       arabicPlate: arabicPlate,
       englishPlate: englishPlate,
       carModel: _modelCtrl.text,
       manufacturer: _selectedManufacturer!,
       modelYear: _selectedYear!.toString(),
-      carImages: imagesBase64,
+      carImages: imagesForSubmission,
       vinNumber: _vinCtrl.text,
     );
   }
@@ -348,7 +506,9 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
       });
     }
     return Scaffold(
-      appBar: InternalAppBar(title: appLang.addCar),
+      appBar: InternalAppBar(
+        title: _isEditing ? appLang.userCarsEditInfo : appLang.addCar,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.all(16),
@@ -649,6 +809,7 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
                   children: [
                     _ImagesGrid(
                       images: _carImages,
+                      existingImages: _existingImages,
                       onAdd: _showImageSheet,
                       onRemove: _removeImage,
                     ),
@@ -794,10 +955,11 @@ class _PlateLetterDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final safeValue = (value != null && letters.contains(value)) ? value : null;
     return SizedBox(
       width: 80,
       child: DropdownButtonFormField<String>(
-        value: value,
+        value: safeValue,
         isExpanded: true,
         decoration: InputDecoration(
           filled: true,
@@ -827,11 +989,13 @@ class _PlateLetterDropdown extends StatelessWidget {
 class _ImagesGrid extends StatelessWidget {
   const _ImagesGrid({
     required this.images,
+    required this.existingImages,
     required this.onAdd,
     required this.onRemove,
   });
 
   final List<XFile> images;
+  final List<String> existingImages;
   final VoidCallback onAdd;
   final void Function(int index) onRemove;
 
@@ -839,6 +1003,7 @@ class _ImagesGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final tiles = <Widget>[
       _AddTile(onTap: onAdd),
+      ...existingImages.map((src) => _ExistingImageTile(src: src)).toList(),
       ...List.generate(images.length, (i) {
         final xf = images[i];
         return _ImageTile(file: File(xf.path), onRemove: () => onRemove(i));
@@ -912,6 +1077,34 @@ class _ImageTile extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _ExistingImageTile extends StatelessWidget {
+  const _ExistingImageTile({required this.src});
+  final String src;
+
+  @override
+  Widget build(BuildContext context) {
+    Widget child;
+    if (src.toLowerCase().startsWith('http')) {
+      child = Image.network(src, fit: BoxFit.cover);
+    } else {
+      try {
+        final bytes = base64Decode(src);
+        child = Image.memory(bytes, fit: BoxFit.cover);
+      } catch (_) {
+        child = Container(color: Colors.grey.shade200);
+      }
+    }
+
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        decoration: BoxDecoration(border: Border.all(color: Colors.grey.shade300)),
+        child: child,
+      ),
     );
   }
 }

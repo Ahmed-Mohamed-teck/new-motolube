@@ -5,7 +5,7 @@ import '../model/car_model.dart';
 
 abstract class IUserCarRemoteDataSource {
   Future<void> addCar({required CarModel car});
-  Future<void> deleteCar({required String carId});
+  Future<void> updateCar({required CarModel car});
   Future<List<CarModel>> getCars({required String customerId});
   Future<CarModel> getCarById({required String carId});
   Future<List<ManufactureModel>> getManufacturers();

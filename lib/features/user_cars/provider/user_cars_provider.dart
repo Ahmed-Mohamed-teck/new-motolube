@@ -9,6 +9,7 @@ import '../data/data_source/user_car_remote_data_source.dart';
 import '../data/repository/user_car_repository.dart';
 import '../domain/repository/i_user_car_repository.dart';
 import '../domain/use_case/add_user_car_use_case.dart';
+import '../domain/use_case/update_user_car_use_case.dart';
 import '../domain/use_case/get_user_cars_use_case.dart';
 import '../presentation/view_model/car_brands_state.dart';
 import '../presentation/view_model/car_brands_view_model.dart';
@@ -57,8 +58,15 @@ final addUserCarUseCaseProvider = Provider<AddUserCarUseCase>((ref) {
   return AddUserCarUseCase(ref.read(userCarsRepositoryProvider));
 });
 
+final updateUserCarUseCaseProvider = Provider<UpdateUserCarUseCase>((ref) {
+  return UpdateUserCarUseCase(ref.read(userCarsRepositoryProvider));
+});
+
 final addUserCarViewModelProvider = StateNotifierProvider.autoDispose<AddUserCarViewModel, AddUserCarState>((ref) {
-  return AddUserCarViewModel(ref.read(addUserCarUseCaseProvider));
+  return AddUserCarViewModel(
+    ref.read(addUserCarUseCaseProvider),
+    ref.read(updateUserCarUseCaseProvider),
+  );
 });
 
 final userCarsViewModelProvider = StateNotifierProvider.autoDispose<UserCarsViewModel, UserCarsState>((ref) {

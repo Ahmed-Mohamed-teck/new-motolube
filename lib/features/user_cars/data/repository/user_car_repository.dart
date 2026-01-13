@@ -17,11 +17,10 @@ class UserCarRepository extends IUserCarRepository {
     return _remoteDataSource.addCar(car: carModel);
   }
 
-
-
   @override
-  Future<void> deleteCar({required String carId}) {
-    return _remoteDataSource.deleteCar(carId: carId);
+  Future<void> updateCar({required CarEntity car}) {
+    final carModel = CarModel.fromEntity(car);
+    return _remoteDataSource.updateCar(car: carModel);
   }
 
   @override

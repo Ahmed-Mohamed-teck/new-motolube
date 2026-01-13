@@ -33,12 +33,6 @@ class UserCarsRemoteDataSourceImpl extends IUserCarRemoteDataSource{
   }
 
   @override
-  Future<void> deleteCar({required String carId}) {
-    // TODO: implement deleteCar
-    throw UnimplementedError();
-  }
-
-  @override
   Future<CarModel> getCarById({required String carId}) {
     // TODO: implement getCarById
     throw UnimplementedError();
@@ -87,9 +81,20 @@ class UserCarsRemoteDataSourceImpl extends IUserCarRemoteDataSource{
   }
 
   @override
-  Future<void> updateCar({required String carId, required CarModel updatedCar}) {
-    // TODO: implement updateCar
-    throw UnimplementedError();
+  Future<void> updateCar({required CarModel car}) async {
+    try {
+      final storedAuth = await _authLocalRepository.getStoredAuth();
+      final oracleId = storedAuth?.oracleId;
+      if (oracleId == null || oracleId.isEmpty) {
+        throw Exception('Missing oracleId in stored auth');
+      }
+      await dio.post(
+        addVehicleEndPoint,
+        data: car.toJson(oracleId),
+      );
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override

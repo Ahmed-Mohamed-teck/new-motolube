@@ -69,10 +69,10 @@ class CarModel extends CarEntity {
       'year_manufactured': modelYear,
       'photoBase64': carImages.toList(),
       'vin': vinNumber,
+      if (vehicleId.isNotEmpty) 'vehicle_id': vehicleId,
     };
   }
 }
-
 
 
 
