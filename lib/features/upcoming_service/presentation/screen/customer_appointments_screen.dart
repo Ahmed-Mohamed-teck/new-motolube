@@ -172,7 +172,7 @@ class _CustomerAppointmentsScreenState
         );
       }
       final children = services
-          .map((service) => _mapToBookingCard(context, service))
+          .map((service) => _mapToBookingCard(service))
           .expand((widget) => [widget, const SizedBox(height: 12)])
           .toList()
         ..removeLast();
@@ -296,62 +296,68 @@ class _CustomerAppointmentsScreenState
     }
     return message.isNotEmpty ? message : 'Something went wrong.';
   }
-}
 
-Widget _mapToBookingCard(BuildContext context, UpcomingServiceEntity service) {
-  final s = S.of(context);
-  final dateLabel = _formatDate(context, service);
-  final timeLabel = _formatTime(service);
-  final branchLabel = _valueOrFallback(
-    service.branchLabel.isNotEmpty ? service.branchLabel : service.location ?? '',
-    fallback: s.upcomingServicesLocationFallback,
-  );
-  final technicianLabel = _valueOrFallback(
-    service.technicianLabel,
-    fallback: s.upcomingServicesTechnicianFallback,
-  );
-  final plateText = _valueOrFallback(
-    service.plateText,
-    fallback: s.upcomingServicesPlateFallback,
-  );
-  final carCandidate =
-      service.carTitle.isNotEmpty ? service.carTitle : service.serviceName;
-  final carTitle = _valueOrFallback(
-    carCandidate,
-    fallback: s.upcomingServicesVehiclePlaceholder,
-  );
-  final packageCandidate = service.packageTitle.isNotEmpty
-      ? service.packageTitle
-      : service.serviceName;
-  final package = _valueOrFallback(
-    packageCandidate,
-    fallback: s.upcomingServicesServicePlaceholder,
-  );
-  final statusRaw = service.status.trim();
-  final statusLabel = _statusLabel(context, statusRaw);
-  final statusColors = _statusColorsForStatus(
-    statusRaw.isEmpty ? 'pending' : statusRaw,
-  );
+  Widget _mapToBookingCard(UpcomingServiceEntity service) {
+    final s = S.of(context);
+    final dateLabel = _formatDate(context, service);
+    final timeLabel = _formatTime(service);
+    final branchLabel = _valueOrFallback(
+      service.branchLabel.isNotEmpty ? service.branchLabel : service.location ?? '',
+      fallback: s.upcomingServicesLocationFallback,
+    );
+    final technicianLabel = _valueOrFallback(
+      service.technicianLabel,
+      fallback: s.upcomingServicesTechnicianFallback,
+    );
+    final plateText = _valueOrFallback(
+      service.plateText,
+      fallback: s.upcomingServicesPlateFallback,
+    );
+    final carCandidate =
+        service.carTitle.isNotEmpty ? service.carTitle : service.serviceName;
+    final carTitle = _valueOrFallback(
+      carCandidate,
+      fallback: s.upcomingServicesVehiclePlaceholder,
+    );
+    final packageCandidate = service.packageTitle.isNotEmpty
+        ? service.packageTitle
+        : service.serviceName;
+    final package = _valueOrFallback(
+      packageCandidate,
+      fallback: s.upcomingServicesServicePlaceholder,
+    );
+    final statusRaw = service.status.trim();
+    final statusLabel = _statusLabel(context, statusRaw);
+    final statusColors = _statusColorsForStatus(
+      statusRaw.isEmpty ? 'pending' : statusRaw,
+    );
 
-  return BookingSummaryCard(
-    carTitle: carTitle,
-    plate: plateText,
-    packageTitle: package,
-    dateLabel: dateLabel,
-    timeLabel: timeLabel,
-    locationLabel: branchLabel,
-    technicianLabel: technicianLabel,
-    statusText: statusLabel,
-    statusBg: statusColors.$1,
-    statusFg: statusColors.$2,
-    onTap: () {
-      Navigator.of(context, rootNavigator: true).pushNamed(
-        'bookingDetailScreen',
-        arguments: service,
-      );
-    },
-  );
-}
+    return BookingSummaryCard(
+      carTitle: carTitle,
+      plate: plateText,
+      packageTitle: package,
+      dateLabel: dateLabel,
+      timeLabel: timeLabel,
+      locationLabel: branchLabel,
+      technicianLabel: technicianLabel,
+      statusText: statusLabel,
+      statusBg: statusColors.$1,
+      statusFg: statusColors.$2,
+      onTap: () async {
+        final result = await Navigator.of(context, rootNavigator: true).pushNamed(
+          'bookingDetailScreen',
+          arguments: service,
+        );
+        if (result == true && mounted) {
+          await ref.read(upcomingServiceViewModelProvider.notifier).fetchUpcomingServices(
+                fromDate: _fromDate,
+                toDate: _toDate,
+                statusId: _statusId,
+              );
+        }
+      },
+    );
+  }
 
 String _formatDate(BuildContext context, UpcomingServiceEntity service) {
   final date = service.appointmentDate;
@@ -408,6 +414,8 @@ String _statusLabel(BuildContext context, String status) {
     return (const Color(0xFFE2ECFF), const Color(0xFF0F4AA3));
   }
   return (const Color(0xFFF1F2F4), const Color(0xFF44474F));
+}
+
 }
 
 class _UpcomingServiceLoadingCard extends StatelessWidget {

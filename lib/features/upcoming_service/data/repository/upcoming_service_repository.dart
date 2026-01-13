@@ -48,4 +48,15 @@ class UpcomingServiceRepository implements IUpcomingServiceRepository {
 
     return List<UpcomingServiceEntity>.from(models);
   }
+
+  @override
+  Future<void> updateAppointmentStatus({
+    required String bookingId,
+    required String statusId,
+  }) {
+    return _remoteDataSource.updateAppointmentStatus(
+      bookingId: bookingId,
+      statusId: statusId,
+    );
+  }
 }

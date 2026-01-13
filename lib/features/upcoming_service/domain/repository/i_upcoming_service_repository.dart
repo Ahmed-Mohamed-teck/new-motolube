@@ -6,4 +6,9 @@ abstract class IUpcomingServiceRepository {
     DateTime? toDate,
     int? statusId,
   });
+
+  Future<void> updateAppointmentStatus({
+    required String bookingId,
+    required String statusId,
+  });
 }

@@ -65,4 +65,26 @@ class UpcomingServiceRemoteDataSourceImpl
       );
     }
   }
+
+  @override
+  Future<void> updateAppointmentStatus({
+    required String bookingId,
+    required String statusId,
+  }) async {
+    try {
+      await dio.post(
+        updateAppointmentStatusEndPoint,
+        data: {
+          'bookingId': bookingId,
+          'status_Id': statusId,
+        },
+      );
+    } on DioException catch (e) {
+      final statusCode = e.response?.statusCode;
+      final reason = e.message ?? 'Unknown error';
+      throw Exception(
+        'Failed to update appointment status [code: $statusCode]: $reason',
+      );
+    }
+  }
 }

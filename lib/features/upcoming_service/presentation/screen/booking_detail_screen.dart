@@ -10,7 +10,11 @@ import '../../../payment/domain/entity/payment_initiation_request.dart';
 import '../../../payment/presentation/screen/payment_webview_screen.dart';
 import '../../../payment/presentation/state/payment_state.dart';
 import '../../../payment/provider/payment_provider.dart';
+import '../../../technician/provider/technician_provider.dart';
+import '../../../technician/domain/entity/booking_status.dart';
 import '../../domain/entity/upcoming_service_entity.dart';
+import '../../provider/upcoming_service_provider.dart';
+import '../view_model/upcoming_service_action_state.dart';
 import '../../../../core/utils/helper_fuc.dart';
 
 class BookingDetailScreen extends ConsumerStatefulWidget {
@@ -25,6 +29,12 @@ class BookingDetailScreen extends ConsumerStatefulWidget {
 
 class _BookingDetailScreenState
     extends ConsumerState<BookingDetailScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+  }
+
   Future<void> _handlePayment() async {
     final request = _buildPaymentRequest();
     final result = await ref
@@ -194,6 +204,36 @@ class _BookingDetailScreenState
     );
   }
 
+  Future<void> _confirmCancel(String bookingId, String statusId) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Cancel appointment?'),
+          content: const Text(
+            'Are you sure you want to cancel this appointment?',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('No'),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text('Yes, cancel'),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (confirmed == true && mounted) {
+      await ref
+          .read(upcomingServiceActionViewModelProvider.notifier)
+          .cancelAppointment(bookingId: bookingId, statusId: statusId);
+    }
+  }
+
   String? _bookingIdForChat(UpcomingServiceEntity service) {
     final candidates = [
       service.appointmentId,
@@ -228,8 +268,35 @@ class _BookingDetailScreenState
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<UpcomingServiceActionState>(
+      upcomingServiceActionViewModelProvider,
+          (prev, next) {
+        if (!mounted) return;
+        if (next is UpcomingServiceActionSuccess) {
+          _showSnack('Appointment cancelled successfully.');
+          Navigator.of(context).pop(true);
+          ref.read(upcomingServiceActionViewModelProvider.notifier).reset();
+        } else if (next is UpcomingServiceActionError) {
+          _showSnack(next.message);
+          ref.read(upcomingServiceActionViewModelProvider.notifier).reset();
+        }
+      },
+    );
     final service = widget.service;
     final s = S.of(context);
+    final statusesAsync = ref.watch(technicianBookingStatusesProvider);
+    final cancelStatusId = statusesAsync.maybeWhen(
+      data: (list) {
+        final match = list.firstWhere(
+          (item) => item.label.toLowerCase().contains('cancel'),
+          orElse: () => const TechnicianBookingStatus(),
+        );
+        return match.label.isNotEmpty ? match.code : null;
+      },
+      orElse: () => null,
+    );
+    final actionState = ref.watch(upcomingServiceActionViewModelProvider);
+    final isCancelling = actionState is UpcomingServiceActionLoading;
     final paymentState = ref.watch(paymentViewModelProvider);
     final isProcessingPayment = paymentState is PaymentLoading;
     final carCandidate =
@@ -262,6 +329,14 @@ class _BookingDetailScreenState
     );
     final requiresPayment = _requiresPayment(service);
     final showChatIcon = _shouldShowChatIcon(service);
+    final statusLower = service.status.toLowerCase();
+    final statusId = _parseStatusId(service.status);
+    final canCancel =
+        cancelStatusId != null &&
+        service.appointmentId.trim().isNotEmpty &&
+        !statusLower.contains('openJobCard') &&
+        !statusLower.contains('cancel') &&
+        (statusId == null || statusId < 6);
 
     return Scaffold(
       appBar: InternalAppBar(
@@ -401,6 +476,49 @@ class _BookingDetailScreenState
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
                       : const Text('Pay Now'),
+                ),
+              ],
+              const SizedBox(height: 12),
+              if (canCancel) ...[
+                OutlinedButton.icon(
+                  onPressed: isCancelling
+                      ? null
+                      : () {
+                          final bookingId = service.appointmentId.trim();
+                          final statusId = cancelStatusId!;
+                          _confirmCancel(bookingId, statusId);
+                        },
+                  icon: isCancelling
+                      ? const SizedBox(
+                          height: 18,
+                          width: 18,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : const Icon(Icons.cancel_outlined, color: Colors.red),
+                  label: Text(
+                    isCancelling ? 'Cancelling...' : 'Cancel appointment',
+                    style: const TextStyle(color: Colors.red),
+                  ),
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: Colors.redAccent),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  ),
+                ),
+              ] else if (statusLower.contains('open job card')) ...[
+                Text(
+                  'Cannot cancel after job card is opened.',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.red),
+                ),
+              ] else if (cancelStatusId == null && statusesAsync.isLoading) ...[
+                const Padding(
+                  padding: EdgeInsets.only(top: 4),
+                  child: LinearProgressIndicator(minHeight: 2),
+                ),
+              ] else if (cancelStatusId == null) ...[
+                Text(
+                  'Cancellation status is unavailable right now.',
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.orange),
                 ),
               ],
             ],

@@ -7,4 +7,9 @@ abstract class IUpcomingServiceRemoteDataSource {
     String? toDate,
     String? statusId,
   });
+
+  Future<void> updateAppointmentStatus({
+    required String bookingId,
+    required String statusId,
+  });
 }

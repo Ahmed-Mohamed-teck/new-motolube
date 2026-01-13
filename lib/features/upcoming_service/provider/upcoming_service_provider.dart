@@ -6,8 +6,11 @@ import '../data/data_source/i_upcoming_service_remote_data_source.dart';
 import '../data/data_source/upcoming_service_remote_data_source.dart';
 import '../data/repository/upcoming_service_repository.dart';
 import '../domain/repository/i_upcoming_service_repository.dart';
+import '../domain/use_case/cancel_appointment_use_case.dart';
 import '../domain/use_case/get_upcoming_services_use_case.dart';
 import '../presentation/view_model/upcoming_service_state.dart';
+import '../presentation/view_model/upcoming_service_action_state.dart';
+import '../presentation/view_model/upcoming_service_action_view_model.dart';
 import '../presentation/view_model/upcoming_service_view_model.dart';
 
 final upcomingServiceRemoteDataSourceProvider =
@@ -30,9 +33,24 @@ final getUpcomingServicesUseCaseProvider =
   );
 });
 
+final cancelAppointmentUseCaseProvider =
+    Provider<CancelAppointmentUseCase>((ref) {
+  return CancelAppointmentUseCase(
+    ref.read(upcomingServiceRepositoryProvider),
+  );
+});
+
 final upcomingServiceViewModelProvider = StateNotifierProvider.autoDispose<
     UpcomingServiceViewModel, UpcomingServiceState>((ref) {
   return UpcomingServiceViewModel(
     ref.read(getUpcomingServicesUseCaseProvider),
+  );
+});
+
+final upcomingServiceActionViewModelProvider =
+    StateNotifierProvider.autoDispose<UpcomingServiceActionViewModel,
+        UpcomingServiceActionState>((ref) {
+  return UpcomingServiceActionViewModel(
+    ref.read(cancelAppointmentUseCaseProvider),
   );
 });
