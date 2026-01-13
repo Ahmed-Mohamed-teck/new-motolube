@@ -54,6 +54,7 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
   final ImagePicker _picker = ImagePicker();
   final List<XFile> _carImages = [];
   final List<String> _existingImages = [];
+  bool _requestedBrands = false;
 
   // Lists
   late final List<int> _years = List.generate(
@@ -195,6 +196,20 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
       
     });
     
+  }
+
+  void _maybeRequestBrands() {
+    if (_requestedBrands) return;
+    if (_selectedManufacturer == null || _selectedManufacturer!.isEmpty) return;
+    final brandsState = ref.read(carBrandsViewModelProvider);
+    if (brandsState is CarBrandsLoading) return;
+    _requestedBrands = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      ref.read(carBrandsViewModelProvider.notifier).fetCarBrands(
+            carModelId: _selectedManufacturer!,
+          );
+    });
   }
 
   Future<void> _pickCamera() async {
@@ -485,6 +500,7 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
   Widget build(BuildContext context) {
     final manufacturersState = ref.watch(manufacturersViewModelProvider);
     final carBrandsState = ref.watch(carBrandsViewModelProvider);
+    _maybeRequestBrands();
     final addState = ref.watch(addUserCarViewModelProvider);
     final isBusy = _isPreparingSubmission || addState is AddUserCarLoading;
     if (addState is AddUserCarSuccess) {
