@@ -5,6 +5,7 @@ abstract class IBookServiceRepository {
   Future<List<ServicePackageEntity>> getPackagesForVehicle({
     required String customerId,
     required String vehicleId,
+    String? category,
   });
 
   Future<CreateAppointmentResult> createAppointment({

@@ -5,6 +5,7 @@ abstract class IBookServiceRemoteDataSource {
   Future<List<ServicePackageModel>> getPackagesForVehicle({
     required String customerId,
     required String vehicleId,
+    String? category,
   });
 
   Future<CreateAppointmentResponseModel> createAppointment({

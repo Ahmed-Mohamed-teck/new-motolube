@@ -17,6 +17,8 @@ import 'package:newmotorlube/features/user_cars/provider/user_cars_provider.dart
 import 'package:newmotorlube/features/user_cars/presentation/view_model/user_cars_state.dart';
 import 'package:newmotorlube/features/home/presentaion/screen/base_home_screen.dart';
 import 'package:newmotorlube/features/auth/presentation/view_model/auth_state.dart';
+import 'package:newmotorlube/features/home/domain/entity/main_category_entity.dart';
+import 'package:newmotorlube/features/home/provider/home_provider.dart';
 import 'package:newmotorlube/features/technician/provider/technician_provider.dart';
 import 'package:newmotorlube/features/technician/presentation/view_model/technician_search_state.dart';
 import 'package:newmotorlube/features/technician/presentation/view_model/technician_slots_state.dart';
@@ -25,6 +27,8 @@ import 'package:newmotorlube/features/technician/domain/entity/technician_summar
 import 'package:newmotorlube/features/upcoming_service/provider/upcoming_service_provider.dart';
 import 'package:newmotorlube/generated/l10n.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+
+import '../../../home/provider/home_provider.dart' as home;
 
 class BookServiceScreen extends ConsumerStatefulWidget {
   const BookServiceScreen({super.key});
@@ -386,12 +390,14 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
   int? _selectedService;
   ServicePackageEntity? _selectedPackage;
   CarEntity? _selectedCarEntity;
+  MainCategoryEntity? _selectedMainCategory;
   String? _customerId;
   LatLng? _selectedLocation;
   TechnicianSummaryEntity? _selectedTechnician;
   TechnicianSlotEntity? _selectedSlot;
   DateTime _selectedSlotDate = DateTime.now();
   bool _isBooking = false;
+  bool _didLoadInitialCategory = false;
   final MapController _mapController = MapController();
   static const int _maxTechnicianResults = 20;
   static const double _searchRadiusKm = 25;
@@ -405,6 +411,29 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _applyPreselectedCar(preselected);
         ref.read(preselectedBookServiceCarProvider.notifier).state = null;
+      });
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_didLoadInitialCategory) {
+      return;
+    }
+    _didLoadInitialCategory = true;
+
+    MainCategoryEntity? incomingCategory;
+    final args = ModalRoute.of(context)?.settings.arguments;
+    if (args is Map && args['selectedCategory'] is MainCategoryEntity) {
+      incomingCategory = args['selectedCategory'] as MainCategoryEntity;
+    }
+
+    incomingCategory ??= ref.read(selectedMainCategoryProvider);
+
+    if (incomingCategory != null) {
+      setState(() {
+        _selectedMainCategory = incomingCategory;
       });
     }
   }
@@ -451,7 +480,89 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
     }
     await ref
         .read(servicePackagesViewModelProvider.notifier)
-        .fetchPackages(customerId: customerId, vehicleId: car.vehicleId);
+        .fetchPackages(
+          customerId: customerId,
+          vehicleId: car.vehicleId,
+          category: _categoryQueryValue(),
+        );
+  }
+
+  String? _categoryQueryValue() {
+    final category = _selectedMainCategory;
+    if (category == null) return null;
+    final id = category.id.trim();
+    if (id.isNotEmpty) return id;
+    final titleEn = category.titleEn.trim();
+    if (titleEn.isNotEmpty) return titleEn;
+    final titleAr = category.titleAr.trim();
+    if (titleAr.isNotEmpty) return titleAr;
+    return null;
+  }
+
+  Widget _wrapWithCategoryBanner(BuildContext context, Widget child) {
+    final banner = _buildCategoryBanner(context);
+    if (banner == null) {
+      return child;
+    }
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        banner,
+        const SizedBox(height: 8),
+        Expanded(child: child),
+      ],
+    );
+  }
+
+  Widget? _buildCategoryBanner(BuildContext context) {
+    final category = _selectedMainCategory;
+    if (category == null) return null;
+    final label =
+        category.titleForLocale(Localizations.localeOf(context)).trim();
+    if (label.isEmpty) return null;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primary.withOpacity(0.08),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        children: [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.category_outlined,
+                size: 18,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              const SizedBox(width: 6),
+              Text(
+                'Selected category: $label',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurface,
+                      fontWeight: FontWeight.w600,
+                    ),
+              ),
+            ],
+          ),
+          const Spacer(),
+          TextButton.icon(
+            onPressed: _clearSelectedCategory,
+            icon: const Icon(Icons.close),
+            label: const Text('Reset'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _clearSelectedCategory() async {
+    ref.read(home.selectedMainCategoryProvider.notifier).state = null;
+    setState(() {
+      _selectedMainCategory = null;
+    });
+    await _fetchPackagesForSelectedCar();
   }
 
   Future<void> _fetchTechniciansForSelection() async {
@@ -618,6 +729,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
           .fetchPackages(
             customerId: customerId,
             vehicleId: _selectedCarEntity!.vehicleId,
+            category: _categoryQueryValue(),
           );
       return;
     }
@@ -919,92 +1031,107 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
     final packagesState = ref.watch(servicePackagesViewModelProvider);
 
     if (_selectedCarEntity == null) {
-      return const Center(
-        child: Text(
-          'Please select a car in Step 1 to view available packages.',
+      return _wrapWithCategoryBanner(
+        context,
+        const Center(
+          child: Text(
+            'Please select a car in Step 1 to view available packages.',
+          ),
         ),
       );
     }
 
     if (packagesState is ServicePackagesInitial ||
         packagesState is ServicePackagesLoading) {
-      return const _ServicePackagesSkeletonList();
+      return _wrapWithCategoryBanner(
+        context,
+        const _ServicePackagesSkeletonList(),
+      );
     }
 
     if (packagesState is ServicePackagesError) {
-      return Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              'Failed to load packages.\n${packagesState.message}',
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.error,
+      return _wrapWithCategoryBanner(
+        context,
+        Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Failed to load packages.\n${packagesState.message}',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.error,
+                    ),
               ),
-            ),
-            const SizedBox(height: 12),
-            OutlinedButton(
-              onPressed: () {
-                _fetchPackagesForSelectedCar();
-              },
-              child: const Text('Try Again'),
-            ),
-          ],
+              const SizedBox(height: 12),
+              OutlinedButton(
+                onPressed: () {
+                  _fetchPackagesForSelectedCar();
+                },
+                child: const Text('Try Again'),
+              ),
+            ],
+          ),
         ),
       );
     }
 
     if (packagesState is ServicePackagesEmpty) {
-      return const Center(
-        child: Text('No packages available for the selected vehicle.'),
+      return _wrapWithCategoryBanner(
+        context,
+        const Center(
+          child: Text('No packages available for the selected vehicle.'),
+        ),
       );
     }
 
     if (packagesState is ServicePackagesLoaded) {
       final packages = packagesState.packages;
 
-      return ListView.separated(
-        itemCount: packages.length,
-        itemBuilder: (context, index) {
-          final package = packages[index];
-          final isSelected = _selectedService == index;
-          final price = package.linePrice;
-          final rounded = price.roundToDouble();
-          final displayPrice =
-              price == rounded
-                  ? rounded.toStringAsFixed(0)
-                  : price.toStringAsFixed(2);
-          final title =
-              package.packageNameEn.isNotEmpty
-                  ? package.packageNameEn
-                  : package.packageNameAr;
+      return _wrapWithCategoryBanner(
+        context,
+        ListView.separated(
+          itemCount: packages.length,
+          itemBuilder: (context, index) {
+            final package = packages[index];
+            final isSelected = _selectedService == index;
+            final price = package.linePrice;
+            final rounded = price.roundToDouble();
+            final displayPrice =
+                price == rounded
+                    ? rounded.toStringAsFixed(0)
+                    : price.toStringAsFixed(2);
+            final title =
+                package.packageNameEn.isNotEmpty
+                    ? package.packageNameEn
+                    : package.packageNameAr;
 
-          return Card(
-            color: isSelected ? Colors.amber[100] : null,
-            child: ListTile(
-              title: Text(title),
-              subtitle: Text('$displayPrice SAR'),
-              leading: Icon(
-                Icons.build_circle,
-                color: isSelected ? Colors.amber : Colors.grey[600],
-                size: 40,
+            return Card(
+              color: isSelected ? Colors.amber[100] : null,
+              child: ListTile(
+                title: Text(title),
+                subtitle: Text('$displayPrice SAR'),
+                leading: Icon(
+                  Icons.build_circle,
+                  color: isSelected ? Colors.amber : Colors.grey[600],
+                  size: 40,
+                ),
+                trailing:
+                    package.isEmergency
+                        ? const Icon(Icons.warning, color: Colors.red)
+                        : null,
+                onTap: () {
+                  setState(() {
+                    _selectedService = index;
+                    _selectedPackage = package;
+                  });
+                  _resetTechnicianSearch();
+                },
               ),
-              trailing:
-                  package.isEmergency
-                      ? const Icon(Icons.warning, color: Colors.red)
-                      : null,
-              onTap: () {
-                setState(() {
-                  _selectedService = index;
-                  _selectedPackage = package;
-                });
-                _resetTechnicianSearch();
-              },
-            ),
-          );
-        },
-        separatorBuilder: (_, __) => const SizedBox(height: 12),
+            );
+          },
+          separatorBuilder: (_, __) => const SizedBox(height: 12),
+        ),
       );
     }
 

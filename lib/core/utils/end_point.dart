@@ -21,6 +21,14 @@ const String getTechnicianAvailableSlotsEndPoint =
     '$baseUrl/MotorLubeApp/technician/getAvailableSlot';
 String getPackagesForVehicleEndPoint(String customerId, String vehicleId) =>
     '$baseUrl/MotorLubeApp/getPackagesForVehicle/$customerId/$vehicleId/0';
+String getPackagesForVehicleByCategoryEndPoint({
+  required String customerId,
+  required String vehicleId,
+  required String category,
+}) {
+  final encodedCategory = Uri.encodeComponent(category);
+  return '$baseUrl/MotorLubeApp/getPackagesForVehicle/$customerId/$vehicleId/1000?category=$encodedCategory';
+}
 const String getCustomerAppointmentsEndPoint =
     '$baseUrl/MotorLubeApp/getCustomerAppointment';
 const String getTechnicianAppointmentsEndPoint =
@@ -53,3 +61,5 @@ String addCouponEndPoint({
 }
 String getPaymentStatusEndPoint(String transactionId) =>
     '$baseUrl/Payments/status?transactionId=${Uri.encodeComponent(transactionId)}';
+const String getMainCategoriesEndPoint =
+    '$baseUrl/MotorLubeApp/GetMainCategories';

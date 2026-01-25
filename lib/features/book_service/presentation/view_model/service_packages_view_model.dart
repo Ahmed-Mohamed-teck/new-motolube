@@ -13,12 +13,14 @@ class ServicePackagesViewModel extends StateNotifier<ServicePackagesState> {
   Future<void> fetchPackages({
     required String customerId,
     required String vehicleId,
+    String? category,
   }) async {
     state = const ServicePackagesLoading();
     try {
       final packages = await _getPackagesForVehicleUseCase(
         customerId: customerId,
         vehicleId: vehicleId,
+        category: category,
       );
       if (packages.isEmpty) {
         state = const ServicePackagesEmpty();

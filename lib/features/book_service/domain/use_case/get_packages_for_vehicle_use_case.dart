@@ -9,10 +9,12 @@ class GetPackagesForVehicleUseCase {
   Future<List<ServicePackageEntity>> call({
     required String customerId,
     required String vehicleId,
+    String? category,
   }) {
     return _repository.getPackagesForVehicle(
       customerId: customerId,
       vehicleId: vehicleId,
+      category: category,
     );
   }
 }

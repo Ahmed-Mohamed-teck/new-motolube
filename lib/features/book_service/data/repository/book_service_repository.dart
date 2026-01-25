@@ -12,10 +12,12 @@ class BookServiceRepository implements IBookServiceRepository {
   Future<List<ServicePackageEntity>> getPackagesForVehicle({
     required String customerId,
     required String vehicleId,
+    String? category,
   }) async {
     final models = await _remoteDataSource.getPackagesForVehicle(
       customerId: customerId,
       vehicleId: vehicleId,
+      category: category,
     );
     return models.map((model) => model.toEntity()).toList();
   }

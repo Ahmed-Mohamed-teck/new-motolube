@@ -15,10 +15,18 @@ class BookServiceRemoteDataSource implements IBookServiceRemoteDataSource {
   Future<List<ServicePackageModel>> getPackagesForVehicle({
     required String customerId,
     required String vehicleId,
+    String? category,
   }) async {
     try {
+      final endpoint = (category != null && category.trim().isNotEmpty)
+          ? getPackagesForVehicleByCategoryEndPoint(
+              customerId: customerId,
+              vehicleId: vehicleId,
+              category: category,
+            )
+          : getPackagesForVehicleEndPoint(customerId, vehicleId);
       final response = await _dio.get(
-        getPackagesForVehicleEndPoint(customerId, vehicleId),
+        endpoint,
       );
       final data = response.data;
       final List<dynamic> rawList = _extractPackages(data);
