@@ -20,6 +20,8 @@ import '../../../../core/providers/plate_chars_provider.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
 import '../../../../core/widget/internal_app_bar.dart';
+import '../../../home/presentaion/screen/base_home_screen.dart';
+import '../../../../main.dart';
 import '../view_model/car_brands_state.dart';
 
 class AddNewCarScreen extends ConsumerStatefulWidget {
@@ -88,6 +90,15 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
     _vinCtrl.dispose();
     _plateNumberCtrl.dispose();
     super.dispose();
+  }
+
+  void _goHomeAndRefreshCars() {
+    ref.invalidate(userCarsViewModelProvider);
+    ref.read(currentNavBottomIndexProvider.notifier).state = 0;
+    Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil(
+      'baseHomeScreen',
+      (_) => false,
+    );
   }
 
   void _prefillIfEditing() {
@@ -505,12 +516,16 @@ class _AddNewCarScreenState extends ConsumerState<AddNewCarScreen> {
     final isBusy = _isPreparingSubmission || addState is AddUserCarLoading;
     if (addState is AddUserCarSuccess) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(
-          SnackBar(content: Text(appLang.userCarsAddedSuccessfully)),
-        );
-        Navigator.of(context).pop(true);
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(
+            SnackBar(content: Text(appLang.userCarsAddedSuccessfully)),
+          );
+        if (_isEditing) {
+          _goHomeAndRefreshCars();
+        } else {
+          Navigator.of(context).pop(true);
+        }
       });
     } else if (addState is AddUserCarError) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
