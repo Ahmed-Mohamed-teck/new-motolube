@@ -138,6 +138,7 @@ class _TechnicianAppointmentDetailsScreenState
       data: (value) => value,
       orElse: () => const <TechnicianBookingStatus>[],
     );
+    final visibleStatuses = _filterStatusesForCurrentState(statuses);
     final statusesError = statusesAsync.whenOrNull(
       error: (error, _) => error.toString(),
     );
@@ -155,9 +156,9 @@ class _TechnicianAppointmentDetailsScreenState
         jobCardOperationState is JobCardOperationLoading &&
         jobCardOperationState.operationType == JobCardOperationType.addPackage;
 
-    List<TechnicianBookingStatus> orderedStatuses = statuses;
-    if (statuses.isNotEmpty) {
-      orderedStatuses = [...statuses]
+    List<TechnicianBookingStatus> orderedStatuses = visibleStatuses;
+    if (visibleStatuses.isNotEmpty) {
+      orderedStatuses = [...visibleStatuses]
         ..sort((a, b) => _parseStatusId(a).compareTo(_parseStatusId(b)));
       final resolvedIndex = _resolveCurrentStatusIndex(orderedStatuses) ?? 0;
       final resolvedId = _statusIdAtIndex(orderedStatuses, resolvedIndex);
@@ -290,7 +291,7 @@ class _TechnicianAppointmentDetailsScreenState
                 onRetry:
                     () => ref.invalidate(technicianBookingStatusesProvider),
               )
-            else if (statuses.isEmpty)
+            else if (visibleStatuses.isEmpty)
               const _StatusHelperCard.error(
                 message: 'No booking statuses available.',
               )
@@ -648,6 +649,40 @@ class _TechnicianAppointmentDetailsScreenState
     final parsed = _parseStatusInt(raw);
     if (parsed != null) return parsed.toString();
     return raw.toLowerCase();
+  }
+
+  List<TechnicianBookingStatus> _filterStatusesForCurrentState(
+    List<TechnicianBookingStatus> statuses,
+  ) {
+    if (!_isInvoicedPaidStatus(statuses)) return statuses;
+    const hiddenKeys = {
+      'cancelled',
+      'needapproval',
+      'companyrejected',
+      'expired',
+    };
+    return statuses.where((status) {
+      final normalizedCode = _normalizeStatusCode(status.code);
+      final normalizedLabel = _normalizeStatusLabel(status.label);
+      return !hiddenKeys.contains(normalizedCode) &&
+          !hiddenKeys.contains(normalizedLabel);
+    }).toList();
+  }
+
+  bool _isInvoicedPaidStatus(List<TechnicianBookingStatus> statuses) {
+    final invoicedPaidId = getStatusIdFromStatusName('invoicedPaid');
+    if (invoicedPaidId != 0) {
+      final currentStatusId = _resolveCurrentStatusId(statuses);
+      if (currentStatusId == invoicedPaidId) return true;
+    }
+    final normalizedCode = _normalizeStatusCode(
+      widget.appointment.bookingStatus.code,
+    );
+    if (normalizedCode == 'invoicedpaid' || normalizedCode == '8') return true;
+    final normalizedLabel = _normalizeStatusLabel(
+      widget.appointment.bookingStatus.label,
+    );
+    return normalizedLabel == 'invoicedpaid';
   }
 
   String? _canonicalStatusKey(String raw) {
