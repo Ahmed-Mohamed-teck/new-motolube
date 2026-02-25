@@ -559,23 +559,7 @@ class _SelectedPackageDetails extends StatelessWidget {
           'Line price',
           currencyFormat.format(package.linePrice),
         ),
-        _PackageDetailRow(
-          'Total price',
-          currencyFormat.format(package.totalPrice),
-        ),
-        _PackageDetailRow('Total tax', currencyFormat.format(package.totalTax)),
-        _PackageDetailRow(
-          'Total discount',
-          package.totalDiscount > 0
-              ? '- ${currencyFormat.format(package.totalDiscount)}'
-              : '0.00',
-        ),
-        _PackageDetailRow(
-          'List price',
-          currencyFormat.format(package.totalListPrice),
-        ),
-        if (package.packageShortName.isNotEmpty)
-          _PackageDetailRow('Short name', package.packageShortName),
+
       ],
     );
   }
@@ -598,6 +582,8 @@ class _PackageDetailRow extends StatelessWidget {
             child: Text(
               label,
               style: Theme.of(
+
+
                 context,
               ).textTheme.bodySmall?.copyWith(color: Colors.grey.shade600),
             ),
@@ -693,6 +679,12 @@ class _PackagesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currencyFormat = NumberFormat.currency(
+      locale: 'en',
+      symbol: 'SAR ',
+      decimalDigits: 2,
+    );
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -705,6 +697,10 @@ class _PackagesCard extends StatelessWidget {
                 onRetry: onRetry,
               );
             }
+            final totalAppliedPrice = packages.fold<double>(
+              0,
+              (sum, pkg) => sum + _effectivePackagePrice(pkg),
+            );
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -714,6 +710,11 @@ class _PackagesCard extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
+                const SizedBox(height: 10),
+                _AppliedPackagesTotalWidget(
+                  totalPrice: totalAppliedPrice,
+                  currencyFormat: currencyFormat,
+                ),
                 const SizedBox(height: 12),
                 ...packages.map(
                   (pkg) {
@@ -721,8 +722,14 @@ class _PackagesCard extends StatelessWidget {
                         isDeleting &&
                         deletingLineId != null &&
                         pkg.lineId == deletingLineId;
+                    final packagePrice = _effectivePackagePrice(pkg);
                     final subtitleChildren = <Widget>[
                       Text('Code: ${pkg.packageCode}'),
+                      Text(
+                        packagePrice > 0
+                            ? 'Price: ${currencyFormat.format(packagePrice)}'
+                            : 'Price: Included',
+                      ),
                     ];
                     if (pkg.lineId.isNotEmpty) {
                       subtitleChildren.add(
@@ -777,25 +784,46 @@ class _PackagesCard extends StatelessWidget {
                         ),
                       );
                     }
-                    return ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      title: Text(
-                        pkg.displayName.isNotEmpty
-                            ? pkg.displayName
-                            : 'Package ${pkg.packageCode}',
+                    return Card(
+                      margin: const EdgeInsets.only(bottom: 8),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    pkg.displayName.isNotEmpty
+                                        ? pkg.displayName
+                                        : 'Package ${pkg.packageCode}',
+                                    style: Theme.of(context).textTheme.titleSmall
+                                        ?.copyWith(fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                if (isBusy)
+                                  const SizedBox(
+                                    width: 20,
+                                    height: 20,
+                                    child: CircularProgressIndicator(strokeWidth: 2),
+                                  )
+                                else
+                                  Text(
+                                    packagePrice > 0
+                                        ? currencyFormat.format(packagePrice)
+                                        : 'Included',
+                                    style: Theme.of(context).textTheme.bodyMedium
+                                        ?.copyWith(fontWeight: FontWeight.w700),
+                                  ),
+                              ],
+                            ),
+                            const SizedBox(height: 6),
+                            ...subtitleChildren,
+                          ],
+                        ),
                       ),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: subtitleChildren,
-                      ),
-                      trailing:
-                          isBusy
-                              ? const SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(strokeWidth: 2),
-                              )
-                              : null,
                     );
                   },
                 ),
@@ -812,6 +840,55 @@ class _PackagesCard extends StatelessWidget {
       ),
     );
   }
+}
+
+class _AppliedPackagesTotalWidget extends StatelessWidget {
+  const _AppliedPackagesTotalWidget({
+    required this.totalPrice,
+    required this.currencyFormat,
+  });
+
+  final double totalPrice;
+  final NumberFormat currencyFormat;
+
+  @override
+  Widget build(BuildContext context) {
+    final totalText =
+        totalPrice > 0 ? currencyFormat.format(totalPrice) : 'Included';
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade100,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.grey.shade300),
+      ),
+      child: Row(
+        children: [
+          Text(
+            'Total price',
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
+          ),
+          const Spacer(),
+          Text(
+            totalText,
+            style: Theme.of(
+              context,
+            ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+double _effectivePackagePrice(JobCardPackageEntity package) {
+  if (package.totalPrice > 0) return package.totalPrice;
+  if (package.linePrice > 0) return package.linePrice;
+  if (package.totalListPrice > 0) return package.totalListPrice;
+  return 0;
 }
 
 
