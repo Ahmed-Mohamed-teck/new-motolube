@@ -54,11 +54,12 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
           ],
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(2),
-            child: _isLoading
-                ? LinearProgressIndicator(
-              value: _progress > 0 && _progress < 1 ? _progress : null,
-            )
-                : const SizedBox.shrink(),
+            child:
+                _isLoading
+                    ? LinearProgressIndicator(
+                      value: _progress > 0 && _progress < 1 ? _progress : null,
+                    )
+                    : const SizedBox.shrink(),
           ),
         ),
         body: InAppWebView(
@@ -108,21 +109,26 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
           onProgressChanged: (_, progress) {
             setState(() => _progress = progress / 100);
           },
-          onLoadHttpError: (_, __, ___, ____) {},
+          onReceivedHttpError: (_, request, errorResponse) {
+            final statusCode = errorResponse.statusCode;
+            final uri = request.url;
+            if (statusCode == 401 && _isReturnPage(uri)) {
+              if (!_returnHandled) {
+                _returnHandled = true;
+                _postReturn(uri);
+              }
+            }
+          },
         ),
       ),
     );
   }
 
-  bool _handleUrl(
-    String url, {
-    required String method,
-    Uint8List? postedData,
-  }) {
+  bool _handleUrl(String url, {required String method, Uint8List? postedData}) {
     final uri = Uri.tryParse(url);
     if (uri == null) return true;
 
-    final isReturnPage = uri.path.toLowerCase().contains('/payform/return');
+    final isReturnPage = _isReturnPage(uri);
     if (isReturnPage && !_returnHandled) {
       if (method == 'POST' && postedData != null) {
         _capturedReturnBody = _decodeUrlEncodedBody(postedData);
@@ -134,19 +140,20 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
 
     final status =
         uri.queryParameters['status']?.toLowerCase().trim() ??
-        (uri.pathSegments.isNotEmpty ? uri.pathSegments.last.toLowerCase() : '');
+        (uri.pathSegments.isNotEmpty
+            ? uri.pathSegments.last.toLowerCase()
+            : '');
     final responseCode = uri.queryParameters['response_code']?.trim();
 
     final isSuccess =
-        status == 'success' ||
-            responseCode == '14000' ||
-            uri.path.toLowerCase().contains('/payform/success');
+        status == 'success' || responseCode == '14000' || _isSuccessPage(uri);
     final isFailure =
         status == 'failed' ||
-            status == 'failure' ||
-            status == 'error' ||
-            status == 'cancelled' ||
-            status == 'canceled';
+        status == 'failure' ||
+        status == 'error' ||
+        status == 'cancelled' ||
+        status == 'canceled' ||
+        _isFailurePage(uri);
 
     if (isSuccess) {
       _completeAndPop(PaymentWebViewResult.success);
@@ -159,10 +166,25 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
     return true;
   }
 
-  Future<void> _postReturn(
-    Uri uri, {
-    Uint8List? overrideBody,
-  }) async {
+  bool _isReturnPage(Uri uri) {
+    final path = uri.path.toLowerCase();
+    return path.contains('/payform/return') ||
+        path.contains('/api/payments/return');
+  }
+
+  bool _isSuccessPage(Uri uri) {
+    final path = uri.path.toLowerCase();
+    return path.contains('/payform/success') ||
+        path.contains('/api/payments/success');
+  }
+
+  bool _isFailurePage(Uri uri) {
+    final path = uri.path.toLowerCase();
+    return path.contains('/payform/failure') ||
+        path.contains('/api/payments/failure');
+  }
+
+  Future<void> _postReturn(Uri uri, {Uint8List? overrideBody}) async {
     if (_controller == null) return;
 
     Uint8List body;
@@ -170,7 +192,7 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
       body = overrideBody;
     } else {
       final params = <String, String>{};
-      params.addAll(uri.queryParameters.map((k, v) => MapEntry(k, v ?? '')));
+      params.addAll(uri.queryParameters);
       if (_capturedReturnBody != null) {
         params.addAll(_capturedReturnBody!);
       }
@@ -209,7 +231,7 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
     try {
       final decoded = utf8.decode(data);
       final uri = Uri.parse('http://dummy/?$decoded');
-      return uri.queryParameters.map((k, v) => MapEntry(k, v ?? ''));
+      return uri.queryParameters;
     } catch (_) {
       return {};
     }

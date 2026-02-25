@@ -24,6 +24,8 @@ class PaymentInitiationRequestModel extends PaymentInitiationRequest {
   const PaymentInitiationRequestModel({
     required super.amount,
     required super.currency,
+    required super.bookingId,
+    required super.srNumber,
     required super.orderId,
     required super.customerId,
     required super.customerEmail,
@@ -33,10 +35,14 @@ class PaymentInitiationRequestModel extends PaymentInitiationRequest {
   });
 
   Map<String, dynamic> toJson() {
+    final trimmedBookingId = bookingId?.trim();
     return {
       'amount': amount,
       'currency': currency,
+      if (trimmedBookingId != null && trimmedBookingId.isNotEmpty)
+        'bookingId': trimmedBookingId,
       'orderId': orderId,
+      'srNumber': srNumber,
       'customerId': customerId,
       'customerEmail': customerEmail,
       'metadata': (metadata as PaymentMetadataModel).toJson(),

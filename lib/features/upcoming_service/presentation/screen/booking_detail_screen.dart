@@ -27,12 +27,10 @@ class BookingDetailScreen extends ConsumerStatefulWidget {
       _BookingDetailScreenState();
 }
 
-class _BookingDetailScreenState
-    extends ConsumerState<BookingDetailScreen> {
+class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
   @override
   void initState() {
     super.initState();
-
   }
 
   Future<void> _handlePayment() async {
@@ -59,21 +57,21 @@ class _BookingDetailScreenState
       return;
     }
 
-    final storedAuth = await ref
-        .read(authLocalRepositoryProvider)
-        .getStoredAuth();
+    final storedAuth =
+        await ref.read(authLocalRepositoryProvider).getStoredAuth();
     final bearerToken = storedAuth?.jwtToken.trim();
 
-    final outcome =
-        await Navigator.of(context).push<PaymentWebViewResult>(
+    final outcome = await Navigator.of(context).push<PaymentWebViewResult>(
       MaterialPageRoute(
-        builder: (_) => PaymentWebViewScreen(
-          paymentUrl: result.paymentUrl,
-          payFortParameters: result.payFortParameters,
-          bearerToken: bearerToken != null && bearerToken.isNotEmpty
-              ? bearerToken
-              : null,
-        ),
+        builder:
+            (_) => PaymentWebViewScreen(
+              paymentUrl: result.paymentUrl,
+              payFortParameters: result.payFortParameters,
+              bearerToken:
+                  bearerToken != null && bearerToken.isNotEmpty
+                      ? bearerToken
+                      : null,
+            ),
       ),
     );
 
@@ -108,11 +106,13 @@ class _BookingDetailScreenState
   PaymentInitiationRequest _buildPaymentRequest() {
     final service = widget.service;
     final srNumber = service.srNumber.trim();
+    final appointmentId = service.appointmentId.trim();
+    final bookingId = appointmentId.isNotEmpty ? appointmentId : null;
     final orderId =
         srNumber.isNotEmpty
             ? srNumber
-            : service.appointmentId.isNotEmpty
-            ? service.appointmentId
+            : appointmentId.isNotEmpty
+            ? appointmentId
             : 'order-${DateTime.now().millisecondsSinceEpoch}';
 
     final amount = service.srTotal > 0 ? service.srTotal : 0;
@@ -121,9 +121,10 @@ class _BookingDetailScreenState
     return PaymentInitiationRequest(
       amount: amount.toDouble(),
       currency: 'SAR',
+      bookingId: bookingId,
+      srNumber: srNumber,
       orderId: orderId,
-      customerId:
-          service.appointmentId.isNotEmpty ? service.appointmentId : orderId,
+      customerId: appointmentId.isNotEmpty ? appointmentId : orderId,
       customerEmail: _resolveCustomerEmail(),
       metadata: const PaymentMetadata(
         appVersion: '1.0.0',
@@ -185,9 +186,7 @@ class _BookingDetailScreenState
     }
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(content: Text(message)),
-      );
+      ..showSnackBar(SnackBar(content: Text(message)));
   }
 
   void _openChat() {
@@ -198,10 +197,10 @@ class _BookingDetailScreenState
       return;
     }
 
-    Navigator.of(context, rootNavigator: true).pushNamed(
-      'chatScreen',
-      arguments: bookingId,
-    );
+    Navigator.of(
+      context,
+      rootNavigator: true,
+    ).pushNamed('chatScreen', arguments: bookingId);
   }
 
   Future<void> _confirmCancel(String bookingId, String statusId) async {
@@ -235,10 +234,7 @@ class _BookingDetailScreenState
   }
 
   String? _bookingIdForChat(UpcomingServiceEntity service) {
-    final candidates = [
-      service.appointmentId,
-      service.srNumber,
-    ];
+    final candidates = [service.appointmentId, service.srNumber];
     for (final candidate in candidates) {
       final id = candidate.trim();
       if (id.isNotEmpty) return id;
@@ -270,7 +266,7 @@ class _BookingDetailScreenState
   Widget build(BuildContext context) {
     ref.listen<UpcomingServiceActionState>(
       upcomingServiceActionViewModelProvider,
-          (prev, next) {
+      (prev, next) {
         if (!mounted) return;
         if (next is UpcomingServiceActionSuccess) {
           _showSnack('Appointment cancelled successfully.');
@@ -312,15 +308,18 @@ class _BookingDetailScreenState
     final statusLabel = _statusLabel(context, service.status);
     final dateLabel = _formatDate(context, service);
     final timeLabel = _formatTime(service);
-    final packageCandidate = service.packageTitle.isNotEmpty
-        ? service.packageTitle
-        : service.serviceName;
+    final packageCandidate =
+        service.packageTitle.isNotEmpty
+            ? service.packageTitle
+            : service.serviceName;
     final package = _valueOrFallback(
       packageCandidate,
       fallback: s.upcomingServicesServicePlaceholder,
     );
     final branch = _valueOrFallback(
-      service.branchLabel.isNotEmpty ? service.branchLabel : service.location ?? '',
+      service.branchLabel.isNotEmpty
+          ? service.branchLabel
+          : service.location ?? '',
       fallback: s.upcomingServicesLocationFallback,
     );
     final technician = _valueOrFallback(
@@ -357,11 +356,7 @@ class _BookingDetailScreenState
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _HeaderCard(
-                title: carTitle,
-                plate: plate,
-                status: statusLabel,
-              ),
+              _HeaderCard(title: carTitle, plate: plate, status: statusLabel),
               const SizedBox(height: 12),
               _SectionCard(
                 child: Column(
@@ -379,17 +374,11 @@ class _BookingDetailScreenState
                       const SizedBox(height: 12),
                       const Divider(height: 24),
                       if (dateLabel.isNotEmpty)
-                        _IconTextRow(
-                          icon: Icons.event,
-                          text: dateLabel,
-                        ),
+                        _IconTextRow(icon: Icons.event, text: dateLabel),
                       if (dateLabel.isNotEmpty && timeLabel.isNotEmpty)
                         const SizedBox(height: 8),
                       if (timeLabel.isNotEmpty)
-                        _IconTextRow(
-                          icon: Icons.access_time,
-                          text: timeLabel,
-                        ),
+                        _IconTextRow(icon: Icons.access_time, text: timeLabel),
                     ],
                   ],
                 ),
@@ -427,9 +416,8 @@ class _BookingDetailScreenState
                         Expanded(
                           child: Text(
                             technician,
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                            ),
+                            style: Theme.of(context).textTheme.titleMedium
+                                ?.copyWith(fontWeight: FontWeight.w600),
                           ),
                         ),
                       ],
@@ -469,32 +457,38 @@ class _BookingDetailScreenState
                 const SizedBox(height: 16),
                 ElevatedButton(
                   onPressed: isProcessingPayment ? null : _handlePayment,
-                  child: isProcessingPayment
-                      ? const SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                      : const Text('Pay Now'),
+                  child:
+                      isProcessingPayment
+                          ? const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                          : const Text('Pay Now'),
                 ),
               ],
               const SizedBox(height: 12),
               if (canCancel) ...[
                 OutlinedButton.icon(
-                  onPressed: isCancelling
-                      ? null
-                      : () {
-                          final bookingId = service.appointmentId.trim();
-                          final statusId = cancelStatusId!;
-                          _confirmCancel(bookingId, statusId);
-                        },
-                  icon: isCancelling
-                      ? const SizedBox(
-                          height: 18,
-                          width: 18,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                      : const Icon(Icons.cancel_outlined, color: Colors.red),
+                  onPressed:
+                      isCancelling
+                          ? null
+                          : () {
+                            final bookingId = service.appointmentId.trim();
+                            final statusId = cancelStatusId!;
+                            _confirmCancel(bookingId, statusId);
+                          },
+                  icon:
+                      isCancelling
+                          ? const SizedBox(
+                            height: 18,
+                            width: 18,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                          : const Icon(
+                            Icons.cancel_outlined,
+                            color: Colors.red,
+                          ),
                   label: Text(
                     isCancelling ? 'Cancelling...' : 'Cancel appointment',
                     style: const TextStyle(color: Colors.red),
@@ -502,13 +496,17 @@ class _BookingDetailScreenState
                   style: OutlinedButton.styleFrom(
                     side: const BorderSide(color: Colors.redAccent),
                     padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                 ),
               ] else if (statusLower.contains('open job card')) ...[
                 Text(
                   'Cannot cancel after job card is opened.',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.red),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(color: Colors.red),
                 ),
               ] else if (cancelStatusId == null && statusesAsync.isLoading) ...[
                 const Padding(
@@ -518,7 +516,9 @@ class _BookingDetailScreenState
               ] else if (cancelStatusId == null) ...[
                 Text(
                   'Cancellation status is unavailable right now.',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.orange),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodySmall?.copyWith(color: Colors.orange),
                 ),
               ],
             ],
@@ -561,7 +561,9 @@ class _HeaderCard extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
                 const SizedBox(height: 4),
                 Text(
@@ -605,10 +607,7 @@ class _SectionCard extends StatelessWidget {
       elevation: 0.7,
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: child,
-      ),
+      child: Padding(padding: const EdgeInsets.all(16), child: child),
     );
   }
 }
@@ -647,7 +646,9 @@ class _IconTextRow extends StatelessWidget {
         Expanded(
           child: Text(
             text,
-            style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
+            style: theme.textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
       ],
@@ -707,7 +708,9 @@ String _statusLabel(BuildContext context, String status) {
   if (lower.contains('expired') || lower.contains('cancel')) {
     return (scheme.error.withOpacity(0.12), scheme.error);
   }
-  if (lower.contains('upcoming') || lower.contains('schedule') || lower.contains('book')) {
+  if (lower.contains('upcoming') ||
+      lower.contains('schedule') ||
+      lower.contains('book')) {
     return (Colors.green.withOpacity(0.12), Colors.green.shade700);
   }
   if (lower.contains('pending')) {
@@ -734,22 +737,16 @@ String _initials(String value) {
 bool _requiresPayment(UpcomingServiceEntity service) {
   final label = service.status.toLowerCase();
   final isComplete = label.contains('completedjobcard');
-  return isComplete ;
+  return isComplete;
 }
 
 String _formatCurrency(double amount) {
-  final formatter = NumberFormat.currency(
-    symbol: 'SAR ',
-    decimalDigits: 2,
-  );
+  final formatter = NumberFormat.currency(symbol: 'SAR ', decimalDigits: 2);
   return formatter.format(amount);
 }
 
 class _KeyValueRow extends StatelessWidget {
-  const _KeyValueRow({
-    required this.label,
-    required this.value,
-  });
+  const _KeyValueRow({required this.label, required this.value});
 
   final String label;
   final String value;

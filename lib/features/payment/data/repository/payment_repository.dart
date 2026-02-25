@@ -17,10 +17,12 @@ class PaymentRepository implements IPaymentRepository {
     return _remoteDataSource.initiatePayment(
       PaymentInitiationRequestModel(
         amount: request.amount,
+        bookingId: request.bookingId,
         currency: request.currency,
         orderId: request.orderId,
         customerId: request.customerId,
         customerEmail: request.customerEmail,
+        srNumber: request.srNumber,
         metadata: PaymentMetadataModel(
           appVersion: request.metadata.appVersion,
           platform: request.metadata.platform,

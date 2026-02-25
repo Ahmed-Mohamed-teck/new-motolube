@@ -52,6 +52,7 @@ class UpcomingServiceModel extends UpcomingServiceEntity {
 
     final srNumber = _stringFor(json, const [
       'sr_number',
+      'sr_num',
       'srNumber',
       'srnumber',
       'job_card_number',

@@ -22,6 +22,8 @@ class PaymentInitiationRequest {
     required this.customerId,
     required this.customerEmail,
     required this.metadata,
+    required this.srNumber,
+    required this.bookingId,
     this.appliedCoupon,
     this.discount = 0,
   });
@@ -33,5 +35,7 @@ class PaymentInitiationRequest {
   final String customerEmail;
   final PaymentMetadata metadata;
   final String? appliedCoupon;
+  final String srNumber;
+  final String? bookingId;
   final double discount;
 }
