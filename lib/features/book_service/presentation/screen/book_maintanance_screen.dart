@@ -516,6 +516,13 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
 
   Widget? _buildCategoryBanner(BuildContext context) {
     final l10n = S.of(context);
+    // _selectedMainCategory = ref.watch(selectedMainCategoryProvider);
+    ref.listen(selectedMainCategoryProvider, (_,nex) {
+      setState(() {
+        _selectedMainCategory = nex;
+      });
+      _fetchPackagesForSelectedCar();
+    });
     final category = _selectedMainCategory;
     if (category == null) return null;
     final label =
