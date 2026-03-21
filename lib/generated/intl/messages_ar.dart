@@ -20,11 +20,24 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
-  static String m0(route) => "المسار \"${route}\" غير متاح.";
+  static String m0(name) => "المواعيد المتاحة لـ ${name}";
 
-  static String m1(model, plate) => "بطاقة سيارة لـ ${model}، لوحة ${plate}";
+  static String m1(distance) => "يبعد ${distance} كم";
 
-  static String m2(plate) => "لوحة المركبة ${plate}";
+  static String m2(message) => "فشل تحميل الباقات.\n${message}";
+
+  static String m3(price) => "${price} ر.س";
+
+  static String m4(label) => "الفئة المحددة: ${label}";
+
+  static String m5(latitude, longitude) =>
+      "الموقع المحدد: (${latitude}, ${longitude})";
+
+  static String m6(route) => "المسار \"${route}\" غير متاح.";
+
+  static String m7(model, plate) => "بطاقة سيارة لـ ${model}، لوحة ${plate}";
+
+  static String m8(plate) => "لوحة المركبة ${plate}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -44,6 +57,71 @@ class MessageLookup extends MessageLookupByLibrary {
         "batteires": MessageLookupByLibrary.simpleMessage("بطاريات السيارات"),
         "bestOffers": MessageLookupByLibrary.simpleMessage("أفضل العروض"),
         "book": MessageLookupByLibrary.simpleMessage("احجز"),
+        "bookServiceAllow": MessageLookupByLibrary.simpleMessage("سماح"),
+        "bookServiceAppointmentConfirmedTitle":
+            MessageLookupByLibrary.simpleMessage("تم تأكيد الموعد"),
+        "bookServiceAvailableSlotsFor": m0,
+        "bookServiceCompleteAllStepsBeforeBooking":
+            MessageLookupByLibrary.simpleMessage(
+                "يرجى إكمال جميع الخطوات قبل الحجز."),
+        "bookServiceCreateAppointmentFailed":
+            MessageLookupByLibrary.simpleMessage(
+                "فشل إنشاء الموعد. يرجى المحاولة مرة أخرى."),
+        "bookServiceCustomerInfoUnavailable":
+            MessageLookupByLibrary.simpleMessage("تعذر تحديد معلومات العميل."),
+        "bookServiceDeny": MessageLookupByLibrary.simpleMessage("رفض"),
+        "bookServiceDistanceAway": m1,
+        "bookServiceFailedToLoadPackages": m2,
+        "bookServiceLocationPermissionMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "نحتاج إلى موقعك لعرضه على الخريطة."),
+        "bookServiceLocationPermissionTitle":
+            MessageLookupByLibrary.simpleMessage("إذن الموقع"),
+        "bookServiceNoPackagesFoundDescription":
+            MessageLookupByLibrary.simpleMessage(
+                "لم نتمكن من العثور على أي باقات لسيارتك والفئة المحددة.\nجرّب تغيير عوامل التصفية أو تحقق مرة أخرى لاحقًا."),
+        "bookServiceNoPackagesFoundTitle":
+            MessageLookupByLibrary.simpleMessage("لم يتم العثور على باقات"),
+        "bookServiceNoSlotsForSelectedDate":
+            MessageLookupByLibrary.simpleMessage(
+                "لا توجد مواعيد متاحة للتاريخ المحدد."),
+        "bookServiceNoTechniciansInRegion":
+            MessageLookupByLibrary.simpleMessage(
+                "لا يوجد فني متاح في هذه المنطقة."),
+        "bookServiceOk": MessageLookupByLibrary.simpleMessage("حسنًا"),
+        "bookServicePackagesLoadAfterContinue":
+            MessageLookupByLibrary.simpleMessage(
+                "سيتم تحميل الباقات بمجرد المتابعة."),
+        "bookServicePriceSar": m3,
+        "bookServiceReadyToFindTechnicians":
+            MessageLookupByLibrary.simpleMessage(
+                "هل أنت مستعد للعثور على فنيين بالقرب من موقعك المحدد؟"),
+        "bookServiceRefresh": MessageLookupByLibrary.simpleMessage("تحديث"),
+        "bookServiceReset": MessageLookupByLibrary.simpleMessage("إعادة تعيين"),
+        "bookServiceSearchTechnicians":
+            MessageLookupByLibrary.simpleMessage("البحث عن فنيين"),
+        "bookServiceSelectCarBeforeContinuing":
+            MessageLookupByLibrary.simpleMessage(
+                "يرجى اختيار سيارة قبل المتابعة."),
+        "bookServiceSelectCarInStepOne": MessageLookupByLibrary.simpleMessage(
+            "يرجى اختيار سيارة في الخطوة الأولى لعرض الباقات المتاحة."),
+        "bookServiceSelectLocationBeforeContinuing":
+            MessageLookupByLibrary.simpleMessage(
+                "يرجى اختيار موقع على الخريطة قبل المتابعة."),
+        "bookServiceSelectPackageAndLocation":
+            MessageLookupByLibrary.simpleMessage(
+                "اختر باقة خدمة وموقعًا للعثور على الفنيين القريبين."),
+        "bookServiceSelectPackageBeforeContinuing":
+            MessageLookupByLibrary.simpleMessage(
+                "يرجى اختيار باقة خدمة قبل المتابعة."),
+        "bookServiceSelectedCategory": m4,
+        "bookServiceSelectedLocation": m5,
+        "bookServiceSelectedPackageUnavailable":
+            MessageLookupByLibrary.simpleMessage("تعذر تحديد الباقة المحددة."),
+        "bookServiceSelectedVehicleUnavailable":
+            MessageLookupByLibrary.simpleMessage("تعذر تحديد المركبة المحددة."),
+        "bookServiceSignInToSelectCar": MessageLookupByLibrary.simpleMessage(
+            "يرجى تسجيل الدخول لاختيار سيارة"),
         "bookServiceStepChoosePackage":
             MessageLookupByLibrary.simpleMessage("اختر الباقة"),
         "bookServiceStepPickLocation":
@@ -52,6 +130,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("اختر الفني"),
         "bookServiceStepSelectVehicle":
             MessageLookupByLibrary.simpleMessage("اختر السيارة"),
+        "bookServiceTapMapToSelectLocation":
+            MessageLookupByLibrary.simpleMessage(
+                "اضغط في أي مكان على الخريطة لتحديد موقع الخدمة."),
+        "bookServiceTapTechnicianForSlots":
+            MessageLookupByLibrary.simpleMessage(
+                "اضغط على فني لعرض المواعيد المتاحة لديه."),
+        "bookServiceTechnicianBranchUnavailable":
+            MessageLookupByLibrary.simpleMessage("تعذر تحديد فرع الفني."),
+        "bookServiceTechnicianInfoUnavailable":
+            MessageLookupByLibrary.simpleMessage("تعذر تحديد معلومات الفني."),
+        "bookServiceTryAgain":
+            MessageLookupByLibrary.simpleMessage("حاول مرة أخرى"),
         "carDetailing": MessageLookupByLibrary.simpleMessage("تنظيف السيارات"),
         "carEvaluation": MessageLookupByLibrary.simpleMessage("تقييم السيارات"),
         "carInfo": MessageLookupByLibrary.simpleMessage("معلومات السيارة"),
@@ -148,7 +238,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("عرض تقييمات العملاء"),
         "managerHomeRatingsTitle":
             MessageLookupByLibrary.simpleMessage("التقييمات"),
-        "managerHomeRouteUnavailable": m0,
+        "managerHomeRouteUnavailable": m6,
         "managerHomeTitle": MessageLookupByLibrary.simpleMessage("الإدارة"),
         "manufacturer": MessageLookupByLibrary.simpleMessage("الشركة المصنعة"),
         "mobileServices":
@@ -272,7 +362,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "userCarsCarModelLabel":
             MessageLookupByLibrary.simpleMessage("موديل السيارة"),
         "userCarsCarName": MessageLookupByLibrary.simpleMessage("اسم السيارة"),
-        "userCarsCardSemantics": m1,
+        "userCarsCardSemantics": m7,
         "userCarsChassis": MessageLookupByLibrary.simpleMessage("رقم الهيكل"),
         "userCarsChassisVin":
             MessageLookupByLibrary.simpleMessage("رقم الهيكل (VIN)"),
@@ -298,7 +388,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("حرف اللوحة غير صالح"),
         "userCarsInvalidPlateNumber":
             MessageLookupByLibrary.simpleMessage("رقم اللوحة غير صالح"),
-        "userCarsLicensePlateSemantics": m2,
+        "userCarsLicensePlateSemantics": m8,
         "userCarsSaveVehicle":
             MessageLookupByLibrary.simpleMessage("حفظ المركبة"),
         "userCarsSaving": MessageLookupByLibrary.simpleMessage("جارٍ الحفظ..."),

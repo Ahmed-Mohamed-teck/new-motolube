@@ -1100,6 +1100,376 @@ class S {
     );
   }
 
+  /// `Unable to determine customer information.`
+  String get bookServiceCustomerInfoUnavailable {
+    return Intl.message(
+      'Unable to determine customer information.',
+      name: 'bookServiceCustomerInfoUnavailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Selected category: {label}`
+  String bookServiceSelectedCategory(String label) {
+    return Intl.message(
+      'Selected category: $label',
+      name: 'bookServiceSelectedCategory',
+      desc: '',
+      args: [label],
+    );
+  }
+
+  /// `Reset`
+  String get bookServiceReset {
+    return Intl.message(
+      'Reset',
+      name: 'bookServiceReset',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select a car before continuing.`
+  String get bookServiceSelectCarBeforeContinuing {
+    return Intl.message(
+      'Please select a car before continuing.',
+      name: 'bookServiceSelectCarBeforeContinuing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select a service package before continuing.`
+  String get bookServiceSelectPackageBeforeContinuing {
+    return Intl.message(
+      'Please select a service package before continuing.',
+      name: 'bookServiceSelectPackageBeforeContinuing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please choose a location on the map before continuing.`
+  String get bookServiceSelectLocationBeforeContinuing {
+    return Intl.message(
+      'Please choose a location on the map before continuing.',
+      name: 'bookServiceSelectLocationBeforeContinuing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please complete all steps before booking.`
+  String get bookServiceCompleteAllStepsBeforeBooking {
+    return Intl.message(
+      'Please complete all steps before booking.',
+      name: 'bookServiceCompleteAllStepsBeforeBooking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to determine the selected package.`
+  String get bookServiceSelectedPackageUnavailable {
+    return Intl.message(
+      'Unable to determine the selected package.',
+      name: 'bookServiceSelectedPackageUnavailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to determine the technician branch.`
+  String get bookServiceTechnicianBranchUnavailable {
+    return Intl.message(
+      'Unable to determine the technician branch.',
+      name: 'bookServiceTechnicianBranchUnavailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to determine the technician information.`
+  String get bookServiceTechnicianInfoUnavailable {
+    return Intl.message(
+      'Unable to determine the technician information.',
+      name: 'bookServiceTechnicianInfoUnavailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to determine the selected vehicle.`
+  String get bookServiceSelectedVehicleUnavailable {
+    return Intl.message(
+      'Unable to determine the selected vehicle.',
+      name: 'bookServiceSelectedVehicleUnavailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Appointment Confirmed`
+  String get bookServiceAppointmentConfirmedTitle {
+    return Intl.message(
+      'Appointment Confirmed',
+      name: 'bookServiceAppointmentConfirmedTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OK`
+  String get bookServiceOk {
+    return Intl.message(
+      'OK',
+      name: 'bookServiceOk',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to create appointment. Please try again.`
+  String get bookServiceCreateAppointmentFailed {
+    return Intl.message(
+      'Failed to create appointment. Please try again.',
+      name: 'bookServiceCreateAppointmentFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please sign in to select a car`
+  String get bookServiceSignInToSelectCar {
+    return Intl.message(
+      'Please sign in to select a car',
+      name: 'bookServiceSignInToSelectCar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select a car in Step 1 to view available packages.`
+  String get bookServiceSelectCarInStepOne {
+    return Intl.message(
+      'Please select a car in Step 1 to view available packages.',
+      name: 'bookServiceSelectCarInStepOne',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Failed to load packages.\n{message}`
+  String bookServiceFailedToLoadPackages(String message) {
+    return Intl.message(
+      'Failed to load packages.\n$message',
+      name: 'bookServiceFailedToLoadPackages',
+      desc: '',
+      args: [message],
+    );
+  }
+
+  /// `Try Again`
+  String get bookServiceTryAgain {
+    return Intl.message(
+      'Try Again',
+      name: 'bookServiceTryAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No Packages Found`
+  String get bookServiceNoPackagesFoundTitle {
+    return Intl.message(
+      'No Packages Found',
+      name: 'bookServiceNoPackagesFoundTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We couldn’t find any packages for your selected car and category.\nTry changing filters or check again later.`
+  String get bookServiceNoPackagesFoundDescription {
+    return Intl.message(
+      'We couldn’t find any packages for your selected car and category.\nTry changing filters or check again later.',
+      name: 'bookServiceNoPackagesFoundDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{price} SAR`
+  String bookServicePriceSar(String price) {
+    return Intl.message(
+      '$price SAR',
+      name: 'bookServicePriceSar',
+      desc: '',
+      args: [price],
+    );
+  }
+
+  /// `Packages will load once you continue.`
+  String get bookServicePackagesLoadAfterContinue {
+    return Intl.message(
+      'Packages will load once you continue.',
+      name: 'bookServicePackagesLoadAfterContinue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap anywhere on the map to select a service location.`
+  String get bookServiceTapMapToSelectLocation {
+    return Intl.message(
+      'Tap anywhere on the map to select a service location.',
+      name: 'bookServiceTapMapToSelectLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Selected location: ({latitude}, {longitude})`
+  String bookServiceSelectedLocation(String latitude, String longitude) {
+    return Intl.message(
+      'Selected location: ($latitude, $longitude)',
+      name: 'bookServiceSelectedLocation',
+      desc: '',
+      args: [latitude, longitude],
+    );
+  }
+
+  /// `Select a service package and location to discover nearby technicians.`
+  String get bookServiceSelectPackageAndLocation {
+    return Intl.message(
+      'Select a service package and location to discover nearby technicians.',
+      name: 'bookServiceSelectPackageAndLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No available technician in this region.`
+  String get bookServiceNoTechniciansInRegion {
+    return Intl.message(
+      'No available technician in this region.',
+      name: 'bookServiceNoTechniciansInRegion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refresh`
+  String get bookServiceRefresh {
+    return Intl.message(
+      'Refresh',
+      name: 'bookServiceRefresh',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ready to find technicians near your chosen location?`
+  String get bookServiceReadyToFindTechnicians {
+    return Intl.message(
+      'Ready to find technicians near your chosen location?',
+      name: 'bookServiceReadyToFindTechnicians',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search Technicians`
+  String get bookServiceSearchTechnicians {
+    return Intl.message(
+      'Search Technicians',
+      name: 'bookServiceSearchTechnicians',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{distance} km away`
+  String bookServiceDistanceAway(String distance) {
+    return Intl.message(
+      '$distance km away',
+      name: 'bookServiceDistanceAway',
+      desc: '',
+      args: [distance],
+    );
+  }
+
+  /// `Tap a technician to see their available time slots.`
+  String get bookServiceTapTechnicianForSlots {
+    return Intl.message(
+      'Tap a technician to see their available time slots.',
+      name: 'bookServiceTapTechnicianForSlots',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No slots available for the selected date.`
+  String get bookServiceNoSlotsForSelectedDate {
+    return Intl.message(
+      'No slots available for the selected date.',
+      name: 'bookServiceNoSlotsForSelectedDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Available slots for {name}`
+  String bookServiceAvailableSlotsFor(String name) {
+    return Intl.message(
+      'Available slots for $name',
+      name: 'bookServiceAvailableSlotsFor',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `Location Permission`
+  String get bookServiceLocationPermissionTitle {
+    return Intl.message(
+      'Location Permission',
+      name: 'bookServiceLocationPermissionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We need your location to show it on the map.`
+  String get bookServiceLocationPermissionMessage {
+    return Intl.message(
+      'We need your location to show it on the map.',
+      name: 'bookServiceLocationPermissionMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deny`
+  String get bookServiceDeny {
+    return Intl.message(
+      'Deny',
+      name: 'bookServiceDeny',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Allow`
+  String get bookServiceAllow {
+    return Intl.message(
+      'Allow',
+      name: 'bookServiceAllow',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `No cars found`
   String get noCarsFound {
     return Intl.message(

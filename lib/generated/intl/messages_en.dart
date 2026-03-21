@@ -20,11 +20,24 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(route) => "Route \"${route}\" is not available.";
+  static String m0(name) => "Available slots for ${name}";
 
-  static String m1(model, plate) => "Car card for ${model}, plate ${plate}";
+  static String m1(distance) => "${distance} km away";
 
-  static String m2(plate) => "License plate ${plate}";
+  static String m2(message) => "Failed to load packages.\n${message}";
+
+  static String m3(price) => "${price} SAR";
+
+  static String m4(label) => "Selected category: ${label}";
+
+  static String m5(latitude, longitude) =>
+      "Selected location: (${latitude}, ${longitude})";
+
+  static String m6(route) => "Route \"${route}\" is not available.";
+
+  static String m7(model, plate) => "Car card for ${model}, plate ${plate}";
+
+  static String m8(plate) => "License plate ${plate}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -43,6 +56,73 @@ class MessageLookup extends MessageLookupByLibrary {
         "batteires": MessageLookupByLibrary.simpleMessage("Batteries"),
         "bestOffers": MessageLookupByLibrary.simpleMessage("Best Offers"),
         "book": MessageLookupByLibrary.simpleMessage("Book"),
+        "bookServiceAllow": MessageLookupByLibrary.simpleMessage("Allow"),
+        "bookServiceAppointmentConfirmedTitle":
+            MessageLookupByLibrary.simpleMessage("Appointment Confirmed"),
+        "bookServiceAvailableSlotsFor": m0,
+        "bookServiceCompleteAllStepsBeforeBooking":
+            MessageLookupByLibrary.simpleMessage(
+                "Please complete all steps before booking."),
+        "bookServiceCreateAppointmentFailed":
+            MessageLookupByLibrary.simpleMessage(
+                "Failed to create appointment. Please try again."),
+        "bookServiceCustomerInfoUnavailable":
+            MessageLookupByLibrary.simpleMessage(
+                "Unable to determine customer information."),
+        "bookServiceDeny": MessageLookupByLibrary.simpleMessage("Deny"),
+        "bookServiceDistanceAway": m1,
+        "bookServiceFailedToLoadPackages": m2,
+        "bookServiceLocationPermissionMessage":
+            MessageLookupByLibrary.simpleMessage(
+                "We need your location to show it on the map."),
+        "bookServiceLocationPermissionTitle":
+            MessageLookupByLibrary.simpleMessage("Location Permission"),
+        "bookServiceNoPackagesFoundDescription":
+            MessageLookupByLibrary.simpleMessage(
+                "We couldn’t find any packages for your selected car and category.\nTry changing filters or check again later."),
+        "bookServiceNoPackagesFoundTitle":
+            MessageLookupByLibrary.simpleMessage("No Packages Found"),
+        "bookServiceNoSlotsForSelectedDate":
+            MessageLookupByLibrary.simpleMessage(
+                "No slots available for the selected date."),
+        "bookServiceNoTechniciansInRegion":
+            MessageLookupByLibrary.simpleMessage(
+                "No available technician in this region."),
+        "bookServiceOk": MessageLookupByLibrary.simpleMessage("OK"),
+        "bookServicePackagesLoadAfterContinue":
+            MessageLookupByLibrary.simpleMessage(
+                "Packages will load once you continue."),
+        "bookServicePriceSar": m3,
+        "bookServiceReadyToFindTechnicians":
+            MessageLookupByLibrary.simpleMessage(
+                "Ready to find technicians near your chosen location?"),
+        "bookServiceRefresh": MessageLookupByLibrary.simpleMessage("Refresh"),
+        "bookServiceReset": MessageLookupByLibrary.simpleMessage("Reset"),
+        "bookServiceSearchTechnicians":
+            MessageLookupByLibrary.simpleMessage("Search Technicians"),
+        "bookServiceSelectCarBeforeContinuing":
+            MessageLookupByLibrary.simpleMessage(
+                "Please select a car before continuing."),
+        "bookServiceSelectCarInStepOne": MessageLookupByLibrary.simpleMessage(
+            "Please select a car in Step 1 to view available packages."),
+        "bookServiceSelectLocationBeforeContinuing":
+            MessageLookupByLibrary.simpleMessage(
+                "Please choose a location on the map before continuing."),
+        "bookServiceSelectPackageAndLocation": MessageLookupByLibrary.simpleMessage(
+            "Select a service package and location to discover nearby technicians."),
+        "bookServiceSelectPackageBeforeContinuing":
+            MessageLookupByLibrary.simpleMessage(
+                "Please select a service package before continuing."),
+        "bookServiceSelectedCategory": m4,
+        "bookServiceSelectedLocation": m5,
+        "bookServiceSelectedPackageUnavailable":
+            MessageLookupByLibrary.simpleMessage(
+                "Unable to determine the selected package."),
+        "bookServiceSelectedVehicleUnavailable":
+            MessageLookupByLibrary.simpleMessage(
+                "Unable to determine the selected vehicle."),
+        "bookServiceSignInToSelectCar": MessageLookupByLibrary.simpleMessage(
+            "Please sign in to select a car"),
         "bookServiceStepChoosePackage":
             MessageLookupByLibrary.simpleMessage("Choose Package"),
         "bookServiceStepPickLocation":
@@ -51,6 +131,20 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Select Technician"),
         "bookServiceStepSelectVehicle":
             MessageLookupByLibrary.simpleMessage("Select Vehicle"),
+        "bookServiceTapMapToSelectLocation":
+            MessageLookupByLibrary.simpleMessage(
+                "Tap anywhere on the map to select a service location."),
+        "bookServiceTapTechnicianForSlots":
+            MessageLookupByLibrary.simpleMessage(
+                "Tap a technician to see their available time slots."),
+        "bookServiceTechnicianBranchUnavailable":
+            MessageLookupByLibrary.simpleMessage(
+                "Unable to determine the technician branch."),
+        "bookServiceTechnicianInfoUnavailable":
+            MessageLookupByLibrary.simpleMessage(
+                "Unable to determine the technician information."),
+        "bookServiceTryAgain":
+            MessageLookupByLibrary.simpleMessage("Try Again"),
         "carDetailing": MessageLookupByLibrary.simpleMessage("Car Detailing"),
         "carEvaluation": MessageLookupByLibrary.simpleMessage("Car Evaluation"),
         "carInfo": MessageLookupByLibrary.simpleMessage("Car Info"),
@@ -148,7 +242,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("View customer ratings"),
         "managerHomeRatingsTitle":
             MessageLookupByLibrary.simpleMessage("Ratings"),
-        "managerHomeRouteUnavailable": m0,
+        "managerHomeRouteUnavailable": m6,
         "managerHomeTitle": MessageLookupByLibrary.simpleMessage("Manager"),
         "manufacturer": MessageLookupByLibrary.simpleMessage("Manufacturer"),
         "mobileServices":
@@ -270,7 +364,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "userCarsCarModelLabel":
             MessageLookupByLibrary.simpleMessage("Car model"),
         "userCarsCarName": MessageLookupByLibrary.simpleMessage("Car name"),
-        "userCarsCardSemantics": m1,
+        "userCarsCardSemantics": m7,
         "userCarsChassis": MessageLookupByLibrary.simpleMessage("Chassis"),
         "userCarsChassisVin":
             MessageLookupByLibrary.simpleMessage("Chassis (VIN)"),
@@ -293,7 +387,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Invalid plate letter"),
         "userCarsInvalidPlateNumber":
             MessageLookupByLibrary.simpleMessage("Invalid plate number"),
-        "userCarsLicensePlateSemantics": m2,
+        "userCarsLicensePlateSemantics": m8,
         "userCarsSaveVehicle":
             MessageLookupByLibrary.simpleMessage("Save Vehicle"),
         "userCarsSaving": MessageLookupByLibrary.simpleMessage("Saving..."),

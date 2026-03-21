@@ -105,6 +105,88 @@
   "bookServiceStepChoosePackage": "اختر الباقة",
   "bookServiceStepPickLocation": "حدد الموقع",
   "bookServiceStepSelectTechnician": "اختر الفني",
+  "bookServiceCustomerInfoUnavailable": "تعذر تحديد معلومات العميل.",
+  "bookServiceSelectedCategory": "الفئة المحددة: {label}",
+  "@bookServiceSelectedCategory": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "bookServiceReset": "إعادة تعيين",
+  "bookServiceSelectCarBeforeContinuing": "يرجى اختيار سيارة قبل المتابعة.",
+  "bookServiceSelectPackageBeforeContinuing": "يرجى اختيار باقة خدمة قبل المتابعة.",
+  "bookServiceSelectLocationBeforeContinuing": "يرجى اختيار موقع على الخريطة قبل المتابعة.",
+  "bookServiceCompleteAllStepsBeforeBooking": "يرجى إكمال جميع الخطوات قبل الحجز.",
+  "bookServiceSelectedPackageUnavailable": "تعذر تحديد الباقة المحددة.",
+  "bookServiceTechnicianBranchUnavailable": "تعذر تحديد فرع الفني.",
+  "bookServiceTechnicianInfoUnavailable": "تعذر تحديد معلومات الفني.",
+  "bookServiceSelectedVehicleUnavailable": "تعذر تحديد المركبة المحددة.",
+  "bookServiceAppointmentConfirmedTitle": "تم تأكيد الموعد",
+  "bookServiceOk": "حسنًا",
+  "bookServiceCreateAppointmentFailed": "فشل إنشاء الموعد. يرجى المحاولة مرة أخرى.",
+  "bookServiceSignInToSelectCar": "يرجى تسجيل الدخول لاختيار سيارة",
+  "bookServiceSelectCarInStepOne": "يرجى اختيار سيارة في الخطوة الأولى لعرض الباقات المتاحة.",
+  "bookServiceFailedToLoadPackages": "فشل تحميل الباقات.\n{message}",
+  "@bookServiceFailedToLoadPackages": {
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  },
+  "bookServiceTryAgain": "حاول مرة أخرى",
+  "bookServiceNoPackagesFoundTitle": "لم يتم العثور على باقات",
+  "bookServiceNoPackagesFoundDescription": "لم نتمكن من العثور على أي باقات لسيارتك والفئة المحددة.\nجرّب تغيير عوامل التصفية أو تحقق مرة أخرى لاحقًا.",
+  "bookServicePriceSar": "{price} ر.س",
+  "@bookServicePriceSar": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "bookServicePackagesLoadAfterContinue": "سيتم تحميل الباقات بمجرد المتابعة.",
+  "bookServiceTapMapToSelectLocation": "اضغط في أي مكان على الخريطة لتحديد موقع الخدمة.",
+  "bookServiceSelectedLocation": "الموقع المحدد: ({latitude}, {longitude})",
+  "@bookServiceSelectedLocation": {
+    "placeholders": {
+      "latitude": {
+        "type": "String"
+      },
+      "longitude": {
+        "type": "String"
+      }
+    }
+  },
+  "bookServiceSelectPackageAndLocation": "اختر باقة خدمة وموقعًا للعثور على الفنيين القريبين.",
+  "bookServiceNoTechniciansInRegion": "لا يوجد فني متاح في هذه المنطقة.",
+  "bookServiceRefresh": "تحديث",
+  "bookServiceReadyToFindTechnicians": "هل أنت مستعد للعثور على فنيين بالقرب من موقعك المحدد؟",
+  "bookServiceSearchTechnicians": "البحث عن فنيين",
+  "bookServiceDistanceAway": "يبعد {distance} كم",
+  "@bookServiceDistanceAway": {
+    "placeholders": {
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "bookServiceTapTechnicianForSlots": "اضغط على فني لعرض المواعيد المتاحة لديه.",
+  "bookServiceNoSlotsForSelectedDate": "لا توجد مواعيد متاحة للتاريخ المحدد.",
+  "bookServiceAvailableSlotsFor": "المواعيد المتاحة لـ {name}",
+  "@bookServiceAvailableSlotsFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "bookServiceLocationPermissionTitle": "إذن الموقع",
+  "bookServiceLocationPermissionMessage": "نحتاج إلى موقعك لعرضه على الخريطة.",
+  "bookServiceDeny": "رفض",
+  "bookServiceAllow": "سماح",
   "noCarsFound": "لم يتم العثور على سيارات",
   "PleaseLoginToViewYourCarsMessage": "يرجى تسجيل الدخول لعرض سياراتك",
   "logInToContinue": "سجل الدخول للمتابعة",

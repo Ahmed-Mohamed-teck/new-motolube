@@ -459,8 +459,8 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
         return null;
       }
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Unable to determine customer information.'),
+        SnackBar(
+          content: Text(S.of(context).bookServiceCustomerInfoUnavailable),
         ),
       );
       return null;
@@ -515,6 +515,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
   }
 
   Widget? _buildCategoryBanner(BuildContext context) {
+    final l10n = S.of(context);
     final category = _selectedMainCategory;
     if (category == null) return null;
     final label =
@@ -538,7 +539,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
               ),
               const SizedBox(width: 6),
               Text(
-                'Selected category: $label',
+                l10n.bookServiceSelectedCategory(label),
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Theme.of(context).colorScheme.onSurface,
                       fontWeight: FontWeight.w600,
@@ -550,7 +551,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
           TextButton.icon(
             onPressed: _clearSelectedCategory,
             icon: const Icon(Icons.close),
-            label: const Text('Reset'),
+            label: Text(l10n.bookServiceReset),
           ),
         ],
       ),
@@ -706,11 +707,12 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
   }
 
   Future<void> _goToNext() async {
+    final l10n = S.of(context);
     if (_currentStep == 0) {
       if (_selectedCarEntity == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Please select a car before continuing.'),
+          SnackBar(
+            content: Text(l10n.bookServiceSelectCarBeforeContinuing),
           ),
         );
         return;
@@ -737,8 +739,8 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
     if (_currentStep == 1) {
       if (_selectedPackage == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Please select a service package before continuing.'),
+          SnackBar(
+            content: Text(l10n.bookServiceSelectPackageBeforeContinuing),
           ),
         );
         return;
@@ -752,10 +754,8 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
     if (_currentStep == 2) {
       if (_selectedLocation == null) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-              'Please choose a location on the map before continuing.',
-            ),
+          SnackBar(
+            content: Text(l10n.bookServiceSelectLocationBeforeContinuing),
           ),
         );
         return;
@@ -783,6 +783,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
   }
 
   Future<void> _handleBooking() async {
+    final l10n = S.of(context);
     final car = _selectedCarEntity;
     final package = _selectedPackage;
     final location = _selectedLocation;
@@ -794,7 +795,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
         location == null ||
         technician == null ||
         slot == null) {
-      _showSnack('Please complete all steps before booking.');
+      _showSnack(l10n.bookServiceCompleteAllStepsBeforeBooking);
       return;
     }
 
@@ -808,25 +809,25 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
             ? package.packageId.trim()
             : package.packageCode.trim();
     if (packageId.isEmpty) {
-      _showSnack('Unable to determine the selected package.');
+      _showSnack(l10n.bookServiceSelectedPackageUnavailable);
       return;
     }
 
     final branchId = technician.branchId.trim();
     if (branchId.isEmpty) {
-      _showSnack('Unable to determine the technician branch.');
+      _showSnack(l10n.bookServiceTechnicianBranchUnavailable);
       return;
     }
 
     final userId = technician.techId.trim();
     if (userId.isEmpty) {
-      _showSnack('Unable to determine the technician information.');
+      _showSnack(l10n.bookServiceTechnicianInfoUnavailable);
       return;
     }
 
     final vehicleId = car.vehicleId.trim();
     if (vehicleId.isEmpty) {
-      _showSnack('Unable to determine the selected vehicle.');
+      _showSnack(l10n.bookServiceSelectedVehicleUnavailable);
       return;
     }
 
@@ -869,12 +870,12 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
           context: context,
           builder:
               (dialogContext) => AlertDialog(
-                title: const Text('Appointment Confirmed'),
+                title: Text(l10n.bookServiceAppointmentConfirmedTitle),
                 content: Text(result.displayMessage),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.of(dialogContext).pop(),
-                    child: const Text('OK'),
+                    child: Text(l10n.bookServiceOk),
                   ),
                 ],
               ),
@@ -898,7 +899,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
       _showSnack(
         error.toString().isNotEmpty
             ? error.toString()
-            : 'Failed to create appointment. Please try again.',
+            : l10n.bookServiceCreateAppointmentFailed,
       );
     } finally {
       if (mounted) {
@@ -956,7 +957,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
         }
 
         if (authState is! AuthenticatedState) {
-          return const Center(child: Text('Please sign in to select a car'));
+          return Center(child: Text(S.of(context).bookServiceSignInToSelectCar));
         }
 
         if (state is UserCarsLoading || state is UserCarsInitial) {
@@ -964,7 +965,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
         } else if (state is UserCarsLoaded) {
           final cars = state.cars;
           if (cars.isEmpty) {
-            return const Center(child: Text('No cars found'));
+            return Center(child: Text(S.of(context).noCarsFound));
           }
           _syncSelectedCarSelection(cars);
           return ListView.separated(
@@ -1033,9 +1034,9 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
     if (_selectedCarEntity == null) {
       return _wrapWithCategoryBanner(
         context,
-        const Center(
+        Center(
           child: Text(
-            'Please select a car in Step 1 to view available packages.',
+            S.of(context).bookServiceSelectCarInStepOne,
           ),
         ),
       );
@@ -1050,6 +1051,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
     }
 
     if (packagesState is ServicePackagesError) {
+      final l10n = S.of(context);
       return _wrapWithCategoryBanner(
         context,
         Center(
@@ -1057,7 +1059,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Failed to load packages.\n${packagesState.message}',
+                l10n.bookServiceFailedToLoadPackages(packagesState.message),
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Theme.of(context).colorScheme.error,
@@ -1068,7 +1070,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
                 onPressed: () {
                   _fetchPackagesForSelectedCar();
                 },
-                child: const Text('Try Again'),
+                child: Text(l10n.bookServiceTryAgain),
               ),
             ],
           ),
@@ -1077,15 +1079,74 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
     }
 
     if (packagesState is ServicePackagesEmpty) {
+      final l10n = S.of(context);
       return _wrapWithCategoryBanner(
         context,
-        const Center(
-          child: Text('No packages available for the selected vehicle.'),
+        Center(
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            margin: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 10,
+                  offset: Offset(0, 4),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.car_repair, size: 64, color: Colors.grey[400]),
+
+                SizedBox(height: 16),
+
+                Text(
+                  l10n.bookServiceNoPackagesFoundTitle,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                SizedBox(height: 8),
+
+                Text(
+                  l10n.bookServiceNoPackagesFoundDescription,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.grey[600],
+                    fontSize: 14,
+                  ),
+                ),
+
+                SizedBox(height: 20),
+
+                Row(
+                  children: [
+                    Expanded(
+                      child: OutlinedButton(
+                        onPressed: () {
+                          _fetchPackagesForSelectedCar();
+                        },
+                        child: Text(l10n.commonRetry),
+                      ),
+                    ),
+
+                  ],
+                )
+              ],
+            ),
+          ),
         ),
       );
     }
 
     if (packagesState is ServicePackagesLoaded) {
+      final l10n = S.of(context);
       final packages = packagesState.packages;
 
       return _wrapWithCategoryBanner(
@@ -1110,7 +1171,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
               color: isSelected ? Colors.amber[100] : null,
               child: ListTile(
                 title: Text(title),
-                subtitle: Text('$displayPrice SAR'),
+                subtitle: Text(l10n.bookServicePriceSar(displayPrice)),
                 leading: Icon(
                   Icons.build_circle,
                   color: isSelected ? Colors.amber : Colors.grey[600],
@@ -1135,10 +1196,11 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
       );
     }
 
-    return const Center(child: Text('Packages will load once you continue.'));
+    return Center(child: Text(S.of(context).bookServicePackagesLoadAfterContinue));
   }
 
   Widget _buildLocationStep() {
+    final l10n = S.of(context);
     final markers = <Marker>[
       if (_selectedLocation != null)
         Marker(
@@ -1180,8 +1242,11 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Text(
                 _selectedLocation == null
-                    ? 'Tap anywhere on the map to select a service location.'
-                    : 'Selected location: (${_selectedLocation!.latitude.toStringAsFixed(6)}, ${_selectedLocation!.longitude.toStringAsFixed(6)})',
+                    ? l10n.bookServiceTapMapToSelectLocation
+                    : l10n.bookServiceSelectedLocation(
+                      _selectedLocation!.latitude.toStringAsFixed(6),
+                      _selectedLocation!.longitude.toStringAsFixed(6),
+                    ),
                 style: const TextStyle(color: Colors.white),
                 textAlign: TextAlign.center,
               ),
@@ -1201,21 +1266,19 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
   }
 
   Widget _buildTechnicianStep() {
+    final l10n = S.of(context);
     final searchState = ref.watch(technicianSearchViewModelProvider);
     final hasPrerequisites =
         _selectedLocation != null && _selectedPackage != null;
 
     if (!hasPrerequisites) {
-      return const Center(
+      return Center(
         child: Text(
-          'Select a service package and location to discover nearby technicians.',
+          l10n.bookServiceSelectPackageAndLocation,
           textAlign: TextAlign.center,
         ),
       );
     }
-
-    final location = _selectedLocation!;
-    final selectedPackage = _selectedPackage!;
 
     Widget buildBody(Widget child) {
       return Column(
@@ -1238,14 +1301,14 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
-              'No available technician in this region.',
+            Text(
+              l10n.bookServiceNoTechniciansInRegion,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 12),
             OutlinedButton(
               onPressed: _retryTechnicianSearch,
-              child: const Text('Refresh'),
+              child: Text(l10n.bookServiceRefresh),
             ),
           ],
         ),
@@ -1269,14 +1332,14 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            'Ready to find technicians near your chosen location?',
+          Text(
+            l10n.bookServiceReadyToFindTechnicians,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 12),
           ElevatedButton(
             onPressed: _retryTechnicianSearch,
-            child: const Text('Search Technicians'),
+            child: Text(l10n.bookServiceSearchTechnicians),
           ),
         ],
       ),
@@ -1314,6 +1377,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
     required bool isSelected,
     required VoidCallback onTap,
   }) {
+    final l10n = S.of(context);
     final distance = technician.calculatedDistance;
     final rating = technician.rating;
     final primaryName =
@@ -1383,16 +1447,17 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
                   ).textTheme.bodyMedium?.copyWith(color: Colors.grey[700]),
                 ),
               const Spacer(),
-              if (distance != null)
-                Row(
-                  children: [
-                    const Icon(Icons.place, size: 18, color: Colors.amber),
-                    const SizedBox(width: 4),
-                    Text(
-                      '${distance.toStringAsFixed(distance >= 10 ? 0 : 1)} km away',
+              Row(
+                children: [
+                  const Icon(Icons.place, size: 18, color: Colors.amber),
+                  const SizedBox(width: 4),
+                  Text(
+                    l10n.bookServiceDistanceAway(
+                      distance.toStringAsFixed(distance >= 10 ? 0 : 1),
                     ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
               if (rating != null)
                 Row(
                   children: [
@@ -1409,11 +1474,12 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
   }
 
   Widget _buildTechnicianSlotsSection() {
+    final l10n = S.of(context);
     final technician = _selectedTechnician;
     final slotsState = ref.watch(technicianSlotsViewModelProvider);
 
     if (technician == null) {
-      return const Text('Tap a technician to see their available time slots.');
+      return Text(l10n.bookServiceTapTechnicianForSlots);
     }
 
     bool matchesCurrentTech(String technicianId) =>
@@ -1421,9 +1487,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
 
     Widget content;
     if (slotsState is TechnicianSlotsInitial) {
-      content = const Text(
-        'Tap a technician to see their available time slots.',
-      );
+      content = Text(l10n.bookServiceTapTechnicianForSlots);
     } else if (slotsState is TechnicianSlotsLoading) {
       content =
           matchesCurrentTech(slotsState.technicianId)
@@ -1440,10 +1504,10 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
               ? Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('No slots available for the selected date.'),
+                  Text(l10n.bookServiceNoSlotsForSelectedDate),
                   TextButton(
                     onPressed: _fetchSlotsForTechnician,
-                    child: const Text('Refresh'),
+                    child: Text(l10n.bookServiceRefresh),
                   ),
                 ],
               )
@@ -1469,7 +1533,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
           children: [
             Expanded(
               child: Text(
-                'Available slots for $displayName',
+                l10n.bookServiceAvailableSlotsFor(displayName),
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
@@ -1488,7 +1552,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
 
   Widget _buildSlotChips(List<TechnicianSlotEntity> slots) {
     if (slots.isEmpty) {
-      return const Text('No slots available for the selected date.');
+      return Text(S.of(context).bookServiceNoSlotsForSelectedDate);
     }
 
     return SingleChildScrollView(
@@ -1583,6 +1647,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
   }
 
   Future<void> _requestCurrentLocation() async {
+    final l10n = S.of(context);
     var permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied ||
         permission == LocationPermission.deniedForever) {
@@ -1590,18 +1655,16 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
         context: context,
         builder:
             (context) => AlertDialog(
-              title: const Text('Location Permission'),
-              content: const Text(
-                'We need your location to show it on the map.',
-              ),
+              title: Text(l10n.bookServiceLocationPermissionTitle),
+              content: Text(l10n.bookServiceLocationPermissionMessage),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(context, false),
-                  child: const Text('Deny'),
+                  child: Text(l10n.bookServiceDeny),
                 ),
                 TextButton(
                   onPressed: () => Navigator.pop(context, true),
-                  child: const Text('Allow'),
+                  child: Text(l10n.bookServiceAllow),
                 ),
               ],
             ),

@@ -105,6 +105,88 @@
   "bookServiceStepChoosePackage": "Choose Package",
   "bookServiceStepPickLocation": "Pick Location",
   "bookServiceStepSelectTechnician": "Select Technician",
+  "bookServiceCustomerInfoUnavailable": "Unable to determine customer information.",
+  "bookServiceSelectedCategory": "Selected category: {label}",
+  "@bookServiceSelectedCategory": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "bookServiceReset": "Reset",
+  "bookServiceSelectCarBeforeContinuing": "Please select a car before continuing.",
+  "bookServiceSelectPackageBeforeContinuing": "Please select a service package before continuing.",
+  "bookServiceSelectLocationBeforeContinuing": "Please choose a location on the map before continuing.",
+  "bookServiceCompleteAllStepsBeforeBooking": "Please complete all steps before booking.",
+  "bookServiceSelectedPackageUnavailable": "Unable to determine the selected package.",
+  "bookServiceTechnicianBranchUnavailable": "Unable to determine the technician branch.",
+  "bookServiceTechnicianInfoUnavailable": "Unable to determine the technician information.",
+  "bookServiceSelectedVehicleUnavailable": "Unable to determine the selected vehicle.",
+  "bookServiceAppointmentConfirmedTitle": "Appointment Confirmed",
+  "bookServiceOk": "OK",
+  "bookServiceCreateAppointmentFailed": "Failed to create appointment. Please try again.",
+  "bookServiceSignInToSelectCar": "Please sign in to select a car",
+  "bookServiceSelectCarInStepOne": "Please select a car in Step 1 to view available packages.",
+  "bookServiceFailedToLoadPackages": "Failed to load packages.\n{message}",
+  "@bookServiceFailedToLoadPackages": {
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  },
+  "bookServiceTryAgain": "Try Again",
+  "bookServiceNoPackagesFoundTitle": "No Packages Found",
+  "bookServiceNoPackagesFoundDescription": "We couldn’t find any packages for your selected car and category.\nTry changing filters or check again later.",
+  "bookServicePriceSar": "{price} SAR",
+  "@bookServicePriceSar": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "bookServicePackagesLoadAfterContinue": "Packages will load once you continue.",
+  "bookServiceTapMapToSelectLocation": "Tap anywhere on the map to select a service location.",
+  "bookServiceSelectedLocation": "Selected location: ({latitude}, {longitude})",
+  "@bookServiceSelectedLocation": {
+    "placeholders": {
+      "latitude": {
+        "type": "String"
+      },
+      "longitude": {
+        "type": "String"
+      }
+    }
+  },
+  "bookServiceSelectPackageAndLocation": "Select a service package and location to discover nearby technicians.",
+  "bookServiceNoTechniciansInRegion": "No available technician in this region.",
+  "bookServiceRefresh": "Refresh",
+  "bookServiceReadyToFindTechnicians": "Ready to find technicians near your chosen location?",
+  "bookServiceSearchTechnicians": "Search Technicians",
+  "bookServiceDistanceAway": "{distance} km away",
+  "@bookServiceDistanceAway": {
+    "placeholders": {
+      "distance": {
+        "type": "String"
+      }
+    }
+  },
+  "bookServiceTapTechnicianForSlots": "Tap a technician to see their available time slots.",
+  "bookServiceNoSlotsForSelectedDate": "No slots available for the selected date.",
+  "bookServiceAvailableSlotsFor": "Available slots for {name}",
+  "@bookServiceAvailableSlotsFor": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "bookServiceLocationPermissionTitle": "Location Permission",
+  "bookServiceLocationPermissionMessage": "We need your location to show it on the map.",
+  "bookServiceDeny": "Deny",
+  "bookServiceAllow": "Allow",
   "noCarsFound": "No cars found",
   "PleaseLoginToViewYourCarsMessage": "Please login to view your cars",
   "logInToContinue": "Log in to continue",
