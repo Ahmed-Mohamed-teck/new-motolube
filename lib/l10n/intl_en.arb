@@ -189,7 +189,9 @@
   "bookServiceAllow": "Allow",
   "noCarsFound": "No cars found",
   "PleaseLoginToViewYourCarsMessage": "Please login to view your cars",
+  "userCarsEmptyDescription": "We couldn’t find any cars matching your search .",
   "logInToContinue": "Log in to continue",
+
   "upcomingServicesBookingDetailsTitle": "Booking Details",
   "upcomingServicesServicePackageLabel": "Service Package",
   "upcomingServicesServiceLocationLabel": "Service Location",

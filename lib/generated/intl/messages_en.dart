@@ -377,6 +377,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "userCarsCopy": MessageLookupByLibrary.simpleMessage("Copy"),
         "userCarsDeleteCar": MessageLookupByLibrary.simpleMessage("Delete car"),
         "userCarsEditInfo": MessageLookupByLibrary.simpleMessage("Edit info"),
+        "userCarsEmptyDescription": MessageLookupByLibrary.simpleMessage(
+            "We couldn’t find any cars matching your search ."),
         "userCarsErrorLoadingManufacturers":
             MessageLookupByLibrary.simpleMessage("Error loading manufacturers"),
         "userCarsErrorLoadingModels":

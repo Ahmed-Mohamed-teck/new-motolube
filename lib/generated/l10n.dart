@@ -1490,6 +1490,16 @@ class S {
     );
   }
 
+  /// `We couldn’t find any cars matching your search .`
+  String get userCarsEmptyDescription {
+    return Intl.message(
+      'We couldn’t find any cars matching your search .',
+      name: 'userCarsEmptyDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Log in to continue`
   String get logInToContinue {
     return Intl.message(

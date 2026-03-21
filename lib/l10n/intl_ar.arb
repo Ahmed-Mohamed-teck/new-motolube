@@ -189,6 +189,7 @@
   "bookServiceAllow": "سماح",
   "noCarsFound": "لم يتم العثور على سيارات",
   "PleaseLoginToViewYourCarsMessage": "يرجى تسجيل الدخول لعرض سياراتك",
+  "userCarsEmptyDescription": "لم نتمكن من العثور على أي سيارات تطابق بحثك ",
   "logInToContinue": "سجل الدخول للمتابعة",
   "upcomingServicesBookingDetailsTitle": "تفاصيل الحجز",
   "upcomingServicesServicePackageLabel": "باقة الخدمة",

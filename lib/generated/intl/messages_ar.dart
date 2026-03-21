@@ -377,6 +377,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("حذف السيارة"),
         "userCarsEditInfo":
             MessageLookupByLibrary.simpleMessage("تعديل المعلومات"),
+        "userCarsEmptyDescription": MessageLookupByLibrary.simpleMessage(
+            "لم نتمكن من العثور على أي سيارات تطابق بحثك "),
         "userCarsErrorLoadingManufacturers":
             MessageLookupByLibrary.simpleMessage(
                 "حدث خطأ أثناء تحميل الشركات المصنعة"),
