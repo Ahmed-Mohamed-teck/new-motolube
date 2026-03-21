@@ -67,8 +67,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       children: [
                         CircleAvatar(
                           radius: 60,
-                          backgroundImage: const AssetImage('assets/images/default_avatar.png'),
                           backgroundColor: Colors.grey[300],
+                          child: Icon(Icons.person, size: 60, color: Colors.white),
                         ),
                         Positioned(
                           bottom: 0,
