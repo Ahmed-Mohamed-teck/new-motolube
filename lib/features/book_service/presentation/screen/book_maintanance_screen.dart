@@ -12,6 +12,7 @@ import 'package:newmotorlube/features/book_service/presentation/view_model/servi
 import 'package:newmotorlube/features/book_service/provider/book_service_provider.dart';
 import 'package:newmotorlube/features/book_service/domain/entity/service_package_entity.dart';
 import 'package:newmotorlube/features/user_cars/domain/entity/car_entity.dart';
+import 'package:newmotorlube/features/user_cars/presentation/widget/user_cars_empty_state.dart';
 import 'package:newmotorlube/features/user_cars/presentation/widget/user_car_list_item.dart';
 import 'package:newmotorlube/features/user_cars/provider/user_cars_provider.dart';
 import 'package:newmotorlube/features/user_cars/presentation/view_model/user_cars_state.dart';
@@ -972,7 +973,11 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
         } else if (state is UserCarsLoaded) {
           final cars = state.cars;
           if (cars.isEmpty) {
-            return Center(child: Text(S.of(context).noCarsFound));
+            return UserCarsEmptyState(
+              onAddCar: () {
+                Navigator.of(context).pushNamed('addNewCarScreen');
+              },
+            );
           }
           _syncSelectedCarSelection(cars);
           return ListView.separated(
