@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:newmotorlube/features/home/provider/home_provider.dart'
-    as home;
+import 'package:newmotorlube/features/home/provider/home_provider.dart' as home;
 import 'package:newmotorlube/features/home/presentaion/view_model/main_categories_state.dart';
 import 'package:newmotorlube/features/home/presentaion/screen/base_home_screen.dart';
 
 import 'home_service_card.dart';
 
 class HomeServiceGrid extends ConsumerWidget {
-  const HomeServiceGrid({super.key});
+  const HomeServiceGrid({super.key, required this.isAuthenticated});
+
+  final bool isAuthenticated;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    if (!isAuthenticated) {
+      return _buildEmptyState(context);
+    }
+
     final categoriesState = ref.watch(home.mainCategoriesViewModelProvider);
 
     if (categoriesState is MainCategoriesInitial) {
       Future.microtask(() {
-        ref.read(home.mainCategoriesViewModelProvider.notifier).fetchCategories();
+        ref
+            .read(home.mainCategoriesViewModelProvider.notifier)
+            .fetchCategories();
       });
     }
 
@@ -62,10 +69,7 @@ class HomeServiceGrid extends ConsumerWidget {
                 category;
             ref.read(currentNavBottomIndexProvider.notifier).state = 2;
           },
-          child: HomeServiceCard(
-            title: title,
-            photoUrl: category.photoUrl,
-          ),
+          child: HomeServiceCard(title: title, photoUrl: category.photoUrl),
         );
       },
     );
@@ -82,10 +86,7 @@ class HomeServiceGrid extends ConsumerWidget {
       padding: const EdgeInsets.all(8.0),
       children: List.generate(
         8,
-        (_) => const HomeServiceCard(
-          title: '',
-          isLoading: true,
-        ),
+        (_) => const HomeServiceCard(title: '', isLoading: true),
       ),
     );
   }
@@ -100,11 +101,7 @@ class HomeServiceGrid extends ConsumerWidget {
     );
   }
 
-  Widget _buildErrorState(
-    BuildContext context,
-    WidgetRef ref,
-    String message,
-  ) {
+  Widget _buildErrorState(BuildContext context, WidgetRef ref, String message) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       child: Card(
@@ -122,10 +119,9 @@ class HomeServiceGrid extends ConsumerWidget {
               const SizedBox(height: 4),
               Text(
                 message,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodySmall
-                    ?.copyWith(color: Colors.grey[700]),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(color: Colors.grey[700]),
               ),
               const SizedBox(height: 8),
               Align(

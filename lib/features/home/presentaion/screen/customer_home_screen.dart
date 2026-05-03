@@ -31,8 +31,9 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
         if (isAuthenticated) {
           addCarAction = IconButton(
             onPressed: () async {
-              final result =
-                  await navigatorKey.currentState!.pushNamed('addNewCarScreen');
+              final result = await navigatorKey.currentState!.pushNamed(
+                'addNewCarScreen',
+              );
               if (result == true) {
                 ref.invalidate(userCarsViewModelProvider);
               }
@@ -79,7 +80,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                   ).pushNamed('ourServicesScreen');
                 },
               ),
-              HomeServiceGrid(),
+              HomeServiceGrid(isAuthenticated: isAuthenticated),
 
               const SizedBox(height: 16),
               TitleWithSubTitle(
@@ -88,9 +89,9 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                 subTitle: Text(
                   'All',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    color: Theme.of(context).colorScheme.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 onSubTitleTap: () {
                   Navigator.of(
