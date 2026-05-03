@@ -9,10 +9,6 @@ import '../../../../main.dart';
 import '../../provider/splash_provider.dart';
 import '../view_model/splash_state.dart';
 
-
-
-
-
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
 
@@ -21,7 +17,6 @@ class SplashScreen extends ConsumerStatefulWidget {
 }
 
 class _SplashScreenState extends ConsumerState<SplashScreen> {
-
   @override
   void initState() {
     super.initState();
@@ -40,10 +35,22 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
           showDialog(
             context: context,
             barrierColor: Colors.transparent,
-            builder: (context) => AlertDialog(
-              title: Text(appLang.errorTitle),
-              content: Text(state.message),
-            ),
+            builder:
+                (dialogContext) => AlertDialog(
+                  title: Text(appLang.errorTitle),
+                  content: Text(state.message),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(dialogContext).pop();
+                        navigatorKey.currentState?.pushReplacementNamed(
+                          'loginScreen',
+                        );
+                      },
+                      child: Text(appLang.login),
+                    ),
+                  ],
+                ),
           );
         });
       }
@@ -61,9 +68,10 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                      height: 150,
-                      width: 150,
-                      child: Image.asset('assets/logo-no-bg.png')),
+                    height: 150,
+                    width: 150,
+                    child: Image.asset('assets/logo-no-bg.png'),
+                  ),
                   const SizedBox(height: 8),
                   Text(
                     appPrefsWithCache.getString(kAppLanguage) == 'ar'
@@ -100,10 +108,13 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                   padding: const EdgeInsets.only(top: 24.0),
                   child: Text(
                     'V 1.0.0',
-                    style: const TextStyle(fontSize: 16,fontWeight: FontWeight.w700),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
-                const SizedBox(height: 16,)
+                const SizedBox(height: 16),
               ],
             ),
           ),

@@ -1,26 +1,60 @@
 {
   "project_info": {
-    "project_number": "359150204861",
-    "project_id": "motorlube-qa",
-    "storage_bucket": "motorlube-qa.firebasestorage.app"
+    "project_number": "245641245056",
+    "firebase_url": "https://motorlube-default-rtdb.firebaseio.com",
+    "project_id": "motorlube",
+    "storage_bucket": "motorlube.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:359150204861:android:556e7431191f50047884d4",
+        "mobilesdk_app_id": "1:245641245056:android:b08786ae1bd56a96e05165",
         "android_client_info": {
-          "package_name": "com.example.newmotorlube"
+          "package_name": "com.ml.motorlube"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "245641245056-h6d8942kajs9480v8t29j1eclisqql80.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ml.motorlube",
+            "certificate_hash": "7c142870ad00ece28a471b3eb0dcbf0c4ff6ad43"
+          }
+        },
+        {
+          "client_id": "245641245056-nuclpgl5cjfsnng5t52rca9ash2gpvgf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ml.motorlube",
+            "certificate_hash": "9b9dc69c622d08e9be968ffa8fc1f495ec4350b0"
+          }
+        },
+        {
+          "client_id": "245641245056-fsp2sclt24lvsve7sp33ilmf796cesav.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyDcXe4wjqGvj6znqEHcBMokVx2GOwHbG28"
+          "current_key": "AIzaSyDj_baMHQEq2gE02de9cw5swNM9N1DIDxw"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "245641245056-fsp2sclt24lvsve7sp33ilmf796cesav.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "245641245056-qfoohmp8ol09a72aa6dfqka9bufr26bo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.taajer.motorlube"
+              }
+            }
+          ]
         }
       }
     }

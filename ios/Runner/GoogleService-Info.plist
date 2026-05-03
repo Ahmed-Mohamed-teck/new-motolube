@@ -2,18 +2,24 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CLIENT_ID</key>
+	<string>245641245056-qfoohmp8ol09a72aa6dfqka9bufr26bo.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.245641245056-qfoohmp8ol09a72aa6dfqka9bufr26bo</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>245641245056-h6d8942kajs9480v8t29j1eclisqql80.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBIz-Uvp9XRR1O_dHcxQDMooj-k8T1HgoY</string>
+	<string>AIzaSyDiD8DBic7xWWTR571MCwPtxOEh_LzoyPM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>359150204861</string>
+	<string>245641245056</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.newmotorlube</string>
+	<string>com.taajer.motorlube</string>
 	<key>PROJECT_ID</key>
-	<string>motorlube-qa</string>
+	<string>motorlube</string>
 	<key>STORAGE_BUCKET</key>
-	<string>motorlube-qa.firebasestorage.app</string>
+	<string>motorlube.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +31,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:359150204861:ios:147a666b083e55c77884d4</string>
+	<string>1:245641245056:ios:48752e84e6d8aaeee05165</string>
+	<key>DATABASE_URL</key>
+	<string>https://motorlube-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

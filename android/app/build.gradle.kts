@@ -9,13 +9,14 @@ plugins {
 }
 
 android {
-    namespace = "com.example.newmotorlube"
+    namespace = "com.ml.motorlube"
     compileSdk = flutter.compileSdkVersion
 
     // Pin the NDK version to satisfy plugins (backward compatible)
     ndkVersion = "27.0.12077973"
 
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
@@ -25,7 +26,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.newmotorlube"
+        applicationId = "com.ml.motorlube"
 
         // Override the Flutter default if you need a specific minSdk (most plugins need 23+)
         minSdk = flutter.minSdkVersion
@@ -45,4 +46,8 @@ android {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 }

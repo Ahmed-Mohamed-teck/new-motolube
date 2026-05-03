@@ -1,4 +1,4 @@
-package com.example.newmotorlube
+package com.ml.motorlube
 
 import io.flutter.embedding.android.FlutterActivity
 
