@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:newmotorlube/core/providers/global_lang_provider.dart';
 import 'package:newmotorlube/features/auth/presentation/view_model/auth_state.dart';
 import 'package:newmotorlube/features/auth/provider/auth_provider.dart';
+import 'package:newmotorlube/features/home/provider/home_provider.dart';
 import 'package:newmotorlube/features/upcoming_service/presentation/widget/upcoming_service_section.dart';
 import '../../../../main.dart';
 import '../../../promotions/presentation/widget/promotions.dart';
@@ -25,6 +26,12 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
       builder: (context, ref, _) {
         final authState = ref.watch(authViewModelProvider);
         final isAuthenticated = authState is AuthenticatedState;
+        final promotionImageUrls = ref
+            .watch(promotionsSliderImageUrlsProvider)
+            .maybeWhen(
+              data: (imageUrls) => imageUrls,
+              orElse: () => const <String>[],
+            );
 
         Widget? addCarAction;
         VoidCallback? onYourCarsTap;
@@ -56,13 +63,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Promotions(
-                imageUrls: [
-                  'https://firebasestorage.googleapis.com/v0/b/motorlube.appspot.com/o/promotions%2F58ead032-5398-4d41-9e4a-1478bdd3db13.png?alt=media&token=f5f9615c-10e2-430b-b5e1-1c4c0f48e1d2',
-                  'https://firebasestorage.googleapis.com/v0/b/motorlube.appspot.com/o/promotions%2F58ead032-5398-4d41-9e4a-1478bdd3db13.png?alt=media&token=f5f9615c-10e2-430b-b5e1-1c4c0f48e1d2',
-                  'https://firebasestorage.googleapis.com/v0/b/motorlube.appspot.com/o/promotions%2F58ead032-5398-4d41-9e4a-1478bdd3db13.png?alt=media&token=f5f9615c-10e2-430b-b5e1-1c4c0f48e1d2',
-                ],
-              ),
+              Promotions(imageUrls: promotionImageUrls),
               const SizedBox(height: 16),
               TitleWithSubTitle(
                 title: appLang.ourServices,

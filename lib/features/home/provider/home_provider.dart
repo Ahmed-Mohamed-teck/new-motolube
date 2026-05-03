@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:newmotorlube/core/providers/general_providers.dart';
 import 'package:newmotorlube/core/providers/dio_provider.dart';
 
 import '../data/data_source/home_remote_data_source.dart';
@@ -18,15 +19,37 @@ final homeRepositoryProvider = Provider<IHomeRepository>((ref) {
   return HomeRepository(ref.read(homeRemoteDataSourceProvider));
 });
 
-final getMainCategoriesUseCaseProvider =
-    Provider<GetMainCategoriesUseCase>((ref) {
+final getMainCategoriesUseCaseProvider = Provider<GetMainCategoriesUseCase>((
+  ref,
+) {
   return GetMainCategoriesUseCase(ref.read(homeRepositoryProvider));
 });
 
 final mainCategoriesViewModelProvider = StateNotifierProvider.autoDispose<
-    MainCategoriesViewModel, MainCategoriesState>((ref) {
+  MainCategoriesViewModel,
+  MainCategoriesState
+>((ref) {
   return MainCategoriesViewModel(ref.read(getMainCategoriesUseCaseProvider));
 });
 
-final selectedMainCategoryProvider =
-    StateProvider<MainCategoryEntity?>((ref) => null);
+final selectedMainCategoryProvider = StateProvider<MainCategoryEntity?>(
+  (ref) => null,
+);
+
+final promotionsSliderImageUrlsProvider =
+    StreamProvider.autoDispose<List<String>>((ref) {
+      final firestore = ref.watch(firebaseFirestoreProvider);
+
+      return firestore
+          .collection('promotionsSliderDisplay')
+          .snapshots()
+          .map(
+            (snapshot) =>
+                snapshot.docs
+                    .map((doc) => doc.data()['imageUrl'])
+                    .whereType<String>()
+                    .map((url) => url.trim())
+                    .where((url) => url.isNotEmpty)
+                    .toList(),
+          );
+    });
