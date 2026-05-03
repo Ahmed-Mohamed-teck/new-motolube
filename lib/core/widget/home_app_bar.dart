@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:newmotorlube/core/utils/extensions/extensions.dart';
 
 import '../../features/auth/presentation/view_model/auth_state.dart';
 import '../../features/auth/provider/auth_provider.dart';
@@ -10,13 +8,11 @@ import '../../main.dart';
 import '../providers/global_lang_provider.dart';
 
 class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
-
   const HomeAppBar({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authViewModelProvider);
-    final authVm = ref.read(authViewModelProvider.notifier);
     final navIndex = ref.watch(currentNavBottomIndexProvider);
     String appBarTitle = appLang.homeAppbar;
     switch (navIndex) {
@@ -33,7 +29,7 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
         appBarTitle = appLang.contactUsAppbar;
         break;
       case 4:
-        appBarTitle =  appLang.profileAppbar;
+        appBarTitle = appLang.profileAppbar;
         break;
       default:
         appBarTitle = appLang.homeAppbar;
@@ -47,25 +43,12 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
         style: Theme.of(context).textTheme.headlineMedium?.copyWith(
           color: Theme.of(context).colorScheme.onSurface,
           fontWeight: FontWeight.w500,
-
         ),
       ),
-      actions: [
-        IconButton(
-          icon: SvgPicture.asset("assets/svg/notification-icon.svg",
-          ),
-          onPressed: () {
-            //   todo go to notification screen
-            authVm.unAuthenticate();
-          },
-        ),
-      ],
       leading: InkWell(
         onTap: () {
           navigatorKey.currentState?.pushNamed(
-            authState is AuthenticatedState
-                ? 'profileScreen'
-                : 'loginScreen',
+            authState is AuthenticatedState ? 'profileScreen' : 'loginScreen',
           );
         },
         borderRadius: BorderRadius.circular(32),
