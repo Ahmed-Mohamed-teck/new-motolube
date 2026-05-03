@@ -212,6 +212,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "firstNameHint":
             MessageLookupByLibrary.simpleMessage("Enter first name"),
         "flatTyre": MessageLookupByLibrary.simpleMessage("Flat Tyre"),
+        "forceUpdateButton": MessageLookupByLibrary.simpleMessage("Update Now"),
+        "forceUpdateMessage": MessageLookupByLibrary.simpleMessage(
+            "A new update is available. Please update the app to continue."),
+        "forceUpdateTitle": MessageLookupByLibrary.simpleMessage(
+            "There is an update available"),
         "homeAppbar": MessageLookupByLibrary.simpleMessage("Home"),
         "homeNav": MessageLookupByLibrary.simpleMessage("Home"),
         "insuranceClaims":

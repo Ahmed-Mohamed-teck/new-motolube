@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:newmotorlube/core/providers/global_lang_provider.dart';
 import 'package:newmotorlube/core/widget/home_app_bar.dart';
 import 'package:newmotorlube/features/auth/provider/auth_provider.dart';
 import 'package:newmotorlube/features/home/presentaion/screen/customer_home_screen.dart';
 import 'package:newmotorlube/features/home/presentaion/screen/credit_manager_home_screen.dart';
 import 'package:newmotorlube/features/home/presentaion/screen/manager_home_screen.dart';
-import 'package:newmotorlube/main.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 import '../../../../core/utils/theme/app_colors.dart';
@@ -16,6 +14,9 @@ import '../../../../generated/l10n.dart';
 import '../../../auth/presentation/view_model/auth_state.dart';
 import '../../../book_service/presentation/screen/book_maintanance_screen.dart';
 import '../../../contact_us/presentation/screen/contact_us_screen.dart';
+import '../../../force_update/presentation/view_model/force_update_state.dart';
+import '../../../force_update/presentation/widget/force_update_dialog.dart';
+import '../../../force_update/provider/force_update_provider.dart';
 import '../../../user_cars/presentation/screen/user_cars_list_screen.dart';
 import '../../../more/presentation/screen/more_screen.dart';
 import '../../../auth/domain/entity/user_type.dart';
@@ -35,6 +36,7 @@ class BaseHomeScreen extends ConsumerStatefulWidget {
 class _BaseHomeScreenState extends ConsumerState<BaseHomeScreen> {
   String appBarTitle = "";
   late final PersistentTabController _tabController;
+  bool _forceUpdateDialogShown = false;
 
   @override
   void initState() {
@@ -43,6 +45,9 @@ class _BaseHomeScreenState extends ConsumerState<BaseHomeScreen> {
       initialIndex: ref.read(currentNavBottomIndexProvider),
     );
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(forceUpdateViewModelProvider.notifier).check();
+    });
   }
 
   @override
@@ -126,6 +131,22 @@ class _BaseHomeScreenState extends ConsumerState<BaseHomeScreen> {
         _tabController.jumpToTab(targetIndex);
       }
     });
+
+    ref.listen<ForceUpdateState>(forceUpdateViewModelProvider, (_, state) {
+      if (!mounted ||
+          _forceUpdateDialogShown ||
+          state is! ForceUpdateAvailable) {
+        return;
+      }
+
+      _forceUpdateDialogShown = true;
+      showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) => ForceUpdateDialog(storeUrl: state.result.storeUrl),
+      );
+    });
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus(); // Dismiss the keyboard if it's open

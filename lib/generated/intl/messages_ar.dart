@@ -206,6 +206,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "firstNameHint":
             MessageLookupByLibrary.simpleMessage("أدخل الاسم الأول"),
         "flatTyre": MessageLookupByLibrary.simpleMessage("إصلاح الإطارات"),
+        "forceUpdateButton": MessageLookupByLibrary.simpleMessage("حدث الآن"),
+        "forceUpdateMessage": MessageLookupByLibrary.simpleMessage(
+            "يتوفر تحديث جديد. يرجى تحديث التطبيق للمتابعة."),
+        "forceUpdateTitle":
+            MessageLookupByLibrary.simpleMessage("يوجد تحديث متاح"),
         "homeAppbar": MessageLookupByLibrary.simpleMessage("الرئيسية"),
         "homeNav": MessageLookupByLibrary.simpleMessage("الرئيسية"),
         "insuranceClaims":

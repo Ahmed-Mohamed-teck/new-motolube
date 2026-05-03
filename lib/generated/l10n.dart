@@ -630,6 +630,36 @@ class S {
     );
   }
 
+  /// `There is an update available`
+  String get forceUpdateTitle {
+    return Intl.message(
+      'There is an update available',
+      name: 'forceUpdateTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A new update is available. Please update the app to continue.`
+  String get forceUpdateMessage {
+    return Intl.message(
+      'A new update is available. Please update the app to continue.',
+      name: 'forceUpdateMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Update Now`
+  String get forceUpdateButton {
+    return Intl.message(
+      'Update Now',
+      name: 'forceUpdateButton',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Profile`
   String get Profile {
     return Intl.message(
