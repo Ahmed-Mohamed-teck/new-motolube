@@ -590,6 +590,36 @@ class S {
     );
   }
 
+  /// `Inquiry sent`
+  String get contactUsInquirySentTitle {
+    return Intl.message(
+      'Inquiry sent',
+      name: 'contactUsInquirySentTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your inquiry has been sent successfully.`
+  String get contactUsInquirySentMessage {
+    return Intl.message(
+      'Your inquiry has been sent successfully.',
+      name: 'contactUsInquirySentMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OK`
+  String get ok {
+    return Intl.message(
+      'OK',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Maintenance`
   String get maintenanceNav {
     return Intl.message(

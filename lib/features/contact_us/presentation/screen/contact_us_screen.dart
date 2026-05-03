@@ -1,12 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:newmotorlube/features/contact_us/provider/contact_us_provider.dart';
+import 'package:newmotorlube/features/contact_us/presentation/view_model/contact_us_state.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/providers/global_lang_provider.dart';
 import '../../../../core/utils/theme/app_colors.dart';
 import '../../../app/app_color_theme.dart';
-import '../../data/model/contact_us_model.dart';
 
 class ContactUsScreen extends ConsumerStatefulWidget {
   const ContactUsScreen({super.key});
@@ -17,54 +16,12 @@ class ContactUsScreen extends ConsumerStatefulWidget {
 
 class _ContactUsPageState extends ConsumerState<ContactUsScreen> {
   final _formKey = GlobalKey<FormState>();
-  bool _isLoading = false;
 
   // TextEditingControllers for each field
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _mobileNumberController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
-
-  Future<void> _submitForm() async {
-    final isValid = _formKey.currentState!.validate();
-    if (!isValid) return;
-
-    setState(() {
-      _isLoading = true;
-    });
-
-    // Handle save logic
-    try {
-      final doc =
-      FirebaseFirestore.instance.collection('contactUs').doc();
-      final rec = ContactUsModel(
-        name: _nameController.text,
-        email: _emailController.text,
-        mobileNo: _mobileNumberController.text,
-        comment: _descriptionController.text,
-      );
-      await doc.set(rec.toJson());
-
-      // Clear the text fields
-      _nameController.clear();
-      _emailController.clear();
-      _mobileNumberController.clear();
-      _descriptionController.clear();
-
-      if (mounted) {
-        _showErrorSnackbar(context, 'successfullySaved');
-      }
-      //_sendEmail();
-    } catch (e) {
-      debugPrint(e.toString());
-    } finally {
-      setState(() {
-        _isLoading = false;
-      });
-    }
-  }
-
-
 
   Future<bool> _dialPhoneNumber() async {
     const phoneNumber = '+966920014257';
@@ -122,6 +79,21 @@ class _ContactUsPageState extends ConsumerState<ContactUsScreen> {
   Widget build(BuildContext context) {
     final state = ref.watch(contactUsViewModelProvider);
     final vm = ref.read(contactUsViewModelProvider.notifier);
+    final isSending = state is SendingContactUsMessage;
+
+    ref.listen<ContactUsState>(contactUsViewModelProvider, (previous, next) {
+      if (!mounted) return;
+
+      if (next is ContactUsMessageSent) {
+        _nameController.clear();
+        _emailController.clear();
+        _mobileNumberController.clear();
+        _descriptionController.clear();
+        _showSuccessDialog(context);
+      } else if (next is ContactUsMessageFailed) {
+        _showSnackbar(context, next.errorMessage);
+      }
+    });
 
     return Scaffold(
       // Add a Floating Action Button to dial the phone number.
@@ -243,7 +215,7 @@ class _ContactUsPageState extends ConsumerState<ContactUsScreen> {
                   },
                 ),
                 const SizedBox(height: 50),
-                _isLoading
+                isSending
                     ? Center(
                     child: CircularProgressIndicator(
                       color: Theme.of(context).extension<AppColorsTheme>()!.primary,
@@ -254,12 +226,16 @@ class _ContactUsPageState extends ConsumerState<ContactUsScreen> {
                       return SizedBox(
                         width: constraints.maxWidth * 0.9, // 90% width
                         child: ElevatedButton.icon(
-                          onPressed: ()=>vm.sendContactUsMessage(
-                            name: _nameController.text,
-                            email: _emailController.text,
-                            phoneNumber: _mobileNumberController.text,
-                            message: _descriptionController.text,
-                          ),
+                          onPressed: () {
+                            if (!_formKey.currentState!.validate()) return;
+
+                            vm.sendContactUsMessage(
+                              name: _nameController.text.trim(),
+                              email: _emailController.text.trim(),
+                              phoneNumber: _mobileNumberController.text.trim(),
+                              message: _descriptionController.text.trim(),
+                            );
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
                             Theme.of(context).colorScheme.primary,
@@ -305,7 +281,25 @@ class _ContactUsPageState extends ConsumerState<ContactUsScreen> {
     );
   }
 
-  void _showErrorSnackbar(BuildContext ctx, String message) {
+  Future<void> _showSuccessDialog(BuildContext ctx) {
+    return showDialog<void>(
+      context: ctx,
+      builder: (dialogContext) {
+        return AlertDialog(
+          title: Text(appLang.contactUsInquirySentTitle),
+          content: Text(appLang.contactUsInquirySentMessage),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(dialogContext).pop(),
+              child: Text(appLang.ok),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showSnackbar(BuildContext ctx, String message) {
     ScaffoldMessenger.of(ctx).showSnackBar(
       SnackBar(
         content: Text(message),
@@ -313,4 +307,3 @@ class _ContactUsPageState extends ConsumerState<ContactUsScreen> {
     );
   }
 }
-

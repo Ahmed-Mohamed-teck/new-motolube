@@ -181,6 +181,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "companyNameHint":
             MessageLookupByLibrary.simpleMessage("e.g. MotorLube Co."),
         "contactUsAppbar": MessageLookupByLibrary.simpleMessage("Contanct Us"),
+        "contactUsInquirySentMessage": MessageLookupByLibrary.simpleMessage(
+            "Your inquiry has been sent successfully."),
+        "contactUsInquirySentTitle":
+            MessageLookupByLibrary.simpleMessage("Inquiry sent"),
         "contactUsNav": MessageLookupByLibrary.simpleMessage("Contact Us"),
         "crn": MessageLookupByLibrary.simpleMessage(
             "Commercial Registration Number (CRN)"),
@@ -264,6 +268,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notValidUserEmail":
             MessageLookupByLibrary.simpleMessage("User email is not valid"),
         "oiling": MessageLookupByLibrary.simpleMessage("Oiling"),
+        "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "onBoardingDescription1": MessageLookupByLibrary.simpleMessage(
             "Skip the hassle of workshop visits! Our expert mobile auto service brings professional maintenance & repairs right to your location."),
         "onBoardingDescription2": MessageLookupByLibrary.simpleMessage(

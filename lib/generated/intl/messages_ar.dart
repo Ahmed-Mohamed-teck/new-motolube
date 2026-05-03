@@ -176,6 +176,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "companyNameHint":
             MessageLookupByLibrary.simpleMessage("مثال: شركة الخليج للسيارات"),
         "contactUsAppbar": MessageLookupByLibrary.simpleMessage("اتصل بنا"),
+        "contactUsInquirySentMessage":
+            MessageLookupByLibrary.simpleMessage("تم إرسال استفسارك بنجاح."),
+        "contactUsInquirySentTitle":
+            MessageLookupByLibrary.simpleMessage("تم إرسال الاستفسار"),
         "contactUsNav": MessageLookupByLibrary.simpleMessage("اتصل بنا"),
         "crn": MessageLookupByLibrary.simpleMessage("رقم السجل التجاري"),
         "crnError": MessageLookupByLibrary.simpleMessage(
@@ -261,6 +265,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notValidUserEmail": MessageLookupByLibrary.simpleMessage(
             "البريد الإلكتروني للمستخدم غير صالح"),
         "oiling": MessageLookupByLibrary.simpleMessage("الزيت"),
+        "ok": MessageLookupByLibrary.simpleMessage("حسناً"),
         "onBoardingDescription1": MessageLookupByLibrary.simpleMessage(
             "تجنب عناء زيارة الورش خدمتنا المتنقلة لصيانة السيارات توفر لك الصيانة والإصلاحات الاحترافية مباشرة في موقعك."),
         "onBoardingDescription2": MessageLookupByLibrary.simpleMessage(
