@@ -48,6 +48,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     final langCode = currentLocale;
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
       locale: Locale(langCode), // Default locale
       localizationsDelegates: [
