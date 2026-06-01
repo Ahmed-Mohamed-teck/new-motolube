@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:newmotorlube/core/providers/general_providers.dart';
-import 'package:newmotorlube/core/providers/global_lang_provider.dart';
 import 'package:newmotorlube/core/utils/constant.dart';
 
 import '../../../../main.dart';
@@ -30,29 +29,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     ref.listen<SplashState>(splashViewModelProvider, (previous, state) {
       if (state is SplashNavigateState) {
         navigatorKey.currentState!.pushReplacementNamed(state.route);
-      } else if (state is SplashErrorState) {
-        Future.microtask(() {
-          showDialog(
-            context: context,
-            barrierColor: Colors.transparent,
-            builder:
-                (dialogContext) => AlertDialog(
-                  title: Text(appLang.errorTitle),
-                  content: Text(state.message),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(dialogContext).pop();
-                        navigatorKey.currentState?.pushReplacementNamed(
-                          'loginScreen',
-                        );
-                      },
-                      child: Text(appLang.login),
-                    ),
-                  ],
-                ),
-          );
-        });
       }
     });
 

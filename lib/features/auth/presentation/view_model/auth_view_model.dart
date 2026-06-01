@@ -190,11 +190,14 @@ class AuthViewModel extends Notifier<AuthState> {
             isVerified: user.isVerified,
             userType: user.userType,
             fireBaseId:
-                user.fireBaseId.isNotEmpty ? user.fireBaseId : stored.fireBaseId,
+                user.fireBaseId.isNotEmpty
+                    ? user.fireBaseId
+                    : stored.fireBaseId,
             customer_id: user.customer_id,
           ),
         );
       } catch (e) {
+        await _logoutUseCase.call();
         state = AuthenticationFailedState(appLang.authenticationErrorMessage);
       }
     } else {

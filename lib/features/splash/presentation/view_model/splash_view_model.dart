@@ -19,7 +19,7 @@ class SplashViewModel extends Notifier<SplashState> {
       } else if (next is UnauthenticatedState) {
         state = const SplashNavigateState('loginScreen');
       } else if (next is AuthenticationFailedState) {
-        state = SplashErrorState(next.message);
+        state = const SplashNavigateState('loginScreen');
       }
     });
 
