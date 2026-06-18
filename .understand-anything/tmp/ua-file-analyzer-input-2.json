@@ -1,0 +1,17 @@
+{
+  "projectRoot": "/Users/ehsanfe/flutterprojects/newmotorlube",
+  "batchFiles": [
+    {"path": "analysis_options.yaml", "language": "yaml", "sizeLines": 28, "fileCategory": "config"},
+    {"path": "codex_rules.yaml", "language": "yaml", "sizeLines": 87, "fileCategory": "config"},
+    {"path": "devtools_options.yaml", "language": "yaml", "sizeLines": 3, "fileCategory": "config"},
+    {"path": "firebase.json", "language": "json", "sizeLines": 0, "fileCategory": "config"},
+    {"path": "pubspec.yaml", "language": "yaml", "sizeLines": 150, "fileCategory": "config"}
+  ],
+  "batchImportData": {
+    "analysis_options.yaml": [],
+    "codex_rules.yaml": [],
+    "devtools_options.yaml": [],
+    "firebase.json": [],
+    "pubspec.yaml": []
+  }
+}

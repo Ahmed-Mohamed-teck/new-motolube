@@ -1,0 +1,2968 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "lib/features/auth/domain/entity/user_entity.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 27,
+      "nonEmptyLines": 25,
+      "classes": [
+        {
+          "name": "User",
+          "startLine": 3,
+          "endLine": 27,
+          "methods": [],
+          "properties": [
+            "oracleId",
+            "firstName",
+            "lastName",
+            "name",
+            "mobileNo",
+            "email",
+            "isVerified",
+            "userType",
+            "fireBaseId",
+            "customer_id"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "User",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/auth/domain/entity/user_type.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 16,
+      "nonEmptyLines": 14,
+      "classes": [
+        {
+          "name": "UserType",
+          "startLine": 1,
+          "endLine": 2,
+          "methods": [],
+          "properties": [
+            "customer"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "UserType",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fromValue",
+          "callee": "firstWhere",
+          "lineNumber": 11
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/auth/domain/entity/verify_otp_result.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 12,
+      "classes": [
+        {
+          "name": "VerifyOtpResult",
+          "startLine": 4,
+          "endLine": 13,
+          "methods": [],
+          "properties": [
+            "message",
+            "user",
+            "tokens"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "VerifyOtpResult",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/auth/domain/repository/i_auth_local_repository.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 7,
+      "functions": [
+        {
+          "name": "saveAuthSession",
+          "startLine": 5,
+          "endLine": 5,
+          "params": [
+            "session"
+          ]
+        },
+        {
+          "name": "getStoredAuth",
+          "startLine": 6,
+          "endLine": 6,
+          "params": []
+        },
+        {
+          "name": "clear",
+          "startLine": 7,
+          "endLine": 7,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "IAuthLocalRepository",
+          "startLine": 4,
+          "endLine": 8,
+          "methods": [
+            "saveAuthSession",
+            "getStoredAuth",
+            "clear"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "saveAuthSession",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "getStoredAuth",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "clear",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "IAuthLocalRepository",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 4,
+        "functionCount": 3,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/auth/domain/repository/i_auth_repository.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 16,
+      "functions": [
+        {
+          "name": "isUserRegisteredUser",
+          "startLine": 8,
+          "endLine": 8,
+          "params": [
+            "phoneNumber"
+          ]
+        },
+        {
+          "name": "sendOtp",
+          "startLine": 9,
+          "endLine": 9,
+          "params": [
+            "phone"
+          ]
+        },
+        {
+          "name": "register",
+          "startLine": 10,
+          "endLine": 15,
+          "params": [
+            "firstName",
+            "lastName",
+            "phone",
+            "email"
+          ]
+        },
+        {
+          "name": "verifyOtp",
+          "startLine": 16,
+          "endLine": 16,
+          "params": [
+            "phone",
+            "otp"
+          ]
+        },
+        {
+          "name": "getUserInfo",
+          "startLine": 17,
+          "endLine": 17,
+          "params": [
+            "phoneNumber"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "IAuthRepository",
+          "startLine": 7,
+          "endLine": 18,
+          "methods": [
+            "isUserRegisteredUser",
+            "sendOtp",
+            "register",
+            "verifyOtp",
+            "getUserInfo"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "isUserRegisteredUser",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "sendOtp",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "register",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "verifyOtp",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "getUserInfo",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "IAuthRepository",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 6,
+        "functionCount": 5,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/auth/domain/use_case/get_stored_auth_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 9,
+      "functions": [
+        {
+          "name": "GetStoredAuthUseCase",
+          "startLine": 6,
+          "endLine": 6,
+          "params": [
+            "repository"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 8,
+          "endLine": 8,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "GetStoredAuthUseCase",
+          "startLine": 4,
+          "endLine": 11,
+          "methods": [
+            "GetStoredAuthUseCase",
+            "call"
+          ],
+          "properties": [
+            "repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "GetStoredAuthUseCase",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "call",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "GetStoredAuthUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "getStoredAuth",
+          "lineNumber": 9
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/auth/domain/use_case/get_user_info_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 12,
+      "nonEmptyLines": 9,
+      "functions": [
+        {
+          "name": "GetUserInfoUseCase",
+          "startLine": 7,
+          "endLine": 7,
+          "params": [
+            "_repository"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 9,
+          "endLine": 9,
+          "params": [
+            "phone"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "GetUserInfoUseCase",
+          "startLine": 4,
+          "endLine": 12,
+          "methods": [
+            "GetUserInfoUseCase",
+            "call"
+          ],
+          "properties": [
+            "_repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "GetUserInfoUseCase",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "call",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "GetUserInfoUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "getUserInfo",
+          "lineNumber": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/auth/domain/use_case/is_registered_user.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 8,
+      "functions": [
+        {
+          "name": "IsRegisteredUserUseCase",
+          "startLine": 5,
+          "endLine": 5,
+          "params": [
+            "repository"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 7,
+          "endLine": 7,
+          "params": [
+            "phoneNumber"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "IsRegisteredUserUseCase",
+          "startLine": 3,
+          "endLine": 10,
+          "methods": [
+            "IsRegisteredUserUseCase",
+            "call"
+          ],
+          "properties": [
+            "repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "IsRegisteredUserUseCase",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "call",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "IsRegisteredUserUseCase",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "isUserRegisteredUser",
+          "lineNumber": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/auth/domain/use_case/log_out_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 8,
+      "functions": [
+        {
+          "name": "LogoutUseCase",
+          "startLine": 5,
+          "endLine": 5,
+          "params": [
+            "_repository"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 7,
+          "endLine": 7,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "LogoutUseCase",
+          "startLine": 3,
+          "endLine": 10,
+          "methods": [
+            "LogoutUseCase",
+            "call"
+          ],
+          "properties": [
+            "_repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "LogoutUseCase",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "call",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "LogoutUseCase",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "clear",
+          "lineNumber": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/auth/domain/use_case/register_user_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 21,
+      "nonEmptyLines": 19,
+      "functions": [
+        {
+          "name": "RegisterUserUseCase",
+          "startLine": 6,
+          "endLine": 6,
+          "params": [
+            "repository"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 8,
+          "endLine": 13,
+          "params": [
+            "firstName",
+            "lastName",
+            "phone",
+            "email"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "RegisterUserUseCase",
+          "startLine": 4,
+          "endLine": 21,
+          "methods": [
+            "RegisterUserUseCase",
+            "call"
+          ],
+          "properties": [
+            "repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "RegisterUserUseCase",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "call",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "RegisterUserUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "register",
+          "lineNumber": 14
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/auth/domain/use_case/save_auth_session_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 24,
+      "nonEmptyLines": 22,
+      "functions": [
+        {
+          "name": "SaveAuthSessionUseCase",
+          "startLine": 7,
+          "endLine": 7,
+          "params": [
+            "repository"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 9,
+          "endLine": 9,
+          "params": [
+            "result"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "SaveAuthSessionUseCase",
+          "startLine": 5,
+          "endLine": 24,
+          "methods": [
+            "SaveAuthSessionUseCase",
+            "call"
+          ],
+          "properties": [
+            "repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SaveAuthSessionUseCase",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "call",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "SaveAuthSessionUseCase",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "AuthSession",
+          "lineNumber": 10
+        },
+        {
+          "caller": "call",
+          "callee": "saveAuthSession",
+          "lineNumber": 22
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/auth/domain/use_case/send_otp_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 9,
+      "functions": [
+        {
+          "name": "SendOtpUseCase",
+          "startLine": 6,
+          "endLine": 6,
+          "params": [
+            "repository"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 8,
+          "endLine": 8,
+          "params": [
+            "phone"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "SendOtpUseCase",
+          "startLine": 4,
+          "endLine": 11,
+          "methods": [
+            "SendOtpUseCase",
+            "call"
+          ],
+          "properties": [
+            "repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SendOtpUseCase",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "call",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "SendOtpUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "sendOtp",
+          "lineNumber": 9
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/auth/domain/use_case/verify_otp_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 9,
+      "functions": [
+        {
+          "name": "VerifyOtpUseCase",
+          "startLine": 6,
+          "endLine": 6,
+          "params": [
+            "repository"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 8,
+          "endLine": 8,
+          "params": [
+            "phone",
+            "otp"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "VerifyOtpUseCase",
+          "startLine": 4,
+          "endLine": 11,
+          "methods": [
+            "VerifyOtpUseCase",
+            "call"
+          ],
+          "properties": [
+            "repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "VerifyOtpUseCase",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "call",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "VerifyOtpUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "verifyOtp",
+          "lineNumber": 9
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/auth/presentation/screens/auth_screen.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 430,
+      "nonEmptyLines": 395,
+      "functions": [
+        {
+          "name": "createState",
+          "startLine": 13,
+          "endLine": 13,
+          "params": []
+        },
+        {
+          "name": "dispose",
+          "startLine": 33,
+          "endLine": 33,
+          "params": []
+        },
+        {
+          "name": "_clearOtpFields",
+          "startLine": 43,
+          "endLine": 43,
+          "params": []
+        },
+        {
+          "name": "_focusFirstOtp",
+          "startLine": 47,
+          "endLine": 47,
+          "params": []
+        },
+        {
+          "name": "build",
+          "startLine": 58,
+          "endLine": 58,
+          "params": [
+            "context"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "LoginScreen",
+          "startLine": 9,
+          "endLine": 14,
+          "methods": [
+            "createState"
+          ],
+          "properties": []
+        },
+        {
+          "name": "_LoginScreenState",
+          "startLine": 16,
+          "endLine": 430,
+          "methods": [
+            "dispose",
+            "_clearOtpFields",
+            "_focusFirstOtp",
+            "build"
+          ],
+          "properties": [
+            "_phoneController",
+            "_firstNameController",
+            "_lastNameController",
+            "_emailController",
+            "_otpCtrls",
+            "_otpNodes",
+            "_wasOnOtpBefore",
+            "_stayOnOtp",
+            "_pendingClearOtp"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "createState",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "LoginScreen",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "dispose",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 58,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "createState",
+          "callee": "_LoginScreenState",
+          "lineNumber": 13
+        },
+        {
+          "caller": "dispose",
+          "callee": "dispose",
+          "lineNumber": 34
+        },
+        {
+          "caller": "dispose",
+          "callee": "dispose",
+          "lineNumber": 35
+        },
+        {
+          "caller": "dispose",
+          "callee": "dispose",
+          "lineNumber": 36
+        },
+        {
+          "caller": "dispose",
+          "callee": "dispose",
+          "lineNumber": 37
+        },
+        {
+          "caller": "dispose",
+          "callee": "dispose",
+          "lineNumber": 38
+        },
+        {
+          "caller": "dispose",
+          "callee": "dispose",
+          "lineNumber": 39
+        },
+        {
+          "caller": "_clearOtpFields",
+          "callee": "clear",
+          "lineNumber": 44
+        },
+        {
+          "caller": "_focusFirstOtp",
+          "callee": "microtask",
+          "lineNumber": 49
+        },
+        {
+          "caller": "_focusFirstOtp",
+          "callee": "of",
+          "lineNumber": 50
+        },
+        {
+          "caller": "_focusFirstOtp",
+          "callee": "requestFocus",
+          "lineNumber": 52
+        },
+        {
+          "caller": "build",
+          "callee": "watch",
+          "lineNumber": 59
+        },
+        {
+          "caller": "build",
+          "callee": "read",
+          "lineNumber": 60
+        },
+        {
+          "caller": "build",
+          "callee": "listen",
+          "lineNumber": 62
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 64
+        },
+        {
+          "caller": "build",
+          "callee": "showSnackBar",
+          "lineNumber": 64
+        },
+        {
+          "caller": "build",
+          "callee": "SnackBar",
+          "lineNumber": 65
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 66
+        },
+        {
+          "caller": "build",
+          "callee": "only",
+          "lineNumber": 68
+        },
+        {
+          "caller": "build",
+          "callee": "Duration",
+          "lineNumber": 69
+        },
+        {
+          "caller": "build",
+          "callee": "_clearOtpFields",
+          "lineNumber": 81
+        },
+        {
+          "caller": "build",
+          "callee": "_focusFirstOtp",
+          "lineNumber": 82
+        },
+        {
+          "caller": "build",
+          "callee": "pushReplacementNamed",
+          "lineNumber": 100
+        },
+        {
+          "caller": "build",
+          "callee": "setState",
+          "lineNumber": 102
+        },
+        {
+          "caller": "build",
+          "callee": "onRegisterPressed",
+          "lineNumber": 123
+        },
+        {
+          "caller": "build",
+          "callee": "onLoginPressed",
+          "lineNumber": 132
+        },
+        {
+          "caller": "_notifyOtp",
+          "callee": "map",
+          "lineNumber": 146
+        },
+        {
+          "caller": "_notifyOtp",
+          "callee": "join",
+          "lineNumber": 146
+        },
+        {
+          "caller": "_notifyOtp",
+          "callee": "onOtpChanged",
+          "lineNumber": 147
+        },
+        {
+          "caller": "build",
+          "callee": "Scaffold",
+          "lineNumber": 150
+        },
+        {
+          "caller": "build",
+          "callee": "AppBar",
+          "lineNumber": 151
+        },
+        {
+          "caller": "build",
+          "callee": "Color",
+          "lineNumber": 152
+        },
+        {
+          "caller": "build",
+          "callee": "TextButton",
+          "lineNumber": 155
+        },
+        {
+          "caller": "build",
+          "callee": "pushReplacementNamed",
+          "lineNumber": 156
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 157
+        },
+        {
+          "caller": "build",
+          "callee": "TextStyle",
+          "lineNumber": 158
+        },
+        {
+          "caller": "build",
+          "callee": "IconButton",
+          "lineNumber": 163
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 164
+        },
+        {
+          "caller": "build",
+          "callee": "buildShowLangBottomSheet",
+          "lineNumber": 165
+        },
+        {
+          "caller": "build",
+          "callee": "SafeArea",
+          "lineNumber": 168
+        },
+        {
+          "caller": "build",
+          "callee": "Stack",
+          "lineNumber": 169
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 172
+        },
+        {
+          "caller": "build",
+          "callee": "Color",
+          "lineNumber": 172
+        },
+        {
+          "caller": "build",
+          "callee": "Center",
+          "lineNumber": 175
+        },
+        {
+          "caller": "build",
+          "callee": "asset",
+          "lineNumber": 176
+        },
+        {
+          "caller": "build",
+          "callee": "Align",
+          "lineNumber": 182
+        },
+        {
+          "caller": "build",
+          "callee": "AnimatedContainer",
+          "lineNumber": 184
+        },
+        {
+          "caller": "build",
+          "callee": "Duration",
+          "lineNumber": 185
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 187
+        },
+        {
+          "caller": "build",
+          "callee": "vertical",
+          "lineNumber": 189
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 189
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 191
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 192
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 196
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 200
+        },
+        {
+          "caller": "build",
+          "callee": "TextStyle",
+          "lineNumber": 202
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 205
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 210
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 211
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 213
+        },
+        {
+          "caller": "build",
+          "callee": "Expanded",
+          "lineNumber": 219
+        },
+        {
+          "caller": "build",
+          "callee": "TextFormField",
+          "lineNumber": 220
+        },
+        {
+          "caller": "build",
+          "callee": "InputDecoration",
+          "lineNumber": 223
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 225
+        },
+        {
+          "caller": "build",
+          "callee": "OutlineInputBorder",
+          "lineNumber": 228
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 229
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 238
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 239
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 240
+        },
+        {
+          "caller": "build",
+          "callee": "TextFormField",
+          "lineNumber": 241
+        },
+        {
+          "caller": "build",
+          "callee": "InputDecoration",
+          "lineNumber": 243
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 245
+        },
+        {
+          "caller": "build",
+          "callee": "OutlineInputBorder",
+          "lineNumber": 247
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 248
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 252
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 253
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 254
+        },
+        {
+          "caller": "build",
+          "callee": "TextFormField",
+          "lineNumber": 255
+        },
+        {
+          "caller": "build",
+          "callee": "InputDecoration",
+          "lineNumber": 257
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 259
+        },
+        {
+          "caller": "build",
+          "callee": "OutlineInputBorder",
+          "lineNumber": 261
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 262
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 266
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 267
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 268
+        },
+        {
+          "caller": "build",
+          "callee": "TextFormField",
+          "lineNumber": 269
+        },
+        {
+          "caller": "build",
+          "callee": "RegExp",
+          "lineNumber": 275
+        },
+        {
+          "caller": "build",
+          "callee": "hasMatch",
+          "lineNumber": 276
+        },
+        {
+          "caller": "build",
+          "callee": "InputDecoration",
+          "lineNumber": 281
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 283
+        },
+        {
+          "caller": "build",
+          "callee": "OutlineInputBorder",
+          "lineNumber": 285
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 286
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 295
+        },
+        {
+          "caller": "build",
+          "callee": "TextStyle",
+          "lineNumber": 298
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 300
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 302
+        },
+        {
+          "caller": "build",
+          "callee": "generate",
+          "lineNumber": 304
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 305
+        },
+        {
+          "caller": "build",
+          "callee": "TextField",
+          "lineNumber": 308
+        },
+        {
+          "caller": "build",
+          "callee": "LengthLimitingTextInputFormatter",
+          "lineNumber": 315
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 318
+        },
+        {
+          "caller": "build",
+          "callee": "requestFocus",
+          "lineNumber": 322
+        },
+        {
+          "caller": "build",
+          "callee": "requestFocus",
+          "lineNumber": 324
+        },
+        {
+          "caller": "build",
+          "callee": "requestFocus",
+          "lineNumber": 329
+        },
+        {
+          "caller": "build",
+          "callee": "requestFocus",
+          "lineNumber": 331
+        },
+        {
+          "caller": "build",
+          "callee": "_notifyOtp",
+          "lineNumber": 334
+        },
+        {
+          "caller": "build",
+          "callee": "InputDecoration",
+          "lineNumber": 336
+        },
+        {
+          "caller": "build",
+          "callee": "OutlineInputBorder",
+          "lineNumber": 338
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 339
+        },
+        {
+          "caller": "build",
+          "callee": "TextStyle",
+          "lineNumber": 342
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 348
+        },
+        {
+          "caller": "build",
+          "callee": "Builder",
+          "lineNumber": 351
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 356
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 357
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 358
+        },
+        {
+          "caller": "build",
+          "callee": "TextStyle",
+          "lineNumber": 361
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 365
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 369
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 373
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 374
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 377
+        },
+        {
+          "caller": "build",
+          "callee": "TextButton",
+          "lineNumber": 378
+        },
+        {
+          "caller": "build",
+          "callee": "setState",
+          "lineNumber": 386
+        },
+        {
+          "caller": "build",
+          "callee": "onResendOtp",
+          "lineNumber": 387
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 389
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 395
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 397
+        },
+        {
+          "caller": "build",
+          "callee": "ElevatedButton",
+          "lineNumber": 399
+        },
+        {
+          "caller": "build",
+          "callee": "styleFrom",
+          "lineNumber": 403
+        },
+        {
+          "caller": "build",
+          "callee": "RoundedRectangleBorder",
+          "lineNumber": 405
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 406
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 410
+        },
+        {
+          "caller": "build",
+          "callee": "CircularProgressIndicator",
+          "lineNumber": 413
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 415
+        },
+        {
+          "caller": "build",
+          "callee": "TextStyle",
+          "lineNumber": 417
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 4,
+        "functionCount": 5,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "lib/features/auth/presentation/view_model/auth_state.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 67,
+      "nonEmptyLines": 55,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 212,
+      "nonEmptyLines": 201,
+      "functions": [
+        {
+          "name": "build",
+          "startLine": 32,
+          "endLine": 32,
+          "params": []
+        },
+        {
+          "name": "onOtpChanged",
+          "startLine": 43,
+          "endLine": 43,
+          "params": [
+            "otp"
+          ]
+        },
+        {
+          "name": "onLoginPressed",
+          "startLine": 47,
+          "endLine": 47,
+          "params": [
+            "phone"
+          ]
+        },
+        {
+          "name": "onRegisterPressed",
+          "startLine": 72,
+          "endLine": 77,
+          "params": [
+            "firstName",
+            "lastName",
+            "phone",
+            "email"
+          ]
+        },
+        {
+          "name": "onVerifyPressed",
+          "startLine": 108,
+          "endLine": 108,
+          "params": []
+        },
+        {
+          "name": "onResendOtp",
+          "startLine": 147,
+          "endLine": 147,
+          "params": []
+        },
+        {
+          "name": "_startTimer",
+          "startLine": 153,
+          "endLine": 153,
+          "params": [
+            "seconds"
+          ]
+        },
+        {
+          "name": "authenticating",
+          "startLine": 174,
+          "endLine": 174,
+          "params": []
+        },
+        {
+          "name": "unAuthenticate",
+          "startLine": 208,
+          "endLine": 208,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "AuthViewModel",
+          "startLine": 16,
+          "endLine": 212,
+          "methods": [
+            "build",
+            "onOtpChanged",
+            "onLoginPressed",
+            "onRegisterPressed",
+            "onVerifyPressed",
+            "onResendOtp",
+            "_startTimer",
+            "authenticating",
+            "unAuthenticate"
+          ],
+          "properties": [
+            "_sendOtpUseCase",
+            "_registerUserUseCase",
+            "_verifyOtpUseCase",
+            "_getUserInfoUseCase",
+            "_logoutUseCase",
+            "_saveAuthSessionUseCase",
+            "_getStoredAuthUseCase",
+            "_phone",
+            "_otp",
+            "_timer",
+            "_remaining",
+            "_expiresIn"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "build",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "onOtpChanged",
+          "line": 43,
+          "isDefault": false
+        },
+        {
+          "name": "onLoginPressed",
+          "line": 47,
+          "isDefault": false
+        },
+        {
+          "name": "onRegisterPressed",
+          "line": 72,
+          "isDefault": false
+        },
+        {
+          "name": "onVerifyPressed",
+          "line": 108,
+          "isDefault": false
+        },
+        {
+          "name": "onResendOtp",
+          "line": 147,
+          "isDefault": false
+        },
+        {
+          "name": "authenticating",
+          "line": 174,
+          "isDefault": false
+        },
+        {
+          "name": "unAuthenticate",
+          "line": 208,
+          "isDefault": false
+        },
+        {
+          "name": "AuthViewModel",
+          "line": 16,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "build",
+          "callee": "read",
+          "lineNumber": 33
+        },
+        {
+          "caller": "build",
+          "callee": "read",
+          "lineNumber": 34
+        },
+        {
+          "caller": "build",
+          "callee": "read",
+          "lineNumber": 35
+        },
+        {
+          "caller": "build",
+          "callee": "read",
+          "lineNumber": 36
+        },
+        {
+          "caller": "build",
+          "callee": "read",
+          "lineNumber": 37
+        },
+        {
+          "caller": "build",
+          "callee": "read",
+          "lineNumber": 38
+        },
+        {
+          "caller": "build",
+          "callee": "read",
+          "lineNumber": 39
+        },
+        {
+          "caller": "build",
+          "callee": "InitailAuthState",
+          "lineNumber": 40
+        },
+        {
+          "caller": "onLoginPressed",
+          "callee": "CheckingState",
+          "lineNumber": 48
+        },
+        {
+          "caller": "onLoginPressed",
+          "callee": "read",
+          "lineNumber": 52
+        },
+        {
+          "caller": "onLoginPressed",
+          "callee": "call",
+          "lineNumber": 53
+        },
+        {
+          "caller": "onLoginPressed",
+          "callee": "_sendOtpUseCase",
+          "lineNumber": 55
+        },
+        {
+          "caller": "onLoginPressed",
+          "callee": "_startTimer",
+          "lineNumber": 56
+        },
+        {
+          "caller": "onLoginPressed",
+          "callee": "AwaitingOtpState",
+          "lineNumber": 57
+        },
+        {
+          "caller": "onLoginPressed",
+          "callee": "RegistrationState",
+          "lineNumber": 63
+        },
+        {
+          "caller": "onLoginPressed",
+          "callee": "RegistrationState",
+          "lineNumber": 66
+        },
+        {
+          "caller": "onLoginPressed",
+          "callee": "ErrorState",
+          "lineNumber": 68
+        },
+        {
+          "caller": "onLoginPressed",
+          "callee": "toString",
+          "lineNumber": 68
+        },
+        {
+          "caller": "onRegisterPressed",
+          "callee": "CheckingState",
+          "lineNumber": 78
+        },
+        {
+          "caller": "onRegisterPressed",
+          "callee": "_registerUserUseCase",
+          "lineNumber": 80
+        },
+        {
+          "caller": "onRegisterPressed",
+          "callee": "_sendOtpUseCase",
+          "lineNumber": 86
+        },
+        {
+          "caller": "onRegisterPressed",
+          "callee": "_startTimer",
+          "lineNumber": 88
+        },
+        {
+          "caller": "onRegisterPressed",
+          "callee": "AwaitingOtpState",
+          "lineNumber": 89
+        },
+        {
+          "caller": "onRegisterPressed",
+          "callee": "_sendOtpUseCase",
+          "lineNumber": 95
+        },
+        {
+          "caller": "onRegisterPressed",
+          "callee": "_startTimer",
+          "lineNumber": 97
+        },
+        {
+          "caller": "onRegisterPressed",
+          "callee": "AwaitingOtpState",
+          "lineNumber": 98
+        },
+        {
+          "caller": "onRegisterPressed",
+          "callee": "ErrorState",
+          "lineNumber": 104
+        },
+        {
+          "caller": "onRegisterPressed",
+          "callee": "toString",
+          "lineNumber": 104
+        },
+        {
+          "caller": "onVerifyPressed",
+          "callee": "VerifyingState",
+          "lineNumber": 111
+        },
+        {
+          "caller": "onVerifyPressed",
+          "callee": "_verifyOtpUseCase",
+          "lineNumber": 117
+        },
+        {
+          "caller": "onVerifyPressed",
+          "callee": "_saveAuthSessionUseCase",
+          "lineNumber": 118
+        },
+        {
+          "caller": "onVerifyPressed",
+          "callee": "AuthenticatedState",
+          "lineNumber": 119
+        },
+        {
+          "caller": "onVerifyPressed",
+          "callee": "User",
+          "lineNumber": 122
+        },
+        {
+          "caller": "onVerifyPressed",
+          "callee": "AwaitingOtpState",
+          "lineNumber": 136
+        },
+        {
+          "caller": "onVerifyPressed",
+          "callee": "ErrorState",
+          "lineNumber": 143
+        },
+        {
+          "caller": "onResendOtp",
+          "callee": "onLoginPressed",
+          "lineNumber": 150
+        },
+        {
+          "caller": "_startTimer",
+          "callee": "periodic",
+          "lineNumber": 157
+        },
+        {
+          "caller": "_startTimer",
+          "callee": "Duration",
+          "lineNumber": 157
+        },
+        {
+          "caller": "_startTimer",
+          "callee": "cancel",
+          "lineNumber": 160
+        },
+        {
+          "caller": "_startTimer",
+          "callee": "AwaitingOtpState",
+          "lineNumber": 165
+        },
+        {
+          "caller": "authenticating",
+          "callee": "AuthenticatingState",
+          "lineNumber": 175
+        },
+        {
+          "caller": "authenticating",
+          "callee": "_getStoredAuthUseCase",
+          "lineNumber": 176
+        },
+        {
+          "caller": "authenticating",
+          "callee": "call",
+          "lineNumber": 179
+        },
+        {
+          "caller": "authenticating",
+          "callee": "AuthenticatedState",
+          "lineNumber": 180
+        },
+        {
+          "caller": "authenticating",
+          "callee": "User",
+          "lineNumber": 183
+        },
+        {
+          "caller": "authenticating",
+          "callee": "call",
+          "lineNumber": 200
+        },
+        {
+          "caller": "authenticating",
+          "callee": "AuthenticationFailedState",
+          "lineNumber": 201
+        },
+        {
+          "caller": "authenticating",
+          "callee": "UnauthenticatedState",
+          "lineNumber": 204
+        },
+        {
+          "caller": "unAuthenticate",
+          "callee": "call",
+          "lineNumber": 209
+        },
+        {
+          "caller": "unAuthenticate",
+          "callee": "UnauthenticatedState",
+          "lineNumber": 210
+        }
+      ],
+      "metrics": {
+        "importCount": 10,
+        "exportCount": 9,
+        "functionCount": 9,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/auth/presentation/widget/otp_inputs.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 71,
+      "nonEmptyLines": 63,
+      "functions": [
+        {
+          "name": "createState",
+          "startLine": 11,
+          "endLine": 11,
+          "params": []
+        },
+        {
+          "name": "initState",
+          "startLine": 19,
+          "endLine": 19,
+          "params": []
+        },
+        {
+          "name": "dispose",
+          "startLine": 26,
+          "endLine": 26,
+          "params": []
+        },
+        {
+          "name": "_notify",
+          "startLine": 36,
+          "endLine": 36,
+          "params": []
+        },
+        {
+          "name": "build",
+          "startLine": 42,
+          "endLine": 42,
+          "params": [
+            "context"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "OtpInput",
+          "startLine": 3,
+          "endLine": 12,
+          "methods": [
+            "createState"
+          ],
+          "properties": [
+            "length",
+            "boxSize",
+            "onChanged"
+          ]
+        },
+        {
+          "name": "_OtpInputState",
+          "startLine": 14,
+          "endLine": 71,
+          "methods": [
+            "initState",
+            "dispose",
+            "_notify",
+            "build"
+          ],
+          "properties": [
+            "_controllers",
+            "_focusNodes"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "createState",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "OtpInput",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "initState",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "dispose",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 42,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "createState",
+          "callee": "_OtpInputState",
+          "lineNumber": 11
+        },
+        {
+          "caller": "initState",
+          "callee": "generate",
+          "lineNumber": 21
+        },
+        {
+          "caller": "initState",
+          "callee": "TextEditingController",
+          "lineNumber": 21
+        },
+        {
+          "caller": "initState",
+          "callee": "generate",
+          "lineNumber": 22
+        },
+        {
+          "caller": "initState",
+          "callee": "FocusNode",
+          "lineNumber": 22
+        },
+        {
+          "caller": "dispose",
+          "callee": "dispose",
+          "lineNumber": 28
+        },
+        {
+          "caller": "dispose",
+          "callee": "dispose",
+          "lineNumber": 31
+        },
+        {
+          "caller": "_notify",
+          "callee": "map",
+          "lineNumber": 37
+        },
+        {
+          "caller": "_notify",
+          "callee": "join",
+          "lineNumber": 37
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 43
+        },
+        {
+          "caller": "build",
+          "callee": "generate",
+          "lineNumber": 45
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 46
+        },
+        {
+          "caller": "build",
+          "callee": "TextField",
+          "lineNumber": 48
+        },
+        {
+          "caller": "build",
+          "callee": "InputDecoration",
+          "lineNumber": 54
+        },
+        {
+          "caller": "build",
+          "callee": "OutlineInputBorder",
+          "lineNumber": 56
+        },
+        {
+          "caller": "build",
+          "callee": "requestFocus",
+          "lineNumber": 60
+        },
+        {
+          "caller": "build",
+          "callee": "requestFocus",
+          "lineNumber": 62
+        },
+        {
+          "caller": "build",
+          "callee": "_notify",
+          "lineNumber": 64
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 5,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "lib/features/auth/provider/auth_provider.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 67,
+      "nonEmptyLines": 55,
+      "metrics": {
+        "importCount": 18,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/features/book_service/data/data_source/book_service_remote_data_source.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 117,
+      "nonEmptyLines": 109,
+      "functions": [
+        {
+          "name": "BookServiceRemoteDataSource",
+          "startLine": 12,
+          "endLine": 12,
+          "params": [
+            "_dio"
+          ]
+        },
+        {
+          "name": "getPackagesForVehicle",
+          "startLine": 15,
+          "endLine": 19,
+          "params": [
+            "customerId",
+            "vehicleId",
+            "category"
+          ]
+        },
+        {
+          "name": "_extractPackages",
+          "startLine": 61,
+          "endLine": 61,
+          "params": [
+            "data"
+          ]
+        },
+        {
+          "name": "createAppointment",
+          "startLine": 75,
+          "endLine": 77,
+          "params": [
+            "payload"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "BookServiceRemoteDataSource",
+          "startLine": 9,
+          "endLine": 117,
+          "methods": [
+            "BookServiceRemoteDataSource",
+            "getPackagesForVehicle",
+            "_extractPackages",
+            "createAppointment"
+          ],
+          "properties": [
+            "_dio"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "BookServiceRemoteDataSource",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "getPackagesForVehicle",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "createAppointment",
+          "line": 75,
+          "isDefault": false
+        },
+        {
+          "name": "BookServiceRemoteDataSource",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getPackagesForVehicle",
+          "callee": "trim",
+          "lineNumber": 21
+        },
+        {
+          "caller": "getPackagesForVehicle",
+          "callee": "getPackagesForVehicleByCategoryEndPoint",
+          "lineNumber": 22
+        },
+        {
+          "caller": "getPackagesForVehicle",
+          "callee": "getPackagesForVehicleEndPoint",
+          "lineNumber": 27
+        },
+        {
+          "caller": "getPackagesForVehicle",
+          "callee": "get",
+          "lineNumber": 28
+        },
+        {
+          "caller": "getPackagesForVehicle",
+          "callee": "_extractPackages",
+          "lineNumber": 32
+        },
+        {
+          "caller": "getPackagesForVehicle",
+          "callee": "map",
+          "lineNumber": 34
+        },
+        {
+          "caller": "getPackagesForVehicle",
+          "callee": "fromJson",
+          "lineNumber": 35
+        },
+        {
+          "caller": "getPackagesForVehicle",
+          "callee": "toList",
+          "lineNumber": 39
+        },
+        {
+          "caller": "getPackagesForVehicle",
+          "callee": "networkError",
+          "lineNumber": 44
+        },
+        {
+          "caller": "getPackagesForVehicle",
+          "callee": "serverError",
+          "lineNumber": 48
+        },
+        {
+          "caller": "getPackagesForVehicle",
+          "callee": "ServicePackagesException",
+          "lineNumber": 55
+        },
+        {
+          "caller": "getPackagesForVehicle",
+          "callee": "unexpected",
+          "lineNumber": 57
+        },
+        {
+          "caller": "createAppointment",
+          "callee": "post",
+          "lineNumber": 79
+        },
+        {
+          "caller": "createAppointment",
+          "callee": "fromJson",
+          "lineNumber": 85
+        },
+        {
+          "caller": "createAppointment",
+          "callee": "fromJson",
+          "lineNumber": 88
+        },
+        {
+          "caller": "createAppointment",
+          "callee": "Exception",
+          "lineNumber": 92
+        },
+        {
+          "caller": "createAppointment",
+          "callee": "Exception",
+          "lineNumber": 106
+        },
+        {
+          "caller": "createAppointment",
+          "callee": "Exception",
+          "lineNumber": 110
+        },
+        {
+          "caller": "createAppointment",
+          "callee": "toString",
+          "lineNumber": 111
+        },
+        {
+          "caller": "createAppointment",
+          "callee": "toString",
+          "lineNumber": 112
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 4,
+        "functionCount": 4,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/book_service/data/data_source/i_book_service_remote_data_source.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 12,
+      "functions": [
+        {
+          "name": "getPackagesForVehicle",
+          "startLine": 5,
+          "endLine": 9,
+          "params": [
+            "customerId",
+            "vehicleId",
+            "category"
+          ]
+        },
+        {
+          "name": "createAppointment",
+          "startLine": 11,
+          "endLine": 13,
+          "params": [
+            "payload"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "IBookServiceRemoteDataSource",
+          "startLine": 4,
+          "endLine": 14,
+          "methods": [
+            "getPackagesForVehicle",
+            "createAppointment"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "getPackagesForVehicle",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "createAppointment",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "IBookServiceRemoteDataSource",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/book_service/data/model/create_appointment_response_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 33,
+      "functions": [
+        {
+          "name": "CreateAppointmentResponseModel.fromJson",
+          "startLine": 18,
+          "endLine": 18,
+          "params": [
+            "json"
+          ]
+        },
+        {
+          "name": "toEntity",
+          "startLine": 28,
+          "endLine": 28,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "CreateAppointmentResponseModel",
+          "startLine": 3,
+          "endLine": 37,
+          "methods": [
+            "CreateAppointmentResponseModel.fromJson",
+            "toEntity"
+          ],
+          "properties": [
+            "infoCode",
+            "infoType",
+            "infoDescriptionAr",
+            "infoDescriptionEn",
+            "infoDescription"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CreateAppointmentResponseModel.fromJson",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "toEntity",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "CreateAppointmentResponseModel",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "CreateAppointmentResponseModel.fromJson",
+          "callee": "CreateAppointmentResponseModel",
+          "lineNumber": 19
+        },
+        {
+          "caller": "CreateAppointmentResponseModel.fromJson",
+          "callee": "toString",
+          "lineNumber": 20
+        },
+        {
+          "caller": "CreateAppointmentResponseModel.fromJson",
+          "callee": "toString",
+          "lineNumber": 21
+        },
+        {
+          "caller": "CreateAppointmentResponseModel.fromJson",
+          "callee": "toString",
+          "lineNumber": 22
+        },
+        {
+          "caller": "CreateAppointmentResponseModel.fromJson",
+          "callee": "toString",
+          "lineNumber": 23
+        },
+        {
+          "caller": "CreateAppointmentResponseModel.fromJson",
+          "callee": "toString",
+          "lineNumber": 24
+        },
+        {
+          "caller": "toEntity",
+          "callee": "CreateAppointmentResult",
+          "lineNumber": 29
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/book_service/data/model/service_package_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 43,
+      "nonEmptyLines": 39,
+      "functions": [
+        {
+          "name": "ServicePackageModel.fromJson",
+          "startLine": 20,
+          "endLine": 20,
+          "params": [
+            "json"
+          ]
+        },
+        {
+          "name": "toEntity",
+          "startLine": 33,
+          "endLine": 33,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "ServicePackageModel",
+          "startLine": 3,
+          "endLine": 43,
+          "methods": [
+            "ServicePackageModel.fromJson",
+            "toEntity"
+          ],
+          "properties": [
+            "packageId",
+            "packageCode",
+            "packageNameAr",
+            "packageNameEn",
+            "linePrice",
+            "isEmergency"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ServicePackageModel.fromJson",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "toEntity",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "ServicePackageModel",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ServicePackageModel.fromJson",
+          "callee": "ServicePackageModel",
+          "lineNumber": 22
+        },
+        {
+          "caller": "ServicePackageModel.fromJson",
+          "callee": "toString",
+          "lineNumber": 23
+        },
+        {
+          "caller": "ServicePackageModel.fromJson",
+          "callee": "toString",
+          "lineNumber": 24
+        },
+        {
+          "caller": "ServicePackageModel.fromJson",
+          "callee": "toString",
+          "lineNumber": 25
+        },
+        {
+          "caller": "ServicePackageModel.fromJson",
+          "callee": "toString",
+          "lineNumber": 26
+        },
+        {
+          "caller": "ServicePackageModel.fromJson",
+          "callee": "toString",
+          "lineNumber": 29
+        },
+        {
+          "caller": "ServicePackageModel.fromJson",
+          "callee": "toUpperCase",
+          "lineNumber": 29
+        },
+        {
+          "caller": "toEntity",
+          "callee": "ServicePackageEntity",
+          "lineNumber": 34
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/book_service/data/repository/book_service_repository.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 60,
+      "nonEmptyLines": 55,
+      "functions": [
+        {
+          "name": "BookServiceRepository",
+          "startLine": 9,
+          "endLine": 9,
+          "params": [
+            "_remoteDataSource"
+          ]
+        },
+        {
+          "name": "getPackagesForVehicle",
+          "startLine": 12,
+          "endLine": 16,
+          "params": [
+            "customerId",
+            "vehicleId",
+            "category"
+          ]
+        },
+        {
+          "name": "createAppointment",
+          "startLine": 26,
+          "endLine": 39,
+          "params": [
+            "bookingDate",
+            "branchId",
+            "userId",
+            "latitude",
+            "longitude",
+            "mileage",
+            "partyId",
+            "vehicleId",
+            "packageId",
+            "selectedSlot",
+            "isImmediateAppointment",
+            "slotTime"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "BookServiceRepository",
+          "startLine": 6,
+          "endLine": 60,
+          "methods": [
+            "BookServiceRepository",
+            "getPackagesForVehicle",
+            "createAppointment"
+          ],
+          "properties": [
+            "_remoteDataSource"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "BookServiceRepository",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "getPackagesForVehicle",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "createAppointment",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "BookServiceRepository",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getPackagesForVehicle",
+          "callee": "getPackagesForVehicle",
+          "lineNumber": 17
+        },
+        {
+          "caller": "getPackagesForVehicle",
+          "callee": "map",
+          "lineNumber": 22
+        },
+        {
+          "caller": "getPackagesForVehicle",
+          "callee": "toEntity",
+          "lineNumber": 22
+        },
+        {
+          "caller": "getPackagesForVehicle",
+          "callee": "toList",
+          "lineNumber": 22
+        },
+        {
+          "caller": "createAppointment",
+          "callee": "toString",
+          "lineNumber": 51
+        },
+        {
+          "caller": "createAppointment",
+          "callee": "createAppointment",
+          "lineNumber": 55
+        },
+        {
+          "caller": "createAppointment",
+          "callee": "toEntity",
+          "lineNumber": 58
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 4,
+        "functionCount": 3,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/book_service/domain/entity/create_appointment_result.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 29,
+      "nonEmptyLines": 26,
+      "functions": [
+        {
+          "name": "isSuccessful",
+          "startLine": 16,
+          "endLine": 16,
+          "params": []
+        },
+        {
+          "name": "displayMessage",
+          "startLine": 18,
+          "endLine": 18,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "CreateAppointmentResult",
+          "startLine": 1,
+          "endLine": 29,
+          "methods": [
+            "isSuccessful",
+            "displayMessage"
+          ],
+          "properties": [
+            "infoCode",
+            "infoType",
+            "infoDescriptionAr",
+            "infoDescriptionEn",
+            "infoDescription"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "isSuccessful",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "displayMessage",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "CreateAppointmentResult",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "isSuccessful",
+          "callee": "trim",
+          "lineNumber": 16
+        },
+        {
+          "caller": "displayMessage",
+          "callee": "trim",
+          "lineNumber": 19
+        },
+        {
+          "caller": "displayMessage",
+          "callee": "trim",
+          "lineNumber": 23
+        },
+        {
+          "caller": "displayMessage",
+          "callee": "trim",
+          "lineNumber": 27
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/book_service/domain/entity/service_package_entity.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 17,
+      "nonEmptyLines": 16,
+      "classes": [
+        {
+          "name": "ServicePackageEntity",
+          "startLine": 1,
+          "endLine": 17,
+          "methods": [],
+          "properties": [
+            "packageId",
+            "packageCode",
+            "packageNameAr",
+            "packageNameEn",
+            "linePrice",
+            "isEmergency"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ServicePackageEntity",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    }
+  ]
+}

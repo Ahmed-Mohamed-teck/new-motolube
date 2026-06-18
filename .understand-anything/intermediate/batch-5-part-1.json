@@ -1,0 +1,691 @@
+{
+  "nodes": [
+    {
+      "id": "file:lib/features/auth/domain/entity/user_entity.dart",
+      "type": "file",
+      "name": "user_entity.dart",
+      "filePath": "lib/features/auth/domain/entity/user_entity.dart",
+      "summary": "Domain entity representing an authenticated app user with profile fields (name, mobile, email, verification status, user type).",
+      "tags": [
+        "data-model",
+        "domain-entity",
+        "auth"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/auth/domain/entity/user_entity.dart:User",
+      "type": "class",
+      "name": "User",
+      "filePath": "lib/features/auth/domain/entity/user_entity.dart",
+      "lineRange": [
+        3,
+        27
+      ],
+      "summary": "Immutable domain entity holding identity and profile data for a registered or technician user.",
+      "tags": [
+        "data-model",
+        "domain-entity"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/auth/domain/entity/user_type.dart",
+      "type": "file",
+      "name": "user_type.dart",
+      "filePath": "lib/features/auth/domain/entity/user_type.dart",
+      "summary": "Defines the UserType enum/class distinguishing customer accounts from other user roles in the app.",
+      "tags": [
+        "data-model",
+        "domain-entity",
+        "auth"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/auth/domain/entity/user_type.dart:UserType",
+      "type": "class",
+      "name": "UserType",
+      "filePath": "lib/features/auth/domain/entity/user_type.dart",
+      "lineRange": [
+        1,
+        2
+      ],
+      "summary": "Represents the role/category of an app user (e.g. customer), parsed from raw values via fromValue.",
+      "tags": [
+        "data-model",
+        "enum-like"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/auth/domain/entity/verify_otp_result.dart",
+      "type": "file",
+      "name": "verify_otp_result.dart",
+      "filePath": "lib/features/auth/domain/entity/verify_otp_result.dart",
+      "summary": "Domain entity bundling the outcome of an OTP verification call, including message, user, and tokens.",
+      "tags": [
+        "data-model",
+        "domain-entity",
+        "auth"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/auth/domain/entity/verify_otp_result.dart:VerifyOtpResult",
+      "type": "class",
+      "name": "VerifyOtpResult",
+      "filePath": "lib/features/auth/domain/entity/verify_otp_result.dart",
+      "lineRange": [
+        4,
+        13
+      ],
+      "summary": "Holds the verify-OTP response data: a message, the resolved User, and auth Tokens.",
+      "tags": [
+        "data-model",
+        "domain-entity"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/auth/domain/repository/i_auth_local_repository.dart",
+      "type": "file",
+      "name": "i_auth_local_repository.dart",
+      "filePath": "lib/features/auth/domain/repository/i_auth_local_repository.dart",
+      "summary": "Repository interface defining local persistence operations for authentication session data.",
+      "tags": [
+        "data-model",
+        "service",
+        "auth"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/auth/domain/repository/i_auth_local_repository.dart:IAuthLocalRepository",
+      "type": "class",
+      "name": "IAuthLocalRepository",
+      "filePath": "lib/features/auth/domain/repository/i_auth_local_repository.dart",
+      "lineRange": [
+        4,
+        8
+      ],
+      "summary": "Abstract contract for saving, retrieving, and clearing locally stored auth sessions.",
+      "tags": [
+        "service",
+        "interface"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/auth/domain/repository/i_auth_repository.dart",
+      "type": "file",
+      "name": "i_auth_repository.dart",
+      "filePath": "lib/features/auth/domain/repository/i_auth_repository.dart",
+      "summary": "Repository interface defining remote authentication operations: registration check, OTP send/verify, registration, and user info retrieval.",
+      "tags": [
+        "data-model",
+        "service",
+        "auth"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/auth/domain/repository/i_auth_repository.dart:IAuthRepository",
+      "type": "class",
+      "name": "IAuthRepository",
+      "filePath": "lib/features/auth/domain/repository/i_auth_repository.dart",
+      "lineRange": [
+        7,
+        18
+      ],
+      "summary": "Abstract contract for the auth flow's remote operations, implemented by AuthRepositoryImpl.",
+      "tags": [
+        "service",
+        "interface"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/auth/domain/use_case/get_stored_auth_use_case.dart",
+      "type": "file",
+      "name": "get_stored_auth_use_case.dart",
+      "filePath": "lib/features/auth/domain/use_case/get_stored_auth_use_case.dart",
+      "summary": "Use case that retrieves a previously persisted authentication session from local storage.",
+      "tags": [
+        "service",
+        "auth",
+        "use-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/auth/domain/use_case/get_stored_auth_use_case.dart:GetStoredAuthUseCase",
+      "type": "class",
+      "name": "GetStoredAuthUseCase",
+      "filePath": "lib/features/auth/domain/use_case/get_stored_auth_use_case.dart",
+      "lineRange": [
+        4,
+        11
+      ],
+      "summary": "Wraps IAuthLocalRepository.getStoredAuth to expose a callable use case for restoring session state.",
+      "tags": [
+        "service",
+        "use-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/auth/domain/use_case/get_user_info_use_case.dart",
+      "type": "file",
+      "name": "get_user_info_use_case.dart",
+      "filePath": "lib/features/auth/domain/use_case/get_user_info_use_case.dart",
+      "summary": "Use case that fetches remote user profile info for a given phone number.",
+      "tags": [
+        "service",
+        "auth",
+        "use-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/auth/domain/use_case/get_user_info_use_case.dart:GetUserInfoUseCase",
+      "type": "class",
+      "name": "GetUserInfoUseCase",
+      "filePath": "lib/features/auth/domain/use_case/get_user_info_use_case.dart",
+      "lineRange": [
+        4,
+        12
+      ],
+      "summary": "Wraps IAuthRepository.getUserInfo to expose a callable use case for fetching user profile data.",
+      "tags": [
+        "service",
+        "use-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/auth/domain/use_case/is_registered_user.dart",
+      "type": "file",
+      "name": "is_registered_user.dart",
+      "filePath": "lib/features/auth/domain/use_case/is_registered_user.dart",
+      "summary": "Use case checking whether a given phone number belongs to an already-registered user.",
+      "tags": [
+        "service",
+        "auth",
+        "use-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/auth/domain/use_case/is_registered_user.dart:IsRegisteredUserUseCase",
+      "type": "class",
+      "name": "IsRegisteredUserUseCase",
+      "filePath": "lib/features/auth/domain/use_case/is_registered_user.dart",
+      "lineRange": [
+        3,
+        10
+      ],
+      "summary": "Wraps IAuthRepository.isUserRegisteredUser to drive login-vs-register branching in the UI.",
+      "tags": [
+        "service",
+        "use-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/auth/domain/use_case/log_out_use_case.dart",
+      "type": "file",
+      "name": "log_out_use_case.dart",
+      "filePath": "lib/features/auth/domain/use_case/log_out_use_case.dart",
+      "summary": "Use case that clears the locally stored authentication session, effectively logging the user out.",
+      "tags": [
+        "service",
+        "auth",
+        "use-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/auth/domain/use_case/log_out_use_case.dart:LogoutUseCase",
+      "type": "class",
+      "name": "LogoutUseCase",
+      "filePath": "lib/features/auth/domain/use_case/log_out_use_case.dart",
+      "lineRange": [
+        3,
+        10
+      ],
+      "summary": "Wraps IAuthLocalRepository.clear to expose a callable logout use case.",
+      "tags": [
+        "service",
+        "use-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/auth/domain/use_case/register_user_use_case.dart",
+      "type": "file",
+      "name": "register_user_use_case.dart",
+      "filePath": "lib/features/auth/domain/use_case/register_user_use_case.dart",
+      "summary": "Use case that registers a new user with name, phone, and email via the auth repository.",
+      "tags": [
+        "service",
+        "auth",
+        "use-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/auth/domain/use_case/register_user_use_case.dart:RegisterUserUseCase",
+      "type": "class",
+      "name": "RegisterUserUseCase",
+      "filePath": "lib/features/auth/domain/use_case/register_user_use_case.dart",
+      "lineRange": [
+        4,
+        21
+      ],
+      "summary": "Wraps IAuthRepository.register to expose a callable registration use case.",
+      "tags": [
+        "service",
+        "use-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/auth/domain/use_case/save_auth_session_use_case.dart",
+      "type": "file",
+      "name": "save_auth_session_use_case.dart",
+      "filePath": "lib/features/auth/domain/use_case/save_auth_session_use_case.dart",
+      "summary": "Use case that persists a verified authentication result as a stored AuthSession.",
+      "tags": [
+        "service",
+        "auth",
+        "use-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/auth/domain/use_case/save_auth_session_use_case.dart:SaveAuthSessionUseCase",
+      "type": "class",
+      "name": "SaveAuthSessionUseCase",
+      "filePath": "lib/features/auth/domain/use_case/save_auth_session_use_case.dart",
+      "lineRange": [
+        5,
+        24
+      ],
+      "summary": "Builds an AuthSession from a verify-OTP result and saves it via IAuthLocalRepository.saveAuthSession.",
+      "tags": [
+        "service",
+        "use-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/auth/domain/use_case/send_otp_use_case.dart",
+      "type": "file",
+      "name": "send_otp_use_case.dart",
+      "filePath": "lib/features/auth/domain/use_case/send_otp_use_case.dart",
+      "summary": "Use case that triggers sending an OTP code to a given phone number.",
+      "tags": [
+        "service",
+        "auth",
+        "use-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/auth/domain/use_case/send_otp_use_case.dart:SendOtpUseCase",
+      "type": "class",
+      "name": "SendOtpUseCase",
+      "filePath": "lib/features/auth/domain/use_case/send_otp_use_case.dart",
+      "lineRange": [
+        4,
+        11
+      ],
+      "summary": "Wraps IAuthRepository.sendOtp to expose a callable OTP-send use case.",
+      "tags": [
+        "service",
+        "use-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/auth/domain/use_case/verify_otp_use_case.dart",
+      "type": "file",
+      "name": "verify_otp_use_case.dart",
+      "filePath": "lib/features/auth/domain/use_case/verify_otp_use_case.dart",
+      "summary": "Use case that verifies a phone+OTP pair against the auth repository.",
+      "tags": [
+        "service",
+        "auth",
+        "use-case"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/auth/domain/use_case/verify_otp_use_case.dart:VerifyOtpUseCase",
+      "type": "class",
+      "name": "VerifyOtpUseCase",
+      "filePath": "lib/features/auth/domain/use_case/verify_otp_use_case.dart",
+      "lineRange": [
+        4,
+        11
+      ],
+      "summary": "Wraps IAuthRepository.verifyOtp to expose a callable OTP-verification use case.",
+      "tags": [
+        "service",
+        "use-case"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:lib/features/auth/domain/entity/user_entity.dart",
+      "target": "class:lib/features/auth/domain/entity/user_entity.dart:User",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/domain/entity/user_entity.dart",
+      "target": "class:lib/features/auth/domain/entity/user_entity.dart:User",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/domain/entity/user_type.dart",
+      "target": "class:lib/features/auth/domain/entity/user_type.dart:UserType",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/domain/entity/user_type.dart",
+      "target": "class:lib/features/auth/domain/entity/user_type.dart:UserType",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/domain/entity/verify_otp_result.dart",
+      "target": "class:lib/features/auth/domain/entity/verify_otp_result.dart:VerifyOtpResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/domain/entity/verify_otp_result.dart",
+      "target": "class:lib/features/auth/domain/entity/verify_otp_result.dart:VerifyOtpResult",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/domain/entity/verify_otp_result.dart",
+      "target": "file:lib/features/auth/domain/entity/user_entity.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/domain/repository/i_auth_local_repository.dart",
+      "target": "class:lib/features/auth/domain/repository/i_auth_local_repository.dart:IAuthLocalRepository",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/domain/repository/i_auth_local_repository.dart",
+      "target": "class:lib/features/auth/domain/repository/i_auth_local_repository.dart:IAuthLocalRepository",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/domain/repository/i_auth_repository.dart",
+      "target": "class:lib/features/auth/domain/repository/i_auth_repository.dart:IAuthRepository",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/domain/repository/i_auth_repository.dart",
+      "target": "class:lib/features/auth/domain/repository/i_auth_repository.dart:IAuthRepository",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/get_stored_auth_use_case.dart",
+      "target": "class:lib/features/auth/domain/use_case/get_stored_auth_use_case.dart:GetStoredAuthUseCase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/get_stored_auth_use_case.dart",
+      "target": "class:lib/features/auth/domain/use_case/get_stored_auth_use_case.dart:GetStoredAuthUseCase",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/get_stored_auth_use_case.dart",
+      "target": "file:lib/features/auth/domain/repository/i_auth_local_repository.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "class:lib/features/auth/domain/use_case/get_stored_auth_use_case.dart:GetStoredAuthUseCase",
+      "target": "class:lib/features/auth/domain/repository/i_auth_local_repository.dart:IAuthLocalRepository",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/get_user_info_use_case.dart",
+      "target": "class:lib/features/auth/domain/use_case/get_user_info_use_case.dart:GetUserInfoUseCase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/get_user_info_use_case.dart",
+      "target": "class:lib/features/auth/domain/use_case/get_user_info_use_case.dart:GetUserInfoUseCase",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/get_user_info_use_case.dart",
+      "target": "file:lib/features/auth/domain/repository/i_auth_repository.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "class:lib/features/auth/domain/use_case/get_user_info_use_case.dart:GetUserInfoUseCase",
+      "target": "class:lib/features/auth/domain/repository/i_auth_repository.dart:IAuthRepository",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/is_registered_user.dart",
+      "target": "class:lib/features/auth/domain/use_case/is_registered_user.dart:IsRegisteredUserUseCase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/is_registered_user.dart",
+      "target": "class:lib/features/auth/domain/use_case/is_registered_user.dart:IsRegisteredUserUseCase",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/is_registered_user.dart",
+      "target": "file:lib/features/auth/domain/repository/i_auth_repository.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "class:lib/features/auth/domain/use_case/is_registered_user.dart:IsRegisteredUserUseCase",
+      "target": "class:lib/features/auth/domain/repository/i_auth_repository.dart:IAuthRepository",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/log_out_use_case.dart",
+      "target": "class:lib/features/auth/domain/use_case/log_out_use_case.dart:LogoutUseCase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/log_out_use_case.dart",
+      "target": "class:lib/features/auth/domain/use_case/log_out_use_case.dart:LogoutUseCase",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/log_out_use_case.dart",
+      "target": "file:lib/features/auth/domain/repository/i_auth_local_repository.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "class:lib/features/auth/domain/use_case/log_out_use_case.dart:LogoutUseCase",
+      "target": "class:lib/features/auth/domain/repository/i_auth_local_repository.dart:IAuthLocalRepository",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/register_user_use_case.dart",
+      "target": "class:lib/features/auth/domain/use_case/register_user_use_case.dart:RegisterUserUseCase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/register_user_use_case.dart",
+      "target": "class:lib/features/auth/domain/use_case/register_user_use_case.dart:RegisterUserUseCase",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/register_user_use_case.dart",
+      "target": "file:lib/features/auth/domain/repository/i_auth_repository.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "class:lib/features/auth/domain/use_case/register_user_use_case.dart:RegisterUserUseCase",
+      "target": "class:lib/features/auth/domain/repository/i_auth_repository.dart:IAuthRepository",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/save_auth_session_use_case.dart",
+      "target": "class:lib/features/auth/domain/use_case/save_auth_session_use_case.dart:SaveAuthSessionUseCase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/save_auth_session_use_case.dart",
+      "target": "class:lib/features/auth/domain/use_case/save_auth_session_use_case.dart:SaveAuthSessionUseCase",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/save_auth_session_use_case.dart",
+      "target": "file:lib/features/auth/domain/repository/i_auth_local_repository.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "class:lib/features/auth/domain/use_case/save_auth_session_use_case.dart:SaveAuthSessionUseCase",
+      "target": "class:lib/features/auth/domain/repository/i_auth_local_repository.dart:IAuthLocalRepository",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/save_auth_session_use_case.dart",
+      "target": "file:lib/features/auth/domain/entity/verify_otp_result.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/send_otp_use_case.dart",
+      "target": "class:lib/features/auth/domain/use_case/send_otp_use_case.dart:SendOtpUseCase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/send_otp_use_case.dart",
+      "target": "class:lib/features/auth/domain/use_case/send_otp_use_case.dart:SendOtpUseCase",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/send_otp_use_case.dart",
+      "target": "file:lib/features/auth/domain/repository/i_auth_repository.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "class:lib/features/auth/domain/use_case/send_otp_use_case.dart:SendOtpUseCase",
+      "target": "class:lib/features/auth/domain/repository/i_auth_repository.dart:IAuthRepository",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/verify_otp_use_case.dart",
+      "target": "class:lib/features/auth/domain/use_case/verify_otp_use_case.dart:VerifyOtpUseCase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/verify_otp_use_case.dart",
+      "target": "class:lib/features/auth/domain/use_case/verify_otp_use_case.dart:VerifyOtpUseCase",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/domain/use_case/verify_otp_use_case.dart",
+      "target": "file:lib/features/auth/domain/repository/i_auth_repository.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "class:lib/features/auth/domain/use_case/verify_otp_use_case.dart:VerifyOtpUseCase",
+      "target": "class:lib/features/auth/domain/repository/i_auth_repository.dart:IAuthRepository",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

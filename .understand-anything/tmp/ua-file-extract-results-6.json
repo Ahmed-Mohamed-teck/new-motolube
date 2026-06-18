@@ -1,0 +1,6347 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "lib/features/book_service/domain/exception/service_packages_exception.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 22,
+      "nonEmptyLines": 17,
+      "functions": [
+        {
+          "name": "ServicePackagesException.serverError",
+          "startLine": 6,
+          "endLine": 6,
+          "params": []
+        },
+        {
+          "name": "ServicePackagesException.networkError",
+          "startLine": 10,
+          "endLine": 10,
+          "params": []
+        },
+        {
+          "name": "ServicePackagesException.unexpected",
+          "startLine": 15,
+          "endLine": 15,
+          "params": []
+        },
+        {
+          "name": "toString",
+          "startLine": 21,
+          "endLine": 21,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "ServicePackagesException",
+          "startLine": 1,
+          "endLine": 22,
+          "methods": [
+            "ServicePackagesException.serverError",
+            "ServicePackagesException.networkError",
+            "ServicePackagesException.unexpected",
+            "toString"
+          ],
+          "properties": [
+            "message"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ServicePackagesException.serverError",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "ServicePackagesException.networkError",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "ServicePackagesException.unexpected",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "toString",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "ServicePackagesException",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ServicePackagesException.serverError",
+          "callee": "ServicePackagesException",
+          "lineNumber": 6
+        },
+        {
+          "caller": "ServicePackagesException.networkError",
+          "callee": "ServicePackagesException",
+          "lineNumber": 11
+        },
+        {
+          "caller": "ServicePackagesException.unexpected",
+          "callee": "ServicePackagesException",
+          "lineNumber": 16
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 4,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/book_service/domain/repository/i_book_service_repository.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 25,
+      "nonEmptyLines": 23,
+      "functions": [
+        {
+          "name": "getPackagesForVehicle",
+          "startLine": 5,
+          "endLine": 9,
+          "params": [
+            "customerId",
+            "vehicleId",
+            "category"
+          ]
+        },
+        {
+          "name": "createAppointment",
+          "startLine": 11,
+          "endLine": 24,
+          "params": [
+            "bookingDate",
+            "branchId",
+            "userId",
+            "latitude",
+            "longitude",
+            "mileage",
+            "partyId",
+            "vehicleId",
+            "packageId",
+            "selectedSlot",
+            "isImmediateAppointment",
+            "slotTime"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "IBookServiceRepository",
+          "startLine": 4,
+          "endLine": 25,
+          "methods": [
+            "getPackagesForVehicle",
+            "createAppointment"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "getPackagesForVehicle",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "createAppointment",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "IBookServiceRepository",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/book_service/domain/use_case/create_appointment_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 35,
+      "functions": [
+        {
+          "name": "CreateAppointmentUseCase",
+          "startLine": 7,
+          "endLine": 7,
+          "params": [
+            "_repository"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 9,
+          "endLine": 22,
+          "params": [
+            "bookingDate",
+            "branchId",
+            "userId",
+            "latitude",
+            "longitude",
+            "mileage",
+            "partyId",
+            "vehicleId",
+            "packageId",
+            "selectedSlot",
+            "isImmediateAppointment",
+            "slotTime"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "CreateAppointmentUseCase",
+          "startLine": 4,
+          "endLine": 38,
+          "methods": [
+            "CreateAppointmentUseCase",
+            "call"
+          ],
+          "properties": [
+            "_repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CreateAppointmentUseCase",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "call",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "CreateAppointmentUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "createAppointment",
+          "lineNumber": 23
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/book_service/domain/use_case/get_packages_for_vehicle_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 17,
+      "functions": [
+        {
+          "name": "GetPackagesForVehicleUseCase",
+          "startLine": 7,
+          "endLine": 7,
+          "params": [
+            "_repository"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 9,
+          "endLine": 13,
+          "params": [
+            "customerId",
+            "vehicleId",
+            "category"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "GetPackagesForVehicleUseCase",
+          "startLine": 4,
+          "endLine": 20,
+          "methods": [
+            "GetPackagesForVehicleUseCase",
+            "call"
+          ],
+          "properties": [
+            "_repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "GetPackagesForVehicleUseCase",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "call",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "GetPackagesForVehicleUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "getPackagesForVehicle",
+          "lineNumber": 14
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/book_service/presentation/screen/book_maintanance_screen.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 1835,
+      "nonEmptyLines": 1709,
+      "functions": [
+        {
+          "name": "createState",
+          "startLine": 38,
+          "endLine": 38,
+          "params": []
+        },
+        {
+          "name": "build",
+          "startLine": 46,
+          "endLine": 46,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 60,
+          "endLine": 60,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 135,
+          "endLine": 135,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 149,
+          "endLine": 149,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 214,
+          "endLine": 214,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 234,
+          "endLine": 234,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 356,
+          "endLine": 356,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "initState",
+          "startLine": 407,
+          "endLine": 407,
+          "params": []
+        },
+        {
+          "name": "didChangeDependencies",
+          "startLine": 420,
+          "endLine": 420,
+          "params": []
+        },
+        {
+          "name": "_stepContents",
+          "startLine": 444,
+          "endLine": 444,
+          "params": []
+        },
+        {
+          "name": "_ensureCustomerId",
+          "startLine": 451,
+          "endLine": 451,
+          "params": []
+        },
+        {
+          "name": "_fetchPackagesForSelectedCar",
+          "startLine": 473,
+          "endLine": 473,
+          "params": []
+        },
+        {
+          "name": "_categoryQueryValue",
+          "startLine": 491,
+          "endLine": 491,
+          "params": []
+        },
+        {
+          "name": "_wrapWithCategoryBanner",
+          "startLine": 503,
+          "endLine": 503,
+          "params": [
+            "context",
+            "child"
+          ]
+        },
+        {
+          "name": "_buildCategoryBanner",
+          "startLine": 518,
+          "endLine": 518,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "_clearSelectedCategory",
+          "startLine": 569,
+          "endLine": 569,
+          "params": []
+        },
+        {
+          "name": "_fetchTechniciansForSelection",
+          "startLine": 577,
+          "endLine": 577,
+          "params": []
+        },
+        {
+          "name": "_retryTechnicianSearch",
+          "startLine": 598,
+          "endLine": 598,
+          "params": []
+        },
+        {
+          "name": "_resetTechnicianSearch",
+          "startLine": 602,
+          "endLine": 602,
+          "params": []
+        },
+        {
+          "name": "_resetBookingFlow",
+          "startLine": 614,
+          "endLine": 614,
+          "params": []
+        },
+        {
+          "name": "_applyPreselectedCar",
+          "startLine": 634,
+          "endLine": 634,
+          "params": [
+            "car"
+          ]
+        },
+        {
+          "name": "_handleLocationSelection",
+          "startLine": 652,
+          "endLine": 652,
+          "params": [
+            "latlng"
+          ]
+        },
+        {
+          "name": "_formatDateForApi",
+          "startLine": 657,
+          "endLine": 657,
+          "params": [
+            "date"
+          ]
+        },
+        {
+          "name": "_formatDateForAppointment",
+          "startLine": 662,
+          "endLine": 662,
+          "params": [
+            "date"
+          ]
+        },
+        {
+          "name": "_formatDateForDisplay",
+          "startLine": 666,
+          "endLine": 666,
+          "params": [
+            "date"
+          ]
+        },
+        {
+          "name": "_fetchSlotsForTechnician",
+          "startLine": 670,
+          "endLine": 670,
+          "params": [
+            "technicianId"
+          ]
+        },
+        {
+          "name": "_onTechnicianSelected",
+          "startLine": 681,
+          "endLine": 681,
+          "params": [
+            "technician"
+          ]
+        },
+        {
+          "name": "_onSlotSelected",
+          "startLine": 689,
+          "endLine": 689,
+          "params": [
+            "slot"
+          ]
+        },
+        {
+          "name": "_pickSlotDate",
+          "startLine": 695,
+          "endLine": 695,
+          "params": []
+        },
+        {
+          "name": "_goToNext",
+          "startLine": 717,
+          "endLine": 717,
+          "params": []
+        },
+        {
+          "name": "_goToPrevious",
+          "startLine": 785,
+          "endLine": 785,
+          "params": []
+        },
+        {
+          "name": "_handleBooking",
+          "startLine": 793,
+          "endLine": 793,
+          "params": []
+        },
+        {
+          "name": "_showSnack",
+          "startLine": 921,
+          "endLine": 921,
+          "params": [
+            "message"
+          ]
+        },
+        {
+          "name": "_syncSelectedCarSelection",
+          "startLine": 930,
+          "endLine": 930,
+          "params": [
+            "cars"
+          ]
+        },
+        {
+          "name": "_buildCarStep",
+          "startLine": 949,
+          "endLine": 949,
+          "params": []
+        },
+        {
+          "name": "_buildServiceStep",
+          "startLine": 1043,
+          "endLine": 1043,
+          "params": []
+        },
+        {
+          "name": "_buildLocationStep",
+          "startLine": 1214,
+          "endLine": 1214,
+          "params": []
+        },
+        {
+          "name": "_buildTechnicianStep",
+          "startLine": 1280,
+          "endLine": 1280,
+          "params": []
+        },
+        {
+          "name": "_buildTechnicianGrid",
+          "startLine": 1361,
+          "endLine": 1361,
+          "params": [
+            "technicians"
+          ]
+        },
+        {
+          "name": "_buildTechnicianCard",
+          "startLine": 1387,
+          "endLine": 1391,
+          "params": [
+            "technician",
+            "isSelected",
+            "onTap"
+          ]
+        },
+        {
+          "name": "_buildTechnicianSlotsSection",
+          "startLine": 1488,
+          "endLine": 1488,
+          "params": []
+        },
+        {
+          "name": "_buildSlotChips",
+          "startLine": 1565,
+          "endLine": 1565,
+          "params": [
+            "slots"
+          ]
+        },
+        {
+          "name": "_isSlotSelected",
+          "startLine": 1594,
+          "endLine": 1594,
+          "params": [
+            "slot"
+          ]
+        },
+        {
+          "name": "_slotLabel",
+          "startLine": 1611,
+          "endLine": 1611,
+          "params": [
+            "slot"
+          ]
+        },
+        {
+          "name": "_resolveServiceId",
+          "startLine": 1630,
+          "endLine": 1630,
+          "params": [
+            "package"
+          ]
+        },
+        {
+          "name": "_resolveServiceName",
+          "startLine": 1642,
+          "endLine": 1642,
+          "params": [
+            "raw"
+          ]
+        },
+        {
+          "name": "_requestCurrentLocation",
+          "startLine": 1661,
+          "endLine": 1661,
+          "params": []
+        },
+        {
+          "name": "build",
+          "startLine": 1701,
+          "endLine": 1701,
+          "params": [
+            "context"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "BookServiceScreen",
+          "startLine": 34,
+          "endLine": 40,
+          "methods": [
+            "createState"
+          ],
+          "properties": []
+        },
+        {
+          "name": "_CarStepSkeletonList",
+          "startLine": 42,
+          "endLine": 54,
+          "methods": [
+            "build"
+          ],
+          "properties": []
+        },
+        {
+          "name": "_CarStepSkeleton",
+          "startLine": 56,
+          "endLine": 129,
+          "methods": [
+            "build"
+          ],
+          "properties": []
+        },
+        {
+          "name": "_ServicePackagesSkeletonList",
+          "startLine": 131,
+          "endLine": 143,
+          "methods": [
+            "build"
+          ],
+          "properties": []
+        },
+        {
+          "name": "_ServicePackageSkeleton",
+          "startLine": 145,
+          "endLine": 208,
+          "methods": [
+            "build"
+          ],
+          "properties": []
+        },
+        {
+          "name": "_TechnicianGridSkeleton",
+          "startLine": 210,
+          "endLine": 228,
+          "methods": [
+            "build"
+          ],
+          "properties": []
+        },
+        {
+          "name": "_TechnicianCardSkeleton",
+          "startLine": 230,
+          "endLine": 350,
+          "methods": [
+            "build"
+          ],
+          "properties": []
+        },
+        {
+          "name": "_SlotChipsSkeleton",
+          "startLine": 352,
+          "endLine": 386,
+          "methods": [
+            "build"
+          ],
+          "properties": []
+        },
+        {
+          "name": "_HorizontalStepperScreenState",
+          "startLine": 388,
+          "endLine": 1835,
+          "methods": [
+            "initState",
+            "didChangeDependencies",
+            "_stepContents",
+            "_ensureCustomerId",
+            "_fetchPackagesForSelectedCar",
+            "_categoryQueryValue",
+            "_wrapWithCategoryBanner",
+            "_buildCategoryBanner",
+            "_clearSelectedCategory",
+            "_fetchTechniciansForSelection",
+            "_retryTechnicianSearch",
+            "_resetTechnicianSearch",
+            "_resetBookingFlow",
+            "_applyPreselectedCar",
+            "_handleLocationSelection",
+            "_formatDateForApi",
+            "_formatDateForAppointment",
+            "_formatDateForDisplay",
+            "_fetchSlotsForTechnician",
+            "_onTechnicianSelected",
+            "_onSlotSelected",
+            "_pickSlotDate",
+            "_goToNext",
+            "_goToPrevious",
+            "_handleBooking",
+            "_showSnack",
+            "_syncSelectedCarSelection",
+            "_buildCarStep",
+            "_buildServiceStep",
+            "_buildLocationStep",
+            "_buildTechnicianStep",
+            "_buildTechnicianGrid",
+            "_buildTechnicianCard",
+            "_buildTechnicianSlotsSection",
+            "_buildSlotChips",
+            "_isSlotSelected",
+            "_slotLabel",
+            "_resolveServiceId",
+            "_resolveServiceName",
+            "_requestCurrentLocation",
+            "build"
+          ],
+          "properties": [
+            "_currentStep",
+            "_selectedCar",
+            "_selectedService",
+            "_selectedPackage",
+            "_selectedCarEntity",
+            "_selectedMainCategory",
+            "_customerId",
+            "_selectedLocation",
+            "_selectedTechnician",
+            "_selectedSlot",
+            "_selectedSlotDate",
+            "_isBooking",
+            "_didLoadInitialCategory",
+            "_mapController"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "createState",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "BookServiceScreen",
+          "line": 34,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 60,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 135,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 149,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 214,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 234,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 356,
+          "isDefault": false
+        },
+        {
+          "name": "initState",
+          "line": 407,
+          "isDefault": false
+        },
+        {
+          "name": "didChangeDependencies",
+          "line": 420,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 1701,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "createState",
+          "callee": "_HorizontalStepperScreenState",
+          "lineNumber": 39
+        },
+        {
+          "caller": "build",
+          "callee": "separated",
+          "lineNumber": 47
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 48
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 50
+        },
+        {
+          "caller": "build",
+          "callee": "_CarStepSkeleton",
+          "lineNumber": 51
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 61
+        },
+        {
+          "caller": "build",
+          "callee": "withOpacity",
+          "lineNumber": 62
+        },
+        {
+          "caller": "build",
+          "callee": "Skeletonizer",
+          "lineNumber": 64
+        },
+        {
+          "caller": "build",
+          "callee": "Card",
+          "lineNumber": 65
+        },
+        {
+          "caller": "build",
+          "callee": "RoundedRectangleBorder",
+          "lineNumber": 66
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 66
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 67
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 68
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 69
+        },
+        {
+          "caller": "build",
+          "callee": "leaf",
+          "lineNumber": 71
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 72
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 75
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 76
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 81
+        },
+        {
+          "caller": "build",
+          "callee": "Expanded",
+          "lineNumber": 82
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 83
+        },
+        {
+          "caller": "build",
+          "callee": "leaf",
+          "lineNumber": 86
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 87
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 93
+        },
+        {
+          "caller": "build",
+          "callee": "leaf",
+          "lineNumber": 94
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 95
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 101
+        },
+        {
+          "caller": "build",
+          "callee": "leaf",
+          "lineNumber": 102
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 103
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 112
+        },
+        {
+          "caller": "build",
+          "callee": "leaf",
+          "lineNumber": 113
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 114
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 117
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 118
+        },
+        {
+          "caller": "build",
+          "callee": "separated",
+          "lineNumber": 136
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 137
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 139
+        },
+        {
+          "caller": "build",
+          "callee": "_ServicePackageSkeleton",
+          "lineNumber": 140
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 150
+        },
+        {
+          "caller": "build",
+          "callee": "withOpacity",
+          "lineNumber": 151
+        },
+        {
+          "caller": "build",
+          "callee": "Skeletonizer",
+          "lineNumber": 153
+        },
+        {
+          "caller": "build",
+          "callee": "Card",
+          "lineNumber": 154
+        },
+        {
+          "caller": "build",
+          "callee": "RoundedRectangleBorder",
+          "lineNumber": 155
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 155
+        },
+        {
+          "caller": "build",
+          "callee": "ListTile",
+          "lineNumber": 156
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 157
+        },
+        {
+          "caller": "build",
+          "callee": "leaf",
+          "lineNumber": 161
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 162
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 165
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 166
+        },
+        {
+          "caller": "build",
+          "callee": "leaf",
+          "lineNumber": 171
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 172
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 178
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 179
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 180
+        },
+        {
+          "caller": "build",
+          "callee": "leaf",
+          "lineNumber": 184
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 185
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 187
+        },
+        {
+          "caller": "build",
+          "callee": "leaf",
+          "lineNumber": 188
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 189
+        },
+        {
+          "caller": "build",
+          "callee": "leaf",
+          "lineNumber": 194
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 195
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 198
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 199
+        },
+        {
+          "caller": "build",
+          "callee": "builder",
+          "lineNumber": 215
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 216
+        },
+        {
+          "caller": "build",
+          "callee": "NeverScrollableScrollPhysics",
+          "lineNumber": 217
+        },
+        {
+          "caller": "build",
+          "callee": "SliverGridDelegateWithFixedCrossAxisCount",
+          "lineNumber": 218
+        },
+        {
+          "caller": "build",
+          "callee": "_TechnicianCardSkeleton",
+          "lineNumber": 225
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 235
+        },
+        {
+          "caller": "build",
+          "callee": "withOpacity",
+          "lineNumber": 236
+        },
+        {
+          "caller": "build",
+          "callee": "Skeletonizer",
+          "lineNumber": 238
+        },
+        {
+          "caller": "build",
+          "callee": "Card",
+          "lineNumber": 239
+        },
+        {
+          "caller": "build",
+          "callee": "RoundedRectangleBorder",
+          "lineNumber": 240
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 240
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 241
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 242
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 243
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 246
+        },
+        {
+          "caller": "build",
+          "callee": "leaf",
+          "lineNumber": 248
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 249
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 252
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 258
+        },
+        {
+          "caller": "build",
+          "callee": "Expanded",
+          "lineNumber": 259
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 260
+        },
+        {
+          "caller": "build",
+          "callee": "leaf",
+          "lineNumber": 263
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 264
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 270
+        },
+        {
+          "caller": "build",
+          "callee": "leaf",
+          "lineNumber": 271
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 272
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 281
+        },
+        {
+          "caller": "build",
+          "callee": "leaf",
+          "lineNumber": 282
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 283
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 286
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 287
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 294
+        },
+        {
+          "caller": "build",
+          "callee": "leaf",
+          "lineNumber": 295
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 296
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 302
+        },
+        {
+          "caller": "build",
+          "callee": "leaf",
+          "lineNumber": 303
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 304
+        },
+        {
+          "caller": "build",
+          "callee": "Spacer",
+          "lineNumber": 306
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 307
+        },
+        {
+          "caller": "build",
+          "callee": "leaf",
+          "lineNumber": 309
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 310
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 313
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 319
+        },
+        {
+          "caller": "build",
+          "callee": "leaf",
+          "lineNumber": 320
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 321
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 325
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 326
+        },
+        {
+          "caller": "build",
+          "callee": "leaf",
+          "lineNumber": 328
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 329
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 332
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 338
+        },
+        {
+          "caller": "build",
+          "callee": "leaf",
+          "lineNumber": 339
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 340
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 357
+        },
+        {
+          "caller": "build",
+          "callee": "withOpacity",
+          "lineNumber": 358
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 360
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 361
+        },
+        {
+          "caller": "build",
+          "callee": "Skeletonizer",
+          "lineNumber": 362
+        },
+        {
+          "caller": "build",
+          "callee": "SingleChildScrollView",
+          "lineNumber": 363
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 365
+        },
+        {
+          "caller": "build",
+          "callee": "generate",
+          "lineNumber": 366
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 368
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 369
+        },
+        {
+          "caller": "build",
+          "callee": "Chip",
+          "lineNumber": 370
+        },
+        {
+          "caller": "build",
+          "callee": "leaf",
+          "lineNumber": 371
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 372
+        },
+        {
+          "caller": "build",
+          "callee": "toDouble",
+          "lineNumber": 373
+        },
+        {
+          "caller": "initState",
+          "callee": "read",
+          "lineNumber": 410
+        },
+        {
+          "caller": "initState",
+          "callee": "addPostFrameCallback",
+          "lineNumber": 412
+        },
+        {
+          "caller": "initState",
+          "callee": "_applyPreselectedCar",
+          "lineNumber": 413
+        },
+        {
+          "caller": "initState",
+          "callee": "read",
+          "lineNumber": 414
+        },
+        {
+          "caller": "didChangeDependencies",
+          "callee": "of",
+          "lineNumber": 428
+        },
+        {
+          "caller": "didChangeDependencies",
+          "callee": "read",
+          "lineNumber": 433
+        },
+        {
+          "caller": "didChangeDependencies",
+          "callee": "setState",
+          "lineNumber": 436
+        },
+        {
+          "caller": "_stepContents",
+          "callee": "_buildCarStep",
+          "lineNumber": 445
+        },
+        {
+          "caller": "_stepContents",
+          "callee": "_buildServiceStep",
+          "lineNumber": 446
+        },
+        {
+          "caller": "_stepContents",
+          "callee": "_buildLocationStep",
+          "lineNumber": 447
+        },
+        {
+          "caller": "_stepContents",
+          "callee": "_buildTechnicianStep",
+          "lineNumber": 448
+        },
+        {
+          "caller": "_ensureCustomerId",
+          "callee": "read",
+          "lineNumber": 456
+        },
+        {
+          "caller": "_ensureCustomerId",
+          "callee": "getStoredAuth",
+          "lineNumber": 456
+        },
+        {
+          "caller": "_ensureCustomerId",
+          "callee": "of",
+          "lineNumber": 462
+        },
+        {
+          "caller": "_ensureCustomerId",
+          "callee": "showSnackBar",
+          "lineNumber": 462
+        },
+        {
+          "caller": "_ensureCustomerId",
+          "callee": "SnackBar",
+          "lineNumber": 463
+        },
+        {
+          "caller": "_ensureCustomerId",
+          "callee": "Text",
+          "lineNumber": 464
+        },
+        {
+          "caller": "_ensureCustomerId",
+          "callee": "of",
+          "lineNumber": 464
+        },
+        {
+          "caller": "_fetchPackagesForSelectedCar",
+          "callee": "_ensureCustomerId",
+          "lineNumber": 478
+        },
+        {
+          "caller": "_fetchPackagesForSelectedCar",
+          "callee": "read",
+          "lineNumber": 483
+        },
+        {
+          "caller": "_fetchPackagesForSelectedCar",
+          "callee": "fetchPackages",
+          "lineNumber": 484
+        },
+        {
+          "caller": "_fetchPackagesForSelectedCar",
+          "callee": "_categoryQueryValue",
+          "lineNumber": 487
+        },
+        {
+          "caller": "_categoryQueryValue",
+          "callee": "trim",
+          "lineNumber": 494
+        },
+        {
+          "caller": "_categoryQueryValue",
+          "callee": "trim",
+          "lineNumber": 496
+        },
+        {
+          "caller": "_categoryQueryValue",
+          "callee": "trim",
+          "lineNumber": 498
+        },
+        {
+          "caller": "_wrapWithCategoryBanner",
+          "callee": "_buildCategoryBanner",
+          "lineNumber": 504
+        },
+        {
+          "caller": "_wrapWithCategoryBanner",
+          "callee": "Column",
+          "lineNumber": 508
+        },
+        {
+          "caller": "_wrapWithCategoryBanner",
+          "callee": "SizedBox",
+          "lineNumber": 512
+        },
+        {
+          "caller": "_wrapWithCategoryBanner",
+          "callee": "Expanded",
+          "lineNumber": 513
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "of",
+          "lineNumber": 519
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "listen",
+          "lineNumber": 521
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "setState",
+          "lineNumber": 522
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "_fetchPackagesForSelectedCar",
+          "lineNumber": 525
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "titleForLocale",
+          "lineNumber": 530
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "localeOf",
+          "lineNumber": 530
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "trim",
+          "lineNumber": 530
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "Container",
+          "lineNumber": 532
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "EdgeInsets",
+          "lineNumber": 533
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "BoxDecoration",
+          "lineNumber": 534
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "of",
+          "lineNumber": 535
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "withOpacity",
+          "lineNumber": 535
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "circular",
+          "lineNumber": 536
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "Row",
+          "lineNumber": 538
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "Row",
+          "lineNumber": 540
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "Icon",
+          "lineNumber": 543
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "of",
+          "lineNumber": 546
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "SizedBox",
+          "lineNumber": 548
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "Text",
+          "lineNumber": 549
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "bookServiceSelectedCategory",
+          "lineNumber": 550
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "of",
+          "lineNumber": 551
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "of",
+          "lineNumber": 552
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "Spacer",
+          "lineNumber": 558
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "icon",
+          "lineNumber": 559
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "Icon",
+          "lineNumber": 561
+        },
+        {
+          "caller": "_buildCategoryBanner",
+          "callee": "Text",
+          "lineNumber": 562
+        },
+        {
+          "caller": "_clearSelectedCategory",
+          "callee": "read",
+          "lineNumber": 570
+        },
+        {
+          "caller": "_clearSelectedCategory",
+          "callee": "setState",
+          "lineNumber": 571
+        },
+        {
+          "caller": "_clearSelectedCategory",
+          "callee": "_fetchPackagesForSelectedCar",
+          "lineNumber": 574
+        },
+        {
+          "caller": "_fetchTechniciansForSelection",
+          "callee": "_resolveServiceId",
+          "lineNumber": 583
+        },
+        {
+          "caller": "_fetchTechniciansForSelection",
+          "callee": "read",
+          "lineNumber": 588
+        },
+        {
+          "caller": "_fetchTechniciansForSelection",
+          "callee": "search",
+          "lineNumber": 589
+        },
+        {
+          "caller": "_retryTechnicianSearch",
+          "callee": "_fetchTechniciansForSelection",
+          "lineNumber": 599
+        },
+        {
+          "caller": "_resetTechnicianSearch",
+          "callee": "read",
+          "lineNumber": 603
+        },
+        {
+          "caller": "_resetTechnicianSearch",
+          "callee": "reset",
+          "lineNumber": 603
+        },
+        {
+          "caller": "_resetTechnicianSearch",
+          "callee": "read",
+          "lineNumber": 604
+        },
+        {
+          "caller": "_resetTechnicianSearch",
+          "callee": "reset",
+          "lineNumber": 604
+        },
+        {
+          "caller": "_resetTechnicianSearch",
+          "callee": "setState",
+          "lineNumber": 608
+        },
+        {
+          "caller": "_resetBookingFlow",
+          "callee": "read",
+          "lineNumber": 615
+        },
+        {
+          "caller": "_resetBookingFlow",
+          "callee": "reset",
+          "lineNumber": 615
+        },
+        {
+          "caller": "_resetBookingFlow",
+          "callee": "read",
+          "lineNumber": 616
+        },
+        {
+          "caller": "_resetBookingFlow",
+          "callee": "reset",
+          "lineNumber": 616
+        },
+        {
+          "caller": "_resetBookingFlow",
+          "callee": "read",
+          "lineNumber": 617
+        },
+        {
+          "caller": "_resetBookingFlow",
+          "callee": "reset",
+          "lineNumber": 617
+        },
+        {
+          "caller": "_resetBookingFlow",
+          "callee": "setState",
+          "lineNumber": 621
+        },
+        {
+          "caller": "_resetBookingFlow",
+          "callee": "now",
+          "lineNumber": 630
+        },
+        {
+          "caller": "_applyPreselectedCar",
+          "callee": "read",
+          "lineNumber": 635
+        },
+        {
+          "caller": "_applyPreselectedCar",
+          "callee": "reset",
+          "lineNumber": 635
+        },
+        {
+          "caller": "_applyPreselectedCar",
+          "callee": "read",
+          "lineNumber": 636
+        },
+        {
+          "caller": "_applyPreselectedCar",
+          "callee": "reset",
+          "lineNumber": 636
+        },
+        {
+          "caller": "_applyPreselectedCar",
+          "callee": "read",
+          "lineNumber": 637
+        },
+        {
+          "caller": "_applyPreselectedCar",
+          "callee": "reset",
+          "lineNumber": 637
+        },
+        {
+          "caller": "_applyPreselectedCar",
+          "callee": "setState",
+          "lineNumber": 638
+        },
+        {
+          "caller": "_applyPreselectedCar",
+          "callee": "now",
+          "lineNumber": 646
+        },
+        {
+          "caller": "_applyPreselectedCar",
+          "callee": "_fetchPackagesForSelectedCar",
+          "lineNumber": 649
+        },
+        {
+          "caller": "_handleLocationSelection",
+          "callee": "setState",
+          "lineNumber": 653
+        },
+        {
+          "caller": "_handleLocationSelection",
+          "callee": "_resetTechnicianSearch",
+          "lineNumber": 654
+        },
+        {
+          "caller": "_formatDateForApi",
+          "callee": "DateFormat",
+          "lineNumber": 658
+        },
+        {
+          "caller": "_formatDateForApi",
+          "callee": "format",
+          "lineNumber": 659
+        },
+        {
+          "caller": "_formatDateForApi",
+          "callee": "toUpperCase",
+          "lineNumber": 659
+        },
+        {
+          "caller": "_formatDateForAppointment",
+          "callee": "DateFormat",
+          "lineNumber": 663
+        },
+        {
+          "caller": "_formatDateForAppointment",
+          "callee": "format",
+          "lineNumber": 663
+        },
+        {
+          "caller": "_formatDateForAppointment",
+          "callee": "toLowerCase",
+          "lineNumber": 663
+        },
+        {
+          "caller": "_formatDateForDisplay",
+          "callee": "DateFormat",
+          "lineNumber": 667
+        },
+        {
+          "caller": "_formatDateForDisplay",
+          "callee": "format",
+          "lineNumber": 667
+        },
+        {
+          "caller": "_fetchSlotsForTechnician",
+          "callee": "_formatDateForApi",
+          "lineNumber": 675
+        },
+        {
+          "caller": "_fetchSlotsForTechnician",
+          "callee": "read",
+          "lineNumber": 677
+        },
+        {
+          "caller": "_fetchSlotsForTechnician",
+          "callee": "fetch",
+          "lineNumber": 678
+        },
+        {
+          "caller": "_onTechnicianSelected",
+          "callee": "setState",
+          "lineNumber": 682
+        },
+        {
+          "caller": "_onTechnicianSelected",
+          "callee": "_fetchSlotsForTechnician",
+          "lineNumber": 686
+        },
+        {
+          "caller": "_onSlotSelected",
+          "callee": "setState",
+          "lineNumber": 690
+        },
+        {
+          "caller": "_pickSlotDate",
+          "callee": "now",
+          "lineNumber": 696
+        },
+        {
+          "caller": "_pickSlotDate",
+          "callee": "isBefore",
+          "lineNumber": 698
+        },
+        {
+          "caller": "_pickSlotDate",
+          "callee": "showDatePicker",
+          "lineNumber": 699
+        },
+        {
+          "caller": "_pickSlotDate",
+          "callee": "add",
+          "lineNumber": 703
+        },
+        {
+          "caller": "_pickSlotDate",
+          "callee": "Duration",
+          "lineNumber": 703
+        },
+        {
+          "caller": "_pickSlotDate",
+          "callee": "setState",
+          "lineNumber": 709
+        },
+        {
+          "caller": "_pickSlotDate",
+          "callee": "_fetchSlotsForTechnician",
+          "lineNumber": 713
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "of",
+          "lineNumber": 718
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "of",
+          "lineNumber": 721
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "showSnackBar",
+          "lineNumber": 721
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "SnackBar",
+          "lineNumber": 722
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "Text",
+          "lineNumber": 723
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "_ensureCustomerId",
+          "lineNumber": 728
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "setState",
+          "lineNumber": 732
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "read",
+          "lineNumber": 738
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "fetchPackages",
+          "lineNumber": 739
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "_categoryQueryValue",
+          "lineNumber": 742
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "of",
+          "lineNumber": 749
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "showSnackBar",
+          "lineNumber": 749
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "SnackBar",
+          "lineNumber": 750
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "Text",
+          "lineNumber": 751
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "setState",
+          "lineNumber": 756
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "of",
+          "lineNumber": 764
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "showSnackBar",
+          "lineNumber": 764
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "SnackBar",
+          "lineNumber": 765
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "Text",
+          "lineNumber": 766
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "setState",
+          "lineNumber": 771
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "_fetchTechniciansForSelection",
+          "lineNumber": 774
+        },
+        {
+          "caller": "_goToNext",
+          "callee": "setState",
+          "lineNumber": 779
+        },
+        {
+          "caller": "_goToPrevious",
+          "callee": "setState",
+          "lineNumber": 787
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "of",
+          "lineNumber": 794
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "_showSnack",
+          "lineNumber": 806
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "_ensureCustomerId",
+          "lineNumber": 810
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "trim",
+          "lineNumber": 816
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "trim",
+          "lineNumber": 817
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "trim",
+          "lineNumber": 818
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "_showSnack",
+          "lineNumber": 820
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "trim",
+          "lineNumber": 824
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "_showSnack",
+          "lineNumber": 826
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "trim",
+          "lineNumber": 830
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "_showSnack",
+          "lineNumber": 832
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "trim",
+          "lineNumber": 836
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "_showSnack",
+          "lineNumber": 838
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "_formatDateForAppointment",
+          "lineNumber": 842
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "_slotLabel",
+          "lineNumber": 843
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "trim",
+          "lineNumber": 847
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "trim",
+          "lineNumber": 847
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "toStringAsFixed",
+          "lineNumber": 848
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "toStringAsFixed",
+          "lineNumber": 849
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "setState",
+          "lineNumber": 851
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "read",
+          "lineNumber": 856
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "createAppointment",
+          "lineNumber": 857
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "showDialog",
+          "lineNumber": 877
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "AlertDialog",
+          "lineNumber": 880
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "Text",
+          "lineNumber": 881
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "Text",
+          "lineNumber": 882
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "TextButton",
+          "lineNumber": 884
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "of",
+          "lineNumber": 885
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "pop",
+          "lineNumber": 885
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "Text",
+          "lineNumber": 886
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "invalidate",
+          "lineNumber": 894
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "read",
+          "lineNumber": 896
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "fetchUpcomingServices",
+          "lineNumber": 897
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "_resetBookingFlow",
+          "lineNumber": 898
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "read",
+          "lineNumber": 899
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "_showSnack",
+          "lineNumber": 901
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "_showSnack",
+          "lineNumber": 907
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "toString",
+          "lineNumber": 908
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "toString",
+          "lineNumber": 909
+        },
+        {
+          "caller": "_handleBooking",
+          "callee": "setState",
+          "lineNumber": 914
+        },
+        {
+          "caller": "_showSnack",
+          "callee": "of",
+          "lineNumber": 925
+        },
+        {
+          "caller": "_showSnack",
+          "callee": "showSnackBar",
+          "lineNumber": 925
+        },
+        {
+          "caller": "_showSnack",
+          "callee": "SnackBar",
+          "lineNumber": 926
+        },
+        {
+          "caller": "_showSnack",
+          "callee": "Text",
+          "lineNumber": 926
+        },
+        {
+          "caller": "_syncSelectedCarSelection",
+          "callee": "indexWhere",
+          "lineNumber": 936
+        },
+        {
+          "caller": "_syncSelectedCarSelection",
+          "callee": "addPostFrameCallback",
+          "lineNumber": 938
+        },
+        {
+          "caller": "_syncSelectedCarSelection",
+          "callee": "setState",
+          "lineNumber": 942
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "Consumer",
+          "lineNumber": 951
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "watch",
+          "lineNumber": 953
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "watch",
+          "lineNumber": 954
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "microtask",
+          "lineNumber": 959
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "read",
+          "lineNumber": 961
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "fetchUserCars",
+          "lineNumber": 962
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "Center",
+          "lineNumber": 968
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "Text",
+          "lineNumber": 968
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "of",
+          "lineNumber": 968
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "_CarStepSkeletonList",
+          "lineNumber": 972
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "UserCarsEmptyState",
+          "lineNumber": 976
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "of",
+          "lineNumber": 978
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "pushNamed",
+          "lineNumber": 978
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "_syncSelectedCarSelection",
+          "lineNumber": 982
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "separated",
+          "lineNumber": 983
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "SizedBox",
+          "lineNumber": 985
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "trim",
+          "lineNumber": 991
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "join",
+          "lineNumber": 992
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "GestureDetector",
+          "lineNumber": 995
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "setState",
+          "lineNumber": 997
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "read",
+          "lineNumber": 1003
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "reset",
+          "lineNumber": 1003
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "_resetTechnicianSearch",
+          "lineNumber": 1004
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "DecoratedBox",
+          "lineNumber": 1006
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "BoxDecoration",
+          "lineNumber": 1007
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "all",
+          "lineNumber": 1008
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "circular",
+          "lineNumber": 1012
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "CarCard",
+          "lineNumber": 1014
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "CarInfo",
+          "lineNumber": 1015
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "Center",
+          "lineNumber": 1028
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "Text",
+          "lineNumber": 1029
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "of",
+          "lineNumber": 1031
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "of",
+          "lineNumber": 1032
+        },
+        {
+          "caller": "_buildCarStep",
+          "callee": "SizedBox",
+          "lineNumber": 1038
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "watch",
+          "lineNumber": 1044
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "_wrapWithCategoryBanner",
+          "lineNumber": 1047
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Center",
+          "lineNumber": 1049
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Text",
+          "lineNumber": 1050
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "of",
+          "lineNumber": 1051
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "_wrapWithCategoryBanner",
+          "lineNumber": 1059
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "_ServicePackagesSkeletonList",
+          "lineNumber": 1061
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "of",
+          "lineNumber": 1066
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "_wrapWithCategoryBanner",
+          "lineNumber": 1067
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Center",
+          "lineNumber": 1069
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Column",
+          "lineNumber": 1070
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Text",
+          "lineNumber": 1073
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "bookServiceFailedToLoadPackages",
+          "lineNumber": 1074
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "of",
+          "lineNumber": 1076
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "of",
+          "lineNumber": 1077
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "SizedBox",
+          "lineNumber": 1080
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "OutlinedButton",
+          "lineNumber": 1081
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "_fetchPackagesForSelectedCar",
+          "lineNumber": 1083
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Text",
+          "lineNumber": 1085
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "of",
+          "lineNumber": 1094
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "_wrapWithCategoryBanner",
+          "lineNumber": 1095
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Center",
+          "lineNumber": 1097
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Container",
+          "lineNumber": 1098
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "EdgeInsets",
+          "lineNumber": 1099
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "EdgeInsets",
+          "lineNumber": 1100
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "BoxDecoration",
+          "lineNumber": 1101
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "circular",
+          "lineNumber": 1103
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "BoxShadow",
+          "lineNumber": 1105
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "withOpacity",
+          "lineNumber": 1106
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Offset",
+          "lineNumber": 1108
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Column",
+          "lineNumber": 1112
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Icon",
+          "lineNumber": 1115
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "SizedBox",
+          "lineNumber": 1117
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Text",
+          "lineNumber": 1119
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "TextStyle",
+          "lineNumber": 1121
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "SizedBox",
+          "lineNumber": 1127
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Text",
+          "lineNumber": 1129
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "TextStyle",
+          "lineNumber": 1132
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "SizedBox",
+          "lineNumber": 1138
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Row",
+          "lineNumber": 1140
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Expanded",
+          "lineNumber": 1142
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "OutlinedButton",
+          "lineNumber": 1143
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "_fetchPackagesForSelectedCar",
+          "lineNumber": 1145
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Text",
+          "lineNumber": 1147
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "of",
+          "lineNumber": 1161
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "_wrapWithCategoryBanner",
+          "lineNumber": 1164
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "separated",
+          "lineNumber": 1166
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "roundToDouble",
+          "lineNumber": 1172
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "toStringAsFixed",
+          "lineNumber": 1175
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "toStringAsFixed",
+          "lineNumber": 1176
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Card",
+          "lineNumber": 1182
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "ListTile",
+          "lineNumber": 1184
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Text",
+          "lineNumber": 1185
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Text",
+          "lineNumber": 1186
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "bookServicePriceSar",
+          "lineNumber": 1186
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Icon",
+          "lineNumber": 1187
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Icon",
+          "lineNumber": 1194
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "setState",
+          "lineNumber": 1197
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "_resetTechnicianSearch",
+          "lineNumber": 1201
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "SizedBox",
+          "lineNumber": 1206
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Center",
+          "lineNumber": 1211
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "Text",
+          "lineNumber": 1211
+        },
+        {
+          "caller": "_buildServiceStep",
+          "callee": "of",
+          "lineNumber": 1211
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "of",
+          "lineNumber": 1215
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "Marker",
+          "lineNumber": 1218
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "Icon",
+          "lineNumber": 1222
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "Stack",
+          "lineNumber": 1226
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "FlutterMap",
+          "lineNumber": 1228
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "MapOptions",
+          "lineNumber": 1230
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "LatLng",
+          "lineNumber": 1231
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "_handleLocationSelection",
+          "lineNumber": 1233
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "TileLayer",
+          "lineNumber": 1236
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "MarkerLayer",
+          "lineNumber": 1241
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "Positioned",
+          "lineNumber": 1244
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "DecoratedBox",
+          "lineNumber": 1248
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "BoxDecoration",
+          "lineNumber": 1249
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "withOpacity",
+          "lineNumber": 1250
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "circular",
+          "lineNumber": 1251
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "Padding",
+          "lineNumber": 1253
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "EdgeInsets",
+          "lineNumber": 1254
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "Text",
+          "lineNumber": 1255
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "bookServiceSelectedLocation",
+          "lineNumber": 1258
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "toStringAsFixed",
+          "lineNumber": 1259
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "toStringAsFixed",
+          "lineNumber": 1260
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "TextStyle",
+          "lineNumber": 1262
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "Positioned",
+          "lineNumber": 1268
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "small",
+          "lineNumber": 1271
+        },
+        {
+          "caller": "_buildLocationStep",
+          "callee": "Icon",
+          "lineNumber": 1273
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "of",
+          "lineNumber": 1281
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "watch",
+          "lineNumber": 1282
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "Center",
+          "lineNumber": 1287
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "Text",
+          "lineNumber": 1288
+        },
+        {
+          "caller": "buildBody",
+          "callee": "Column",
+          "lineNumber": 1296
+        },
+        {
+          "caller": "buildBody",
+          "callee": "SizedBox",
+          "lineNumber": 1298
+        },
+        {
+          "caller": "buildBody",
+          "callee": "Expanded",
+          "lineNumber": 1298
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "buildBody",
+          "lineNumber": 1303
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "_TechnicianGridSkeleton",
+          "lineNumber": 1303
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "buildBody",
+          "lineNumber": 1307
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "ErrorStateWidget",
+          "lineNumber": 1307
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "buildBody",
+          "lineNumber": 1311
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "Column",
+          "lineNumber": 1312
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "Text",
+          "lineNumber": 1316
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "SizedBox",
+          "lineNumber": 1320
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "OutlinedButton",
+          "lineNumber": 1321
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "Text",
+          "lineNumber": 1323
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "buildBody",
+          "lineNumber": 1331
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "Column",
+          "lineNumber": 1332
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "Expanded",
+          "lineNumber": 1335
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "_buildTechnicianGrid",
+          "lineNumber": 1335
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "SizedBox",
+          "lineNumber": 1336
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "_buildTechnicianSlotsSection",
+          "lineNumber": 1337
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "buildBody",
+          "lineNumber": 1343
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "Column",
+          "lineNumber": 1344
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "Text",
+          "lineNumber": 1347
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "SizedBox",
+          "lineNumber": 1351
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "ElevatedButton",
+          "lineNumber": 1352
+        },
+        {
+          "caller": "_buildTechnicianStep",
+          "callee": "Text",
+          "lineNumber": 1354
+        },
+        {
+          "caller": "_buildTechnicianGrid",
+          "callee": "RefreshIndicator",
+          "lineNumber": 1362
+        },
+        {
+          "caller": "_buildTechnicianGrid",
+          "callee": "builder",
+          "lineNumber": 1364
+        },
+        {
+          "caller": "_buildTechnicianGrid",
+          "callee": "EdgeInsets",
+          "lineNumber": 1365
+        },
+        {
+          "caller": "_buildTechnicianGrid",
+          "callee": "AlwaysScrollableScrollPhysics",
+          "lineNumber": 1366
+        },
+        {
+          "caller": "_buildTechnicianGrid",
+          "callee": "SliverGridDelegateWithFixedCrossAxisCount",
+          "lineNumber": 1368
+        },
+        {
+          "caller": "_buildTechnicianGrid",
+          "callee": "_buildTechnicianCard",
+          "lineNumber": 1377
+        },
+        {
+          "caller": "_buildTechnicianGrid",
+          "callee": "_onTechnicianSelected",
+          "lineNumber": 1380
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "of",
+          "lineNumber": 1392
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "trim",
+          "lineNumber": 1403
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "Card",
+          "lineNumber": 1406
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "RoundedRectangleBorder",
+          "lineNumber": 1409
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "circular",
+          "lineNumber": 1410
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "BorderSide",
+          "lineNumber": 1411
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "InkWell",
+          "lineNumber": 1416
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "circular",
+          "lineNumber": 1417
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "Padding",
+          "lineNumber": 1419
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "EdgeInsets",
+          "lineNumber": 1420
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "Column",
+          "lineNumber": 1421
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "Row",
+          "lineNumber": 1424
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "CircleAvatar",
+          "lineNumber": 1426
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "NetworkImage",
+          "lineNumber": 1430
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "Icon",
+          "lineNumber": 1436
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "SizedBox",
+          "lineNumber": 1438
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "Expanded",
+          "lineNumber": 1439
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "Text",
+          "lineNumber": 1440
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "of",
+          "lineNumber": 1444
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "Icon",
+          "lineNumber": 1448
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "SizedBox",
+          "lineNumber": 1451
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "Text",
+          "lineNumber": 1453
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "of",
+          "lineNumber": 1457
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "Spacer",
+          "lineNumber": 1461
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "Row",
+          "lineNumber": 1462
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "Icon",
+          "lineNumber": 1464
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "SizedBox",
+          "lineNumber": 1465
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "Text",
+          "lineNumber": 1466
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "bookServiceDistanceAway",
+          "lineNumber": 1467
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "toStringAsFixed",
+          "lineNumber": 1468
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "Row",
+          "lineNumber": 1474
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "Icon",
+          "lineNumber": 1476
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "SizedBox",
+          "lineNumber": 1477
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "Text",
+          "lineNumber": 1478
+        },
+        {
+          "caller": "_buildTechnicianCard",
+          "callee": "toStringAsFixed",
+          "lineNumber": 1478
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "of",
+          "lineNumber": 1489
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "watch",
+          "lineNumber": 1491
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "Text",
+          "lineNumber": 1494
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "Text",
+          "lineNumber": 1502
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "matchesCurrentTech",
+          "lineNumber": 1505
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "_SlotChipsSkeleton",
+          "lineNumber": 1506
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "SizedBox",
+          "lineNumber": 1507
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "matchesCurrentTech",
+          "lineNumber": 1510
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "_buildSlotChips",
+          "lineNumber": 1511
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "SizedBox",
+          "lineNumber": 1512
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "matchesCurrentTech",
+          "lineNumber": 1515
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "Column",
+          "lineNumber": 1516
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "Text",
+          "lineNumber": 1519
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "TextButton",
+          "lineNumber": 1520
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "Text",
+          "lineNumber": 1522
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "SizedBox",
+          "lineNumber": 1526
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "matchesCurrentTech",
+          "lineNumber": 1529
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "ErrorStateWidget",
+          "lineNumber": 1530
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "SizedBox",
+          "lineNumber": 1531
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "SizedBox",
+          "lineNumber": 1533
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "Column",
+          "lineNumber": 1541
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "Row",
+          "lineNumber": 1544
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "Expanded",
+          "lineNumber": 1546
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "Text",
+          "lineNumber": 1547
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "bookServiceAvailableSlotsFor",
+          "lineNumber": 1548
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "of",
+          "lineNumber": 1549
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "icon",
+          "lineNumber": 1552
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "Icon",
+          "lineNumber": 1554
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "Text",
+          "lineNumber": 1555
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "_formatDateForDisplay",
+          "lineNumber": 1555
+        },
+        {
+          "caller": "_buildTechnicianSlotsSection",
+          "callee": "SizedBox",
+          "lineNumber": 1559
+        },
+        {
+          "caller": "_buildSlotChips",
+          "callee": "Text",
+          "lineNumber": 1567
+        },
+        {
+          "caller": "_buildSlotChips",
+          "callee": "of",
+          "lineNumber": 1567
+        },
+        {
+          "caller": "_buildSlotChips",
+          "callee": "SingleChildScrollView",
+          "lineNumber": 1570
+        },
+        {
+          "caller": "_buildSlotChips",
+          "callee": "Row",
+          "lineNumber": 1572
+        },
+        {
+          "caller": "_buildSlotChips",
+          "callee": "map",
+          "lineNumber": 1574
+        },
+        {
+          "caller": "_buildSlotChips",
+          "callee": "_slotLabel",
+          "lineNumber": 1575
+        },
+        {
+          "caller": "_buildSlotChips",
+          "callee": "_isSlotSelected",
+          "lineNumber": 1576
+        },
+        {
+          "caller": "_buildSlotChips",
+          "callee": "Padding",
+          "lineNumber": 1577
+        },
+        {
+          "caller": "_buildSlotChips",
+          "callee": "EdgeInsets",
+          "lineNumber": 1578
+        },
+        {
+          "caller": "_buildSlotChips",
+          "callee": "ChoiceChip",
+          "lineNumber": 1579
+        },
+        {
+          "caller": "_buildSlotChips",
+          "callee": "Text",
+          "lineNumber": 1580
+        },
+        {
+          "caller": "_buildSlotChips",
+          "callee": "_onSlotSelected",
+          "lineNumber": 1584
+        },
+        {
+          "caller": "_buildSlotChips",
+          "callee": "toList",
+          "lineNumber": 1589
+        },
+        {
+          "caller": "_resolveServiceId",
+          "callee": "trim",
+          "lineNumber": 1631
+        },
+        {
+          "caller": "_resolveServiceId",
+          "callee": "trim",
+          "lineNumber": 1635
+        },
+        {
+          "caller": "_resolveServiceName",
+          "callee": "trim",
+          "lineNumber": 1654
+        },
+        {
+          "caller": "_resolveServiceName",
+          "callee": "trim",
+          "lineNumber": 1655
+        },
+        {
+          "caller": "_requestCurrentLocation",
+          "callee": "of",
+          "lineNumber": 1662
+        },
+        {
+          "caller": "_requestCurrentLocation",
+          "callee": "checkPermission",
+          "lineNumber": 1663
+        },
+        {
+          "caller": "_requestCurrentLocation",
+          "callee": "showDialog",
+          "lineNumber": 1666
+        },
+        {
+          "caller": "_requestCurrentLocation",
+          "callee": "AlertDialog",
+          "lineNumber": 1669
+        },
+        {
+          "caller": "_requestCurrentLocation",
+          "callee": "Text",
+          "lineNumber": 1670
+        },
+        {
+          "caller": "_requestCurrentLocation",
+          "callee": "Text",
+          "lineNumber": 1671
+        },
+        {
+          "caller": "_requestCurrentLocation",
+          "callee": "TextButton",
+          "lineNumber": 1673
+        },
+        {
+          "caller": "_requestCurrentLocation",
+          "callee": "pop",
+          "lineNumber": 1674
+        },
+        {
+          "caller": "_requestCurrentLocation",
+          "callee": "Text",
+          "lineNumber": 1675
+        },
+        {
+          "caller": "_requestCurrentLocation",
+          "callee": "TextButton",
+          "lineNumber": 1677
+        },
+        {
+          "caller": "_requestCurrentLocation",
+          "callee": "pop",
+          "lineNumber": 1678
+        },
+        {
+          "caller": "_requestCurrentLocation",
+          "callee": "Text",
+          "lineNumber": 1679
+        },
+        {
+          "caller": "_requestCurrentLocation",
+          "callee": "requestPermission",
+          "lineNumber": 1687
+        },
+        {
+          "caller": "_requestCurrentLocation",
+          "callee": "getCurrentPosition",
+          "lineNumber": 1694
+        },
+        {
+          "caller": "_requestCurrentLocation",
+          "callee": "LatLng",
+          "lineNumber": 1695
+        },
+        {
+          "caller": "_requestCurrentLocation",
+          "callee": "_handleLocationSelection",
+          "lineNumber": 1696
+        },
+        {
+          "caller": "_requestCurrentLocation",
+          "callee": "move",
+          "lineNumber": 1697
+        },
+        {
+          "caller": "build",
+          "callee": "listen",
+          "lineNumber": 1702
+        },
+        {
+          "caller": "build",
+          "callee": "_applyPreselectedCar",
+          "lineNumber": 1706
+        },
+        {
+          "caller": "build",
+          "callee": "read",
+          "lineNumber": 1707
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 1713
+        },
+        {
+          "caller": "build",
+          "callee": "add",
+          "lineNumber": 1730
+        },
+        {
+          "caller": "build",
+          "callee": "OutlinedButton",
+          "lineNumber": 1731
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 1731
+        },
+        {
+          "caller": "build",
+          "callee": "add",
+          "lineNumber": 1736
+        },
+        {
+          "caller": "build",
+          "callee": "ElevatedButton",
+          "lineNumber": 1737
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 1741
+        },
+        {
+          "caller": "build",
+          "callee": "CircularProgressIndicator",
+          "lineNumber": 1744
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 1746
+        },
+        {
+          "caller": "build",
+          "callee": "add",
+          "lineNumber": 1750
+        },
+        {
+          "caller": "build",
+          "callee": "ElevatedButton",
+          "lineNumber": 1751
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 1751
+        },
+        {
+          "caller": "build",
+          "callee": "Scaffold",
+          "lineNumber": 1760
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 1761
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 1764
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 1766
+        },
+        {
+          "caller": "build",
+          "callee": "generate",
+          "lineNumber": 1768
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 1770
+        },
+        {
+          "caller": "build",
+          "callee": "CircleAvatar",
+          "lineNumber": 1773
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 1777
+        },
+        {
+          "caller": "build",
+          "callee": "TextStyle",
+          "lineNumber": 1779
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 1786
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 1787
+        },
+        {
+          "caller": "build",
+          "callee": "TextStyle",
+          "lineNumber": 1789
+        },
+        {
+          "caller": "build",
+          "callee": "Divider",
+          "lineNumber": 1801
+        },
+        {
+          "caller": "build",
+          "callee": "Expanded",
+          "lineNumber": 1804
+        },
+        {
+          "caller": "build",
+          "callee": "AnimatedSwitcher",
+          "lineNumber": 1805
+        },
+        {
+          "caller": "build",
+          "callee": "Duration",
+          "lineNumber": 1806
+        },
+        {
+          "caller": "build",
+          "callee": "FadeTransition",
+          "lineNumber": 1808
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 1809
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 1811
+        },
+        {
+          "caller": "build",
+          "callee": "SafeArea",
+          "lineNumber": 1819
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 1820
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 1821
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 1825
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 12,
+        "functionCount": 49,
+        "classCount": 9
+      }
+    },
+    {
+      "path": "lib/features/book_service/presentation/view_model/service_packages_state.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 27,
+      "nonEmptyLines": 21,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/features/book_service/presentation/view_model/service_packages_view_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 46,
+      "nonEmptyLines": 40,
+      "functions": [
+        {
+          "name": "ServicePackagesViewModel",
+          "startLine": 10,
+          "endLine": 11,
+          "params": [
+            "_getPackagesForVehicleUseCase"
+          ]
+        },
+        {
+          "name": "fetchPackages",
+          "startLine": 13,
+          "endLine": 17,
+          "params": [
+            "customerId",
+            "vehicleId",
+            "category"
+          ]
+        },
+        {
+          "name": "reset",
+          "startLine": 36,
+          "endLine": 36,
+          "params": []
+        },
+        {
+          "name": "_mapErrorToMessage",
+          "startLine": 40,
+          "endLine": 40,
+          "params": [
+            "error"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ServicePackagesViewModel",
+          "startLine": 7,
+          "endLine": 46,
+          "methods": [
+            "ServicePackagesViewModel",
+            "fetchPackages",
+            "reset",
+            "_mapErrorToMessage"
+          ],
+          "properties": [
+            "_getPackagesForVehicleUseCase"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ServicePackagesViewModel",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "fetchPackages",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "reset",
+          "line": 36,
+          "isDefault": false
+        },
+        {
+          "name": "ServicePackagesViewModel",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fetchPackages",
+          "callee": "ServicePackagesLoading",
+          "lineNumber": 18
+        },
+        {
+          "caller": "fetchPackages",
+          "callee": "_getPackagesForVehicleUseCase",
+          "lineNumber": 20
+        },
+        {
+          "caller": "fetchPackages",
+          "callee": "ServicePackagesEmpty",
+          "lineNumber": 26
+        },
+        {
+          "caller": "fetchPackages",
+          "callee": "ServicePackagesLoaded",
+          "lineNumber": 28
+        },
+        {
+          "caller": "fetchPackages",
+          "callee": "_mapErrorToMessage",
+          "lineNumber": 31
+        },
+        {
+          "caller": "fetchPackages",
+          "callee": "ServicePackagesError",
+          "lineNumber": 32
+        },
+        {
+          "caller": "reset",
+          "callee": "ServicePackagesInitial",
+          "lineNumber": 37
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 4,
+        "functionCount": 4,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/book_service/provider/book_service_provider.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 50,
+      "nonEmptyLines": 43,
+      "metrics": {
+        "importCount": 10,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/features/chat/data/data_source/chat_remote_data_source.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 55,
+      "nonEmptyLines": 47,
+      "functions": [
+        {
+          "name": "ChatRemoteDataSource",
+          "startLine": 7,
+          "endLine": 7,
+          "params": [
+            "firestore"
+          ]
+        },
+        {
+          "name": "_messagesCollection",
+          "startLine": 11,
+          "endLine": 11,
+          "params": [
+            "bookingId"
+          ]
+        },
+        {
+          "name": "observeMessages",
+          "startLine": 19,
+          "endLine": 19,
+          "params": [
+            "bookingId"
+          ]
+        },
+        {
+          "name": "sendMessage",
+          "startLine": 32,
+          "endLine": 38,
+          "params": [
+            "bookingId",
+            "text",
+            "senderId",
+            "senderTypeValue",
+            "senderName"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ChatRemoteDataSource",
+          "startLine": 6,
+          "endLine": 55,
+          "methods": [
+            "ChatRemoteDataSource",
+            "_messagesCollection",
+            "observeMessages",
+            "sendMessage"
+          ],
+          "properties": [
+            "firestore"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ChatRemoteDataSource",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "observeMessages",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "sendMessage",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "ChatRemoteDataSource",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "_messagesCollection",
+          "callee": "collection",
+          "lineNumber": 13
+        },
+        {
+          "caller": "_messagesCollection",
+          "callee": "doc",
+          "lineNumber": 14
+        },
+        {
+          "caller": "_messagesCollection",
+          "callee": "collection",
+          "lineNumber": 15
+        },
+        {
+          "caller": "observeMessages",
+          "callee": "_messagesCollection",
+          "lineNumber": 20
+        },
+        {
+          "caller": "observeMessages",
+          "callee": "orderBy",
+          "lineNumber": 22
+        },
+        {
+          "caller": "observeMessages",
+          "callee": "snapshots",
+          "lineNumber": 23
+        },
+        {
+          "caller": "observeMessages",
+          "callee": "map",
+          "lineNumber": 24
+        },
+        {
+          "caller": "observeMessages",
+          "callee": "map",
+          "lineNumber": 26
+        },
+        {
+          "caller": "observeMessages",
+          "callee": "toList",
+          "lineNumber": 27
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "trim",
+          "lineNumber": 39
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "_messagesCollection",
+          "lineNumber": 42
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "doc",
+          "lineNumber": 43
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "set",
+          "lineNumber": 45
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "serverTimestamp",
+          "lineNumber": 52
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 4,
+        "functionCount": 4,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/chat/data/data_source/i_chat_remote_data_source.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 11,
+      "functions": [
+        {
+          "name": "observeMessages",
+          "startLine": 4,
+          "endLine": 4,
+          "params": [
+            "bookingId"
+          ]
+        },
+        {
+          "name": "sendMessage",
+          "startLine": 6,
+          "endLine": 12,
+          "params": [
+            "bookingId",
+            "text",
+            "senderId",
+            "senderTypeValue",
+            "senderName"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "IChatRemoteDataSource",
+          "startLine": 3,
+          "endLine": 13,
+          "methods": [
+            "observeMessages",
+            "sendMessage"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "observeMessages",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "sendMessage",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "IChatRemoteDataSource",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/chat/data/model/chat_message_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 56,
+      "nonEmptyLines": 51,
+      "functions": [
+        {
+          "name": "ChatMessageModel",
+          "startLine": 7,
+          "endLine": 15,
+          "params": [
+            "id",
+            "bookingId",
+            "senderId",
+            "senderType",
+            "senderName",
+            "text",
+            "createdAt"
+          ]
+        },
+        {
+          "name": "ChatMessageModel.fromDocument",
+          "startLine": 17,
+          "endLine": 19,
+          "params": [
+            "doc"
+          ]
+        },
+        {
+          "name": "toJson",
+          "startLine": 45,
+          "endLine": 45,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "ChatMessageModel",
+          "startLine": 6,
+          "endLine": 56,
+          "methods": [
+            "ChatMessageModel",
+            "ChatMessageModel.fromDocument",
+            "toJson"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ChatMessageModel",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "ChatMessageModel.fromDocument",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "toJson",
+          "line": 45,
+          "isDefault": false
+        },
+        {
+          "name": "ChatMessageModel",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ChatMessageModel.fromDocument",
+          "callee": "data",
+          "lineNumber": 20
+        },
+        {
+          "caller": "ChatMessageModel.fromDocument",
+          "callee": "toDate",
+          "lineNumber": 24
+        },
+        {
+          "caller": "ChatMessageModel.fromDocument",
+          "callee": "fromMillisecondsSinceEpoch",
+          "lineNumber": 26
+        },
+        {
+          "caller": "ChatMessageModel.fromDocument",
+          "callee": "now",
+          "lineNumber": 28
+        },
+        {
+          "caller": "ChatMessageModel.fromDocument",
+          "callee": "ChatMessageModel",
+          "lineNumber": 31
+        },
+        {
+          "caller": "ChatMessageModel.fromDocument",
+          "callee": "toString",
+          "lineNumber": 32
+        },
+        {
+          "caller": "ChatMessageModel.fromDocument",
+          "callee": "toString",
+          "lineNumber": 33
+        },
+        {
+          "caller": "ChatMessageModel.fromDocument",
+          "callee": "toString",
+          "lineNumber": 34
+        },
+        {
+          "caller": "ChatMessageModel.fromDocument",
+          "callee": "fromValue",
+          "lineNumber": 35
+        },
+        {
+          "caller": "ChatMessageModel.fromDocument",
+          "callee": "tryParse",
+          "lineNumber": 36
+        },
+        {
+          "caller": "ChatMessageModel.fromDocument",
+          "callee": "toString",
+          "lineNumber": 36
+        },
+        {
+          "caller": "ChatMessageModel.fromDocument",
+          "callee": "toString",
+          "lineNumber": 39
+        },
+        {
+          "caller": "ChatMessageModel.fromDocument",
+          "callee": "toString",
+          "lineNumber": 40
+        },
+        {
+          "caller": "toJson",
+          "callee": "fromDate",
+          "lineNumber": 53
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 4,
+        "functionCount": 3,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/chat/data/repository/chat_repository.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 27,
+      "functions": [
+        {
+          "name": "ChatRepositoryImpl",
+          "startLine": 8,
+          "endLine": 8,
+          "params": [
+            "remoteDataSource"
+          ]
+        },
+        {
+          "name": "observeMessages",
+          "startLine": 13,
+          "endLine": 13,
+          "params": [
+            "bookingId"
+          ]
+        },
+        {
+          "name": "sendMessage",
+          "startLine": 18,
+          "endLine": 22,
+          "params": [
+            "bookingId",
+            "text",
+            "sender"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ChatRepositoryImpl",
+          "startLine": 7,
+          "endLine": 31,
+          "methods": [
+            "ChatRepositoryImpl",
+            "observeMessages",
+            "sendMessage"
+          ],
+          "properties": [
+            "remoteDataSource"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ChatRepositoryImpl",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "observeMessages",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "sendMessage",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "ChatRepositoryImpl",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "observeMessages",
+          "callee": "observeMessages",
+          "lineNumber": 14
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "sendMessage",
+          "lineNumber": 23
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 4,
+        "functionCount": 3,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/chat/domain/entity/chat_message.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 23,
+      "nonEmptyLines": 20,
+      "functions": [
+        {
+          "name": "isFromCustomer",
+          "startLine": 22,
+          "endLine": 22,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "ChatMessage",
+          "startLine": 3,
+          "endLine": 23,
+          "methods": [
+            "isFromCustomer"
+          ],
+          "properties": [
+            "id",
+            "bookingId",
+            "senderId",
+            "senderType",
+            "senderName",
+            "text",
+            "createdAt"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "isFromCustomer",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "ChatMessage",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/chat/domain/entity/chat_user.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 27,
+      "nonEmptyLines": 22,
+      "functions": [
+        {
+          "name": "isValid",
+          "startLine": 14,
+          "endLine": 14,
+          "params": []
+        },
+        {
+          "name": "hashCode",
+          "startLine": 26,
+          "endLine": 26,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "ChatUser",
+          "startLine": 3,
+          "endLine": 27,
+          "methods": [
+            "isValid",
+            "hashCode"
+          ],
+          "properties": [
+            "id",
+            "userType",
+            "displayName"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "isValid",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "hashCode",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "ChatUser",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "isValid",
+          "callee": "trim",
+          "lineNumber": 14
+        },
+        {
+          "caller": "hashCode",
+          "callee": "hash",
+          "lineNumber": 26
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/chat/domain/repository/i_chat_repository.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 12,
+      "nonEmptyLines": 10,
+      "functions": [
+        {
+          "name": "observeMessages",
+          "startLine": 5,
+          "endLine": 5,
+          "params": [
+            "bookingId"
+          ]
+        },
+        {
+          "name": "sendMessage",
+          "startLine": 7,
+          "endLine": 11,
+          "params": [
+            "bookingId",
+            "text",
+            "sender"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "IChatRepository",
+          "startLine": 4,
+          "endLine": 12,
+          "methods": [
+            "observeMessages",
+            "sendMessage"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "observeMessages",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "sendMessage",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "IChatRepository",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/chat/domain/use_case/observe_chat_messages_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 12,
+      "nonEmptyLines": 9,
+      "functions": [
+        {
+          "name": "call",
+          "startLine": 9,
+          "endLine": 9,
+          "params": [
+            "bookingId"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ObserveChatMessagesUseCase",
+          "startLine": 4,
+          "endLine": 12,
+          "methods": [
+            "call"
+          ],
+          "properties": [
+            "repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "call",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "ObserveChatMessagesUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "observeMessages",
+          "lineNumber": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/chat/domain/use_case/send_chat_message_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 17,
+      "functions": [
+        {
+          "name": "call",
+          "startLine": 9,
+          "endLine": 13,
+          "params": [
+            "bookingId",
+            "text",
+            "sender"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "SendChatMessageUseCase",
+          "startLine": 4,
+          "endLine": 20,
+          "methods": [
+            "call"
+          ],
+          "properties": [
+            "repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "call",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "SendChatMessageUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "sendMessage",
+          "lineNumber": 14
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/chat/presentation/screen/chat_screen.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 436,
+      "nonEmptyLines": 406,
+      "functions": [
+        {
+          "name": "createState",
+          "startLine": 20,
+          "endLine": 20,
+          "params": []
+        },
+        {
+          "name": "dispose",
+          "startLine": 29,
+          "endLine": 29,
+          "params": []
+        },
+        {
+          "name": "_sessionFor",
+          "startLine": 35,
+          "endLine": 35,
+          "params": [
+            "authState",
+            "bookingId"
+          ]
+        },
+        {
+          "name": "_userForChat",
+          "startLine": 46,
+          "endLine": 46,
+          "params": [
+            "user"
+          ]
+        },
+        {
+          "name": "_scrollToBottom",
+          "startLine": 67,
+          "endLine": 67,
+          "params": []
+        },
+        {
+          "name": "_handleSend",
+          "startLine": 78,
+          "endLine": 78,
+          "params": [
+            "session"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 88,
+          "endLine": 88,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 211,
+          "endLine": 211,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 248,
+          "endLine": 248,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 281,
+          "endLine": 281,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 312,
+          "endLine": 312,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 390,
+          "endLine": 390,
+          "params": [
+            "context"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ChatScreen",
+          "startLine": 14,
+          "endLine": 21,
+          "methods": [
+            "createState"
+          ],
+          "properties": [
+            "bookingId"
+          ]
+        },
+        {
+          "name": "_ChatScreenState",
+          "startLine": 23,
+          "endLine": 203,
+          "methods": [
+            "dispose",
+            "_sessionFor",
+            "_userForChat",
+            "_scrollToBottom",
+            "_handleSend",
+            "build"
+          ],
+          "properties": [
+            "_messageController",
+            "_scrollController",
+            "_lastMessageCount"
+          ]
+        },
+        {
+          "name": "_BookingPill",
+          "startLine": 205,
+          "endLine": 239,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "bookingId"
+          ]
+        },
+        {
+          "name": "_ChatError",
+          "startLine": 241,
+          "endLine": 273,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "message",
+            "onRetry"
+          ]
+        },
+        {
+          "name": "_EmptyChatPlaceholder",
+          "startLine": 275,
+          "endLine": 303,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "message"
+          ]
+        },
+        {
+          "name": "_MessageBubble",
+          "startLine": 305,
+          "endLine": 372,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "message",
+            "isMine"
+          ]
+        },
+        {
+          "name": "_MessageInput",
+          "startLine": 374,
+          "endLine": 436,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "controller",
+            "isSending",
+            "hintText",
+            "sendLabel",
+            "onSend"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "createState",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "ChatScreen",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "dispose",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 88,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 211,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 248,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 281,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 312,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 390,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "createState",
+          "callee": "_ChatScreenState",
+          "lineNumber": 20
+        },
+        {
+          "caller": "dispose",
+          "callee": "dispose",
+          "lineNumber": 30
+        },
+        {
+          "caller": "dispose",
+          "callee": "dispose",
+          "lineNumber": 31
+        },
+        {
+          "caller": "_sessionFor",
+          "callee": "_userForChat",
+          "lineNumber": 38
+        },
+        {
+          "caller": "_sessionFor",
+          "callee": "ChatSession",
+          "lineNumber": 40
+        },
+        {
+          "caller": "_userForChat",
+          "callee": "trim",
+          "lineNumber": 48
+        },
+        {
+          "caller": "_userForChat",
+          "callee": "trim",
+          "lineNumber": 48
+        },
+        {
+          "caller": "_userForChat",
+          "callee": "StringBuffer",
+          "lineNumber": 49
+        },
+        {
+          "caller": "_userForChat",
+          "callee": "write",
+          "lineNumber": 52
+        },
+        {
+          "caller": "_userForChat",
+          "callee": "write",
+          "lineNumber": 54
+        },
+        {
+          "caller": "_userForChat",
+          "callee": "write",
+          "lineNumber": 55
+        },
+        {
+          "caller": "_userForChat",
+          "callee": "toString",
+          "lineNumber": 59
+        },
+        {
+          "caller": "_userForChat",
+          "callee": "trim",
+          "lineNumber": 59
+        },
+        {
+          "caller": "_userForChat",
+          "callee": "ChatUser",
+          "lineNumber": 60
+        },
+        {
+          "caller": "_scrollToBottom",
+          "callee": "addPostFrameCallback",
+          "lineNumber": 68
+        },
+        {
+          "caller": "_scrollToBottom",
+          "callee": "animateTo",
+          "lineNumber": 70
+        },
+        {
+          "caller": "_scrollToBottom",
+          "callee": "Duration",
+          "lineNumber": 72
+        },
+        {
+          "caller": "_handleSend",
+          "callee": "trim",
+          "lineNumber": 79
+        },
+        {
+          "caller": "_handleSend",
+          "callee": "read",
+          "lineNumber": 81
+        },
+        {
+          "caller": "_handleSend",
+          "callee": "chatControllerProvider",
+          "lineNumber": 81
+        },
+        {
+          "caller": "_handleSend",
+          "callee": "sendMessage",
+          "lineNumber": 81
+        },
+        {
+          "caller": "_handleSend",
+          "callee": "clear",
+          "lineNumber": 83
+        },
+        {
+          "caller": "_handleSend",
+          "callee": "_scrollToBottom",
+          "lineNumber": 84
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 89
+        },
+        {
+          "caller": "build",
+          "callee": "watch",
+          "lineNumber": 91
+        },
+        {
+          "caller": "build",
+          "callee": "Scaffold",
+          "lineNumber": 93
+        },
+        {
+          "caller": "build",
+          "callee": "InternalAppBar",
+          "lineNumber": 94
+        },
+        {
+          "caller": "build",
+          "callee": "Center",
+          "lineNumber": 95
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 96
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 97
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 98
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 101
+        },
+        {
+          "caller": "build",
+          "callee": "_sessionFor",
+          "lineNumber": 108
+        },
+        {
+          "caller": "build",
+          "callee": "Scaffold",
+          "lineNumber": 110
+        },
+        {
+          "caller": "build",
+          "callee": "InternalAppBar",
+          "lineNumber": 111
+        },
+        {
+          "caller": "build",
+          "callee": "Center",
+          "lineNumber": 112
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 113
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 114
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 115
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 118
+        },
+        {
+          "caller": "build",
+          "callee": "watch",
+          "lineNumber": 125
+        },
+        {
+          "caller": "build",
+          "callee": "chatControllerProvider",
+          "lineNumber": 125
+        },
+        {
+          "caller": "build",
+          "callee": "Scaffold",
+          "lineNumber": 128
+        },
+        {
+          "caller": "build",
+          "callee": "InternalAppBar",
+          "lineNumber": 129
+        },
+        {
+          "caller": "build",
+          "callee": "SafeArea",
+          "lineNumber": 130
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 131
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 133
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 134
+        },
+        {
+          "caller": "build",
+          "callee": "_BookingPill",
+          "lineNumber": 135
+        },
+        {
+          "caller": "build",
+          "callee": "Expanded",
+          "lineNumber": 137
+        },
+        {
+          "caller": "build",
+          "callee": "when",
+          "lineNumber": 138
+        },
+        {
+          "caller": "build",
+          "callee": "_scrollToBottom",
+          "lineNumber": 142
+        },
+        {
+          "caller": "build",
+          "callee": "_EmptyChatPlaceholder",
+          "lineNumber": 145
+        },
+        {
+          "caller": "build",
+          "callee": "builder",
+          "lineNumber": 147
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 149
+        },
+        {
+          "caller": "build",
+          "callee": "_MessageBubble",
+          "lineNumber": 154
+        },
+        {
+          "caller": "build",
+          "callee": "Center",
+          "lineNumber": 161
+        },
+        {
+          "caller": "build",
+          "callee": "CircularProgressIndicator",
+          "lineNumber": 161
+        },
+        {
+          "caller": "build",
+          "callee": "_ChatError",
+          "lineNumber": 162
+        },
+        {
+          "caller": "build",
+          "callee": "refresh",
+          "lineNumber": 165
+        },
+        {
+          "caller": "build",
+          "callee": "chatControllerProvider",
+          "lineNumber": 165
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 171
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 172
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 173
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 175
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 176
+        },
+        {
+          "caller": "build",
+          "callee": "Expanded",
+          "lineNumber": 177
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 178
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 180
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 188
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 189
+        },
+        {
+          "caller": "build",
+          "callee": "_MessageInput",
+          "lineNumber": 190
+        },
+        {
+          "caller": "build",
+          "callee": "_handleSend",
+          "lineNumber": 195
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 212
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 213
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 214
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 215
+        },
+        {
+          "caller": "build",
+          "callee": "withOpacity",
+          "lineNumber": 216
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 217
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 219
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 222
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 227
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 228
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 249
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 250
+        },
+        {
+          "caller": "build",
+          "callee": "Center",
+          "lineNumber": 251
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 252
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 253
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 254
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 257
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 262
+        },
+        {
+          "caller": "build",
+          "callee": "icon",
+          "lineNumber": 263
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 265
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 266
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 282
+        },
+        {
+          "caller": "build",
+          "callee": "Center",
+          "lineNumber": 283
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 284
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 285
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 286
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 289
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 290
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 291
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 313
+        },
+        {
+          "caller": "build",
+          "callee": "DateFormat",
+          "lineNumber": 318
+        },
+        {
+          "caller": "build",
+          "callee": "format",
+          "lineNumber": 318
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 320
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 321
+        },
+        {
+          "caller": "build",
+          "callee": "Align",
+          "lineNumber": 322
+        },
+        {
+          "caller": "build",
+          "callee": "ConstrainedBox",
+          "lineNumber": 324
+        },
+        {
+          "caller": "build",
+          "callee": "BoxConstraints",
+          "lineNumber": 325
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 326
+        },
+        {
+          "caller": "build",
+          "callee": "DecoratedBox",
+          "lineNumber": 328
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 329
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 331
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 333
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 334
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 335
+        },
+        {
+          "caller": "build",
+          "callee": "trim",
+          "lineNumber": 340
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 341
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 342
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 343
+        },
+        {
+          "caller": "build",
+          "callee": "withOpacity",
+          "lineNumber": 346
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 351
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 357
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 358
+        },
+        {
+          "caller": "build",
+          "callee": "withOpacity",
+          "lineNumber": 361
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 391
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 392
+        },
+        {
+          "caller": "build",
+          "callee": "Expanded",
+          "lineNumber": 394
+        },
+        {
+          "caller": "build",
+          "callee": "TextField",
+          "lineNumber": 395
+        },
+        {
+          "caller": "build",
+          "callee": "onSend",
+          "lineNumber": 398
+        },
+        {
+          "caller": "build",
+          "callee": "InputDecoration",
+          "lineNumber": 401
+        },
+        {
+          "caller": "build",
+          "callee": "withOpacity",
+          "lineNumber": 404
+        },
+        {
+          "caller": "build",
+          "callee": "OutlineInputBorder",
+          "lineNumber": 405
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 406
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 409
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 416
+        },
+        {
+          "caller": "build",
+          "callee": "icon",
+          "lineNumber": 417
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 420
+        },
+        {
+          "caller": "build",
+          "callee": "CircularProgressIndicator",
+          "lineNumber": 423
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 427
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 428
+        },
+        {
+          "caller": "build",
+          "callee": "styleFrom",
+          "lineNumber": 429
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 430
+        }
+      ],
+      "metrics": {
+        "importCount": 8,
+        "exportCount": 9,
+        "functionCount": 12,
+        "classCount": 7
+      }
+    },
+    {
+      "path": "lib/features/chat/presentation/view_model/chat_state.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 26,
+      "functions": [
+        {
+          "name": "ChatState.initial",
+          "startLine": 16,
+          "endLine": 16,
+          "params": []
+        },
+        {
+          "name": "copyWith",
+          "startLine": 19,
+          "endLine": 24,
+          "params": [
+            "messages",
+            "isSending",
+            "errorMessage",
+            "clearError"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ChatState",
+          "startLine": 5,
+          "endLine": 31,
+          "methods": [
+            "ChatState.initial",
+            "copyWith"
+          ],
+          "properties": [
+            "messages",
+            "isSending",
+            "errorMessage"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ChatState.initial",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "copyWith",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "ChatState",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ChatState.initial",
+          "callee": "ChatState",
+          "lineNumber": 17
+        },
+        {
+          "caller": "ChatState.initial",
+          "callee": "loading",
+          "lineNumber": 17
+        },
+        {
+          "caller": "copyWith",
+          "callee": "ChatState",
+          "lineNumber": 25
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/chat/presentation/view_model/chat_view_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 94,
+      "nonEmptyLines": 80,
+      "functions": [
+        {
+          "name": "hashCode",
+          "startLine": 30,
+          "endLine": 30,
+          "params": []
+        },
+        {
+          "name": "_listenToMessages",
+          "startLine": 50,
+          "endLine": 50,
+          "params": []
+        },
+        {
+          "name": "sendMessage",
+          "startLine": 65,
+          "endLine": 65,
+          "params": [
+            "text"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ChatSession",
+          "startLine": 12,
+          "endLine": 31,
+          "methods": [
+            "hashCode"
+          ],
+          "properties": [
+            "bookingId",
+            "user"
+          ]
+        },
+        {
+          "name": "ChatViewModel",
+          "startLine": 33,
+          "endLine": 82,
+          "methods": [
+            "_listenToMessages",
+            "sendMessage"
+          ],
+          "properties": [
+            "ref",
+            "session",
+            "observeChatMessagesUseCase",
+            "sendChatMessageUseCase",
+            "_subscription"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "hashCode",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "ChatSession",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "sendMessage",
+          "line": 65,
+          "isDefault": false
+        },
+        {
+          "name": "ChatViewModel",
+          "line": 33,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "hashCode",
+          "callee": "hash",
+          "lineNumber": 30
+        },
+        {
+          "caller": "ChatViewModel",
+          "callee": "_listenToMessages",
+          "lineNumber": 40
+        },
+        {
+          "caller": "_listenToMessages",
+          "callee": "observeChatMessagesUseCase",
+          "lineNumber": 51
+        },
+        {
+          "caller": "_listenToMessages",
+          "callee": "listen",
+          "lineNumber": 51
+        },
+        {
+          "caller": "_listenToMessages",
+          "callee": "copyWith",
+          "lineNumber": 53
+        },
+        {
+          "caller": "_listenToMessages",
+          "callee": "data",
+          "lineNumber": 53
+        },
+        {
+          "caller": "_listenToMessages",
+          "callee": "copyWith",
+          "lineNumber": 56
+        },
+        {
+          "caller": "_listenToMessages",
+          "callee": "error",
+          "lineNumber": 56
+        },
+        {
+          "caller": "_listenToMessages",
+          "callee": "onDispose",
+          "lineNumber": 60
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "trim",
+          "lineNumber": 66
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "copyWith",
+          "lineNumber": 69
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "sendChatMessageUseCase",
+          "lineNumber": 71
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "copyWith",
+          "lineNumber": 77
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "toString",
+          "lineNumber": 77
+        },
+        {
+          "caller": "sendMessage",
+          "callee": "copyWith",
+          "lineNumber": 79
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 4,
+        "functionCount": 3,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "lib/features/chat/provider/chat_provider.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 25,
+      "nonEmptyLines": 20,
+      "metrics": {
+        "importCount": 7,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/features/contact_us/data/data_source/contact_us_remote_data_source.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 27,
+      "nonEmptyLines": 24,
+      "functions": [
+        {
+          "name": "sendContactUsMessage",
+          "startLine": 9,
+          "endLine": 9,
+          "params": [
+            "name",
+            "email",
+            "subject",
+            "message"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ContactUsRemoteDataSource",
+          "startLine": 7,
+          "endLine": 27,
+          "methods": [
+            "sendContactUsMessage"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "sendContactUsMessage",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "ContactUsRemoteDataSource",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "sendContactUsMessage",
+          "callee": "collection",
+          "lineNumber": 12
+        },
+        {
+          "caller": "sendContactUsMessage",
+          "callee": "doc",
+          "lineNumber": 12
+        },
+        {
+          "caller": "sendContactUsMessage",
+          "callee": "ContactUsModel",
+          "lineNumber": 13
+        },
+        {
+          "caller": "sendContactUsMessage",
+          "callee": "set",
+          "lineNumber": 19
+        },
+        {
+          "caller": "sendContactUsMessage",
+          "callee": "toJson",
+          "lineNumber": 19
+        },
+        {
+          "caller": "sendContactUsMessage",
+          "callee": "debugPrint",
+          "lineNumber": 22
+        },
+        {
+          "caller": "sendContactUsMessage",
+          "callee": "toString",
+          "lineNumber": 22
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/contact_us/data/data_source/i_contact_us_remote_data_source.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 11,
+      "functions": [
+        {
+          "name": "sendContactUsMessage",
+          "startLine": 5,
+          "endLine": 10,
+          "params": [
+            "name",
+            "email",
+            "subject",
+            "message"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "IContactUsRemoteDataSource",
+          "startLine": 1,
+          "endLine": 11,
+          "methods": [
+            "sendContactUsMessage"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "sendContactUsMessage",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "IContactUsRemoteDataSource",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/contact_us/data/model/contact_us_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 30,
+      "nonEmptyLines": 25,
+      "functions": [
+        {
+          "name": "ContactUsModel",
+          "startLine": 9,
+          "endLine": 14,
+          "params": [
+            "name",
+            "email",
+            "mobileNo",
+            "comment"
+          ]
+        },
+        {
+          "name": "toJson",
+          "startLine": 17,
+          "endLine": 17,
+          "params": []
+        },
+        {
+          "name": "toEntity",
+          "startLine": 24,
+          "endLine": 24,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "ContactUsModel",
+          "startLine": 3,
+          "endLine": 30,
+          "methods": [
+            "ContactUsModel",
+            "toJson",
+            "toEntity"
+          ],
+          "properties": [
+            "name",
+            "email",
+            "mobileNo",
+            "comment"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ContactUsModel",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "toJson",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "toEntity",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "ContactUsModel",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "toEntity",
+          "callee": "ContactUs",
+          "lineNumber": 24
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 3,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/contact_us/data/repository/contact_us_repository.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 24,
+      "nonEmptyLines": 20,
+      "functions": [
+        {
+          "name": "ContactUsRepository",
+          "startLine": 8,
+          "endLine": 8,
+          "params": [
+            "remoteDataSource"
+          ]
+        },
+        {
+          "name": "sendContactUsMessage",
+          "startLine": 11,
+          "endLine": 16,
+          "params": [
+            "name",
+            "email",
+            "phoneNumber",
+            "message"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ContactUsRepository",
+          "startLine": 5,
+          "endLine": 24,
+          "methods": [
+            "ContactUsRepository",
+            "sendContactUsMessage"
+          ],
+          "properties": [
+            "remoteDataSource"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ContactUsRepository",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "sendContactUsMessage",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "ContactUsRepository",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "sendContactUsMessage",
+          "callee": "sendContactUsMessage",
+          "lineNumber": 17
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    }
+  ]
+}

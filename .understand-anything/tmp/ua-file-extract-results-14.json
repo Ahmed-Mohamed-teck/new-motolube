@@ -1,0 +1,6654 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "lib/features/user_cars/data/model/manufacture_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 23,
+      "nonEmptyLines": 16,
+      "functions": [
+        {
+          "name": "ManufacturesModel.fromJson",
+          "startLine": 6,
+          "endLine": 12,
+          "params": [
+            "json"
+          ]
+        },
+        {
+          "name": "ManufactureModel",
+          "startLine": 22,
+          "endLine": 22,
+          "params": [
+            "id",
+            "name"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ManufacturesModel",
+          "startLine": 3,
+          "endLine": 13,
+          "methods": [
+            "ManufacturesModel.fromJson"
+          ],
+          "properties": [
+            "manufactures"
+          ]
+        },
+        {
+          "name": "ManufactureModel",
+          "startLine": 18,
+          "endLine": 23,
+          "methods": [
+            "ManufactureModel"
+          ],
+          "properties": [
+            "id",
+            "name"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ManufacturesModel.fromJson",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "ManufacturesModel",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "ManufactureModel",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "ManufactureModel",
+          "line": 18,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 4,
+        "functionCount": 2,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "lib/features/user_cars/data/repository/user_car_repository.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 45,
+      "nonEmptyLines": 35,
+      "functions": [
+        {
+          "name": "UserCarRepository",
+          "startLine": 12,
+          "endLine": 12,
+          "params": [
+            "_remoteDataSource"
+          ]
+        },
+        {
+          "name": "addCar",
+          "startLine": 15,
+          "endLine": 15,
+          "params": [
+            "car"
+          ]
+        },
+        {
+          "name": "updateCar",
+          "startLine": 21,
+          "endLine": 21,
+          "params": [
+            "car"
+          ]
+        },
+        {
+          "name": "getUserCars",
+          "startLine": 27,
+          "endLine": 27,
+          "params": [
+            "customerId"
+          ]
+        },
+        {
+          "name": "getManufacturers",
+          "startLine": 35,
+          "endLine": 35,
+          "params": []
+        },
+        {
+          "name": "getCarBrands",
+          "startLine": 40,
+          "endLine": 40,
+          "params": [
+            "carModelId"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "UserCarRepository",
+          "startLine": 9,
+          "endLine": 45,
+          "methods": [
+            "UserCarRepository",
+            "addCar",
+            "updateCar",
+            "getUserCars",
+            "getManufacturers",
+            "getCarBrands"
+          ],
+          "properties": [
+            "_remoteDataSource"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "UserCarRepository",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "addCar",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "updateCar",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "getUserCars",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "getManufacturers",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "getCarBrands",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "UserCarRepository",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "addCar",
+          "callee": "fromEntity",
+          "lineNumber": 16
+        },
+        {
+          "caller": "addCar",
+          "callee": "addCar",
+          "lineNumber": 17
+        },
+        {
+          "caller": "updateCar",
+          "callee": "fromEntity",
+          "lineNumber": 22
+        },
+        {
+          "caller": "updateCar",
+          "callee": "updateCar",
+          "lineNumber": 23
+        },
+        {
+          "caller": "getUserCars",
+          "callee": "getCars",
+          "lineNumber": 30
+        },
+        {
+          "caller": "getUserCars",
+          "callee": "map",
+          "lineNumber": 31
+        },
+        {
+          "caller": "getUserCars",
+          "callee": "fromEntity",
+          "lineNumber": 31
+        },
+        {
+          "caller": "getUserCars",
+          "callee": "toList",
+          "lineNumber": 31
+        },
+        {
+          "caller": "getManufacturers",
+          "callee": "getManufacturers",
+          "lineNumber": 36
+        },
+        {
+          "caller": "getCarBrands",
+          "callee": "getCarModels",
+          "lineNumber": 41
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 7,
+        "functionCount": 6,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/user_cars/domain/entity/car_brand_entity.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 6,
+      "nonEmptyLines": 5,
+      "functions": [
+        {
+          "name": "CarBrandEntity",
+          "startLine": 5,
+          "endLine": 5,
+          "params": [
+            "id",
+            "name"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "CarBrandEntity",
+          "startLine": 1,
+          "endLine": 6,
+          "methods": [
+            "CarBrandEntity"
+          ],
+          "properties": [
+            "id",
+            "name"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CarBrandEntity",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "CarBrandEntity",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/user_cars/domain/entity/car_entity.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 33,
+      "nonEmptyLines": 23,
+      "functions": [
+        {
+          "name": "CarEntity",
+          "startLine": 20,
+          "endLine": 30,
+          "params": [
+            "vehicleId",
+            "mileage",
+            "arabicPlate",
+            "englishPlate",
+            "carModel",
+            "manufacturer",
+            "modelYear",
+            "carImages",
+            "vinNumber"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "CarEntity",
+          "startLine": 7,
+          "endLine": 33,
+          "methods": [
+            "CarEntity"
+          ],
+          "properties": [
+            "vehicleId",
+            "mileage",
+            "arabicPlate",
+            "englishPlate",
+            "carModel",
+            "manufacturer",
+            "modelYear",
+            "carImages",
+            "vinNumber"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CarEntity",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "CarEntity",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/user_cars/domain/entity/manufacture_entity.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 6,
+      "nonEmptyLines": 5,
+      "functions": [
+        {
+          "name": "ManufactureEntity",
+          "startLine": 5,
+          "endLine": 5,
+          "params": [
+            "id",
+            "name"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ManufactureEntity",
+          "startLine": 1,
+          "endLine": 6,
+          "methods": [
+            "ManufactureEntity"
+          ],
+          "properties": [
+            "id",
+            "name"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ManufactureEntity",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "ManufactureEntity",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/user_cars/domain/repository/i_user_car_repository.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 10,
+      "functions": [
+        {
+          "name": "addCar",
+          "startLine": 8,
+          "endLine": 8,
+          "params": [
+            "car"
+          ]
+        },
+        {
+          "name": "updateCar",
+          "startLine": 9,
+          "endLine": 9,
+          "params": [
+            "car"
+          ]
+        },
+        {
+          "name": "getUserCars",
+          "startLine": 10,
+          "endLine": 10,
+          "params": [
+            "customerId"
+          ]
+        },
+        {
+          "name": "getManufacturers",
+          "startLine": 11,
+          "endLine": 11,
+          "params": []
+        },
+        {
+          "name": "getCarBrands",
+          "startLine": 12,
+          "endLine": 12,
+          "params": [
+            "carModelId"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "IUserCarRepository",
+          "startLine": 7,
+          "endLine": 13,
+          "methods": [
+            "addCar",
+            "updateCar",
+            "getUserCars",
+            "getManufacturers",
+            "getCarBrands"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "addCar",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "updateCar",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "getUserCars",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "getManufacturers",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "getCarBrands",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "IUserCarRepository",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 6,
+        "functionCount": 5,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/user_cars/domain/use_case/add_user_car_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 9,
+      "functions": [
+        {
+          "name": "AddUserCarUseCase",
+          "startLine": 6,
+          "endLine": 6,
+          "params": [
+            "_repository"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 8,
+          "endLine": 8,
+          "params": [
+            "car"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "AddUserCarUseCase",
+          "startLine": 4,
+          "endLine": 11,
+          "methods": [
+            "AddUserCarUseCase",
+            "call"
+          ],
+          "properties": [
+            "_repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AddUserCarUseCase",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "call",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "AddUserCarUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "addCar",
+          "lineNumber": 9
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/user_cars/domain/use_case/get_car_brands_model_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 12,
+      "nonEmptyLines": 10,
+      "functions": [
+        {
+          "name": "GetCarBrandsModelUseCase",
+          "startLine": 8,
+          "endLine": 8,
+          "params": [
+            "_repository"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 9,
+          "endLine": 9,
+          "params": [
+            "carModelId"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "GetCarBrandsModelUseCase",
+          "startLine": 6,
+          "endLine": 12,
+          "methods": [
+            "GetCarBrandsModelUseCase",
+            "call"
+          ],
+          "properties": [
+            "_repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "GetCarBrandsModelUseCase",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "call",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "GetCarBrandsModelUseCase",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "getCarBrands",
+          "lineNumber": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/user_cars/domain/use_case/get_manufacturers_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 9,
+      "functions": [
+        {
+          "name": "GetManufacturersUseCase",
+          "startLine": 6,
+          "endLine": 6,
+          "params": [
+            "_repository"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 7,
+          "endLine": 7,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "GetManufacturersUseCase",
+          "startLine": 4,
+          "endLine": 10,
+          "methods": [
+            "GetManufacturersUseCase",
+            "call"
+          ],
+          "properties": [
+            "_repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "GetManufacturersUseCase",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "call",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "GetManufacturersUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "getManufacturers",
+          "lineNumber": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/user_cars/domain/use_case/get_user_cars_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 9,
+      "functions": [
+        {
+          "name": "GetUserCarsUseCase",
+          "startLine": 8,
+          "endLine": 8,
+          "params": [
+            "_repository"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 10,
+          "endLine": 10,
+          "params": [
+            "customerId"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "GetUserCarsUseCase",
+          "startLine": 5,
+          "endLine": 13,
+          "methods": [
+            "GetUserCarsUseCase",
+            "call"
+          ],
+          "properties": [
+            "_repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "GetUserCarsUseCase",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "call",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "GetUserCarsUseCase",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "getUserCars",
+          "lineNumber": 11
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/user_cars/domain/use_case/update_user_car_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 9,
+      "functions": [
+        {
+          "name": "UpdateUserCarUseCase",
+          "startLine": 6,
+          "endLine": 6,
+          "params": [
+            "_repository"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 8,
+          "endLine": 8,
+          "params": [
+            "car"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "UpdateUserCarUseCase",
+          "startLine": 4,
+          "endLine": 11,
+          "methods": [
+            "UpdateUserCarUseCase",
+            "call"
+          ],
+          "properties": [
+            "_repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "UpdateUserCarUseCase",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "call",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateUserCarUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "updateCar",
+          "lineNumber": 9
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/user_cars/presentation/screen/add_new_car_screen.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 1229,
+      "nonEmptyLines": 1130,
+      "functions": [
+        {
+          "name": "createState",
+          "startLine": 33,
+          "endLine": 33,
+          "params": []
+        },
+        {
+          "name": "_isEditing",
+          "startLine": 37,
+          "endLine": 37,
+          "params": []
+        },
+        {
+          "name": "initState",
+          "startLine": 71,
+          "endLine": 71,
+          "params": []
+        },
+        {
+          "name": "dispose",
+          "startLine": 88,
+          "endLine": 88,
+          "params": []
+        },
+        {
+          "name": "_goHomeAndRefreshCars",
+          "startLine": 95,
+          "endLine": 95,
+          "params": []
+        },
+        {
+          "name": "_prefillIfEditing",
+          "startLine": 104,
+          "endLine": 104,
+          "params": []
+        },
+        {
+          "name": "_maybeRequestBrands",
+          "startLine": 212,
+          "endLine": 212,
+          "params": []
+        },
+        {
+          "name": "_pickCamera",
+          "startLine": 226,
+          "endLine": 226,
+          "params": []
+        },
+        {
+          "name": "_pickGallery",
+          "startLine": 233,
+          "endLine": 233,
+          "params": []
+        },
+        {
+          "name": "_compressImage",
+          "startLine": 240,
+          "endLine": 240,
+          "params": [
+            "file"
+          ]
+        },
+        {
+          "name": "_showImageSheet",
+          "startLine": 269,
+          "endLine": 269,
+          "params": []
+        },
+        {
+          "name": "_removeImage",
+          "startLine": 306,
+          "endLine": 306,
+          "params": [
+            "index"
+          ]
+        },
+        {
+          "name": "_convertExistingImagesToBase64",
+          "startLine": 310,
+          "endLine": 310,
+          "params": [
+            "allowEmpty"
+          ]
+        },
+        {
+          "name": "_save",
+          "startLine": 335,
+          "endLine": 335,
+          "params": []
+        },
+        {
+          "name": "_buildCarEntity",
+          "startLine": 419,
+          "endLine": 419,
+          "params": []
+        },
+        {
+          "name": "build",
+          "startLine": 511,
+          "endLine": 511,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "_input",
+          "startLine": 893,
+          "endLine": 893,
+          "params": [
+            "hint"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 921,
+          "endLine": 921,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 963,
+          "endLine": 963,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 988,
+          "endLine": 988,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 1034,
+          "endLine": 1034,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 1064,
+          "endLine": 1064,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 1085,
+          "endLine": 1085,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 1120,
+          "endLine": 1120,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 1156,
+          "endLine": 1156,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 1215,
+          "endLine": 1215,
+          "params": [
+            "context"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "AddNewCarScreen",
+          "startLine": 27,
+          "endLine": 34,
+          "methods": [
+            "createState"
+          ],
+          "properties": [
+            "existingCar"
+          ]
+        },
+        {
+          "name": "_AddNewCarScreenState",
+          "startLine": 36,
+          "endLine": 904,
+          "methods": [
+            "_isEditing",
+            "initState",
+            "dispose",
+            "_goHomeAndRefreshCars",
+            "_prefillIfEditing",
+            "_maybeRequestBrands",
+            "_pickCamera",
+            "_pickGallery",
+            "_compressImage",
+            "_showImageSheet",
+            "_removeImage",
+            "_convertExistingImagesToBase64",
+            "_save",
+            "_buildCarEntity",
+            "build",
+            "_input"
+          ],
+          "properties": [
+            "_formKey",
+            "_selectedManufacturer",
+            "_modelCtrl",
+            "_vinCtrl",
+            "_plateNumberCtrl",
+            "_selectedYear",
+            "_plateL1",
+            "_plateL2",
+            "_plateL3",
+            "_plateL4",
+            "_plateL5",
+            "_plateL6",
+            "_plateL7",
+            "_imagesError",
+            "_isPreparingSubmission",
+            "_picker",
+            "_carImages",
+            "_existingImages",
+            "_requestedBrands",
+            "_years",
+            "_plateChars",
+            "_plateNumbers"
+          ]
+        },
+        {
+          "name": "_SectionCard",
+          "startLine": 907,
+          "endLine": 954,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "title",
+            "icon",
+            "child",
+            "action"
+          ]
+        },
+        {
+          "name": "_LabeledField",
+          "startLine": 956,
+          "endLine": 974,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "label",
+            "child"
+          ]
+        },
+        {
+          "name": "_PlateLetterDropdown",
+          "startLine": 976,
+          "endLine": 1018,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "value",
+            "letters",
+            "onChanged"
+          ]
+        },
+        {
+          "name": "_ImagesGrid",
+          "startLine": 1020,
+          "endLine": 1057,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "images",
+            "existingImages",
+            "onAdd",
+            "onRemove"
+          ]
+        },
+        {
+          "name": "_AddTile",
+          "startLine": 1059,
+          "endLine": 1077,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "onTap"
+          ]
+        },
+        {
+          "name": "_ImageTile",
+          "startLine": 1079,
+          "endLine": 1113,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "file",
+            "onRemove"
+          ]
+        },
+        {
+          "name": "_ExistingImageTile",
+          "startLine": 1115,
+          "endLine": 1141,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "src"
+          ]
+        },
+        {
+          "name": "_CrnImageField",
+          "startLine": 1144,
+          "endLine": 1207,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "file",
+            "onPick",
+            "onRemove"
+          ]
+        },
+        {
+          "name": "_CircleBtn",
+          "startLine": 1209,
+          "endLine": 1229,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "icon",
+            "onTap"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "createState",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "AddNewCarScreen",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "initState",
+          "line": 71,
+          "isDefault": false
+        },
+        {
+          "name": "dispose",
+          "line": 88,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 511,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 921,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 963,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 988,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 1034,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 1064,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 1085,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 1120,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 1156,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 1215,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "createState",
+          "callee": "_AddNewCarScreenState",
+          "lineNumber": 33
+        },
+        {
+          "caller": "initState",
+          "callee": "addPostFrameCallback",
+          "lineNumber": 75
+        },
+        {
+          "caller": "initState",
+          "callee": "read",
+          "lineNumber": 76
+        },
+        {
+          "caller": "initState",
+          "callee": "fetchManufacturers",
+          "lineNumber": 76
+        },
+        {
+          "caller": "initState",
+          "callee": "getPlateChars",
+          "lineNumber": 77
+        },
+        {
+          "caller": "initState",
+          "callee": "read",
+          "lineNumber": 78
+        },
+        {
+          "caller": "initState",
+          "callee": "getPlateNumbers",
+          "lineNumber": 80
+        },
+        {
+          "caller": "initState",
+          "callee": "read",
+          "lineNumber": 81
+        },
+        {
+          "caller": "initState",
+          "callee": "_prefillIfEditing",
+          "lineNumber": 83
+        },
+        {
+          "caller": "dispose",
+          "callee": "dispose",
+          "lineNumber": 89
+        },
+        {
+          "caller": "dispose",
+          "callee": "dispose",
+          "lineNumber": 90
+        },
+        {
+          "caller": "dispose",
+          "callee": "dispose",
+          "lineNumber": 91
+        },
+        {
+          "caller": "_goHomeAndRefreshCars",
+          "callee": "invalidate",
+          "lineNumber": 96
+        },
+        {
+          "caller": "_goHomeAndRefreshCars",
+          "callee": "read",
+          "lineNumber": 97
+        },
+        {
+          "caller": "_goHomeAndRefreshCars",
+          "callee": "of",
+          "lineNumber": 98
+        },
+        {
+          "caller": "_goHomeAndRefreshCars",
+          "callee": "pushNamedAndRemoveUntil",
+          "lineNumber": 98
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "tryParse",
+          "lineNumber": 111
+        },
+        {
+          "caller": "mapLetter",
+          "callee": "trim",
+          "lineNumber": 115
+        },
+        {
+          "caller": "mapLetter",
+          "callee": "toUpperCase",
+          "lineNumber": 117
+        },
+        {
+          "caller": "mapLetter",
+          "callee": "firstWhere",
+          "lineNumber": 120
+        },
+        {
+          "caller": "mapLetter",
+          "callee": "toUpperCase",
+          "lineNumber": 121
+        },
+        {
+          "caller": "mapLetter",
+          "callee": "indexWhere",
+          "lineNumber": 126
+        },
+        {
+          "caller": "mapLetter",
+          "callee": "toUpperCase",
+          "lineNumber": 127
+        },
+        {
+          "caller": "mapLetter",
+          "callee": "indexWhere",
+          "lineNumber": 129
+        },
+        {
+          "caller": "mapNumber",
+          "callee": "trim",
+          "lineNumber": 142
+        },
+        {
+          "caller": "mapNumber",
+          "callee": "firstWhere",
+          "lineNumber": 145
+        },
+        {
+          "caller": "mapNumber",
+          "callee": "indexOf",
+          "lineNumber": 151
+        },
+        {
+          "caller": "mapNumber",
+          "callee": "indexOf",
+          "lineNumber": 152
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "where",
+          "lineNumber": 164
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "trim",
+          "lineNumber": 164
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "toList",
+          "lineNumber": 164
+        },
+        {
+          "caller": "isLetter",
+          "callee": "trim",
+          "lineNumber": 166
+        },
+        {
+          "caller": "isLetter",
+          "callee": "toUpperCase",
+          "lineNumber": 168
+        },
+        {
+          "caller": "isLetter",
+          "callee": "any",
+          "lineNumber": 169
+        },
+        {
+          "caller": "isLetter",
+          "callee": "toUpperCase",
+          "lineNumber": 169
+        },
+        {
+          "caller": "isLetter",
+          "callee": "contains",
+          "lineNumber": 170
+        },
+        {
+          "caller": "isNumber",
+          "callee": "trim",
+          "lineNumber": 174
+        },
+        {
+          "caller": "isNumber",
+          "callee": "contains",
+          "lineNumber": 176
+        },
+        {
+          "caller": "isNumber",
+          "callee": "contains",
+          "lineNumber": 177
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "isLetter",
+          "lineNumber": 181
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "isLetter",
+          "lineNumber": 181
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "isLetter",
+          "lineNumber": 181
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "isNumber",
+          "lineNumber": 182
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "isNumber",
+          "lineNumber": 182
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "isNumber",
+          "lineNumber": 182
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "isNumber",
+          "lineNumber": 182
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "mapLetter",
+          "lineNumber": 186
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "mapLetter",
+          "lineNumber": 187
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "mapLetter",
+          "lineNumber": 188
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "mapNumber",
+          "lineNumber": 189
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "mapNumber",
+          "lineNumber": 190
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "mapNumber",
+          "lineNumber": 191
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "mapNumber",
+          "lineNumber": 192
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "mapLetter",
+          "lineNumber": 195
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "mapLetter",
+          "lineNumber": 196
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "mapLetter",
+          "lineNumber": 197
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "mapNumber",
+          "lineNumber": 198
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "mapNumber",
+          "lineNumber": 199
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "mapNumber",
+          "lineNumber": 200
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "mapNumber",
+          "lineNumber": 201
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "setState",
+          "lineNumber": 205
+        },
+        {
+          "caller": "_prefillIfEditing",
+          "callee": "addAll",
+          "lineNumber": 206
+        },
+        {
+          "caller": "_maybeRequestBrands",
+          "callee": "read",
+          "lineNumber": 215
+        },
+        {
+          "caller": "_maybeRequestBrands",
+          "callee": "addPostFrameCallback",
+          "lineNumber": 218
+        },
+        {
+          "caller": "_maybeRequestBrands",
+          "callee": "read",
+          "lineNumber": 220
+        },
+        {
+          "caller": "_maybeRequestBrands",
+          "callee": "fetCarBrands",
+          "lineNumber": 220
+        },
+        {
+          "caller": "_pickCamera",
+          "callee": "pickImage",
+          "lineNumber": 227
+        },
+        {
+          "caller": "_pickCamera",
+          "callee": "setState",
+          "lineNumber": 229
+        },
+        {
+          "caller": "_pickCamera",
+          "callee": "add",
+          "lineNumber": 229
+        },
+        {
+          "caller": "_pickGallery",
+          "callee": "pickMultiImage",
+          "lineNumber": 234
+        },
+        {
+          "caller": "_pickGallery",
+          "callee": "setState",
+          "lineNumber": 236
+        },
+        {
+          "caller": "_pickGallery",
+          "callee": "addAll",
+          "lineNumber": 236
+        },
+        {
+          "caller": "_compressImage",
+          "callee": "readAsBytes",
+          "lineNumber": 241
+        },
+        {
+          "caller": "_compressImage",
+          "callee": "decodeImage",
+          "lineNumber": 242
+        },
+        {
+          "caller": "_compressImage",
+          "callee": "copyResize",
+          "lineNumber": 251
+        },
+        {
+          "caller": "_compressImage",
+          "callee": "copyResize",
+          "lineNumber": 257
+        },
+        {
+          "caller": "_compressImage",
+          "callee": "encodeJpg",
+          "lineNumber": 265
+        },
+        {
+          "caller": "_compressImage",
+          "callee": "fromList",
+          "lineNumber": 266
+        },
+        {
+          "caller": "_showImageSheet",
+          "callee": "showModalBottomSheet",
+          "lineNumber": 270
+        },
+        {
+          "caller": "_showImageSheet",
+          "callee": "RoundedRectangleBorder",
+          "lineNumber": 273
+        },
+        {
+          "caller": "_showImageSheet",
+          "callee": "vertical",
+          "lineNumber": 274
+        },
+        {
+          "caller": "_showImageSheet",
+          "callee": "circular",
+          "lineNumber": 274
+        },
+        {
+          "caller": "_showImageSheet",
+          "callee": "SafeArea",
+          "lineNumber": 277
+        },
+        {
+          "caller": "_showImageSheet",
+          "callee": "Column",
+          "lineNumber": 278
+        },
+        {
+          "caller": "_showImageSheet",
+          "callee": "ListTile",
+          "lineNumber": 281
+        },
+        {
+          "caller": "_showImageSheet",
+          "callee": "Icon",
+          "lineNumber": 282
+        },
+        {
+          "caller": "_showImageSheet",
+          "callee": "Text",
+          "lineNumber": 283
+        },
+        {
+          "caller": "_showImageSheet",
+          "callee": "pop",
+          "lineNumber": 285
+        },
+        {
+          "caller": "_showImageSheet",
+          "callee": "_pickCamera",
+          "lineNumber": 286
+        },
+        {
+          "caller": "_showImageSheet",
+          "callee": "ListTile",
+          "lineNumber": 289
+        },
+        {
+          "caller": "_showImageSheet",
+          "callee": "Icon",
+          "lineNumber": 291
+        },
+        {
+          "caller": "_showImageSheet",
+          "callee": "Text",
+          "lineNumber": 292
+        },
+        {
+          "caller": "_showImageSheet",
+          "callee": "pop",
+          "lineNumber": 294
+        },
+        {
+          "caller": "_showImageSheet",
+          "callee": "_pickGallery",
+          "lineNumber": 295
+        },
+        {
+          "caller": "_removeImage",
+          "callee": "setState",
+          "lineNumber": 307
+        },
+        {
+          "caller": "_removeImage",
+          "callee": "removeAt",
+          "lineNumber": 307
+        },
+        {
+          "caller": "_convertExistingImagesToBase64",
+          "callee": "trim",
+          "lineNumber": 313
+        },
+        {
+          "caller": "_convertExistingImagesToBase64",
+          "callee": "toLowerCase",
+          "lineNumber": 315
+        },
+        {
+          "caller": "_convertExistingImagesToBase64",
+          "callee": "startsWith",
+          "lineNumber": 315
+        },
+        {
+          "caller": "_convertExistingImagesToBase64",
+          "callee": "add",
+          "lineNumber": 317
+        },
+        {
+          "caller": "_convertExistingImagesToBase64",
+          "callee": "get",
+          "lineNumber": 321
+        },
+        {
+          "caller": "_convertExistingImagesToBase64",
+          "callee": "parse",
+          "lineNumber": 321
+        },
+        {
+          "caller": "_convertExistingImagesToBase64",
+          "callee": "add",
+          "lineNumber": 323
+        },
+        {
+          "caller": "_convertExistingImagesToBase64",
+          "callee": "base64Encode",
+          "lineNumber": 323
+        },
+        {
+          "caller": "_convertExistingImagesToBase64",
+          "callee": "Exception",
+          "lineNumber": 330
+        },
+        {
+          "caller": "_save",
+          "callee": "read",
+          "lineNumber": 338
+        },
+        {
+          "caller": "_save",
+          "callee": "read",
+          "lineNumber": 339
+        },
+        {
+          "caller": "_save",
+          "callee": "of",
+          "lineNumber": 342
+        },
+        {
+          "caller": "_save",
+          "callee": "showSnackBar",
+          "lineNumber": 342
+        },
+        {
+          "caller": "_save",
+          "callee": "SnackBar",
+          "lineNumber": 343
+        },
+        {
+          "caller": "_save",
+          "callee": "Text",
+          "lineNumber": 343
+        },
+        {
+          "caller": "_save",
+          "callee": "of",
+          "lineNumber": 348
+        },
+        {
+          "caller": "_save",
+          "callee": "showSnackBar",
+          "lineNumber": 348
+        },
+        {
+          "caller": "_save",
+          "callee": "SnackBar",
+          "lineNumber": 349
+        },
+        {
+          "caller": "_save",
+          "callee": "Text",
+          "lineNumber": 349
+        },
+        {
+          "caller": "_save",
+          "callee": "of",
+          "lineNumber": 354
+        },
+        {
+          "caller": "_save",
+          "callee": "showSnackBar",
+          "lineNumber": 354
+        },
+        {
+          "caller": "_save",
+          "callee": "SnackBar",
+          "lineNumber": 355
+        },
+        {
+          "caller": "_save",
+          "callee": "Text",
+          "lineNumber": 355
+        },
+        {
+          "caller": "_save",
+          "callee": "of",
+          "lineNumber": 360
+        },
+        {
+          "caller": "_save",
+          "callee": "showSnackBar",
+          "lineNumber": 360
+        },
+        {
+          "caller": "_save",
+          "callee": "SnackBar",
+          "lineNumber": 361
+        },
+        {
+          "caller": "_save",
+          "callee": "Text",
+          "lineNumber": 361
+        },
+        {
+          "caller": "_save",
+          "callee": "of",
+          "lineNumber": 366
+        },
+        {
+          "caller": "_save",
+          "callee": "showSnackBar",
+          "lineNumber": 366
+        },
+        {
+          "caller": "_save",
+          "callee": "SnackBar",
+          "lineNumber": 367
+        },
+        {
+          "caller": "_save",
+          "callee": "Text",
+          "lineNumber": 367
+        },
+        {
+          "caller": "_save",
+          "callee": "of",
+          "lineNumber": 382
+        },
+        {
+          "caller": "_save",
+          "callee": "showSnackBar",
+          "lineNumber": 382
+        },
+        {
+          "caller": "_save",
+          "callee": "SnackBar",
+          "lineNumber": 383
+        },
+        {
+          "caller": "_save",
+          "callee": "Text",
+          "lineNumber": 384
+        },
+        {
+          "caller": "_save",
+          "callee": "setState",
+          "lineNumber": 391
+        },
+        {
+          "caller": "_save",
+          "callee": "setState",
+          "lineNumber": 394
+        },
+        {
+          "caller": "_save",
+          "callee": "setState",
+          "lineNumber": 399
+        },
+        {
+          "caller": "_save",
+          "callee": "_buildCarEntity",
+          "lineNumber": 400
+        },
+        {
+          "caller": "_save",
+          "callee": "read",
+          "lineNumber": 401
+        },
+        {
+          "caller": "_save",
+          "callee": "updateCar",
+          "lineNumber": 403
+        },
+        {
+          "caller": "_save",
+          "callee": "addCar",
+          "lineNumber": 405
+        },
+        {
+          "caller": "_save",
+          "callee": "of",
+          "lineNumber": 408
+        },
+        {
+          "caller": "_save",
+          "callee": "showSnackBar",
+          "lineNumber": 410
+        },
+        {
+          "caller": "_save",
+          "callee": "SnackBar",
+          "lineNumber": 410
+        },
+        {
+          "caller": "_save",
+          "callee": "Text",
+          "lineNumber": 410
+        },
+        {
+          "caller": "_save",
+          "callee": "toString",
+          "lineNumber": 410
+        },
+        {
+          "caller": "_save",
+          "callee": "setState",
+          "lineNumber": 413
+        },
+        {
+          "caller": "mapArabicLetter",
+          "callee": "indexOf",
+          "lineNumber": 430
+        },
+        {
+          "caller": "mapArabicLetter",
+          "callee": "indexOf",
+          "lineNumber": 432
+        },
+        {
+          "caller": "mapArabicLetter",
+          "callee": "Exception",
+          "lineNumber": 434
+        },
+        {
+          "caller": "mapEnglishLetter",
+          "callee": "indexOf",
+          "lineNumber": 438
+        },
+        {
+          "caller": "mapEnglishLetter",
+          "callee": "indexOf",
+          "lineNumber": 440
+        },
+        {
+          "caller": "mapEnglishLetter",
+          "callee": "Exception",
+          "lineNumber": 442
+        },
+        {
+          "caller": "mapArabicNumber",
+          "callee": "indexOf",
+          "lineNumber": 446
+        },
+        {
+          "caller": "mapArabicNumber",
+          "callee": "indexOf",
+          "lineNumber": 448
+        },
+        {
+          "caller": "mapArabicNumber",
+          "callee": "Exception",
+          "lineNumber": 450
+        },
+        {
+          "caller": "mapEnglishNumber",
+          "callee": "indexOf",
+          "lineNumber": 454
+        },
+        {
+          "caller": "mapEnglishNumber",
+          "callee": "indexOf",
+          "lineNumber": 456
+        },
+        {
+          "caller": "mapEnglishNumber",
+          "callee": "Exception",
+          "lineNumber": 458
+        },
+        {
+          "caller": "_buildCarEntity",
+          "callee": "mapArabicLetter",
+          "lineNumber": 462
+        },
+        {
+          "caller": "_buildCarEntity",
+          "callee": "mapArabicLetter",
+          "lineNumber": 463
+        },
+        {
+          "caller": "_buildCarEntity",
+          "callee": "mapArabicLetter",
+          "lineNumber": 464
+        },
+        {
+          "caller": "_buildCarEntity",
+          "callee": "mapArabicNumber",
+          "lineNumber": 465
+        },
+        {
+          "caller": "_buildCarEntity",
+          "callee": "mapArabicNumber",
+          "lineNumber": 466
+        },
+        {
+          "caller": "_buildCarEntity",
+          "callee": "mapArabicNumber",
+          "lineNumber": 467
+        },
+        {
+          "caller": "_buildCarEntity",
+          "callee": "mapArabicNumber",
+          "lineNumber": 468
+        },
+        {
+          "caller": "_buildCarEntity",
+          "callee": "mapEnglishLetter",
+          "lineNumber": 472
+        },
+        {
+          "caller": "_buildCarEntity",
+          "callee": "mapEnglishLetter",
+          "lineNumber": 473
+        },
+        {
+          "caller": "_buildCarEntity",
+          "callee": "mapEnglishLetter",
+          "lineNumber": 474
+        },
+        {
+          "caller": "_buildCarEntity",
+          "callee": "mapEnglishNumber",
+          "lineNumber": 475
+        },
+        {
+          "caller": "_buildCarEntity",
+          "callee": "mapEnglishNumber",
+          "lineNumber": 476
+        },
+        {
+          "caller": "_buildCarEntity",
+          "callee": "mapEnglishNumber",
+          "lineNumber": 477
+        },
+        {
+          "caller": "_buildCarEntity",
+          "callee": "mapEnglishNumber",
+          "lineNumber": 478
+        },
+        {
+          "caller": "_buildCarEntity",
+          "callee": "_compressImage",
+          "lineNumber": 484
+        },
+        {
+          "caller": "_buildCarEntity",
+          "callee": "add",
+          "lineNumber": 485
+        },
+        {
+          "caller": "_buildCarEntity",
+          "callee": "base64Encode",
+          "lineNumber": 485
+        },
+        {
+          "caller": "_buildCarEntity",
+          "callee": "_convertExistingImagesToBase64",
+          "lineNumber": 489
+        },
+        {
+          "caller": "_buildCarEntity",
+          "callee": "CarEntity",
+          "lineNumber": 497
+        },
+        {
+          "caller": "_buildCarEntity",
+          "callee": "toString",
+          "lineNumber": 504
+        },
+        {
+          "caller": "build",
+          "callee": "watch",
+          "lineNumber": 512
+        },
+        {
+          "caller": "build",
+          "callee": "watch",
+          "lineNumber": 513
+        },
+        {
+          "caller": "build",
+          "callee": "_maybeRequestBrands",
+          "lineNumber": 514
+        },
+        {
+          "caller": "build",
+          "callee": "watch",
+          "lineNumber": 515
+        },
+        {
+          "caller": "build",
+          "callee": "addPostFrameCallback",
+          "lineNumber": 518
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 519
+        },
+        {
+          "caller": "build",
+          "callee": "showSnackBar",
+          "lineNumber": 521
+        },
+        {
+          "caller": "build",
+          "callee": "SnackBar",
+          "lineNumber": 522
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 522
+        },
+        {
+          "caller": "build",
+          "callee": "_goHomeAndRefreshCars",
+          "lineNumber": 525
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 527
+        },
+        {
+          "caller": "build",
+          "callee": "pop",
+          "lineNumber": 527
+        },
+        {
+          "caller": "build",
+          "callee": "addPostFrameCallback",
+          "lineNumber": 531
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 532
+        },
+        {
+          "caller": "build",
+          "callee": "showSnackBar",
+          "lineNumber": 534
+        },
+        {
+          "caller": "build",
+          "callee": "SnackBar",
+          "lineNumber": 534
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 534
+        },
+        {
+          "caller": "build",
+          "callee": "read",
+          "lineNumber": 536
+        },
+        {
+          "caller": "build",
+          "callee": "reset",
+          "lineNumber": 536
+        },
+        {
+          "caller": "build",
+          "callee": "Scaffold",
+          "lineNumber": 539
+        },
+        {
+          "caller": "build",
+          "callee": "InternalAppBar",
+          "lineNumber": 540
+        },
+        {
+          "caller": "build",
+          "callee": "SafeArea",
+          "lineNumber": 543
+        },
+        {
+          "caller": "build",
+          "callee": "SingleChildScrollView",
+          "lineNumber": 544
+        },
+        {
+          "caller": "build",
+          "callee": "all",
+          "lineNumber": 545
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 546
+        },
+        {
+          "caller": "build",
+          "callee": "_SectionCard",
+          "lineNumber": 548
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 551
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 555
+        },
+        {
+          "caller": "build",
+          "callee": "TextStyle",
+          "lineNumber": 557
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 559
+        },
+        {
+          "caller": "build",
+          "callee": "Wrap",
+          "lineNumber": 560
+        },
+        {
+          "caller": "build",
+          "callee": "_PlateLetterDropdown",
+          "lineNumber": 565
+        },
+        {
+          "caller": "build",
+          "callee": "setState",
+          "lineNumber": 568
+        },
+        {
+          "caller": "build",
+          "callee": "_PlateLetterDropdown",
+          "lineNumber": 570
+        },
+        {
+          "caller": "build",
+          "callee": "setState",
+          "lineNumber": 573
+        },
+        {
+          "caller": "build",
+          "callee": "_PlateLetterDropdown",
+          "lineNumber": 575
+        },
+        {
+          "caller": "build",
+          "callee": "setState",
+          "lineNumber": 578
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 582
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 585
+        },
+        {
+          "caller": "build",
+          "callee": "TextStyle",
+          "lineNumber": 587
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 589
+        },
+        {
+          "caller": "build",
+          "callee": "Wrap",
+          "lineNumber": 590
+        },
+        {
+          "caller": "build",
+          "callee": "_PlateLetterDropdown",
+          "lineNumber": 595
+        },
+        {
+          "caller": "build",
+          "callee": "setState",
+          "lineNumber": 598
+        },
+        {
+          "caller": "build",
+          "callee": "_PlateLetterDropdown",
+          "lineNumber": 600
+        },
+        {
+          "caller": "build",
+          "callee": "setState",
+          "lineNumber": 603
+        },
+        {
+          "caller": "build",
+          "callee": "_PlateLetterDropdown",
+          "lineNumber": 605
+        },
+        {
+          "caller": "build",
+          "callee": "setState",
+          "lineNumber": 608
+        },
+        {
+          "caller": "build",
+          "callee": "_PlateLetterDropdown",
+          "lineNumber": 610
+        },
+        {
+          "caller": "build",
+          "callee": "setState",
+          "lineNumber": 613
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 620
+        },
+        {
+          "caller": "build",
+          "callee": "_SectionCard",
+          "lineNumber": 623
+        },
+        {
+          "caller": "build",
+          "callee": "Form",
+          "lineNumber": 626
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 628
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 633
+        },
+        {
+          "caller": "build",
+          "callee": "_LabeledField",
+          "lineNumber": 635
+        },
+        {
+          "caller": "build",
+          "callee": "SpinKitThreeBounce",
+          "lineNumber": 637
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 638
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 645
+        },
+        {
+          "caller": "build",
+          "callee": "Builder",
+          "lineNumber": 648
+        },
+        {
+          "caller": "build",
+          "callee": "any",
+          "lineNumber": 652
+        },
+        {
+          "caller": "build",
+          "callee": "_LabeledField",
+          "lineNumber": 656
+        },
+        {
+          "caller": "build",
+          "callee": "DropdownButtonFormField2",
+          "lineNumber": 658
+        },
+        {
+          "caller": "build",
+          "callee": "_input",
+          "lineNumber": 661
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 662
+        },
+        {
+          "caller": "build",
+          "callee": "DropdownStyleData",
+          "lineNumber": 663
+        },
+        {
+          "caller": "build",
+          "callee": "Offset",
+          "lineNumber": 665
+        },
+        {
+          "caller": "build",
+          "callee": "map",
+          "lineNumber": 673
+        },
+        {
+          "caller": "build",
+          "callee": "DropdownMenuItem",
+          "lineNumber": 674
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 676
+        },
+        {
+          "caller": "build",
+          "callee": "toList",
+          "lineNumber": 679
+        },
+        {
+          "caller": "build",
+          "callee": "setState",
+          "lineNumber": 681
+        },
+        {
+          "caller": "build",
+          "callee": "clear",
+          "lineNumber": 683
+        },
+        {
+          "caller": "build",
+          "callee": "read",
+          "lineNumber": 687
+        },
+        {
+          "caller": "build",
+          "callee": "fetCarBrands",
+          "lineNumber": 690
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 703
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 705
+        },
+        {
+          "caller": "build",
+          "callee": "_LabeledField",
+          "lineNumber": 708
+        },
+        {
+          "caller": "build",
+          "callee": "Builder",
+          "lineNumber": 710
+        },
+        {
+          "caller": "build",
+          "callee": "SpinKitThreeBounce",
+          "lineNumber": 714
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 715
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 719
+        },
+        {
+          "caller": "build",
+          "callee": "any",
+          "lineNumber": 724
+        },
+        {
+          "caller": "build",
+          "callee": "addPostFrameCallback",
+          "lineNumber": 733
+        },
+        {
+          "caller": "build",
+          "callee": "setState",
+          "lineNumber": 736
+        },
+        {
+          "caller": "build",
+          "callee": "DropdownButtonFormField",
+          "lineNumber": 741
+        },
+        {
+          "caller": "build",
+          "callee": "_input",
+          "lineNumber": 744
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 745
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 746
+        },
+        {
+          "caller": "build",
+          "callee": "map",
+          "lineNumber": 749
+        },
+        {
+          "caller": "build",
+          "callee": "DropdownMenuItem",
+          "lineNumber": 750
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 752
+        },
+        {
+          "caller": "build",
+          "callee": "toList",
+          "lineNumber": 755
+        },
+        {
+          "caller": "build",
+          "callee": "setState",
+          "lineNumber": 759
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 772
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 778
+        },
+        {
+          "caller": "build",
+          "callee": "_LabeledField",
+          "lineNumber": 779
+        },
+        {
+          "caller": "build",
+          "callee": "DropdownButtonFormField",
+          "lineNumber": 781
+        },
+        {
+          "caller": "build",
+          "callee": "_input",
+          "lineNumber": 783
+        },
+        {
+          "caller": "build",
+          "callee": "map",
+          "lineNumber": 786
+        },
+        {
+          "caller": "build",
+          "callee": "DropdownMenuItem",
+          "lineNumber": 787
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 789
+        },
+        {
+          "caller": "build",
+          "callee": "toList",
+          "lineNumber": 792
+        },
+        {
+          "caller": "build",
+          "callee": "setState",
+          "lineNumber": 793
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 799
+        },
+        {
+          "caller": "build",
+          "callee": "_LabeledField",
+          "lineNumber": 801
+        },
+        {
+          "caller": "build",
+          "callee": "TextFormField",
+          "lineNumber": 803
+        },
+        {
+          "caller": "build",
+          "callee": "_input",
+          "lineNumber": 806
+        },
+        {
+          "caller": "build",
+          "callee": "trim",
+          "lineNumber": 808
+        },
+        {
+          "caller": "build",
+          "callee": "LengthLimitingTextInputFormatter",
+          "lineNumber": 815
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 822
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 828
+        },
+        {
+          "caller": "build",
+          "callee": "_SectionCard",
+          "lineNumber": 831
+        },
+        {
+          "caller": "build",
+          "callee": "icon",
+          "lineNumber": 834
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 836
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 837
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 839
+        },
+        {
+          "caller": "build",
+          "callee": "_ImagesGrid",
+          "lineNumber": 841
+        },
+        {
+          "caller": "build",
+          "callee": "Visibility",
+          "lineNumber": 847
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 849
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 850
+        },
+        {
+          "caller": "build",
+          "callee": "Align",
+          "lineNumber": 851
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 853
+        },
+        {
+          "caller": "build",
+          "callee": "TextStyle",
+          "lineNumber": 855
+        },
+        {
+          "caller": "build",
+          "callee": "SafeArea",
+          "lineNumber": 870
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 871
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 872
+        },
+        {
+          "caller": "build",
+          "callee": "icon",
+          "lineNumber": 874
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 878
+        },
+        {
+          "caller": "build",
+          "callee": "CircularProgressIndicator",
+          "lineNumber": 881
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 883
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 884
+        },
+        {
+          "caller": "_input",
+          "callee": "InputDecoration",
+          "lineNumber": 893
+        },
+        {
+          "caller": "_input",
+          "callee": "OutlineInputBorder",
+          "lineNumber": 897
+        },
+        {
+          "caller": "_input",
+          "callee": "circular",
+          "lineNumber": 897
+        },
+        {
+          "caller": "_input",
+          "callee": "OutlineInputBorder",
+          "lineNumber": 898
+        },
+        {
+          "caller": "_input",
+          "callee": "circular",
+          "lineNumber": 899
+        },
+        {
+          "caller": "_input",
+          "callee": "BorderSide",
+          "lineNumber": 900
+        },
+        {
+          "caller": "_input",
+          "callee": "EdgeInsets",
+          "lineNumber": 902
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 922
+        },
+        {
+          "caller": "build",
+          "callee": "Card",
+          "lineNumber": 923
+        },
+        {
+          "caller": "build",
+          "callee": "RoundedRectangleBorder",
+          "lineNumber": 925
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 925
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 927
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 928
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 929
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 932
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 934
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 935
+        },
+        {
+          "caller": "build",
+          "callee": "Expanded",
+          "lineNumber": 936
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 937
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 947
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 964
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 965
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 968
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 969
+        },
+        {
+          "caller": "build",
+          "callee": "contains",
+          "lineNumber": 989
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 990
+        },
+        {
+          "caller": "build",
+          "callee": "DropdownButtonFormField",
+          "lineNumber": 992
+        },
+        {
+          "caller": "build",
+          "callee": "InputDecoration",
+          "lineNumber": 995
+        },
+        {
+          "caller": "build",
+          "callee": "OutlineInputBorder",
+          "lineNumber": 998
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 998
+        },
+        {
+          "caller": "build",
+          "callee": "OutlineInputBorder",
+          "lineNumber": 999
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 1000
+        },
+        {
+          "caller": "build",
+          "callee": "BorderSide",
+          "lineNumber": 1001
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 1003
+        },
+        {
+          "caller": "build",
+          "callee": "map",
+          "lineNumber": 1010
+        },
+        {
+          "caller": "build",
+          "callee": "DropdownMenuItem",
+          "lineNumber": 1010
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 1010
+        },
+        {
+          "caller": "build",
+          "callee": "toList",
+          "lineNumber": 1011
+        },
+        {
+          "caller": "build",
+          "callee": "_AddTile",
+          "lineNumber": 1036
+        },
+        {
+          "caller": "build",
+          "callee": "map",
+          "lineNumber": 1037
+        },
+        {
+          "caller": "build",
+          "callee": "_ExistingImageTile",
+          "lineNumber": 1037
+        },
+        {
+          "caller": "build",
+          "callee": "toList",
+          "lineNumber": 1037
+        },
+        {
+          "caller": "build",
+          "callee": "generate",
+          "lineNumber": 1038
+        },
+        {
+          "caller": "build",
+          "callee": "_ImageTile",
+          "lineNumber": 1040
+        },
+        {
+          "caller": "build",
+          "callee": "File",
+          "lineNumber": 1040
+        },
+        {
+          "caller": "build",
+          "callee": "onRemove",
+          "lineNumber": 1040
+        },
+        {
+          "caller": "build",
+          "callee": "builder",
+          "lineNumber": 1044
+        },
+        {
+          "caller": "build",
+          "callee": "NeverScrollableScrollPhysics",
+          "lineNumber": 1047
+        },
+        {
+          "caller": "build",
+          "callee": "SliverGridDelegateWithFixedCrossAxisCount",
+          "lineNumber": 1048
+        },
+        {
+          "caller": "build",
+          "callee": "InkWell",
+          "lineNumber": 1065
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 1066
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 1068
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 1069
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 1070
+        },
+        {
+          "caller": "build",
+          "callee": "all",
+          "lineNumber": 1071
+        },
+        {
+          "caller": "build",
+          "callee": "Center",
+          "lineNumber": 1073
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 1073
+        },
+        {
+          "caller": "build",
+          "callee": "Stack",
+          "lineNumber": 1086
+        },
+        {
+          "caller": "build",
+          "callee": "fill",
+          "lineNumber": 1088
+        },
+        {
+          "caller": "build",
+          "callee": "ClipRRect",
+          "lineNumber": 1089
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 1090
+        },
+        {
+          "caller": "build",
+          "callee": "file",
+          "lineNumber": 1091
+        },
+        {
+          "caller": "build",
+          "callee": "Positioned",
+          "lineNumber": 1094
+        },
+        {
+          "caller": "build",
+          "callee": "Material",
+          "lineNumber": 1097
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 1099
+        },
+        {
+          "caller": "build",
+          "callee": "InkWell",
+          "lineNumber": 1100
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 1101
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 1103
+        },
+        {
+          "caller": "build",
+          "callee": "all",
+          "lineNumber": 1104
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 1105
+        },
+        {
+          "caller": "build",
+          "callee": "toLowerCase",
+          "lineNumber": 1122
+        },
+        {
+          "caller": "build",
+          "callee": "startsWith",
+          "lineNumber": 1122
+        },
+        {
+          "caller": "build",
+          "callee": "network",
+          "lineNumber": 1123
+        },
+        {
+          "caller": "build",
+          "callee": "base64Decode",
+          "lineNumber": 1126
+        },
+        {
+          "caller": "build",
+          "callee": "memory",
+          "lineNumber": 1127
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 1129
+        },
+        {
+          "caller": "build",
+          "callee": "ClipRRect",
+          "lineNumber": 1133
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 1134
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 1135
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 1136
+        },
+        {
+          "caller": "build",
+          "callee": "all",
+          "lineNumber": 1136
+        },
+        {
+          "caller": "build",
+          "callee": "InkWell",
+          "lineNumber": 1158
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 1159
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 1161
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 1163
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 1164
+        },
+        {
+          "caller": "build",
+          "callee": "all",
+          "lineNumber": 1165
+        },
+        {
+          "caller": "build",
+          "callee": "Center",
+          "lineNumber": 1168
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 1169
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 1172
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 1173
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 1174
+        },
+        {
+          "caller": "build",
+          "callee": "Stack",
+          "lineNumber": 1182
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 1184
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 1186
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 1187
+        },
+        {
+          "caller": "build",
+          "callee": "all",
+          "lineNumber": 1188
+        },
+        {
+          "caller": "build",
+          "callee": "file",
+          "lineNumber": 1191
+        },
+        {
+          "caller": "build",
+          "callee": "Positioned",
+          "lineNumber": 1193
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 1196
+        },
+        {
+          "caller": "build",
+          "callee": "_CircleBtn",
+          "lineNumber": 1198
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 1199
+        },
+        {
+          "caller": "build",
+          "callee": "_CircleBtn",
+          "lineNumber": 1200
+        },
+        {
+          "caller": "build",
+          "callee": "Material",
+          "lineNumber": 1216
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 1218
+        },
+        {
+          "caller": "build",
+          "callee": "InkWell",
+          "lineNumber": 1219
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 1220
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 1222
+        },
+        {
+          "caller": "build",
+          "callee": "all",
+          "lineNumber": 1223
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 1224
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 14,
+        "functionCount": 26,
+        "classCount": 11
+      }
+    },
+    {
+      "path": "lib/features/user_cars/presentation/screen/user_car_details_screen.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 470,
+      "nonEmptyLines": 441,
+      "functions": [
+        {
+          "name": "createState",
+          "startLine": 13,
+          "endLine": 13,
+          "params": []
+        },
+        {
+          "name": "dispose",
+          "startLine": 22,
+          "endLine": 22,
+          "params": []
+        },
+        {
+          "name": "build",
+          "startLine": 29,
+          "endLine": 29,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "_ensureThumbVisible",
+          "startLine": 319,
+          "endLine": 319,
+          "params": [
+            "index"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 338,
+          "endLine": 338,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 366,
+          "endLine": 366,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 393,
+          "endLine": 393,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 425,
+          "endLine": 425,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 440,
+          "endLine": 440,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 466,
+          "endLine": 466,
+          "params": [
+            "context"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "UserCarDetailsScreen",
+          "startLine": 8,
+          "endLine": 14,
+          "methods": [
+            "createState"
+          ],
+          "properties": [
+            "car"
+          ]
+        },
+        {
+          "name": "_CarDetailsScreenState",
+          "startLine": 16,
+          "endLine": 329,
+          "methods": [
+            "dispose",
+            "build",
+            "_ensureThumbVisible"
+          ],
+          "properties": [
+            "_pageCtrl",
+            "_thumbScrollCtrl",
+            "_page"
+          ]
+        },
+        {
+          "name": "_Card",
+          "startLine": 333,
+          "endLine": 358,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "child"
+          ]
+        },
+        {
+          "name": "_Chip",
+          "startLine": 360,
+          "endLine": 384,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "icon",
+            "label"
+          ]
+        },
+        {
+          "name": "_InfoTile",
+          "startLine": 386,
+          "endLine": 421,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "title",
+            "value",
+            "icon"
+          ]
+        },
+        {
+          "name": "_Divider",
+          "startLine": 423,
+          "endLine": 432,
+          "methods": [
+            "build"
+          ],
+          "properties": []
+        },
+        {
+          "name": "_Dots",
+          "startLine": 434,
+          "endLine": 458,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "count",
+            "index"
+          ]
+        },
+        {
+          "name": "_ThumbImage",
+          "startLine": 461,
+          "endLine": 470,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "src"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "createState",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "UserCarDetailsScreen",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "dispose",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 338,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 366,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 393,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 425,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 440,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 466,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "createState",
+          "callee": "_CarDetailsScreenState",
+          "lineNumber": 13
+        },
+        {
+          "caller": "dispose",
+          "callee": "dispose",
+          "lineNumber": 23
+        },
+        {
+          "caller": "dispose",
+          "callee": "dispose",
+          "lineNumber": 24
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 31
+        },
+        {
+          "caller": "valueOrDash",
+          "callee": "trim",
+          "lineNumber": 34
+        },
+        {
+          "caller": "valueOrDash",
+          "callee": "trim",
+          "lineNumber": 34
+        },
+        {
+          "caller": "build",
+          "callee": "trim",
+          "lineNumber": 36
+        },
+        {
+          "caller": "build",
+          "callee": "replaceAll",
+          "lineNumber": 36
+        },
+        {
+          "caller": "build",
+          "callee": "RegExp",
+          "lineNumber": 36
+        },
+        {
+          "caller": "build",
+          "callee": "join",
+          "lineNumber": 41
+        },
+        {
+          "caller": "build",
+          "callee": "join",
+          "lineNumber": 42
+        },
+        {
+          "caller": "build",
+          "callee": "Scaffold",
+          "lineNumber": 46
+        },
+        {
+          "caller": "build",
+          "callee": "InternalAppBar",
+          "lineNumber": 48
+        },
+        {
+          "caller": "build",
+          "callee": "SafeArea",
+          "lineNumber": 49
+        },
+        {
+          "caller": "build",
+          "callee": "SingleChildScrollView",
+          "lineNumber": 50
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 51
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 54
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 55
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 56
+        },
+        {
+          "caller": "build",
+          "callee": "ClipRRect",
+          "lineNumber": 58
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 59
+        },
+        {
+          "caller": "build",
+          "callee": "AspectRatio",
+          "lineNumber": 60
+        },
+        {
+          "caller": "build",
+          "callee": "Stack",
+          "lineNumber": 62
+        },
+        {
+          "caller": "build",
+          "callee": "builder",
+          "lineNumber": 65
+        },
+        {
+          "caller": "build",
+          "callee": "setState",
+          "lineNumber": 69
+        },
+        {
+          "caller": "build",
+          "callee": "_ensureThumbVisible",
+          "lineNumber": 71
+        },
+        {
+          "caller": "build",
+          "callee": "trim",
+          "lineNumber": 77
+        },
+        {
+          "caller": "build",
+          "callee": "toLowerCase",
+          "lineNumber": 77
+        },
+        {
+          "caller": "build",
+          "callee": "startsWith",
+          "lineNumber": 77
+        },
+        {
+          "caller": "build",
+          "callee": "asset",
+          "lineNumber": 79
+        },
+        {
+          "caller": "build",
+          "callee": "network",
+          "lineNumber": 80
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 82
+        },
+        {
+          "caller": "build",
+          "callee": "Color",
+          "lineNumber": 83
+        },
+        {
+          "caller": "build",
+          "callee": "Stack",
+          "lineNumber": 84
+        },
+        {
+          "caller": "build",
+          "callee": "fill",
+          "lineNumber": 86
+        },
+        {
+          "caller": "build",
+          "callee": "Positioned",
+          "lineNumber": 88
+        },
+        {
+          "caller": "build",
+          "callee": "IgnorePointer",
+          "lineNumber": 93
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 94
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 95
+        },
+        {
+          "caller": "build",
+          "callee": "LinearGradient",
+          "lineNumber": 96
+        },
+        {
+          "caller": "build",
+          "callee": "Positioned",
+          "lineNumber": 106
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 110
+        },
+        {
+          "caller": "build",
+          "callee": "Shadow",
+          "lineNumber": 117
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 128
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 129
+        },
+        {
+          "caller": "build",
+          "callee": "_Dots",
+          "lineNumber": 130
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 140
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 144
+        },
+        {
+          "caller": "build",
+          "callee": "separated",
+          "lineNumber": 146
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 149
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 151
+        },
+        {
+          "caller": "build",
+          "callee": "GestureDetector",
+          "lineNumber": 155
+        },
+        {
+          "caller": "build",
+          "callee": "animateToPage",
+          "lineNumber": 157
+        },
+        {
+          "caller": "build",
+          "callee": "Duration",
+          "lineNumber": 159
+        },
+        {
+          "caller": "build",
+          "callee": "AnimatedContainer",
+          "lineNumber": 163
+        },
+        {
+          "caller": "build",
+          "callee": "Duration",
+          "lineNumber": 164
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 166
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 167
+        },
+        {
+          "caller": "build",
+          "callee": "all",
+          "lineNumber": 168
+        },
+        {
+          "caller": "build",
+          "callee": "withOpacity",
+          "lineNumber": 171
+        },
+        {
+          "caller": "build",
+          "callee": "BoxShadow",
+          "lineNumber": 176
+        },
+        {
+          "caller": "build",
+          "callee": "Offset",
+          "lineNumber": 178
+        },
+        {
+          "caller": "build",
+          "callee": "withOpacity",
+          "lineNumber": 179
+        },
+        {
+          "caller": "build",
+          "callee": "_ThumbImage",
+          "lineNumber": 185
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 195
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 198
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 199
+        },
+        {
+          "caller": "build",
+          "callee": "_Card",
+          "lineNumber": 200
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 201
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 203
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 204
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 205
+        },
+        {
+          "caller": "build",
+          "callee": "withOpacity",
+          "lineNumber": 206
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 207
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 209
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 211
+        },
+        {
+          "caller": "build",
+          "callee": "Expanded",
+          "lineNumber": 212
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 213
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 216
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 218
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 219
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 220
+        },
+        {
+          "caller": "build",
+          "callee": "Wrap",
+          "lineNumber": 221
+        },
+        {
+          "caller": "build",
+          "callee": "_Chip",
+          "lineNumber": 225
+        },
+        {
+          "caller": "build",
+          "callee": "join",
+          "lineNumber": 225
+        },
+        {
+          "caller": "build",
+          "callee": "_Chip",
+          "lineNumber": 226
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 237
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 240
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 241
+        },
+        {
+          "caller": "build",
+          "callee": "_Card",
+          "lineNumber": 242
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 243
+        },
+        {
+          "caller": "build",
+          "callee": "_InfoTile",
+          "lineNumber": 245
+        },
+        {
+          "caller": "build",
+          "callee": "valueOrDash",
+          "lineNumber": 247
+        },
+        {
+          "caller": "build",
+          "callee": "_Divider",
+          "lineNumber": 250
+        },
+        {
+          "caller": "build",
+          "callee": "_InfoTile",
+          "lineNumber": 251
+        },
+        {
+          "caller": "build",
+          "callee": "valueOrDash",
+          "lineNumber": 253
+        },
+        {
+          "caller": "build",
+          "callee": "_Divider",
+          "lineNumber": 256
+        },
+        {
+          "caller": "build",
+          "callee": "_InfoTile",
+          "lineNumber": 257
+        },
+        {
+          "caller": "build",
+          "callee": "valueOrDash",
+          "lineNumber": 259
+        },
+        {
+          "caller": "build",
+          "callee": "_Divider",
+          "lineNumber": 262
+        },
+        {
+          "caller": "build",
+          "callee": "_InfoTile",
+          "lineNumber": 263
+        },
+        {
+          "caller": "build",
+          "callee": "valueOrDash",
+          "lineNumber": 265
+        },
+        {
+          "caller": "build",
+          "callee": "_Divider",
+          "lineNumber": 268
+        },
+        {
+          "caller": "build",
+          "callee": "_InfoTile",
+          "lineNumber": 269
+        },
+        {
+          "caller": "build",
+          "callee": "valueOrDash",
+          "lineNumber": 271
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 279
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 282
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 283
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 284
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 286
+        },
+        {
+          "caller": "build",
+          "callee": "icon",
+          "lineNumber": 288
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 290
+        },
+        {
+          "caller": "build",
+          "callee": "push",
+          "lineNumber": 290
+        },
+        {
+          "caller": "build",
+          "callee": "MaterialPageRoute",
+          "lineNumber": 291
+        },
+        {
+          "caller": "build",
+          "callee": "AddNewCarScreen",
+          "lineNumber": 292
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 296
+        },
+        {
+          "caller": "build",
+          "callee": "pop",
+          "lineNumber": 296
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 299
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 300
+        },
+        {
+          "caller": "build",
+          "callee": "styleFrom",
+          "lineNumber": 301
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 302
+        },
+        {
+          "caller": "build",
+          "callee": "RoundedRectangleBorder",
+          "lineNumber": 303
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 303
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 307
+        },
+        {
+          "caller": "_ensureThumbVisible",
+          "callee": "animateTo",
+          "lineNumber": 323
+        },
+        {
+          "caller": "_ensureThumbVisible",
+          "callee": "clamp",
+          "lineNumber": 324
+        },
+        {
+          "caller": "_ensureThumbVisible",
+          "callee": "Duration",
+          "lineNumber": 325
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 339
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 340
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 342
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 344
+        },
+        {
+          "caller": "build",
+          "callee": "all",
+          "lineNumber": 345
+        },
+        {
+          "caller": "build",
+          "callee": "withOpacity",
+          "lineNumber": 345
+        },
+        {
+          "caller": "build",
+          "callee": "BoxShadow",
+          "lineNumber": 347
+        },
+        {
+          "caller": "build",
+          "callee": "Offset",
+          "lineNumber": 349
+        },
+        {
+          "caller": "build",
+          "callee": "withOpacity",
+          "lineNumber": 350
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 354
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 367
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 368
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 369
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 370
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 371
+        },
+        {
+          "caller": "build",
+          "callee": "all",
+          "lineNumber": 372
+        },
+        {
+          "caller": "build",
+          "callee": "withOpacity",
+          "lineNumber": 372
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 374
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 377
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 378
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 379
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 394
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 395
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 397
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 398
+        },
+        {
+          "caller": "build",
+          "callee": "withOpacity",
+          "lineNumber": 399
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 400
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 402
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 403
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 405
+        },
+        {
+          "caller": "build",
+          "callee": "Expanded",
+          "lineNumber": 406
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 407
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 410
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 412
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 413
+        },
+        {
+          "caller": "build",
+          "callee": "Divider",
+          "lineNumber": 426
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 429
+        },
+        {
+          "caller": "build",
+          "callee": "withOpacity",
+          "lineNumber": 429
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 441
+        },
+        {
+          "caller": "build",
+          "callee": "generate",
+          "lineNumber": 443
+        },
+        {
+          "caller": "build",
+          "callee": "AnimatedContainer",
+          "lineNumber": 445
+        },
+        {
+          "caller": "build",
+          "callee": "Duration",
+          "lineNumber": 446
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 447
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 450
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 452
+        },
+        {
+          "caller": "build",
+          "callee": "ClipRRect",
+          "lineNumber": 467
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 468
+        },
+        {
+          "caller": "build",
+          "callee": "ImageLoader",
+          "lineNumber": 468
+        },
+        {
+          "caller": "build",
+          "callee": "Center",
+          "lineNumber": 468
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 468
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 10,
+        "functionCount": 10,
+        "classCount": 8
+      }
+    },
+    {
+      "path": "lib/features/user_cars/presentation/screen/user_cars_list_screen.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 98,
+      "nonEmptyLines": 89,
+      "functions": [
+        {
+          "name": "build",
+          "startLine": 17,
+          "endLine": 17,
+          "params": [
+            "context",
+            "ref"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "UserCarsListScreen",
+          "startLine": 13,
+          "endLine": 98,
+          "methods": [
+            "build"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "build",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "UserCarsListScreen",
+          "line": 13,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 19
+        },
+        {
+          "caller": "build",
+          "callee": "watch",
+          "lineNumber": 20
+        },
+        {
+          "caller": "build",
+          "callee": "watch",
+          "lineNumber": 21
+        },
+        {
+          "caller": "build",
+          "callee": "microtask",
+          "lineNumber": 26
+        },
+        {
+          "caller": "build",
+          "callee": "read",
+          "lineNumber": 28
+        },
+        {
+          "caller": "build",
+          "callee": "fetchUserCars",
+          "lineNumber": 29
+        },
+        {
+          "caller": "build",
+          "callee": "Scaffold",
+          "lineNumber": 35
+        },
+        {
+          "caller": "build",
+          "callee": "Center",
+          "lineNumber": 36
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 36
+        },
+        {
+          "caller": "build",
+          "callee": "Center",
+          "lineNumber": 42
+        },
+        {
+          "caller": "build",
+          "callee": "CircularProgressIndicator",
+          "lineNumber": 42
+        },
+        {
+          "caller": "build",
+          "callee": "UserCarsEmptyState",
+          "lineNumber": 46
+        },
+        {
+          "caller": "build",
+          "callee": "pushNamed",
+          "lineNumber": 48
+        },
+        {
+          "caller": "build",
+          "callee": "separated",
+          "lineNumber": 52
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 53
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 55
+        },
+        {
+          "caller": "build",
+          "callee": "trim",
+          "lineNumber": 59
+        },
+        {
+          "caller": "build",
+          "callee": "join",
+          "lineNumber": 60
+        },
+        {
+          "caller": "build",
+          "callee": "CarCard",
+          "lineNumber": 64
+        },
+        {
+          "caller": "build",
+          "callee": "CarInfo",
+          "lineNumber": 65
+        },
+        {
+          "caller": "build",
+          "callee": "pushNamed",
+          "lineNumber": 73
+        },
+        {
+          "caller": "build",
+          "callee": "Center",
+          "lineNumber": 83
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 84
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 86
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 89
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 93
+        },
+        {
+          "caller": "build",
+          "callee": "Scaffold",
+          "lineNumber": 96
+        }
+      ],
+      "metrics": {
+        "importCount": 8,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/user_cars/presentation/view_model/add_user_car_state.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 8,
+      "functions": [
+        {
+          "name": "AddUserCarError",
+          "startLine": 12,
+          "endLine": 12,
+          "params": [
+            "message"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "AddUserCarState",
+          "startLine": 1,
+          "endLine": 1,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "AddUserCarInitial",
+          "startLine": 3,
+          "endLine": 3,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "AddUserCarLoading",
+          "startLine": 5,
+          "endLine": 5,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "AddUserCarSuccess",
+          "startLine": 7,
+          "endLine": 7,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "AddUserCarError",
+          "startLine": 9,
+          "endLine": 13,
+          "methods": [
+            "AddUserCarError"
+          ],
+          "properties": [
+            "message"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AddUserCarState",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "AddUserCarInitial",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "AddUserCarLoading",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "AddUserCarSuccess",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "AddUserCarError",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "AddUserCarError",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 6,
+        "functionCount": 1,
+        "classCount": 5
+      }
+    },
+    {
+      "path": "lib/features/user_cars/presentation/view_model/add_user_car_view_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 34,
+      "functions": [
+        {
+          "name": "AddUserCarViewModel",
+          "startLine": 12,
+          "endLine": 15,
+          "params": [
+            "_addUserCarUseCase",
+            "_updateUserCarUseCase"
+          ]
+        },
+        {
+          "name": "addCar",
+          "startLine": 17,
+          "endLine": 17,
+          "params": [
+            "car"
+          ]
+        },
+        {
+          "name": "updateCar",
+          "startLine": 27,
+          "endLine": 27,
+          "params": [
+            "car"
+          ]
+        },
+        {
+          "name": "reset",
+          "startLine": 37,
+          "endLine": 37,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "AddUserCarViewModel",
+          "startLine": 8,
+          "endLine": 40,
+          "methods": [
+            "AddUserCarViewModel",
+            "addCar",
+            "updateCar",
+            "reset"
+          ],
+          "properties": [
+            "_addUserCarUseCase",
+            "_updateUserCarUseCase"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AddUserCarViewModel",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "addCar",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "updateCar",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "reset",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "AddUserCarViewModel",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "addCar",
+          "callee": "AddUserCarLoading",
+          "lineNumber": 18
+        },
+        {
+          "caller": "addCar",
+          "callee": "_addUserCarUseCase",
+          "lineNumber": 20
+        },
+        {
+          "caller": "addCar",
+          "callee": "AddUserCarSuccess",
+          "lineNumber": 21
+        },
+        {
+          "caller": "addCar",
+          "callee": "AddUserCarError",
+          "lineNumber": 23
+        },
+        {
+          "caller": "addCar",
+          "callee": "toString",
+          "lineNumber": 23
+        },
+        {
+          "caller": "updateCar",
+          "callee": "AddUserCarLoading",
+          "lineNumber": 28
+        },
+        {
+          "caller": "updateCar",
+          "callee": "_updateUserCarUseCase",
+          "lineNumber": 30
+        },
+        {
+          "caller": "updateCar",
+          "callee": "AddUserCarSuccess",
+          "lineNumber": 31
+        },
+        {
+          "caller": "updateCar",
+          "callee": "AddUserCarError",
+          "lineNumber": 33
+        },
+        {
+          "caller": "updateCar",
+          "callee": "toString",
+          "lineNumber": 33
+        },
+        {
+          "caller": "reset",
+          "callee": "AddUserCarInitial",
+          "lineNumber": 38
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 5,
+        "functionCount": 4,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/user_cars/presentation/view_model/car_brands_state.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 21,
+      "nonEmptyLines": 12,
+      "functions": [
+        {
+          "name": "CarBrandsLoaded",
+          "startLine": 14,
+          "endLine": 14,
+          "params": [
+            "carBrands"
+          ]
+        },
+        {
+          "name": "CarBrandsError",
+          "startLine": 20,
+          "endLine": 20,
+          "params": [
+            "message"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "CarBrandsState",
+          "startLine": 4,
+          "endLine": 4,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "CarBrandsInitial",
+          "startLine": 7,
+          "endLine": 7,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "CarBrandsLoading",
+          "startLine": 9,
+          "endLine": 9,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "CarBrandsLoaded",
+          "startLine": 11,
+          "endLine": 15,
+          "methods": [
+            "CarBrandsLoaded"
+          ],
+          "properties": [
+            "carBrands"
+          ]
+        },
+        {
+          "name": "CarBrandsError",
+          "startLine": 17,
+          "endLine": 21,
+          "methods": [
+            "CarBrandsError"
+          ],
+          "properties": [
+            "message"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CarBrandsState",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "CarBrandsInitial",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "CarBrandsLoading",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "CarBrandsLoaded",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "CarBrandsLoaded",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "CarBrandsError",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "CarBrandsError",
+          "line": 17,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 7,
+        "functionCount": 2,
+        "classCount": 5
+      }
+    },
+    {
+      "path": "lib/features/user_cars/presentation/view_model/car_brands_view_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 23,
+      "nonEmptyLines": 18,
+      "functions": [
+        {
+          "name": "CarBrandsViewModel",
+          "startLine": 10,
+          "endLine": 12,
+          "params": [
+            "getCarBrandsModelUseCase"
+          ]
+        },
+        {
+          "name": "fetCarBrands",
+          "startLine": 14,
+          "endLine": 14,
+          "params": [
+            "carModelId"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "CarBrandsViewModel",
+          "startLine": 7,
+          "endLine": 23,
+          "methods": [
+            "CarBrandsViewModel",
+            "fetCarBrands"
+          ],
+          "properties": [
+            "getCarBrandsModelUseCase"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CarBrandsViewModel",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "fetCarBrands",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "CarBrandsViewModel",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fetCarBrands",
+          "callee": "CarBrandsLoading",
+          "lineNumber": 15
+        },
+        {
+          "caller": "fetCarBrands",
+          "callee": "getCarBrandsModelUseCase",
+          "lineNumber": 17
+        },
+        {
+          "caller": "fetCarBrands",
+          "callee": "CarBrandsLoaded",
+          "lineNumber": 18
+        },
+        {
+          "caller": "fetCarBrands",
+          "callee": "CarBrandsError",
+          "lineNumber": 20
+        },
+        {
+          "caller": "fetCarBrands",
+          "callee": "toString",
+          "lineNumber": 20
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/user_cars/presentation/view_model/manufacturers_state.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 12,
+      "functions": [
+        {
+          "name": "ManufacturersLoaded",
+          "startLine": 13,
+          "endLine": 13,
+          "params": [
+            "manufacturers"
+          ]
+        },
+        {
+          "name": "ManufacturersError",
+          "startLine": 19,
+          "endLine": 19,
+          "params": [
+            "message"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ManufacturersState",
+          "startLine": 3,
+          "endLine": 3,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "ManufacturersInitial",
+          "startLine": 6,
+          "endLine": 6,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "ManufacturersLoading",
+          "startLine": 8,
+          "endLine": 8,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "ManufacturersLoaded",
+          "startLine": 10,
+          "endLine": 14,
+          "methods": [
+            "ManufacturersLoaded"
+          ],
+          "properties": [
+            "manufacturers"
+          ]
+        },
+        {
+          "name": "ManufacturersError",
+          "startLine": 16,
+          "endLine": 20,
+          "methods": [
+            "ManufacturersError"
+          ],
+          "properties": [
+            "message"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ManufacturersState",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "ManufacturersInitial",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "ManufacturersLoading",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "ManufacturersLoaded",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "ManufacturersLoaded",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "ManufacturersError",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "ManufacturersError",
+          "line": 16,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 7,
+        "functionCount": 2,
+        "classCount": 5
+      }
+    },
+    {
+      "path": "lib/features/user_cars/presentation/view_model/manufacturers_view_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 27,
+      "nonEmptyLines": 22,
+      "functions": [
+        {
+          "name": "ManufacturersViewModel",
+          "startLine": 10,
+          "endLine": 12,
+          "params": [
+            "getManufacturersUseCase"
+          ]
+        },
+        {
+          "name": "fetchManufacturers",
+          "startLine": 14,
+          "endLine": 14,
+          "params": []
+        },
+        {
+          "name": "selectManufacturer",
+          "startLine": 24,
+          "endLine": 24,
+          "params": [
+            "manufacturerId"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ManufacturersViewModel",
+          "startLine": 6,
+          "endLine": 27,
+          "methods": [
+            "ManufacturersViewModel",
+            "fetchManufacturers",
+            "selectManufacturer"
+          ],
+          "properties": [
+            "getManufacturersUseCase",
+            "selectedManufacturerId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ManufacturersViewModel",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "fetchManufacturers",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "selectManufacturer",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "ManufacturersViewModel",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fetchManufacturers",
+          "callee": "ManufacturersLoading",
+          "lineNumber": 15
+        },
+        {
+          "caller": "fetchManufacturers",
+          "callee": "getManufacturersUseCase",
+          "lineNumber": 17
+        },
+        {
+          "caller": "fetchManufacturers",
+          "callee": "ManufacturersLoaded",
+          "lineNumber": 18
+        },
+        {
+          "caller": "fetchManufacturers",
+          "callee": "ManufacturersError",
+          "lineNumber": 20
+        },
+        {
+          "caller": "fetchManufacturers",
+          "callee": "toString",
+          "lineNumber": 20
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 3,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/user_cars/presentation/view_model/user_cars_state.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 24,
+      "nonEmptyLines": 18,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/features/user_cars/presentation/view_model/user_cars_view_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 28,
+      "nonEmptyLines": 24,
+      "functions": [
+        {
+          "name": "UserCarsViewModel",
+          "startLine": 8,
+          "endLine": 8,
+          "params": [
+            "_getUserCarsUseCase"
+          ]
+        },
+        {
+          "name": "fetchUserCars",
+          "startLine": 10,
+          "endLine": 10,
+          "params": [
+            "customerId"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "UserCarsViewModel",
+          "startLine": 5,
+          "endLine": 28,
+          "methods": [
+            "UserCarsViewModel",
+            "fetchUserCars"
+          ],
+          "properties": [
+            "_getUserCarsUseCase"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "UserCarsViewModel",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "fetchUserCars",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "UserCarsViewModel",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fetchUserCars",
+          "callee": "UserCarsLoading",
+          "lineNumber": 15
+        },
+        {
+          "caller": "fetchUserCars",
+          "callee": "trim",
+          "lineNumber": 18
+        },
+        {
+          "caller": "fetchUserCars",
+          "callee": "trim",
+          "lineNumber": 19
+        },
+        {
+          "caller": "fetchUserCars",
+          "callee": "_getUserCarsUseCase",
+          "lineNumber": 22
+        },
+        {
+          "caller": "fetchUserCars",
+          "callee": "UserCarsLoaded",
+          "lineNumber": 23
+        },
+        {
+          "caller": "fetchUserCars",
+          "callee": "UserCarsError",
+          "lineNumber": 25
+        },
+        {
+          "caller": "fetchUserCars",
+          "callee": "toString",
+          "lineNumber": 25
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/user_cars/presentation/widget/user_car_home_item_card.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 233,
+      "nonEmptyLines": 202,
+      "functions": [
+        {
+          "name": "build",
+          "startLine": 35,
+          "endLine": 35,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "_copy",
+          "startLine": 85,
+          "endLine": 85,
+          "params": [
+            "context",
+            "text"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 107,
+          "endLine": 107,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 177,
+          "endLine": 177,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 220,
+          "endLine": 220,
+          "params": [
+            "context"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "HomeCarOutlinedCard",
+          "startLine": 7,
+          "endLine": 91,
+          "methods": [
+            "build",
+            "_copy"
+          ],
+          "properties": [
+            "imageUrl",
+            "model",
+            "plate",
+            "chassis",
+            "maskChassis",
+            "heroTag",
+            "onBook"
+          ]
+        },
+        {
+          "name": "_DetailsCompact",
+          "startLine": 93,
+          "endLine": 161,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "model",
+            "plate",
+            "chassisDisplay",
+            "onBook"
+          ]
+        },
+        {
+          "name": "_SpecRow",
+          "startLine": 163,
+          "endLine": 214,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "icon",
+            "label",
+            "value",
+            "onCopy"
+          ]
+        },
+        {
+          "name": "_ImageErrorTile",
+          "startLine": 216,
+          "endLine": 225,
+          "methods": [
+            "build"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "build",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "HomeCarOutlinedCard",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 107,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 177,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 220,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 36
+        },
+        {
+          "caller": "build",
+          "callee": "Card",
+          "lineNumber": 39
+        },
+        {
+          "caller": "build",
+          "callee": "RoundedRectangleBorder",
+          "lineNumber": 44
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 45
+        },
+        {
+          "caller": "build",
+          "callee": "BorderSide",
+          "lineNumber": 46
+        },
+        {
+          "caller": "build",
+          "callee": "withOpacity",
+          "lineNumber": 47
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 50
+        },
+        {
+          "caller": "build",
+          "callee": "Hero",
+          "lineNumber": 55
+        },
+        {
+          "caller": "build",
+          "callee": "ValueKey",
+          "lineNumber": 56
+        },
+        {
+          "caller": "build",
+          "callee": "AspectRatio",
+          "lineNumber": 57
+        },
+        {
+          "caller": "build",
+          "callee": "ImageLoader",
+          "lineNumber": 59
+        },
+        {
+          "caller": "build",
+          "callee": "_ImageErrorTile",
+          "lineNumber": 61
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 67
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 69
+        },
+        {
+          "caller": "build",
+          "callee": "_DetailsCompact",
+          "lineNumber": 70
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 77
+        },
+        {
+          "caller": "_copy",
+          "callee": "setData",
+          "lineNumber": 86
+        },
+        {
+          "caller": "_copy",
+          "callee": "ClipboardData",
+          "lineNumber": 86
+        },
+        {
+          "caller": "_copy",
+          "callee": "of",
+          "lineNumber": 87
+        },
+        {
+          "caller": "_copy",
+          "callee": "showSnackBar",
+          "lineNumber": 87
+        },
+        {
+          "caller": "_copy",
+          "callee": "SnackBar",
+          "lineNumber": 88
+        },
+        {
+          "caller": "_copy",
+          "callee": "Text",
+          "lineNumber": 88
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 108
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 111
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 116
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 125
+        },
+        {
+          "caller": "build",
+          "callee": "_SpecRow",
+          "lineNumber": 127
+        },
+        {
+          "caller": "build",
+          "callee": "_copy",
+          "lineNumber": 131
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 133
+        },
+        {
+          "caller": "build",
+          "callee": "_SpecRow",
+          "lineNumber": 135
+        },
+        {
+          "caller": "build",
+          "callee": "_copy",
+          "lineNumber": 139
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 142
+        },
+        {
+          "caller": "build",
+          "callee": "Align",
+          "lineNumber": 145
+        },
+        {
+          "caller": "build",
+          "callee": "OutlinedButton",
+          "lineNumber": 147
+        },
+        {
+          "caller": "build",
+          "callee": "styleFrom",
+          "lineNumber": 149
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 151
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 155
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 178
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 179
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 181
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 182
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 183
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 190
+        },
+        {
+          "caller": "build",
+          "callee": "Expanded",
+          "lineNumber": 191
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 192
+        },
+        {
+          "caller": "build",
+          "callee": "tabularFigures",
+          "lineNumber": 198
+        },
+        {
+          "caller": "build",
+          "callee": "IconButton",
+          "lineNumber": 203
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 206
+        },
+        {
+          "caller": "build",
+          "callee": "BoxConstraints",
+          "lineNumber": 209
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 221
+        },
+        {
+          "caller": "build",
+          "callee": "Center",
+          "lineNumber": 222
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 222
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 5,
+        "functionCount": 5,
+        "classCount": 4
+      }
+    },
+    {
+      "path": "lib/features/user_cars/presentation/widget/user_car_list_item.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 303,
+      "nonEmptyLines": 275,
+      "functions": [
+        {
+          "name": "build",
+          "startLine": 46,
+          "endLine": 46,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "_buildImage",
+          "startLine": 113,
+          "endLine": 113,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "_maskChassis",
+          "startLine": 135,
+          "endLine": 135,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 158,
+          "endLine": 158,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 217,
+          "endLine": 217,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 254,
+          "endLine": 254,
+          "params": [
+            "context"
+          ]
+        },
+        {
+          "name": "createState",
+          "startLine": 267,
+          "endLine": 267,
+          "params": []
+        },
+        {
+          "name": "dispose",
+          "startLine": 278,
+          "endLine": 278,
+          "params": []
+        },
+        {
+          "name": "build",
+          "startLine": 284,
+          "endLine": 284,
+          "params": [
+            "context"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "CarInfo",
+          "startLine": 9,
+          "endLine": 20,
+          "methods": [],
+          "properties": [
+            "imageUrl",
+            "model",
+            "plate",
+            "chassis"
+          ]
+        },
+        {
+          "name": "CarCard",
+          "startLine": 23,
+          "endLine": 142,
+          "methods": [
+            "build",
+            "_buildImage",
+            "_maskChassis"
+          ],
+          "properties": [
+            "car",
+            "onTap",
+            "onLongPress",
+            "imageBuilder",
+            "heroTag",
+            "showDivider",
+            "maskChassis"
+          ]
+        },
+        {
+          "name": "_InfoColumn",
+          "startLine": 144,
+          "endLine": 203,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "model",
+            "plate",
+            "chassis",
+            "textScale"
+          ]
+        },
+        {
+          "name": "_InfoChip",
+          "startLine": 205,
+          "endLine": 245,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "icon",
+            "label",
+            "semanticsLabel"
+          ]
+        },
+        {
+          "name": "_PlaceholderTile",
+          "startLine": 249,
+          "endLine": 262,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "icon"
+          ]
+        },
+        {
+          "name": "_ShimmerSkeleton",
+          "startLine": 265,
+          "endLine": 268,
+          "methods": [
+            "createState"
+          ],
+          "properties": []
+        },
+        {
+          "name": "_ShimmerSkeletonState",
+          "startLine": 270,
+          "endLine": 303,
+          "methods": [
+            "dispose",
+            "build"
+          ],
+          "properties": [
+            "_c"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CarInfo",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "CarCard",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 158,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 217,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 254,
+          "isDefault": false
+        },
+        {
+          "name": "createState",
+          "line": 267,
+          "isDefault": false
+        },
+        {
+          "name": "dispose",
+          "line": 278,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 284,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 47
+        },
+        {
+          "caller": "build",
+          "callee": "textScaleFactorOf",
+          "lineNumber": 48
+        },
+        {
+          "caller": "build",
+          "callee": "clamp",
+          "lineNumber": 48
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 49
+        },
+        {
+          "caller": "build",
+          "callee": "Semantics",
+          "lineNumber": 51
+        },
+        {
+          "caller": "build",
+          "callee": "userCarsCardSemantics",
+          "lineNumber": 52
+        },
+        {
+          "caller": "build",
+          "callee": "InkWell",
+          "lineNumber": 54
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 57
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 58
+        },
+        {
+          "caller": "build",
+          "callee": "Card",
+          "lineNumber": 60
+        },
+        {
+          "caller": "build",
+          "callee": "RoundedRectangleBorder",
+          "lineNumber": 65
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 66
+        },
+        {
+          "caller": "build",
+          "callee": "BorderSide",
+          "lineNumber": 67
+        },
+        {
+          "caller": "build",
+          "callee": "withOpacity",
+          "lineNumber": 68
+        },
+        {
+          "caller": "build",
+          "callee": "Padding",
+          "lineNumber": 71
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 72
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 73
+        },
+        {
+          "caller": "build",
+          "callee": "_buildImage",
+          "lineNumber": 76
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 77
+        },
+        {
+          "caller": "build",
+          "callee": "Expanded",
+          "lineNumber": 78
+        },
+        {
+          "caller": "build",
+          "callee": "_InfoColumn",
+          "lineNumber": 79
+        },
+        {
+          "caller": "build",
+          "callee": "_maskChassis",
+          "lineNumber": 82
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 86
+        },
+        {
+          "caller": "build",
+          "callee": "Transform",
+          "lineNumber": 87
+        },
+        {
+          "caller": "build",
+          "callee": "rotationY",
+          "lineNumber": 89
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 90
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 100
+        },
+        {
+          "caller": "build",
+          "callee": "Divider",
+          "lineNumber": 102
+        },
+        {
+          "caller": "build",
+          "callee": "withOpacity",
+          "lineNumber": 105
+        },
+        {
+          "caller": "_buildImage",
+          "callee": "ClipRRect",
+          "lineNumber": 114
+        },
+        {
+          "caller": "_buildImage",
+          "callee": "circular",
+          "lineNumber": 115
+        },
+        {
+          "caller": "_buildImage",
+          "callee": "AspectRatio",
+          "lineNumber": 116
+        },
+        {
+          "caller": "_buildImage",
+          "callee": "ImageLoader",
+          "lineNumber": 118
+        },
+        {
+          "caller": "_buildImage",
+          "callee": "_PlaceholderTile",
+          "lineNumber": 120
+        },
+        {
+          "caller": "_buildImage",
+          "callee": "SizedBox",
+          "lineNumber": 126
+        },
+        {
+          "caller": "_buildImage",
+          "callee": "Hero",
+          "lineNumber": 129
+        },
+        {
+          "caller": "_buildImage",
+          "callee": "SizedBox",
+          "lineNumber": 132
+        },
+        {
+          "caller": "_maskChassis",
+          "callee": "replaceAll",
+          "lineNumber": 138
+        },
+        {
+          "caller": "_maskChassis",
+          "callee": "substring",
+          "lineNumber": 140
+        },
+        {
+          "caller": "_maskChassis",
+          "callee": "substring",
+          "lineNumber": 140
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 159
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 161
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 165
+        },
+        {
+          "caller": "build",
+          "callee": "linear",
+          "lineNumber": 172
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 174
+        },
+        {
+          "caller": "build",
+          "callee": "_InfoChip",
+          "lineNumber": 177
+        },
+        {
+          "caller": "build",
+          "callee": "userCarsLicensePlateSemantics",
+          "lineNumber": 180
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 182
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 185
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 187
+        },
+        {
+          "caller": "build",
+          "callee": "Expanded",
+          "lineNumber": 188
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 189
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 218
+        },
+        {
+          "caller": "build",
+          "callee": "Semantics",
+          "lineNumber": 219
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 221
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 222
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 223
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 225
+        },
+        {
+          "caller": "build",
+          "callee": "all",
+          "lineNumber": 226
+        },
+        {
+          "caller": "build",
+          "callee": "withOpacity",
+          "lineNumber": 226
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 228
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 231
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 232
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 233
+        },
+        {
+          "caller": "build",
+          "callee": "tabularFigures",
+          "lineNumber": 237
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 255
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 256
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 259
+        },
+        {
+          "caller": "createState",
+          "callee": "_ShimmerSkeletonState",
+          "lineNumber": 267
+        },
+        {
+          "caller": "dispose",
+          "callee": "dispose",
+          "lineNumber": 279
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 285
+        },
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 286
+        },
+        {
+          "caller": "build",
+          "callee": "AnimatedBuilder",
+          "lineNumber": 287
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 290
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 291
+        },
+        {
+          "caller": "build",
+          "callee": "LinearGradient",
+          "lineNumber": 292
+        },
+        {
+          "caller": "build",
+          "callee": "lerp",
+          "lineNumber": 295
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 9,
+        "functionCount": 9,
+        "classCount": 7
+      }
+    },
+    {
+      "path": "lib/features/user_cars/presentation/widget/user_cars_empty_state.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 68,
+      "nonEmptyLines": 63,
+      "functions": [
+        {
+          "name": "build",
+          "startLine": 11,
+          "endLine": 11,
+          "params": [
+            "context"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "UserCarsEmptyState",
+          "startLine": 5,
+          "endLine": 68,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "onAddCar"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "build",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "UserCarsEmptyState",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "build",
+          "callee": "of",
+          "lineNumber": 12
+        },
+        {
+          "caller": "build",
+          "callee": "Center",
+          "lineNumber": 14
+        },
+        {
+          "caller": "build",
+          "callee": "Container",
+          "lineNumber": 15
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 16
+        },
+        {
+          "caller": "build",
+          "callee": "EdgeInsets",
+          "lineNumber": 17
+        },
+        {
+          "caller": "build",
+          "callee": "BoxDecoration",
+          "lineNumber": 18
+        },
+        {
+          "caller": "build",
+          "callee": "circular",
+          "lineNumber": 20
+        },
+        {
+          "caller": "build",
+          "callee": "BoxShadow",
+          "lineNumber": 22
+        },
+        {
+          "caller": "build",
+          "callee": "withValues",
+          "lineNumber": 23
+        },
+        {
+          "caller": "build",
+          "callee": "Offset",
+          "lineNumber": 25
+        },
+        {
+          "caller": "build",
+          "callee": "Column",
+          "lineNumber": 29
+        },
+        {
+          "caller": "build",
+          "callee": "Icon",
+          "lineNumber": 32
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 37
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 38
+        },
+        {
+          "caller": "build",
+          "callee": "TextStyle",
+          "lineNumber": 40
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 42
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 43
+        },
+        {
+          "caller": "build",
+          "callee": "TextStyle",
+          "lineNumber": 46
+        },
+        {
+          "caller": "build",
+          "callee": "SizedBox",
+          "lineNumber": 52
+        },
+        {
+          "caller": "build",
+          "callee": "Row",
+          "lineNumber": 53
+        },
+        {
+          "caller": "build",
+          "callee": "Expanded",
+          "lineNumber": 55
+        },
+        {
+          "caller": "build",
+          "callee": "ElevatedButton",
+          "lineNumber": 56
+        },
+        {
+          "caller": "build",
+          "callee": "Text",
+          "lineNumber": 58
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    }
+  ]
+}

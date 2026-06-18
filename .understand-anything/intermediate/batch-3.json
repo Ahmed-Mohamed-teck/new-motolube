@@ -1,0 +1,564 @@
+{
+  "nodes": [
+    {
+      "id": "file:.dart-tool/CLIENT_ID",
+      "type": "file",
+      "name": "CLIENT_ID",
+      "filePath": ".dart-tool/CLIENT_ID",
+      "summary": "Dart tooling auto-generated anonymous client identifier used for Dart/Flutter analytics telemetry; not part of application source.",
+      "tags": ["configuration", "tooling", "generated", "telemetry"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.dart-tool/dart-flutter-telemetry-dismissed-surveys.json",
+      "type": "config",
+      "name": "dart-flutter-telemetry-dismissed-surveys.json",
+      "filePath": ".dart-tool/dart-flutter-telemetry-dismissed-surveys.json",
+      "summary": "Auto-generated Dart/Flutter tooling file tracking which telemetry survey prompts the developer has dismissed.",
+      "tags": ["configuration", "tooling", "generated", "telemetry"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.dart-tool/dart-flutter-telemetry-session.json",
+      "type": "config",
+      "name": "dart-flutter-telemetry-session.json",
+      "filePath": ".dart-tool/dart-flutter-telemetry-session.json",
+      "summary": "Auto-generated Dart/Flutter tooling file storing the current telemetry session id and last ping timestamp.",
+      "tags": ["configuration", "tooling", "generated", "telemetry"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.dart-tool/dart-flutter-telemetry.config",
+      "type": "file",
+      "name": "dart-flutter-telemetry.config",
+      "filePath": ".dart-tool/dart-flutter-telemetry.config",
+      "summary": "Auto-generated Dart/Flutter tooling configuration recording the developer's telemetry opt-in/opt-out preference.",
+      "tags": ["configuration", "tooling", "generated", "telemetry"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.metadata",
+      "type": "file",
+      "name": ".metadata",
+      "filePath": ".metadata",
+      "summary": "Flutter tooling metadata file tracking the Flutter SDK version and migration/platform info used to create and manage this project.",
+      "tags": ["configuration", "tooling", "generated", "flutter"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.understand-anything/.understandignore",
+      "type": "file",
+      "name": ".understandignore",
+      "filePath": ".understand-anything/.understandignore",
+      "summary": "Ignore-pattern list used by the Understand-Anything analysis tool to exclude build artifacts, dependencies, and generated files from codebase scanning.",
+      "tags": ["configuration", "tooling", "ignore-rules"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.understand-anything/intermediate/scan-result.json",
+      "type": "config",
+      "name": "scan-result.json",
+      "filePath": ".understand-anything/intermediate/scan-result.json",
+      "summary": "Intermediate project-scanner output listing detected languages, frameworks, all project files, and a resolved cross-file import map for the newmotorlube Flutter app, used as input to the knowledge-graph build pipeline.",
+      "tags": ["configuration", "tooling", "generated", "build-system"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:lib/core/providers/current_locale_provider.dart",
+      "type": "file",
+      "name": "current_locale_provider.dart",
+      "filePath": "lib/core/providers/current_locale_provider.dart",
+      "summary": "Riverpod notifier provider that tracks and persists the app's currently selected locale, reading and writing it to shared preferences.",
+      "tags": ["service", "state-management", "localization", "provider"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/core/providers/current_locale_provider.dart:CurrentLocaleProvider",
+      "type": "class",
+      "name": "CurrentLocaleProvider",
+      "filePath": "lib/core/providers/current_locale_provider.dart",
+      "lineRange": [4, 19],
+      "summary": "Riverpod Notifier holding the current Locale, initialized from persisted shared-preferences and updatable via updateLocale, which also writes the new value back to storage.",
+      "tags": ["state-management", "provider", "localization"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/core/providers/dio_provider.dart",
+      "type": "file",
+      "name": "dio_provider.dart",
+      "filePath": "lib/core/providers/dio_provider.dart",
+      "summary": "Configures the shared Dio HTTP client (timeouts, auth-token interceptor) and exposes a DioClient wrapper providing get/post helpers with optional bearer-token authentication and request retry support.",
+      "tags": ["service", "api-handler", "provider", "networking"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/core/providers/dio_provider.dart:DioClient",
+      "type": "class",
+      "name": "DioClient",
+      "filePath": "lib/core/providers/dio_provider.dart",
+      "lineRange": [39, 126],
+      "summary": "Thin wrapper around a Dio instance exposing get/post methods with optional bearer-auth header injection and a private _retry helper for re-issuing failed requests.",
+      "tags": ["api-handler", "networking", "service"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/core/providers/dio_provider.dart:get",
+      "type": "function",
+      "name": "get",
+      "filePath": "lib/core/providers/dio_provider.dart",
+      "lineRange": [49, 56],
+      "summary": "Performs an HTTP GET via the wrapped Dio instance, optionally attaching a bearer auth header, and returns the raw response data.",
+      "tags": ["api-handler", "networking"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/core/providers/dio_provider.dart:post",
+      "type": "function",
+      "name": "post",
+      "filePath": "lib/core/providers/dio_provider.dart",
+      "lineRange": [77, 86],
+      "summary": "Performs an HTTP POST via the wrapped Dio instance, optionally attaching a bearer auth header, and returns the raw response data.",
+      "tags": ["api-handler", "networking"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/core/providers/general_providers.dart",
+      "type": "file",
+      "name": "general_providers.dart",
+      "filePath": "lib/core/providers/general_providers.dart",
+      "summary": "Defines a Riverpod FutureProvider that initializes and exposes the app's SharedPreferencesWithCache instance for use across the app.",
+      "tags": ["provider", "state-management", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/core/providers/general_providers.dart:initializeSharedPreferences",
+      "type": "function",
+      "name": "initializeSharedPreferences",
+      "filePath": "lib/core/providers/general_providers.dart",
+      "lineRange": [8, 8],
+      "summary": "Asynchronously creates a cached SharedPreferencesWithCache instance for the app's persisted key-value storage.",
+      "tags": ["utility", "storage"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/core/providers/global_lang_provider.dart",
+      "type": "file",
+      "name": "global_lang_provider.dart",
+      "filePath": "lib/core/providers/global_lang_provider.dart",
+      "summary": "Sets up a global, non-widget-scoped accessor for the generated localization strings (S) via a standalone Riverpod ProviderContainer, allowing localized strings to be used outside the widget tree.",
+      "tags": ["provider", "localization", "singleton"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/core/providers/plate_chars_provider.dart",
+      "type": "file",
+      "name": "plate_chars_provider.dart",
+      "filePath": "lib/core/providers/plate_chars_provider.dart",
+      "summary": "Provides static lookup lists of valid Saudi license-plate Arabic/English letters and digits used by the vehicle-registration UI for plate-character selection.",
+      "tags": ["utility", "data-model", "localization"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/core/providers/plate_chars_provider.dart:CharListProvider",
+      "type": "class",
+      "name": "CharListProvider",
+      "filePath": "lib/core/providers/plate_chars_provider.dart",
+      "lineRange": [1, 91],
+      "summary": "Static utility class exposing getPlateChars and getPlateNumbers, returning language-specific (Arabic/English) lists of valid license-plate characters and digits, throwing ArgumentError for unsupported languages.",
+      "tags": ["utility", "data-model", "validation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:lib/core/providers/push_notifications_service.dart",
+      "type": "file",
+      "name": "push_notifications_service.dart",
+      "filePath": "lib/core/providers/push_notifications_service.dart",
+      "summary": "Singleton service that initializes Firebase Cloud Messaging and local notifications, requests permissions, handles foreground/background/terminated push messages, and navigates the app when a notification is tapped.",
+      "tags": ["service", "singleton", "event-handler", "notifications"],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:lib/core/providers/push_notifications_service.dart:PushNotificationsService",
+      "type": "class",
+      "name": "PushNotificationsService",
+      "filePath": "lib/core/providers/push_notifications_service.dart",
+      "lineRange": [15, 208],
+      "summary": "Singleton wrapping FirebaseMessaging and flutter_local_notifications; initializes push handling, manages permission requests, token retrieval (with APNs wait logic on iOS), local notification display, and message-tap navigation.",
+      "tags": ["service", "singleton", "notifications", "event-handler"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:lib/core/providers/push_notifications_service.dart:firebaseMessagingBackgroundHandler",
+      "type": "function",
+      "name": "firebaseMessagingBackgroundHandler",
+      "filePath": "lib/core/providers/push_notifications_service.dart",
+      "lineRange": [10, 10],
+      "summary": "Top-level background message handler registered with Firebase Messaging; ensures Firebase is initialized when a push notification arrives while the app is terminated/backgrounded.",
+      "tags": ["event-handler", "notifications", "entry-point"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/core/providers/push_notifications_service.dart:initialize",
+      "type": "function",
+      "name": "initialize",
+      "filePath": "lib/core/providers/push_notifications_service.dart",
+      "lineRange": [34, 34],
+      "summary": "Bootstraps push notification support: registers the background handler, requests permission, sets up local notifications and message listeners, and logs the device token.",
+      "tags": ["event-handler", "notifications", "entry-point"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/core/providers/push_notifications_service.dart:_initializeLocalNotifications",
+      "type": "function",
+      "name": "_initializeLocalNotifications",
+      "filePath": "lib/core/providers/push_notifications_service.dart",
+      "lineRange": [68, 68],
+      "summary": "Configures flutter_local_notifications for Android and iOS and wires up the notification-tap callback to route into _handleMessage.",
+      "tags": ["notifications", "event-handler"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/core/providers/push_notifications_service.dart:_initializePushHandlers",
+      "type": "function",
+      "name": "_initializePushHandlers",
+      "filePath": "lib/core/providers/push_notifications_service.dart",
+      "lineRange": [105, 105],
+      "summary": "Sets foreground notification presentation options and subscribes to FCM message streams (onMessage, onMessageOpenedApp, getInitialMessage) to route incoming pushes to _handleMessage.",
+      "tags": ["notifications", "event-handler"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/core/providers/push_notifications_service.dart:_showForegroundNotification",
+      "type": "function",
+      "name": "_showForegroundNotification",
+      "filePath": "lib/core/providers/push_notifications_service.dart",
+      "lineRange": [135, 135],
+      "summary": "Displays a local notification with platform-specific styling when a push message is received while the app is in the foreground.",
+      "tags": ["notifications", "event-handler"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/core/providers/push_notifications_service.dart:_handleMessage",
+      "type": "function",
+      "name": "_handleMessage",
+      "filePath": "lib/core/providers/push_notifications_service.dart",
+      "lineRange": [168, 168],
+      "summary": "Processes a tapped/opened push notification's payload and navigates the app to the relevant screen based on its data.",
+      "tags": ["event-handler", "notifications", "navigation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/core/providers/secure_storage.dart",
+      "type": "file",
+      "name": "secure_storage.dart",
+      "filePath": "lib/core/providers/secure_storage.dart",
+      "summary": "Riverpod provider exposing a singleton SecureStore backed by FlutterSecureStorage for encrypted persistence of auth tokens and user data.",
+      "tags": ["provider", "singleton", "storage", "security"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/core/state/view_state.dart",
+      "type": "file",
+      "name": "view_state.dart",
+      "filePath": "lib/core/state/view_state.dart",
+      "summary": "Generic sealed-style ViewState hierarchy (Initial, Loading, Error, Empty, Loaded) used to model async UI state with equality, copyWith, and toString support for the Loaded variant.",
+      "tags": ["data-model", "state-management"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/core/state/view_state.dart:ErrorViewState",
+      "type": "class",
+      "name": "ErrorViewState",
+      "filePath": "lib/core/state/view_state.dart",
+      "lineRange": [7, 11],
+      "summary": "ViewState variant representing a failed load, carrying a human-readable errorMessage.",
+      "tags": ["data-model", "state-management"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/core/state/view_state.dart:LoadedViewState",
+      "type": "class",
+      "name": "LoadedViewState",
+      "filePath": "lib/core/state/view_state.dart",
+      "lineRange": [15, 42],
+      "summary": "Generic ViewState variant holding successfully loaded data of type T, with value-based equality (hashCode), toString, and copyWith for immutable updates.",
+      "tags": ["data-model", "state-management"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/core/storage/secure_store.dart",
+      "type": "file",
+      "name": "secure_store.dart",
+      "filePath": "lib/core/storage/secure_store.dart",
+      "summary": "Wraps FlutterSecureStorage to persist and retrieve the authenticated session's tokens and user profile fields (jwt, firebase token, name, email, ids, user type) and clear them on logout.",
+      "tags": ["service", "storage", "security", "data-model"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/core/storage/secure_store.dart:SecureStore",
+      "type": "class",
+      "name": "SecureStore",
+      "filePath": "lib/core/storage/secure_store.dart",
+      "lineRange": [4, 45],
+      "summary": "Thin encrypted key-value store wrapper exposing saveAuth (writes all session fields at once) plus individual readers (readToken, userEmail, userType, etc.) and clear() for logout.",
+      "tags": ["service", "storage", "security"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/core/storage/secure_store.dart:saveAuth",
+      "type": "function",
+      "name": "saveAuth",
+      "filePath": "lib/core/storage/secure_store.dart",
+      "lineRange": [8, 19],
+      "summary": "Persists the full authenticated session (JWT, Firebase token/id, expiry, oracle id, user name, mobile number, email, and user type) into secure storage in one call.",
+      "tags": ["storage", "security"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/core/utils/constant.dart",
+      "type": "file",
+      "name": "constant.dart",
+      "filePath": "lib/core/utils/constant.dart",
+      "summary": "Defines shared-preferences key name constants for the app's selected language and onboarding-seen flag.",
+      "tags": ["utility", "config"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/core/utils/end_point.dart",
+      "type": "file",
+      "name": "end_point.dart",
+      "filePath": "lib/core/utils/end_point.dart",
+      "summary": "Central registry of the backend API base URL and all REST endpoint constants/builder functions (auth, vehicles, packages, appointments, coupons, payments) used throughout the app's data sources.",
+      "tags": ["config", "api-handler", "utility"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/core/utils/end_point.dart:getPackagesForVehicleByCategoryEndPoint",
+      "type": "function",
+      "name": "getPackagesForVehicleByCategoryEndPoint",
+      "filePath": "lib/core/utils/end_point.dart",
+      "lineRange": [27, 31],
+      "summary": "Builds the URL for fetching service packages for a given vehicle filtered by category, URL-encoding the category parameter.",
+      "tags": ["api-handler", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/core/utils/end_point.dart:addCouponEndPoint",
+      "type": "function",
+      "name": "addCouponEndPoint",
+      "filePath": "lib/core/utils/end_point.dart",
+      "lineRange": [53, 61],
+      "summary": "Builds the URL for creating a coupon header, embedding app user id, company name, validity dates, discount rate, coupon count, and domain as path segments.",
+      "tags": ["api-handler", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/core/utils/enum.dart",
+      "type": "file",
+      "name": "enum.dart",
+      "filePath": "lib/core/utils/enum.dart",
+      "summary": "Defines the AuthFlowStep enum (enterPhone, needRegistration, otp, done) representing stages of the authentication/onboarding flow.",
+      "tags": ["data-model", "type-definition"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/core/utils/enum.dart:AuthFlowStep",
+      "type": "class",
+      "name": "AuthFlowStep",
+      "filePath": "lib/core/utils/enum.dart",
+      "lineRange": [1, 1],
+      "summary": "Enum modeling the sequential steps of the auth flow: entering a phone number, registration, OTP verification, and completion.",
+      "tags": ["data-model", "type-definition"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/core/utils/extensions/extensions.dart",
+      "type": "file",
+      "name": "extensions.dart",
+      "filePath": "lib/core/utils/extensions/extensions.dart",
+      "summary": "BuildContext extension (SugarExt) providing terse accessors for the current Theme, custom AppColorsTheme extension, text styles, text theme, and color scheme.",
+      "tags": ["utility", "component"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/core/utils/extensions/extensions.dart:SugarExt",
+      "type": "class",
+      "name": "SugarExt",
+      "filePath": "lib/core/utils/extensions/extensions.dart",
+      "lineRange": [8, 19],
+      "summary": "Extension on BuildContext exposing convenience getters (theme, appColors, textStyles, textTheme, colorScheme) to reduce boilerplate when styling widgets.",
+      "tags": ["utility", "component"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/core/utils/helper_fuc.dart",
+      "type": "file",
+      "name": "helper_fuc.dart",
+      "filePath": "lib/core/utils/helper_fuc.dart",
+      "summary": "Utility helper mapping a human-readable booking status name to its corresponding numeric status id used by the backend API.",
+      "tags": ["utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/core/utils/helper_fuc.dart:getStatusIdFromStatusName",
+      "type": "function",
+      "name": "getStatusIdFromStatusName",
+      "filePath": "lib/core/utils/helper_fuc.dart",
+      "lineRange": [1, 1],
+      "summary": "Maps a status display name string to its numeric backend status id, used when filtering or updating booking/appointment statuses.",
+      "tags": ["utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/core/utils/theme/app_colors.dart",
+      "type": "file",
+      "name": "app_colors.dart",
+      "filePath": "lib/core/utils/theme/app_colors.dart",
+      "summary": "Defines the AppColors class holding the app's static brand color palette constants used throughout the UI theme.",
+      "tags": ["config", "component"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/core/utils/theme/app_colors.dart:AppColors",
+      "type": "class",
+      "name": "AppColors",
+      "filePath": "lib/core/utils/theme/app_colors.dart",
+      "lineRange": [22, 50],
+      "summary": "Static color constants (primary, secondary, accents, neutrals, etc.) defining the app's design-system palette.",
+      "tags": ["config", "component"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/core/utils/theme/app_text_styles.dart",
+      "type": "file",
+      "name": "app_text_styles.dart",
+      "filePath": "lib/core/utils/theme/app_text_styles.dart",
+      "summary": "Defines a set of named static TextStyle constants (large title, headline, body, caption, footnote, etc.) forming the app's typography scale.",
+      "tags": ["config", "component"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/core/utils/theme/app_text_theme.dart",
+      "type": "file",
+      "name": "app_text_theme.dart",
+      "filePath": "lib/core/utils/theme/app_text_theme.dart",
+      "summary": "Defines a Material ThemeExtension (AppTextTheme) exposing a comprehensive set of named text style getters (display/text sizes XS-2XL x regular/medium/semibold/bold) built from a configurable font family, plus an AppFontSize constants holder, with copyWith/lerp support for theme transitions.",
+      "tags": ["config", "component", "type-definition"],
+      "complexity": "complex",
+      "languageNotes": "Uses Flutter's ThemeExtension<T> pattern to make a large custom typography scale available via Theme.of(context), with copyWith and lerp implemented for smooth animated theme changes."
+    },
+    {
+      "id": "class:lib/core/utils/theme/app_text_theme.dart:AppTextTheme",
+      "type": "class",
+      "name": "AppTextTheme",
+      "filePath": "lib/core/utils/theme/app_text_theme.dart",
+      "lineRange": [3, 425],
+      "summary": "ThemeExtension defining ~50 named TextStyle getters spanning the app's full display/text typography scale (2XL to 2XS, regular to bold), parameterized by a font family and supporting copyWith and lerp.",
+      "tags": ["config", "type-definition", "component"],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:lib/core/utils/theme/app_text_theme.dart:AppFontSize",
+      "type": "class",
+      "name": "AppFontSize",
+      "filePath": "lib/core/utils/theme/app_text_theme.dart",
+      "lineRange": [427, 445],
+      "summary": "Holds the raw numeric font-size constants underlying the AppTextTheme typography scale.",
+      "tags": ["config", "type-definition"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/core/utils/theme/themes.dart",
+      "type": "file",
+      "name": "themes.dart",
+      "filePath": "lib/core/utils/theme/themes.dart",
+      "summary": "Builds the app's Material ThemeData (color scheme, app bar, input decoration, date picker, bottom sheet, dialog theming) combining AppColors and AppTextTheme for a consistent design system.",
+      "tags": ["config", "component"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/core/utils/theme/themes.dart:getThemeData",
+      "type": "function",
+      "name": "getThemeData",
+      "filePath": "lib/core/utils/theme/themes.dart",
+      "lineRange": [10, 13],
+      "summary": "Constructs and returns the fully configured Flutter ThemeData for the app, wiring together color scheme, typography (AppTextTheme), and component themes (app bar, inputs, date picker, bottom sheet, dialogs).",
+      "tags": ["config", "component"],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    { "source": "file:lib/core/providers/dio_provider.dart", "target": "class:lib/core/providers/dio_provider.dart:DioClient", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "class:lib/core/providers/dio_provider.dart:DioClient", "target": "function:lib/core/providers/dio_provider.dart:get", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "class:lib/core/providers/dio_provider.dart:DioClient", "target": "function:lib/core/providers/dio_provider.dart:post", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/core/providers/dio_provider.dart", "target": "function:lib/core/providers/dio_provider.dart:get", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "file:lib/core/providers/dio_provider.dart", "target": "function:lib/core/providers/dio_provider.dart:post", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "file:lib/core/providers/dio_provider.dart", "target": "class:lib/core/providers/dio_provider.dart:DioClient", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "file:lib/core/providers/dio_provider.dart", "target": "file:lib/core/providers/secure_storage.dart", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+
+    { "source": "file:lib/core/providers/current_locale_provider.dart", "target": "class:lib/core/providers/current_locale_provider.dart:CurrentLocaleProvider", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/core/providers/current_locale_provider.dart", "target": "class:lib/core/providers/current_locale_provider.dart:CurrentLocaleProvider", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/core/providers/general_providers.dart", "target": "function:lib/core/providers/general_providers.dart:initializeSharedPreferences", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/core/providers/general_providers.dart", "target": "function:lib/core/providers/general_providers.dart:initializeSharedPreferences", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/core/providers/global_lang_provider.dart", "target": "file:lib/generated/l10n.dart", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+
+    { "source": "file:lib/core/providers/plate_chars_provider.dart", "target": "class:lib/core/providers/plate_chars_provider.dart:CharListProvider", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/core/providers/plate_chars_provider.dart", "target": "class:lib/core/providers/plate_chars_provider.dart:CharListProvider", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/core/providers/push_notifications_service.dart", "target": "class:lib/core/providers/push_notifications_service.dart:PushNotificationsService", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "class:lib/core/providers/push_notifications_service.dart:PushNotificationsService", "target": "function:lib/core/providers/push_notifications_service.dart:initialize", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "class:lib/core/providers/push_notifications_service.dart:PushNotificationsService", "target": "function:lib/core/providers/push_notifications_service.dart:_initializeLocalNotifications", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "class:lib/core/providers/push_notifications_service.dart:PushNotificationsService", "target": "function:lib/core/providers/push_notifications_service.dart:_initializePushHandlers", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "class:lib/core/providers/push_notifications_service.dart:PushNotificationsService", "target": "function:lib/core/providers/push_notifications_service.dart:_showForegroundNotification", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "class:lib/core/providers/push_notifications_service.dart:PushNotificationsService", "target": "function:lib/core/providers/push_notifications_service.dart:_handleMessage", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/core/providers/push_notifications_service.dart", "target": "function:lib/core/providers/push_notifications_service.dart:firebaseMessagingBackgroundHandler", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/core/providers/push_notifications_service.dart", "target": "class:lib/core/providers/push_notifications_service.dart:PushNotificationsService", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "function:lib/core/providers/push_notifications_service.dart:initialize", "target": "function:lib/core/providers/push_notifications_service.dart:_initializeLocalNotifications", "type": "calls", "direction": "forward", "weight": 0.8 },
+    { "source": "function:lib/core/providers/push_notifications_service.dart:initialize", "target": "function:lib/core/providers/push_notifications_service.dart:_initializePushHandlers", "type": "calls", "direction": "forward", "weight": 0.8 },
+    { "source": "function:lib/core/providers/push_notifications_service.dart:_initializeLocalNotifications", "target": "function:lib/core/providers/push_notifications_service.dart:_handleMessage", "type": "calls", "direction": "forward", "weight": 0.8 },
+    { "source": "function:lib/core/providers/push_notifications_service.dart:_initializePushHandlers", "target": "function:lib/core/providers/push_notifications_service.dart:_handleMessage", "type": "calls", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/core/providers/secure_storage.dart", "target": "file:lib/core/storage/secure_store.dart", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+
+    { "source": "file:lib/core/state/view_state.dart", "target": "class:lib/core/state/view_state.dart:ErrorViewState", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/core/state/view_state.dart", "target": "class:lib/core/state/view_state.dart:LoadedViewState", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/core/state/view_state.dart", "target": "class:lib/core/state/view_state.dart:ErrorViewState", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "file:lib/core/state/view_state.dart", "target": "class:lib/core/state/view_state.dart:LoadedViewState", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/core/storage/secure_store.dart", "target": "class:lib/core/storage/secure_store.dart:SecureStore", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "class:lib/core/storage/secure_store.dart:SecureStore", "target": "function:lib/core/storage/secure_store.dart:saveAuth", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/core/storage/secure_store.dart", "target": "class:lib/core/storage/secure_store.dart:SecureStore", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/core/utils/end_point.dart", "target": "function:lib/core/utils/end_point.dart:getPackagesForVehicleByCategoryEndPoint", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/core/utils/end_point.dart", "target": "function:lib/core/utils/end_point.dart:addCouponEndPoint", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/core/utils/end_point.dart", "target": "function:lib/core/utils/end_point.dart:getPackagesForVehicleByCategoryEndPoint", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "file:lib/core/utils/end_point.dart", "target": "function:lib/core/utils/end_point.dart:addCouponEndPoint", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/core/utils/enum.dart", "target": "class:lib/core/utils/enum.dart:AuthFlowStep", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/core/utils/enum.dart", "target": "class:lib/core/utils/enum.dart:AuthFlowStep", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/core/utils/extensions/extensions.dart", "target": "class:lib/core/utils/extensions/extensions.dart:SugarExt", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/core/utils/extensions/extensions.dart", "target": "class:lib/core/utils/extensions/extensions.dart:SugarExt", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "file:lib/core/utils/extensions/extensions.dart", "target": "file:lib/features/app/app_color_theme.dart", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+
+    { "source": "file:lib/core/utils/helper_fuc.dart", "target": "function:lib/core/utils/helper_fuc.dart:getStatusIdFromStatusName", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/core/utils/helper_fuc.dart", "target": "function:lib/core/utils/helper_fuc.dart:getStatusIdFromStatusName", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/core/utils/theme/app_colors.dart", "target": "class:lib/core/utils/theme/app_colors.dart:AppColors", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/core/utils/theme/app_colors.dart", "target": "class:lib/core/utils/theme/app_colors.dart:AppColors", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/core/utils/theme/app_text_theme.dart", "target": "class:lib/core/utils/theme/app_text_theme.dart:AppTextTheme", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/core/utils/theme/app_text_theme.dart", "target": "class:lib/core/utils/theme/app_text_theme.dart:AppFontSize", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/core/utils/theme/app_text_theme.dart", "target": "class:lib/core/utils/theme/app_text_theme.dart:AppTextTheme", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "file:lib/core/utils/theme/app_text_theme.dart", "target": "class:lib/core/utils/theme/app_text_theme.dart:AppFontSize", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/core/utils/theme/themes.dart", "target": "function:lib/core/utils/theme/themes.dart:getThemeData", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/core/utils/theme/themes.dart", "target": "function:lib/core/utils/theme/themes.dart:getThemeData", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "function:lib/core/utils/theme/themes.dart:getThemeData", "target": "class:lib/core/utils/theme/app_colors.dart:AppColors", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "function:lib/core/utils/theme/themes.dart:getThemeData", "target": "class:lib/core/utils/theme/app_text_theme.dart:AppTextTheme", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+
+    { "source": "config:.understand-anything/intermediate/scan-result.json", "target": "file:lib/core/utils/end_point.dart", "type": "related", "direction": "forward", "weight": 0.5 }
+  ]
+}

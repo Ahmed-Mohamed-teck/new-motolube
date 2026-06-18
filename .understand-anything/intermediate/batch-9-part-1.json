@@ -1,0 +1,847 @@
+{
+  "nodes": [
+    {
+      "id": "file:lib/features/onboarding/presentation/screens/onboarding_screen.dart",
+      "type": "file",
+      "name": "onboarding_screen.dart",
+      "filePath": "lib/features/onboarding/presentation/screens/onboarding_screen.dart",
+      "summary": "Stateful onboarding screen presenting a swipeable PageView of intro slides with language switcher, skip button, dot indicators, and a next/get-started CTA that navigates to the login screen.",
+      "tags": [
+        "component",
+        "screen",
+        "onboarding",
+        "navigation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/features/onboarding/presentation/screens/onboarding_screen.dart:_OnboardingScreenState",
+      "type": "class",
+      "name": "_OnboardingScreenState",
+      "filePath": "lib/features/onboarding/presentation/screens/onboarding_screen.dart",
+      "lineRange": [
+        20,
+        171
+      ],
+      "summary": "State class managing onboarding page index, page controller, localized slide content, and navigation to the login screen once onboarding completes.",
+      "tags": [
+        "component",
+        "state",
+        "onboarding"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/features/onboarding/presentation/screens/onboarding_screen.dart:build",
+      "type": "function",
+      "name": "build",
+      "filePath": "lib/features/onboarding/presentation/screens/onboarding_screen.dart",
+      "lineRange": [
+        67,
+        67
+      ],
+      "summary": "Builds the onboarding UI: top bar with language toggle and skip action, the page view of slides, dot indicators, and the next/start button.",
+      "tags": [
+        "widget-build",
+        "ui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:lib/features/payment/data/data_source/i_payment_remote_data_source.dart",
+      "type": "file",
+      "name": "i_payment_remote_data_source.dart",
+      "filePath": "lib/features/payment/data/data_source/i_payment_remote_data_source.dart",
+      "summary": "Abstract interface defining the remote data source contract for initiating a payment and checking payment status.",
+      "tags": [
+        "interface",
+        "data-source",
+        "payment"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/payment/data/data_source/i_payment_remote_data_source.dart:IPaymentRemoteDataSource",
+      "type": "class",
+      "name": "IPaymentRemoteDataSource",
+      "filePath": "lib/features/payment/data/data_source/i_payment_remote_data_source.dart",
+      "lineRange": [
+        5,
+        11
+      ],
+      "summary": "Interface declaring initiatePayment and getPaymentStatus methods implemented by the concrete payment remote data source.",
+      "tags": [
+        "interface",
+        "data-source",
+        "payment"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/payment/data/data_source/payment_remote_data_source.dart",
+      "type": "file",
+      "name": "payment_remote_data_source.dart",
+      "filePath": "lib/features/payment/data/data_source/payment_remote_data_source.dart",
+      "summary": "Concrete Dio-based implementation of the payment remote data source that posts payment initiation requests and polls payment status, mapping HTTP/Dio errors into user-facing exceptions.",
+      "tags": [
+        "data-source",
+        "payment",
+        "api-handler",
+        "http"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/features/payment/data/data_source/payment_remote_data_source.dart:PaymentRemoteDataSource",
+      "type": "class",
+      "name": "PaymentRemoteDataSource",
+      "filePath": "lib/features/payment/data/data_source/payment_remote_data_source.dart",
+      "lineRange": [
+        9,
+        78
+      ],
+      "summary": "Implements IPaymentRemoteDataSource using Dio to call the payment initiation and status endpoints, parsing JSON responses and surfacing friendly error messages on failure.",
+      "tags": [
+        "data-source",
+        "payment",
+        "http",
+        "implements"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/features/payment/data/data_source/payment_remote_data_source.dart:initiatePayment",
+      "type": "function",
+      "name": "initiatePayment",
+      "filePath": "lib/features/payment/data/data_source/payment_remote_data_source.dart",
+      "lineRange": [
+        15,
+        17
+      ],
+      "summary": "Posts a payment initiation request to the API and parses the response into a PaymentInitiationResponseModel, throwing a descriptive exception on Dio errors.",
+      "tags": [
+        "api-handler",
+        "payment",
+        "http"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/features/payment/data/data_source/payment_remote_data_source.dart:getPaymentStatus",
+      "type": "function",
+      "name": "getPaymentStatus",
+      "filePath": "lib/features/payment/data/data_source/payment_remote_data_source.dart",
+      "lineRange": [
+        48,
+        50
+      ],
+      "summary": "Fetches payment status by transaction id from the API and parses it into a PaymentStatusResponseModel, handling Dio errors gracefully.",
+      "tags": [
+        "api-handler",
+        "payment",
+        "http"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:lib/features/payment/data/model/payment_initiation_request_model.dart",
+      "type": "file",
+      "name": "payment_initiation_request_model.dart",
+      "filePath": "lib/features/payment/data/model/payment_initiation_request_model.dart",
+      "summary": "Data models (PaymentMetadataModel and PaymentInitiationRequestModel) used to serialize a payment initiation request, including device/app metadata, into JSON for the payment API.",
+      "tags": [
+        "data-model",
+        "serialization",
+        "payment"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/payment/data/model/payment_initiation_request_model.dart:PaymentInitiationRequestModel",
+      "type": "class",
+      "name": "PaymentInitiationRequestModel",
+      "filePath": "lib/features/payment/data/model/payment_initiation_request_model.dart",
+      "lineRange": [
+        23,
+        53
+      ],
+      "summary": "Serializable model carrying amount, currency, order/customer info, coupon/discount, and metadata for the payment initiation API request body.",
+      "tags": [
+        "data-model",
+        "serialization",
+        "payment"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/payment/data/model/payment_initiation_request_model.dart:PaymentMetadataModel",
+      "type": "class",
+      "name": "PaymentMetadataModel",
+      "filePath": "lib/features/payment/data/model/payment_initiation_request_model.dart",
+      "lineRange": [
+        3,
+        21
+      ],
+      "summary": "Serializable model holding app version, platform, locale, device id, and user agent metadata sent alongside payment initiation requests.",
+      "tags": [
+        "data-model",
+        "serialization",
+        "payment"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/payment/data/model/payment_initiation_response_model.dart",
+      "type": "file",
+      "name": "payment_initiation_response_model.dart",
+      "filePath": "lib/features/payment/data/model/payment_initiation_response_model.dart",
+      "summary": "Response model parsed from the payment initiation API, capturing the transaction id, redirect payment URL, status, creation timestamp, and provider (PayFort) parameters.",
+      "tags": [
+        "data-model",
+        "serialization",
+        "payment"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/payment/data/model/payment_initiation_response_model.dart:PaymentInitiationResponseModel",
+      "type": "class",
+      "name": "PaymentInitiationResponseModel",
+      "filePath": "lib/features/payment/data/model/payment_initiation_response_model.dart",
+      "lineRange": [
+        3,
+        34
+      ],
+      "summary": "Deserializes the payment initiation API response JSON, including a custom fromJson factory that safely parses the PayFort parameters map.",
+      "tags": [
+        "data-model",
+        "serialization",
+        "payment"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/payment/data/model/payment_status_response_model.dart",
+      "type": "file",
+      "name": "payment_status_response_model.dart",
+      "filePath": "lib/features/payment/data/model/payment_status_response_model.dart",
+      "summary": "Response model parsed from the payment status API, capturing transaction id, status, response code, and message returned by the payment gateway.",
+      "tags": [
+        "data-model",
+        "serialization",
+        "payment"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/payment/data/model/payment_status_response_model.dart:PaymentStatusResponseModel",
+      "type": "class",
+      "name": "PaymentStatusResponseModel",
+      "filePath": "lib/features/payment/data/model/payment_status_response_model.dart",
+      "lineRange": [
+        3,
+        31
+      ],
+      "summary": "Deserializes the payment status API response, defensively coercing fields to strings via a fromJson factory.",
+      "tags": [
+        "data-model",
+        "serialization",
+        "payment"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/payment/data/repository/payment_repository.dart",
+      "type": "file",
+      "name": "payment_repository.dart",
+      "filePath": "lib/features/payment/data/repository/payment_repository.dart",
+      "summary": "Repository implementation that maps domain payment requests into data-layer request models, delegates to the remote data source, and implements IPaymentRepository for the domain layer.",
+      "tags": [
+        "service",
+        "payment",
+        "implements"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/features/payment/data/repository/payment_repository.dart:PaymentRepository",
+      "type": "class",
+      "name": "PaymentRepository",
+      "filePath": "lib/features/payment/data/repository/payment_repository.dart",
+      "lineRange": [
+        8,
+        43
+      ],
+      "summary": "Implements IPaymentRepository by converting PaymentInitiationRequest entities into PaymentInitiationRequestModel and forwarding calls to IPaymentRemoteDataSource.",
+      "tags": [
+        "service",
+        "payment",
+        "implements"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:lib/features/payment/domain/entity/payment_initiation_request.dart",
+      "type": "file",
+      "name": "payment_initiation_request.dart",
+      "filePath": "lib/features/payment/domain/entity/payment_initiation_request.dart",
+      "summary": "Domain entities PaymentMetadata and PaymentInitiationRequest representing the business-layer payload for starting a payment, independent of any API/serialization concerns.",
+      "tags": [
+        "data-model",
+        "payment",
+        "entity"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/payment/domain/entity/payment_initiation_request.dart:PaymentInitiationRequest",
+      "type": "class",
+      "name": "PaymentInitiationRequest",
+      "filePath": "lib/features/payment/domain/entity/payment_initiation_request.dart",
+      "lineRange": [
+        17,
+        41
+      ],
+      "summary": "Domain entity holding amount, currency, order/customer identifiers, coupon, discount, and metadata needed to initiate a payment.",
+      "tags": [
+        "data-model",
+        "payment",
+        "entity"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/payment/domain/entity/payment_initiation_request.dart:PaymentMetadata",
+      "type": "class",
+      "name": "PaymentMetadata",
+      "filePath": "lib/features/payment/domain/entity/payment_initiation_request.dart",
+      "lineRange": [
+        1,
+        15
+      ],
+      "summary": "Domain entity capturing app version, platform, locale, device id, and user agent used as contextual metadata for a payment.",
+      "tags": [
+        "data-model",
+        "payment",
+        "entity"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/payment/domain/entity/payment_initiation_result.dart",
+      "type": "file",
+      "name": "payment_initiation_result.dart",
+      "filePath": "lib/features/payment/domain/entity/payment_initiation_result.dart",
+      "summary": "Domain entity representing the outcome of initiating a payment, including transaction id, redirect payment URL, status, and gateway parameters.",
+      "tags": [
+        "data-model",
+        "payment",
+        "entity"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/payment/domain/entity/payment_initiation_result.dart:PaymentInitiationResult",
+      "type": "class",
+      "name": "PaymentInitiationResult",
+      "filePath": "lib/features/payment/domain/entity/payment_initiation_result.dart",
+      "lineRange": [
+        1,
+        15
+      ],
+      "summary": "Holds the transaction id, payment URL, status, creation time, and PayFort parameters returned after a payment is initiated.",
+      "tags": [
+        "data-model",
+        "payment",
+        "entity"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/payment/domain/entity/payment_status_result.dart",
+      "type": "file",
+      "name": "payment_status_result.dart",
+      "filePath": "lib/features/payment/domain/entity/payment_status_result.dart",
+      "summary": "Domain entity describing the result of a payment status check, with an isSuccess helper that normalizes the status string comparison.",
+      "tags": [
+        "data-model",
+        "payment",
+        "entity"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/payment/domain/entity/payment_status_result.dart:PaymentStatusResult",
+      "type": "class",
+      "name": "PaymentStatusResult",
+      "filePath": "lib/features/payment/domain/entity/payment_status_result.dart",
+      "lineRange": [
+        1,
+        18
+      ],
+      "summary": "Carries transaction id, status, response code, and message, exposing an isSuccess getter that case-insensitively checks the status value.",
+      "tags": [
+        "data-model",
+        "payment",
+        "entity"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/payment/domain/repository/i_payment_repository.dart",
+      "type": "file",
+      "name": "i_payment_repository.dart",
+      "filePath": "lib/features/payment/domain/repository/i_payment_repository.dart",
+      "summary": "Domain-layer abstract repository interface declaring initiatePayment and getPaymentStatus operations, decoupling use cases from the data layer implementation.",
+      "tags": [
+        "interface",
+        "payment",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/payment/domain/repository/i_payment_repository.dart:IPaymentRepository",
+      "type": "class",
+      "name": "IPaymentRepository",
+      "filePath": "lib/features/payment/domain/repository/i_payment_repository.dart",
+      "lineRange": [
+        5,
+        11
+      ],
+      "summary": "Interface implemented by PaymentRepository, declaring the contract used by InitiatePaymentUseCase and CheckPaymentStatusUseCase.",
+      "tags": [
+        "interface",
+        "payment",
+        "repository"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/payment/domain/use_case/check_payment_status_use_case.dart",
+      "type": "file",
+      "name": "check_payment_status_use_case.dart",
+      "filePath": "lib/features/payment/domain/use_case/check_payment_status_use_case.dart",
+      "summary": "Use case encapsulating the business operation of checking a payment's status by transaction id via the payment repository.",
+      "tags": [
+        "use-case",
+        "payment",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/payment/domain/use_case/check_payment_status_use_case.dart:CheckPaymentStatusUseCase",
+      "type": "class",
+      "name": "CheckPaymentStatusUseCase",
+      "filePath": "lib/features/payment/domain/use_case/check_payment_status_use_case.dart",
+      "lineRange": [
+        4,
+        14
+      ],
+      "summary": "Callable use case that delegates to IPaymentRepository.getPaymentStatus to check the state of a previously initiated payment.",
+      "tags": [
+        "use-case",
+        "payment",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/payment/domain/use_case/initiate_payment_use_case.dart",
+      "type": "file",
+      "name": "initiate_payment_use_case.dart",
+      "filePath": "lib/features/payment/domain/use_case/initiate_payment_use_case.dart",
+      "summary": "Use case encapsulating the business operation of initiating a payment via the payment repository, given a PaymentInitiationRequest.",
+      "tags": [
+        "use-case",
+        "payment",
+        "service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/payment/domain/use_case/initiate_payment_use_case.dart:InitiatePaymentUseCase",
+      "type": "class",
+      "name": "InitiatePaymentUseCase",
+      "filePath": "lib/features/payment/domain/use_case/initiate_payment_use_case.dart",
+      "lineRange": [
+        5,
+        15
+      ],
+      "summary": "Callable use case that delegates to IPaymentRepository.initiatePayment to start a new payment transaction.",
+      "tags": [
+        "use-case",
+        "payment",
+        "service"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:lib/features/onboarding/presentation/screens/onboarding_screen.dart",
+      "target": "class:lib/features/onboarding/presentation/screens/onboarding_screen.dart:_OnboardingScreenState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:lib/features/onboarding/presentation/screens/onboarding_screen.dart:_OnboardingScreenState",
+      "target": "function:lib/features/onboarding/presentation/screens/onboarding_screen.dart:build",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/payment/data/data_source/i_payment_remote_data_source.dart",
+      "target": "class:lib/features/payment/data/data_source/i_payment_remote_data_source.dart:IPaymentRemoteDataSource",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/payment/data/data_source/i_payment_remote_data_source.dart",
+      "target": "class:lib/features/payment/data/data_source/i_payment_remote_data_source.dart:IPaymentRemoteDataSource",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/payment/data/data_source/payment_remote_data_source.dart",
+      "target": "class:lib/features/payment/data/data_source/payment_remote_data_source.dart:PaymentRemoteDataSource",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:lib/features/payment/data/data_source/payment_remote_data_source.dart:PaymentRemoteDataSource",
+      "target": "function:lib/features/payment/data/data_source/payment_remote_data_source.dart:initiatePayment",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:lib/features/payment/data/data_source/payment_remote_data_source.dart:PaymentRemoteDataSource",
+      "target": "function:lib/features/payment/data/data_source/payment_remote_data_source.dart:getPaymentStatus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/payment/data/data_source/payment_remote_data_source.dart",
+      "target": "class:lib/features/payment/data/data_source/payment_remote_data_source.dart:PaymentRemoteDataSource",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:lib/features/payment/data/data_source/payment_remote_data_source.dart:PaymentRemoteDataSource",
+      "target": "class:lib/features/payment/data/data_source/i_payment_remote_data_source.dart:IPaymentRemoteDataSource",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:lib/features/payment/data/data_source/payment_remote_data_source.dart",
+      "target": "file:lib/features/payment/data/data_source/i_payment_remote_data_source.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/payment/data/data_source/payment_remote_data_source.dart",
+      "target": "file:lib/features/payment/data/model/payment_initiation_request_model.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/payment/data/data_source/payment_remote_data_source.dart",
+      "target": "file:lib/features/payment/data/model/payment_initiation_response_model.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/payment/data/data_source/payment_remote_data_source.dart",
+      "target": "file:lib/features/payment/data/model/payment_status_response_model.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/payment/data/model/payment_initiation_request_model.dart",
+      "target": "class:lib/features/payment/data/model/payment_initiation_request_model.dart:PaymentMetadataModel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/payment/data/model/payment_initiation_request_model.dart",
+      "target": "class:lib/features/payment/data/model/payment_initiation_request_model.dart:PaymentInitiationRequestModel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/payment/data/model/payment_initiation_request_model.dart",
+      "target": "class:lib/features/payment/data/model/payment_initiation_request_model.dart:PaymentMetadataModel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/payment/data/model/payment_initiation_request_model.dart",
+      "target": "class:lib/features/payment/data/model/payment_initiation_request_model.dart:PaymentInitiationRequestModel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/payment/data/model/payment_initiation_response_model.dart",
+      "target": "class:lib/features/payment/data/model/payment_initiation_response_model.dart:PaymentInitiationResponseModel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/payment/data/model/payment_initiation_response_model.dart",
+      "target": "class:lib/features/payment/data/model/payment_initiation_response_model.dart:PaymentInitiationResponseModel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/payment/data/model/payment_status_response_model.dart",
+      "target": "class:lib/features/payment/data/model/payment_status_response_model.dart:PaymentStatusResponseModel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/payment/data/model/payment_status_response_model.dart",
+      "target": "class:lib/features/payment/data/model/payment_status_response_model.dart:PaymentStatusResponseModel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/payment/data/repository/payment_repository.dart",
+      "target": "class:lib/features/payment/data/repository/payment_repository.dart:PaymentRepository",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/payment/data/repository/payment_repository.dart",
+      "target": "class:lib/features/payment/data/repository/payment_repository.dart:PaymentRepository",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:lib/features/payment/data/repository/payment_repository.dart:PaymentRepository",
+      "target": "class:lib/features/payment/domain/repository/i_payment_repository.dart:IPaymentRepository",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:lib/features/payment/data/repository/payment_repository.dart",
+      "target": "file:lib/features/payment/domain/entity/payment_initiation_request.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/payment/data/repository/payment_repository.dart",
+      "target": "file:lib/features/payment/domain/entity/payment_initiation_result.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/payment/data/repository/payment_repository.dart",
+      "target": "file:lib/features/payment/domain/entity/payment_status_result.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/payment/data/repository/payment_repository.dart",
+      "target": "file:lib/features/payment/domain/repository/i_payment_repository.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/payment/data/repository/payment_repository.dart",
+      "target": "file:lib/features/payment/data/data_source/i_payment_remote_data_source.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/payment/data/repository/payment_repository.dart",
+      "target": "file:lib/features/payment/data/model/payment_initiation_request_model.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:lib/features/payment/data/repository/payment_repository.dart:PaymentRepository",
+      "target": "class:lib/features/payment/data/data_source/i_payment_remote_data_source.dart:IPaymentRemoteDataSource",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/payment/domain/entity/payment_initiation_request.dart",
+      "target": "class:lib/features/payment/domain/entity/payment_initiation_request.dart:PaymentMetadata",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/payment/domain/entity/payment_initiation_request.dart",
+      "target": "class:lib/features/payment/domain/entity/payment_initiation_request.dart:PaymentInitiationRequest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/payment/domain/entity/payment_initiation_request.dart",
+      "target": "class:lib/features/payment/domain/entity/payment_initiation_request.dart:PaymentMetadata",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/payment/domain/entity/payment_initiation_request.dart",
+      "target": "class:lib/features/payment/domain/entity/payment_initiation_request.dart:PaymentInitiationRequest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/payment/domain/entity/payment_initiation_result.dart",
+      "target": "class:lib/features/payment/domain/entity/payment_initiation_result.dart:PaymentInitiationResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/payment/domain/entity/payment_initiation_result.dart",
+      "target": "class:lib/features/payment/domain/entity/payment_initiation_result.dart:PaymentInitiationResult",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/payment/domain/entity/payment_status_result.dart",
+      "target": "class:lib/features/payment/domain/entity/payment_status_result.dart:PaymentStatusResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/payment/domain/entity/payment_status_result.dart",
+      "target": "class:lib/features/payment/domain/entity/payment_status_result.dart:PaymentStatusResult",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/payment/domain/repository/i_payment_repository.dart",
+      "target": "class:lib/features/payment/domain/repository/i_payment_repository.dart:IPaymentRepository",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/payment/domain/repository/i_payment_repository.dart",
+      "target": "class:lib/features/payment/domain/repository/i_payment_repository.dart:IPaymentRepository",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/payment/domain/use_case/check_payment_status_use_case.dart",
+      "target": "class:lib/features/payment/domain/use_case/check_payment_status_use_case.dart:CheckPaymentStatusUseCase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/payment/domain/use_case/check_payment_status_use_case.dart",
+      "target": "class:lib/features/payment/domain/use_case/check_payment_status_use_case.dart:CheckPaymentStatusUseCase",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/payment/domain/use_case/check_payment_status_use_case.dart",
+      "target": "file:lib/features/payment/domain/entity/payment_status_result.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/payment/domain/use_case/check_payment_status_use_case.dart",
+      "target": "file:lib/features/payment/domain/repository/i_payment_repository.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:lib/features/payment/domain/use_case/check_payment_status_use_case.dart:CheckPaymentStatusUseCase",
+      "target": "class:lib/features/payment/domain/repository/i_payment_repository.dart:IPaymentRepository",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/payment/domain/use_case/initiate_payment_use_case.dart",
+      "target": "class:lib/features/payment/domain/use_case/initiate_payment_use_case.dart:InitiatePaymentUseCase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/payment/domain/use_case/initiate_payment_use_case.dart",
+      "target": "class:lib/features/payment/domain/use_case/initiate_payment_use_case.dart:InitiatePaymentUseCase",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/payment/domain/use_case/initiate_payment_use_case.dart",
+      "target": "file:lib/features/payment/domain/entity/payment_initiation_request.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/payment/domain/use_case/initiate_payment_use_case.dart",
+      "target": "file:lib/features/payment/domain/entity/payment_initiation_result.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/payment/domain/use_case/initiate_payment_use_case.dart",
+      "target": "file:lib/features/payment/domain/repository/i_payment_repository.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:lib/features/payment/domain/use_case/initiate_payment_use_case.dart:InitiatePaymentUseCase",
+      "target": "class:lib/features/payment/domain/repository/i_payment_repository.dart:IPaymentRepository",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

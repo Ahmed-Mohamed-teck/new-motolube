@@ -1,0 +1,31 @@
+{
+  "projectRoot": "/Users/ehsanfe/flutterprojects/newmotorlube",
+  "batchFiles": [
+    {"path": "lib/features/onboarding/presentation/screens/onboarding_screen.dart", "language": "dart", "sizeLines": 171, "fileCategory": "code"},
+    {"path": "lib/features/payment/data/data_source/i_payment_remote_data_source.dart", "language": "dart", "sizeLines": 11, "fileCategory": "code"},
+    {"path": "lib/features/payment/data/data_source/payment_remote_data_source.dart", "language": "dart", "sizeLines": 78, "fileCategory": "code"},
+    {"path": "lib/features/payment/data/model/payment_initiation_request_model.dart", "language": "dart", "sizeLines": 53, "fileCategory": "code"},
+    {"path": "lib/features/payment/data/model/payment_initiation_response_model.dart", "language": "dart", "sizeLines": 34, "fileCategory": "code"},
+    {"path": "lib/features/payment/data/model/payment_status_response_model.dart", "language": "dart", "sizeLines": 31, "fileCategory": "code"},
+    {"path": "lib/features/payment/data/repository/payment_repository.dart", "language": "dart", "sizeLines": 43, "fileCategory": "code"},
+    {"path": "lib/features/payment/domain/entity/payment_initiation_request.dart", "language": "dart", "sizeLines": 41, "fileCategory": "code"},
+    {"path": "lib/features/payment/domain/entity/payment_initiation_result.dart", "language": "dart", "sizeLines": 15, "fileCategory": "code"},
+    {"path": "lib/features/payment/domain/entity/payment_status_result.dart", "language": "dart", "sizeLines": 18, "fileCategory": "code"},
+    {"path": "lib/features/payment/domain/repository/i_payment_repository.dart", "language": "dart", "sizeLines": 11, "fileCategory": "code"},
+    {"path": "lib/features/payment/domain/use_case/check_payment_status_use_case.dart", "language": "dart", "sizeLines": 14, "fileCategory": "code"},
+    {"path": "lib/features/payment/domain/use_case/initiate_payment_use_case.dart", "language": "dart", "sizeLines": 15, "fileCategory": "code"},
+    {"path": "lib/features/payment/presentation/screen/payment_webview_screen.dart", "language": "dart", "sizeLines": 254, "fileCategory": "code"},
+    {"path": "lib/features/payment/presentation/state/payment_state.dart", "language": "dart", "sizeLines": 25, "fileCategory": "code"},
+    {"path": "lib/features/payment/presentation/view_model/payment_view_model.dart", "language": "dart", "sizeLines": 47, "fileCategory": "code"},
+    {"path": "lib/features/payment/provider/payment_provider.dart", "language": "dart", "sizeLines": 38, "fileCategory": "code"},
+    {"path": "lib/features/profile/presentation/screen/profile_screen.dart", "language": "dart", "sizeLines": 186, "fileCategory": "code"},
+    {"path": "lib/features/promotions/data/data_source/i_promotion_remote_data_source.dart", "language": "dart", "sizeLines": 9, "fileCategory": "code"},
+    {"path": "lib/features/promotions/data/data_source/promotion_remote_data_source.dart", "language": "dart", "sizeLines": 47, "fileCategory": "code"},
+    {"path": "lib/features/promotions/data/model/promotion_model.dart", "language": "dart", "sizeLines": 42, "fileCategory": "code"},
+    {"path": "lib/features/promotions/data/repository/promotion_repository_impl.dart", "language": "dart", "sizeLines": 44, "fileCategory": "code"},
+    {"path": "lib/features/promotions/domain/entity/promotion_entity.dart", "language": "dart", "sizeLines": 17, "fileCategory": "code"},
+    {"path": "lib/features/promotions/domain/repository/i_promotion_repository.dart", "language": "dart", "sizeLines": 10, "fileCategory": "code"},
+    {"path": "lib/features/promotions/domain/use_case/add_promotion_use_case.dart", "language": "dart", "sizeLines": 12, "fileCategory": "code"}
+  ],
+  "batchImportData": {}
+}

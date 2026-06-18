@@ -1,0 +1,2666 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "lib/features/technician/data/model/technician_booking_status_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 24,
+      "nonEmptyLines": 21,
+      "functions": [
+        {
+          "name": "TechnicianBookingStatusModel",
+          "startLine": 4,
+          "endLine": 8,
+          "params": [
+            "label",
+            "code",
+            "hexColor"
+          ]
+        },
+        {
+          "name": "TechnicianBookingStatusModel.fromJson",
+          "startLine": 10,
+          "endLine": 10,
+          "params": [
+            "json"
+          ]
+        },
+        {
+          "name": "toEntity",
+          "startLine": 17,
+          "endLine": 17,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "TechnicianBookingStatusModel",
+          "startLine": 3,
+          "endLine": 24,
+          "methods": [
+            "TechnicianBookingStatusModel",
+            "TechnicianBookingStatusModel.fromJson",
+            "toEntity"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "TechnicianBookingStatusModel",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "TechnicianBookingStatusModel.fromJson",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "toEntity",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "TechnicianBookingStatusModel",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "TechnicianBookingStatusModel.fromJson",
+          "callee": "toString",
+          "lineNumber": 11
+        },
+        {
+          "caller": "TechnicianBookingStatusModel.fromJson",
+          "callee": "toString",
+          "lineNumber": 12
+        },
+        {
+          "caller": "TechnicianBookingStatusModel.fromJson",
+          "callee": "toString",
+          "lineNumber": 13
+        },
+        {
+          "caller": "TechnicianBookingStatusModel.fromJson",
+          "callee": "TechnicianBookingStatusModel",
+          "lineNumber": 14
+        },
+        {
+          "caller": "toEntity",
+          "callee": "TechnicianBookingStatus",
+          "lineNumber": 18
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 4,
+        "functionCount": 3,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/data/model/technician_slot_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 174,
+      "nonEmptyLines": 159,
+      "functions": [
+        {
+          "name": "TechnicianSlotModel",
+          "startLine": 4,
+          "endLine": 18,
+          "params": [
+            "slotId",
+            "label",
+            "startTime",
+            "endTime",
+            "slotTime",
+            "raw"
+          ]
+        },
+        {
+          "name": "TechnicianSlotModel.fromDynamic",
+          "startLine": 20,
+          "endLine": 20,
+          "params": [
+            "data"
+          ]
+        },
+        {
+          "name": "toEntity",
+          "startLine": 44,
+          "endLine": 44,
+          "params": []
+        },
+        {
+          "name": "_fromMap",
+          "startLine": 55,
+          "endLine": 55,
+          "params": [
+            "json"
+          ]
+        },
+        {
+          "name": "_stringForKeys",
+          "startLine": 140,
+          "endLine": 140,
+          "params": [
+            "json",
+            "keys"
+          ]
+        },
+        {
+          "name": "_firstStringValue",
+          "startLine": 156,
+          "endLine": 156,
+          "params": [
+            "values"
+          ]
+        },
+        {
+          "name": "_formatRange",
+          "startLine": 165,
+          "endLine": 165,
+          "params": [
+            "start",
+            "end"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "TechnicianSlotModel",
+          "startLine": 3,
+          "endLine": 174,
+          "methods": [
+            "TechnicianSlotModel",
+            "TechnicianSlotModel.fromDynamic",
+            "toEntity",
+            "_fromMap",
+            "_stringForKeys",
+            "_firstStringValue",
+            "_formatRange"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "TechnicianSlotModel",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "TechnicianSlotModel.fromDynamic",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "toEntity",
+          "line": 44,
+          "isDefault": false
+        },
+        {
+          "name": "TechnicianSlotModel",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "TechnicianSlotModel.fromDynamic",
+          "callee": "_fromMap",
+          "lineNumber": 25
+        },
+        {
+          "caller": "TechnicianSlotModel.fromDynamic",
+          "callee": "_fromMap",
+          "lineNumber": 28
+        },
+        {
+          "caller": "TechnicianSlotModel.fromDynamic",
+          "callee": "map",
+          "lineNumber": 29
+        },
+        {
+          "caller": "TechnicianSlotModel.fromDynamic",
+          "callee": "MapEntry",
+          "lineNumber": 29
+        },
+        {
+          "caller": "TechnicianSlotModel.fromDynamic",
+          "callee": "toString",
+          "lineNumber": 29
+        },
+        {
+          "caller": "TechnicianSlotModel.fromDynamic",
+          "callee": "trim",
+          "lineNumber": 34
+        },
+        {
+          "caller": "TechnicianSlotModel.fromDynamic",
+          "callee": "TechnicianSlotModel",
+          "lineNumber": 36
+        },
+        {
+          "caller": "toEntity",
+          "callee": "TechnicianSlotEntity",
+          "lineNumber": 45
+        },
+        {
+          "caller": "_fromMap",
+          "callee": "_stringForKeys",
+          "lineNumber": 56
+        },
+        {
+          "caller": "_fromMap",
+          "callee": "_stringForKeys",
+          "lineNumber": 66
+        },
+        {
+          "caller": "_fromMap",
+          "callee": "_stringForKeys",
+          "lineNumber": 79
+        },
+        {
+          "caller": "_fromMap",
+          "callee": "_stringForKeys",
+          "lineNumber": 92
+        },
+        {
+          "caller": "_fromMap",
+          "callee": "_stringForKeys",
+          "lineNumber": 109
+        },
+        {
+          "caller": "_fromMap",
+          "callee": "_formatRange",
+          "lineNumber": 119
+        },
+        {
+          "caller": "_fromMap",
+          "callee": "_firstStringValue",
+          "lineNumber": 120
+        },
+        {
+          "caller": "_fromMap",
+          "callee": "trim",
+          "lineNumber": 122
+        },
+        {
+          "caller": "_fromMap",
+          "callee": "trim",
+          "lineNumber": 125
+        },
+        {
+          "caller": "_fromMap",
+          "callee": "trim",
+          "lineNumber": 127
+        },
+        {
+          "caller": "_fromMap",
+          "callee": "TechnicianSlotModel",
+          "lineNumber": 130
+        },
+        {
+          "caller": "_stringForKeys",
+          "callee": "trim",
+          "lineNumber": 143
+        },
+        {
+          "caller": "_stringForKeys",
+          "callee": "trim",
+          "lineNumber": 144
+        },
+        {
+          "caller": "_stringForKeys",
+          "callee": "toString",
+          "lineNumber": 147
+        },
+        {
+          "caller": "_stringForKeys",
+          "callee": "trim",
+          "lineNumber": 147
+        },
+        {
+          "caller": "_firstStringValue",
+          "callee": "trim",
+          "lineNumber": 158
+        },
+        {
+          "caller": "_firstStringValue",
+          "callee": "trim",
+          "lineNumber": 159
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 4,
+        "functionCount": 7,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/data/model/technician_summary_model.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 60,
+      "nonEmptyLines": 54,
+      "functions": [
+        {
+          "name": "TechnicianSummaryModel",
+          "startLine": 6,
+          "endLine": 24,
+          "params": [
+            "techId",
+            "techNameAr",
+            "techNameEn",
+            "techPhotoUrl",
+            "organizationId",
+            "branchId",
+            "calculatedDistance",
+            "rating"
+          ]
+        },
+        {
+          "name": "TechnicianSummaryModel.fromJson",
+          "startLine": 26,
+          "endLine": 26,
+          "params": [
+            "json"
+          ]
+        },
+        {
+          "name": "toEntity",
+          "startLine": 48,
+          "endLine": 48,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "TechnicianSummaryModel",
+          "startLine": 5,
+          "endLine": 60,
+          "methods": [
+            "TechnicianSummaryModel",
+            "TechnicianSummaryModel.fromJson",
+            "toEntity"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "TechnicianSummaryModel",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "TechnicianSummaryModel.fromJson",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "toEntity",
+          "line": 48,
+          "isDefault": false
+        },
+        {
+          "name": "TechnicianSummaryModel",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "TechnicianSummaryModel.fromJson",
+          "callee": "TechnicianSummaryModel",
+          "lineNumber": 27
+        },
+        {
+          "caller": "TechnicianSummaryModel.fromJson",
+          "callee": "tryParse",
+          "lineNumber": 36
+        },
+        {
+          "caller": "TechnicianSummaryModel.fromJson",
+          "callee": "tryParse",
+          "lineNumber": 41
+        },
+        {
+          "caller": "toEntity",
+          "callee": "TechnicianSummaryEntity",
+          "lineNumber": 49
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 4,
+        "functionCount": 3,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/data/repository/technician_repository.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 230,
+      "nonEmptyLines": 211,
+      "functions": [
+        {
+          "name": "TechnicianRepository",
+          "startLine": 15,
+          "endLine": 15,
+          "params": [
+            "_remoteDataSource"
+          ]
+        },
+        {
+          "name": "searchNearby",
+          "startLine": 20,
+          "endLine": 26,
+          "params": [
+            "latitude",
+            "longitude",
+            "maxResults",
+            "radiusKm",
+            "serviceId"
+          ]
+        },
+        {
+          "name": "getAvailableSlots",
+          "startLine": 38,
+          "endLine": 41,
+          "params": [
+            "technicianId",
+            "date"
+          ]
+        },
+        {
+          "name": "getAppointments",
+          "startLine": 50,
+          "endLine": 55,
+          "params": [
+            "userId",
+            "fromDate",
+            "toDate",
+            "statusId"
+          ]
+        },
+        {
+          "name": "getBookingStatuses",
+          "startLine": 66,
+          "endLine": 66,
+          "params": []
+        },
+        {
+          "name": "updateAppointmentStatus",
+          "startLine": 72,
+          "endLine": 75,
+          "params": [
+            "bookingId",
+            "statusId"
+          ]
+        },
+        {
+          "name": "createServiceRequest",
+          "startLine": 83,
+          "endLine": 91,
+          "params": [
+            "fireBaseId",
+            "phoneNumber",
+            "vin",
+            "mileage",
+            "couponNumber",
+            "isEstimation",
+            "bookingId"
+          ]
+        },
+        {
+          "name": "completeServiceRequest",
+          "startLine": 105,
+          "endLine": 108,
+          "params": [
+            "srNumber",
+            "userId"
+          ]
+        },
+        {
+          "name": "getJobCardPackages",
+          "startLine": 117,
+          "endLine": 119,
+          "params": [
+            "srNumber"
+          ]
+        },
+        {
+          "name": "getCustomPackageCategories",
+          "startLine": 127,
+          "endLine": 127,
+          "params": []
+        },
+        {
+          "name": "getCustomPackageItems",
+          "startLine": 133,
+          "endLine": 136,
+          "params": [
+            "jobCardNumber",
+            "categoryId"
+          ]
+        },
+        {
+          "name": "addCustomPackageItem",
+          "startLine": 145,
+          "endLine": 152,
+          "params": [
+            "jobCardNumber",
+            "lineId",
+            "categoryId",
+            "inventoryItemId",
+            "qty",
+            "userId"
+          ]
+        },
+        {
+          "name": "deleteCustomPackageItem",
+          "startLine": 164,
+          "endLine": 166,
+          "params": [
+            "srLineId"
+          ]
+        },
+        {
+          "name": "getJobCardPackageLines",
+          "startLine": 171,
+          "endLine": 174,
+          "params": [
+            "srNumber",
+            "packageId"
+          ]
+        },
+        {
+          "name": "addPackageToJobCard",
+          "startLine": 183,
+          "endLine": 188,
+          "params": [
+            "srNumber",
+            "packageId",
+            "userId",
+            "campaignLineId"
+          ]
+        },
+        {
+          "name": "deletePackageFromJobCard",
+          "startLine": 198,
+          "endLine": 201,
+          "params": [
+            "packageLineId",
+            "userId"
+          ]
+        },
+        {
+          "name": "postChecklist",
+          "startLine": 209,
+          "endLine": 213,
+          "params": [
+            "srNumber",
+            "checklistId",
+            "data"
+          ]
+        },
+        {
+          "name": "getPackagesOfJobCard",
+          "startLine": 222,
+          "endLine": 224,
+          "params": [
+            "srNumber"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "TechnicianRepository",
+          "startLine": 14,
+          "endLine": 230,
+          "methods": [
+            "TechnicianRepository",
+            "searchNearby",
+            "getAvailableSlots",
+            "getAppointments",
+            "getBookingStatuses",
+            "updateAppointmentStatus",
+            "createServiceRequest",
+            "completeServiceRequest",
+            "getJobCardPackages",
+            "getCustomPackageCategories",
+            "getCustomPackageItems",
+            "addCustomPackageItem",
+            "deleteCustomPackageItem",
+            "getJobCardPackageLines",
+            "addPackageToJobCard",
+            "deletePackageFromJobCard",
+            "postChecklist",
+            "getPackagesOfJobCard"
+          ],
+          "properties": [
+            "_remoteDataSource"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "TechnicianRepository",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "searchNearby",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "getAvailableSlots",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "getAppointments",
+          "line": 50,
+          "isDefault": false
+        },
+        {
+          "name": "getBookingStatuses",
+          "line": 66,
+          "isDefault": false
+        },
+        {
+          "name": "updateAppointmentStatus",
+          "line": 72,
+          "isDefault": false
+        },
+        {
+          "name": "createServiceRequest",
+          "line": 83,
+          "isDefault": false
+        },
+        {
+          "name": "completeServiceRequest",
+          "line": 105,
+          "isDefault": false
+        },
+        {
+          "name": "getJobCardPackages",
+          "line": 117,
+          "isDefault": false
+        },
+        {
+          "name": "getCustomPackageCategories",
+          "line": 127,
+          "isDefault": false
+        },
+        {
+          "name": "getCustomPackageItems",
+          "line": 133,
+          "isDefault": false
+        },
+        {
+          "name": "addCustomPackageItem",
+          "line": 145,
+          "isDefault": false
+        },
+        {
+          "name": "deleteCustomPackageItem",
+          "line": 164,
+          "isDefault": false
+        },
+        {
+          "name": "getJobCardPackageLines",
+          "line": 171,
+          "isDefault": false
+        },
+        {
+          "name": "addPackageToJobCard",
+          "line": 183,
+          "isDefault": false
+        },
+        {
+          "name": "deletePackageFromJobCard",
+          "line": 198,
+          "isDefault": false
+        },
+        {
+          "name": "postChecklist",
+          "line": 209,
+          "isDefault": false
+        },
+        {
+          "name": "getPackagesOfJobCard",
+          "line": 222,
+          "isDefault": false
+        },
+        {
+          "name": "TechnicianRepository",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "searchNearby",
+          "callee": "searchNearby",
+          "lineNumber": 27
+        },
+        {
+          "caller": "searchNearby",
+          "callee": "map",
+          "lineNumber": 34
+        },
+        {
+          "caller": "searchNearby",
+          "callee": "toEntity",
+          "lineNumber": 34
+        },
+        {
+          "caller": "searchNearby",
+          "callee": "toList",
+          "lineNumber": 34
+        },
+        {
+          "caller": "getAvailableSlots",
+          "callee": "getAvailableSlots",
+          "lineNumber": 42
+        },
+        {
+          "caller": "getAvailableSlots",
+          "callee": "map",
+          "lineNumber": 46
+        },
+        {
+          "caller": "getAvailableSlots",
+          "callee": "toEntity",
+          "lineNumber": 46
+        },
+        {
+          "caller": "getAvailableSlots",
+          "callee": "toList",
+          "lineNumber": 46
+        },
+        {
+          "caller": "getAppointments",
+          "callee": "getAppointments",
+          "lineNumber": 56
+        },
+        {
+          "caller": "getBookingStatuses",
+          "callee": "getBookingStatuses",
+          "lineNumber": 67
+        },
+        {
+          "caller": "getBookingStatuses",
+          "callee": "map",
+          "lineNumber": 68
+        },
+        {
+          "caller": "getBookingStatuses",
+          "callee": "toEntity",
+          "lineNumber": 68
+        },
+        {
+          "caller": "getBookingStatuses",
+          "callee": "toList",
+          "lineNumber": 68
+        },
+        {
+          "caller": "updateAppointmentStatus",
+          "callee": "updateAppointmentStatus",
+          "lineNumber": 76
+        },
+        {
+          "caller": "createServiceRequest",
+          "callee": "createServiceRequest",
+          "lineNumber": 92
+        },
+        {
+          "caller": "createServiceRequest",
+          "callee": "map",
+          "lineNumber": 101
+        },
+        {
+          "caller": "createServiceRequest",
+          "callee": "toEntity",
+          "lineNumber": 101
+        },
+        {
+          "caller": "createServiceRequest",
+          "callee": "toList",
+          "lineNumber": 101
+        },
+        {
+          "caller": "completeServiceRequest",
+          "callee": "completeServiceRequest",
+          "lineNumber": 109
+        },
+        {
+          "caller": "completeServiceRequest",
+          "callee": "map",
+          "lineNumber": 113
+        },
+        {
+          "caller": "completeServiceRequest",
+          "callee": "toEntity",
+          "lineNumber": 113
+        },
+        {
+          "caller": "completeServiceRequest",
+          "callee": "toList",
+          "lineNumber": 113
+        },
+        {
+          "caller": "getJobCardPackages",
+          "callee": "getJobCardPackages",
+          "lineNumber": 120
+        },
+        {
+          "caller": "getJobCardPackages",
+          "callee": "map",
+          "lineNumber": 123
+        },
+        {
+          "caller": "getJobCardPackages",
+          "callee": "toEntity",
+          "lineNumber": 123
+        },
+        {
+          "caller": "getJobCardPackages",
+          "callee": "toList",
+          "lineNumber": 123
+        },
+        {
+          "caller": "getCustomPackageCategories",
+          "callee": "getCustomPackageCategories",
+          "lineNumber": 128
+        },
+        {
+          "caller": "getCustomPackageCategories",
+          "callee": "map",
+          "lineNumber": 129
+        },
+        {
+          "caller": "getCustomPackageCategories",
+          "callee": "toEntity",
+          "lineNumber": 129
+        },
+        {
+          "caller": "getCustomPackageCategories",
+          "callee": "toList",
+          "lineNumber": 129
+        },
+        {
+          "caller": "getCustomPackageItems",
+          "callee": "getCustomPackageItems",
+          "lineNumber": 137
+        },
+        {
+          "caller": "getCustomPackageItems",
+          "callee": "map",
+          "lineNumber": 141
+        },
+        {
+          "caller": "getCustomPackageItems",
+          "callee": "toEntity",
+          "lineNumber": 141
+        },
+        {
+          "caller": "getCustomPackageItems",
+          "callee": "toList",
+          "lineNumber": 141
+        },
+        {
+          "caller": "addCustomPackageItem",
+          "callee": "addItemToCustomPackage",
+          "lineNumber": 153
+        },
+        {
+          "caller": "deleteCustomPackageItem",
+          "callee": "deleteCustomPackageItem",
+          "lineNumber": 167
+        },
+        {
+          "caller": "getJobCardPackageLines",
+          "callee": "getJobCardPackageLines",
+          "lineNumber": 175
+        },
+        {
+          "caller": "getJobCardPackageLines",
+          "callee": "map",
+          "lineNumber": 179
+        },
+        {
+          "caller": "getJobCardPackageLines",
+          "callee": "toEntity",
+          "lineNumber": 179
+        },
+        {
+          "caller": "getJobCardPackageLines",
+          "callee": "toList",
+          "lineNumber": 179
+        },
+        {
+          "caller": "addPackageToJobCard",
+          "callee": "addPackageToJobCard",
+          "lineNumber": 189
+        },
+        {
+          "caller": "deletePackageFromJobCard",
+          "callee": "deletePackageFromJobCard",
+          "lineNumber": 202
+        },
+        {
+          "caller": "postChecklist",
+          "callee": "postChecklist",
+          "lineNumber": 214
+        },
+        {
+          "caller": "getPackagesOfJobCard",
+          "callee": "getPackagesOfJobCard",
+          "lineNumber": 225
+        },
+        {
+          "caller": "getPackagesOfJobCard",
+          "callee": "map",
+          "lineNumber": 228
+        },
+        {
+          "caller": "getPackagesOfJobCard",
+          "callee": "toEntity",
+          "lineNumber": 228
+        },
+        {
+          "caller": "getPackagesOfJobCard",
+          "callee": "toList",
+          "lineNumber": 228
+        }
+      ],
+      "metrics": {
+        "importCount": 12,
+        "exportCount": 19,
+        "functionCount": 18,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/domain/entity/booking_status.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 49,
+      "nonEmptyLines": 43,
+      "functions": [
+        {
+          "name": "hasLabel",
+          "startLine": 12,
+          "endLine": 12,
+          "params": []
+        },
+        {
+          "name": "hasColor",
+          "startLine": 14,
+          "endLine": 14,
+          "params": []
+        },
+        {
+          "name": "colorValue",
+          "startLine": 17,
+          "endLine": 17,
+          "params": []
+        },
+        {
+          "name": "copyWith",
+          "startLine": 26,
+          "endLine": 30,
+          "params": [
+            "label",
+            "code",
+            "hexColor"
+          ]
+        },
+        {
+          "name": "TechnicianBookingStatus.fromRaw",
+          "startLine": 38,
+          "endLine": 42,
+          "params": [
+            "label",
+            "code",
+            "hexColor"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "TechnicianBookingStatus",
+          "startLine": 1,
+          "endLine": 49,
+          "methods": [
+            "hasLabel",
+            "hasColor",
+            "colorValue",
+            "copyWith",
+            "TechnicianBookingStatus.fromRaw"
+          ],
+          "properties": [
+            "label",
+            "code",
+            "hexColor"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "hasLabel",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "hasColor",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "colorValue",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "copyWith",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "TechnicianBookingStatus.fromRaw",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "TechnicianBookingStatus",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "hasLabel",
+          "callee": "trim",
+          "lineNumber": 12
+        },
+        {
+          "caller": "hasColor",
+          "callee": "trim",
+          "lineNumber": 14
+        },
+        {
+          "caller": "colorValue",
+          "callee": "replaceAll",
+          "lineNumber": 19
+        },
+        {
+          "caller": "colorValue",
+          "callee": "trim",
+          "lineNumber": 19
+        },
+        {
+          "caller": "colorValue",
+          "callee": "tryParse",
+          "lineNumber": 21
+        },
+        {
+          "caller": "copyWith",
+          "callee": "TechnicianBookingStatus",
+          "lineNumber": 31
+        },
+        {
+          "caller": "TechnicianBookingStatus.fromRaw",
+          "callee": "TechnicianBookingStatus",
+          "lineNumber": 43
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 6,
+        "functionCount": 5,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/domain/entity/custom_package_category_entity.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 12,
+      "functions": [
+        {
+          "name": "displayName",
+          "startLine": 12,
+          "endLine": 12,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "CustomPackageCategoryEntity",
+          "startLine": 1,
+          "endLine": 14,
+          "methods": [
+            "displayName"
+          ],
+          "properties": [
+            "id",
+            "descriptionEn",
+            "descriptionAr"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "displayName",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "CustomPackageCategoryEntity",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "displayName",
+          "callee": "trim",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/domain/entity/custom_package_item_entity.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 12,
+      "classes": [
+        {
+          "name": "CustomPackageItemEntity",
+          "startLine": 1,
+          "endLine": 13,
+          "methods": [],
+          "properties": [
+            "itemCode",
+            "description",
+            "itemType",
+            "inventoryItemId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CustomPackageItemEntity",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/domain/entity/job_card_entity.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 21,
+      "nonEmptyLines": 20,
+      "classes": [
+        {
+          "name": "JobCardEntity",
+          "startLine": 1,
+          "endLine": 21,
+          "methods": [],
+          "properties": [
+            "srNumber",
+            "srStatus",
+            "openDate",
+            "branch",
+            "technicianName",
+            "customerName",
+            "vin",
+            "raw"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "JobCardEntity",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/domain/entity/job_card_package_entity.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 38,
+      "functions": [
+        {
+          "name": "displayName",
+          "startLine": 36,
+          "endLine": 36,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "JobCardPackageEntity",
+          "startLine": 1,
+          "endLine": 40,
+          "methods": [
+            "displayName"
+          ],
+          "properties": [
+            "packageId",
+            "packageCode",
+            "packageNameAr",
+            "packageNameEn",
+            "packageShortName",
+            "lineId",
+            "campaignLineId",
+            "linePrice",
+            "totalPrice",
+            "totalTax",
+            "totalCost",
+            "totalDiscount",
+            "totalListPrice",
+            "isEmergency",
+            "isCustomPackage"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "displayName",
+          "line": 36,
+          "isDefault": false
+        },
+        {
+          "name": "JobCardPackageEntity",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "displayName",
+          "callee": "trim",
+          "lineNumber": 37
+        },
+        {
+          "caller": "displayName",
+          "callee": "trim",
+          "lineNumber": 38
+        },
+        {
+          "caller": "displayName",
+          "callee": "trim",
+          "lineNumber": 39
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/domain/entity/job_card_package_line_entity.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 47,
+      "nonEmptyLines": 46,
+      "classes": [
+        {
+          "name": "JobCardPackageLineEntity",
+          "startLine": 1,
+          "endLine": 47,
+          "methods": [],
+          "properties": [
+            "lineNumber",
+            "lineId",
+            "itemCode",
+            "itemDescription",
+            "itemType",
+            "categoryDescription",
+            "packageLineId",
+            "packageId",
+            "itemCategoryId",
+            "inventoryItemId",
+            "quantity",
+            "priceWithoutDiscount",
+            "priceWithDiscount",
+            "discountPercentage",
+            "discountAmount",
+            "extendedPrice",
+            "conditionItemCode",
+            "conditionPrice",
+            "fromPriceList",
+            "fixedItemPrice",
+            "srLineId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "JobCardPackageLineEntity",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/domain/entity/operation_result_entity.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 12,
+      "classes": [
+        {
+          "name": "OperationResultEntity",
+          "startLine": 1,
+          "endLine": 13,
+          "methods": [],
+          "properties": [
+            "success",
+            "message",
+            "code",
+            "type"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "OperationResultEntity",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/domain/entity/technician_appointment_entity.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 99,
+      "nonEmptyLines": 92,
+      "functions": [
+        {
+          "name": "displayPlate",
+          "startLine": 74,
+          "endLine": 74,
+          "params": []
+        },
+        {
+          "name": "displayCar",
+          "startLine": 76,
+          "endLine": 76,
+          "params": []
+        },
+        {
+          "name": "packageLabel",
+          "startLine": 90,
+          "endLine": 90,
+          "params": []
+        },
+        {
+          "name": "statusLabel",
+          "startLine": 96,
+          "endLine": 96,
+          "params": []
+        },
+        {
+          "name": "statusColorValue",
+          "startLine": 98,
+          "endLine": 98,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "TechnicianAppointmentEntity",
+          "startLine": 3,
+          "endLine": 99,
+          "methods": [
+            "displayPlate",
+            "displayCar",
+            "packageLabel",
+            "statusLabel",
+            "statusColorValue"
+          ],
+          "properties": [
+            "bookingId",
+            "bookingDateText",
+            "bookingDate",
+            "slotTime",
+            "branchId",
+            "vehicleId",
+            "branchName",
+            "bookingStatus",
+            "customerName",
+            "customerType",
+            "plateAr",
+            "plateEn",
+            "vin",
+            "make",
+            "brand",
+            "modelYear",
+            "packageNameAr",
+            "packageNameEn",
+            "technicianId",
+            "technicianNameAr",
+            "technicianNameEn",
+            "createdAtText",
+            "createdAt",
+            "srNumber",
+            "srType",
+            "srStatus",
+            "isEstimation",
+            "isCampaign",
+            "couponNumber",
+            "discount",
+            "srTotal",
+            "raw",
+            "mileage"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "displayPlate",
+          "line": 74,
+          "isDefault": false
+        },
+        {
+          "name": "displayCar",
+          "line": 76,
+          "isDefault": false
+        },
+        {
+          "name": "packageLabel",
+          "line": 90,
+          "isDefault": false
+        },
+        {
+          "name": "statusLabel",
+          "line": 96,
+          "isDefault": false
+        },
+        {
+          "name": "statusColorValue",
+          "line": 98,
+          "isDefault": false
+        },
+        {
+          "name": "TechnicianAppointmentEntity",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "displayPlate",
+          "callee": "trim",
+          "lineNumber": 74
+        },
+        {
+          "caller": "displayCar",
+          "callee": "StringBuffer",
+          "lineNumber": 77
+        },
+        {
+          "caller": "displayCar",
+          "callee": "trim",
+          "lineNumber": 78
+        },
+        {
+          "caller": "displayCar",
+          "callee": "write",
+          "lineNumber": 79
+        },
+        {
+          "caller": "displayCar",
+          "callee": "trim",
+          "lineNumber": 79
+        },
+        {
+          "caller": "displayCar",
+          "callee": "trim",
+          "lineNumber": 80
+        },
+        {
+          "caller": "displayCar",
+          "callee": "write",
+          "lineNumber": 81
+        },
+        {
+          "caller": "displayCar",
+          "callee": "trim",
+          "lineNumber": 81
+        },
+        {
+          "caller": "displayCar",
+          "callee": "trim",
+          "lineNumber": 83
+        },
+        {
+          "caller": "displayCar",
+          "callee": "write",
+          "lineNumber": 84
+        },
+        {
+          "caller": "displayCar",
+          "callee": "write",
+          "lineNumber": 85
+        },
+        {
+          "caller": "displayCar",
+          "callee": "trim",
+          "lineNumber": 85
+        },
+        {
+          "caller": "displayCar",
+          "callee": "toString",
+          "lineNumber": 87
+        },
+        {
+          "caller": "displayCar",
+          "callee": "trim",
+          "lineNumber": 87
+        },
+        {
+          "caller": "packageLabel",
+          "callee": "trim",
+          "lineNumber": 91
+        },
+        {
+          "caller": "packageLabel",
+          "callee": "trim",
+          "lineNumber": 91
+        },
+        {
+          "caller": "packageLabel",
+          "callee": "trim",
+          "lineNumber": 92
+        },
+        {
+          "caller": "packageLabel",
+          "callee": "trim",
+          "lineNumber": 92
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 6,
+        "functionCount": 5,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/domain/entity/technician_slot_entity.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 17,
+      "nonEmptyLines": 16,
+      "classes": [
+        {
+          "name": "TechnicianSlotEntity",
+          "startLine": 1,
+          "endLine": 17,
+          "methods": [],
+          "properties": [
+            "slotId",
+            "label",
+            "startTime",
+            "endTime",
+            "slotTime",
+            "raw"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "TechnicianSlotEntity",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/domain/entity/technician_summary_entity.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 21,
+      "nonEmptyLines": 20,
+      "classes": [
+        {
+          "name": "TechnicianSummaryEntity",
+          "startLine": 1,
+          "endLine": 21,
+          "methods": [],
+          "properties": [
+            "techId",
+            "techNameAr",
+            "techNameEn",
+            "techPhotoUrl",
+            "organizationId",
+            "branchId",
+            "calculatedDistance",
+            "rating"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "TechnicianSummaryEntity",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/domain/repository/i_technician_repository.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 105,
+      "nonEmptyLines": 88,
+      "functions": [
+        {
+          "name": "searchNearby",
+          "startLine": 13,
+          "endLine": 19,
+          "params": [
+            "latitude",
+            "longitude",
+            "maxResults",
+            "radiusKm",
+            "serviceId"
+          ]
+        },
+        {
+          "name": "getAvailableSlots",
+          "startLine": 21,
+          "endLine": 24,
+          "params": [
+            "technicianId",
+            "date"
+          ]
+        },
+        {
+          "name": "getAppointments",
+          "startLine": 26,
+          "endLine": 31,
+          "params": [
+            "userId",
+            "fromDate",
+            "toDate",
+            "statusId"
+          ]
+        },
+        {
+          "name": "getBookingStatuses",
+          "startLine": 33,
+          "endLine": 33,
+          "params": []
+        },
+        {
+          "name": "updateAppointmentStatus",
+          "startLine": 35,
+          "endLine": 38,
+          "params": [
+            "bookingId",
+            "statusId"
+          ]
+        },
+        {
+          "name": "createServiceRequest",
+          "startLine": 40,
+          "endLine": 48,
+          "params": [
+            "fireBaseId",
+            "phoneNumber",
+            "vin",
+            "mileage",
+            "couponNumber",
+            "isEstimation",
+            "bookingId"
+          ]
+        },
+        {
+          "name": "completeServiceRequest",
+          "startLine": 50,
+          "endLine": 53,
+          "params": [
+            "srNumber",
+            "userId"
+          ]
+        },
+        {
+          "name": "getJobCardPackages",
+          "startLine": 55,
+          "endLine": 57,
+          "params": [
+            "srNumber"
+          ]
+        },
+        {
+          "name": "getCustomPackageCategories",
+          "startLine": 59,
+          "endLine": 59,
+          "params": []
+        },
+        {
+          "name": "getCustomPackageItems",
+          "startLine": 61,
+          "endLine": 64,
+          "params": [
+            "jobCardNumber",
+            "categoryId"
+          ]
+        },
+        {
+          "name": "addCustomPackageItem",
+          "startLine": 66,
+          "endLine": 73,
+          "params": [
+            "jobCardNumber",
+            "lineId",
+            "categoryId",
+            "inventoryItemId",
+            "qty",
+            "userId"
+          ]
+        },
+        {
+          "name": "deleteCustomPackageItem",
+          "startLine": 75,
+          "endLine": 77,
+          "params": [
+            "srLineId"
+          ]
+        },
+        {
+          "name": "getJobCardPackageLines",
+          "startLine": 79,
+          "endLine": 82,
+          "params": [
+            "srNumber",
+            "packageId"
+          ]
+        },
+        {
+          "name": "addPackageToJobCard",
+          "startLine": 84,
+          "endLine": 89,
+          "params": [
+            "srNumber",
+            "packageId",
+            "userId",
+            "campaignLineId"
+          ]
+        },
+        {
+          "name": "deletePackageFromJobCard",
+          "startLine": 91,
+          "endLine": 94,
+          "params": [
+            "packageLineId",
+            "userId"
+          ]
+        },
+        {
+          "name": "postChecklist",
+          "startLine": 96,
+          "endLine": 100,
+          "params": [
+            "srNumber",
+            "checklistId",
+            "data"
+          ]
+        },
+        {
+          "name": "getPackagesOfJobCard",
+          "startLine": 102,
+          "endLine": 104,
+          "params": [
+            "srNumber"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ITechnicianRepository",
+          "startLine": 12,
+          "endLine": 105,
+          "methods": [
+            "searchNearby",
+            "getAvailableSlots",
+            "getAppointments",
+            "getBookingStatuses",
+            "updateAppointmentStatus",
+            "createServiceRequest",
+            "completeServiceRequest",
+            "getJobCardPackages",
+            "getCustomPackageCategories",
+            "getCustomPackageItems",
+            "addCustomPackageItem",
+            "deleteCustomPackageItem",
+            "getJobCardPackageLines",
+            "addPackageToJobCard",
+            "deletePackageFromJobCard",
+            "postChecklist",
+            "getPackagesOfJobCard"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "searchNearby",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "getAvailableSlots",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "getAppointments",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "getBookingStatuses",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "updateAppointmentStatus",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "createServiceRequest",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "completeServiceRequest",
+          "line": 50,
+          "isDefault": false
+        },
+        {
+          "name": "getJobCardPackages",
+          "line": 55,
+          "isDefault": false
+        },
+        {
+          "name": "getCustomPackageCategories",
+          "line": 59,
+          "isDefault": false
+        },
+        {
+          "name": "getCustomPackageItems",
+          "line": 61,
+          "isDefault": false
+        },
+        {
+          "name": "addCustomPackageItem",
+          "line": 66,
+          "isDefault": false
+        },
+        {
+          "name": "deleteCustomPackageItem",
+          "line": 75,
+          "isDefault": false
+        },
+        {
+          "name": "getJobCardPackageLines",
+          "line": 79,
+          "isDefault": false
+        },
+        {
+          "name": "addPackageToJobCard",
+          "line": 84,
+          "isDefault": false
+        },
+        {
+          "name": "deletePackageFromJobCard",
+          "line": 91,
+          "isDefault": false
+        },
+        {
+          "name": "postChecklist",
+          "line": 96,
+          "isDefault": false
+        },
+        {
+          "name": "getPackagesOfJobCard",
+          "line": 102,
+          "isDefault": false
+        },
+        {
+          "name": "ITechnicianRepository",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 10,
+        "exportCount": 18,
+        "functionCount": 17,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/domain/use_case/add_custom_package_item_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 26,
+      "nonEmptyLines": 23,
+      "functions": [
+        {
+          "name": "AddCustomPackageItemUseCase",
+          "startLine": 5,
+          "endLine": 5,
+          "params": [
+            "_repository"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 9,
+          "endLine": 16,
+          "params": [
+            "jobCardNumber",
+            "lineId",
+            "categoryId",
+            "inventoryItemId",
+            "qty",
+            "userId"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "AddCustomPackageItemUseCase",
+          "startLine": 4,
+          "endLine": 26,
+          "methods": [
+            "AddCustomPackageItemUseCase",
+            "call"
+          ],
+          "properties": [
+            "_repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AddCustomPackageItemUseCase",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "call",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "AddCustomPackageItemUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "addCustomPackageItem",
+          "lineNumber": 17
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/domain/use_case/add_package_to_job_card_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 22,
+      "nonEmptyLines": 19,
+      "functions": [
+        {
+          "name": "AddPackageToJobCardUseCase",
+          "startLine": 5,
+          "endLine": 5,
+          "params": [
+            "_repository"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 9,
+          "endLine": 14,
+          "params": [
+            "srNumber",
+            "packageId",
+            "userId",
+            "campaignLineId"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "AddPackageToJobCardUseCase",
+          "startLine": 4,
+          "endLine": 22,
+          "methods": [
+            "AddPackageToJobCardUseCase",
+            "call"
+          ],
+          "properties": [
+            "_repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AddPackageToJobCardUseCase",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "call",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "AddPackageToJobCardUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "addPackageToJobCard",
+          "lineNumber": 15
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/domain/use_case/complete_service_request_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 15,
+      "functions": [
+        {
+          "name": "call",
+          "startLine": 9,
+          "endLine": 12,
+          "params": [
+            "srNumber",
+            "userId"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "CompleteServiceRequestUseCase",
+          "startLine": 4,
+          "endLine": 18,
+          "methods": [
+            "call"
+          ],
+          "properties": [
+            "_repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "call",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "CompleteServiceRequestUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "completeServiceRequest",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/domain/use_case/create_job_card_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 28,
+      "nonEmptyLines": 25,
+      "functions": [
+        {
+          "name": "call",
+          "startLine": 9,
+          "endLine": 17,
+          "params": [
+            "fireBaseId",
+            "phoneNumber",
+            "vin",
+            "mileage",
+            "couponNumber",
+            "isEstimation",
+            "bookingId"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "CreateJobCardUseCase",
+          "startLine": 4,
+          "endLine": 28,
+          "methods": [
+            "call"
+          ],
+          "properties": [
+            "_repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "call",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "CreateJobCardUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "createServiceRequest",
+          "lineNumber": 18
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/domain/use_case/delete_custom_package_item_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 11,
+      "functions": [
+        {
+          "name": "DeleteCustomPackageItemUseCase",
+          "startLine": 5,
+          "endLine": 5,
+          "params": [
+            "_repository"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 9,
+          "endLine": 11,
+          "params": [
+            "srLineId"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "DeleteCustomPackageItemUseCase",
+          "startLine": 4,
+          "endLine": 14,
+          "methods": [
+            "DeleteCustomPackageItemUseCase",
+            "call"
+          ],
+          "properties": [
+            "_repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "DeleteCustomPackageItemUseCase",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "call",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "DeleteCustomPackageItemUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "deleteCustomPackageItem",
+          "lineNumber": 12
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/domain/use_case/delete_package_from_job_card_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 15,
+      "functions": [
+        {
+          "name": "DeletePackageFromJobCardUseCase",
+          "startLine": 5,
+          "endLine": 5,
+          "params": [
+            "_repository"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 9,
+          "endLine": 12,
+          "params": [
+            "packageLineId",
+            "userId"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "DeletePackageFromJobCardUseCase",
+          "startLine": 4,
+          "endLine": 18,
+          "methods": [
+            "DeletePackageFromJobCardUseCase",
+            "call"
+          ],
+          "properties": [
+            "_repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "DeletePackageFromJobCardUseCase",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "call",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "DeletePackageFromJobCardUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "deletePackageFromJobCard",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/domain/use_case/get_booking_statuses_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 12,
+      "nonEmptyLines": 9,
+      "functions": [
+        {
+          "name": "call",
+          "startLine": 9,
+          "endLine": 9,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "GetBookingStatusesUseCase",
+          "startLine": 4,
+          "endLine": 12,
+          "methods": [
+            "call"
+          ],
+          "properties": [
+            "_repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "call",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "GetBookingStatusesUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "getBookingStatuses",
+          "lineNumber": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/domain/use_case/get_custom_package_categories_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 12,
+      "nonEmptyLines": 9,
+      "functions": [
+        {
+          "name": "GetCustomPackageCategoriesUseCase",
+          "startLine": 5,
+          "endLine": 5,
+          "params": [
+            "_repository"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 9,
+          "endLine": 9,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "GetCustomPackageCategoriesUseCase",
+          "startLine": 4,
+          "endLine": 12,
+          "methods": [
+            "GetCustomPackageCategoriesUseCase",
+            "call"
+          ],
+          "properties": [
+            "_repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "GetCustomPackageCategoriesUseCase",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "call",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "GetCustomPackageCategoriesUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "getCustomPackageCategories",
+          "lineNumber": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/domain/use_case/get_custom_package_items_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 15,
+      "functions": [
+        {
+          "name": "GetCustomPackageItemsUseCase",
+          "startLine": 5,
+          "endLine": 5,
+          "params": [
+            "_repository"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 9,
+          "endLine": 12,
+          "params": [
+            "jobCardNumber",
+            "categoryId"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "GetCustomPackageItemsUseCase",
+          "startLine": 4,
+          "endLine": 18,
+          "methods": [
+            "GetCustomPackageItemsUseCase",
+            "call"
+          ],
+          "properties": [
+            "_repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "GetCustomPackageItemsUseCase",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "call",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "GetCustomPackageItemsUseCase",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "getCustomPackageItems",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/features/technician/domain/use_case/get_customer_appointments_use_case.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 25,
+      "nonEmptyLines": 21,
+      "functions": [
+        {
+          "name": "call",
+          "startLine": 12,
+          "endLine": 17,
+          "params": [
+            "userId",
+            "fromDate",
+            "toDate",
+            "statusId"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "GetCustomerAppointmentsUseCase",
+          "startLine": 7,
+          "endLine": 25,
+          "methods": [
+            "call"
+          ],
+          "properties": [
+            "_repository"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "call",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "GetCustomerAppointmentsUseCase",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "call",
+          "callee": "getUpcomingServices",
+          "lineNumber": 18
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    }
+  ]
+}

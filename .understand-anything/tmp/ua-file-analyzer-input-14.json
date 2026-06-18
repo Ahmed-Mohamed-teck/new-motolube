@@ -1,0 +1,182 @@
+{
+  "projectRoot": "/Users/ehsanfe/flutterprojects/newmotorlube",
+  "batchFiles": [
+    {
+      "path": "lib/features/user_cars/data/model/manufacture_model.dart",
+      "language": "dart",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/data/repository/user_car_repository.dart",
+      "language": "dart",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/domain/entity/car_brand_entity.dart",
+      "language": "dart",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/domain/entity/car_entity.dart",
+      "language": "dart",
+      "sizeLines": 32,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/domain/entity/manufacture_entity.dart",
+      "language": "dart",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/domain/repository/i_user_car_repository.dart",
+      "language": "dart",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/domain/use_case/add_user_car_use_case.dart",
+      "language": "dart",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/domain/use_case/get_car_brands_model_use_case.dart",
+      "language": "dart",
+      "sizeLines": 11,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/domain/use_case/get_manufacturers_use_case.dart",
+      "language": "dart",
+      "sizeLines": 9,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/domain/use_case/get_user_cars_use_case.dart",
+      "language": "dart",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/domain/use_case/update_user_car_use_case.dart",
+      "language": "dart",
+      "sizeLines": 11,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/presentation/screen/add_new_car_screen.dart",
+      "language": "dart",
+      "sizeLines": 1229,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/presentation/screen/user_car_details_screen.dart",
+      "language": "dart",
+      "sizeLines": 470,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/presentation/screen/user_cars_list_screen.dart",
+      "language": "dart",
+      "sizeLines": 98,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/presentation/view_model/add_user_car_state.dart",
+      "language": "dart",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/presentation/view_model/add_user_car_view_model.dart",
+      "language": "dart",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/presentation/view_model/car_brands_state.dart",
+      "language": "dart",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/presentation/view_model/car_brands_view_model.dart",
+      "language": "dart",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/presentation/view_model/manufacturers_state.dart",
+      "language": "dart",
+      "sizeLines": 19,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/presentation/view_model/manufacturers_view_model.dart",
+      "language": "dart",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/presentation/view_model/user_cars_state.dart",
+      "language": "dart",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/presentation/view_model/user_cars_view_model.dart",
+      "language": "dart",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/presentation/widget/user_car_home_item_card.dart",
+      "language": "dart",
+      "sizeLines": 233,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/presentation/widget/user_car_list_item.dart",
+      "language": "dart",
+      "sizeLines": 303,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/user_cars/presentation/widget/user_cars_empty_state.dart",
+      "language": "dart",
+      "sizeLines": 68,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "lib/features/user_cars/data/model/manufacture_model.dart": [],
+    "lib/features/user_cars/data/repository/user_car_repository.dart": [],
+    "lib/features/user_cars/domain/entity/car_brand_entity.dart": [],
+    "lib/features/user_cars/domain/entity/car_entity.dart": [],
+    "lib/features/user_cars/domain/entity/manufacture_entity.dart": [],
+    "lib/features/user_cars/domain/repository/i_user_car_repository.dart": [],
+    "lib/features/user_cars/domain/use_case/add_user_car_use_case.dart": [],
+    "lib/features/user_cars/domain/use_case/get_car_brands_model_use_case.dart": [],
+    "lib/features/user_cars/domain/use_case/get_manufacturers_use_case.dart": [],
+    "lib/features/user_cars/domain/use_case/get_user_cars_use_case.dart": [],
+    "lib/features/user_cars/domain/use_case/update_user_car_use_case.dart": [],
+    "lib/features/user_cars/presentation/screen/add_new_car_screen.dart": [],
+    "lib/features/user_cars/presentation/screen/user_car_details_screen.dart": [],
+    "lib/features/user_cars/presentation/screen/user_cars_list_screen.dart": [],
+    "lib/features/user_cars/presentation/view_model/add_user_car_state.dart": [],
+    "lib/features/user_cars/presentation/view_model/add_user_car_view_model.dart": [],
+    "lib/features/user_cars/presentation/view_model/car_brands_state.dart": [],
+    "lib/features/user_cars/presentation/view_model/car_brands_view_model.dart": [],
+    "lib/features/user_cars/presentation/view_model/manufacturers_state.dart": [],
+    "lib/features/user_cars/presentation/view_model/manufacturers_view_model.dart": [],
+    "lib/features/user_cars/presentation/view_model/user_cars_state.dart": [],
+    "lib/features/user_cars/presentation/view_model/user_cars_view_model.dart": [],
+    "lib/features/user_cars/presentation/widget/user_car_home_item_card.dart": [],
+    "lib/features/user_cars/presentation/widget/user_car_list_item.dart": [],
+    "lib/features/user_cars/presentation/widget/user_cars_empty_state.dart": []
+  }
+}

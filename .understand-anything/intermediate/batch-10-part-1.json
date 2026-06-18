@@ -1,0 +1,1019 @@
+{
+  "nodes": [
+    {
+      "id": "file:lib/features/promotions/domain/use_case/delete_promotion_use_case.dart",
+      "type": "file",
+      "name": "delete_promotion_use_case.dart",
+      "filePath": "lib/features/promotions/domain/use_case/delete_promotion_use_case.dart",
+      "summary": "Use case wrapping the promotion repository's delete operation, called by the promotions list view model to remove a promotion.",
+      "tags": [
+        "use-case",
+        "domain-layer",
+        "promotions"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/promotions/domain/use_case/delete_promotion_use_case.dart:DeletePromotionUseCase",
+      "type": "class",
+      "name": "DeletePromotionUseCase",
+      "filePath": "lib/features/promotions/domain/use_case/delete_promotion_use_case.dart",
+      "lineRange": [
+        3,
+        11
+      ],
+      "summary": "Callable use case that deletes a promotion by id via the injected repository.",
+      "tags": [
+        "use-case",
+        "domain-layer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/promotions/domain/use_case/fetch_promotions_use_case.dart",
+      "type": "file",
+      "name": "fetch_promotions_use_case.dart",
+      "filePath": "lib/features/promotions/domain/use_case/fetch_promotions_use_case.dart",
+      "summary": "Use case that fetches the list of promotions from the repository for display in the promotions list screen.",
+      "tags": [
+        "use-case",
+        "domain-layer",
+        "promotions"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/promotions/domain/use_case/fetch_promotions_use_case.dart:FetchPromotionsUseCase",
+      "type": "class",
+      "name": "FetchPromotionsUseCase",
+      "filePath": "lib/features/promotions/domain/use_case/fetch_promotions_use_case.dart",
+      "lineRange": [
+        4,
+        12
+      ],
+      "summary": "Callable use case that retrieves all promotions via the injected repository.",
+      "tags": [
+        "use-case",
+        "domain-layer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/promotions/presentation/screen/create_promotion_screen.dart",
+      "type": "file",
+      "name": "create_promotion_screen.dart",
+      "filePath": "lib/features/promotions/presentation/screen/create_promotion_screen.dart",
+      "summary": "Form screen for creating a new promotion: picks an image, sets name/description and start/end dates, uploads the image, and submits the promotion via the view model.",
+      "tags": [
+        "screen",
+        "component",
+        "form",
+        "promotions"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/features/promotions/presentation/screen/create_promotion_screen.dart:CreatePromotionScreen",
+      "type": "class",
+      "name": "CreatePromotionScreen",
+      "filePath": "lib/features/promotions/presentation/screen/create_promotion_screen.dart",
+      "lineRange": [
+        12,
+        17
+      ],
+      "summary": "StatefulWidget entry point for the create-promotion form screen.",
+      "tags": [
+        "component",
+        "screen"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/promotions/presentation/screen/create_promotion_screen.dart:_CreatePromotionScreenState",
+      "type": "class",
+      "name": "_CreatePromotionScreenState",
+      "filePath": "lib/features/promotions/presentation/screen/create_promotion_screen.dart",
+      "lineRange": [
+        19,
+        183
+      ],
+      "summary": "State for the create-promotion form: manages image picking, date pickers, form validation, image upload, and promotion submission.",
+      "tags": [
+        "component",
+        "form",
+        "state-management"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:lib/features/promotions/presentation/screen/create_promotion_screen.dart:_pickImage",
+      "type": "function",
+      "name": "_pickImage",
+      "filePath": "lib/features/promotions/presentation/screen/create_promotion_screen.dart",
+      "lineRange": [
+        27,
+        27
+      ],
+      "summary": "Opens the image picker and stores the selected promotion image file in state.",
+      "tags": [
+        "image-picker",
+        "event-handler"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/features/promotions/presentation/screen/create_promotion_screen.dart:_pickDate",
+      "type": "function",
+      "name": "_pickDate",
+      "filePath": "lib/features/promotions/presentation/screen/create_promotion_screen.dart",
+      "lineRange": [
+        37,
+        37
+      ],
+      "summary": "Opens a date picker dialog to select the promotion's start or end date.",
+      "tags": [
+        "date-picker",
+        "event-handler"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/features/promotions/presentation/screen/create_promotion_screen.dart:_submitForm",
+      "type": "function",
+      "name": "_submitForm",
+      "filePath": "lib/features/promotions/presentation/screen/create_promotion_screen.dart",
+      "lineRange": [
+        55,
+        55
+      ],
+      "summary": "Validates the form, uploads the picked image, builds a PromotionEntity, and saves it through the promotion view model, showing success/error snackbars.",
+      "tags": [
+        "validation",
+        "event-handler",
+        "form-submit"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/features/promotions/presentation/screen/create_promotion_screen.dart:build",
+      "type": "function",
+      "name": "build",
+      "filePath": "lib/features/promotions/presentation/screen/create_promotion_screen.dart",
+      "lineRange": [
+        100,
+        100
+      ],
+      "summary": "Builds the create-promotion form UI including image picker, text fields, and date range selectors.",
+      "tags": [
+        "component",
+        "ui-builder"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:lib/features/promotions/presentation/screen/promotions_list_screen.dart",
+      "type": "file",
+      "name": "promotions_list_screen.dart",
+      "filePath": "lib/features/promotions/presentation/screen/promotions_list_screen.dart",
+      "summary": "Screen that lists existing promotions with pull-to-refresh, delete action, loading skeleton, and error states, navigating to the create-promotion screen.",
+      "tags": [
+        "screen",
+        "component",
+        "promotions",
+        "list"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:lib/features/promotions/presentation/screen/promotions_list_screen.dart:PromotionsListScreen",
+      "type": "class",
+      "name": "PromotionsListScreen",
+      "filePath": "lib/features/promotions/presentation/screen/promotions_list_screen.dart",
+      "lineRange": [
+        11,
+        17
+      ],
+      "summary": "StatefulWidget entry point for the promotions list screen.",
+      "tags": [
+        "component",
+        "screen"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/promotions/presentation/screen/promotions_list_screen.dart:_PromotionsListScreenState",
+      "type": "class",
+      "name": "_PromotionsListScreenState",
+      "filePath": "lib/features/promotions/presentation/screen/promotions_list_screen.dart",
+      "lineRange": [
+        19,
+        85
+      ],
+      "summary": "State for the promotions list screen: loads promotions on init and renders body based on view state (loading, error, loaded, empty).",
+      "tags": [
+        "component",
+        "state-management"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/features/promotions/presentation/screen/promotions_list_screen.dart:_PromotionCard",
+      "type": "class",
+      "name": "_PromotionCard",
+      "filePath": "lib/features/promotions/presentation/screen/promotions_list_screen.dart",
+      "lineRange": [
+        87,
+        161
+      ],
+      "summary": "Card widget rendering a single promotion's image, name, description, and date range with a delete button.",
+      "tags": [
+        "component",
+        "list-item"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/features/promotions/presentation/screen/promotions_list_screen.dart:_PromotionsSkeleton",
+      "type": "class",
+      "name": "_PromotionsSkeleton",
+      "filePath": "lib/features/promotions/presentation/screen/promotions_list_screen.dart",
+      "lineRange": [
+        163,
+        229
+      ],
+      "summary": "Skeleton/shimmer placeholder widget shown while promotions are loading.",
+      "tags": [
+        "component",
+        "loading-state"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/features/promotions/presentation/screen/promotions_list_screen.dart:_ErrorView",
+      "type": "class",
+      "name": "_ErrorView",
+      "filePath": "lib/features/promotions/presentation/screen/promotions_list_screen.dart",
+      "lineRange": [
+        231,
+        256
+      ],
+      "summary": "Error state widget displaying a message and retry button when promotions fail to load.",
+      "tags": [
+        "component",
+        "error-handling"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/features/promotions/presentation/screen/promotions_list_screen.dart:_ensureLoaded",
+      "type": "function",
+      "name": "_ensureLoaded",
+      "filePath": "lib/features/promotions/presentation/screen/promotions_list_screen.dart",
+      "lineRange": [
+        28,
+        28
+      ],
+      "summary": "Triggers loading of the promotions list after the first frame if not already loaded.",
+      "tags": [
+        "lifecycle",
+        "data-loading"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/features/promotions/presentation/screen/promotions_list_screen.dart:_buildBody",
+      "type": "function",
+      "name": "_buildBody",
+      "filePath": "lib/features/promotions/presentation/screen/promotions_list_screen.dart",
+      "lineRange": [
+        52,
+        52
+      ],
+      "summary": "Selects which UI to render (skeleton, error, empty, or refreshable list) based on the current ViewState.",
+      "tags": [
+        "ui-builder",
+        "conditional-rendering"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:lib/features/promotions/presentation/view_model/promotion_list_notifier.dart",
+      "type": "file",
+      "name": "promotion_list_notifier.dart",
+      "filePath": "lib/features/promotions/presentation/view_model/promotion_list_notifier.dart",
+      "summary": "Defines the ViewState sealed hierarchy (initial/loading/error/empty/loaded) and the StateNotifier that loads and deletes promotions using injected use cases.",
+      "tags": [
+        "state-management",
+        "view-model",
+        "promotions"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/features/promotions/presentation/view_model/promotion_list_notifier.dart:LoadedViewState",
+      "type": "class",
+      "name": "LoadedViewState",
+      "filePath": "lib/features/promotions/presentation/view_model/promotion_list_notifier.dart",
+      "lineRange": [
+        21,
+        46
+      ],
+      "summary": "ViewState variant carrying the loaded list of promotions, with equality, hashCode, and copyWith support.",
+      "tags": [
+        "data-model",
+        "state-management"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/promotions/presentation/view_model/promotion_list_notifier.dart:PromotionListNotifier",
+      "type": "class",
+      "name": "PromotionListNotifier",
+      "filePath": "lib/features/promotions/presentation/view_model/promotion_list_notifier.dart",
+      "lineRange": [
+        48,
+        90
+      ],
+      "summary": "StateNotifier managing the promotions list ViewState; loads promotions via FetchPromotionsUseCase and removes a promotion via DeletePromotionUseCase, updating state optimistically.",
+      "tags": [
+        "state-management",
+        "view-model"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/features/promotions/presentation/view_model/promotion_list_notifier.dart:load",
+      "type": "function",
+      "name": "load",
+      "filePath": "lib/features/promotions/presentation/view_model/promotion_list_notifier.dart",
+      "lineRange": [
+        62,
+        62
+      ],
+      "summary": "Fetches promotions and updates state to Loaded, Empty, or Error depending on the result.",
+      "tags": [
+        "data-loading",
+        "async"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/features/promotions/presentation/view_model/promotion_list_notifier.dart:delete",
+      "type": "function",
+      "name": "delete",
+      "filePath": "lib/features/promotions/presentation/view_model/promotion_list_notifier.dart",
+      "lineRange": [
+        76,
+        76
+      ],
+      "summary": "Optimistically removes a promotion from the loaded list and calls the delete use case, reverting/erroring on failure.",
+      "tags": [
+        "event-handler",
+        "async"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/promotions/presentation/view_model/promotion_view_model.dart",
+      "type": "file",
+      "name": "promotion_view_model.dart",
+      "filePath": "lib/features/promotions/presentation/view_model/promotion_view_model.dart",
+      "summary": "Riverpod Notifier providing image upload and save operations for creating a new promotion, used by the create-promotion screen.",
+      "tags": [
+        "view-model",
+        "state-management",
+        "promotions"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/promotions/presentation/view_model/promotion_view_model.dart:PromotionViewModel",
+      "type": "class",
+      "name": "PromotionViewModel",
+      "filePath": "lib/features/promotions/presentation/view_model/promotion_view_model.dart",
+      "lineRange": [
+        11,
+        31
+      ],
+      "summary": "Notifier exposing uploadImage and savePromotion operations backed by AddPromotionUseCase and the promotion repository.",
+      "tags": [
+        "view-model",
+        "state-management"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/promotions/presentation/widget/promotions.dart",
+      "type": "file",
+      "name": "promotions.dart",
+      "filePath": "lib/features/promotions/presentation/widget/promotions.dart",
+      "summary": "Reusable auto-playing image carousel widget used to display promotion banners with page indicator dots.",
+      "tags": [
+        "component",
+        "carousel",
+        "widget"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/features/promotions/presentation/widget/promotions.dart:Promotions",
+      "type": "class",
+      "name": "Promotions",
+      "filePath": "lib/features/promotions/presentation/widget/promotions.dart",
+      "lineRange": [
+        22,
+        42
+      ],
+      "summary": "StatefulWidget configuring an image carousel (image URLs, height, autoplay, viewport fraction, border radius).",
+      "tags": [
+        "component",
+        "widget"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/promotions/presentation/widget/promotions.dart:_PromotionsState",
+      "type": "class",
+      "name": "_PromotionsState",
+      "filePath": "lib/features/promotions/presentation/widget/promotions.dart",
+      "lineRange": [
+        44,
+        104
+      ],
+      "summary": "State for the Promotions carousel: builds the CarouselSlider with images and animated page indicator dots.",
+      "tags": [
+        "component",
+        "carousel",
+        "state-management"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:lib/features/promotions/provider/promotion_providers.dart",
+      "type": "file",
+      "name": "promotion_providers.dart",
+      "filePath": "lib/features/promotions/provider/promotion_providers.dart",
+      "summary": "Riverpod provider wiring for the promotions feature: data source, repository, use cases (add/fetch/delete), and the promotions list StateNotifierProvider.",
+      "tags": [
+        "provider",
+        "dependency-injection",
+        "promotions"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/splash/data/repository/splash_repository.dart",
+      "type": "file",
+      "name": "splash_repository.dart",
+      "filePath": "lib/features/splash/data/repository/splash_repository.dart",
+      "summary": "Repository implementation that reads and writes the 'has seen onboarding' flag using SharedPreferences.",
+      "tags": [
+        "repository",
+        "data-layer",
+        "splash"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/splash/data/repository/splash_repository.dart:SplashRepositoryImpl",
+      "type": "class",
+      "name": "SplashRepositoryImpl",
+      "filePath": "lib/features/splash/data/repository/splash_repository.dart",
+      "lineRange": [
+        6,
+        20
+      ],
+      "summary": "Implements ISplashRepository by storing/retrieving the onboarding-seen boolean flag in SharedPreferences.",
+      "tags": [
+        "repository",
+        "data-layer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/splash/domain/repository/i_splash_repository.dart",
+      "type": "file",
+      "name": "i_splash_repository.dart",
+      "filePath": "lib/features/splash/domain/repository/i_splash_repository.dart",
+      "summary": "Abstract repository interface declaring onboarding-seen check and set operations for the splash feature.",
+      "tags": [
+        "interface",
+        "domain-layer",
+        "splash"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/splash/domain/repository/i_splash_repository.dart:ISplashRepository",
+      "type": "class",
+      "name": "ISplashRepository",
+      "filePath": "lib/features/splash/domain/repository/i_splash_repository.dart",
+      "lineRange": [
+        1,
+        4
+      ],
+      "summary": "Interface defining hasSeenOnboarding and setOnboardingSeen contract methods.",
+      "tags": [
+        "interface",
+        "domain-layer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/splash/domain/use_case/check_onboarding_use_case.dart",
+      "type": "file",
+      "name": "check_onboarding_use_case.dart",
+      "filePath": "lib/features/splash/domain/use_case/check_onboarding_use_case.dart",
+      "summary": "Use case that checks whether onboarding has been seen and marks it seen, used by the splash view model to decide navigation.",
+      "tags": [
+        "use-case",
+        "domain-layer",
+        "splash"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/splash/domain/use_case/check_onboarding_use_case.dart:CheckOnboardingUseCase",
+      "type": "class",
+      "name": "CheckOnboardingUseCase",
+      "filePath": "lib/features/splash/domain/use_case/check_onboarding_use_case.dart",
+      "lineRange": [
+        3,
+        16
+      ],
+      "summary": "Callable use case wrapping hasSeenOnboarding/setOnboardingSeen repository calls.",
+      "tags": [
+        "use-case",
+        "domain-layer"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/splash/presentation/screens/splash_screen.dart",
+      "type": "file",
+      "name": "splash_screen.dart",
+      "filePath": "lib/features/splash/presentation/screens/splash_screen.dart",
+      "summary": "Splash screen shown on app start; displays logo and loading spinner while initializing, then listens for navigation state to route to onboarding/login/home.",
+      "tags": [
+        "screen",
+        "component",
+        "splash",
+        "navigation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/features/splash/presentation/screens/splash_screen.dart:SplashScreen",
+      "type": "class",
+      "name": "SplashScreen",
+      "filePath": "lib/features/splash/presentation/screens/splash_screen.dart",
+      "lineRange": [
+        11,
+        16
+      ],
+      "summary": "StatefulWidget entry point for the splash screen.",
+      "tags": [
+        "component",
+        "screen"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/splash/presentation/screens/splash_screen.dart:_SplashScreenState",
+      "type": "class",
+      "name": "_SplashScreenState",
+      "filePath": "lib/features/splash/presentation/screens/splash_screen.dart",
+      "lineRange": [
+        18,
+        101
+      ],
+      "summary": "State for the splash screen: triggers initialization on first frame and listens to SplashViewModel state to navigate when ready.",
+      "tags": [
+        "component",
+        "state-management",
+        "navigation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/features/splash/presentation/screens/splash_screen.dart:build",
+      "type": "function",
+      "name": "build",
+      "filePath": "lib/features/splash/presentation/screens/splash_screen.dart",
+      "lineRange": [
+        28,
+        28
+      ],
+      "summary": "Builds the splash UI (logo, app name, spinner) and triggers navigation via pushReplacementNamed when SplashNavigateState is emitted.",
+      "tags": [
+        "ui-builder",
+        "navigation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:lib/features/splash/presentation/view_model/splash_state.dart",
+      "type": "file",
+      "name": "splash_state.dart",
+      "filePath": "lib/features/splash/presentation/view_model/splash_state.dart",
+      "summary": "Sealed class hierarchy describing splash screen states: initial (loading) and navigate (carrying the target route).",
+      "tags": [
+        "data-model",
+        "state-management",
+        "splash"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/splash/presentation/view_model/splash_state.dart:SplashState",
+      "type": "class",
+      "name": "SplashState",
+      "filePath": "lib/features/splash/presentation/view_model/splash_state.dart",
+      "lineRange": [
+        1,
+        3
+      ],
+      "summary": "Sealed base class for splash screen states.",
+      "tags": [
+        "data-model",
+        "state-management"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/splash/presentation/view_model/splash_state.dart:SplashNavigateState",
+      "type": "class",
+      "name": "SplashNavigateState",
+      "filePath": "lib/features/splash/presentation/view_model/splash_state.dart",
+      "lineRange": [
+        9,
+        12
+      ],
+      "summary": "State carrying the route name to navigate to once splash initialization completes.",
+      "tags": [
+        "data-model",
+        "navigation"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:lib/features/promotions/domain/use_case/delete_promotion_use_case.dart",
+      "target": "class:lib/features/promotions/domain/use_case/delete_promotion_use_case.dart:DeletePromotionUseCase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/domain/use_case/delete_promotion_use_case.dart",
+      "target": "class:lib/features/promotions/domain/use_case/delete_promotion_use_case.dart:DeletePromotionUseCase",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/promotions/domain/use_case/fetch_promotions_use_case.dart",
+      "target": "class:lib/features/promotions/domain/use_case/fetch_promotions_use_case.dart:FetchPromotionsUseCase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/domain/use_case/fetch_promotions_use_case.dart",
+      "target": "class:lib/features/promotions/domain/use_case/fetch_promotions_use_case.dart:FetchPromotionsUseCase",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/screen/create_promotion_screen.dart",
+      "target": "class:lib/features/promotions/presentation/screen/create_promotion_screen.dart:CreatePromotionScreen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/screen/create_promotion_screen.dart",
+      "target": "class:lib/features/promotions/presentation/screen/create_promotion_screen.dart:_CreatePromotionScreenState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/screen/create_promotion_screen.dart",
+      "target": "function:lib/features/promotions/presentation/screen/create_promotion_screen.dart:_pickImage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/screen/create_promotion_screen.dart",
+      "target": "function:lib/features/promotions/presentation/screen/create_promotion_screen.dart:_pickDate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/screen/create_promotion_screen.dart",
+      "target": "function:lib/features/promotions/presentation/screen/create_promotion_screen.dart:_submitForm",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/screen/create_promotion_screen.dart",
+      "target": "function:lib/features/promotions/presentation/screen/create_promotion_screen.dart:build",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/screen/create_promotion_screen.dart",
+      "target": "class:lib/features/promotions/presentation/screen/create_promotion_screen.dart:CreatePromotionScreen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/screen/promotions_list_screen.dart",
+      "target": "class:lib/features/promotions/presentation/screen/promotions_list_screen.dart:PromotionsListScreen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/screen/promotions_list_screen.dart",
+      "target": "class:lib/features/promotions/presentation/screen/promotions_list_screen.dart:_PromotionsListScreenState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/screen/promotions_list_screen.dart",
+      "target": "class:lib/features/promotions/presentation/screen/promotions_list_screen.dart:_PromotionCard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/screen/promotions_list_screen.dart",
+      "target": "class:lib/features/promotions/presentation/screen/promotions_list_screen.dart:_PromotionsSkeleton",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/screen/promotions_list_screen.dart",
+      "target": "class:lib/features/promotions/presentation/screen/promotions_list_screen.dart:_ErrorView",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/screen/promotions_list_screen.dart",
+      "target": "function:lib/features/promotions/presentation/screen/promotions_list_screen.dart:_ensureLoaded",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/screen/promotions_list_screen.dart",
+      "target": "function:lib/features/promotions/presentation/screen/promotions_list_screen.dart:_buildBody",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/screen/promotions_list_screen.dart",
+      "target": "class:lib/features/promotions/presentation/screen/promotions_list_screen.dart:PromotionsListScreen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/view_model/promotion_list_notifier.dart",
+      "target": "class:lib/features/promotions/presentation/view_model/promotion_list_notifier.dart:LoadedViewState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/view_model/promotion_list_notifier.dart",
+      "target": "class:lib/features/promotions/presentation/view_model/promotion_list_notifier.dart:PromotionListNotifier",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/view_model/promotion_list_notifier.dart",
+      "target": "function:lib/features/promotions/presentation/view_model/promotion_list_notifier.dart:load",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/view_model/promotion_list_notifier.dart",
+      "target": "function:lib/features/promotions/presentation/view_model/promotion_list_notifier.dart:delete",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/view_model/promotion_list_notifier.dart",
+      "target": "class:lib/features/promotions/presentation/view_model/promotion_list_notifier.dart:PromotionListNotifier",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:lib/features/promotions/presentation/view_model/promotion_list_notifier.dart:PromotionListNotifier",
+      "target": "class:lib/features/promotions/domain/use_case/fetch_promotions_use_case.dart:FetchPromotionsUseCase",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:lib/features/promotions/presentation/view_model/promotion_list_notifier.dart:PromotionListNotifier",
+      "target": "class:lib/features/promotions/domain/use_case/delete_promotion_use_case.dart:DeletePromotionUseCase",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/view_model/promotion_view_model.dart",
+      "target": "class:lib/features/promotions/presentation/view_model/promotion_view_model.dart:PromotionViewModel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/view_model/promotion_view_model.dart",
+      "target": "class:lib/features/promotions/presentation/view_model/promotion_view_model.dart:PromotionViewModel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/widget/promotions.dart",
+      "target": "class:lib/features/promotions/presentation/widget/promotions.dart:Promotions",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/widget/promotions.dart",
+      "target": "class:lib/features/promotions/presentation/widget/promotions.dart:_PromotionsState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/promotions/presentation/widget/promotions.dart",
+      "target": "class:lib/features/promotions/presentation/widget/promotions.dart:Promotions",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/promotions/provider/promotion_providers.dart",
+      "target": "class:lib/features/promotions/presentation/view_model/promotion_list_notifier.dart:PromotionListNotifier",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/promotions/provider/promotion_providers.dart",
+      "target": "class:lib/features/promotions/domain/use_case/fetch_promotions_use_case.dart:FetchPromotionsUseCase",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/promotions/provider/promotion_providers.dart",
+      "target": "class:lib/features/promotions/domain/use_case/delete_promotion_use_case.dart:DeletePromotionUseCase",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/splash/data/repository/splash_repository.dart",
+      "target": "class:lib/features/splash/data/repository/splash_repository.dart:SplashRepositoryImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/splash/data/repository/splash_repository.dart",
+      "target": "class:lib/features/splash/data/repository/splash_repository.dart:SplashRepositoryImpl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:lib/features/splash/data/repository/splash_repository.dart:SplashRepositoryImpl",
+      "target": "class:lib/features/splash/domain/repository/i_splash_repository.dart:ISplashRepository",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:lib/features/splash/domain/repository/i_splash_repository.dart",
+      "target": "class:lib/features/splash/domain/repository/i_splash_repository.dart:ISplashRepository",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/splash/domain/repository/i_splash_repository.dart",
+      "target": "class:lib/features/splash/domain/repository/i_splash_repository.dart:ISplashRepository",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/splash/domain/use_case/check_onboarding_use_case.dart",
+      "target": "class:lib/features/splash/domain/use_case/check_onboarding_use_case.dart:CheckOnboardingUseCase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/splash/domain/use_case/check_onboarding_use_case.dart",
+      "target": "class:lib/features/splash/domain/use_case/check_onboarding_use_case.dart:CheckOnboardingUseCase",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/splash/presentation/screens/splash_screen.dart",
+      "target": "class:lib/features/splash/presentation/screens/splash_screen.dart:SplashScreen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/splash/presentation/screens/splash_screen.dart",
+      "target": "class:lib/features/splash/presentation/screens/splash_screen.dart:_SplashScreenState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/splash/presentation/screens/splash_screen.dart",
+      "target": "function:lib/features/splash/presentation/screens/splash_screen.dart:build",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/splash/presentation/screens/splash_screen.dart",
+      "target": "class:lib/features/splash/presentation/screens/splash_screen.dart:SplashScreen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:lib/features/splash/presentation/screens/splash_screen.dart:_SplashScreenState",
+      "target": "class:lib/features/splash/presentation/view_model/splash_view_model.dart:SplashViewModel",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "class:lib/features/splash/presentation/screens/splash_screen.dart:_SplashScreenState",
+      "target": "class:lib/features/splash/presentation/view_model/splash_state.dart:SplashNavigateState",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/splash/presentation/view_model/splash_state.dart",
+      "target": "class:lib/features/splash/presentation/view_model/splash_state.dart:SplashState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/splash/presentation/view_model/splash_state.dart",
+      "target": "class:lib/features/splash/presentation/view_model/splash_state.dart:SplashNavigateState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/splash/presentation/view_model/splash_state.dart",
+      "target": "class:lib/features/splash/presentation/view_model/splash_state.dart:SplashState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/splash/presentation/view_model/splash_state.dart",
+      "target": "class:lib/features/splash/presentation/view_model/splash_state.dart:SplashNavigateState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

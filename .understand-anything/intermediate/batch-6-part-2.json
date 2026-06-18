@@ -1,0 +1,1175 @@
+{
+  "nodes": [
+    {
+      "id": "file:lib/features/chat/data/data_source/i_chat_remote_data_source.dart",
+      "type": "file",
+      "name": "i_chat_remote_data_source.dart",
+      "filePath": "lib/features/chat/data/data_source/i_chat_remote_data_source.dart",
+      "summary": "Data-source interface defining how chat messages are observed (as a stream) and sent against the remote backend.",
+      "tags": [
+        "interface",
+        "data-source",
+        "chat"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/chat/data/data_source/i_chat_remote_data_source.dart:IChatRemoteDataSource",
+      "type": "class",
+      "name": "IChatRemoteDataSource",
+      "filePath": "lib/features/chat/data/data_source/i_chat_remote_data_source.dart",
+      "summary": "Abstract contract with observeMessages (stream) and sendMessage methods implemented by the Firestore data source.",
+      "tags": [
+        "interface",
+        "data-source"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        3,
+        13
+      ]
+    },
+    {
+      "id": "file:lib/features/chat/data/data_source/chat_remote_data_source.dart",
+      "type": "file",
+      "name": "chat_remote_data_source.dart",
+      "filePath": "lib/features/chat/data/data_source/chat_remote_data_source.dart",
+      "summary": "Firestore-backed implementation of IChatRemoteDataSource: observes a booking's messages subcollection as a real-time stream and writes new chat messages.",
+      "tags": [
+        "data-source",
+        "firestore",
+        "chat"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/features/chat/data/data_source/chat_remote_data_source.dart:ChatRemoteDataSource",
+      "type": "class",
+      "name": "ChatRemoteDataSource",
+      "filePath": "lib/features/chat/data/data_source/chat_remote_data_source.dart",
+      "summary": "Implements observeMessages via Firestore snapshots ordered by createdAt, and sendMessage by writing a new document with a server timestamp.",
+      "tags": [
+        "data-source",
+        "firestore"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        6,
+        55
+      ]
+    },
+    {
+      "id": "file:lib/features/chat/data/model/chat_message_model.dart",
+      "type": "file",
+      "name": "chat_message_model.dart",
+      "filePath": "lib/features/chat/data/model/chat_message_model.dart",
+      "summary": "Data model extending the ChatMessage entity with Firestore (de)serialization: fromDocument parses a snapshot, toJson serializes for writes.",
+      "tags": [
+        "data-model",
+        "serialization",
+        "firestore",
+        "chat"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/features/chat/data/model/chat_message_model.dart:ChatMessageModel",
+      "type": "class",
+      "name": "ChatMessageModel",
+      "filePath": "lib/features/chat/data/model/chat_message_model.dart",
+      "summary": "Extends ChatMessage; ChatMessageModel.fromDocument builds an instance from a Firestore DocumentSnapshot handling Timestamp/int/missing createdAt, and toJson converts back to a Firestore-writable map.",
+      "tags": [
+        "data-model",
+        "serialization",
+        "firestore"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        6,
+        56
+      ]
+    },
+    {
+      "id": "file:lib/features/chat/data/repository/chat_repository.dart",
+      "type": "file",
+      "name": "chat_repository.dart",
+      "filePath": "lib/features/chat/data/repository/chat_repository.dart",
+      "summary": "Repository implementation bridging the chat domain layer and the remote data source, delegating message observation and sending.",
+      "tags": [
+        "repository",
+        "chat"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/chat/data/repository/chat_repository.dart:ChatRepositoryImpl",
+      "type": "class",
+      "name": "ChatRepositoryImpl",
+      "filePath": "lib/features/chat/data/repository/chat_repository.dart",
+      "summary": "Implements IChatRepository by forwarding observeMessages and sendMessage calls to the injected IChatRemoteDataSource, mapping ChatUser to sender fields.",
+      "tags": [
+        "repository"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        7,
+        31
+      ]
+    },
+    {
+      "id": "file:lib/features/chat/domain/entity/chat_message.dart",
+      "type": "file",
+      "name": "chat_message.dart",
+      "filePath": "lib/features/chat/domain/entity/chat_message.dart",
+      "summary": "Domain entity representing a single chat message tied to a booking, including sender info, text, and timestamp.",
+      "tags": [
+        "entity",
+        "data-model",
+        "chat"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/chat/domain/entity/chat_message.dart:ChatMessage",
+      "type": "class",
+      "name": "ChatMessage",
+      "filePath": "lib/features/chat/domain/entity/chat_message.dart",
+      "summary": "Immutable chat message with id, bookingId, senderId/type/name, text, createdAt, and an isFromCustomer convenience getter.",
+      "tags": [
+        "entity",
+        "data-model"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        3,
+        23
+      ]
+    },
+    {
+      "id": "file:lib/features/chat/domain/entity/chat_user.dart",
+      "type": "file",
+      "name": "chat_user.dart",
+      "filePath": "lib/features/chat/domain/entity/chat_user.dart",
+      "summary": "Domain entity representing the current chat participant (id, user type, display name) with validity and equality semantics.",
+      "tags": [
+        "entity",
+        "data-model",
+        "chat"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/chat/domain/entity/chat_user.dart:ChatUser",
+      "type": "class",
+      "name": "ChatUser",
+      "filePath": "lib/features/chat/domain/entity/chat_user.dart",
+      "summary": "Immutable chat user with id/userType/displayName, an isValid getter requiring a non-empty id, and value equality/hashCode.",
+      "tags": [
+        "entity",
+        "data-model"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        3,
+        27
+      ]
+    },
+    {
+      "id": "file:lib/features/chat/domain/repository/i_chat_repository.dart",
+      "type": "file",
+      "name": "i_chat_repository.dart",
+      "filePath": "lib/features/chat/domain/repository/i_chat_repository.dart",
+      "summary": "Repository interface for the chat domain layer exposing message observation as a stream and sending a message.",
+      "tags": [
+        "interface",
+        "repository",
+        "chat"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/chat/domain/repository/i_chat_repository.dart:IChatRepository",
+      "type": "class",
+      "name": "IChatRepository",
+      "filePath": "lib/features/chat/domain/repository/i_chat_repository.dart",
+      "summary": "Abstract contract with observeMessages(bookingId) and sendMessage used by chat use cases.",
+      "tags": [
+        "interface",
+        "repository"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        4,
+        12
+      ]
+    },
+    {
+      "id": "file:lib/features/chat/domain/use_case/observe_chat_messages_use_case.dart",
+      "type": "file",
+      "name": "observe_chat_messages_use_case.dart",
+      "filePath": "lib/features/chat/domain/use_case/observe_chat_messages_use_case.dart",
+      "summary": "Use case exposing a stream of chat messages for a booking by delegating to the chat repository.",
+      "tags": [
+        "use-case",
+        "chat"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/chat/domain/use_case/observe_chat_messages_use_case.dart:ObserveChatMessagesUseCase",
+      "type": "class",
+      "name": "ObserveChatMessagesUseCase",
+      "filePath": "lib/features/chat/domain/use_case/observe_chat_messages_use_case.dart",
+      "summary": "Callable use case wrapping IChatRepository.observeMessages to provide a real-time message stream.",
+      "tags": [
+        "use-case"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        4,
+        12
+      ]
+    },
+    {
+      "id": "file:lib/features/chat/domain/use_case/send_chat_message_use_case.dart",
+      "type": "file",
+      "name": "send_chat_message_use_case.dart",
+      "filePath": "lib/features/chat/domain/use_case/send_chat_message_use_case.dart",
+      "summary": "Use case for sending a chat message on behalf of a sender, delegating to the chat repository.",
+      "tags": [
+        "use-case",
+        "chat"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/chat/domain/use_case/send_chat_message_use_case.dart:SendChatMessageUseCase",
+      "type": "class",
+      "name": "SendChatMessageUseCase",
+      "filePath": "lib/features/chat/domain/use_case/send_chat_message_use_case.dart",
+      "summary": "Callable use case wrapping IChatRepository.sendMessage with bookingId, text, and sender.",
+      "tags": [
+        "use-case"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        4,
+        20
+      ]
+    },
+    {
+      "id": "file:lib/features/chat/presentation/screen/chat_screen.dart",
+      "type": "file",
+      "name": "chat_screen.dart",
+      "filePath": "lib/features/chat/presentation/screen/chat_screen.dart",
+      "summary": "Booking chat screen showing a real-time message thread for a booking, with a message input bar, auto-scroll on new messages, and login/availability guard states.",
+      "tags": [
+        "screen",
+        "component",
+        "chat",
+        "real-time"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/features/chat/presentation/screen/chat_screen.dart:ChatScreen",
+      "type": "class",
+      "name": "ChatScreen",
+      "filePath": "lib/features/chat/presentation/screen/chat_screen.dart",
+      "summary": "ConsumerStatefulWidget entry point for the chat screen, accepting an optional bookingId.",
+      "tags": [
+        "component",
+        "entry-point"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        14,
+        21
+      ]
+    },
+    {
+      "id": "class:lib/features/chat/presentation/screen/chat_screen.dart:_ChatScreenState",
+      "type": "class",
+      "name": "_ChatScreenState",
+      "filePath": "lib/features/chat/presentation/screen/chat_screen.dart",
+      "summary": "State managing the message text/scroll controllers, deriving a ChatSession from auth state, sending messages, auto-scrolling on new messages, and building the chat UI (booking pill, message list, input bar).",
+      "tags": [
+        "state-management",
+        "chat",
+        "component"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        23,
+        203
+      ]
+    },
+    {
+      "id": "class:lib/features/chat/presentation/screen/chat_screen.dart:_BookingPill",
+      "type": "class",
+      "name": "_BookingPill",
+      "filePath": "lib/features/chat/presentation/screen/chat_screen.dart",
+      "summary": "Small pill widget displaying the booking id at the top of the chat screen.",
+      "tags": [
+        "component"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        205,
+        239
+      ]
+    },
+    {
+      "id": "class:lib/features/chat/presentation/screen/chat_screen.dart:_ChatError",
+      "type": "class",
+      "name": "_ChatError",
+      "filePath": "lib/features/chat/presentation/screen/chat_screen.dart",
+      "summary": "Error state widget shown when chat messages fail to load, with a retry button.",
+      "tags": [
+        "component",
+        "error-handling"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        241,
+        273
+      ]
+    },
+    {
+      "id": "class:lib/features/chat/presentation/screen/chat_screen.dart:_EmptyChatPlaceholder",
+      "type": "class",
+      "name": "_EmptyChatPlaceholder",
+      "filePath": "lib/features/chat/presentation/screen/chat_screen.dart",
+      "summary": "Placeholder widget shown when a chat thread has no messages yet.",
+      "tags": [
+        "component",
+        "empty-state"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        275,
+        303
+      ]
+    },
+    {
+      "id": "class:lib/features/chat/presentation/screen/chat_screen.dart:_MessageBubble",
+      "type": "class",
+      "name": "_MessageBubble",
+      "filePath": "lib/features/chat/presentation/screen/chat_screen.dart",
+      "summary": "Chat bubble widget rendering a single message, styled differently depending on whether it was sent by the current user.",
+      "tags": [
+        "component",
+        "chat"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        305,
+        372
+      ]
+    },
+    {
+      "id": "class:lib/features/chat/presentation/screen/chat_screen.dart:_MessageInput",
+      "type": "class",
+      "name": "_MessageInput",
+      "filePath": "lib/features/chat/presentation/screen/chat_screen.dart",
+      "summary": "Text input row with a send button used to compose and submit new chat messages, showing a loading spinner while sending.",
+      "tags": [
+        "component",
+        "chat",
+        "form"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        374,
+        436
+      ]
+    },
+    {
+      "id": "function:lib/features/chat/presentation/screen/chat_screen.dart:_sessionFor",
+      "type": "function",
+      "name": "_sessionFor",
+      "filePath": "lib/features/chat/presentation/screen/chat_screen.dart",
+      "summary": "Builds a ChatSession from the current AuthState and bookingId, returning null when unauthenticated or the chat user is invalid.",
+      "tags": [
+        "chat",
+        "handler"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        35,
+        44
+      ]
+    },
+    {
+      "id": "function:lib/features/chat/presentation/screen/chat_screen.dart:_userForChat",
+      "type": "function",
+      "name": "_userForChat",
+      "filePath": "lib/features/chat/presentation/screen/chat_screen.dart",
+      "summary": "Derives a ChatUser (id, type, display name) from the authenticated User entity, falling back to mobile number when no name is set.",
+      "tags": [
+        "chat",
+        "handler"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        46,
+        65
+      ]
+    },
+    {
+      "id": "function:lib/features/chat/presentation/screen/chat_screen.dart:_handleSend",
+      "type": "function",
+      "name": "_handleSend",
+      "filePath": "lib/features/chat/presentation/screen/chat_screen.dart",
+      "summary": "Sends the composed message text via the chat controller, then clears the input and scrolls to the bottom.",
+      "tags": [
+        "chat",
+        "handler"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        78,
+        85
+      ]
+    },
+    {
+      "id": "file:lib/features/chat/presentation/view_model/chat_state.dart",
+      "type": "file",
+      "name": "chat_state.dart",
+      "filePath": "lib/features/chat/presentation/view_model/chat_state.dart",
+      "summary": "View-model state for the chat screen wrapping an AsyncValue of messages plus sending/error flags.",
+      "tags": [
+        "state-management",
+        "data-model",
+        "chat"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/chat/presentation/view_model/chat_state.dart:ChatState",
+      "type": "class",
+      "name": "ChatState",
+      "filePath": "lib/features/chat/presentation/view_model/chat_state.dart",
+      "summary": "Holds the async message list, isSending flag, and optional errorMessage, with an initial() factory and copyWith for incremental updates.",
+      "tags": [
+        "state-management",
+        "data-model"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        5,
+        31
+      ]
+    },
+    {
+      "id": "file:lib/features/chat/presentation/view_model/chat_view_model.dart",
+      "type": "file",
+      "name": "chat_view_model.dart",
+      "filePath": "lib/features/chat/presentation/view_model/chat_view_model.dart",
+      "summary": "Riverpod family StateNotifier driving a single chat session: subscribes to the message stream on creation and exposes sendMessage, keyed by ChatSession (bookingId + user).",
+      "tags": [
+        "view-model",
+        "state-management",
+        "chat",
+        "real-time"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/features/chat/presentation/view_model/chat_view_model.dart:ChatSession",
+      "type": "class",
+      "name": "ChatSession",
+      "filePath": "lib/features/chat/presentation/view_model/chat_view_model.dart",
+      "summary": "Value-type key combining bookingId and ChatUser, used as the Riverpod family parameter for the chat controller provider.",
+      "tags": [
+        "data-model",
+        "value-object"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        12,
+        31
+      ]
+    },
+    {
+      "id": "class:lib/features/chat/presentation/view_model/chat_view_model.dart:ChatViewModel",
+      "type": "class",
+      "name": "ChatViewModel",
+      "filePath": "lib/features/chat/presentation/view_model/chat_view_model.dart",
+      "summary": "StateNotifier<ChatState> that subscribes to ObserveChatMessagesUseCase on construction, updates state on each snapshot/error, and sends messages via SendChatMessageUseCase.",
+      "tags": [
+        "view-model",
+        "state-management",
+        "real-time"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        33,
+        82
+      ]
+    },
+    {
+      "id": "function:lib/features/chat/presentation/view_model/chat_view_model.dart:_listenToMessages",
+      "type": "function",
+      "name": "_listenToMessages",
+      "filePath": "lib/features/chat/presentation/view_model/chat_view_model.dart",
+      "summary": "Subscribes to the observe-messages use case stream, updating state with each new message list or propagating stream errors; cancels the subscription on dispose.",
+      "tags": [
+        "real-time",
+        "chat"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        50,
+        63
+      ]
+    },
+    {
+      "id": "function:lib/features/chat/presentation/view_model/chat_view_model.dart:sendMessage",
+      "type": "function",
+      "name": "sendMessage",
+      "filePath": "lib/features/chat/presentation/view_model/chat_view_model.dart",
+      "summary": "Validates and trims outgoing message text, sets the sending flag, invokes SendChatMessageUseCase, and captures any error message.",
+      "tags": [
+        "chat",
+        "handler"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        65,
+        81
+      ]
+    },
+    {
+      "id": "file:lib/features/chat/provider/chat_provider.dart",
+      "type": "file",
+      "name": "chat_provider.dart",
+      "filePath": "lib/features/chat/provider/chat_provider.dart",
+      "summary": "Riverpod provider wiring for the chat feature: Firestore data source, repository, and the observe/send use cases.",
+      "tags": [
+        "provider",
+        "dependency-injection",
+        "chat"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:lib/features/chat/data/data_source/i_chat_remote_data_source.dart",
+      "target": "class:lib/features/chat/data/data_source/i_chat_remote_data_source.dart:IChatRemoteDataSource",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/chat/data/data_source/i_chat_remote_data_source.dart",
+      "target": "class:lib/features/chat/data/data_source/i_chat_remote_data_source.dart:IChatRemoteDataSource",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/chat/data/data_source/i_chat_remote_data_source.dart",
+      "target": "file:lib/features/chat/data/model/chat_message_model.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/data/data_source/chat_remote_data_source.dart",
+      "target": "class:lib/features/chat/data/data_source/chat_remote_data_source.dart:ChatRemoteDataSource",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/chat/data/data_source/chat_remote_data_source.dart",
+      "target": "class:lib/features/chat/data/data_source/chat_remote_data_source.dart:ChatRemoteDataSource",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/chat/data/data_source/chat_remote_data_source.dart",
+      "target": "file:lib/features/chat/data/data_source/i_chat_remote_data_source.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/data/data_source/chat_remote_data_source.dart",
+      "target": "file:lib/features/chat/data/model/chat_message_model.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:lib/features/chat/data/data_source/chat_remote_data_source.dart:ChatRemoteDataSource",
+      "target": "class:lib/features/chat/data/data_source/i_chat_remote_data_source.dart:IChatRemoteDataSource",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:lib/features/chat/data/model/chat_message_model.dart",
+      "target": "class:lib/features/chat/data/model/chat_message_model.dart:ChatMessageModel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/chat/data/model/chat_message_model.dart",
+      "target": "class:lib/features/chat/data/model/chat_message_model.dart:ChatMessageModel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/chat/data/model/chat_message_model.dart",
+      "target": "file:lib/features/chat/domain/entity/chat_message.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/data/model/chat_message_model.dart",
+      "target": "file:lib/features/auth/domain/entity/user_type.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:lib/features/chat/data/model/chat_message_model.dart:ChatMessageModel",
+      "target": "class:lib/features/chat/domain/entity/chat_message.dart:ChatMessage",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:lib/features/chat/data/repository/chat_repository.dart",
+      "target": "class:lib/features/chat/data/repository/chat_repository.dart:ChatRepositoryImpl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/chat/data/repository/chat_repository.dart",
+      "target": "class:lib/features/chat/data/repository/chat_repository.dart:ChatRepositoryImpl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/chat/data/repository/chat_repository.dart",
+      "target": "file:lib/features/chat/domain/entity/chat_message.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/data/repository/chat_repository.dart",
+      "target": "file:lib/features/chat/domain/entity/chat_user.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/data/repository/chat_repository.dart",
+      "target": "file:lib/features/chat/domain/repository/i_chat_repository.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/data/repository/chat_repository.dart",
+      "target": "file:lib/features/chat/data/data_source/i_chat_remote_data_source.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/data/repository/chat_repository.dart",
+      "target": "file:lib/features/chat/data/model/chat_message_model.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:lib/features/chat/data/repository/chat_repository.dart:ChatRepositoryImpl",
+      "target": "class:lib/features/chat/domain/repository/i_chat_repository.dart:IChatRepository",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:lib/features/chat/domain/entity/chat_message.dart",
+      "target": "class:lib/features/chat/domain/entity/chat_message.dart:ChatMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/chat/domain/entity/chat_message.dart",
+      "target": "class:lib/features/chat/domain/entity/chat_message.dart:ChatMessage",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/chat/domain/entity/chat_message.dart",
+      "target": "file:lib/features/auth/domain/entity/user_type.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/domain/entity/chat_user.dart",
+      "target": "class:lib/features/chat/domain/entity/chat_user.dart:ChatUser",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/chat/domain/entity/chat_user.dart",
+      "target": "class:lib/features/chat/domain/entity/chat_user.dart:ChatUser",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/chat/domain/entity/chat_user.dart",
+      "target": "file:lib/features/auth/domain/entity/user_type.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/domain/repository/i_chat_repository.dart",
+      "target": "class:lib/features/chat/domain/repository/i_chat_repository.dart:IChatRepository",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/chat/domain/repository/i_chat_repository.dart",
+      "target": "class:lib/features/chat/domain/repository/i_chat_repository.dart:IChatRepository",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/chat/domain/repository/i_chat_repository.dart",
+      "target": "file:lib/features/chat/domain/entity/chat_message.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/domain/repository/i_chat_repository.dart",
+      "target": "file:lib/features/chat/domain/entity/chat_user.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/domain/use_case/observe_chat_messages_use_case.dart",
+      "target": "class:lib/features/chat/domain/use_case/observe_chat_messages_use_case.dart:ObserveChatMessagesUseCase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/chat/domain/use_case/observe_chat_messages_use_case.dart",
+      "target": "class:lib/features/chat/domain/use_case/observe_chat_messages_use_case.dart:ObserveChatMessagesUseCase",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/chat/domain/use_case/observe_chat_messages_use_case.dart",
+      "target": "file:lib/features/chat/domain/entity/chat_message.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/domain/use_case/observe_chat_messages_use_case.dart",
+      "target": "file:lib/features/chat/domain/repository/i_chat_repository.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:lib/features/chat/domain/use_case/observe_chat_messages_use_case.dart:ObserveChatMessagesUseCase",
+      "target": "class:lib/features/chat/domain/repository/i_chat_repository.dart:IChatRepository",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/chat/domain/use_case/send_chat_message_use_case.dart",
+      "target": "class:lib/features/chat/domain/use_case/send_chat_message_use_case.dart:SendChatMessageUseCase",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/chat/domain/use_case/send_chat_message_use_case.dart",
+      "target": "class:lib/features/chat/domain/use_case/send_chat_message_use_case.dart:SendChatMessageUseCase",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/chat/domain/use_case/send_chat_message_use_case.dart",
+      "target": "file:lib/features/chat/domain/entity/chat_user.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/domain/use_case/send_chat_message_use_case.dart",
+      "target": "file:lib/features/chat/domain/repository/i_chat_repository.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:lib/features/chat/domain/use_case/send_chat_message_use_case.dart:SendChatMessageUseCase",
+      "target": "class:lib/features/chat/domain/repository/i_chat_repository.dart:IChatRepository",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/chat/presentation/screen/chat_screen.dart",
+      "target": "class:lib/features/chat/presentation/screen/chat_screen.dart:ChatScreen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/chat/presentation/screen/chat_screen.dart",
+      "target": "class:lib/features/chat/presentation/screen/chat_screen.dart:_ChatScreenState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/chat/presentation/screen/chat_screen.dart",
+      "target": "class:lib/features/chat/presentation/screen/chat_screen.dart:_BookingPill",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/chat/presentation/screen/chat_screen.dart",
+      "target": "class:lib/features/chat/presentation/screen/chat_screen.dart:_ChatError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/chat/presentation/screen/chat_screen.dart",
+      "target": "class:lib/features/chat/presentation/screen/chat_screen.dart:_EmptyChatPlaceholder",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/chat/presentation/screen/chat_screen.dart",
+      "target": "class:lib/features/chat/presentation/screen/chat_screen.dart:_MessageBubble",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/chat/presentation/screen/chat_screen.dart",
+      "target": "class:lib/features/chat/presentation/screen/chat_screen.dart:_MessageInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/chat/presentation/screen/chat_screen.dart",
+      "target": "class:lib/features/chat/presentation/screen/chat_screen.dart:ChatScreen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:lib/features/chat/presentation/screen/chat_screen.dart:_ChatScreenState",
+      "target": "function:lib/features/chat/presentation/screen/chat_screen.dart:_sessionFor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:lib/features/chat/presentation/screen/chat_screen.dart:_ChatScreenState",
+      "target": "function:lib/features/chat/presentation/screen/chat_screen.dart:_userForChat",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:lib/features/chat/presentation/screen/chat_screen.dart:_ChatScreenState",
+      "target": "function:lib/features/chat/presentation/screen/chat_screen.dart:_handleSend",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/chat/presentation/screen/chat_screen.dart",
+      "target": "file:lib/core/widget/internal_app_bar.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/presentation/screen/chat_screen.dart",
+      "target": "file:lib/generated/l10n.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/presentation/screen/chat_screen.dart",
+      "target": "file:lib/features/auth/domain/entity/user_entity.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/presentation/screen/chat_screen.dart",
+      "target": "file:lib/features/auth/presentation/view_model/auth_state.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/presentation/screen/chat_screen.dart",
+      "target": "file:lib/features/auth/provider/auth_provider.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/presentation/screen/chat_screen.dart",
+      "target": "file:lib/features/chat/domain/entity/chat_message.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/presentation/screen/chat_screen.dart",
+      "target": "file:lib/features/chat/domain/entity/chat_user.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/presentation/screen/chat_screen.dart",
+      "target": "file:lib/features/chat/presentation/view_model/chat_view_model.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:lib/features/chat/presentation/screen/chat_screen.dart:_handleSend",
+      "target": "class:lib/features/chat/presentation/view_model/chat_view_model.dart:ChatViewModel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/chat/presentation/view_model/chat_state.dart",
+      "target": "class:lib/features/chat/presentation/view_model/chat_state.dart:ChatState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/chat/presentation/view_model/chat_state.dart",
+      "target": "class:lib/features/chat/presentation/view_model/chat_state.dart:ChatState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/chat/presentation/view_model/chat_state.dart",
+      "target": "file:lib/features/chat/domain/entity/chat_message.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/presentation/view_model/chat_view_model.dart",
+      "target": "class:lib/features/chat/presentation/view_model/chat_view_model.dart:ChatSession",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/chat/presentation/view_model/chat_view_model.dart",
+      "target": "class:lib/features/chat/presentation/view_model/chat_view_model.dart:ChatViewModel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/chat/presentation/view_model/chat_view_model.dart",
+      "target": "class:lib/features/chat/presentation/view_model/chat_view_model.dart:ChatSession",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/chat/presentation/view_model/chat_view_model.dart",
+      "target": "class:lib/features/chat/presentation/view_model/chat_view_model.dart:ChatViewModel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/chat/presentation/view_model/chat_view_model.dart",
+      "target": "file:lib/features/chat/domain/entity/chat_user.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/presentation/view_model/chat_view_model.dart",
+      "target": "file:lib/features/chat/domain/use_case/observe_chat_messages_use_case.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/presentation/view_model/chat_view_model.dart",
+      "target": "file:lib/features/chat/domain/use_case/send_chat_message_use_case.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/presentation/view_model/chat_view_model.dart",
+      "target": "file:lib/features/chat/domain/entity/chat_message.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/presentation/view_model/chat_view_model.dart",
+      "target": "file:lib/features/chat/provider/chat_provider.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/presentation/view_model/chat_view_model.dart",
+      "target": "file:lib/features/chat/presentation/view_model/chat_state.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "class:lib/features/chat/presentation/view_model/chat_view_model.dart:ChatViewModel",
+      "target": "class:lib/features/chat/domain/use_case/observe_chat_messages_use_case.dart:ObserveChatMessagesUseCase",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:lib/features/chat/presentation/view_model/chat_view_model.dart:ChatViewModel",
+      "target": "class:lib/features/chat/domain/use_case/send_chat_message_use_case.dart:SendChatMessageUseCase",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:lib/features/chat/presentation/view_model/chat_view_model.dart:ChatViewModel",
+      "target": "function:lib/features/chat/presentation/view_model/chat_view_model.dart:_listenToMessages",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:lib/features/chat/presentation/view_model/chat_view_model.dart:ChatViewModel",
+      "target": "function:lib/features/chat/presentation/view_model/chat_view_model.dart:sendMessage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/chat/provider/chat_provider.dart",
+      "target": "file:lib/core/providers/general_providers.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/provider/chat_provider.dart",
+      "target": "file:lib/features/chat/data/data_source/chat_remote_data_source.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/provider/chat_provider.dart",
+      "target": "file:lib/features/chat/data/data_source/i_chat_remote_data_source.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/provider/chat_provider.dart",
+      "target": "file:lib/features/chat/data/repository/chat_repository.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/provider/chat_provider.dart",
+      "target": "file:lib/features/chat/domain/repository/i_chat_repository.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/provider/chat_provider.dart",
+      "target": "file:lib/features/chat/domain/use_case/observe_chat_messages_use_case.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/provider/chat_provider.dart",
+      "target": "file:lib/features/chat/domain/use_case/send_chat_message_use_case.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:lib/features/chat/provider/chat_provider.dart",
+      "target": "class:lib/features/chat/data/repository/chat_repository.dart:ChatRepositoryImpl",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/chat/provider/chat_provider.dart",
+      "target": "class:lib/features/chat/data/data_source/chat_remote_data_source.dart:ChatRemoteDataSource",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/chat/presentation/view_model/chat_view_model.dart",
+      "target": "file:lib/features/chat/provider/chat_provider.dart",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    }
+  ]
+}

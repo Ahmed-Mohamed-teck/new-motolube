@@ -1,0 +1,182 @@
+{
+  "projectRoot": "/Users/ehsanfe/flutterprojects/newmotorlube",
+  "batchFiles": [
+    {
+      "path": "lib/features/book_service/domain/exception/service_packages_exception.dart",
+      "language": "dart",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/book_service/domain/repository/i_book_service_repository.dart",
+      "language": "dart",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/book_service/domain/use_case/create_appointment_use_case.dart",
+      "language": "dart",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/book_service/domain/use_case/get_packages_for_vehicle_use_case.dart",
+      "language": "dart",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/book_service/presentation/screen/book_maintanance_screen.dart",
+      "language": "dart",
+      "sizeLines": 1835,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/book_service/presentation/view_model/service_packages_state.dart",
+      "language": "dart",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/book_service/presentation/view_model/service_packages_view_model.dart",
+      "language": "dart",
+      "sizeLines": 46,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/book_service/provider/book_service_provider.dart",
+      "language": "dart",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/chat/data/data_source/chat_remote_data_source.dart",
+      "language": "dart",
+      "sizeLines": 55,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/chat/data/data_source/i_chat_remote_data_source.dart",
+      "language": "dart",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/chat/data/model/chat_message_model.dart",
+      "language": "dart",
+      "sizeLines": 56,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/chat/data/repository/chat_repository.dart",
+      "language": "dart",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/chat/domain/entity/chat_message.dart",
+      "language": "dart",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/chat/domain/entity/chat_user.dart",
+      "language": "dart",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/chat/domain/repository/i_chat_repository.dart",
+      "language": "dart",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/chat/domain/use_case/observe_chat_messages_use_case.dart",
+      "language": "dart",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/chat/domain/use_case/send_chat_message_use_case.dart",
+      "language": "dart",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/chat/presentation/screen/chat_screen.dart",
+      "language": "dart",
+      "sizeLines": 436,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/chat/presentation/view_model/chat_state.dart",
+      "language": "dart",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/chat/presentation/view_model/chat_view_model.dart",
+      "language": "dart",
+      "sizeLines": 94,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/chat/provider/chat_provider.dart",
+      "language": "dart",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/contact_us/data/data_source/contact_us_remote_data_source.dart",
+      "language": "dart",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/contact_us/data/data_source/i_contact_us_remote_data_source.dart",
+      "language": "dart",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/contact_us/data/model/contact_us_model.dart",
+      "language": "dart",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/contact_us/data/repository/contact_us_repository.dart",
+      "language": "dart",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "lib/features/book_service/domain/exception/service_packages_exception.dart": [],
+    "lib/features/book_service/domain/repository/i_book_service_repository.dart": [],
+    "lib/features/book_service/domain/use_case/create_appointment_use_case.dart": [],
+    "lib/features/book_service/domain/use_case/get_packages_for_vehicle_use_case.dart": [],
+    "lib/features/book_service/presentation/screen/book_maintanance_screen.dart": [],
+    "lib/features/book_service/presentation/view_model/service_packages_state.dart": [],
+    "lib/features/book_service/presentation/view_model/service_packages_view_model.dart": [],
+    "lib/features/book_service/provider/book_service_provider.dart": [],
+    "lib/features/chat/data/data_source/chat_remote_data_source.dart": [],
+    "lib/features/chat/data/data_source/i_chat_remote_data_source.dart": [],
+    "lib/features/chat/data/model/chat_message_model.dart": [],
+    "lib/features/chat/data/repository/chat_repository.dart": [],
+    "lib/features/chat/domain/entity/chat_message.dart": [],
+    "lib/features/chat/domain/entity/chat_user.dart": [],
+    "lib/features/chat/domain/repository/i_chat_repository.dart": [],
+    "lib/features/chat/domain/use_case/observe_chat_messages_use_case.dart": [],
+    "lib/features/chat/domain/use_case/send_chat_message_use_case.dart": [],
+    "lib/features/chat/presentation/screen/chat_screen.dart": [],
+    "lib/features/chat/presentation/view_model/chat_state.dart": [],
+    "lib/features/chat/presentation/view_model/chat_view_model.dart": [],
+    "lib/features/chat/provider/chat_provider.dart": [],
+    "lib/features/contact_us/data/data_source/contact_us_remote_data_source.dart": [],
+    "lib/features/contact_us/data/data_source/i_contact_us_remote_data_source.dart": [],
+    "lib/features/contact_us/data/model/contact_us_model.dart": [],
+    "lib/features/contact_us/data/repository/contact_us_repository.dart": []
+  }
+}

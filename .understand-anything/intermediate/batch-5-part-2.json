@@ -1,0 +1,1137 @@
+{
+  "nodes": [
+    {
+      "id": "file:lib/features/auth/presentation/screens/auth_screen.dart",
+      "type": "file",
+      "name": "auth_screen.dart",
+      "filePath": "lib/features/auth/presentation/screens/auth_screen.dart",
+      "summary": "Login/registration screen widget handling phone entry, registration fields, OTP input, and submission flows for the auth feature.",
+      "tags": [
+        "component",
+        "screen",
+        "auth"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:lib/features/auth/presentation/screens/auth_screen.dart:LoginScreen",
+      "type": "class",
+      "name": "LoginScreen",
+      "filePath": "lib/features/auth/presentation/screens/auth_screen.dart",
+      "lineRange": [
+        9,
+        14
+      ],
+      "summary": "StatefulWidget entry point for the combined login/register/OTP screen.",
+      "tags": [
+        "component",
+        "screen"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/auth/presentation/screens/auth_screen.dart:_LoginScreenState",
+      "type": "class",
+      "name": "_LoginScreenState",
+      "filePath": "lib/features/auth/presentation/screens/auth_screen.dart",
+      "lineRange": [
+        16,
+        430
+      ],
+      "summary": "State class managing text controllers and OTP focus nodes, and building the UI for phone/registration/OTP steps, watching AuthViewModel for state transitions.",
+      "tags": [
+        "component",
+        "screen",
+        "state-management"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:lib/features/auth/presentation/screens/auth_screen.dart:build",
+      "type": "function",
+      "name": "build",
+      "filePath": "lib/features/auth/presentation/screens/auth_screen.dart",
+      "lineRange": [
+        58,
+        430
+      ],
+      "summary": "Builds the login screen UI, watching AuthViewModel state and rendering phone/registration form fields, OTP boxes, and submit buttons depending on the current AuthState.",
+      "tags": [
+        "component",
+        "screen",
+        "ui-builder"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:lib/features/auth/presentation/view_model/auth_state.dart",
+      "type": "file",
+      "name": "auth_state.dart",
+      "filePath": "lib/features/auth/presentation/view_model/auth_state.dart",
+      "summary": "Sealed class hierarchy of AuthState variants (initial, checking, registration, awaiting OTP, verifying, authenticating, authenticated, failed, unauthenticated, error) modeling the login/registration state machine.",
+      "tags": [
+        "data-model",
+        "state-management",
+        "auth"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Uses Dart 3 sealed classes to model an exhaustive auth state machine, enabling pattern matching in the view via switch expressions."
+    },
+    {
+      "id": "class:lib/features/auth/presentation/view_model/auth_state.dart:AuthState",
+      "type": "class",
+      "name": "AuthState",
+      "filePath": "lib/features/auth/presentation/view_model/auth_state.dart",
+      "lineRange": [
+        3,
+        5
+      ],
+      "summary": "Sealed base class for all states in the authentication flow.",
+      "tags": [
+        "data-model",
+        "state-management"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/auth/presentation/view_model/auth_state.dart:AwaitingOtpState",
+      "type": "class",
+      "name": "AwaitingOtpState",
+      "filePath": "lib/features/auth/presentation/view_model/auth_state.dart",
+      "lineRange": [
+        18,
+        29
+      ],
+      "summary": "State representing the OTP-entry step, carrying phone number, expiry countdown, remaining seconds, and optional error message.",
+      "tags": [
+        "data-model",
+        "state-management"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/auth/presentation/view_model/auth_state.dart:AuthenticatedState",
+      "type": "class",
+      "name": "AuthenticatedState",
+      "filePath": "lib/features/auth/presentation/view_model/auth_state.dart",
+      "lineRange": [
+        44,
+        53
+      ],
+      "summary": "Terminal success state carrying the JWT token, Firebase token, and resolved User after successful authentication.",
+      "tags": [
+        "data-model",
+        "state-management"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "type": "file",
+      "name": "auth_view_model.dart",
+      "filePath": "lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "summary": "Riverpod Notifier orchestrating the login/registration/OTP-verification flow, including OTP resend countdown timer and session restoration on app start.",
+      "tags": [
+        "service",
+        "state-management",
+        "auth"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:lib/features/auth/presentation/view_model/auth_view_model.dart:AuthViewModel",
+      "type": "class",
+      "name": "AuthViewModel",
+      "filePath": "lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "lineRange": [
+        16,
+        212
+      ],
+      "summary": "Notifier that holds AuthState and drives login, registration, OTP verification/resend, and logout by coordinating the auth use cases.",
+      "tags": [
+        "service",
+        "state-management"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:lib/features/auth/presentation/view_model/auth_view_model.dart:onLoginPressed",
+      "type": "function",
+      "name": "onLoginPressed",
+      "filePath": "lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "lineRange": [
+        47,
+        71
+      ],
+      "summary": "Checks if the phone is registered, then either sends an OTP for login or transitions to the registration state, starting the resend timer.",
+      "tags": [
+        "event-handler",
+        "auth"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/features/auth/presentation/view_model/auth_view_model.dart:onRegisterPressed",
+      "type": "function",
+      "name": "onRegisterPressed",
+      "filePath": "lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "lineRange": [
+        72,
+        107
+      ],
+      "summary": "Registers a new user with provided name/phone/email then sends an OTP, starting the resend timer and handling registration errors.",
+      "tags": [
+        "event-handler",
+        "auth"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/features/auth/presentation/view_model/auth_view_model.dart:onVerifyPressed",
+      "type": "function",
+      "name": "onVerifyPressed",
+      "filePath": "lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "lineRange": [
+        108,
+        146
+      ],
+      "summary": "Verifies the entered OTP, saves the resulting auth session, and transitions to AuthenticatedState or surfaces an error.",
+      "tags": [
+        "event-handler",
+        "auth"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/features/auth/presentation/view_model/auth_view_model.dart:authenticating",
+      "type": "function",
+      "name": "authenticating",
+      "filePath": "lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "lineRange": [
+        174,
+        207
+      ],
+      "summary": "Attempts to restore a stored auth session on app start, fetching fresh user info and transitioning to AuthenticatedState or UnauthenticatedState/Failed accordingly.",
+      "tags": [
+        "service",
+        "auth",
+        "session-restore"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/features/auth/presentation/view_model/auth_view_model.dart:_startTimer",
+      "type": "function",
+      "name": "_startTimer",
+      "filePath": "lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "lineRange": [
+        153,
+        173
+      ],
+      "summary": "Starts a periodic countdown timer used to drive the OTP resend cooldown and updates AwaitingOtpState's remaining seconds.",
+      "tags": [
+        "utility",
+        "timer"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:lib/features/auth/presentation/widget/otp_inputs.dart",
+      "type": "file",
+      "name": "otp_inputs.dart",
+      "filePath": "lib/features/auth/presentation/widget/otp_inputs.dart",
+      "summary": "Reusable OTP entry widget rendering a row of single-character text fields with auto-advancing focus.",
+      "tags": [
+        "component",
+        "widget",
+        "auth"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/features/auth/presentation/widget/otp_inputs.dart:OtpInput",
+      "type": "class",
+      "name": "OtpInput",
+      "filePath": "lib/features/auth/presentation/widget/otp_inputs.dart",
+      "lineRange": [
+        3,
+        12
+      ],
+      "summary": "StatefulWidget exposing length, boxSize, and onChanged callback for a segmented OTP input control.",
+      "tags": [
+        "component",
+        "widget"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/auth/presentation/widget/otp_inputs.dart:_OtpInputState",
+      "type": "class",
+      "name": "_OtpInputState",
+      "filePath": "lib/features/auth/presentation/widget/otp_inputs.dart",
+      "lineRange": [
+        14,
+        71
+      ],
+      "summary": "Manages per-digit TextEditingControllers and FocusNodes, advancing focus on input and notifying the parent of the combined OTP value.",
+      "tags": [
+        "component",
+        "widget",
+        "state-management"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:lib/features/auth/provider/auth_provider.dart",
+      "type": "file",
+      "name": "auth_provider.dart",
+      "filePath": "lib/features/auth/provider/auth_provider.dart",
+      "summary": "Riverpod provider wiring for the auth feature: builds the remote data source, repositories, all auth use cases, and the AuthViewModel notifier with their dependencies.",
+      "tags": [
+        "service",
+        "dependency-injection",
+        "auth"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "Acts as the feature's composition root, chaining ref.read calls to build a full dependency graph from Dio client down to view-model use cases."
+    },
+    {
+      "id": "file:lib/features/book_service/data/data_source/book_service_remote_data_source.dart",
+      "type": "file",
+      "name": "book_service_remote_data_source.dart",
+      "filePath": "lib/features/book_service/data/data_source/book_service_remote_data_source.dart",
+      "summary": "Remote data source performing HTTP calls (via Dio) to fetch service packages for a vehicle and to create a service appointment.",
+      "tags": [
+        "api-handler",
+        "service",
+        "book-service"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/features/book_service/data/data_source/book_service_remote_data_source.dart:BookServiceRemoteDataSource",
+      "type": "class",
+      "name": "BookServiceRemoteDataSource",
+      "filePath": "lib/features/book_service/data/data_source/book_service_remote_data_source.dart",
+      "lineRange": [
+        9,
+        117
+      ],
+      "summary": "Implements IBookServiceRemoteDataSource using Dio to call the packages and appointment-creation endpoints, mapping JSON to model objects and translating errors into ServicePackagesException.",
+      "tags": [
+        "api-handler",
+        "service"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/features/book_service/data/data_source/book_service_remote_data_source.dart:getPackagesForVehicle",
+      "type": "function",
+      "name": "getPackagesForVehicle",
+      "filePath": "lib/features/book_service/data/data_source/book_service_remote_data_source.dart",
+      "lineRange": [
+        15,
+        60
+      ],
+      "summary": "Calls the packages endpoint (optionally filtered by category) and maps the response into a list of ServicePackageModel, throwing ServicePackagesException on network/server errors.",
+      "tags": [
+        "api-handler",
+        "validation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/features/book_service/data/data_source/book_service_remote_data_source.dart:createAppointment",
+      "type": "function",
+      "name": "createAppointment",
+      "filePath": "lib/features/book_service/data/data_source/book_service_remote_data_source.dart",
+      "lineRange": [
+        75,
+        116
+      ],
+      "summary": "Posts an appointment-creation payload and parses the JSON response into a CreateAppointmentResponseModel, raising exceptions on failure.",
+      "tags": [
+        "api-handler"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:lib/features/book_service/data/data_source/i_book_service_remote_data_source.dart",
+      "type": "file",
+      "name": "i_book_service_remote_data_source.dart",
+      "filePath": "lib/features/book_service/data/data_source/i_book_service_remote_data_source.dart",
+      "summary": "Interface defining the remote operations needed by the book-service feature: fetching packages and creating appointments.",
+      "tags": [
+        "service",
+        "interface",
+        "book-service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/book_service/data/data_source/i_book_service_remote_data_source.dart:IBookServiceRemoteDataSource",
+      "type": "class",
+      "name": "IBookServiceRemoteDataSource",
+      "filePath": "lib/features/book_service/data/data_source/i_book_service_remote_data_source.dart",
+      "lineRange": [
+        4,
+        14
+      ],
+      "summary": "Abstract contract implemented by BookServiceRemoteDataSource for vehicle packages and appointment creation.",
+      "tags": [
+        "service",
+        "interface"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/book_service/data/model/create_appointment_response_model.dart",
+      "type": "file",
+      "name": "create_appointment_response_model.dart",
+      "filePath": "lib/features/book_service/data/model/create_appointment_response_model.dart",
+      "summary": "Data model parsing the JSON response from the create-appointment API and converting it to a domain CreateAppointmentResult.",
+      "tags": [
+        "data-model",
+        "serialization",
+        "book-service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/book_service/data/model/create_appointment_response_model.dart:CreateAppointmentResponseModel",
+      "type": "class",
+      "name": "CreateAppointmentResponseModel",
+      "filePath": "lib/features/book_service/data/model/create_appointment_response_model.dart",
+      "lineRange": [
+        3,
+        37
+      ],
+      "summary": "Holds infoCode/infoType/description fields from the API and maps them to a CreateAppointmentResult domain entity via toEntity.",
+      "tags": [
+        "data-model",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/book_service/data/model/service_package_model.dart",
+      "type": "file",
+      "name": "service_package_model.dart",
+      "filePath": "lib/features/book_service/data/model/service_package_model.dart",
+      "summary": "Data model for a service package returned by the API, including JSON deserialization and conversion to ServicePackageEntity.",
+      "tags": [
+        "data-model",
+        "serialization",
+        "book-service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/book_service/data/model/service_package_model.dart:ServicePackageModel",
+      "type": "class",
+      "name": "ServicePackageModel",
+      "filePath": "lib/features/book_service/data/model/service_package_model.dart",
+      "lineRange": [
+        3,
+        43
+      ],
+      "summary": "Holds package id/code/names/price/emergency flag from the API and maps to ServicePackageEntity via toEntity.",
+      "tags": [
+        "data-model",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/book_service/data/repository/book_service_repository.dart",
+      "type": "file",
+      "name": "book_service_repository.dart",
+      "filePath": "lib/features/book_service/data/repository/book_service_repository.dart",
+      "summary": "Repository that delegates to the remote data source to fetch vehicle packages and create appointments, converting models to domain entities.",
+      "tags": [
+        "service",
+        "book-service"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/features/book_service/data/repository/book_service_repository.dart:BookServiceRepository",
+      "type": "class",
+      "name": "BookServiceRepository",
+      "filePath": "lib/features/book_service/data/repository/book_service_repository.dart",
+      "lineRange": [
+        6,
+        60
+      ],
+      "summary": "Wraps BookServiceRemoteDataSource calls, mapping ServicePackageModel/response models to domain entities for use cases to consume.",
+      "tags": [
+        "service"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/features/book_service/data/repository/book_service_repository.dart:createAppointment",
+      "type": "function",
+      "name": "createAppointment",
+      "filePath": "lib/features/book_service/data/repository/book_service_repository.dart",
+      "lineRange": [
+        26,
+        39
+      ],
+      "summary": "Builds the appointment-creation payload from booking details (date, branch, vehicle, package, slot, etc.) and calls the remote data source.",
+      "tags": [
+        "service",
+        "book-service"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:lib/features/book_service/domain/entity/create_appointment_result.dart",
+      "type": "file",
+      "name": "create_appointment_result.dart",
+      "filePath": "lib/features/book_service/domain/entity/create_appointment_result.dart",
+      "summary": "Domain entity representing the outcome of creating an appointment, exposing isSuccessful and a localized displayMessage.",
+      "tags": [
+        "data-model",
+        "domain-entity",
+        "book-service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/book_service/domain/entity/create_appointment_result.dart:CreateAppointmentResult",
+      "type": "class",
+      "name": "CreateAppointmentResult",
+      "filePath": "lib/features/book_service/domain/entity/create_appointment_result.dart",
+      "lineRange": [
+        1,
+        29
+      ],
+      "summary": "Carries infoCode/infoType/description fields and derives success status and a display message for the UI.",
+      "tags": [
+        "data-model",
+        "domain-entity"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/book_service/domain/entity/service_package_entity.dart",
+      "type": "file",
+      "name": "service_package_entity.dart",
+      "filePath": "lib/features/book_service/domain/entity/service_package_entity.dart",
+      "summary": "Domain entity representing a purchasable/bookable service package with bilingual names and pricing.",
+      "tags": [
+        "data-model",
+        "domain-entity",
+        "book-service"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/book_service/domain/entity/service_package_entity.dart:ServicePackageEntity",
+      "type": "class",
+      "name": "ServicePackageEntity",
+      "filePath": "lib/features/book_service/domain/entity/service_package_entity.dart",
+      "lineRange": [
+        1,
+        17
+      ],
+      "summary": "Holds package id/code/names (Arabic/English)/price/emergency flag for use throughout the booking flow.",
+      "tags": [
+        "data-model",
+        "domain-entity"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:lib/features/auth/presentation/screens/auth_screen.dart",
+      "target": "class:lib/features/auth/presentation/screens/auth_screen.dart:LoginScreen",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/presentation/screens/auth_screen.dart",
+      "target": "class:lib/features/auth/presentation/screens/auth_screen.dart:_LoginScreenState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/presentation/screens/auth_screen.dart",
+      "target": "function:lib/features/auth/presentation/screens/auth_screen.dart:build",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/presentation/screens/auth_screen.dart",
+      "target": "class:lib/features/auth/presentation/screens/auth_screen.dart:LoginScreen",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:lib/features/auth/presentation/screens/auth_screen.dart:_LoginScreenState",
+      "target": "function:lib/features/auth/presentation/screens/auth_screen.dart:build",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/presentation/screens/auth_screen.dart",
+      "target": "file:lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/presentation/screens/auth_screen.dart",
+      "target": "file:lib/features/auth/provider/auth_provider.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/presentation/screens/auth_screen.dart",
+      "target": "file:lib/features/auth/presentation/widget/otp_inputs.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "function:lib/features/auth/presentation/screens/auth_screen.dart:build",
+      "target": "function:lib/features/auth/presentation/view_model/auth_view_model.dart:onLoginPressed",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:lib/features/auth/presentation/screens/auth_screen.dart:build",
+      "target": "function:lib/features/auth/presentation/view_model/auth_view_model.dart:onRegisterPressed",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/presentation/view_model/auth_state.dart",
+      "target": "class:lib/features/auth/presentation/view_model/auth_state.dart:AuthState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/presentation/view_model/auth_state.dart",
+      "target": "class:lib/features/auth/presentation/view_model/auth_state.dart:AwaitingOtpState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/presentation/view_model/auth_state.dart",
+      "target": "class:lib/features/auth/presentation/view_model/auth_state.dart:AuthenticatedState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "class:lib/features/auth/presentation/view_model/auth_state.dart:AwaitingOtpState",
+      "target": "class:lib/features/auth/presentation/view_model/auth_state.dart:AuthState",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "class:lib/features/auth/presentation/view_model/auth_state.dart:AuthenticatedState",
+      "target": "class:lib/features/auth/presentation/view_model/auth_state.dart:AuthState",
+      "type": "inherits",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:lib/features/auth/presentation/view_model/auth_state.dart",
+      "target": "file:lib/features/auth/domain/entity/user_entity.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "class:lib/features/auth/presentation/view_model/auth_state.dart:AuthenticatedState",
+      "target": "class:lib/features/auth/domain/entity/user_entity.dart:User",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "target": "class:lib/features/auth/presentation/view_model/auth_view_model.dart:AuthViewModel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "target": "function:lib/features/auth/presentation/view_model/auth_view_model.dart:onLoginPressed",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "target": "function:lib/features/auth/presentation/view_model/auth_view_model.dart:onRegisterPressed",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "target": "function:lib/features/auth/presentation/view_model/auth_view_model.dart:onVerifyPressed",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "target": "function:lib/features/auth/presentation/view_model/auth_view_model.dart:authenticating",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "target": "function:lib/features/auth/presentation/view_model/auth_view_model.dart:_startTimer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "target": "class:lib/features/auth/presentation/view_model/auth_view_model.dart:AuthViewModel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "target": "file:lib/features/auth/presentation/view_model/auth_state.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "target": "file:lib/features/auth/domain/use_case/send_otp_use_case.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "target": "file:lib/features/auth/domain/use_case/register_user_use_case.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "target": "file:lib/features/auth/domain/use_case/verify_otp_use_case.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "target": "file:lib/features/auth/domain/use_case/get_user_info_use_case.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "target": "file:lib/features/auth/domain/use_case/log_out_use_case.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "target": "file:lib/features/auth/domain/use_case/save_auth_session_use_case.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "target": "file:lib/features/auth/domain/use_case/get_stored_auth_use_case.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "function:lib/features/auth/presentation/view_model/auth_view_model.dart:onLoginPressed",
+      "target": "class:lib/features/auth/domain/use_case/send_otp_use_case.dart:SendOtpUseCase",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:lib/features/auth/presentation/view_model/auth_view_model.dart:onRegisterPressed",
+      "target": "class:lib/features/auth/domain/use_case/register_user_use_case.dart:RegisterUserUseCase",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:lib/features/auth/presentation/view_model/auth_view_model.dart:onVerifyPressed",
+      "target": "class:lib/features/auth/domain/use_case/verify_otp_use_case.dart:VerifyOtpUseCase",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:lib/features/auth/presentation/view_model/auth_view_model.dart:onVerifyPressed",
+      "target": "class:lib/features/auth/domain/use_case/save_auth_session_use_case.dart:SaveAuthSessionUseCase",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:lib/features/auth/presentation/view_model/auth_view_model.dart:authenticating",
+      "target": "class:lib/features/auth/domain/use_case/get_stored_auth_use_case.dart:GetStoredAuthUseCase",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:lib/features/auth/presentation/view_model/auth_view_model.dart:authenticating",
+      "target": "class:lib/features/auth/domain/use_case/get_user_info_use_case.dart:GetUserInfoUseCase",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/presentation/widget/otp_inputs.dart",
+      "target": "class:lib/features/auth/presentation/widget/otp_inputs.dart:OtpInput",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/presentation/widget/otp_inputs.dart",
+      "target": "class:lib/features/auth/presentation/widget/otp_inputs.dart:_OtpInputState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/auth/presentation/widget/otp_inputs.dart",
+      "target": "class:lib/features/auth/presentation/widget/otp_inputs.dart:OtpInput",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/auth/provider/auth_provider.dart",
+      "target": "file:lib/features/auth/data/data_source/auth_remote_data_source.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/provider/auth_provider.dart",
+      "target": "file:lib/features/auth/data/repository/auth_local_repository.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/provider/auth_provider.dart",
+      "target": "file:lib/features/auth/data/repository/auth_repository.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/provider/auth_provider.dart",
+      "target": "file:lib/features/auth/domain/repository/i_auth_local_repository.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/provider/auth_provider.dart",
+      "target": "file:lib/features/auth/domain/repository/i_auth_repository.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/provider/auth_provider.dart",
+      "target": "file:lib/features/auth/domain/use_case/get_stored_auth_use_case.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/provider/auth_provider.dart",
+      "target": "file:lib/features/auth/domain/use_case/get_user_info_use_case.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/provider/auth_provider.dart",
+      "target": "file:lib/features/auth/domain/use_case/is_registered_user.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/provider/auth_provider.dart",
+      "target": "file:lib/features/auth/domain/use_case/log_out_use_case.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/provider/auth_provider.dart",
+      "target": "file:lib/features/auth/domain/use_case/register_user_use_case.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/provider/auth_provider.dart",
+      "target": "file:lib/features/auth/domain/use_case/save_auth_session_use_case.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/provider/auth_provider.dart",
+      "target": "file:lib/features/auth/domain/use_case/send_otp_use_case.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/provider/auth_provider.dart",
+      "target": "file:lib/features/auth/domain/use_case/verify_otp_use_case.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/provider/auth_provider.dart",
+      "target": "file:lib/features/auth/presentation/view_model/auth_state.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/auth/provider/auth_provider.dart",
+      "target": "file:lib/features/auth/presentation/view_model/auth_view_model.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/book_service/data/data_source/book_service_remote_data_source.dart",
+      "target": "class:lib/features/book_service/data/data_source/book_service_remote_data_source.dart:BookServiceRemoteDataSource",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/book_service/data/data_source/book_service_remote_data_source.dart",
+      "target": "function:lib/features/book_service/data/data_source/book_service_remote_data_source.dart:getPackagesForVehicle",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/book_service/data/data_source/book_service_remote_data_source.dart",
+      "target": "function:lib/features/book_service/data/data_source/book_service_remote_data_source.dart:createAppointment",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/book_service/data/data_source/book_service_remote_data_source.dart",
+      "target": "class:lib/features/book_service/data/data_source/book_service_remote_data_source.dart:BookServiceRemoteDataSource",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:lib/features/book_service/data/data_source/book_service_remote_data_source.dart:BookServiceRemoteDataSource",
+      "target": "class:lib/features/book_service/data/data_source/i_book_service_remote_data_source.dart:IBookServiceRemoteDataSource",
+      "type": "implements",
+      "direction": "forward",
+      "weight": 0.9
+    },
+    {
+      "source": "file:lib/features/book_service/data/data_source/book_service_remote_data_source.dart",
+      "target": "file:lib/features/book_service/data/model/service_package_model.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:lib/features/book_service/data/data_source/book_service_remote_data_source.dart",
+      "target": "file:lib/features/book_service/data/model/create_appointment_response_model.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "function:lib/features/book_service/data/data_source/book_service_remote_data_source.dart:getPackagesForVehicle",
+      "target": "class:lib/features/book_service/data/model/service_package_model.dart:ServicePackageModel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:lib/features/book_service/data/data_source/book_service_remote_data_source.dart:createAppointment",
+      "target": "class:lib/features/book_service/data/model/create_appointment_response_model.dart:CreateAppointmentResponseModel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/book_service/data/data_source/i_book_service_remote_data_source.dart",
+      "target": "class:lib/features/book_service/data/data_source/i_book_service_remote_data_source.dart:IBookServiceRemoteDataSource",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/book_service/data/data_source/i_book_service_remote_data_source.dart",
+      "target": "class:lib/features/book_service/data/data_source/i_book_service_remote_data_source.dart:IBookServiceRemoteDataSource",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/book_service/data/model/create_appointment_response_model.dart",
+      "target": "class:lib/features/book_service/data/model/create_appointment_response_model.dart:CreateAppointmentResponseModel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/book_service/data/model/create_appointment_response_model.dart",
+      "target": "class:lib/features/book_service/data/model/create_appointment_response_model.dart:CreateAppointmentResponseModel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/book_service/data/model/create_appointment_response_model.dart",
+      "target": "file:lib/features/book_service/domain/entity/create_appointment_result.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "class:lib/features/book_service/data/model/create_appointment_response_model.dart:CreateAppointmentResponseModel",
+      "target": "class:lib/features/book_service/domain/entity/create_appointment_result.dart:CreateAppointmentResult",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/book_service/data/model/service_package_model.dart",
+      "target": "class:lib/features/book_service/data/model/service_package_model.dart:ServicePackageModel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/book_service/data/model/service_package_model.dart",
+      "target": "class:lib/features/book_service/data/model/service_package_model.dart:ServicePackageModel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/book_service/data/model/service_package_model.dart",
+      "target": "file:lib/features/book_service/domain/entity/service_package_entity.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "class:lib/features/book_service/data/model/service_package_model.dart:ServicePackageModel",
+      "target": "class:lib/features/book_service/domain/entity/service_package_entity.dart:ServicePackageEntity",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/book_service/data/repository/book_service_repository.dart",
+      "target": "class:lib/features/book_service/data/repository/book_service_repository.dart:BookServiceRepository",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/book_service/data/repository/book_service_repository.dart",
+      "target": "function:lib/features/book_service/data/repository/book_service_repository.dart:createAppointment",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/book_service/data/repository/book_service_repository.dart",
+      "target": "class:lib/features/book_service/data/repository/book_service_repository.dart:BookServiceRepository",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/book_service/data/repository/book_service_repository.dart",
+      "target": "file:lib/features/book_service/data/data_source/book_service_remote_data_source.dart",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "function:lib/features/book_service/data/repository/book_service_repository.dart:createAppointment",
+      "target": "function:lib/features/book_service/data/data_source/book_service_remote_data_source.dart:createAppointment",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/book_service/domain/entity/create_appointment_result.dart",
+      "target": "class:lib/features/book_service/domain/entity/create_appointment_result.dart:CreateAppointmentResult",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/book_service/domain/entity/create_appointment_result.dart",
+      "target": "class:lib/features/book_service/domain/entity/create_appointment_result.dart:CreateAppointmentResult",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:lib/features/book_service/domain/entity/service_package_entity.dart",
+      "target": "class:lib/features/book_service/domain/entity/service_package_entity.dart:ServicePackageEntity",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:lib/features/book_service/domain/entity/service_package_entity.dart",
+      "target": "class:lib/features/book_service/domain/entity/service_package_entity.dart:ServicePackageEntity",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

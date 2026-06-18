@@ -1,0 +1,4390 @@
+{
+  "schemaVersion": 1,
+  "algorithm": "louvain",
+  "totalFiles": 322,
+  "totalBatches": 15,
+  "exportsByPath": {
+    ".dart-tool/CLIENT_ID": [],
+    ".dart-tool/dart-flutter-telemetry.config": [],
+    ".metadata": [],
+    ".understand-anything/.understandignore": [],
+    "lib/core/providers/current_locale_provider.dart": [
+      "CurrentLocaleProvider",
+      "currentLocale",
+      "init",
+      "updateLocale",
+      "CurrentLocaleProvider"
+    ],
+    "lib/core/providers/dio_provider.dart": [
+      "DioClient",
+      "get",
+      "post",
+      "DioClient"
+    ],
+    "lib/core/providers/general_providers.dart": [
+      "initializeSharedPreferences"
+    ],
+    "lib/core/providers/global_lang_provider.dart": [],
+    "lib/core/providers/plate_chars_provider.dart": [
+      "getPlateChars",
+      "getPlateNumbers",
+      "CharListProvider"
+    ],
+    "lib/core/providers/push_notifications_service.dart": [
+      "firebaseMessagingBackgroundHandler",
+      "PushNotificationsService._",
+      "initialize",
+      "getToken",
+      "PushNotificationsService"
+    ],
+    "lib/core/providers/secure_storage.dart": [],
+    "lib/core/state/view_state.dart": [
+      "ViewState",
+      "InitialViewState",
+      "LoadingViewState",
+      "ErrorViewState",
+      "ErrorViewState",
+      "EmptyViewState",
+      "LoadedViewState",
+      "hashCode",
+      "toString",
+      "copyWith",
+      "LoadedViewState"
+    ],
+    "lib/core/storage/secure_store.dart": [
+      "saveAuth",
+      "readToken",
+      "readFcmToken",
+      "fireBaseId",
+      "phoneNumber",
+      "userName",
+      "userEmail",
+      "userId",
+      "oracleId",
+      "userType",
+      "clear",
+      "SecureStore"
+    ],
+    "lib/core/utils/constant.dart": [],
+    "lib/core/utils/end_point.dart": [
+      "getCarModelsEndPoint",
+      "getCarsForCustomerEndPoint",
+      "getUserInfoEndPoint",
+      "getPackagesForVehicleEndPoint",
+      "getPackagesForVehicleByCategoryEndPoint",
+      "getPackagesBySrEndPoint",
+      "addCouponEndPoint",
+      "getPaymentStatusEndPoint"
+    ],
+    "lib/core/utils/enum.dart": [
+      "AuthFlowStep"
+    ],
+    "lib/core/utils/extensions/extensions.dart": [
+      "theme",
+      "appColors",
+      "textStyles",
+      "textTheme",
+      "colorScheme",
+      "SugarExt"
+    ],
+    "lib/core/utils/helper_fuc.dart": [
+      "getStatusIdFromStatusName"
+    ],
+    "lib/core/utils/theme/app_colors.dart": [
+      "AppColors"
+    ],
+    "lib/core/utils/theme/app_text_styles.dart": [],
+    "lib/core/utils/theme/app_text_theme.dart": [
+      "AppTextTheme",
+      "display2XlRegular",
+      "display2XlMedium",
+      "display2XlSemibold",
+      "display2XlBold",
+      "displayXlRegular",
+      "displayXlMedium",
+      "displayXlSemibold",
+      "displayXlBold",
+      "displayLgRegular",
+      "displayLgMedium",
+      "displayLgSemibold",
+      "displayLgBold",
+      "displayMdRegular",
+      "displayMdMedium",
+      "displayMdSemibold",
+      "displayMdBold",
+      "displaySmRegular",
+      "displaySmMedium",
+      "displaySmSemibold",
+      "displaySmBold",
+      "displayXsRegular",
+      "displayXsMedium",
+      "displayXsSemibold",
+      "displayXsBold",
+      "textXlRegular",
+      "textXlMedium",
+      "textXlSemibold",
+      "textXlBold",
+      "textLgRegular",
+      "textLgMedium",
+      "textLgSemibold",
+      "textLgBold",
+      "textMdRegular",
+      "textMdMedium",
+      "textMdSemibold",
+      "textMdBold",
+      "textSmRegular",
+      "textSmMedium",
+      "textSmSemibold",
+      "textSmBold",
+      "textXsRegular",
+      "textXsMedium",
+      "textXsSemibold",
+      "textXsBold",
+      "text2xsRegular",
+      "text2xsMedium",
+      "text2xsSemibold",
+      "text2xsBold",
+      "copyWith",
+      "lerp",
+      "AppTextTheme",
+      "AppFontSize"
+    ],
+    "lib/core/utils/theme/themes.dart": [
+      "getThemeData"
+    ],
+    "lib/core/utils/ui_components/shared_ui.dart": [
+      "buildShowLangBottomSheet"
+    ],
+    "lib/core/widget/error_widget.dart": [
+      "build",
+      "ErrorStateWidget"
+    ],
+    "lib/core/widget/home_app_bar.dart": [
+      "build",
+      "preferredSize",
+      "HomeAppBar"
+    ],
+    "lib/core/widget/image_loader.dart": [
+      "build",
+      "ImageLoader",
+      "build"
+    ],
+    "lib/core/widget/internal_app_bar.dart": [
+      "build",
+      "preferredSize",
+      "InternalAppBar"
+    ],
+    "lib/core/widget/network_status_widget.dart": [
+      "createState",
+      "NetworkStatusWidget",
+      "initState",
+      "dispose",
+      "build",
+      "NetworkStatusWidgetState"
+    ],
+    "lib/features/app/app_color_theme.dart": [
+      "AppColorsTheme.light",
+      "AppColorsTheme.dark",
+      "copyWith",
+      "lerp",
+      "AppColorsTheme"
+    ],
+    "lib/features/auth/data/data_source/auth_remote_data_source.dart": [
+      "AuthRemoteDataSourceImpl",
+      "isUserRegisteredUser",
+      "sendOtp",
+      "register",
+      "verifyOtp",
+      "getUserInfo",
+      "AuthRemoteDataSourceImpl"
+    ],
+    "lib/features/auth/data/data_source/i_auth_remote_data_source.dart": [
+      "isUserRegisteredUser",
+      "sendOtp",
+      "register",
+      "verifyOtp",
+      "getUserInfo",
+      "AuthRemoteDataSource"
+    ],
+    "lib/features/auth/data/model/register_request.dart": [
+      "RegisterRequest",
+      "toJson",
+      "RegisterRequest"
+    ],
+    "lib/features/auth/data/model/register_response.dart": [
+      "RegisterResponse",
+      "RegisterResponse.fromJson",
+      "toEntity",
+      "RegisterResponse"
+    ],
+    "lib/features/auth/data/model/send_otp_request.dart": [
+      "SendOtpRequest",
+      "toJson",
+      "SendOtpRequest"
+    ],
+    "lib/features/auth/data/model/send_otp_response.dart": [
+      "SendOtpResponse",
+      "SendOtpResponse.fromJson",
+      "toEntity",
+      "SendOtpResponse"
+    ],
+    "lib/features/auth/data/model/tokens_model.dart": [
+      "TokensModel",
+      "TokensModel.fromJson",
+      "toEntity",
+      "TokensModel"
+    ],
+    "lib/features/auth/data/model/user_model.dart": [
+      "UserModel",
+      "UserModel.fromJson",
+      "toEntity",
+      "UserModel"
+    ],
+    "lib/features/auth/data/model/verify_opt_response.dart": [
+      "VerifyOtpResponse",
+      "VerifyOtpResponse.fromJson",
+      "toEntity",
+      "VerifyOtpResponse"
+    ],
+    "lib/features/auth/data/model/verify_otp_request.dart": [
+      "VerifyOtpRequest",
+      "toJson",
+      "VerifyOtpRequest"
+    ],
+    "lib/features/auth/data/repository/auth_local_repository.dart": [
+      "AuthLocalRepositoryImpl",
+      "saveAuthSession",
+      "getStoredAuth",
+      "clear",
+      "AuthLocalRepositoryImpl"
+    ],
+    "lib/features/auth/data/repository/auth_repository.dart": [
+      "AuthRepositoryImpl",
+      "isUserRegisteredUser",
+      "sendOtp",
+      "register",
+      "verifyOtp",
+      "getUserInfo",
+      "AuthRepositoryImpl"
+    ],
+    "lib/features/auth/domain/entity/auth_exception.dart": [
+      "UnregisteredUserException",
+      "UserAlreadyRegisteredException",
+      "InvalidOtpException"
+    ],
+    "lib/features/auth/domain/entity/auth_session.dart": [
+      "AuthSession"
+    ],
+    "lib/features/auth/domain/entity/otp_info.dart": [
+      "OtpInfo"
+    ],
+    "lib/features/auth/domain/entity/register_result.dart": [
+      "RegisterResult"
+    ],
+    "lib/features/auth/domain/entity/stored_auth.dart": [
+      "StoredAuth"
+    ],
+    "lib/features/auth/domain/entity/tokens.dart": [
+      "Tokens"
+    ],
+    "lib/features/auth/domain/entity/user_entity.dart": [
+      "User"
+    ],
+    "lib/features/auth/domain/entity/user_type.dart": [
+      "UserType"
+    ],
+    "lib/features/auth/domain/entity/verify_otp_result.dart": [
+      "VerifyOtpResult"
+    ],
+    "lib/features/auth/domain/repository/i_auth_local_repository.dart": [
+      "saveAuthSession",
+      "getStoredAuth",
+      "clear",
+      "IAuthLocalRepository"
+    ],
+    "lib/features/auth/domain/repository/i_auth_repository.dart": [
+      "isUserRegisteredUser",
+      "sendOtp",
+      "register",
+      "verifyOtp",
+      "getUserInfo",
+      "IAuthRepository"
+    ],
+    "lib/features/auth/domain/use_case/get_stored_auth_use_case.dart": [
+      "GetStoredAuthUseCase",
+      "call",
+      "GetStoredAuthUseCase"
+    ],
+    "lib/features/auth/domain/use_case/get_user_info_use_case.dart": [
+      "GetUserInfoUseCase",
+      "call",
+      "GetUserInfoUseCase"
+    ],
+    "lib/features/auth/domain/use_case/is_registered_user.dart": [
+      "IsRegisteredUserUseCase",
+      "call",
+      "IsRegisteredUserUseCase"
+    ],
+    "lib/features/auth/domain/use_case/log_out_use_case.dart": [
+      "LogoutUseCase",
+      "call",
+      "LogoutUseCase"
+    ],
+    "lib/features/auth/domain/use_case/register_user_use_case.dart": [
+      "RegisterUserUseCase",
+      "call",
+      "RegisterUserUseCase"
+    ],
+    "lib/features/auth/domain/use_case/save_auth_session_use_case.dart": [
+      "SaveAuthSessionUseCase",
+      "call",
+      "SaveAuthSessionUseCase"
+    ],
+    "lib/features/auth/domain/use_case/send_otp_use_case.dart": [
+      "SendOtpUseCase",
+      "call",
+      "SendOtpUseCase"
+    ],
+    "lib/features/auth/domain/use_case/verify_otp_use_case.dart": [
+      "VerifyOtpUseCase",
+      "call",
+      "VerifyOtpUseCase"
+    ],
+    "lib/features/auth/presentation/screens/auth_screen.dart": [
+      "createState",
+      "LoginScreen",
+      "dispose",
+      "build"
+    ],
+    "lib/features/auth/presentation/view_model/auth_state.dart": [],
+    "lib/features/auth/presentation/view_model/auth_view_model.dart": [
+      "build",
+      "onOtpChanged",
+      "onLoginPressed",
+      "onRegisterPressed",
+      "onVerifyPressed",
+      "onResendOtp",
+      "authenticating",
+      "unAuthenticate",
+      "AuthViewModel"
+    ],
+    "lib/features/auth/presentation/widget/otp_inputs.dart": [
+      "createState",
+      "OtpInput",
+      "initState",
+      "dispose",
+      "build"
+    ],
+    "lib/features/auth/provider/auth_provider.dart": [],
+    "lib/features/book_service/data/data_source/book_service_remote_data_source.dart": [
+      "BookServiceRemoteDataSource",
+      "getPackagesForVehicle",
+      "createAppointment",
+      "BookServiceRemoteDataSource"
+    ],
+    "lib/features/book_service/data/data_source/i_book_service_remote_data_source.dart": [
+      "getPackagesForVehicle",
+      "createAppointment",
+      "IBookServiceRemoteDataSource"
+    ],
+    "lib/features/book_service/data/model/create_appointment_response_model.dart": [
+      "CreateAppointmentResponseModel.fromJson",
+      "toEntity",
+      "CreateAppointmentResponseModel"
+    ],
+    "lib/features/book_service/data/model/service_package_model.dart": [
+      "ServicePackageModel.fromJson",
+      "toEntity",
+      "ServicePackageModel"
+    ],
+    "lib/features/book_service/data/repository/book_service_repository.dart": [
+      "BookServiceRepository",
+      "getPackagesForVehicle",
+      "createAppointment",
+      "BookServiceRepository"
+    ],
+    "lib/features/book_service/domain/entity/create_appointment_result.dart": [
+      "isSuccessful",
+      "displayMessage",
+      "CreateAppointmentResult"
+    ],
+    "lib/features/book_service/domain/entity/service_package_entity.dart": [
+      "ServicePackageEntity"
+    ],
+    "lib/features/book_service/domain/exception/service_packages_exception.dart": [
+      "ServicePackagesException.serverError",
+      "ServicePackagesException.networkError",
+      "ServicePackagesException.unexpected",
+      "toString",
+      "ServicePackagesException"
+    ],
+    "lib/features/book_service/domain/repository/i_book_service_repository.dart": [
+      "getPackagesForVehicle",
+      "createAppointment",
+      "IBookServiceRepository"
+    ],
+    "lib/features/book_service/domain/use_case/create_appointment_use_case.dart": [
+      "CreateAppointmentUseCase",
+      "call",
+      "CreateAppointmentUseCase"
+    ],
+    "lib/features/book_service/domain/use_case/get_packages_for_vehicle_use_case.dart": [
+      "GetPackagesForVehicleUseCase",
+      "call",
+      "GetPackagesForVehicleUseCase"
+    ],
+    "lib/features/book_service/presentation/screen/book_maintanance_screen.dart": [
+      "createState",
+      "BookServiceScreen",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "initState",
+      "didChangeDependencies",
+      "build"
+    ],
+    "lib/features/book_service/presentation/view_model/service_packages_state.dart": [],
+    "lib/features/book_service/presentation/view_model/service_packages_view_model.dart": [
+      "ServicePackagesViewModel",
+      "fetchPackages",
+      "reset",
+      "ServicePackagesViewModel"
+    ],
+    "lib/features/book_service/provider/book_service_provider.dart": [],
+    "lib/features/chat/data/data_source/chat_remote_data_source.dart": [
+      "ChatRemoteDataSource",
+      "observeMessages",
+      "sendMessage",
+      "ChatRemoteDataSource"
+    ],
+    "lib/features/chat/data/data_source/i_chat_remote_data_source.dart": [
+      "observeMessages",
+      "sendMessage",
+      "IChatRemoteDataSource"
+    ],
+    "lib/features/chat/data/model/chat_message_model.dart": [
+      "ChatMessageModel",
+      "ChatMessageModel.fromDocument",
+      "toJson",
+      "ChatMessageModel"
+    ],
+    "lib/features/chat/data/repository/chat_repository.dart": [
+      "ChatRepositoryImpl",
+      "observeMessages",
+      "sendMessage",
+      "ChatRepositoryImpl"
+    ],
+    "lib/features/chat/domain/entity/chat_message.dart": [
+      "isFromCustomer",
+      "ChatMessage"
+    ],
+    "lib/features/chat/domain/entity/chat_user.dart": [
+      "isValid",
+      "hashCode",
+      "ChatUser"
+    ],
+    "lib/features/chat/domain/repository/i_chat_repository.dart": [
+      "observeMessages",
+      "sendMessage",
+      "IChatRepository"
+    ],
+    "lib/features/chat/domain/use_case/observe_chat_messages_use_case.dart": [
+      "call",
+      "ObserveChatMessagesUseCase"
+    ],
+    "lib/features/chat/domain/use_case/send_chat_message_use_case.dart": [
+      "call",
+      "SendChatMessageUseCase"
+    ],
+    "lib/features/chat/presentation/screen/chat_screen.dart": [
+      "createState",
+      "ChatScreen",
+      "dispose",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build"
+    ],
+    "lib/features/chat/presentation/view_model/chat_state.dart": [
+      "ChatState.initial",
+      "copyWith",
+      "ChatState"
+    ],
+    "lib/features/chat/presentation/view_model/chat_view_model.dart": [
+      "hashCode",
+      "ChatSession",
+      "sendMessage",
+      "ChatViewModel"
+    ],
+    "lib/features/chat/provider/chat_provider.dart": [],
+    "lib/features/contact_us/data/data_source/contact_us_remote_data_source.dart": [
+      "sendContactUsMessage",
+      "ContactUsRemoteDataSource"
+    ],
+    "lib/features/contact_us/data/data_source/i_contact_us_remote_data_source.dart": [
+      "sendContactUsMessage",
+      "IContactUsRemoteDataSource"
+    ],
+    "lib/features/contact_us/data/model/contact_us_model.dart": [
+      "ContactUsModel",
+      "toJson",
+      "toEntity",
+      "ContactUsModel"
+    ],
+    "lib/features/contact_us/data/repository/contact_us_repository.dart": [
+      "ContactUsRepository",
+      "sendContactUsMessage",
+      "ContactUsRepository"
+    ],
+    "lib/features/contact_us/domain/entity/contact_us_entity.dart": [
+      "ContactUs",
+      "ContactUs"
+    ],
+    "lib/features/contact_us/domain/repository/i_contact_us_repository.dart": [
+      "sendContactUsMessage",
+      "IContactUsRepository"
+    ],
+    "lib/features/contact_us/domain/use_case/send_contact_us_meassage.dart": [
+      "SendContactUsMessageUseCase",
+      "call",
+      "SendContactUsMessageUseCase"
+    ],
+    "lib/features/contact_us/presentation/screen/contact_us_screen.dart": [
+      "createState",
+      "ContactUsScreen",
+      "sendEmail",
+      "dispose",
+      "build"
+    ],
+    "lib/features/contact_us/presentation/view_model/contact_us_state.dart": [
+      "ContactUsState",
+      "ContactUsInitial",
+      "SendingContactUsMessage",
+      "ContactUsMessageSent",
+      "ContactUsMessageFailed",
+      "ContactUsMessageFailed"
+    ],
+    "lib/features/contact_us/presentation/view_model/contact_us_view_model.dart": [
+      "build",
+      "sendContactUsMessage",
+      "ContactUsViewModel"
+    ],
+    "lib/features/contact_us/provider/contact_us_provider.dart": [],
+    "lib/features/coupons/data/data_source/coupon_remote_data_source.dart": [
+      "CouponRemoteDataSource",
+      "fetchCoupons",
+      "createCoupon",
+      "CouponRemoteDataSource"
+    ],
+    "lib/features/coupons/data/data_source/i_coupon_remote_data_source.dart": [
+      "fetchCoupons",
+      "createCoupon",
+      "ICouponRemoteDataSource"
+    ],
+    "lib/features/coupons/data/model/coupon_model.dart": [
+      "CouponModel.fromJson",
+      "CouponModel"
+    ],
+    "lib/features/coupons/data/repository/coupon_repository.dart": [
+      "CouponRepository",
+      "createCoupon",
+      "fetchCoupons",
+      "CouponRepository"
+    ],
+    "lib/features/coupons/domain/entity/coupon_entity.dart": [
+      "CouponEntity"
+    ],
+    "lib/features/coupons/domain/repository/i_coupon_repository.dart": [
+      "fetchCoupons",
+      "createCoupon",
+      "ICouponRepository"
+    ],
+    "lib/features/coupons/domain/use_case/create_coupon_use_case.dart": [
+      "CreateCouponUseCase",
+      "call",
+      "CreateCouponUseCase"
+    ],
+    "lib/features/coupons/domain/use_case/fetch_coupons_use_case.dart": [
+      "FetchCouponsUseCase",
+      "call",
+      "FetchCouponsUseCase"
+    ],
+    "lib/features/coupons/presentation/screen/coupon_list_screen.dart": [
+      "createState",
+      "CouponListScreen",
+      "build",
+      "build",
+      "createState",
+      "CreateCouponScreen",
+      "initState",
+      "dispose",
+      "build"
+    ],
+    "lib/features/coupons/presentation/view_model/coupon_notifier.dart": [
+      "CouponNotifier",
+      "load",
+      "create",
+      "CouponNotifier"
+    ],
+    "lib/features/coupons/presentation/view_model/coupon_state.dart": [
+      "CouponState",
+      "CouponInitial",
+      "CouponLoading",
+      "CouponError",
+      "CouponError",
+      "CouponEmpty",
+      "CouponLoaded",
+      "CouponLoaded",
+      "CouponCreating",
+      "CouponCreated",
+      "CouponCreated"
+    ],
+    "lib/features/coupons/provider/coupon_providers.dart": [],
+    "lib/features/force_update/data/data_source/force_update_remote_data_source.dart": [
+      "getAppInfo",
+      "ForceUpdateRemoteDataSource",
+      "getAppInfo",
+      "ForceUpdateRemoteDataSourceImpl"
+    ],
+    "lib/features/force_update/data/model/app_info_model.dart": [
+      "AppInfoModel.fromJson",
+      "AppInfoModel"
+    ],
+    "lib/features/force_update/data/repository/force_update_repository.dart": [
+      "checkForUpdate",
+      "ForceUpdateRepositoryImpl"
+    ],
+    "lib/features/force_update/domain/entity/app_info_entity.dart": [
+      "AppInfoEntity"
+    ],
+    "lib/features/force_update/domain/entity/force_update_result.dart": [],
+    "lib/features/force_update/domain/repository/i_force_update_repository.dart": [
+      "checkForUpdate",
+      "IForceUpdateRepository"
+    ],
+    "lib/features/force_update/domain/use_case/check_force_update_use_case.dart": [
+      "call",
+      "CheckForceUpdateUseCase"
+    ],
+    "lib/features/force_update/presentation/view_model/force_update_state.dart": [],
+    "lib/features/force_update/presentation/view_model/force_update_view_model.dart": [],
+    "lib/features/force_update/presentation/widget/force_update_dialog.dart": [
+      "build",
+      "ForceUpdateDialog"
+    ],
+    "lib/features/force_update/provider/force_update_provider.dart": [],
+    "lib/features/home/data/data_source/home_remote_data_source.dart": [
+      "HomeRemoteDataSource",
+      "getMainCategories",
+      "HomeRemoteDataSource"
+    ],
+    "lib/features/home/data/data_source/i_home_remote_data_source.dart": [
+      "getMainCategories",
+      "IHomeRemoteDataSource"
+    ],
+    "lib/features/home/data/model/main_category_model.dart": [
+      "MainCategoryModel.fromJson",
+      "MainCategoryModel"
+    ],
+    "lib/features/home/data/repository/home_repository.dart": [
+      "HomeRepository",
+      "getMainCategories",
+      "HomeRepository"
+    ],
+    "lib/features/home/domain/entity/main_category_entity.dart": [
+      "titleForLocale",
+      "MainCategoryEntity"
+    ],
+    "lib/features/home/domain/repository/i_home_repository.dart": [
+      "getMainCategories",
+      "IHomeRepository"
+    ],
+    "lib/features/home/domain/use_case/get_main_categories_use_case.dart": [
+      "GetMainCategoriesUseCase",
+      "call",
+      "GetMainCategoriesUseCase"
+    ],
+    "lib/features/home/presentaion/screen/base_home_screen.dart": [
+      "createState",
+      "BaseHomeScreen",
+      "initState",
+      "build",
+      "build"
+    ],
+    "lib/features/home/presentaion/screen/credit_manager_home_screen.dart": [
+      "createState",
+      "CreditManagerHomeScreen",
+      "initState",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build"
+    ],
+    "lib/features/home/presentaion/screen/customer_home_screen.dart": [
+      "createState",
+      "CustomerHomeScreen",
+      "build"
+    ],
+    "lib/features/home/presentaion/screen/manager_home_screen.dart": [
+      "build",
+      "ManagerHomeScreen",
+      "build"
+    ],
+    "lib/features/home/presentaion/view_model/main_categories_state.dart": [],
+    "lib/features/home/presentaion/view_model/main_categories_view_model.dart": [
+      "MainCategoriesViewModel",
+      "fetchCategories",
+      "MainCategoriesViewModel"
+    ],
+    "lib/features/home/presentaion/widget/home_service_card.dart": [
+      "build",
+      "HomeServiceCard"
+    ],
+    "lib/features/home/presentaion/widget/home_service_grid.dart": [
+      "build",
+      "HomeServiceGrid"
+    ],
+    "lib/features/home/presentaion/widget/pormotions_home_slider_widget.dart": [
+      "createState",
+      "PromotionsSlider",
+      "build"
+    ],
+    "lib/features/home/presentaion/widget/title_with_sub_title.dart": [
+      "build",
+      "TitleWithSubTitle"
+    ],
+    "lib/features/home/provider/home_provider.dart": [],
+    "lib/features/more/presentation/screen/more_screen.dart": [
+      "build",
+      "MoreScreen"
+    ],
+    "lib/features/onboarding/onboarding_page_data.dart": [
+      "OnboardingPageData",
+      "OnboardingPageData"
+    ],
+    "lib/features/onboarding/presentation/screens/onboarding_screen.dart": [
+      "createState",
+      "OnboardingScreen",
+      "didChangeDependencies",
+      "build"
+    ],
+    "lib/features/payment/data/data_source/i_payment_remote_data_source.dart": [
+      "initiatePayment",
+      "getPaymentStatus",
+      "IPaymentRemoteDataSource"
+    ],
+    "lib/features/payment/data/data_source/payment_remote_data_source.dart": [
+      "PaymentRemoteDataSource",
+      "initiatePayment",
+      "getPaymentStatus",
+      "PaymentRemoteDataSource"
+    ],
+    "lib/features/payment/data/model/payment_initiation_request_model.dart": [
+      "toJson",
+      "PaymentMetadataModel",
+      "toJson",
+      "PaymentInitiationRequestModel"
+    ],
+    "lib/features/payment/data/model/payment_initiation_response_model.dart": [
+      "PaymentInitiationResponseModel",
+      "PaymentInitiationResponseModel.fromJson",
+      "PaymentInitiationResponseModel"
+    ],
+    "lib/features/payment/data/model/payment_status_response_model.dart": [
+      "PaymentStatusResponseModel",
+      "PaymentStatusResponseModel.fromJson",
+      "PaymentStatusResponseModel"
+    ],
+    "lib/features/payment/data/repository/payment_repository.dart": [
+      "PaymentRepository",
+      "initiatePayment",
+      "getPaymentStatus",
+      "PaymentRepository"
+    ],
+    "lib/features/payment/domain/entity/payment_initiation_request.dart": [
+      "PaymentMetadata",
+      "PaymentInitiationRequest"
+    ],
+    "lib/features/payment/domain/entity/payment_initiation_result.dart": [
+      "PaymentInitiationResult"
+    ],
+    "lib/features/payment/domain/entity/payment_status_result.dart": [
+      "isSuccess",
+      "PaymentStatusResult"
+    ],
+    "lib/features/payment/domain/repository/i_payment_repository.dart": [
+      "initiatePayment",
+      "getPaymentStatus",
+      "IPaymentRepository"
+    ],
+    "lib/features/payment/domain/use_case/check_payment_status_use_case.dart": [
+      "CheckPaymentStatusUseCase",
+      "call",
+      "CheckPaymentStatusUseCase"
+    ],
+    "lib/features/payment/domain/use_case/initiate_payment_use_case.dart": [
+      "InitiatePaymentUseCase",
+      "call",
+      "InitiatePaymentUseCase"
+    ],
+    "lib/features/payment/presentation/screen/payment_webview_screen.dart": [
+      "PaymentWebViewResult",
+      "createState",
+      "PaymentWebViewScreen",
+      "build"
+    ],
+    "lib/features/payment/presentation/state/payment_state.dart": [
+      "PaymentState",
+      "PaymentInitial",
+      "PaymentLoading",
+      "PaymentSuccess",
+      "PaymentFailure"
+    ],
+    "lib/features/payment/presentation/view_model/payment_view_model.dart": [
+      "PaymentViewModel",
+      "initiatePayment",
+      "checkPaymentStatus",
+      "reset",
+      "PaymentViewModel"
+    ],
+    "lib/features/payment/provider/payment_provider.dart": [],
+    "lib/features/profile/presentation/screen/profile_screen.dart": [
+      "createState",
+      "ProfileScreen",
+      "initState",
+      "build"
+    ],
+    "lib/features/promotions/data/data_source/i_promotion_remote_data_source.dart": [
+      "uploadPromotion",
+      "uploadImage",
+      "fetchPromotions",
+      "deletePromotion",
+      "IPromotionRemoteDataSource"
+    ],
+    "lib/features/promotions/data/data_source/promotion_remote_data_source.dart": [
+      "PromotionRemoteDataSourceImpl",
+      "uploadPromotion",
+      "uploadImage",
+      "fetchPromotions",
+      "deletePromotion",
+      "PromotionRemoteDataSourceImpl"
+    ],
+    "lib/features/promotions/data/model/promotion_model.dart": [
+      "PromotionModel",
+      "PromotionModel.fromJson",
+      "toJson",
+      "PromotionModel"
+    ],
+    "lib/features/promotions/data/repository/promotion_repository_impl.dart": [
+      "PromotionRepositoryImpl",
+      "addPromotion",
+      "uploadImage",
+      "fetchPromotions",
+      "deletePromotion",
+      "PromotionRepositoryImpl"
+    ],
+    "lib/features/promotions/domain/entity/promotion_entity.dart": [
+      "PromotionEntity",
+      "PromotionEntity"
+    ],
+    "lib/features/promotions/domain/repository/i_promotion_repository.dart": [
+      "addPromotion",
+      "uploadImage",
+      "fetchPromotions",
+      "deletePromotion",
+      "IPromotionRepository"
+    ],
+    "lib/features/promotions/domain/use_case/add_promotion_use_case.dart": [
+      "AddPromotionUseCase",
+      "call",
+      "AddPromotionUseCase"
+    ],
+    "lib/features/promotions/domain/use_case/delete_promotion_use_case.dart": [
+      "DeletePromotionUseCase",
+      "call",
+      "DeletePromotionUseCase"
+    ],
+    "lib/features/promotions/domain/use_case/fetch_promotions_use_case.dart": [
+      "FetchPromotionsUseCase",
+      "call",
+      "FetchPromotionsUseCase"
+    ],
+    "lib/features/promotions/presentation/screen/create_promotion_screen.dart": [
+      "createState",
+      "CreatePromotionScreen",
+      "build"
+    ],
+    "lib/features/promotions/presentation/screen/promotions_list_screen.dart": [
+      "createState",
+      "PromotionsListScreen",
+      "initState",
+      "build",
+      "build",
+      "build",
+      "build"
+    ],
+    "lib/features/promotions/presentation/view_model/promotion_list_notifier.dart": [
+      "ViewState",
+      "InitialViewState",
+      "LoadingViewState",
+      "ErrorViewState",
+      "ErrorViewState",
+      "EmptyViewState",
+      "LoadedViewState",
+      "hashCode",
+      "toString",
+      "copyWith",
+      "LoadedViewState",
+      "load",
+      "delete",
+      "PromotionListNotifier"
+    ],
+    "lib/features/promotions/presentation/view_model/promotion_view_model.dart": [
+      "build",
+      "uploadImage",
+      "savePromotion",
+      "PromotionViewModel"
+    ],
+    "lib/features/promotions/presentation/widget/promotions.dart": [
+      "createState",
+      "Promotions",
+      "build"
+    ],
+    "lib/features/promotions/provider/promotion_providers.dart": [],
+    "lib/features/splash/data/repository/splash_repository.dart": [
+      "SplashRepositoryImpl",
+      "hasSeenOnboarding",
+      "setOnboardingSeen",
+      "SplashRepositoryImpl"
+    ],
+    "lib/features/splash/domain/repository/i_splash_repository.dart": [
+      "hasSeenOnboarding",
+      "setOnboardingSeen",
+      "ISplashRepository"
+    ],
+    "lib/features/splash/domain/use_case/check_onboarding_use_case.dart": [
+      "CheckOnboardingUseCase",
+      "call",
+      "CheckOnboardingUseCase"
+    ],
+    "lib/features/splash/presentation/screens/splash_screen.dart": [
+      "createState",
+      "SplashScreen",
+      "initState",
+      "build"
+    ],
+    "lib/features/splash/presentation/view_model/splash_state.dart": [],
+    "lib/features/splash/presentation/view_model/splash_view_model.dart": [
+      "build",
+      "init",
+      "SplashViewModel"
+    ],
+    "lib/features/splash/provider/splash_provider.dart": [],
+    "lib/features/technician/data/data_source/i_technician_remote_data_source.dart": [
+      "searchNearby",
+      "getAvailableSlots",
+      "getAppointments",
+      "getBookingStatuses",
+      "updateAppointmentStatus",
+      "createServiceRequest",
+      "completeServiceRequest",
+      "getJobCardPackages",
+      "getCustomPackageCategories",
+      "getCustomPackageItems",
+      "addItemToCustomPackage",
+      "deleteCustomPackageItem",
+      "getJobCardPackageLines",
+      "addPackageToJobCard",
+      "deletePackageFromJobCard",
+      "postChecklist",
+      "getPackagesOfJobCard",
+      "ITechnicianRemoteDataSource"
+    ],
+    "lib/features/technician/data/data_source/technician_remote_data_source.dart": [
+      "TechnicianRemoteDataSource",
+      "searchNearby",
+      "getAvailableSlots",
+      "getAppointments",
+      "getBookingStatuses",
+      "updateAppointmentStatus",
+      "createServiceRequest",
+      "getJobCardPackages",
+      "getPackagesOfJobCard",
+      "getJobCardPackageLines",
+      "addPackageToJobCard",
+      "deletePackageFromJobCard",
+      "postChecklist",
+      "getCustomPackageCategories",
+      "getCustomPackageItems",
+      "addItemToCustomPackage",
+      "deleteCustomPackageItem",
+      "completeServiceRequest",
+      "TechnicianRemoteDataSource"
+    ],
+    "lib/features/technician/data/model/custom_package_category_model.dart": [
+      "CustomPackageCategoryModel",
+      "CustomPackageCategoryModel.fromJson",
+      "toEntity",
+      "CustomPackageCategoryModel"
+    ],
+    "lib/features/technician/data/model/custom_package_item_model.dart": [
+      "CustomPackageItemModel",
+      "CustomPackageItemModel.fromJson",
+      "toEntity",
+      "CustomPackageItemModel"
+    ],
+    "lib/features/technician/data/model/job_card_model.dart": [
+      "JobCardModel",
+      "JobCardModel.fromJson",
+      "toEntity",
+      "JobCardModel"
+    ],
+    "lib/features/technician/data/model/job_card_package_line_model.dart": [
+      "JobCardPackageLineModel",
+      "JobCardPackageLineModel.fromJson",
+      "toEntity",
+      "JobCardPackageLineModel"
+    ],
+    "lib/features/technician/data/model/job_card_package_model.dart": [
+      "JobCardPackageModel",
+      "JobCardPackageModel.fromJson",
+      "toEntity",
+      "JobCardPackageModel"
+    ],
+    "lib/features/technician/data/model/operation_result_model.dart": [
+      "OperationResultModel",
+      "OperationResultModel.fromStatusInfo",
+      "OperationResultModel"
+    ],
+    "lib/features/technician/data/model/status_info_model.dart": [
+      "StatusInfoModel.fromDynamic",
+      "isSuccess",
+      "StatusInfoModel"
+    ],
+    "lib/features/technician/data/model/technician_appointment_model.dart": [
+      "TechnicianAppointmentModel",
+      "TechnicianAppointmentModel.fromJson",
+      "TechnicianAppointmentModel"
+    ],
+    "lib/features/technician/data/model/technician_booking_status_model.dart": [
+      "TechnicianBookingStatusModel",
+      "TechnicianBookingStatusModel.fromJson",
+      "toEntity",
+      "TechnicianBookingStatusModel"
+    ],
+    "lib/features/technician/data/model/technician_slot_model.dart": [
+      "TechnicianSlotModel",
+      "TechnicianSlotModel.fromDynamic",
+      "toEntity",
+      "TechnicianSlotModel"
+    ],
+    "lib/features/technician/data/model/technician_summary_model.dart": [
+      "TechnicianSummaryModel",
+      "TechnicianSummaryModel.fromJson",
+      "toEntity",
+      "TechnicianSummaryModel"
+    ],
+    "lib/features/technician/data/repository/technician_repository.dart": [
+      "TechnicianRepository",
+      "searchNearby",
+      "getAvailableSlots",
+      "getAppointments",
+      "getBookingStatuses",
+      "updateAppointmentStatus",
+      "createServiceRequest",
+      "completeServiceRequest",
+      "getJobCardPackages",
+      "getCustomPackageCategories",
+      "getCustomPackageItems",
+      "addCustomPackageItem",
+      "deleteCustomPackageItem",
+      "getJobCardPackageLines",
+      "addPackageToJobCard",
+      "deletePackageFromJobCard",
+      "postChecklist",
+      "getPackagesOfJobCard",
+      "TechnicianRepository"
+    ],
+    "lib/features/technician/domain/entity/booking_status.dart": [
+      "hasLabel",
+      "hasColor",
+      "colorValue",
+      "copyWith",
+      "TechnicianBookingStatus.fromRaw",
+      "TechnicianBookingStatus"
+    ],
+    "lib/features/technician/domain/entity/custom_package_category_entity.dart": [
+      "displayName",
+      "CustomPackageCategoryEntity"
+    ],
+    "lib/features/technician/domain/entity/custom_package_item_entity.dart": [
+      "CustomPackageItemEntity"
+    ],
+    "lib/features/technician/domain/entity/job_card_entity.dart": [
+      "JobCardEntity"
+    ],
+    "lib/features/technician/domain/entity/job_card_package_entity.dart": [
+      "displayName",
+      "JobCardPackageEntity"
+    ],
+    "lib/features/technician/domain/entity/job_card_package_line_entity.dart": [
+      "JobCardPackageLineEntity"
+    ],
+    "lib/features/technician/domain/entity/operation_result_entity.dart": [
+      "OperationResultEntity"
+    ],
+    "lib/features/technician/domain/entity/technician_appointment_entity.dart": [
+      "displayPlate",
+      "displayCar",
+      "packageLabel",
+      "statusLabel",
+      "statusColorValue",
+      "TechnicianAppointmentEntity"
+    ],
+    "lib/features/technician/domain/entity/technician_slot_entity.dart": [
+      "TechnicianSlotEntity"
+    ],
+    "lib/features/technician/domain/entity/technician_summary_entity.dart": [
+      "TechnicianSummaryEntity"
+    ],
+    "lib/features/technician/domain/repository/i_technician_repository.dart": [
+      "searchNearby",
+      "getAvailableSlots",
+      "getAppointments",
+      "getBookingStatuses",
+      "updateAppointmentStatus",
+      "createServiceRequest",
+      "completeServiceRequest",
+      "getJobCardPackages",
+      "getCustomPackageCategories",
+      "getCustomPackageItems",
+      "addCustomPackageItem",
+      "deleteCustomPackageItem",
+      "getJobCardPackageLines",
+      "addPackageToJobCard",
+      "deletePackageFromJobCard",
+      "postChecklist",
+      "getPackagesOfJobCard",
+      "ITechnicianRepository"
+    ],
+    "lib/features/technician/domain/use_case/add_custom_package_item_use_case.dart": [
+      "AddCustomPackageItemUseCase",
+      "call",
+      "AddCustomPackageItemUseCase"
+    ],
+    "lib/features/technician/domain/use_case/add_package_to_job_card_use_case.dart": [
+      "AddPackageToJobCardUseCase",
+      "call",
+      "AddPackageToJobCardUseCase"
+    ],
+    "lib/features/technician/domain/use_case/complete_service_request_use_case.dart": [
+      "call",
+      "CompleteServiceRequestUseCase"
+    ],
+    "lib/features/technician/domain/use_case/create_job_card_use_case.dart": [
+      "call",
+      "CreateJobCardUseCase"
+    ],
+    "lib/features/technician/domain/use_case/delete_custom_package_item_use_case.dart": [
+      "DeleteCustomPackageItemUseCase",
+      "call",
+      "DeleteCustomPackageItemUseCase"
+    ],
+    "lib/features/technician/domain/use_case/delete_package_from_job_card_use_case.dart": [
+      "DeletePackageFromJobCardUseCase",
+      "call",
+      "DeletePackageFromJobCardUseCase"
+    ],
+    "lib/features/technician/domain/use_case/get_booking_statuses_use_case.dart": [
+      "call",
+      "GetBookingStatusesUseCase"
+    ],
+    "lib/features/technician/domain/use_case/get_custom_package_categories_use_case.dart": [
+      "GetCustomPackageCategoriesUseCase",
+      "call",
+      "GetCustomPackageCategoriesUseCase"
+    ],
+    "lib/features/technician/domain/use_case/get_custom_package_items_use_case.dart": [
+      "GetCustomPackageItemsUseCase",
+      "call",
+      "GetCustomPackageItemsUseCase"
+    ],
+    "lib/features/technician/domain/use_case/get_customer_appointments_use_case.dart": [
+      "call",
+      "GetCustomerAppointmentsUseCase"
+    ],
+    "lib/features/technician/domain/use_case/get_job_card_package_lines_use_case.dart": [
+      "GetJobCardPackageLinesUseCase",
+      "call",
+      "GetJobCardPackageLinesUseCase"
+    ],
+    "lib/features/technician/domain/use_case/get_job_card_packages_use_case.dart": [
+      "GetJobCardPackagesUseCase",
+      "call",
+      "GetJobCardPackagesUseCase"
+    ],
+    "lib/features/technician/domain/use_case/get_packages_of_job_card_use_case.dart": [
+      "GetPackagesOfJobCardUseCase",
+      "call",
+      "GetPackagesOfJobCardUseCase"
+    ],
+    "lib/features/technician/domain/use_case/get_technician_appointments_use_case.dart": [
+      "call",
+      "GetTechnicianAppointmentsUseCase"
+    ],
+    "lib/features/technician/domain/use_case/get_technician_available_slots_use_case.dart": [
+      "GetTechnicianAvailableSlotsUseCase",
+      "call",
+      "GetTechnicianAvailableSlotsUseCase"
+    ],
+    "lib/features/technician/domain/use_case/post_checklist_use_case.dart": [
+      "PostChecklistUseCase",
+      "call",
+      "PostChecklistUseCase"
+    ],
+    "lib/features/technician/domain/use_case/search_nearby_technicians_use_case.dart": [
+      "SearchNearbyTechniciansUseCase",
+      "call",
+      "SearchNearbyTechniciansUseCase"
+    ],
+    "lib/features/technician/domain/use_case/update_appointment_status_use_case.dart": [
+      "call",
+      "UpdateAppointmentStatusUseCase"
+    ],
+    "lib/features/technician/domain/utils/job_card_utils.dart": [
+      "sanitizeJobCardId",
+      "findJobCardId",
+      "normalizeJobCardKey"
+    ],
+    "lib/features/technician/presentation/screen/technician_appointment_details_screen.dart": [
+      "createState",
+      "TechnicianAppointmentDetailsScreen",
+      "initState",
+      "didUpdateWidget",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "TechnicianHomeScreenDefaults"
+    ],
+    "lib/features/technician/presentation/screen/technician_checklist_screen.dart": [
+      "createState",
+      "TechnicianChecklistScreen",
+      "initState",
+      "dispose",
+      "build",
+      "build"
+    ],
+    "lib/features/technician/presentation/screen/technician_custom_package_screen.dart": [
+      "createState",
+      "TechnicianCustomPackageScreen",
+      "initState",
+      "dispose",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build"
+    ],
+    "lib/features/technician/presentation/screen/technician_home_screen.dart": [
+      "createState",
+      "TechnicianHomeScreen",
+      "initState",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build"
+    ],
+    "lib/features/technician/presentation/screen/technician_job_card_management_screen.dart": [
+      "createState",
+      "TechnicianJobCardManagementScreen",
+      "dispose",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build"
+    ],
+    "lib/features/technician/presentation/view_model/job_card_operation_state.dart": [
+      "JobCardOperationType"
+    ],
+    "lib/features/technician/presentation/view_model/job_card_operation_view_model.dart": [
+      "JobCardOperationViewModel",
+      "addItem",
+      "deleteItem",
+      "addPackage",
+      "submitChecklist",
+      "deletePackage",
+      "reset",
+      "JobCardOperationViewModel"
+    ],
+    "lib/features/technician/presentation/view_model/technician_appointment_update_state.dart": [
+      "TechnicianAppointmentUpdateLoading",
+      "TechnicianAppointmentUpdateSuccess",
+      "TechnicianAppointmentUpdateError"
+    ],
+    "lib/features/technician/presentation/view_model/technician_appointment_update_view_model.dart": [
+      "TechnicianAppointmentUpdateViewModel",
+      "update",
+      "reset",
+      "TechnicianAppointmentUpdateViewModel"
+    ],
+    "lib/features/technician/presentation/view_model/technician_appointments_state.dart": [
+      "copyWith",
+      "TechnicianAppointmentsRequestContext"
+    ],
+    "lib/features/technician/presentation/view_model/technician_appointments_view_model.dart": [
+      "TechnicianAppointmentsViewModel",
+      "loadAppointments",
+      "reset",
+      "TechnicianAppointmentsViewModel"
+    ],
+    "lib/features/technician/presentation/view_model/technician_search_state.dart": [],
+    "lib/features/technician/presentation/view_model/technician_search_view_model.dart": [
+      "TechnicianSearchViewModel",
+      "search",
+      "reset",
+      "currentResults",
+      "TechnicianSearchViewModel"
+    ],
+    "lib/features/technician/presentation/view_model/technician_slots_state.dart": [],
+    "lib/features/technician/presentation/view_model/technician_slots_view_model.dart": [
+      "TechnicianSlotsViewModel",
+      "fetch",
+      "reset",
+      "TechnicianSlotsViewModel"
+    ],
+    "lib/features/technician/presentation/widget/maintenance_request_card.dart": [
+      "build",
+      "MaintenanceRequestCard",
+      "build"
+    ],
+    "lib/features/technician/presentation/widget/status_picker_sheet.dart": [
+      "createState",
+      "StatusPickerSheet",
+      "build"
+    ],
+    "lib/features/technician/provider/technician_provider.dart": [
+      "hashCode",
+      "CustomPackageItemsRequest",
+      "hashCode",
+      "JobCardPackageLinesRequest"
+    ],
+    "lib/features/technician/service/technician_location_service.dart": [
+      "initialize",
+      "startTracking",
+      "stopTracking",
+      "TechnicianLocationService",
+      "technicianBackgroundService"
+    ],
+    "lib/features/technician/service/technician_tracking_coordinator.dart": [
+      "createState",
+      "TechnicianTrackingCoordinator",
+      "initState",
+      "dispose",
+      "build"
+    ],
+    "lib/features/upcoming_service/data/data_source/i_upcoming_service_remote_data_source.dart": [
+      "getUpcomingServices",
+      "updateAppointmentStatus",
+      "IUpcomingServiceRemoteDataSource"
+    ],
+    "lib/features/upcoming_service/data/data_source/upcoming_service_remote_data_source.dart": [
+      "UpcomingServiceRemoteDataSourceImpl",
+      "getUpcomingServices",
+      "updateAppointmentStatus",
+      "UpcomingServiceRemoteDataSourceImpl"
+    ],
+    "lib/features/upcoming_service/data/model/upcoming_service_model.dart": [
+      "UpcomingServiceModel",
+      "UpcomingServiceModel.fromJson",
+      "UpcomingServiceModel.fromEntity",
+      "UpcomingServiceModel"
+    ],
+    "lib/features/upcoming_service/data/repository/upcoming_service_repository.dart": [
+      "UpcomingServiceRepository",
+      "getUpcomingServices",
+      "updateAppointmentStatus",
+      "UpcomingServiceRepository"
+    ],
+    "lib/features/upcoming_service/domain/entity/upcoming_service_entity.dart": [
+      "hasSchedule",
+      "UpcomingServiceEntity"
+    ],
+    "lib/features/upcoming_service/domain/repository/i_upcoming_service_repository.dart": [
+      "getUpcomingServices",
+      "updateAppointmentStatus",
+      "IUpcomingServiceRepository"
+    ],
+    "lib/features/upcoming_service/domain/use_case/cancel_appointment_use_case.dart": [
+      "CancelAppointmentUseCase",
+      "call",
+      "CancelAppointmentUseCase"
+    ],
+    "lib/features/upcoming_service/domain/use_case/get_upcoming_services_use_case.dart": [
+      "call",
+      "GetUpcomingServicesUseCase"
+    ],
+    "lib/features/upcoming_service/presentation/screen/booking_detail_screen.dart": [
+      "createState",
+      "BookingDetailScreen",
+      "initState",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build"
+    ],
+    "lib/features/upcoming_service/presentation/screen/customer_appointments_screen.dart": [
+      "createState",
+      "CustomerAppointmentsScreen",
+      "initState",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build"
+    ],
+    "lib/features/upcoming_service/presentation/view_model/upcoming_service_action_state.dart": [
+      "UpcomingServiceActionState",
+      "UpcomingServiceActionIdle",
+      "UpcomingServiceActionLoading",
+      "UpcomingServiceActionSuccess",
+      "UpcomingServiceActionError"
+    ],
+    "lib/features/upcoming_service/presentation/view_model/upcoming_service_action_view_model.dart": [
+      "UpcomingServiceActionViewModel",
+      "cancelAppointment",
+      "reset",
+      "UpcomingServiceActionViewModel"
+    ],
+    "lib/features/upcoming_service/presentation/view_model/upcoming_service_state.dart": [],
+    "lib/features/upcoming_service/presentation/view_model/upcoming_service_view_model.dart": [
+      "UpcomingServiceViewModel",
+      "fetchUpcomingServices",
+      "reset",
+      "UpcomingServiceViewModel"
+    ],
+    "lib/features/upcoming_service/presentation/widget/booking_card.dart": [
+      "build",
+      "BookingSummaryCard",
+      "build"
+    ],
+    "lib/features/upcoming_service/presentation/widget/upcoming_service_section.dart": [
+      "build",
+      "UpcomingServiceSection"
+    ],
+    "lib/features/upcoming_service/provider/upcoming_service_provider.dart": [],
+    "lib/features/user_cars/data/data_source/i_user_car_remote_data_source.dart": [
+      "addCar",
+      "updateCar",
+      "getCars",
+      "getCarById",
+      "getManufacturers",
+      "getCarModels",
+      "IUserCarRemoteDataSource"
+    ],
+    "lib/features/user_cars/data/data_source/user_car_remote_data_source.dart": [
+      "UserCarsRemoteDataSourceImpl",
+      "addCar",
+      "getCarById",
+      "getCars",
+      "updateCar",
+      "getManufacturers",
+      "getCarModels",
+      "UserCarsRemoteDataSourceImpl"
+    ],
+    "lib/features/user_cars/data/model/car_brand_model.dart": [
+      "CarBrandsModel.fromJson",
+      "CarBrandsModel",
+      "CarBrandModel",
+      "CarBrandModel"
+    ],
+    "lib/features/user_cars/data/model/car_model.dart": [
+      "CarModel",
+      "CarModel.fromJson",
+      "CarModel.fromEntity",
+      "toJson",
+      "CarModel"
+    ],
+    "lib/features/user_cars/data/model/manufacture_model.dart": [
+      "ManufacturesModel.fromJson",
+      "ManufacturesModel",
+      "ManufactureModel",
+      "ManufactureModel"
+    ],
+    "lib/features/user_cars/data/repository/user_car_repository.dart": [
+      "UserCarRepository",
+      "addCar",
+      "updateCar",
+      "getUserCars",
+      "getManufacturers",
+      "getCarBrands",
+      "UserCarRepository"
+    ],
+    "lib/features/user_cars/domain/entity/car_brand_entity.dart": [
+      "CarBrandEntity",
+      "CarBrandEntity"
+    ],
+    "lib/features/user_cars/domain/entity/car_entity.dart": [
+      "CarEntity",
+      "CarEntity"
+    ],
+    "lib/features/user_cars/domain/entity/manufacture_entity.dart": [
+      "ManufactureEntity",
+      "ManufactureEntity"
+    ],
+    "lib/features/user_cars/domain/repository/i_user_car_repository.dart": [
+      "addCar",
+      "updateCar",
+      "getUserCars",
+      "getManufacturers",
+      "getCarBrands",
+      "IUserCarRepository"
+    ],
+    "lib/features/user_cars/domain/use_case/add_user_car_use_case.dart": [
+      "AddUserCarUseCase",
+      "call",
+      "AddUserCarUseCase"
+    ],
+    "lib/features/user_cars/domain/use_case/get_car_brands_model_use_case.dart": [
+      "GetCarBrandsModelUseCase",
+      "call",
+      "GetCarBrandsModelUseCase"
+    ],
+    "lib/features/user_cars/domain/use_case/get_manufacturers_use_case.dart": [
+      "GetManufacturersUseCase",
+      "call",
+      "GetManufacturersUseCase"
+    ],
+    "lib/features/user_cars/domain/use_case/get_user_cars_use_case.dart": [
+      "GetUserCarsUseCase",
+      "call",
+      "GetUserCarsUseCase"
+    ],
+    "lib/features/user_cars/domain/use_case/update_user_car_use_case.dart": [
+      "UpdateUserCarUseCase",
+      "call",
+      "UpdateUserCarUseCase"
+    ],
+    "lib/features/user_cars/presentation/screen/add_new_car_screen.dart": [
+      "createState",
+      "AddNewCarScreen",
+      "initState",
+      "dispose",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build"
+    ],
+    "lib/features/user_cars/presentation/screen/user_car_details_screen.dart": [
+      "createState",
+      "UserCarDetailsScreen",
+      "dispose",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build",
+      "build"
+    ],
+    "lib/features/user_cars/presentation/screen/user_cars_list_screen.dart": [
+      "build",
+      "UserCarsListScreen"
+    ],
+    "lib/features/user_cars/presentation/view_model/add_user_car_state.dart": [
+      "AddUserCarState",
+      "AddUserCarInitial",
+      "AddUserCarLoading",
+      "AddUserCarSuccess",
+      "AddUserCarError",
+      "AddUserCarError"
+    ],
+    "lib/features/user_cars/presentation/view_model/add_user_car_view_model.dart": [
+      "AddUserCarViewModel",
+      "addCar",
+      "updateCar",
+      "reset",
+      "AddUserCarViewModel"
+    ],
+    "lib/features/user_cars/presentation/view_model/car_brands_state.dart": [
+      "CarBrandsState",
+      "CarBrandsInitial",
+      "CarBrandsLoading",
+      "CarBrandsLoaded",
+      "CarBrandsLoaded",
+      "CarBrandsError",
+      "CarBrandsError"
+    ],
+    "lib/features/user_cars/presentation/view_model/car_brands_view_model.dart": [
+      "CarBrandsViewModel",
+      "fetCarBrands",
+      "CarBrandsViewModel"
+    ],
+    "lib/features/user_cars/presentation/view_model/manufacturers_state.dart": [
+      "ManufacturersState",
+      "ManufacturersInitial",
+      "ManufacturersLoading",
+      "ManufacturersLoaded",
+      "ManufacturersLoaded",
+      "ManufacturersError",
+      "ManufacturersError"
+    ],
+    "lib/features/user_cars/presentation/view_model/manufacturers_view_model.dart": [
+      "ManufacturersViewModel",
+      "fetchManufacturers",
+      "selectManufacturer",
+      "ManufacturersViewModel"
+    ],
+    "lib/features/user_cars/presentation/view_model/user_cars_state.dart": [],
+    "lib/features/user_cars/presentation/view_model/user_cars_view_model.dart": [
+      "UserCarsViewModel",
+      "fetchUserCars",
+      "UserCarsViewModel"
+    ],
+    "lib/features/user_cars/presentation/widget/user_car_home_item_card.dart": [
+      "build",
+      "HomeCarOutlinedCard",
+      "build",
+      "build",
+      "build"
+    ],
+    "lib/features/user_cars/presentation/widget/user_car_list_item.dart": [
+      "CarInfo",
+      "build",
+      "CarCard",
+      "build",
+      "build",
+      "build",
+      "createState",
+      "dispose",
+      "build"
+    ],
+    "lib/features/user_cars/presentation/widget/user_cars_empty_state.dart": [
+      "build",
+      "UserCarsEmptyState"
+    ],
+    "lib/features/user_cars/presentation/widget/user_cars.dart": [
+      "build",
+      "UserCars",
+      "build",
+      "build",
+      "EmptyCarsCard",
+      "build",
+      "EmptyCarsCard"
+    ],
+    "lib/features/user_cars/provider/user_cars_provider.dart": [],
+    "lib/generated/intl/messages_all.dart": [
+      "initializeMessages"
+    ],
+    "lib/generated/intl/messages_ar.dart": [
+      "localeName",
+      "m0",
+      "m1",
+      "m2",
+      "m3",
+      "m4",
+      "m5",
+      "m6",
+      "m7",
+      "m8",
+      "MessageLookup"
+    ],
+    "lib/generated/intl/messages_en.dart": [
+      "localeName",
+      "m0",
+      "m1",
+      "m2",
+      "m3",
+      "m4",
+      "m5",
+      "m6",
+      "m7",
+      "m8",
+      "MessageLookup"
+    ],
+    "lib/generated/l10n.dart": [
+      "S",
+      "current",
+      "load",
+      "of",
+      "maybeOf",
+      "onBoardingTitle1",
+      "onBoardingTitle2",
+      "onBoardingTitle3",
+      "onBoardingDescription1",
+      "onBoardingDescription2",
+      "onBoardingDescription3",
+      "homeNav",
+      "myCarsNav",
+      "profileNav",
+      "moreNav",
+      "homeAppbar",
+      "contactUsAppbar",
+      "profileAppbar",
+      "moreAppbar",
+      "next",
+      "start",
+      "basicServices",
+      "majorServices",
+      "carRepair",
+      "batteires",
+      "carEvaluation",
+      "towiling",
+      "mobileServices",
+      "oiling",
+      "flatTyre",
+      "carWash",
+      "insuranceClaims",
+      "carDetailing",
+      "ourServices",
+      "bestOffers",
+      "more",
+      "yourCars",
+      "savePromotion",
+      "promotionSavedSuccessfully",
+      "errorSavingPromotion",
+      "promotionName",
+      "enterPromotionNameHint",
+      "promotionDescription",
+      "selectStartDate",
+      "startDate",
+      "selectEndDate",
+      "endDate",
+      "fillAllFields",
+      "skip",
+      "loginWelcomeMessage",
+      "phoneNumber",
+      "login",
+      "name",
+      "enterProperValue",
+      "email",
+      "enterValidEmail",
+      "comment",
+      "submit",
+      "mailUsAt",
+      "contactUsInquirySentTitle",
+      "contactUsInquirySentMessage",
+      "ok",
+      "maintenanceNav",
+      "contactUsNav",
+      "authenticationErrorMessage",
+      "errorTitle",
+      "forceUpdateTitle",
+      "forceUpdateMessage",
+      "forceUpdateButton",
+      "Profile",
+      "addCar",
+      "plate",
+      "plateLetters",
+      "plateNumbers",
+      "carInfo",
+      "selectManufacturer",
+      "model",
+      "selectModel",
+      "year",
+      "selectYear",
+      "vin",
+      "characterVinLimit",
+      "characterVinLimitError",
+      "areYouOwnerThisCar",
+      "no",
+      "yes",
+      "companyName",
+      "companyNameHint",
+      "companyNameError",
+      "crn",
+      "crnHint",
+      "manufacturer",
+      "crnError",
+      "crnLengthError",
+      "verify",
+      "register",
+      "userName",
+      "userNameHint",
+      "firstName",
+      "firstNameHint",
+      "lastName",
+      "lastNameHint",
+      "userEmail",
+      "userEmailHint",
+      "notValidUserEmail",
+      "enterOtpSentTo",
+      "expiresIn",
+      "didntReceiveOtp",
+      "resendOTP",
+      "changeLanguage",
+      "english",
+      "arabic",
+      "bookServiceStepSelectVehicle",
+      "bookServiceStepChoosePackage",
+      "bookServiceStepPickLocation",
+      "bookServiceStepSelectTechnician",
+      "bookServiceCustomerInfoUnavailable",
+      "bookServiceSelectedCategory",
+      "bookServiceReset",
+      "bookServiceSelectCarBeforeContinuing",
+      "bookServiceSelectPackageBeforeContinuing",
+      "bookServiceSelectLocationBeforeContinuing",
+      "bookServiceCompleteAllStepsBeforeBooking",
+      "bookServiceSelectedPackageUnavailable",
+      "bookServiceTechnicianBranchUnavailable",
+      "bookServiceTechnicianInfoUnavailable",
+      "bookServiceSelectedVehicleUnavailable",
+      "bookServiceAppointmentConfirmedTitle",
+      "bookServiceOk",
+      "bookServiceCreateAppointmentFailed",
+      "bookServiceSignInToSelectCar",
+      "bookServiceSelectCarInStepOne",
+      "bookServiceFailedToLoadPackages",
+      "bookServiceTryAgain",
+      "bookServiceNoPackagesFoundTitle",
+      "bookServiceNoPackagesFoundDescription",
+      "bookServicePriceSar",
+      "bookServicePackagesLoadAfterContinue",
+      "bookServiceTapMapToSelectLocation",
+      "bookServiceSelectedLocation",
+      "bookServiceSelectPackageAndLocation",
+      "bookServiceNoTechniciansInRegion",
+      "bookServiceRefresh",
+      "bookServiceReadyToFindTechnicians",
+      "bookServiceSearchTechnicians",
+      "bookServiceDistanceAway",
+      "bookServiceTapTechnicianForSlots",
+      "bookServiceNoSlotsForSelectedDate",
+      "bookServiceAvailableSlotsFor",
+      "bookServiceLocationPermissionTitle",
+      "bookServiceLocationPermissionMessage",
+      "bookServiceDeny",
+      "bookServiceAllow",
+      "noCarsFound",
+      "PleaseLoginToViewYourCarsMessage",
+      "userCarsEmptyDescription",
+      "logInToContinue",
+      "upcomingServicesBookingDetailsTitle",
+      "upcomingServicesServicePackageLabel",
+      "upcomingServicesServiceLocationLabel",
+      "upcomingServicesAssignedTechnicianLabel",
+      "upcomingServicesLocationFallback",
+      "upcomingServicesTechnicianFallback",
+      "upcomingServicesPlateFallback",
+      "upcomingServicesDateFallback",
+      "upcomingServicesStatusPending",
+      "upcomingServicesStatusExpired",
+      "upcomingServicesStatusUpcoming",
+      "upcomingServicesStatusCompleted",
+      "upcomingServicesStatusCancelled",
+      "upcomingServicesStatusNew",
+      "upcomingServicesLoadingVehicle",
+      "upcomingServicesLoadingPackage",
+      "upcomingServicesLoadingLocation",
+      "upcomingServicesLoadingTechnician",
+      "upcomingServicesLoadingStatus",
+      "upcomingServicesEmptyMessage",
+      "upcomingServicesErrorPrefix",
+      "upcomingServicesLoginPrompt",
+      "upcomingServicesViewButton",
+      "upcomingServicesServicePlaceholder",
+      "upcomingServicesVehiclePlaceholder",
+      "upcomingService",
+      "back",
+      "book",
+      "commonErrorTitle",
+      "commonErrorDescription",
+      "commonRetry",
+      "userCarsTakePhoto",
+      "userCarsChooseFromGallery",
+      "userCarsCompletePlateFields",
+      "userCarsInvalidPlateLetter",
+      "userCarsInvalidPlateNumber",
+      "userCarsAddedSuccessfully",
+      "userCarsErrorLoadingManufacturers",
+      "userCarsErrorLoadingModels",
+      "userCarsImagesSectionTitle",
+      "userCarsAddPhotos",
+      "userCarsAddImageRequirement",
+      "userCarsSaving",
+      "userCarsSaveVehicle",
+      "userCarsAddCrnImage",
+      "userCarsCarDetailsTitle",
+      "userCarsCarName",
+      "userCarsCarModelLabel",
+      "userCarsChassisVin",
+      "userCarsYearOfManufacture",
+      "userCarsEditInfo",
+      "userCarsDeleteCar",
+      "userCarsChassis",
+      "userCarsBookNow",
+      "userCarsCopy",
+      "userCarsCopiedToClipboard",
+      "userCarsLicensePlateSemantics",
+      "userCarsCardSemantics",
+      "managerHomeTitle",
+      "managerHomeCouponsTitle",
+      "managerHomeCouponsDescription",
+      "managerHomeRatingsTitle",
+      "managerHomeRatingsDescription",
+      "managerHomePromotionsTitle",
+      "managerHomePromotionsDescription",
+      "managerHomeCreatePromotionTitle",
+      "managerHomeCreatePromotionDescription",
+      "managerHomeRouteUnavailable",
+      "chatTitle",
+      "chatUnavailable",
+      "chatLoginRequired",
+      "chatEmptyMessage",
+      "chatInputHint",
+      "chatSendLabel",
+      "chatErrorLoading",
+      "chatMissingBookingId",
+      "S",
+      "supportedLocales",
+      "isSupported",
+      "load",
+      "shouldReload",
+      "AppLocalizationDelegate"
+    ],
+    "lib/l10n/intl_ar.arb": [],
+    "lib/l10n/intl_en.arb": [],
+    "lib/legacy/coupon_header_data_model.dart": [
+      "CouponHeaderDataModel",
+      "CouponHeaderDataModel.fromJson",
+      "CouponHeaderDataModel"
+    ],
+    "lib/legacy/coupon_header_model.dart": [
+      "CouponHeaderModel",
+      "CouponHeaderModel.fromJson",
+      "CouponHeaderModel"
+    ],
+    "lib/legacy/status_info_model.dart": [
+      "StatusInfoModel",
+      "StatusInfoModel.fromJson",
+      "StatusInfoModel"
+    ],
+    "lib/main.dart": [
+      "main",
+      "createState",
+      "MyApp",
+      "initState",
+      "build"
+    ],
+    "lib/route_generator.dart": [
+      "generateRoute",
+      "RouteGenerator"
+    ],
+    "test/widget_test.dart": [
+      "main"
+    ]
+  },
+  "batches": [
+    {
+      "batchIndex": 1,
+      "files": [
+        {
+          "path": ".understand-anything/tmp/ua-import-map-input.json",
+          "language": "json",
+          "sizeLines": 0,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-import-map-output.json",
+          "language": "json",
+          "sizeLines": 366,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".understand-anything/tmp/ua-scan-files.json",
+          "language": "json",
+          "sizeLines": 2179,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        ".understand-anything/tmp/ua-import-map-input.json": [],
+        ".understand-anything/tmp/ua-import-map-output.json": [],
+        ".understand-anything/tmp/ua-scan-files.json": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 2,
+      "files": [
+        {
+          "path": "analysis_options.yaml",
+          "language": "yaml",
+          "sizeLines": 28,
+          "fileCategory": "config"
+        },
+        {
+          "path": "codex_rules.yaml",
+          "language": "yaml",
+          "sizeLines": 87,
+          "fileCategory": "config"
+        },
+        {
+          "path": "devtools_options.yaml",
+          "language": "yaml",
+          "sizeLines": 3,
+          "fileCategory": "config"
+        },
+        {
+          "path": "firebase.json",
+          "language": "json",
+          "sizeLines": 0,
+          "fileCategory": "config"
+        },
+        {
+          "path": "pubspec.yaml",
+          "language": "yaml",
+          "sizeLines": 150,
+          "fileCategory": "config"
+        }
+      ],
+      "batchImportData": {
+        "analysis_options.yaml": [],
+        "codex_rules.yaml": [],
+        "devtools_options.yaml": [],
+        "firebase.json": [],
+        "pubspec.yaml": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 3,
+      "files": [
+        {
+          "path": ".dart-tool/CLIENT_ID",
+          "language": "unknown",
+          "sizeLines": 0,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".dart-tool/dart-flutter-telemetry-dismissed-surveys.json",
+          "language": "json",
+          "sizeLines": 0,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".dart-tool/dart-flutter-telemetry-session.json",
+          "language": "json",
+          "sizeLines": 0,
+          "fileCategory": "config"
+        },
+        {
+          "path": ".dart-tool/dart-flutter-telemetry.config",
+          "language": "config",
+          "sizeLines": 34,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".metadata",
+          "language": "unknown",
+          "sizeLines": 33,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".understand-anything/.understandignore",
+          "language": "unknown",
+          "sizeLines": 66,
+          "fileCategory": "code"
+        },
+        {
+          "path": ".understand-anything/intermediate/scan-result.json",
+          "language": "json",
+          "sizeLines": 2536,
+          "fileCategory": "config"
+        },
+        {
+          "path": "lib/core/providers/current_locale_provider.dart",
+          "language": "dart",
+          "sizeLines": 25,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/providers/dio_provider.dart",
+          "language": "dart",
+          "sizeLines": 126,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/providers/general_providers.dart",
+          "language": "dart",
+          "sizeLines": 17,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/providers/global_lang_provider.dart",
+          "language": "dart",
+          "sizeLines": 8,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/providers/plate_chars_provider.dart",
+          "language": "dart",
+          "sizeLines": 91,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/providers/push_notifications_service.dart",
+          "language": "dart",
+          "sizeLines": 208,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/providers/secure_storage.dart",
+          "language": "dart",
+          "sizeLines": 8,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/state/view_state.dart",
+          "language": "dart",
+          "sizeLines": 42,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/storage/secure_store.dart",
+          "language": "dart",
+          "sizeLines": 45,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/utils/constant.dart",
+          "language": "dart",
+          "sizeLines": 3,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/utils/end_point.dart",
+          "language": "dart",
+          "sizeLines": 68,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/utils/enum.dart",
+          "language": "dart",
+          "sizeLines": 1,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/utils/extensions/extensions.dart",
+          "language": "dart",
+          "sizeLines": 20,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/utils/helper_fuc.dart",
+          "language": "dart",
+          "sizeLines": 29,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/utils/theme/app_colors.dart",
+          "language": "dart",
+          "sizeLines": 50,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/utils/theme/app_text_styles.dart",
+          "language": "dart",
+          "sizeLines": 69,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/utils/theme/app_text_theme.dart",
+          "language": "dart",
+          "sizeLines": 445,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/utils/theme/themes.dart",
+          "language": "dart",
+          "sizeLines": 126,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        ".dart-tool/CLIENT_ID": [],
+        ".dart-tool/dart-flutter-telemetry-dismissed-surveys.json": [],
+        ".dart-tool/dart-flutter-telemetry-session.json": [],
+        ".dart-tool/dart-flutter-telemetry.config": [],
+        ".metadata": [],
+        ".understand-anything/.understandignore": [],
+        ".understand-anything/intermediate/scan-result.json": [],
+        "lib/core/providers/current_locale_provider.dart": [],
+        "lib/core/providers/dio_provider.dart": [],
+        "lib/core/providers/general_providers.dart": [],
+        "lib/core/providers/global_lang_provider.dart": [],
+        "lib/core/providers/plate_chars_provider.dart": [],
+        "lib/core/providers/push_notifications_service.dart": [],
+        "lib/core/providers/secure_storage.dart": [],
+        "lib/core/state/view_state.dart": [],
+        "lib/core/storage/secure_store.dart": [],
+        "lib/core/utils/constant.dart": [],
+        "lib/core/utils/end_point.dart": [],
+        "lib/core/utils/enum.dart": [],
+        "lib/core/utils/extensions/extensions.dart": [],
+        "lib/core/utils/helper_fuc.dart": [],
+        "lib/core/utils/theme/app_colors.dart": [],
+        "lib/core/utils/theme/app_text_styles.dart": [],
+        "lib/core/utils/theme/app_text_theme.dart": [],
+        "lib/core/utils/theme/themes.dart": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 4,
+      "files": [
+        {
+          "path": "lib/core/utils/ui_components/shared_ui.dart",
+          "language": "dart",
+          "sizeLines": 83,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/widget/error_widget.dart",
+          "language": "dart",
+          "sizeLines": 83,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/widget/home_app_bar.dart",
+          "language": "dart",
+          "sizeLines": 112,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/widget/image_loader.dart",
+          "language": "dart",
+          "sizeLines": 57,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/widget/internal_app_bar.dart",
+          "language": "dart",
+          "sizeLines": 40,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/core/widget/network_status_widget.dart",
+          "language": "dart",
+          "sizeLines": 103,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/app/app_color_theme.dart",
+          "language": "dart",
+          "sizeLines": 216,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/data/data_source/auth_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 88,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/data/data_source/i_auth_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 15,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/data/model/register_request.dart",
+          "language": "dart",
+          "sizeLines": 22,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/data/model/register_response.dart",
+          "language": "dart",
+          "sizeLines": 19,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/data/model/send_otp_request.dart",
+          "language": "dart",
+          "sizeLines": 7,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/data/model/send_otp_response.dart",
+          "language": "dart",
+          "sizeLines": 19,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/data/model/tokens_model.dart",
+          "language": "dart",
+          "sizeLines": 27,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/data/model/user_model.dart",
+          "language": "dart",
+          "sizeLines": 79,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/data/model/verify_opt_response.dart",
+          "language": "dart",
+          "sizeLines": 25,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/data/model/verify_otp_request.dart",
+          "language": "dart",
+          "sizeLines": 9,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/data/repository/auth_local_repository.dart",
+          "language": "dart",
+          "sizeLines": 53,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/data/repository/auth_repository.dart",
+          "language": "dart",
+          "sizeLines": 60,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/domain/entity/auth_exception.dart",
+          "language": "dart",
+          "sizeLines": 4,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/domain/entity/auth_session.dart",
+          "language": "dart",
+          "sizeLines": 27,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/domain/entity/otp_info.dart",
+          "language": "dart",
+          "sizeLines": 9,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/domain/entity/register_result.dart",
+          "language": "dart",
+          "sizeLines": 5,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/domain/entity/stored_auth.dart",
+          "language": "dart",
+          "sizeLines": 19,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/domain/entity/tokens.dart",
+          "language": "dart",
+          "sizeLines": 11,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "lib/core/utils/ui_components/shared_ui.dart": [],
+        "lib/core/widget/error_widget.dart": [],
+        "lib/core/widget/home_app_bar.dart": [],
+        "lib/core/widget/image_loader.dart": [],
+        "lib/core/widget/internal_app_bar.dart": [],
+        "lib/core/widget/network_status_widget.dart": [],
+        "lib/features/app/app_color_theme.dart": [],
+        "lib/features/auth/data/data_source/auth_remote_data_source.dart": [],
+        "lib/features/auth/data/data_source/i_auth_remote_data_source.dart": [],
+        "lib/features/auth/data/model/register_request.dart": [],
+        "lib/features/auth/data/model/register_response.dart": [],
+        "lib/features/auth/data/model/send_otp_request.dart": [],
+        "lib/features/auth/data/model/send_otp_response.dart": [],
+        "lib/features/auth/data/model/tokens_model.dart": [],
+        "lib/features/auth/data/model/user_model.dart": [],
+        "lib/features/auth/data/model/verify_opt_response.dart": [],
+        "lib/features/auth/data/model/verify_otp_request.dart": [],
+        "lib/features/auth/data/repository/auth_local_repository.dart": [],
+        "lib/features/auth/data/repository/auth_repository.dart": [],
+        "lib/features/auth/domain/entity/auth_exception.dart": [],
+        "lib/features/auth/domain/entity/auth_session.dart": [],
+        "lib/features/auth/domain/entity/otp_info.dart": [],
+        "lib/features/auth/domain/entity/register_result.dart": [],
+        "lib/features/auth/domain/entity/stored_auth.dart": [],
+        "lib/features/auth/domain/entity/tokens.dart": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 5,
+      "files": [
+        {
+          "path": "lib/features/auth/domain/entity/user_entity.dart",
+          "language": "dart",
+          "sizeLines": 27,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/domain/entity/user_type.dart",
+          "language": "dart",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/domain/entity/verify_otp_result.dart",
+          "language": "dart",
+          "sizeLines": 12,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/domain/repository/i_auth_local_repository.dart",
+          "language": "dart",
+          "sizeLines": 8,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/domain/repository/i_auth_repository.dart",
+          "language": "dart",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/domain/use_case/get_stored_auth_use_case.dart",
+          "language": "dart",
+          "sizeLines": 11,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/domain/use_case/get_user_info_use_case.dart",
+          "language": "dart",
+          "sizeLines": 11,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/domain/use_case/is_registered_user.dart",
+          "language": "dart",
+          "sizeLines": 9,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/domain/use_case/log_out_use_case.dart",
+          "language": "dart",
+          "sizeLines": 10,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/domain/use_case/register_user_use_case.dart",
+          "language": "dart",
+          "sizeLines": 21,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/domain/use_case/save_auth_session_use_case.dart",
+          "language": "dart",
+          "sizeLines": 24,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/domain/use_case/send_otp_use_case.dart",
+          "language": "dart",
+          "sizeLines": 10,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/domain/use_case/verify_otp_use_case.dart",
+          "language": "dart",
+          "sizeLines": 10,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/presentation/screens/auth_screen.dart",
+          "language": "dart",
+          "sizeLines": 430,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/presentation/view_model/auth_state.dart",
+          "language": "dart",
+          "sizeLines": 66,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/presentation/view_model/auth_view_model.dart",
+          "language": "dart",
+          "sizeLines": 212,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/presentation/widget/otp_inputs.dart",
+          "language": "dart",
+          "sizeLines": 70,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/auth/provider/auth_provider.dart",
+          "language": "dart",
+          "sizeLines": 67,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/book_service/data/data_source/book_service_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 117,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/book_service/data/data_source/i_book_service_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/book_service/data/model/create_appointment_response_model.dart",
+          "language": "dart",
+          "sizeLines": 37,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/book_service/data/model/service_package_model.dart",
+          "language": "dart",
+          "sizeLines": 43,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/book_service/data/repository/book_service_repository.dart",
+          "language": "dart",
+          "sizeLines": 60,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/book_service/domain/entity/create_appointment_result.dart",
+          "language": "dart",
+          "sizeLines": 29,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/book_service/domain/entity/service_package_entity.dart",
+          "language": "dart",
+          "sizeLines": 17,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "lib/features/auth/domain/entity/user_entity.dart": [],
+        "lib/features/auth/domain/entity/user_type.dart": [],
+        "lib/features/auth/domain/entity/verify_otp_result.dart": [],
+        "lib/features/auth/domain/repository/i_auth_local_repository.dart": [],
+        "lib/features/auth/domain/repository/i_auth_repository.dart": [],
+        "lib/features/auth/domain/use_case/get_stored_auth_use_case.dart": [],
+        "lib/features/auth/domain/use_case/get_user_info_use_case.dart": [],
+        "lib/features/auth/domain/use_case/is_registered_user.dart": [],
+        "lib/features/auth/domain/use_case/log_out_use_case.dart": [],
+        "lib/features/auth/domain/use_case/register_user_use_case.dart": [],
+        "lib/features/auth/domain/use_case/save_auth_session_use_case.dart": [],
+        "lib/features/auth/domain/use_case/send_otp_use_case.dart": [],
+        "lib/features/auth/domain/use_case/verify_otp_use_case.dart": [],
+        "lib/features/auth/presentation/screens/auth_screen.dart": [],
+        "lib/features/auth/presentation/view_model/auth_state.dart": [],
+        "lib/features/auth/presentation/view_model/auth_view_model.dart": [],
+        "lib/features/auth/presentation/widget/otp_inputs.dart": [],
+        "lib/features/auth/provider/auth_provider.dart": [],
+        "lib/features/book_service/data/data_source/book_service_remote_data_source.dart": [],
+        "lib/features/book_service/data/data_source/i_book_service_remote_data_source.dart": [],
+        "lib/features/book_service/data/model/create_appointment_response_model.dart": [],
+        "lib/features/book_service/data/model/service_package_model.dart": [],
+        "lib/features/book_service/data/repository/book_service_repository.dart": [],
+        "lib/features/book_service/domain/entity/create_appointment_result.dart": [],
+        "lib/features/book_service/domain/entity/service_package_entity.dart": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 6,
+      "files": [
+        {
+          "path": "lib/features/book_service/domain/exception/service_packages_exception.dart",
+          "language": "dart",
+          "sizeLines": 22,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/book_service/domain/repository/i_book_service_repository.dart",
+          "language": "dart",
+          "sizeLines": 25,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/book_service/domain/use_case/create_appointment_use_case.dart",
+          "language": "dart",
+          "sizeLines": 38,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/book_service/domain/use_case/get_packages_for_vehicle_use_case.dart",
+          "language": "dart",
+          "sizeLines": 20,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/book_service/presentation/screen/book_maintanance_screen.dart",
+          "language": "dart",
+          "sizeLines": 1835,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/book_service/presentation/view_model/service_packages_state.dart",
+          "language": "dart",
+          "sizeLines": 27,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/book_service/presentation/view_model/service_packages_view_model.dart",
+          "language": "dart",
+          "sizeLines": 46,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/book_service/provider/book_service_provider.dart",
+          "language": "dart",
+          "sizeLines": 50,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/chat/data/data_source/chat_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 55,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/chat/data/data_source/i_chat_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 13,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/chat/data/model/chat_message_model.dart",
+          "language": "dart",
+          "sizeLines": 56,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/chat/data/repository/chat_repository.dart",
+          "language": "dart",
+          "sizeLines": 31,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/chat/domain/entity/chat_message.dart",
+          "language": "dart",
+          "sizeLines": 23,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/chat/domain/entity/chat_user.dart",
+          "language": "dart",
+          "sizeLines": 27,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/chat/domain/repository/i_chat_repository.dart",
+          "language": "dart",
+          "sizeLines": 12,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/chat/domain/use_case/observe_chat_messages_use_case.dart",
+          "language": "dart",
+          "sizeLines": 12,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/chat/domain/use_case/send_chat_message_use_case.dart",
+          "language": "dart",
+          "sizeLines": 20,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/chat/presentation/screen/chat_screen.dart",
+          "language": "dart",
+          "sizeLines": 436,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/chat/presentation/view_model/chat_state.dart",
+          "language": "dart",
+          "sizeLines": 31,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/chat/presentation/view_model/chat_view_model.dart",
+          "language": "dart",
+          "sizeLines": 94,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/chat/provider/chat_provider.dart",
+          "language": "dart",
+          "sizeLines": 25,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/contact_us/data/data_source/contact_us_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 26,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/contact_us/data/data_source/i_contact_us_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 10,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/contact_us/data/model/contact_us_model.dart",
+          "language": "dart",
+          "sizeLines": 29,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/contact_us/data/repository/contact_us_repository.dart",
+          "language": "dart",
+          "sizeLines": 23,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "lib/features/book_service/domain/exception/service_packages_exception.dart": [],
+        "lib/features/book_service/domain/repository/i_book_service_repository.dart": [],
+        "lib/features/book_service/domain/use_case/create_appointment_use_case.dart": [],
+        "lib/features/book_service/domain/use_case/get_packages_for_vehicle_use_case.dart": [],
+        "lib/features/book_service/presentation/screen/book_maintanance_screen.dart": [],
+        "lib/features/book_service/presentation/view_model/service_packages_state.dart": [],
+        "lib/features/book_service/presentation/view_model/service_packages_view_model.dart": [],
+        "lib/features/book_service/provider/book_service_provider.dart": [],
+        "lib/features/chat/data/data_source/chat_remote_data_source.dart": [],
+        "lib/features/chat/data/data_source/i_chat_remote_data_source.dart": [],
+        "lib/features/chat/data/model/chat_message_model.dart": [],
+        "lib/features/chat/data/repository/chat_repository.dart": [],
+        "lib/features/chat/domain/entity/chat_message.dart": [],
+        "lib/features/chat/domain/entity/chat_user.dart": [],
+        "lib/features/chat/domain/repository/i_chat_repository.dart": [],
+        "lib/features/chat/domain/use_case/observe_chat_messages_use_case.dart": [],
+        "lib/features/chat/domain/use_case/send_chat_message_use_case.dart": [],
+        "lib/features/chat/presentation/screen/chat_screen.dart": [],
+        "lib/features/chat/presentation/view_model/chat_state.dart": [],
+        "lib/features/chat/presentation/view_model/chat_view_model.dart": [],
+        "lib/features/chat/provider/chat_provider.dart": [],
+        "lib/features/contact_us/data/data_source/contact_us_remote_data_source.dart": [],
+        "lib/features/contact_us/data/data_source/i_contact_us_remote_data_source.dart": [],
+        "lib/features/contact_us/data/model/contact_us_model.dart": [],
+        "lib/features/contact_us/data/repository/contact_us_repository.dart": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 7,
+      "files": [
+        {
+          "path": "lib/features/contact_us/domain/entity/contact_us_entity.dart",
+          "language": "dart",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/contact_us/domain/repository/i_contact_us_repository.dart",
+          "language": "dart",
+          "sizeLines": 10,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/contact_us/domain/use_case/send_contact_us_meassage.dart",
+          "language": "dart",
+          "sizeLines": 15,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/contact_us/presentation/screen/contact_us_screen.dart",
+          "language": "dart",
+          "sizeLines": 309,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/contact_us/presentation/view_model/contact_us_state.dart",
+          "language": "dart",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/contact_us/presentation/view_model/contact_us_view_model.dart",
+          "language": "dart",
+          "sizeLines": 27,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/contact_us/provider/contact_us_provider.dart",
+          "language": "dart",
+          "sizeLines": 25,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/coupons/data/data_source/coupon_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 54,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/coupons/data/data_source/i_coupon_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/coupons/data/model/coupon_model.dart",
+          "language": "dart",
+          "sizeLines": 44,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/coupons/data/repository/coupon_repository.dart",
+          "language": "dart",
+          "sizeLines": 35,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/coupons/domain/entity/coupon_entity.dart",
+          "language": "dart",
+          "sizeLines": 33,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/coupons/domain/repository/i_coupon_repository.dart",
+          "language": "dart",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/coupons/domain/use_case/create_coupon_use_case.dart",
+          "language": "dart",
+          "sizeLines": 28,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/coupons/domain/use_case/fetch_coupons_use_case.dart",
+          "language": "dart",
+          "sizeLines": 12,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/coupons/presentation/screen/coupon_list_screen.dart",
+          "language": "dart",
+          "sizeLines": 335,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/coupons/presentation/view_model/coupon_notifier.dart",
+          "language": "dart",
+          "sizeLines": 57,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/coupons/presentation/view_model/coupon_state.dart",
+          "language": "dart",
+          "sizeLines": 26,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/coupons/provider/coupon_providers.dart",
+          "language": "dart",
+          "sizeLines": 36,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/force_update/data/data_source/force_update_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 29,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/force_update/data/model/app_info_model.dart",
+          "language": "dart",
+          "sizeLines": 17,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/force_update/data/repository/force_update_repository.dart",
+          "language": "dart",
+          "sizeLines": 86,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/force_update/domain/entity/app_info_entity.dart",
+          "language": "dart",
+          "sizeLines": 11,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/force_update/domain/entity/force_update_result.dart",
+          "language": "dart",
+          "sizeLines": 26,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/force_update/domain/repository/i_force_update_repository.dart",
+          "language": "dart",
+          "sizeLines": 5,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "lib/features/contact_us/domain/entity/contact_us_entity.dart": [],
+        "lib/features/contact_us/domain/repository/i_contact_us_repository.dart": [],
+        "lib/features/contact_us/domain/use_case/send_contact_us_meassage.dart": [],
+        "lib/features/contact_us/presentation/screen/contact_us_screen.dart": [],
+        "lib/features/contact_us/presentation/view_model/contact_us_state.dart": [],
+        "lib/features/contact_us/presentation/view_model/contact_us_view_model.dart": [],
+        "lib/features/contact_us/provider/contact_us_provider.dart": [],
+        "lib/features/coupons/data/data_source/coupon_remote_data_source.dart": [],
+        "lib/features/coupons/data/data_source/i_coupon_remote_data_source.dart": [],
+        "lib/features/coupons/data/model/coupon_model.dart": [],
+        "lib/features/coupons/data/repository/coupon_repository.dart": [],
+        "lib/features/coupons/domain/entity/coupon_entity.dart": [],
+        "lib/features/coupons/domain/repository/i_coupon_repository.dart": [],
+        "lib/features/coupons/domain/use_case/create_coupon_use_case.dart": [],
+        "lib/features/coupons/domain/use_case/fetch_coupons_use_case.dart": [],
+        "lib/features/coupons/presentation/screen/coupon_list_screen.dart": [],
+        "lib/features/coupons/presentation/view_model/coupon_notifier.dart": [],
+        "lib/features/coupons/presentation/view_model/coupon_state.dart": [],
+        "lib/features/coupons/provider/coupon_providers.dart": [],
+        "lib/features/force_update/data/data_source/force_update_remote_data_source.dart": [],
+        "lib/features/force_update/data/model/app_info_model.dart": [],
+        "lib/features/force_update/data/repository/force_update_repository.dart": [],
+        "lib/features/force_update/domain/entity/app_info_entity.dart": [],
+        "lib/features/force_update/domain/entity/force_update_result.dart": [],
+        "lib/features/force_update/domain/repository/i_force_update_repository.dart": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 8,
+      "files": [
+        {
+          "path": "lib/features/force_update/domain/use_case/check_force_update_use_case.dart",
+          "language": "dart",
+          "sizeLines": 12,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/force_update/presentation/view_model/force_update_state.dart",
+          "language": "dart",
+          "sizeLines": 29,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/force_update/presentation/view_model/force_update_view_model.dart",
+          "language": "dart",
+          "sizeLines": 33,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/force_update/presentation/widget/force_update_dialog.dart",
+          "language": "dart",
+          "sizeLines": 72,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/force_update/provider/force_update_provider.dart",
+          "language": "dart",
+          "sizeLines": 33,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/home/data/data_source/home_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 54,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/home/data/data_source/i_home_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 5,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/home/data/model/main_category_model.dart",
+          "language": "dart",
+          "sizeLines": 27,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/home/data/repository/home_repository.dart",
+          "language": "dart",
+          "sizeLines": 15,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/home/domain/entity/main_category_entity.dart",
+          "language": "dart",
+          "sizeLines": 26,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/home/domain/repository/i_home_repository.dart",
+          "language": "dart",
+          "sizeLines": 5,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/home/domain/use_case/get_main_categories_use_case.dart",
+          "language": "dart",
+          "sizeLines": 12,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/home/presentaion/screen/base_home_screen.dart",
+          "language": "dart",
+          "sizeLines": 210,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/home/presentaion/screen/credit_manager_home_screen.dart",
+          "language": "dart",
+          "sizeLines": 638,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/home/presentaion/screen/customer_home_screen.dart",
+          "language": "dart",
+          "sizeLines": 120,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/home/presentaion/screen/manager_home_screen.dart",
+          "language": "dart",
+          "sizeLines": 164,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/home/presentaion/view_model/main_categories_state.dart",
+          "language": "dart",
+          "sizeLines": 25,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/home/presentaion/view_model/main_categories_view_model.dart",
+          "language": "dart",
+          "sizeLines": 24,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/home/presentaion/widget/home_service_card.dart",
+          "language": "dart",
+          "sizeLines": 111,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/home/presentaion/widget/home_service_grid.dart",
+          "language": "dart",
+          "sizeLines": 145,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/home/presentaion/widget/pormotions_home_slider_widget.dart",
+          "language": "dart",
+          "sizeLines": 33,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/home/presentaion/widget/title_with_sub_title.dart",
+          "language": "dart",
+          "sizeLines": 44,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/home/provider/home_provider.dart",
+          "language": "dart",
+          "sizeLines": 55,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/more/presentation/screen/more_screen.dart",
+          "language": "dart",
+          "sizeLines": 38,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/onboarding/onboarding_page_data.dart",
+          "language": "dart",
+          "sizeLines": 10,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "lib/features/force_update/domain/use_case/check_force_update_use_case.dart": [],
+        "lib/features/force_update/presentation/view_model/force_update_state.dart": [],
+        "lib/features/force_update/presentation/view_model/force_update_view_model.dart": [],
+        "lib/features/force_update/presentation/widget/force_update_dialog.dart": [],
+        "lib/features/force_update/provider/force_update_provider.dart": [],
+        "lib/features/home/data/data_source/home_remote_data_source.dart": [],
+        "lib/features/home/data/data_source/i_home_remote_data_source.dart": [],
+        "lib/features/home/data/model/main_category_model.dart": [],
+        "lib/features/home/data/repository/home_repository.dart": [],
+        "lib/features/home/domain/entity/main_category_entity.dart": [],
+        "lib/features/home/domain/repository/i_home_repository.dart": [],
+        "lib/features/home/domain/use_case/get_main_categories_use_case.dart": [],
+        "lib/features/home/presentaion/screen/base_home_screen.dart": [],
+        "lib/features/home/presentaion/screen/credit_manager_home_screen.dart": [],
+        "lib/features/home/presentaion/screen/customer_home_screen.dart": [],
+        "lib/features/home/presentaion/screen/manager_home_screen.dart": [],
+        "lib/features/home/presentaion/view_model/main_categories_state.dart": [],
+        "lib/features/home/presentaion/view_model/main_categories_view_model.dart": [],
+        "lib/features/home/presentaion/widget/home_service_card.dart": [],
+        "lib/features/home/presentaion/widget/home_service_grid.dart": [],
+        "lib/features/home/presentaion/widget/pormotions_home_slider_widget.dart": [],
+        "lib/features/home/presentaion/widget/title_with_sub_title.dart": [],
+        "lib/features/home/provider/home_provider.dart": [],
+        "lib/features/more/presentation/screen/more_screen.dart": [],
+        "lib/features/onboarding/onboarding_page_data.dart": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 9,
+      "files": [
+        {
+          "path": "lib/features/onboarding/presentation/screens/onboarding_screen.dart",
+          "language": "dart",
+          "sizeLines": 171,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/payment/data/data_source/i_payment_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 11,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/payment/data/data_source/payment_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 78,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/payment/data/model/payment_initiation_request_model.dart",
+          "language": "dart",
+          "sizeLines": 53,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/payment/data/model/payment_initiation_response_model.dart",
+          "language": "dart",
+          "sizeLines": 34,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/payment/data/model/payment_status_response_model.dart",
+          "language": "dart",
+          "sizeLines": 31,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/payment/data/repository/payment_repository.dart",
+          "language": "dart",
+          "sizeLines": 43,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/payment/domain/entity/payment_initiation_request.dart",
+          "language": "dart",
+          "sizeLines": 41,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/payment/domain/entity/payment_initiation_result.dart",
+          "language": "dart",
+          "sizeLines": 15,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/payment/domain/entity/payment_status_result.dart",
+          "language": "dart",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/payment/domain/repository/i_payment_repository.dart",
+          "language": "dart",
+          "sizeLines": 11,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/payment/domain/use_case/check_payment_status_use_case.dart",
+          "language": "dart",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/payment/domain/use_case/initiate_payment_use_case.dart",
+          "language": "dart",
+          "sizeLines": 15,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/payment/presentation/screen/payment_webview_screen.dart",
+          "language": "dart",
+          "sizeLines": 254,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/payment/presentation/state/payment_state.dart",
+          "language": "dart",
+          "sizeLines": 25,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/payment/presentation/view_model/payment_view_model.dart",
+          "language": "dart",
+          "sizeLines": 47,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/payment/provider/payment_provider.dart",
+          "language": "dart",
+          "sizeLines": 38,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/profile/presentation/screen/profile_screen.dart",
+          "language": "dart",
+          "sizeLines": 186,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/promotions/data/data_source/i_promotion_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 9,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/promotions/data/data_source/promotion_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 47,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/promotions/data/model/promotion_model.dart",
+          "language": "dart",
+          "sizeLines": 42,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/promotions/data/repository/promotion_repository_impl.dart",
+          "language": "dart",
+          "sizeLines": 44,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/promotions/domain/entity/promotion_entity.dart",
+          "language": "dart",
+          "sizeLines": 17,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/promotions/domain/repository/i_promotion_repository.dart",
+          "language": "dart",
+          "sizeLines": 10,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/promotions/domain/use_case/add_promotion_use_case.dart",
+          "language": "dart",
+          "sizeLines": 12,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "lib/features/onboarding/presentation/screens/onboarding_screen.dart": [],
+        "lib/features/payment/data/data_source/i_payment_remote_data_source.dart": [],
+        "lib/features/payment/data/data_source/payment_remote_data_source.dart": [],
+        "lib/features/payment/data/model/payment_initiation_request_model.dart": [],
+        "lib/features/payment/data/model/payment_initiation_response_model.dart": [],
+        "lib/features/payment/data/model/payment_status_response_model.dart": [],
+        "lib/features/payment/data/repository/payment_repository.dart": [],
+        "lib/features/payment/domain/entity/payment_initiation_request.dart": [],
+        "lib/features/payment/domain/entity/payment_initiation_result.dart": [],
+        "lib/features/payment/domain/entity/payment_status_result.dart": [],
+        "lib/features/payment/domain/repository/i_payment_repository.dart": [],
+        "lib/features/payment/domain/use_case/check_payment_status_use_case.dart": [],
+        "lib/features/payment/domain/use_case/initiate_payment_use_case.dart": [],
+        "lib/features/payment/presentation/screen/payment_webview_screen.dart": [],
+        "lib/features/payment/presentation/state/payment_state.dart": [],
+        "lib/features/payment/presentation/view_model/payment_view_model.dart": [],
+        "lib/features/payment/provider/payment_provider.dart": [],
+        "lib/features/profile/presentation/screen/profile_screen.dart": [],
+        "lib/features/promotions/data/data_source/i_promotion_remote_data_source.dart": [],
+        "lib/features/promotions/data/data_source/promotion_remote_data_source.dart": [],
+        "lib/features/promotions/data/model/promotion_model.dart": [],
+        "lib/features/promotions/data/repository/promotion_repository_impl.dart": [],
+        "lib/features/promotions/domain/entity/promotion_entity.dart": [],
+        "lib/features/promotions/domain/repository/i_promotion_repository.dart": [],
+        "lib/features/promotions/domain/use_case/add_promotion_use_case.dart": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 10,
+      "files": [
+        {
+          "path": "lib/features/promotions/domain/use_case/delete_promotion_use_case.dart",
+          "language": "dart",
+          "sizeLines": 11,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/promotions/domain/use_case/fetch_promotions_use_case.dart",
+          "language": "dart",
+          "sizeLines": 12,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/promotions/presentation/screen/create_promotion_screen.dart",
+          "language": "dart",
+          "sizeLines": 183,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/promotions/presentation/screen/promotions_list_screen.dart",
+          "language": "dart",
+          "sizeLines": 256,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/promotions/presentation/view_model/promotion_list_notifier.dart",
+          "language": "dart",
+          "sizeLines": 90,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/promotions/presentation/view_model/promotion_view_model.dart",
+          "language": "dart",
+          "sizeLines": 31,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/promotions/presentation/widget/promotions.dart",
+          "language": "dart",
+          "sizeLines": 105,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/promotions/provider/promotion_providers.dart",
+          "language": "dart",
+          "sizeLines": 45,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/splash/data/repository/splash_repository.dart",
+          "language": "dart",
+          "sizeLines": 20,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/splash/domain/repository/i_splash_repository.dart",
+          "language": "dart",
+          "sizeLines": 4,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/splash/domain/use_case/check_onboarding_use_case.dart",
+          "language": "dart",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/splash/presentation/screens/splash_screen.dart",
+          "language": "dart",
+          "sizeLines": 101,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/splash/presentation/view_model/splash_state.dart",
+          "language": "dart",
+          "sizeLines": 12,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/splash/presentation/view_model/splash_view_model.dart",
+          "language": "dart",
+          "sizeLines": 37,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/splash/provider/splash_provider.dart",
+          "language": "dart",
+          "sizeLines": 19,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/data/data_source/i_technician_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 105,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/data/data_source/technician_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 860,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/data/model/custom_package_category_model.dart",
+          "language": "dart",
+          "sizeLines": 26,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/data/model/custom_package_item_model.dart",
+          "language": "dart",
+          "sizeLines": 29,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/data/model/job_card_model.dart",
+          "language": "dart",
+          "sizeLines": 40,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/data/model/job_card_package_line_model.dart",
+          "language": "dart",
+          "sizeLines": 92,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/data/model/job_card_package_model.dart",
+          "language": "dart",
+          "sizeLines": 87,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/data/model/operation_result_model.dart",
+          "language": "dart",
+          "sizeLines": 34,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/data/model/status_info_model.dart",
+          "language": "dart",
+          "sizeLines": 50,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/data/model/technician_appointment_model.dart",
+          "language": "dart",
+          "sizeLines": 308,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "lib/features/promotions/domain/use_case/delete_promotion_use_case.dart": [],
+        "lib/features/promotions/domain/use_case/fetch_promotions_use_case.dart": [],
+        "lib/features/promotions/presentation/screen/create_promotion_screen.dart": [],
+        "lib/features/promotions/presentation/screen/promotions_list_screen.dart": [],
+        "lib/features/promotions/presentation/view_model/promotion_list_notifier.dart": [],
+        "lib/features/promotions/presentation/view_model/promotion_view_model.dart": [],
+        "lib/features/promotions/presentation/widget/promotions.dart": [],
+        "lib/features/promotions/provider/promotion_providers.dart": [],
+        "lib/features/splash/data/repository/splash_repository.dart": [],
+        "lib/features/splash/domain/repository/i_splash_repository.dart": [],
+        "lib/features/splash/domain/use_case/check_onboarding_use_case.dart": [],
+        "lib/features/splash/presentation/screens/splash_screen.dart": [],
+        "lib/features/splash/presentation/view_model/splash_state.dart": [],
+        "lib/features/splash/presentation/view_model/splash_view_model.dart": [],
+        "lib/features/splash/provider/splash_provider.dart": [],
+        "lib/features/technician/data/data_source/i_technician_remote_data_source.dart": [],
+        "lib/features/technician/data/data_source/technician_remote_data_source.dart": [],
+        "lib/features/technician/data/model/custom_package_category_model.dart": [],
+        "lib/features/technician/data/model/custom_package_item_model.dart": [],
+        "lib/features/technician/data/model/job_card_model.dart": [],
+        "lib/features/technician/data/model/job_card_package_line_model.dart": [],
+        "lib/features/technician/data/model/job_card_package_model.dart": [],
+        "lib/features/technician/data/model/operation_result_model.dart": [],
+        "lib/features/technician/data/model/status_info_model.dart": [],
+        "lib/features/technician/data/model/technician_appointment_model.dart": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 11,
+      "files": [
+        {
+          "path": "lib/features/technician/data/model/technician_booking_status_model.dart",
+          "language": "dart",
+          "sizeLines": 24,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/data/model/technician_slot_model.dart",
+          "language": "dart",
+          "sizeLines": 174,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/data/model/technician_summary_model.dart",
+          "language": "dart",
+          "sizeLines": 59,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/data/repository/technician_repository.dart",
+          "language": "dart",
+          "sizeLines": 230,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/entity/booking_status.dart",
+          "language": "dart",
+          "sizeLines": 49,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/entity/custom_package_category_entity.dart",
+          "language": "dart",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/entity/custom_package_item_entity.dart",
+          "language": "dart",
+          "sizeLines": 13,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/entity/job_card_entity.dart",
+          "language": "dart",
+          "sizeLines": 21,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/entity/job_card_package_entity.dart",
+          "language": "dart",
+          "sizeLines": 40,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/entity/job_card_package_line_entity.dart",
+          "language": "dart",
+          "sizeLines": 47,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/entity/operation_result_entity.dart",
+          "language": "dart",
+          "sizeLines": 13,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/entity/technician_appointment_entity.dart",
+          "language": "dart",
+          "sizeLines": 99,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/entity/technician_slot_entity.dart",
+          "language": "dart",
+          "sizeLines": 17,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/entity/technician_summary_entity.dart",
+          "language": "dart",
+          "sizeLines": 21,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/repository/i_technician_repository.dart",
+          "language": "dart",
+          "sizeLines": 105,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/use_case/add_custom_package_item_use_case.dart",
+          "language": "dart",
+          "sizeLines": 26,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/use_case/add_package_to_job_card_use_case.dart",
+          "language": "dart",
+          "sizeLines": 22,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/use_case/complete_service_request_use_case.dart",
+          "language": "dart",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/use_case/create_job_card_use_case.dart",
+          "language": "dart",
+          "sizeLines": 28,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/use_case/delete_custom_package_item_use_case.dart",
+          "language": "dart",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/use_case/delete_package_from_job_card_use_case.dart",
+          "language": "dart",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/use_case/get_booking_statuses_use_case.dart",
+          "language": "dart",
+          "sizeLines": 12,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/use_case/get_custom_package_categories_use_case.dart",
+          "language": "dart",
+          "sizeLines": 12,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/use_case/get_custom_package_items_use_case.dart",
+          "language": "dart",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/use_case/get_customer_appointments_use_case.dart",
+          "language": "dart",
+          "sizeLines": 25,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "lib/features/technician/data/model/technician_booking_status_model.dart": [],
+        "lib/features/technician/data/model/technician_slot_model.dart": [],
+        "lib/features/technician/data/model/technician_summary_model.dart": [],
+        "lib/features/technician/data/repository/technician_repository.dart": [],
+        "lib/features/technician/domain/entity/booking_status.dart": [],
+        "lib/features/technician/domain/entity/custom_package_category_entity.dart": [],
+        "lib/features/technician/domain/entity/custom_package_item_entity.dart": [],
+        "lib/features/technician/domain/entity/job_card_entity.dart": [],
+        "lib/features/technician/domain/entity/job_card_package_entity.dart": [],
+        "lib/features/technician/domain/entity/job_card_package_line_entity.dart": [],
+        "lib/features/technician/domain/entity/operation_result_entity.dart": [],
+        "lib/features/technician/domain/entity/technician_appointment_entity.dart": [],
+        "lib/features/technician/domain/entity/technician_slot_entity.dart": [],
+        "lib/features/technician/domain/entity/technician_summary_entity.dart": [],
+        "lib/features/technician/domain/repository/i_technician_repository.dart": [],
+        "lib/features/technician/domain/use_case/add_custom_package_item_use_case.dart": [],
+        "lib/features/technician/domain/use_case/add_package_to_job_card_use_case.dart": [],
+        "lib/features/technician/domain/use_case/complete_service_request_use_case.dart": [],
+        "lib/features/technician/domain/use_case/create_job_card_use_case.dart": [],
+        "lib/features/technician/domain/use_case/delete_custom_package_item_use_case.dart": [],
+        "lib/features/technician/domain/use_case/delete_package_from_job_card_use_case.dart": [],
+        "lib/features/technician/domain/use_case/get_booking_statuses_use_case.dart": [],
+        "lib/features/technician/domain/use_case/get_custom_package_categories_use_case.dart": [],
+        "lib/features/technician/domain/use_case/get_custom_package_items_use_case.dart": [],
+        "lib/features/technician/domain/use_case/get_customer_appointments_use_case.dart": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 12,
+      "files": [
+        {
+          "path": "lib/features/technician/domain/use_case/get_job_card_package_lines_use_case.dart",
+          "language": "dart",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/use_case/get_job_card_packages_use_case.dart",
+          "language": "dart",
+          "sizeLines": 12,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/use_case/get_packages_of_job_card_use_case.dart",
+          "language": "dart",
+          "sizeLines": 12,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/use_case/get_technician_appointments_use_case.dart",
+          "language": "dart",
+          "sizeLines": 22,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/use_case/get_technician_available_slots_use_case.dart",
+          "language": "dart",
+          "sizeLines": 18,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/use_case/post_checklist_use_case.dart",
+          "language": "dart",
+          "sizeLines": 20,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/use_case/search_nearby_technicians_use_case.dart",
+          "language": "dart",
+          "sizeLines": 24,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/use_case/update_appointment_status_use_case.dart",
+          "language": "dart",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/domain/utils/job_card_utils.dart",
+          "language": "dart",
+          "sizeLines": 74,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/presentation/screen/technician_appointment_details_screen.dart",
+          "language": "dart",
+          "sizeLines": 1531,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/presentation/screen/technician_checklist_screen.dart",
+          "language": "dart",
+          "sizeLines": 331,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/presentation/screen/technician_custom_package_screen.dart",
+          "language": "dart",
+          "sizeLines": 786,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/presentation/screen/technician_home_screen.dart",
+          "language": "dart",
+          "sizeLines": 739,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/presentation/screen/technician_job_card_management_screen.dart",
+          "language": "dart",
+          "sizeLines": 944,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/presentation/view_model/job_card_operation_state.dart",
+          "language": "dart",
+          "sizeLines": 35,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/presentation/view_model/job_card_operation_view_model.dart",
+          "language": "dart",
+          "sizeLines": 216,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/presentation/view_model/technician_appointment_update_state.dart",
+          "language": "dart",
+          "sizeLines": 24,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/presentation/view_model/technician_appointment_update_view_model.dart",
+          "language": "dart",
+          "sizeLines": 31,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/presentation/view_model/technician_appointments_state.dart",
+          "language": "dart",
+          "sizeLines": 69,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/presentation/view_model/technician_appointments_view_model.dart",
+          "language": "dart",
+          "sizeLines": 111,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/presentation/view_model/technician_search_state.dart",
+          "language": "dart",
+          "sizeLines": 29,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/presentation/view_model/technician_search_view_model.dart",
+          "language": "dart",
+          "sizeLines": 50,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/presentation/view_model/technician_slots_state.dart",
+          "language": "dart",
+          "sizeLines": 41,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/presentation/view_model/technician_slots_view_model.dart",
+          "language": "dart",
+          "sizeLines": 43,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/presentation/widget/maintenance_request_card.dart",
+          "language": "dart",
+          "sizeLines": 217,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "lib/features/technician/domain/use_case/get_job_card_package_lines_use_case.dart": [],
+        "lib/features/technician/domain/use_case/get_job_card_packages_use_case.dart": [],
+        "lib/features/technician/domain/use_case/get_packages_of_job_card_use_case.dart": [],
+        "lib/features/technician/domain/use_case/get_technician_appointments_use_case.dart": [],
+        "lib/features/technician/domain/use_case/get_technician_available_slots_use_case.dart": [],
+        "lib/features/technician/domain/use_case/post_checklist_use_case.dart": [],
+        "lib/features/technician/domain/use_case/search_nearby_technicians_use_case.dart": [],
+        "lib/features/technician/domain/use_case/update_appointment_status_use_case.dart": [],
+        "lib/features/technician/domain/utils/job_card_utils.dart": [],
+        "lib/features/technician/presentation/screen/technician_appointment_details_screen.dart": [],
+        "lib/features/technician/presentation/screen/technician_checklist_screen.dart": [],
+        "lib/features/technician/presentation/screen/technician_custom_package_screen.dart": [],
+        "lib/features/technician/presentation/screen/technician_home_screen.dart": [],
+        "lib/features/technician/presentation/screen/technician_job_card_management_screen.dart": [],
+        "lib/features/technician/presentation/view_model/job_card_operation_state.dart": [],
+        "lib/features/technician/presentation/view_model/job_card_operation_view_model.dart": [],
+        "lib/features/technician/presentation/view_model/technician_appointment_update_state.dart": [],
+        "lib/features/technician/presentation/view_model/technician_appointment_update_view_model.dart": [],
+        "lib/features/technician/presentation/view_model/technician_appointments_state.dart": [],
+        "lib/features/technician/presentation/view_model/technician_appointments_view_model.dart": [],
+        "lib/features/technician/presentation/view_model/technician_search_state.dart": [],
+        "lib/features/technician/presentation/view_model/technician_search_view_model.dart": [],
+        "lib/features/technician/presentation/view_model/technician_slots_state.dart": [],
+        "lib/features/technician/presentation/view_model/technician_slots_view_model.dart": [],
+        "lib/features/technician/presentation/widget/maintenance_request_card.dart": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 13,
+      "files": [
+        {
+          "path": "lib/features/technician/presentation/widget/status_picker_sheet.dart",
+          "language": "dart",
+          "sizeLines": 158,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/provider/technician_provider.dart",
+          "language": "dart",
+          "sizeLines": 306,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/service/technician_location_service.dart",
+          "language": "dart",
+          "sizeLines": 379,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/technician/service/technician_tracking_coordinator.dart",
+          "language": "dart",
+          "sizeLines": 231,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/upcoming_service/data/data_source/i_upcoming_service_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 15,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/upcoming_service/data/data_source/upcoming_service_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 90,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/upcoming_service/data/model/upcoming_service_model.dart",
+          "language": "dart",
+          "sizeLines": 124,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/upcoming_service/data/repository/upcoming_service_repository.dart",
+          "language": "dart",
+          "sizeLines": 62,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/upcoming_service/domain/entity/upcoming_service_entity.dart",
+          "language": "dart",
+          "sizeLines": 39,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/upcoming_service/domain/repository/i_upcoming_service_repository.dart",
+          "language": "dart",
+          "sizeLines": 14,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/upcoming_service/domain/use_case/cancel_appointment_use_case.dart",
+          "language": "dart",
+          "sizeLines": 17,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/upcoming_service/domain/use_case/get_upcoming_services_use_case.dart",
+          "language": "dart",
+          "sizeLines": 20,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/upcoming_service/presentation/screen/booking_detail_screen.dart",
+          "language": "dart",
+          "sizeLines": 777,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/upcoming_service/presentation/screen/customer_appointments_screen.dart",
+          "language": "dart",
+          "sizeLines": 840,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/upcoming_service/presentation/view_model/upcoming_service_action_state.dart",
+          "language": "dart",
+          "sizeLines": 20,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/upcoming_service/presentation/view_model/upcoming_service_action_view_model.dart",
+          "language": "dart",
+          "sizeLines": 32,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/upcoming_service/presentation/view_model/upcoming_service_state.dart",
+          "language": "dart",
+          "sizeLines": 27,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/upcoming_service/presentation/view_model/upcoming_service_view_model.dart",
+          "language": "dart",
+          "sizeLines": 41,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/upcoming_service/presentation/widget/booking_card.dart",
+          "language": "dart",
+          "sizeLines": 194,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/upcoming_service/presentation/widget/upcoming_service_section.dart",
+          "language": "dart",
+          "sizeLines": 348,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/upcoming_service/provider/upcoming_service_provider.dart",
+          "language": "dart",
+          "sizeLines": 56,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/data/data_source/i_user_car_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 13,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/data/data_source/user_car_remote_data_source.dart",
+          "language": "dart",
+          "sizeLines": 127,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/data/model/car_brand_model.dart",
+          "language": "dart",
+          "sizeLines": 23,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/data/model/car_model.dart",
+          "language": "dart",
+          "sizeLines": 78,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "lib/features/technician/presentation/widget/status_picker_sheet.dart": [],
+        "lib/features/technician/provider/technician_provider.dart": [],
+        "lib/features/technician/service/technician_location_service.dart": [],
+        "lib/features/technician/service/technician_tracking_coordinator.dart": [],
+        "lib/features/upcoming_service/data/data_source/i_upcoming_service_remote_data_source.dart": [],
+        "lib/features/upcoming_service/data/data_source/upcoming_service_remote_data_source.dart": [],
+        "lib/features/upcoming_service/data/model/upcoming_service_model.dart": [],
+        "lib/features/upcoming_service/data/repository/upcoming_service_repository.dart": [],
+        "lib/features/upcoming_service/domain/entity/upcoming_service_entity.dart": [],
+        "lib/features/upcoming_service/domain/repository/i_upcoming_service_repository.dart": [],
+        "lib/features/upcoming_service/domain/use_case/cancel_appointment_use_case.dart": [],
+        "lib/features/upcoming_service/domain/use_case/get_upcoming_services_use_case.dart": [],
+        "lib/features/upcoming_service/presentation/screen/booking_detail_screen.dart": [],
+        "lib/features/upcoming_service/presentation/screen/customer_appointments_screen.dart": [],
+        "lib/features/upcoming_service/presentation/view_model/upcoming_service_action_state.dart": [],
+        "lib/features/upcoming_service/presentation/view_model/upcoming_service_action_view_model.dart": [],
+        "lib/features/upcoming_service/presentation/view_model/upcoming_service_state.dart": [],
+        "lib/features/upcoming_service/presentation/view_model/upcoming_service_view_model.dart": [],
+        "lib/features/upcoming_service/presentation/widget/booking_card.dart": [],
+        "lib/features/upcoming_service/presentation/widget/upcoming_service_section.dart": [],
+        "lib/features/upcoming_service/provider/upcoming_service_provider.dart": [],
+        "lib/features/user_cars/data/data_source/i_user_car_remote_data_source.dart": [],
+        "lib/features/user_cars/data/data_source/user_car_remote_data_source.dart": [],
+        "lib/features/user_cars/data/model/car_brand_model.dart": [],
+        "lib/features/user_cars/data/model/car_model.dart": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 14,
+      "files": [
+        {
+          "path": "lib/features/user_cars/data/model/manufacture_model.dart",
+          "language": "dart",
+          "sizeLines": 22,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/data/repository/user_car_repository.dart",
+          "language": "dart",
+          "sizeLines": 45,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/domain/entity/car_brand_entity.dart",
+          "language": "dart",
+          "sizeLines": 5,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/domain/entity/car_entity.dart",
+          "language": "dart",
+          "sizeLines": 32,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/domain/entity/manufacture_entity.dart",
+          "language": "dart",
+          "sizeLines": 5,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/domain/repository/i_user_car_repository.dart",
+          "language": "dart",
+          "sizeLines": 13,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/domain/use_case/add_user_car_use_case.dart",
+          "language": "dart",
+          "sizeLines": 10,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/domain/use_case/get_car_brands_model_use_case.dart",
+          "language": "dart",
+          "sizeLines": 11,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/domain/use_case/get_manufacturers_use_case.dart",
+          "language": "dart",
+          "sizeLines": 9,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/domain/use_case/get_user_cars_use_case.dart",
+          "language": "dart",
+          "sizeLines": 13,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/domain/use_case/update_user_car_use_case.dart",
+          "language": "dart",
+          "sizeLines": 11,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/presentation/screen/add_new_car_screen.dart",
+          "language": "dart",
+          "sizeLines": 1229,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/presentation/screen/user_car_details_screen.dart",
+          "language": "dart",
+          "sizeLines": 470,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/presentation/screen/user_cars_list_screen.dart",
+          "language": "dart",
+          "sizeLines": 98,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/presentation/view_model/add_user_car_state.dart",
+          "language": "dart",
+          "sizeLines": 12,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/presentation/view_model/add_user_car_view_model.dart",
+          "language": "dart",
+          "sizeLines": 40,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/presentation/view_model/car_brands_state.dart",
+          "language": "dart",
+          "sizeLines": 20,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/presentation/view_model/car_brands_view_model.dart",
+          "language": "dart",
+          "sizeLines": 22,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/presentation/view_model/manufacturers_state.dart",
+          "language": "dart",
+          "sizeLines": 19,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/presentation/view_model/manufacturers_view_model.dart",
+          "language": "dart",
+          "sizeLines": 26,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/presentation/view_model/user_cars_state.dart",
+          "language": "dart",
+          "sizeLines": 24,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/presentation/view_model/user_cars_view_model.dart",
+          "language": "dart",
+          "sizeLines": 28,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/presentation/widget/user_car_home_item_card.dart",
+          "language": "dart",
+          "sizeLines": 233,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/presentation/widget/user_car_list_item.dart",
+          "language": "dart",
+          "sizeLines": 303,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/presentation/widget/user_cars_empty_state.dart",
+          "language": "dart",
+          "sizeLines": 68,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "lib/features/user_cars/data/model/manufacture_model.dart": [],
+        "lib/features/user_cars/data/repository/user_car_repository.dart": [],
+        "lib/features/user_cars/domain/entity/car_brand_entity.dart": [],
+        "lib/features/user_cars/domain/entity/car_entity.dart": [],
+        "lib/features/user_cars/domain/entity/manufacture_entity.dart": [],
+        "lib/features/user_cars/domain/repository/i_user_car_repository.dart": [],
+        "lib/features/user_cars/domain/use_case/add_user_car_use_case.dart": [],
+        "lib/features/user_cars/domain/use_case/get_car_brands_model_use_case.dart": [],
+        "lib/features/user_cars/domain/use_case/get_manufacturers_use_case.dart": [],
+        "lib/features/user_cars/domain/use_case/get_user_cars_use_case.dart": [],
+        "lib/features/user_cars/domain/use_case/update_user_car_use_case.dart": [],
+        "lib/features/user_cars/presentation/screen/add_new_car_screen.dart": [],
+        "lib/features/user_cars/presentation/screen/user_car_details_screen.dart": [],
+        "lib/features/user_cars/presentation/screen/user_cars_list_screen.dart": [],
+        "lib/features/user_cars/presentation/view_model/add_user_car_state.dart": [],
+        "lib/features/user_cars/presentation/view_model/add_user_car_view_model.dart": [],
+        "lib/features/user_cars/presentation/view_model/car_brands_state.dart": [],
+        "lib/features/user_cars/presentation/view_model/car_brands_view_model.dart": [],
+        "lib/features/user_cars/presentation/view_model/manufacturers_state.dart": [],
+        "lib/features/user_cars/presentation/view_model/manufacturers_view_model.dart": [],
+        "lib/features/user_cars/presentation/view_model/user_cars_state.dart": [],
+        "lib/features/user_cars/presentation/view_model/user_cars_view_model.dart": [],
+        "lib/features/user_cars/presentation/widget/user_car_home_item_card.dart": [],
+        "lib/features/user_cars/presentation/widget/user_car_list_item.dart": [],
+        "lib/features/user_cars/presentation/widget/user_cars_empty_state.dart": []
+      },
+      "neighborMap": {}
+    },
+    {
+      "batchIndex": 15,
+      "files": [
+        {
+          "path": "lib/features/user_cars/presentation/widget/user_cars.dart",
+          "language": "dart",
+          "sizeLines": 354,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/features/user_cars/provider/user_cars_provider.dart",
+          "language": "dart",
+          "sizeLines": 74,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/generated/intl/messages_all.dart",
+          "language": "dart",
+          "sizeLines": 72,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/generated/intl/messages_ar.dart",
+          "language": "dart",
+          "sizeLines": 505,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/generated/intl/messages_en.dart",
+          "language": "dart",
+          "sizeLines": 509,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/generated/l10n.dart",
+          "language": "dart",
+          "sizeLines": 2053,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/l10n/intl_ar.arb",
+          "language": "arb",
+          "sizeLines": 302,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/l10n/intl_en.arb",
+          "language": "arb",
+          "sizeLines": 303,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/legacy/coupon_header_data_model.dart",
+          "language": "dart",
+          "sizeLines": 25,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/legacy/coupon_header_model.dart",
+          "language": "dart",
+          "sizeLines": 57,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/legacy/status_info_model.dart",
+          "language": "dart",
+          "sizeLines": 16,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/main.dart",
+          "language": "dart",
+          "sizeLines": 71,
+          "fileCategory": "code"
+        },
+        {
+          "path": "lib/route_generator.dart",
+          "language": "dart",
+          "sizeLines": 106,
+          "fileCategory": "code"
+        },
+        {
+          "path": "test/widget_test.dart",
+          "language": "dart",
+          "sizeLines": 30,
+          "fileCategory": "code"
+        }
+      ],
+      "batchImportData": {
+        "lib/features/user_cars/presentation/widget/user_cars.dart": [],
+        "lib/features/user_cars/provider/user_cars_provider.dart": [],
+        "lib/generated/intl/messages_all.dart": [],
+        "lib/generated/intl/messages_ar.dart": [],
+        "lib/generated/intl/messages_en.dart": [],
+        "lib/generated/l10n.dart": [],
+        "lib/l10n/intl_ar.arb": [],
+        "lib/l10n/intl_en.arb": [],
+        "lib/legacy/coupon_header_data_model.dart": [],
+        "lib/legacy/coupon_header_model.dart": [],
+        "lib/legacy/status_info_model.dart": [],
+        "lib/main.dart": [],
+        "lib/route_generator.dart": [],
+        "test/widget_test.dart": []
+      },
+      "neighborMap": {}
+    }
+  ]
+}

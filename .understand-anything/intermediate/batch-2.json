@@ -1,0 +1,52 @@
+{
+  "nodes": [
+    {
+      "id": "config:analysis_options.yaml",
+      "type": "config",
+      "name": "analysis_options.yaml",
+      "filePath": "analysis_options.yaml",
+      "summary": "Dart analyzer configuration that activates the flutter_lints recommended rule set for static analysis and linting across the project.",
+      "tags": ["configuration", "linting", "dart", "static-analysis"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:codex_rules.yaml",
+      "type": "config",
+      "name": "codex_rules.yaml",
+      "filePath": "codex_rules.yaml",
+      "summary": "AI coding-assistant rule set documenting the feature-first clean architecture, Riverpod state management conventions, localization discipline, networking/storage patterns, and feature-specific guidance (auth, user cars, book service, technician, technician tracking) for this Flutter app.",
+      "tags": ["configuration", "architecture", "documentation", "ai-guidance", "riverpod"],
+      "complexity": "moderate",
+      "languageNotes": "Structured as a list of glob-scoped rule entries, each pairing file path patterns with prose instructions consumed by an AI coding assistant rather than by tooling."
+    },
+    {
+      "id": "config:devtools_options.yaml",
+      "type": "config",
+      "name": "devtools_options.yaml",
+      "filePath": "devtools_options.yaml",
+      "summary": "Minimal Dart & Flutter DevTools settings file controlling extension enablement state for the project.",
+      "tags": ["configuration", "devtools", "dart", "tooling"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:firebase.json",
+      "type": "config",
+      "name": "firebase.json",
+      "filePath": "firebase.json",
+      "summary": "FlutterFire configuration mapping the Android and iOS app IDs and the motorlube-qa Firebase project to generated platform config files (google-services.json, GoogleService-Info.plist, firebase_options.dart).",
+      "tags": ["configuration", "firebase", "infrastructure", "mobile"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:pubspec.yaml",
+      "type": "config",
+      "name": "pubspec.yaml",
+      "filePath": "pubspec.yaml",
+      "summary": "Flutter project manifest for the newmotorlube app (v2.0.0+101) declaring SDK constraints, dependencies (Riverpod, Dio, Firebase suite, geolocation, maps, image handling, background services), dev dependencies, and bundled assets/fonts (Cairo, RobotoSlab).",
+      "tags": ["configuration", "dependency-management", "flutter", "build-system"],
+      "complexity": "moderate",
+      "languageNotes": "Declares Firebase (core, messaging, storage, firestore), location/background-service packages, and flutter_intl for localization code generation, indicating a feature-rich service-booking mobile app with background technician tracking."
+    }
+  ],
+  "edges": []
+}

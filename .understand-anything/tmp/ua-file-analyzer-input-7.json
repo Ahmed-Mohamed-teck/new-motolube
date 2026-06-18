@@ -1,0 +1,182 @@
+{
+  "projectRoot": "/Users/ehsanfe/flutterprojects/newmotorlube",
+  "batchFiles": [
+    {
+      "path": "lib/features/contact_us/domain/entity/contact_us_entity.dart",
+      "language": "dart",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/contact_us/domain/repository/i_contact_us_repository.dart",
+      "language": "dart",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/contact_us/domain/use_case/send_contact_us_meassage.dart",
+      "language": "dart",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/contact_us/presentation/screen/contact_us_screen.dart",
+      "language": "dart",
+      "sizeLines": 309,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/contact_us/presentation/view_model/contact_us_state.dart",
+      "language": "dart",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/contact_us/presentation/view_model/contact_us_view_model.dart",
+      "language": "dart",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/contact_us/provider/contact_us_provider.dart",
+      "language": "dart",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/coupons/data/data_source/coupon_remote_data_source.dart",
+      "language": "dart",
+      "sizeLines": 54,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/coupons/data/data_source/i_coupon_remote_data_source.dart",
+      "language": "dart",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/coupons/data/model/coupon_model.dart",
+      "language": "dart",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/coupons/data/repository/coupon_repository.dart",
+      "language": "dart",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/coupons/domain/entity/coupon_entity.dart",
+      "language": "dart",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/coupons/domain/repository/i_coupon_repository.dart",
+      "language": "dart",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/coupons/domain/use_case/create_coupon_use_case.dart",
+      "language": "dart",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/coupons/domain/use_case/fetch_coupons_use_case.dart",
+      "language": "dart",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/coupons/presentation/screen/coupon_list_screen.dart",
+      "language": "dart",
+      "sizeLines": 335,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/coupons/presentation/view_model/coupon_notifier.dart",
+      "language": "dart",
+      "sizeLines": 57,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/coupons/presentation/view_model/coupon_state.dart",
+      "language": "dart",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/coupons/provider/coupon_providers.dart",
+      "language": "dart",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/force_update/data/data_source/force_update_remote_data_source.dart",
+      "language": "dart",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/force_update/data/model/app_info_model.dart",
+      "language": "dart",
+      "sizeLines": 17,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/force_update/data/repository/force_update_repository.dart",
+      "language": "dart",
+      "sizeLines": 86,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/force_update/domain/entity/app_info_entity.dart",
+      "language": "dart",
+      "sizeLines": 11,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/force_update/domain/entity/force_update_result.dart",
+      "language": "dart",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/features/force_update/domain/repository/i_force_update_repository.dart",
+      "language": "dart",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "lib/features/contact_us/domain/entity/contact_us_entity.dart": [],
+    "lib/features/contact_us/domain/repository/i_contact_us_repository.dart": [],
+    "lib/features/contact_us/domain/use_case/send_contact_us_meassage.dart": [],
+    "lib/features/contact_us/presentation/screen/contact_us_screen.dart": [],
+    "lib/features/contact_us/presentation/view_model/contact_us_state.dart": [],
+    "lib/features/contact_us/presentation/view_model/contact_us_view_model.dart": [],
+    "lib/features/contact_us/provider/contact_us_provider.dart": [],
+    "lib/features/coupons/data/data_source/coupon_remote_data_source.dart": [],
+    "lib/features/coupons/data/data_source/i_coupon_remote_data_source.dart": [],
+    "lib/features/coupons/data/model/coupon_model.dart": [],
+    "lib/features/coupons/data/repository/coupon_repository.dart": [],
+    "lib/features/coupons/domain/entity/coupon_entity.dart": [],
+    "lib/features/coupons/domain/repository/i_coupon_repository.dart": [],
+    "lib/features/coupons/domain/use_case/create_coupon_use_case.dart": [],
+    "lib/features/coupons/domain/use_case/fetch_coupons_use_case.dart": [],
+    "lib/features/coupons/presentation/screen/coupon_list_screen.dart": [],
+    "lib/features/coupons/presentation/view_model/coupon_notifier.dart": [],
+    "lib/features/coupons/presentation/view_model/coupon_state.dart": [],
+    "lib/features/coupons/provider/coupon_providers.dart": [],
+    "lib/features/force_update/data/data_source/force_update_remote_data_source.dart": [],
+    "lib/features/force_update/data/model/app_info_model.dart": [],
+    "lib/features/force_update/data/repository/force_update_repository.dart": [],
+    "lib/features/force_update/domain/entity/app_info_entity.dart": [],
+    "lib/features/force_update/domain/entity/force_update_result.dart": [],
+    "lib/features/force_update/domain/repository/i_force_update_repository.dart": []
+  }
+}

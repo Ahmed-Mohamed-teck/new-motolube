@@ -1,0 +1,2795 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".dart-tool/CLIENT_ID",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {}
+    },
+    {
+      "path": ".dart-tool/dart-flutter-telemetry-dismissed-surveys.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 0
+      }
+    },
+    {
+      "path": ".dart-tool/dart-flutter-telemetry-session.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "sections": [
+        {
+          "heading": "session_id",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "last_ping",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": ".dart-tool/dart-flutter-telemetry.config",
+      "language": "config",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 33,
+      "metrics": {}
+    },
+    {
+      "path": ".metadata",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 33,
+      "nonEmptyLines": 28,
+      "metrics": {}
+    },
+    {
+      "path": ".understand-anything/.understandignore",
+      "language": "unknown",
+      "fileCategory": "code",
+      "totalLines": 66,
+      "nonEmptyLines": 59,
+      "metrics": {}
+    },
+    {
+      "path": ".understand-anything/intermediate/scan-result.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 2276,
+      "nonEmptyLines": 2276,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "description",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "languages",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "frameworks",
+          "level": 1,
+          "line": 9
+        },
+        {
+          "heading": "files",
+          "level": 1,
+          "line": 15
+        },
+        {
+          "heading": "totalFiles",
+          "level": 1,
+          "line": 1949
+        },
+        {
+          "heading": "filteredByIgnore",
+          "level": 1,
+          "line": 1950
+        },
+        {
+          "heading": "estimatedComplexity",
+          "level": 1,
+          "line": 1951
+        },
+        {
+          "heading": "importMap",
+          "level": 1,
+          "line": 1952
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "lib/core/providers/current_locale_provider.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 26,
+      "nonEmptyLines": 20,
+      "functions": [
+        {
+          "name": "CurrentLocaleProvider",
+          "startLine": 5,
+          "endLine": 5,
+          "params": []
+        },
+        {
+          "name": "currentLocale",
+          "startLine": 8,
+          "endLine": 8,
+          "params": []
+        },
+        {
+          "name": "init",
+          "startLine": 10,
+          "endLine": 10,
+          "params": []
+        },
+        {
+          "name": "updateLocale",
+          "startLine": 15,
+          "endLine": 15,
+          "params": [
+            "newLocale"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "CurrentLocaleProvider",
+          "startLine": 4,
+          "endLine": 19,
+          "methods": [
+            "CurrentLocaleProvider",
+            "currentLocale",
+            "init",
+            "updateLocale"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "CurrentLocaleProvider",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "currentLocale",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "init",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "updateLocale",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "CurrentLocaleProvider",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "init",
+          "callee": "getString",
+          "lineNumber": 11
+        },
+        {
+          "caller": "updateLocale",
+          "callee": "setString",
+          "lineNumber": 16
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 4,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/core/providers/dio_provider.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 126,
+      "nonEmptyLines": 104,
+      "functions": [
+        {
+          "name": "DioClient",
+          "startLine": 46,
+          "endLine": 46,
+          "params": [
+            "_dio"
+          ]
+        },
+        {
+          "name": "get",
+          "startLine": 49,
+          "endLine": 56,
+          "params": [
+            "uri",
+            "queryParameters",
+            "options",
+            "cancelToken",
+            "onReceiveProgress",
+            "requiredApiAuth"
+          ]
+        },
+        {
+          "name": "post",
+          "startLine": 77,
+          "endLine": 86,
+          "params": [
+            "uri",
+            "data",
+            "queryParameters",
+            "options",
+            "cancelToken",
+            "onSendProgress",
+            "onReceiveProgress",
+            "requiredApiAuth"
+          ]
+        },
+        {
+          "name": "_retry",
+          "startLine": 114,
+          "endLine": 114,
+          "params": [
+            "requestOptions"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "DioClient",
+          "startLine": 39,
+          "endLine": 126,
+          "methods": [
+            "DioClient",
+            "get",
+            "post",
+            "_retry"
+          ],
+          "properties": [
+            "_dio"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "DioClient",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "get",
+          "line": 49,
+          "isDefault": false
+        },
+        {
+          "name": "post",
+          "line": 77,
+          "isDefault": false
+        },
+        {
+          "name": "DioClient",
+          "line": 39,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "get",
+          "callee": "Options",
+          "lineNumber": 59
+        },
+        {
+          "caller": "get",
+          "callee": "get",
+          "lineNumber": 63
+        },
+        {
+          "caller": "post",
+          "callee": "Options",
+          "lineNumber": 89
+        },
+        {
+          "caller": "post",
+          "callee": "post",
+          "lineNumber": 94
+        },
+        {
+          "caller": "_retry",
+          "callee": "Options",
+          "lineNumber": 115
+        },
+        {
+          "caller": "_retry",
+          "callee": "request",
+          "lineNumber": 119
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 4,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/core/providers/general_providers.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 13,
+      "functions": [
+        {
+          "name": "initializeSharedPreferences",
+          "startLine": 8,
+          "endLine": 8,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "initializeSharedPreferences",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "initializeSharedPreferences",
+          "callee": "create",
+          "lineNumber": 9
+        },
+        {
+          "caller": "initializeSharedPreferences",
+          "callee": "SharedPreferencesWithCacheOptions",
+          "lineNumber": 10
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/core/providers/global_lang_provider.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 9,
+      "nonEmptyLines": 5,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/core/providers/plate_chars_provider.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 91,
+      "nonEmptyLines": 84,
+      "functions": [
+        {
+          "name": "getPlateChars",
+          "startLine": 68,
+          "endLine": 68,
+          "params": [
+            "language"
+          ]
+        },
+        {
+          "name": "getPlateNumbers",
+          "startLine": 79,
+          "endLine": 79,
+          "params": [
+            "language"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "CharListProvider",
+          "startLine": 1,
+          "endLine": 91,
+          "methods": [
+            "getPlateChars",
+            "getPlateNumbers"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "getPlateChars",
+          "line": 68,
+          "isDefault": false
+        },
+        {
+          "name": "getPlateNumbers",
+          "line": 79,
+          "isDefault": false
+        },
+        {
+          "name": "CharListProvider",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getPlateChars",
+          "callee": "toLowerCase",
+          "lineNumber": 69
+        },
+        {
+          "caller": "getPlateChars",
+          "callee": "ArgumentError",
+          "lineNumber": 75
+        },
+        {
+          "caller": "getPlateNumbers",
+          "callee": "toLowerCase",
+          "lineNumber": 80
+        },
+        {
+          "caller": "getPlateNumbers",
+          "callee": "ArgumentError",
+          "lineNumber": 86
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/core/providers/push_notifications_service.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 208,
+      "nonEmptyLines": 173,
+      "functions": [
+        {
+          "name": "firebaseMessagingBackgroundHandler",
+          "startLine": 10,
+          "endLine": 10,
+          "params": [
+            "message"
+          ]
+        },
+        {
+          "name": "PushNotificationsService._",
+          "startLine": 16,
+          "endLine": 16,
+          "params": []
+        },
+        {
+          "name": "initialize",
+          "startLine": 34,
+          "endLine": 34,
+          "params": []
+        },
+        {
+          "name": "getToken",
+          "startLine": 46,
+          "endLine": 46,
+          "params": []
+        },
+        {
+          "name": "_requestPermission",
+          "startLine": 56,
+          "endLine": 56,
+          "params": []
+        },
+        {
+          "name": "_initializeLocalNotifications",
+          "startLine": 68,
+          "endLine": 68,
+          "params": []
+        },
+        {
+          "name": "_initializePushHandlers",
+          "startLine": 105,
+          "endLine": 105,
+          "params": []
+        },
+        {
+          "name": "_logToken",
+          "startLine": 125,
+          "endLine": 125,
+          "params": []
+        },
+        {
+          "name": "_showForegroundNotification",
+          "startLine": 135,
+          "endLine": 135,
+          "params": [
+            "message"
+          ]
+        },
+        {
+          "name": "_handleMessage",
+          "startLine": 168,
+          "endLine": 168,
+          "params": [
+            "message"
+          ]
+        },
+        {
+          "name": "_waitForApnsTokenIfNeeded",
+          "startLine": 190,
+          "endLine": 190,
+          "params": []
+        },
+        {
+          "name": "_isApplePlatform",
+          "startLine": 205,
+          "endLine": 205,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "PushNotificationsService",
+          "startLine": 15,
+          "endLine": 208,
+          "methods": [
+            "PushNotificationsService._",
+            "initialize",
+            "getToken",
+            "_requestPermission",
+            "_initializeLocalNotifications",
+            "_initializePushHandlers",
+            "_logToken",
+            "_showForegroundNotification",
+            "_handleMessage",
+            "_waitForApnsTokenIfNeeded",
+            "_isApplePlatform"
+          ],
+          "properties": [
+            "_initialized",
+            "_messaging",
+            "_localNotifications"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "firebaseMessagingBackgroundHandler",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "PushNotificationsService._",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "initialize",
+          "line": 34,
+          "isDefault": false
+        },
+        {
+          "name": "getToken",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "PushNotificationsService",
+          "line": 15,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "firebaseMessagingBackgroundHandler",
+          "callee": "initializeApp",
+          "lineNumber": 11
+        },
+        {
+          "caller": "firebaseMessagingBackgroundHandler",
+          "callee": "debugPrint",
+          "lineNumber": 12
+        },
+        {
+          "caller": "initialize",
+          "callee": "onBackgroundMessage",
+          "lineNumber": 38
+        },
+        {
+          "caller": "initialize",
+          "callee": "_requestPermission",
+          "lineNumber": 40
+        },
+        {
+          "caller": "initialize",
+          "callee": "_initializeLocalNotifications",
+          "lineNumber": 41
+        },
+        {
+          "caller": "initialize",
+          "callee": "_initializePushHandlers",
+          "lineNumber": 42
+        },
+        {
+          "caller": "initialize",
+          "callee": "_logToken",
+          "lineNumber": 43
+        },
+        {
+          "caller": "getToken",
+          "callee": "_waitForApnsTokenIfNeeded",
+          "lineNumber": 48
+        },
+        {
+          "caller": "getToken",
+          "callee": "getToken",
+          "lineNumber": 49
+        },
+        {
+          "caller": "getToken",
+          "callee": "debugPrint",
+          "lineNumber": 51
+        },
+        {
+          "caller": "_requestPermission",
+          "callee": "requestPermission",
+          "lineNumber": 57
+        },
+        {
+          "caller": "_requestPermission",
+          "callee": "debugPrint",
+          "lineNumber": 62
+        },
+        {
+          "caller": "_initializeLocalNotifications",
+          "callee": "AndroidInitializationSettings",
+          "lineNumber": 69
+        },
+        {
+          "caller": "_initializeLocalNotifications",
+          "callee": "DarwinInitializationSettings",
+          "lineNumber": 72
+        },
+        {
+          "caller": "_initializeLocalNotifications",
+          "callee": "InitializationSettings",
+          "lineNumber": 73
+        },
+        {
+          "caller": "_initializeLocalNotifications",
+          "callee": "initialize",
+          "lineNumber": 78
+        },
+        {
+          "caller": "_initializeLocalNotifications",
+          "callee": "_handleMessage",
+          "lineNumber": 85
+        },
+        {
+          "caller": "_initializeLocalNotifications",
+          "callee": "fromMap",
+          "lineNumber": 85
+        },
+        {
+          "caller": "_initializeLocalNotifications",
+          "callee": "jsonDecode",
+          "lineNumber": 85
+        },
+        {
+          "caller": "_initializeLocalNotifications",
+          "callee": "debugPrint",
+          "lineNumber": 87
+        },
+        {
+          "caller": "_initializeLocalNotifications",
+          "callee": "resolvePlatformSpecificImplementation",
+          "lineNumber": 93
+        },
+        {
+          "caller": "_initializeLocalNotifications",
+          "callee": "resolvePlatformSpecificImplementation",
+          "lineNumber": 99
+        },
+        {
+          "caller": "_initializePushHandlers",
+          "callee": "setForegroundNotificationPresentationOptions",
+          "lineNumber": 107
+        },
+        {
+          "caller": "_initializePushHandlers",
+          "callee": "getInitialMessage",
+          "lineNumber": 113
+        },
+        {
+          "caller": "_initializePushHandlers",
+          "callee": "_handleMessage",
+          "lineNumber": 115
+        },
+        {
+          "caller": "_initializePushHandlers",
+          "callee": "listen",
+          "lineNumber": 118
+        },
+        {
+          "caller": "_initializePushHandlers",
+          "callee": "listen",
+          "lineNumber": 119
+        },
+        {
+          "caller": "_initializePushHandlers",
+          "callee": "listen",
+          "lineNumber": 120
+        },
+        {
+          "caller": "_initializePushHandlers",
+          "callee": "debugPrint",
+          "lineNumber": 121
+        },
+        {
+          "caller": "_logToken",
+          "callee": "_waitForApnsTokenIfNeeded",
+          "lineNumber": 126
+        },
+        {
+          "caller": "_logToken",
+          "callee": "debugPrint",
+          "lineNumber": 127
+        },
+        {
+          "caller": "_logToken",
+          "callee": "getToken",
+          "lineNumber": 129
+        },
+        {
+          "caller": "_logToken",
+          "callee": "debugPrint",
+          "lineNumber": 131
+        },
+        {
+          "caller": "_showForegroundNotification",
+          "callee": "debugPrint",
+          "lineNumber": 136
+        },
+        {
+          "caller": "_showForegroundNotification",
+          "callee": "show",
+          "lineNumber": 150
+        },
+        {
+          "caller": "_showForegroundNotification",
+          "callee": "NotificationDetails",
+          "lineNumber": 154
+        },
+        {
+          "caller": "_showForegroundNotification",
+          "callee": "AndroidNotificationDetails",
+          "lineNumber": 155
+        },
+        {
+          "caller": "_showForegroundNotification",
+          "callee": "DarwinNotificationDetails",
+          "lineNumber": 162
+        },
+        {
+          "caller": "_showForegroundNotification",
+          "callee": "jsonEncode",
+          "lineNumber": 164
+        },
+        {
+          "caller": "_showForegroundNotification",
+          "callee": "toMap",
+          "lineNumber": 164
+        },
+        {
+          "caller": "_handleMessage",
+          "callee": "debugPrint",
+          "lineNumber": 169
+        },
+        {
+          "caller": "_handleMessage",
+          "callee": "debugPrint",
+          "lineNumber": 178
+        },
+        {
+          "caller": "_handleMessage",
+          "callee": "pushNamed",
+          "lineNumber": 187
+        },
+        {
+          "caller": "_waitForApnsTokenIfNeeded",
+          "callee": "getAPNSToken",
+          "lineNumber": 197
+        },
+        {
+          "caller": "_waitForApnsTokenIfNeeded",
+          "callee": "Duration",
+          "lineNumber": 199
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 12,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/core/providers/secure_storage.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 9,
+      "nonEmptyLines": 7,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/core/state/view_state.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 42,
+      "nonEmptyLines": 30,
+      "functions": [
+        {
+          "name": "ErrorViewState",
+          "startLine": 10,
+          "endLine": 10,
+          "params": [
+            "errorMessage"
+          ]
+        },
+        {
+          "name": "LoadedViewState",
+          "startLine": 18,
+          "endLine": 20,
+          "params": [
+            "data"
+          ]
+        },
+        {
+          "name": "hashCode",
+          "startLine": 30,
+          "endLine": 30,
+          "params": []
+        },
+        {
+          "name": "toString",
+          "startLine": 33,
+          "endLine": 33,
+          "params": []
+        },
+        {
+          "name": "copyWith",
+          "startLine": 35,
+          "endLine": 37,
+          "params": [
+            "data"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ViewState",
+          "startLine": 1,
+          "endLine": 1,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "InitialViewState",
+          "startLine": 3,
+          "endLine": 3,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "LoadingViewState",
+          "startLine": 5,
+          "endLine": 5,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "ErrorViewState",
+          "startLine": 7,
+          "endLine": 11,
+          "methods": [
+            "ErrorViewState"
+          ],
+          "properties": [
+            "errorMessage"
+          ]
+        },
+        {
+          "name": "EmptyViewState",
+          "startLine": 13,
+          "endLine": 13,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "LoadedViewState",
+          "startLine": 15,
+          "endLine": 42,
+          "methods": [
+            "LoadedViewState",
+            "hashCode",
+            "toString",
+            "copyWith"
+          ],
+          "properties": [
+            "data"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ViewState",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "InitialViewState",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "LoadingViewState",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "ErrorViewState",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "ErrorViewState",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "EmptyViewState",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "LoadedViewState",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "hashCode",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "toString",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "copyWith",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "LoadedViewState",
+          "line": 15,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "copyWith",
+          "callee": "LoadedViewState",
+          "lineNumber": 38
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 11,
+        "functionCount": 5,
+        "classCount": 6
+      }
+    },
+    {
+      "path": "lib/core/storage/secure_store.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 45,
+      "nonEmptyLines": 41,
+      "functions": [
+        {
+          "name": "saveAuth",
+          "startLine": 8,
+          "endLine": 19,
+          "params": [
+            "jwtToken",
+            "firebaseToken",
+            "fireBaseId",
+            "tokenType",
+            "expiresIn",
+            "oracleId",
+            "userName",
+            "userMobileNumber",
+            "userEmail",
+            "userType"
+          ]
+        },
+        {
+          "name": "readToken",
+          "startLine": 32,
+          "endLine": 32,
+          "params": []
+        },
+        {
+          "name": "readFcmToken",
+          "startLine": 33,
+          "endLine": 33,
+          "params": []
+        },
+        {
+          "name": "fireBaseId",
+          "startLine": 34,
+          "endLine": 34,
+          "params": []
+        },
+        {
+          "name": "phoneNumber",
+          "startLine": 35,
+          "endLine": 35,
+          "params": []
+        },
+        {
+          "name": "userName",
+          "startLine": 36,
+          "endLine": 36,
+          "params": []
+        },
+        {
+          "name": "userEmail",
+          "startLine": 37,
+          "endLine": 37,
+          "params": []
+        },
+        {
+          "name": "userId",
+          "startLine": 38,
+          "endLine": 38,
+          "params": []
+        },
+        {
+          "name": "oracleId",
+          "startLine": 39,
+          "endLine": 39,
+          "params": []
+        },
+        {
+          "name": "userType",
+          "startLine": 40,
+          "endLine": 40,
+          "params": []
+        },
+        {
+          "name": "clear",
+          "startLine": 42,
+          "endLine": 42,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "SecureStore",
+          "startLine": 4,
+          "endLine": 45,
+          "methods": [
+            "saveAuth",
+            "readToken",
+            "readFcmToken",
+            "fireBaseId",
+            "phoneNumber",
+            "userName",
+            "userEmail",
+            "userId",
+            "oracleId",
+            "userType",
+            "clear"
+          ],
+          "properties": [
+            "_storage"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "saveAuth",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "readToken",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "readFcmToken",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "fireBaseId",
+          "line": 34,
+          "isDefault": false
+        },
+        {
+          "name": "phoneNumber",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "userName",
+          "line": 36,
+          "isDefault": false
+        },
+        {
+          "name": "userEmail",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "userId",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "oracleId",
+          "line": 39,
+          "isDefault": false
+        },
+        {
+          "name": "userType",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "clear",
+          "line": 42,
+          "isDefault": false
+        },
+        {
+          "name": "SecureStore",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "saveAuth",
+          "callee": "write",
+          "lineNumber": 20
+        },
+        {
+          "caller": "saveAuth",
+          "callee": "write",
+          "lineNumber": 21
+        },
+        {
+          "caller": "saveAuth",
+          "callee": "write",
+          "lineNumber": 22
+        },
+        {
+          "caller": "saveAuth",
+          "callee": "write",
+          "lineNumber": 23
+        },
+        {
+          "caller": "saveAuth",
+          "callee": "write",
+          "lineNumber": 24
+        },
+        {
+          "caller": "saveAuth",
+          "callee": "toString",
+          "lineNumber": 24
+        },
+        {
+          "caller": "saveAuth",
+          "callee": "write",
+          "lineNumber": 25
+        },
+        {
+          "caller": "saveAuth",
+          "callee": "write",
+          "lineNumber": 26
+        },
+        {
+          "caller": "saveAuth",
+          "callee": "write",
+          "lineNumber": 27
+        },
+        {
+          "caller": "saveAuth",
+          "callee": "write",
+          "lineNumber": 28
+        },
+        {
+          "caller": "saveAuth",
+          "callee": "write",
+          "lineNumber": 29
+        },
+        {
+          "caller": "saveAuth",
+          "callee": "toString",
+          "lineNumber": 29
+        },
+        {
+          "caller": "readToken",
+          "callee": "read",
+          "lineNumber": 32
+        },
+        {
+          "caller": "readFcmToken",
+          "callee": "read",
+          "lineNumber": 33
+        },
+        {
+          "caller": "fireBaseId",
+          "callee": "read",
+          "lineNumber": 34
+        },
+        {
+          "caller": "phoneNumber",
+          "callee": "read",
+          "lineNumber": 35
+        },
+        {
+          "caller": "userName",
+          "callee": "read",
+          "lineNumber": 36
+        },
+        {
+          "caller": "userEmail",
+          "callee": "read",
+          "lineNumber": 37
+        },
+        {
+          "caller": "userId",
+          "callee": "read",
+          "lineNumber": 38
+        },
+        {
+          "caller": "oracleId",
+          "callee": "read",
+          "lineNumber": 39
+        },
+        {
+          "caller": "userType",
+          "callee": "read",
+          "lineNumber": 40
+        },
+        {
+          "caller": "clear",
+          "callee": "deleteAll",
+          "lineNumber": 43
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 12,
+        "functionCount": 11,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/core/utils/constant.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 3,
+      "nonEmptyLines": 2,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/core/utils/end_point.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 68,
+      "nonEmptyLines": 65,
+      "functions": [
+        {
+          "name": "getCarModelsEndPoint",
+          "startLine": 13,
+          "endLine": 13,
+          "params": [
+            "model"
+          ]
+        },
+        {
+          "name": "getCarsForCustomerEndPoint",
+          "startLine": 15,
+          "endLine": 15,
+          "params": [
+            "customerOracleId"
+          ]
+        },
+        {
+          "name": "getUserInfoEndPoint",
+          "startLine": 17,
+          "endLine": 17,
+          "params": [
+            "phone"
+          ]
+        },
+        {
+          "name": "getPackagesForVehicleEndPoint",
+          "startLine": 25,
+          "endLine": 25,
+          "params": [
+            "customerId",
+            "vehicleId"
+          ]
+        },
+        {
+          "name": "getPackagesForVehicleByCategoryEndPoint",
+          "startLine": 27,
+          "endLine": 31,
+          "params": [
+            "customerId",
+            "vehicleId",
+            "category"
+          ]
+        },
+        {
+          "name": "getPackagesBySrEndPoint",
+          "startLine": 45,
+          "endLine": 45,
+          "params": [
+            "srNumber"
+          ]
+        },
+        {
+          "name": "addCouponEndPoint",
+          "startLine": 53,
+          "endLine": 61,
+          "params": [
+            "appUserId",
+            "companyName",
+            "fromDate",
+            "toDate",
+            "discountRate",
+            "couponCounts",
+            "domain"
+          ]
+        },
+        {
+          "name": "getPaymentStatusEndPoint",
+          "startLine": 65,
+          "endLine": 65,
+          "params": [
+            "transactionId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "getCarModelsEndPoint",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "getCarsForCustomerEndPoint",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "getUserInfoEndPoint",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "getPackagesForVehicleEndPoint",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "getPackagesForVehicleByCategoryEndPoint",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "getPackagesBySrEndPoint",
+          "line": 45,
+          "isDefault": false
+        },
+        {
+          "name": "addCouponEndPoint",
+          "line": 53,
+          "isDefault": false
+        },
+        {
+          "name": "getPaymentStatusEndPoint",
+          "line": 65,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getPackagesForVehicleByCategoryEndPoint",
+          "callee": "encodeComponent",
+          "lineNumber": 32
+        },
+        {
+          "caller": "getPackagesBySrEndPoint",
+          "callee": "encodeComponent",
+          "lineNumber": 46
+        },
+        {
+          "caller": "getPaymentStatusEndPoint",
+          "callee": "encodeComponent",
+          "lineNumber": 66
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 8,
+        "functionCount": 8,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/core/utils/enum.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "classes": [
+        {
+          "name": "AuthFlowStep",
+          "startLine": 1,
+          "endLine": 1,
+          "methods": [],
+          "properties": [
+            "enterPhone",
+            "needRegistration",
+            "otp",
+            "done"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AuthFlowStep",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/core/utils/extensions/extensions.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 11,
+      "functions": [
+        {
+          "name": "theme",
+          "startLine": 10,
+          "endLine": 10,
+          "params": []
+        },
+        {
+          "name": "appColors",
+          "startLine": 12,
+          "endLine": 12,
+          "params": []
+        },
+        {
+          "name": "textStyles",
+          "startLine": 13,
+          "endLine": 13,
+          "params": []
+        },
+        {
+          "name": "textTheme",
+          "startLine": 15,
+          "endLine": 15,
+          "params": []
+        },
+        {
+          "name": "colorScheme",
+          "startLine": 17,
+          "endLine": 17,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "SugarExt",
+          "startLine": 8,
+          "endLine": 19,
+          "methods": [
+            "theme",
+            "appColors",
+            "textStyles",
+            "textTheme",
+            "colorScheme"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "theme",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "appColors",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "textStyles",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "textTheme",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "colorScheme",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "SugarExt",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "theme",
+          "callee": "of",
+          "lineNumber": 10
+        },
+        {
+          "caller": "appColors",
+          "callee": "extension",
+          "lineNumber": 12
+        },
+        {
+          "caller": "textStyles",
+          "callee": "extension",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 6,
+        "functionCount": 5,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/core/utils/helper_fuc.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 30,
+      "nonEmptyLines": 30,
+      "functions": [
+        {
+          "name": "getStatusIdFromStatusName",
+          "startLine": 1,
+          "endLine": 1,
+          "params": [
+            "statusName"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "getStatusIdFromStatusName",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/core/utils/theme/app_colors.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 50,
+      "nonEmptyLines": 43,
+      "classes": [
+        {
+          "name": "AppColors",
+          "startLine": 22,
+          "endLine": 50,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AppColors",
+          "line": 22,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "lib/core/utils/theme/app_text_styles.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 69,
+      "nonEmptyLines": 56,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/core/utils/theme/app_text_theme.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 445,
+      "nonEmptyLines": 391,
+      "functions": [
+        {
+          "name": "AppTextTheme",
+          "startLine": 6,
+          "endLine": 8,
+          "params": [
+            "fontFamily"
+          ]
+        },
+        {
+          "name": "display2XlRegular",
+          "startLine": 10,
+          "endLine": 10,
+          "params": []
+        },
+        {
+          "name": "display2XlMedium",
+          "startLine": 19,
+          "endLine": 19,
+          "params": []
+        },
+        {
+          "name": "display2XlSemibold",
+          "startLine": 28,
+          "endLine": 28,
+          "params": []
+        },
+        {
+          "name": "display2XlBold",
+          "startLine": 37,
+          "endLine": 37,
+          "params": []
+        },
+        {
+          "name": "displayXlRegular",
+          "startLine": 46,
+          "endLine": 46,
+          "params": []
+        },
+        {
+          "name": "displayXlMedium",
+          "startLine": 52,
+          "endLine": 52,
+          "params": []
+        },
+        {
+          "name": "displayXlSemibold",
+          "startLine": 60,
+          "endLine": 60,
+          "params": []
+        },
+        {
+          "name": "displayXlBold",
+          "startLine": 68,
+          "endLine": 68,
+          "params": []
+        },
+        {
+          "name": "displayLgRegular",
+          "startLine": 76,
+          "endLine": 76,
+          "params": []
+        },
+        {
+          "name": "displayLgMedium",
+          "startLine": 84,
+          "endLine": 84,
+          "params": []
+        },
+        {
+          "name": "displayLgSemibold",
+          "startLine": 92,
+          "endLine": 92,
+          "params": []
+        },
+        {
+          "name": "displayLgBold",
+          "startLine": 100,
+          "endLine": 100,
+          "params": []
+        },
+        {
+          "name": "displayMdRegular",
+          "startLine": 108,
+          "endLine": 108,
+          "params": []
+        },
+        {
+          "name": "displayMdMedium",
+          "startLine": 117,
+          "endLine": 117,
+          "params": []
+        },
+        {
+          "name": "displayMdSemibold",
+          "startLine": 126,
+          "endLine": 126,
+          "params": []
+        },
+        {
+          "name": "displayMdBold",
+          "startLine": 135,
+          "endLine": 135,
+          "params": []
+        },
+        {
+          "name": "displaySmRegular",
+          "startLine": 144,
+          "endLine": 144,
+          "params": []
+        },
+        {
+          "name": "displaySmMedium",
+          "startLine": 151,
+          "endLine": 151,
+          "params": []
+        },
+        {
+          "name": "displaySmSemibold",
+          "startLine": 158,
+          "endLine": 158,
+          "params": []
+        },
+        {
+          "name": "displaySmBold",
+          "startLine": 165,
+          "endLine": 165,
+          "params": []
+        },
+        {
+          "name": "displayXsRegular",
+          "startLine": 172,
+          "endLine": 172,
+          "params": []
+        },
+        {
+          "name": "displayXsMedium",
+          "startLine": 179,
+          "endLine": 179,
+          "params": []
+        },
+        {
+          "name": "displayXsSemibold",
+          "startLine": 186,
+          "endLine": 186,
+          "params": []
+        },
+        {
+          "name": "displayXsBold",
+          "startLine": 193,
+          "endLine": 193,
+          "params": []
+        },
+        {
+          "name": "textXlRegular",
+          "startLine": 200,
+          "endLine": 200,
+          "params": []
+        },
+        {
+          "name": "textXlMedium",
+          "startLine": 209,
+          "endLine": 209,
+          "params": []
+        },
+        {
+          "name": "textXlSemibold",
+          "startLine": 218,
+          "endLine": 218,
+          "params": []
+        },
+        {
+          "name": "textXlBold",
+          "startLine": 227,
+          "endLine": 227,
+          "params": []
+        },
+        {
+          "name": "textLgRegular",
+          "startLine": 236,
+          "endLine": 236,
+          "params": []
+        },
+        {
+          "name": "textLgMedium",
+          "startLine": 245,
+          "endLine": 245,
+          "params": []
+        },
+        {
+          "name": "textLgSemibold",
+          "startLine": 254,
+          "endLine": 254,
+          "params": []
+        },
+        {
+          "name": "textLgBold",
+          "startLine": 263,
+          "endLine": 263,
+          "params": []
+        },
+        {
+          "name": "textMdRegular",
+          "startLine": 272,
+          "endLine": 272,
+          "params": []
+        },
+        {
+          "name": "textMdMedium",
+          "startLine": 281,
+          "endLine": 281,
+          "params": []
+        },
+        {
+          "name": "textMdSemibold",
+          "startLine": 290,
+          "endLine": 290,
+          "params": []
+        },
+        {
+          "name": "textMdBold",
+          "startLine": 299,
+          "endLine": 299,
+          "params": []
+        },
+        {
+          "name": "textSmRegular",
+          "startLine": 308,
+          "endLine": 308,
+          "params": []
+        },
+        {
+          "name": "textSmMedium",
+          "startLine": 317,
+          "endLine": 317,
+          "params": []
+        },
+        {
+          "name": "textSmSemibold",
+          "startLine": 326,
+          "endLine": 326,
+          "params": []
+        },
+        {
+          "name": "textSmBold",
+          "startLine": 335,
+          "endLine": 335,
+          "params": []
+        },
+        {
+          "name": "textXsRegular",
+          "startLine": 344,
+          "endLine": 344,
+          "params": []
+        },
+        {
+          "name": "textXsMedium",
+          "startLine": 353,
+          "endLine": 353,
+          "params": []
+        },
+        {
+          "name": "textXsSemibold",
+          "startLine": 362,
+          "endLine": 362,
+          "params": []
+        },
+        {
+          "name": "textXsBold",
+          "startLine": 371,
+          "endLine": 371,
+          "params": []
+        },
+        {
+          "name": "text2xsRegular",
+          "startLine": 380,
+          "endLine": 380,
+          "params": []
+        },
+        {
+          "name": "text2xsMedium",
+          "startLine": 389,
+          "endLine": 389,
+          "params": []
+        },
+        {
+          "name": "text2xsSemibold",
+          "startLine": 398,
+          "endLine": 398,
+          "params": []
+        },
+        {
+          "name": "text2xsBold",
+          "startLine": 407,
+          "endLine": 407,
+          "params": []
+        },
+        {
+          "name": "copyWith",
+          "startLine": 417,
+          "endLine": 417,
+          "params": []
+        },
+        {
+          "name": "lerp",
+          "startLine": 420,
+          "endLine": 423,
+          "params": [
+            "other",
+            "t"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "AppTextTheme",
+          "startLine": 3,
+          "endLine": 425,
+          "methods": [
+            "AppTextTheme",
+            "display2XlRegular",
+            "display2XlMedium",
+            "display2XlSemibold",
+            "display2XlBold",
+            "displayXlRegular",
+            "displayXlMedium",
+            "displayXlSemibold",
+            "displayXlBold",
+            "displayLgRegular",
+            "displayLgMedium",
+            "displayLgSemibold",
+            "displayLgBold",
+            "displayMdRegular",
+            "displayMdMedium",
+            "displayMdSemibold",
+            "displayMdBold",
+            "displaySmRegular",
+            "displaySmMedium",
+            "displaySmSemibold",
+            "displaySmBold",
+            "displayXsRegular",
+            "displayXsMedium",
+            "displayXsSemibold",
+            "displayXsBold",
+            "textXlRegular",
+            "textXlMedium",
+            "textXlSemibold",
+            "textXlBold",
+            "textLgRegular",
+            "textLgMedium",
+            "textLgSemibold",
+            "textLgBold",
+            "textMdRegular",
+            "textMdMedium",
+            "textMdSemibold",
+            "textMdBold",
+            "textSmRegular",
+            "textSmMedium",
+            "textSmSemibold",
+            "textSmBold",
+            "textXsRegular",
+            "textXsMedium",
+            "textXsSemibold",
+            "textXsBold",
+            "text2xsRegular",
+            "text2xsMedium",
+            "text2xsSemibold",
+            "text2xsBold",
+            "copyWith",
+            "lerp"
+          ],
+          "properties": [
+            "fontFamily"
+          ]
+        },
+        {
+          "name": "AppFontSize",
+          "startLine": 427,
+          "endLine": 445,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AppTextTheme",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "display2XlRegular",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "display2XlMedium",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "display2XlSemibold",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "display2XlBold",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "displayXlRegular",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "displayXlMedium",
+          "line": 52,
+          "isDefault": false
+        },
+        {
+          "name": "displayXlSemibold",
+          "line": 60,
+          "isDefault": false
+        },
+        {
+          "name": "displayXlBold",
+          "line": 68,
+          "isDefault": false
+        },
+        {
+          "name": "displayLgRegular",
+          "line": 76,
+          "isDefault": false
+        },
+        {
+          "name": "displayLgMedium",
+          "line": 84,
+          "isDefault": false
+        },
+        {
+          "name": "displayLgSemibold",
+          "line": 92,
+          "isDefault": false
+        },
+        {
+          "name": "displayLgBold",
+          "line": 100,
+          "isDefault": false
+        },
+        {
+          "name": "displayMdRegular",
+          "line": 108,
+          "isDefault": false
+        },
+        {
+          "name": "displayMdMedium",
+          "line": 117,
+          "isDefault": false
+        },
+        {
+          "name": "displayMdSemibold",
+          "line": 126,
+          "isDefault": false
+        },
+        {
+          "name": "displayMdBold",
+          "line": 135,
+          "isDefault": false
+        },
+        {
+          "name": "displaySmRegular",
+          "line": 144,
+          "isDefault": false
+        },
+        {
+          "name": "displaySmMedium",
+          "line": 151,
+          "isDefault": false
+        },
+        {
+          "name": "displaySmSemibold",
+          "line": 158,
+          "isDefault": false
+        },
+        {
+          "name": "displaySmBold",
+          "line": 165,
+          "isDefault": false
+        },
+        {
+          "name": "displayXsRegular",
+          "line": 172,
+          "isDefault": false
+        },
+        {
+          "name": "displayXsMedium",
+          "line": 179,
+          "isDefault": false
+        },
+        {
+          "name": "displayXsSemibold",
+          "line": 186,
+          "isDefault": false
+        },
+        {
+          "name": "displayXsBold",
+          "line": 193,
+          "isDefault": false
+        },
+        {
+          "name": "textXlRegular",
+          "line": 200,
+          "isDefault": false
+        },
+        {
+          "name": "textXlMedium",
+          "line": 209,
+          "isDefault": false
+        },
+        {
+          "name": "textXlSemibold",
+          "line": 218,
+          "isDefault": false
+        },
+        {
+          "name": "textXlBold",
+          "line": 227,
+          "isDefault": false
+        },
+        {
+          "name": "textLgRegular",
+          "line": 236,
+          "isDefault": false
+        },
+        {
+          "name": "textLgMedium",
+          "line": 245,
+          "isDefault": false
+        },
+        {
+          "name": "textLgSemibold",
+          "line": 254,
+          "isDefault": false
+        },
+        {
+          "name": "textLgBold",
+          "line": 263,
+          "isDefault": false
+        },
+        {
+          "name": "textMdRegular",
+          "line": 272,
+          "isDefault": false
+        },
+        {
+          "name": "textMdMedium",
+          "line": 281,
+          "isDefault": false
+        },
+        {
+          "name": "textMdSemibold",
+          "line": 290,
+          "isDefault": false
+        },
+        {
+          "name": "textMdBold",
+          "line": 299,
+          "isDefault": false
+        },
+        {
+          "name": "textSmRegular",
+          "line": 308,
+          "isDefault": false
+        },
+        {
+          "name": "textSmMedium",
+          "line": 317,
+          "isDefault": false
+        },
+        {
+          "name": "textSmSemibold",
+          "line": 326,
+          "isDefault": false
+        },
+        {
+          "name": "textSmBold",
+          "line": 335,
+          "isDefault": false
+        },
+        {
+          "name": "textXsRegular",
+          "line": 344,
+          "isDefault": false
+        },
+        {
+          "name": "textXsMedium",
+          "line": 353,
+          "isDefault": false
+        },
+        {
+          "name": "textXsSemibold",
+          "line": 362,
+          "isDefault": false
+        },
+        {
+          "name": "textXsBold",
+          "line": 371,
+          "isDefault": false
+        },
+        {
+          "name": "text2xsRegular",
+          "line": 380,
+          "isDefault": false
+        },
+        {
+          "name": "text2xsMedium",
+          "line": 389,
+          "isDefault": false
+        },
+        {
+          "name": "text2xsSemibold",
+          "line": 398,
+          "isDefault": false
+        },
+        {
+          "name": "text2xsBold",
+          "line": 407,
+          "isDefault": false
+        },
+        {
+          "name": "copyWith",
+          "line": 417,
+          "isDefault": false
+        },
+        {
+          "name": "lerp",
+          "line": 420,
+          "isDefault": false
+        },
+        {
+          "name": "AppTextTheme",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "AppFontSize",
+          "line": 427,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "display2XlRegular",
+          "callee": "TextStyle",
+          "lineNumber": 10
+        },
+        {
+          "caller": "display2XlMedium",
+          "callee": "TextStyle",
+          "lineNumber": 19
+        },
+        {
+          "caller": "display2XlSemibold",
+          "callee": "TextStyle",
+          "lineNumber": 28
+        },
+        {
+          "caller": "display2XlBold",
+          "callee": "TextStyle",
+          "lineNumber": 37
+        },
+        {
+          "caller": "displayXlRegular",
+          "callee": "TextStyle",
+          "lineNumber": 46
+        },
+        {
+          "caller": "displayXlMedium",
+          "callee": "TextStyle",
+          "lineNumber": 52
+        },
+        {
+          "caller": "displayXlSemibold",
+          "callee": "TextStyle",
+          "lineNumber": 60
+        },
+        {
+          "caller": "displayXlBold",
+          "callee": "TextStyle",
+          "lineNumber": 68
+        },
+        {
+          "caller": "displayLgRegular",
+          "callee": "TextStyle",
+          "lineNumber": 76
+        },
+        {
+          "caller": "displayLgMedium",
+          "callee": "TextStyle",
+          "lineNumber": 84
+        },
+        {
+          "caller": "displayLgSemibold",
+          "callee": "TextStyle",
+          "lineNumber": 92
+        },
+        {
+          "caller": "displayLgBold",
+          "callee": "TextStyle",
+          "lineNumber": 100
+        },
+        {
+          "caller": "displayMdRegular",
+          "callee": "TextStyle",
+          "lineNumber": 108
+        },
+        {
+          "caller": "displayMdMedium",
+          "callee": "TextStyle",
+          "lineNumber": 117
+        },
+        {
+          "caller": "displayMdSemibold",
+          "callee": "TextStyle",
+          "lineNumber": 126
+        },
+        {
+          "caller": "displayMdBold",
+          "callee": "TextStyle",
+          "lineNumber": 135
+        },
+        {
+          "caller": "displaySmRegular",
+          "callee": "TextStyle",
+          "lineNumber": 144
+        },
+        {
+          "caller": "displaySmMedium",
+          "callee": "TextStyle",
+          "lineNumber": 151
+        },
+        {
+          "caller": "displaySmSemibold",
+          "callee": "TextStyle",
+          "lineNumber": 158
+        },
+        {
+          "caller": "displaySmBold",
+          "callee": "TextStyle",
+          "lineNumber": 165
+        },
+        {
+          "caller": "displayXsRegular",
+          "callee": "TextStyle",
+          "lineNumber": 172
+        },
+        {
+          "caller": "displayXsMedium",
+          "callee": "TextStyle",
+          "lineNumber": 179
+        },
+        {
+          "caller": "displayXsSemibold",
+          "callee": "TextStyle",
+          "lineNumber": 186
+        },
+        {
+          "caller": "displayXsBold",
+          "callee": "TextStyle",
+          "lineNumber": 193
+        },
+        {
+          "caller": "textXlRegular",
+          "callee": "TextStyle",
+          "lineNumber": 200
+        },
+        {
+          "caller": "textXlMedium",
+          "callee": "TextStyle",
+          "lineNumber": 209
+        },
+        {
+          "caller": "textXlSemibold",
+          "callee": "TextStyle",
+          "lineNumber": 218
+        },
+        {
+          "caller": "textXlBold",
+          "callee": "TextStyle",
+          "lineNumber": 227
+        },
+        {
+          "caller": "textLgRegular",
+          "callee": "TextStyle",
+          "lineNumber": 236
+        },
+        {
+          "caller": "textLgMedium",
+          "callee": "TextStyle",
+          "lineNumber": 245
+        },
+        {
+          "caller": "textLgSemibold",
+          "callee": "TextStyle",
+          "lineNumber": 254
+        },
+        {
+          "caller": "textLgBold",
+          "callee": "TextStyle",
+          "lineNumber": 263
+        },
+        {
+          "caller": "textMdRegular",
+          "callee": "TextStyle",
+          "lineNumber": 272
+        },
+        {
+          "caller": "textMdMedium",
+          "callee": "TextStyle",
+          "lineNumber": 281
+        },
+        {
+          "caller": "textMdSemibold",
+          "callee": "TextStyle",
+          "lineNumber": 290
+        },
+        {
+          "caller": "textMdBold",
+          "callee": "TextStyle",
+          "lineNumber": 299
+        },
+        {
+          "caller": "textSmRegular",
+          "callee": "TextStyle",
+          "lineNumber": 308
+        },
+        {
+          "caller": "textSmMedium",
+          "callee": "TextStyle",
+          "lineNumber": 317
+        },
+        {
+          "caller": "textSmSemibold",
+          "callee": "TextStyle",
+          "lineNumber": 326
+        },
+        {
+          "caller": "textSmBold",
+          "callee": "TextStyle",
+          "lineNumber": 335
+        },
+        {
+          "caller": "textXsRegular",
+          "callee": "TextStyle",
+          "lineNumber": 344
+        },
+        {
+          "caller": "textXsMedium",
+          "callee": "TextStyle",
+          "lineNumber": 353
+        },
+        {
+          "caller": "textXsSemibold",
+          "callee": "TextStyle",
+          "lineNumber": 362
+        },
+        {
+          "caller": "textXsBold",
+          "callee": "TextStyle",
+          "lineNumber": 371
+        },
+        {
+          "caller": "text2xsRegular",
+          "callee": "TextStyle",
+          "lineNumber": 380
+        },
+        {
+          "caller": "text2xsMedium",
+          "callee": "TextStyle",
+          "lineNumber": 389
+        },
+        {
+          "caller": "text2xsSemibold",
+          "callee": "TextStyle",
+          "lineNumber": 398
+        },
+        {
+          "caller": "text2xsBold",
+          "callee": "TextStyle",
+          "lineNumber": 407
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 53,
+        "functionCount": 51,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "lib/core/utils/theme/themes.dart",
+      "language": "dart",
+      "fileCategory": "code",
+      "totalLines": 127,
+      "nonEmptyLines": 113,
+      "functions": [
+        {
+          "name": "getThemeData",
+          "startLine": 10,
+          "endLine": 13,
+          "params": [
+            "context",
+            "fontFamily"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "getThemeData",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getThemeData",
+          "callee": "ThemeData",
+          "lineNumber": 15
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "DialogThemeData",
+          "lineNumber": 23
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "ColorScheme",
+          "lineNumber": 24
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "light",
+          "lineNumber": 36
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "AppTextTheme",
+          "lineNumber": 37
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "AppBarTheme",
+          "lineNumber": 43
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "DatePickerThemeData",
+          "lineNumber": 48
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "TextStyle",
+          "lineNumber": 52
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "InputDecorationTheme",
+          "lineNumber": 59
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "EdgeInsets",
+          "lineNumber": 62
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "OutlineInputBorder",
+          "lineNumber": 63
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "circular",
+          "lineNumber": 64
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "OutlineInputBorder",
+          "lineNumber": 66
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "circular",
+          "lineNumber": 67
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "OutlineInputBorder",
+          "lineNumber": 69
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "circular",
+          "lineNumber": 70
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "BorderSide",
+          "lineNumber": 71
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "of",
+          "lineNumber": 72
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "OutlineInputBorder",
+          "lineNumber": 76
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "circular",
+          "lineNumber": 77
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "TextStyle",
+          "lineNumber": 79
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "TextTheme",
+          "lineNumber": 85
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "BottomSheetThemeData",
+          "lineNumber": 112
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "RoundedRectangleBorder",
+          "lineNumber": 113
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "vertical",
+          "lineNumber": 114
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "circular",
+          "lineNumber": 115
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "BoxConstraints",
+          "lineNumber": 118
+        },
+        {
+          "caller": "getThemeData",
+          "callee": "sizeOf",
+          "lineNumber": 119
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,783 @@
+{
+ "nodes": [
+  {
+   "id": "file:lib/features/force_update/domain/use_case/check_force_update_use_case.dart",
+   "type": "file",
+   "name": "check_force_update_use_case.dart",
+   "filePath": "lib/features/force_update/domain/use_case/check_force_update_use_case.dart",
+   "summary": "Domain use case that delegates to the force-update repository to determine whether the app requires an update.",
+   "tags": [
+    "use-case",
+    "domain-layer",
+    "clean-architecture"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:lib/features/force_update/domain/use_case/check_force_update_use_case.dart:CheckForceUpdateUseCase",
+   "type": "class",
+   "name": "CheckForceUpdateUseCase",
+   "filePath": "lib/features/force_update/domain/use_case/check_force_update_use_case.dart",
+   "lineRange": [
+    4,
+    12
+   ],
+   "summary": "Callable use case wrapping IForceUpdateRepository.checkForUpdate() behind a single call() entry point.",
+   "tags": [
+    "use-case",
+    "callable",
+    "repository-consumer"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/features/force_update/presentation/view_model/force_update_state.dart",
+   "type": "file",
+   "name": "force_update_state.dart",
+   "filePath": "lib/features/force_update/presentation/view_model/force_update_state.dart",
+   "summary": "Sealed class hierarchy modeling the states of the force-update check flow (initial, checking, available, unavailable, failure).",
+   "tags": [
+    "state",
+    "sealed-class",
+    "view-model-state"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/features/force_update/presentation/view_model/force_update_view_model.dart",
+   "type": "file",
+   "name": "force_update_view_model.dart",
+   "filePath": "lib/features/force_update/presentation/view_model/force_update_view_model.dart",
+   "summary": "Riverpod Notifier that runs the force-update check use case once and exposes the resulting ForceUpdateState to the UI.",
+   "tags": [
+    "view-model",
+    "riverpod",
+    "notifier",
+    "state-management"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:lib/features/force_update/presentation/view_model/force_update_view_model.dart:ForceUpdateViewModel",
+   "type": "class",
+   "name": "ForceUpdateViewModel",
+   "filePath": "lib/features/force_update/presentation/view_model/force_update_view_model.dart",
+   "lineRange": [
+    8,
+    33
+   ],
+   "summary": "Notifier<ForceUpdateState> that checks for forced updates once per session and maps the use case result into UI state.",
+   "tags": [
+    "notifier",
+    "riverpod",
+    "state-management"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:lib/features/force_update/presentation/widget/force_update_dialog.dart",
+   "type": "file",
+   "name": "force_update_dialog.dart",
+   "filePath": "lib/features/force_update/presentation/widget/force_update_dialog.dart",
+   "summary": "Non-dismissible dialog widget that prompts the user to update the app and launches the app store URL.",
+   "tags": [
+    "widget",
+    "dialog",
+    "ui",
+    "url-launcher"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:lib/features/force_update/presentation/widget/force_update_dialog.dart:ForceUpdateDialog",
+   "type": "class",
+   "name": "ForceUpdateDialog",
+   "filePath": "lib/features/force_update/presentation/widget/force_update_dialog.dart",
+   "lineRange": [
+    6,
+    72
+   ],
+   "summary": "StatelessWidget displaying a blocking force-update dialog with localized copy and a button that opens the storeUrl via url_launcher.",
+   "tags": [
+    "widget",
+    "dialog",
+    "stateless-widget"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/features/force_update/provider/force_update_provider.dart",
+   "type": "file",
+   "name": "force_update_provider.dart",
+   "filePath": "lib/features/force_update/provider/force_update_provider.dart",
+   "summary": "Riverpod provider wiring for the force-update feature: data source, repository, use case, and the ForceUpdateViewModel notifier.",
+   "tags": [
+    "provider",
+    "riverpod",
+    "dependency-injection"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/features/home/data/data_source/home_remote_data_source.dart",
+   "type": "file",
+   "name": "home_remote_data_source.dart",
+   "filePath": "lib/features/home/data/data_source/home_remote_data_source.dart",
+   "summary": "Dio-backed implementation of IHomeRemoteDataSource that fetches main service categories from the backend and parses flexible JSON shapes.",
+   "tags": [
+    "data-source",
+    "dio",
+    "api-client",
+    "data-layer"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:lib/features/home/data/data_source/home_remote_data_source.dart:HomeRemoteDataSource",
+   "type": "class",
+   "name": "HomeRemoteDataSource",
+   "filePath": "lib/features/home/data/data_source/home_remote_data_source.dart",
+   "lineRange": [
+    7,
+    54
+   ],
+   "summary": "Implements IHomeRemoteDataSource using Dio to call the main-categories endpoint, normalizing list/map response shapes and wrapping DioException into a descriptive Exception.",
+   "tags": [
+    "data-source",
+    "dio",
+    "api-client"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:lib/features/home/data/data_source/i_home_remote_data_source.dart",
+   "type": "file",
+   "name": "i_home_remote_data_source.dart",
+   "filePath": "lib/features/home/data/data_source/i_home_remote_data_source.dart",
+   "summary": "Abstract contract for fetching main category data, decoupling the repository from the concrete Dio implementation.",
+   "tags": [
+    "interface",
+    "data-layer",
+    "abstraction"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/features/home/data/model/main_category_model.dart",
+   "type": "file",
+   "name": "main_category_model.dart",
+   "filePath": "lib/features/home/data/model/main_category_model.dart",
+   "summary": "Data model extending MainCategoryEntity with a fromJson factory that tolerates multiple backend field-naming conventions for category id, titles, and photo URL.",
+   "tags": [
+    "data-model",
+    "serialization",
+    "json-mapping"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:lib/features/home/data/model/main_category_model.dart:MainCategoryModel",
+   "type": "class",
+   "name": "MainCategoryModel",
+   "filePath": "lib/features/home/data/model/main_category_model.dart",
+   "lineRange": [
+    3,
+    27
+   ],
+   "summary": "Extends MainCategoryEntity and provides fromJson parsing that falls back across alternate API key names (e.g. categorY_ID vs categoryId).",
+   "tags": [
+    "data-model",
+    "json-mapping",
+    "factory"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/features/home/data/repository/home_repository.dart",
+   "type": "file",
+   "name": "home_repository.dart",
+   "filePath": "lib/features/home/data/repository/home_repository.dart",
+   "summary": "Concrete repository implementing IHomeRepository by delegating to the remote data source and mapping models to domain entities.",
+   "tags": [
+    "repository",
+    "data-layer",
+    "clean-architecture"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:lib/features/home/data/repository/home_repository.dart:HomeRepository",
+   "type": "class",
+   "name": "HomeRepository",
+   "filePath": "lib/features/home/data/repository/home_repository.dart",
+   "lineRange": [
+    5,
+    15
+   ],
+   "summary": "Implements IHomeRepository.getMainCategories by calling the remote data source and converting models into MainCategoryEntity list.",
+   "tags": [
+    "repository",
+    "data-layer"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/features/home/domain/entity/main_category_entity.dart",
+   "type": "file",
+   "name": "main_category_entity.dart",
+   "filePath": "lib/features/home/domain/entity/main_category_entity.dart",
+   "summary": "Domain entity representing a main service category with bilingual titles and a locale-aware title accessor.",
+   "tags": [
+    "entity",
+    "domain-layer",
+    "data-model",
+    "localization"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:lib/features/home/domain/entity/main_category_entity.dart:MainCategoryEntity",
+   "type": "class",
+   "name": "MainCategoryEntity",
+   "filePath": "lib/features/home/domain/entity/main_category_entity.dart",
+   "lineRange": [
+    3,
+    26
+   ],
+   "summary": "Core entity with id, English/Arabic titles, optional photo URL, and titleForLocale() that picks the right title based on Locale with fallbacks.",
+   "tags": [
+    "entity",
+    "localization",
+    "domain-model"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/features/home/domain/repository/i_home_repository.dart",
+   "type": "file",
+   "name": "i_home_repository.dart",
+   "filePath": "lib/features/home/domain/repository/i_home_repository.dart",
+   "summary": "Domain-level repository interface declaring getMainCategories(), keeping the use case independent of data-layer details.",
+   "tags": [
+    "interface",
+    "repository",
+    "domain-layer"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/features/home/domain/use_case/get_main_categories_use_case.dart",
+   "type": "file",
+   "name": "get_main_categories_use_case.dart",
+   "filePath": "lib/features/home/domain/use_case/get_main_categories_use_case.dart",
+   "summary": "Use case exposing a callable wrapper around IHomeRepository.getMainCategories() for the home feature's view model.",
+   "tags": [
+    "use-case",
+    "domain-layer",
+    "clean-architecture"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:lib/features/home/domain/use_case/get_main_categories_use_case.dart:GetMainCategoriesUseCase",
+   "type": "class",
+   "name": "GetMainCategoriesUseCase",
+   "filePath": "lib/features/home/domain/use_case/get_main_categories_use_case.dart",
+   "lineRange": [
+    4,
+    12
+   ],
+   "summary": "Callable use case that forwards to IHomeRepository.getMainCategories(), the single entry point view models use to fetch categories.",
+   "tags": [
+    "use-case",
+    "callable",
+    "repository-consumer"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/features/home/presentaion/screen/base_home_screen.dart",
+   "type": "file",
+   "name": "base_home_screen.dart",
+   "filePath": "lib/features/home/presentaion/screen/base_home_screen.dart",
+   "summary": "Root authenticated home shell that builds a role-aware bottom-navigation tab view (customer vs. manager/technician/credit-manager) and triggers the force-update check/dialog.",
+   "tags": [
+    "screen",
+    "navigation",
+    "role-based-ui",
+    "riverpod"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:lib/features/home/presentaion/screen/base_home_screen.dart:_BaseHomeScreenState",
+   "type": "class",
+   "name": "_BaseHomeScreenState",
+   "filePath": "lib/features/home/presentaion/screen/base_home_screen.dart",
+   "lineRange": [
+    36,
+    171
+   ],
+   "summary": "ConsumerState driving BaseHomeScreen: builds the persistent bottom-nav tab list per user role, listens for force-update availability, and shows ForceUpdateDialog when required.",
+   "tags": [
+    "state",
+    "navigation",
+    "role-based-ui",
+    "riverpod"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:lib/features/home/presentaion/screen/base_home_screen.dart:_RoleSpecificHome",
+   "type": "class",
+   "name": "_RoleSpecificHome",
+   "filePath": "lib/features/home/presentaion/screen/base_home_screen.dart",
+   "lineRange": [
+    173,
+    210
+   ],
+   "summary": "Renders the appropriate non-customer home screen (technician, manager, or credit manager) based on UserType.",
+   "tags": [
+    "widget",
+    "role-based-ui"
+   ],
+   "complexity": "simple"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:lib/features/force_update/domain/use_case/check_force_update_use_case.dart",
+   "target": "class:lib/features/force_update/domain/use_case/check_force_update_use_case.dart:CheckForceUpdateUseCase",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:lib/features/force_update/domain/use_case/check_force_update_use_case.dart",
+   "target": "file:lib/features/force_update/domain/repository/i_force_update_repository.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/force_update/presentation/view_model/force_update_state.dart",
+   "target": "file:lib/features/force_update/domain/entity/force_update_result.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/force_update/presentation/view_model/force_update_view_model.dart",
+   "target": "class:lib/features/force_update/presentation/view_model/force_update_view_model.dart:ForceUpdateViewModel",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:lib/features/force_update/presentation/view_model/force_update_view_model.dart",
+   "target": "file:lib/features/force_update/domain/use_case/check_force_update_use_case.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/force_update/presentation/view_model/force_update_view_model.dart",
+   "target": "file:lib/features/force_update/provider/force_update_provider.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/force_update/presentation/view_model/force_update_view_model.dart",
+   "target": "file:lib/features/force_update/presentation/view_model/force_update_state.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "class:lib/features/force_update/presentation/view_model/force_update_view_model.dart:ForceUpdateViewModel",
+   "target": "class:lib/features/force_update/domain/use_case/check_force_update_use_case.dart:CheckForceUpdateUseCase",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/features/force_update/presentation/widget/force_update_dialog.dart",
+   "target": "class:lib/features/force_update/presentation/widget/force_update_dialog.dart:ForceUpdateDialog",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:lib/features/force_update/provider/force_update_provider.dart",
+   "target": "file:lib/features/force_update/data/data_source/force_update_remote_data_source.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/force_update/provider/force_update_provider.dart",
+   "target": "file:lib/features/force_update/data/repository/force_update_repository.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/force_update/provider/force_update_provider.dart",
+   "target": "file:lib/features/force_update/domain/repository/i_force_update_repository.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/force_update/provider/force_update_provider.dart",
+   "target": "file:lib/features/force_update/domain/use_case/check_force_update_use_case.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/force_update/provider/force_update_provider.dart",
+   "target": "file:lib/features/force_update/presentation/view_model/force_update_state.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/force_update/provider/force_update_provider.dart",
+   "target": "file:lib/features/force_update/presentation/view_model/force_update_view_model.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/force_update/provider/force_update_provider.dart",
+   "target": "file:lib/core/providers/general_providers.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/data/data_source/home_remote_data_source.dart",
+   "target": "class:lib/features/home/data/data_source/home_remote_data_source.dart:HomeRemoteDataSource",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:lib/features/home/data/data_source/home_remote_data_source.dart",
+   "target": "file:lib/features/home/data/model/main_category_model.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/data/data_source/home_remote_data_source.dart",
+   "target": "file:lib/features/home/data/data_source/i_home_remote_data_source.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/data/data_source/home_remote_data_source.dart",
+   "target": "file:lib/core/utils/end_point.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "class:lib/features/home/data/data_source/home_remote_data_source.dart:HomeRemoteDataSource",
+   "target": "file:lib/features/home/data/data_source/i_home_remote_data_source.dart",
+   "type": "implements",
+   "direction": "forward",
+   "weight": 0.9
+  },
+  {
+   "source": "class:lib/features/home/data/data_source/home_remote_data_source.dart:HomeRemoteDataSource",
+   "target": "class:lib/features/home/data/model/main_category_model.dart:MainCategoryModel",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/features/home/data/data_source/i_home_remote_data_source.dart",
+   "target": "file:lib/features/home/data/model/main_category_model.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/data/model/main_category_model.dart",
+   "target": "class:lib/features/home/data/model/main_category_model.dart:MainCategoryModel",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:lib/features/home/data/model/main_category_model.dart",
+   "target": "file:lib/features/home/domain/entity/main_category_entity.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "class:lib/features/home/data/model/main_category_model.dart:MainCategoryModel",
+   "target": "class:lib/features/home/domain/entity/main_category_entity.dart:MainCategoryEntity",
+   "type": "inherits",
+   "direction": "forward",
+   "weight": 0.9
+  },
+  {
+   "source": "file:lib/features/home/data/repository/home_repository.dart",
+   "target": "class:lib/features/home/data/repository/home_repository.dart:HomeRepository",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:lib/features/home/data/repository/home_repository.dart",
+   "target": "file:lib/features/home/domain/entity/main_category_entity.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/data/repository/home_repository.dart",
+   "target": "file:lib/features/home/domain/repository/i_home_repository.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/data/repository/home_repository.dart",
+   "target": "file:lib/features/home/data/data_source/i_home_remote_data_source.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "class:lib/features/home/data/repository/home_repository.dart:HomeRepository",
+   "target": "file:lib/features/home/domain/repository/i_home_repository.dart",
+   "type": "implements",
+   "direction": "forward",
+   "weight": 0.9
+  },
+  {
+   "source": "class:lib/features/home/data/repository/home_repository.dart:HomeRepository",
+   "target": "class:lib/features/home/data/data_source/home_remote_data_source.dart:HomeRemoteDataSource",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/features/home/domain/entity/main_category_entity.dart",
+   "target": "class:lib/features/home/domain/entity/main_category_entity.dart:MainCategoryEntity",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:lib/features/home/domain/repository/i_home_repository.dart",
+   "target": "file:lib/features/home/domain/entity/main_category_entity.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/domain/use_case/get_main_categories_use_case.dart",
+   "target": "class:lib/features/home/domain/use_case/get_main_categories_use_case.dart:GetMainCategoriesUseCase",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:lib/features/home/domain/use_case/get_main_categories_use_case.dart",
+   "target": "file:lib/features/home/domain/entity/main_category_entity.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/domain/use_case/get_main_categories_use_case.dart",
+   "target": "file:lib/features/home/domain/repository/i_home_repository.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "class:lib/features/home/domain/use_case/get_main_categories_use_case.dart:GetMainCategoriesUseCase",
+   "target": "file:lib/features/home/domain/repository/i_home_repository.dart",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/features/home/presentaion/screen/base_home_screen.dart",
+   "target": "class:lib/features/home/presentaion/screen/base_home_screen.dart:_BaseHomeScreenState",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:lib/features/home/presentaion/screen/base_home_screen.dart",
+   "target": "class:lib/features/home/presentaion/screen/base_home_screen.dart:_RoleSpecificHome",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:lib/features/home/presentaion/screen/base_home_screen.dart",
+   "target": "file:lib/core/providers/global_lang_provider.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/presentaion/screen/base_home_screen.dart",
+   "target": "file:lib/core/widget/home_app_bar.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/presentaion/screen/base_home_screen.dart",
+   "target": "file:lib/features/auth/provider/auth_provider.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/presentaion/screen/base_home_screen.dart",
+   "target": "file:lib/features/home/presentaion/screen/customer_home_screen.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/presentaion/screen/base_home_screen.dart",
+   "target": "file:lib/features/home/presentaion/screen/credit_manager_home_screen.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/presentaion/screen/base_home_screen.dart",
+   "target": "file:lib/features/home/presentaion/screen/manager_home_screen.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/presentaion/screen/base_home_screen.dart",
+   "target": "file:lib/core/utils/theme/app_colors.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/presentaion/screen/base_home_screen.dart",
+   "target": "file:lib/core/widget/network_status_widget.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/presentaion/screen/base_home_screen.dart",
+   "target": "file:lib/features/auth/presentation/view_model/auth_state.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/presentaion/screen/base_home_screen.dart",
+   "target": "file:lib/features/book_service/presentation/screen/book_maintanance_screen.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/presentaion/screen/base_home_screen.dart",
+   "target": "file:lib/features/contact_us/presentation/screen/contact_us_screen.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/presentaion/screen/base_home_screen.dart",
+   "target": "file:lib/features/force_update/presentation/view_model/force_update_state.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/presentaion/screen/base_home_screen.dart",
+   "target": "file:lib/features/force_update/presentation/widget/force_update_dialog.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/presentaion/screen/base_home_screen.dart",
+   "target": "file:lib/features/force_update/provider/force_update_provider.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/presentaion/screen/base_home_screen.dart",
+   "target": "file:lib/features/user_cars/presentation/screen/user_cars_list_screen.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/presentaion/screen/base_home_screen.dart",
+   "target": "file:lib/features/more/presentation/screen/more_screen.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/presentaion/screen/base_home_screen.dart",
+   "target": "file:lib/features/auth/domain/entity/user_type.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/features/home/presentaion/screen/base_home_screen.dart",
+   "target": "file:lib/features/technician/presentation/screen/technician_home_screen.dart",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "class:lib/features/home/presentaion/screen/base_home_screen.dart:_BaseHomeScreenState",
+   "target": "file:lib/features/force_update/provider/force_update_provider.dart",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:lib/features/home/presentaion/screen/base_home_screen.dart:_BaseHomeScreenState",
+   "target": "class:lib/features/force_update/presentation/widget/force_update_dialog.dart:ForceUpdateDialog",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:lib/features/home/presentaion/screen/base_home_screen.dart:_RoleSpecificHome",
+   "target": "class:lib/features/home/presentaion/screen/manager_home_screen.dart:ManagerHomeScreen",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:lib/features/home/presentaion/screen/base_home_screen.dart:_RoleSpecificHome",
+   "target": "file:lib/features/home/presentaion/screen/credit_manager_home_screen.dart",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

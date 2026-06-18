@@ -1,0 +1,798 @@
+{
+  "nodes": [
+    {
+      "id": "file:lib/features/technician/data/model/technician_booking_status_model.dart",
+      "type": "file",
+      "name": "technician_booking_status_model.dart",
+      "filePath": "lib/features/technician/data/model/technician_booking_status_model.dart",
+      "summary": "Data-layer model extending TechnicianBookingStatus that parses booking status JSON from the API and converts it back into the domain entity.",
+      "tags": ["data-model", "serialization", "technician"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/technician/data/model/technician_booking_status_model.dart:TechnicianBookingStatusModel",
+      "type": "class",
+      "name": "TechnicianBookingStatusModel",
+      "filePath": "lib/features/technician/data/model/technician_booking_status_model.dart",
+      "lineRange": [3, 24],
+      "summary": "Extends TechnicianBookingStatus with a fromJson factory and toEntity conversion for booking status API payloads.",
+      "tags": ["data-model", "serialization", "inherits"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/technician/data/model/technician_slot_model.dart",
+      "type": "file",
+      "name": "technician_slot_model.dart",
+      "filePath": "lib/features/technician/data/model/technician_slot_model.dart",
+      "summary": "Data-layer model extending TechnicianSlotEntity that robustly parses heterogeneous slot JSON shapes (varying key names and value types) returned by the backend into a normalized slot representation.",
+      "tags": ["data-model", "serialization", "technician", "parsing"],
+      "complexity": "moderate",
+      "languageNotes": "Uses private helper methods (_fromMap, _stringForKeys, _firstStringValue, _formatRange) to defensively normalize inconsistent API field naming/casing for time slot data."
+    },
+    {
+      "id": "class:lib/features/technician/data/model/technician_slot_model.dart:TechnicianSlotModel",
+      "type": "class",
+      "name": "TechnicianSlotModel",
+      "filePath": "lib/features/technician/data/model/technician_slot_model.dart",
+      "lineRange": [3, 174],
+      "summary": "Extends TechnicianSlotEntity; parses dynamic/raw JSON slot data with fallback key matching and produces formatted time ranges and entity instances.",
+      "tags": ["data-model", "serialization", "inherits", "parsing"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:lib/features/technician/data/model/technician_slot_model.dart:_fromMap",
+      "type": "function",
+      "name": "_fromMap",
+      "filePath": "lib/features/technician/data/model/technician_slot_model.dart",
+      "lineRange": [55, 140],
+      "summary": "Private constructor helper that extracts slot id, label, start/end time, and formatted slot time from a loosely-typed JSON map using multiple candidate key names.",
+      "tags": ["parsing", "utility", "private"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:lib/features/technician/data/model/technician_summary_model.dart",
+      "type": "file",
+      "name": "technician_summary_model.dart",
+      "filePath": "lib/features/technician/data/model/technician_summary_model.dart",
+      "summary": "Data-layer model extending TechnicianSummaryEntity that deserializes technician summary/profile JSON (name, photo, distance, rating) from the API.",
+      "tags": ["data-model", "serialization", "technician"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/technician/data/model/technician_summary_model.dart:TechnicianSummaryModel",
+      "type": "class",
+      "name": "TechnicianSummaryModel",
+      "filePath": "lib/features/technician/data/model/technician_summary_model.dart",
+      "lineRange": [5, 60],
+      "summary": "Extends TechnicianSummaryEntity with a fromJson factory parsing technician profile fields and numeric distance/rating values via tryParse.",
+      "tags": ["data-model", "serialization", "inherits"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/technician/data/repository/technician_repository.dart",
+      "type": "file",
+      "name": "technician_repository.dart",
+      "filePath": "lib/features/technician/data/repository/technician_repository.dart",
+      "summary": "Concrete implementation of ITechnicianRepository that delegates to the technician remote data source, mapping raw responses into domain entities for search, slots, appointments, job cards, and custom package operations.",
+      "tags": ["service", "data-model", "technician", "implements"],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:lib/features/technician/data/repository/technician_repository.dart:TechnicianRepository",
+      "type": "class",
+      "name": "TechnicianRepository",
+      "filePath": "lib/features/technician/data/repository/technician_repository.dart",
+      "lineRange": [14, 230],
+      "summary": "Implements ITechnicianRepository; wraps ITechnicianRemoteDataSource calls and maps each response to its corresponding domain entity (technicians, slots, appointments, job card packages, custom package items).",
+      "tags": ["service", "implements", "technician", "data-model"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:lib/features/technician/data/repository/technician_repository.dart:searchNearby",
+      "type": "function",
+      "name": "searchNearby",
+      "filePath": "lib/features/technician/data/repository/technician_repository.dart",
+      "lineRange": [20, 26],
+      "summary": "Fetches nearby technicians from the remote data source and maps results to TechnicianSummaryEntity instances.",
+      "tags": ["api-handler", "technician", "geolocation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/features/technician/data/repository/technician_repository.dart:getAvailableSlots",
+      "type": "function",
+      "name": "getAvailableSlots",
+      "filePath": "lib/features/technician/data/repository/technician_repository.dart",
+      "lineRange": [38, 41],
+      "summary": "Retrieves available time slots for a technician on a given date and maps them to TechnicianSlotEntity.",
+      "tags": ["api-handler", "scheduling"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/features/technician/data/repository/technician_repository.dart:getAppointments",
+      "type": "function",
+      "name": "getAppointments",
+      "filePath": "lib/features/technician/data/repository/technician_repository.dart",
+      "lineRange": [50, 55],
+      "summary": "Fetches a technician's appointments within a date range filtered by status.",
+      "tags": ["api-handler", "scheduling"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/features/technician/data/repository/technician_repository.dart:getBookingStatuses",
+      "type": "function",
+      "name": "getBookingStatuses",
+      "filePath": "lib/features/technician/data/repository/technician_repository.dart",
+      "lineRange": [66, 66],
+      "summary": "Retrieves the list of available booking statuses and maps them into TechnicianBookingStatus entities.",
+      "tags": ["api-handler", "technician"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/features/technician/data/repository/technician_repository.dart:updateAppointmentStatus",
+      "type": "function",
+      "name": "updateAppointmentStatus",
+      "filePath": "lib/features/technician/data/repository/technician_repository.dart",
+      "lineRange": [72, 75],
+      "summary": "Updates the status of a given booking via the remote data source.",
+      "tags": ["api-handler", "scheduling"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/features/technician/data/repository/technician_repository.dart:createServiceRequest",
+      "type": "function",
+      "name": "createServiceRequest",
+      "filePath": "lib/features/technician/data/repository/technician_repository.dart",
+      "lineRange": [83, 91],
+      "summary": "Creates a new service request/job card for a vehicle with VIN, mileage, coupon, and estimation flags.",
+      "tags": ["api-handler", "job-card"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:lib/features/technician/data/repository/technician_repository.dart:completeServiceRequest",
+      "type": "function",
+      "name": "completeServiceRequest",
+      "filePath": "lib/features/technician/data/repository/technician_repository.dart",
+      "lineRange": [105, 108],
+      "summary": "Marks a service request as completed for a given user.",
+      "tags": ["api-handler", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/features/technician/data/repository/technician_repository.dart:getJobCardPackages",
+      "type": "function",
+      "name": "getJobCardPackages",
+      "filePath": "lib/features/technician/data/repository/technician_repository.dart",
+      "lineRange": [117, 119],
+      "summary": "Fetches the packages associated with a job card (service request) and maps them to JobCardPackageEntity.",
+      "tags": ["api-handler", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/features/technician/data/repository/technician_repository.dart:getCustomPackageCategories",
+      "type": "function",
+      "name": "getCustomPackageCategories",
+      "filePath": "lib/features/technician/data/repository/technician_repository.dart",
+      "lineRange": [127, 127],
+      "summary": "Retrieves available custom package categories for ad-hoc job card item additions.",
+      "tags": ["api-handler", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/features/technician/data/repository/technician_repository.dart:getCustomPackageItems",
+      "type": "function",
+      "name": "getCustomPackageItems",
+      "filePath": "lib/features/technician/data/repository/technician_repository.dart",
+      "lineRange": [133, 136],
+      "summary": "Fetches custom package items for a job card filtered by category.",
+      "tags": ["api-handler", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/features/technician/data/repository/technician_repository.dart:addCustomPackageItem",
+      "type": "function",
+      "name": "addCustomPackageItem",
+      "filePath": "lib/features/technician/data/repository/technician_repository.dart",
+      "lineRange": [145, 152],
+      "summary": "Adds a custom inventory item line to a job card via the remote data source.",
+      "tags": ["api-handler", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/features/technician/data/repository/technician_repository.dart:deleteCustomPackageItem",
+      "type": "function",
+      "name": "deleteCustomPackageItem",
+      "filePath": "lib/features/technician/data/repository/technician_repository.dart",
+      "lineRange": [164, 166],
+      "summary": "Removes a custom package item line from a job card by its service-request line id.",
+      "tags": ["api-handler", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/features/technician/data/repository/technician_repository.dart:getJobCardPackageLines",
+      "type": "function",
+      "name": "getJobCardPackageLines",
+      "filePath": "lib/features/technician/data/repository/technician_repository.dart",
+      "lineRange": [171, 174],
+      "summary": "Fetches the line items for a specific package within a job card.",
+      "tags": ["api-handler", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/features/technician/data/repository/technician_repository.dart:addPackageToJobCard",
+      "type": "function",
+      "name": "addPackageToJobCard",
+      "filePath": "lib/features/technician/data/repository/technician_repository.dart",
+      "lineRange": [183, 188],
+      "summary": "Adds a service package (optionally tied to a campaign line) to a job card.",
+      "tags": ["api-handler", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/features/technician/data/repository/technician_repository.dart:deletePackageFromJobCard",
+      "type": "function",
+      "name": "deletePackageFromJobCard",
+      "filePath": "lib/features/technician/data/repository/technician_repository.dart",
+      "lineRange": [198, 201],
+      "summary": "Removes a package line from a job card.",
+      "tags": ["api-handler", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/features/technician/data/repository/technician_repository.dart:postChecklist",
+      "type": "function",
+      "name": "postChecklist",
+      "filePath": "lib/features/technician/data/repository/technician_repository.dart",
+      "lineRange": [209, 213],
+      "summary": "Submits checklist data for a service request against a specific checklist id.",
+      "tags": ["api-handler", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:lib/features/technician/data/repository/technician_repository.dart:getPackagesOfJobCard",
+      "type": "function",
+      "name": "getPackagesOfJobCard",
+      "filePath": "lib/features/technician/data/repository/technician_repository.dart",
+      "lineRange": [222, 224],
+      "summary": "Retrieves all packages currently attached to a job card.",
+      "tags": ["api-handler", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/technician/domain/entity/booking_status.dart",
+      "type": "file",
+      "name": "booking_status.dart",
+      "filePath": "lib/features/technician/domain/entity/booking_status.dart",
+      "summary": "Domain entity representing a technician booking status with label, code, and display color, including helpers for color parsing and a copyWith method.",
+      "tags": ["data-model", "entity", "technician"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/technician/domain/entity/booking_status.dart:TechnicianBookingStatus",
+      "type": "class",
+      "name": "TechnicianBookingStatus",
+      "filePath": "lib/features/technician/domain/entity/booking_status.dart",
+      "lineRange": [1, 49],
+      "summary": "Immutable booking status entity with label/code/hexColor, colorValue parsing, copyWith, and a fromRaw factory for constructing from loose inputs.",
+      "tags": ["data-model", "entity", "technician"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/technician/domain/entity/custom_package_category_entity.dart",
+      "type": "file",
+      "name": "custom_package_category_entity.dart",
+      "filePath": "lib/features/technician/domain/entity/custom_package_category_entity.dart",
+      "summary": "Domain entity representing a custom package category with bilingual descriptions and a displayName helper.",
+      "tags": ["data-model", "entity", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/technician/domain/entity/custom_package_category_entity.dart:CustomPackageCategoryEntity",
+      "type": "class",
+      "name": "CustomPackageCategoryEntity",
+      "filePath": "lib/features/technician/domain/entity/custom_package_category_entity.dart",
+      "lineRange": [1, 14],
+      "summary": "Entity holding id and Arabic/English descriptions for a custom package category, with a displayName getter.",
+      "tags": ["data-model", "entity"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/technician/domain/entity/custom_package_item_entity.dart",
+      "type": "file",
+      "name": "custom_package_item_entity.dart",
+      "filePath": "lib/features/technician/domain/entity/custom_package_item_entity.dart",
+      "summary": "Domain entity for a custom package inventory item with item code, description, type, and inventory item id.",
+      "tags": ["data-model", "entity", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/technician/domain/entity/custom_package_item_entity.dart:CustomPackageItemEntity",
+      "type": "class",
+      "name": "CustomPackageItemEntity",
+      "filePath": "lib/features/technician/domain/entity/custom_package_item_entity.dart",
+      "lineRange": [1, 13],
+      "summary": "Simple data class representing a selectable custom package inventory item.",
+      "tags": ["data-model", "entity"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/technician/domain/entity/job_card_entity.dart",
+      "type": "file",
+      "name": "job_card_entity.dart",
+      "filePath": "lib/features/technician/domain/entity/job_card_entity.dart",
+      "summary": "Domain entity representing a job card (service request) summary with status, dates, branch, technician, customer, and VIN information.",
+      "tags": ["data-model", "entity", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/technician/domain/entity/job_card_entity.dart:JobCardEntity",
+      "type": "class",
+      "name": "JobCardEntity",
+      "filePath": "lib/features/technician/domain/entity/job_card_entity.dart",
+      "lineRange": [1, 21],
+      "summary": "Data class capturing core job card fields such as srNumber, status, open date, branch, technician, customer, and VIN, plus raw payload.",
+      "tags": ["data-model", "entity"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/technician/domain/entity/job_card_package_entity.dart",
+      "type": "file",
+      "name": "job_card_package_entity.dart",
+      "filePath": "lib/features/technician/domain/entity/job_card_package_entity.dart",
+      "summary": "Domain entity representing a service package on a job card including pricing, discounts, taxes, and emergency/custom flags.",
+      "tags": ["data-model", "entity", "job-card", "pricing"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/technician/domain/entity/job_card_package_entity.dart:JobCardPackageEntity",
+      "type": "class",
+      "name": "JobCardPackageEntity",
+      "filePath": "lib/features/technician/domain/entity/job_card_package_entity.dart",
+      "lineRange": [1, 40],
+      "summary": "Entity describing a package line on a job card with bilingual names, pricing breakdown (price/tax/cost/discount/list price), and a displayName helper.",
+      "tags": ["data-model", "entity", "pricing"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/technician/domain/entity/job_card_package_line_entity.dart",
+      "type": "file",
+      "name": "job_card_package_line_entity.dart",
+      "filePath": "lib/features/technician/domain/entity/job_card_package_line_entity.dart",
+      "summary": "Domain entity representing a single line item within a job card package, including item, pricing, discount, and condition details.",
+      "tags": ["data-model", "entity", "job-card", "pricing"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/features/technician/domain/entity/job_card_package_line_entity.dart:JobCardPackageLineEntity",
+      "type": "class",
+      "name": "JobCardPackageLineEntity",
+      "filePath": "lib/features/technician/domain/entity/job_card_package_line_entity.dart",
+      "lineRange": [1, 47],
+      "summary": "Data class capturing line-level pricing fields (price with/without discount, extended price, conditions, fixed price) for a job card package item.",
+      "tags": ["data-model", "entity", "pricing"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:lib/features/technician/domain/entity/operation_result_entity.dart",
+      "type": "file",
+      "name": "operation_result_entity.dart",
+      "filePath": "lib/features/technician/domain/entity/operation_result_entity.dart",
+      "summary": "Generic domain entity representing the outcome of a backend operation, carrying success flag, message, code, and type.",
+      "tags": ["data-model", "entity", "result"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/technician/domain/entity/operation_result_entity.dart:OperationResultEntity",
+      "type": "class",
+      "name": "OperationResultEntity",
+      "filePath": "lib/features/technician/domain/entity/operation_result_entity.dart",
+      "lineRange": [1, 13],
+      "summary": "Simple result wrapper used across technician use cases to convey success/failure, message, code, and type from repository operations.",
+      "tags": ["data-model", "entity", "result"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/technician/domain/entity/technician_appointment_entity.dart",
+      "type": "file",
+      "name": "technician_appointment_entity.dart",
+      "filePath": "lib/features/technician/domain/entity/technician_appointment_entity.dart",
+      "summary": "Rich domain entity representing a technician's appointment/booking with vehicle, customer, package, status, and pricing details, plus several display-formatting helpers.",
+      "tags": ["data-model", "entity", "scheduling", "technician"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/features/technician/domain/entity/technician_appointment_entity.dart:TechnicianAppointmentEntity",
+      "type": "class",
+      "name": "TechnicianAppointmentEntity",
+      "filePath": "lib/features/technician/domain/entity/technician_appointment_entity.dart",
+      "lineRange": [3, 99],
+      "summary": "Comprehensive appointment entity with booking, vehicle, customer, package, and status fields, plus computed display helpers (displayPlate, displayCar, packageLabel, statusLabel, statusColorValue).",
+      "tags": ["data-model", "entity", "scheduling"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:lib/features/technician/domain/entity/technician_slot_entity.dart",
+      "type": "file",
+      "name": "technician_slot_entity.dart",
+      "filePath": "lib/features/technician/domain/entity/technician_slot_entity.dart",
+      "summary": "Domain entity representing a bookable technician time slot with id, label, start/end time, and formatted slot time.",
+      "tags": ["data-model", "entity", "scheduling"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/technician/domain/entity/technician_slot_entity.dart:TechnicianSlotEntity",
+      "type": "class",
+      "name": "TechnicianSlotEntity",
+      "filePath": "lib/features/technician/domain/entity/technician_slot_entity.dart",
+      "lineRange": [1, 17],
+      "summary": "Base entity for a technician availability slot, extended by TechnicianSlotModel for JSON parsing.",
+      "tags": ["data-model", "entity", "scheduling"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/technician/domain/entity/technician_summary_entity.dart",
+      "type": "file",
+      "name": "technician_summary_entity.dart",
+      "filePath": "lib/features/technician/domain/entity/technician_summary_entity.dart",
+      "summary": "Domain entity representing a brief technician summary/profile used in nearby-search results, including name, photo, organization, branch, distance, and rating.",
+      "tags": ["data-model", "entity", "technician"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/technician/domain/entity/technician_summary_entity.dart:TechnicianSummaryEntity",
+      "type": "class",
+      "name": "TechnicianSummaryEntity",
+      "filePath": "lib/features/technician/domain/entity/technician_summary_entity.dart",
+      "lineRange": [1, 21],
+      "summary": "Base entity for a technician's summary profile, extended by TechnicianSummaryModel for JSON deserialization.",
+      "tags": ["data-model", "entity", "technician"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/technician/domain/repository/i_technician_repository.dart",
+      "type": "file",
+      "name": "i_technician_repository.dart",
+      "filePath": "lib/features/technician/domain/repository/i_technician_repository.dart",
+      "summary": "Abstract repository interface declaring all technician-related operations (search, slots, appointments, job card and custom package management) that the data layer must implement.",
+      "tags": ["data-model", "interface", "technician", "abstraction"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository",
+      "type": "class",
+      "name": "ITechnicianRepository",
+      "filePath": "lib/features/technician/domain/repository/i_technician_repository.dart",
+      "lineRange": [12, 105],
+      "summary": "Abstract contract for technician data operations implemented by TechnicianRepository and consumed by all technician use cases, decoupling domain logic from the data layer.",
+      "tags": ["interface", "abstraction", "technician"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:lib/features/technician/domain/use_case/add_custom_package_item_use_case.dart",
+      "type": "file",
+      "name": "add_custom_package_item_use_case.dart",
+      "filePath": "lib/features/technician/domain/use_case/add_custom_package_item_use_case.dart",
+      "summary": "Use case that adds a custom inventory item line to a job card by delegating to ITechnicianRepository.addCustomPackageItem.",
+      "tags": ["use-case", "job-card", "service"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/technician/domain/use_case/add_custom_package_item_use_case.dart:AddCustomPackageItemUseCase",
+      "type": "class",
+      "name": "AddCustomPackageItemUseCase",
+      "filePath": "lib/features/technician/domain/use_case/add_custom_package_item_use_case.dart",
+      "lineRange": [4, 26],
+      "summary": "Encapsulates the add-custom-package-item business operation, delegating to the injected ITechnicianRepository and returning an OperationResultEntity.",
+      "tags": ["use-case", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/technician/domain/use_case/add_package_to_job_card_use_case.dart",
+      "type": "file",
+      "name": "add_package_to_job_card_use_case.dart",
+      "filePath": "lib/features/technician/domain/use_case/add_package_to_job_card_use_case.dart",
+      "summary": "Use case that adds a service package to a job card by delegating to ITechnicianRepository.addPackageToJobCard.",
+      "tags": ["use-case", "job-card", "service"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/technician/domain/use_case/add_package_to_job_card_use_case.dart:AddPackageToJobCardUseCase",
+      "type": "class",
+      "name": "AddPackageToJobCardUseCase",
+      "filePath": "lib/features/technician/domain/use_case/add_package_to_job_card_use_case.dart",
+      "lineRange": [4, 22],
+      "summary": "Encapsulates adding a package (optionally tied to a campaign line) to a job card via the repository.",
+      "tags": ["use-case", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/technician/domain/use_case/complete_service_request_use_case.dart",
+      "type": "file",
+      "name": "complete_service_request_use_case.dart",
+      "filePath": "lib/features/technician/domain/use_case/complete_service_request_use_case.dart",
+      "summary": "Use case that marks a service request as completed via ITechnicianRepository.completeServiceRequest.",
+      "tags": ["use-case", "job-card", "service"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/technician/domain/use_case/complete_service_request_use_case.dart:CompleteServiceRequestUseCase",
+      "type": "class",
+      "name": "CompleteServiceRequestUseCase",
+      "filePath": "lib/features/technician/domain/use_case/complete_service_request_use_case.dart",
+      "lineRange": [4, 18],
+      "summary": "Encapsulates completing a service request for a given srNumber and userId via the repository.",
+      "tags": ["use-case", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/technician/domain/use_case/create_job_card_use_case.dart",
+      "type": "file",
+      "name": "create_job_card_use_case.dart",
+      "filePath": "lib/features/technician/domain/use_case/create_job_card_use_case.dart",
+      "summary": "Use case that creates a new service request/job card via ITechnicianRepository.createServiceRequest.",
+      "tags": ["use-case", "job-card", "service"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/technician/domain/use_case/create_job_card_use_case.dart:CreateJobCardUseCase",
+      "type": "class",
+      "name": "CreateJobCardUseCase",
+      "filePath": "lib/features/technician/domain/use_case/create_job_card_use_case.dart",
+      "lineRange": [4, 28],
+      "summary": "Encapsulates job card creation with vehicle/customer details (VIN, mileage, coupon, estimation flag) delegated to the repository.",
+      "tags": ["use-case", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/technician/domain/use_case/delete_custom_package_item_use_case.dart",
+      "type": "file",
+      "name": "delete_custom_package_item_use_case.dart",
+      "filePath": "lib/features/technician/domain/use_case/delete_custom_package_item_use_case.dart",
+      "summary": "Use case that deletes a custom package item line from a job card via ITechnicianRepository.deleteCustomPackageItem.",
+      "tags": ["use-case", "job-card", "service"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/technician/domain/use_case/delete_custom_package_item_use_case.dart:DeleteCustomPackageItemUseCase",
+      "type": "class",
+      "name": "DeleteCustomPackageItemUseCase",
+      "filePath": "lib/features/technician/domain/use_case/delete_custom_package_item_use_case.dart",
+      "lineRange": [4, 14],
+      "summary": "Encapsulates removing a custom package item line by id via the repository.",
+      "tags": ["use-case", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/technician/domain/use_case/delete_package_from_job_card_use_case.dart",
+      "type": "file",
+      "name": "delete_package_from_job_card_use_case.dart",
+      "filePath": "lib/features/technician/domain/use_case/delete_package_from_job_card_use_case.dart",
+      "summary": "Use case that removes a package line from a job card via ITechnicianRepository.deletePackageFromJobCard.",
+      "tags": ["use-case", "job-card", "service"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/technician/domain/use_case/delete_package_from_job_card_use_case.dart:DeletePackageFromJobCardUseCase",
+      "type": "class",
+      "name": "DeletePackageFromJobCardUseCase",
+      "filePath": "lib/features/technician/domain/use_case/delete_package_from_job_card_use_case.dart",
+      "lineRange": [4, 18],
+      "summary": "Encapsulates removing a package line from a job card by packageLineId and userId via the repository.",
+      "tags": ["use-case", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/technician/domain/use_case/get_booking_statuses_use_case.dart",
+      "type": "file",
+      "name": "get_booking_statuses_use_case.dart",
+      "filePath": "lib/features/technician/domain/use_case/get_booking_statuses_use_case.dart",
+      "summary": "Use case that retrieves the list of available booking statuses via ITechnicianRepository.getBookingStatuses.",
+      "tags": ["use-case", "technician", "service"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/technician/domain/use_case/get_booking_statuses_use_case.dart:GetBookingStatusesUseCase",
+      "type": "class",
+      "name": "GetBookingStatusesUseCase",
+      "filePath": "lib/features/technician/domain/use_case/get_booking_statuses_use_case.dart",
+      "lineRange": [4, 12],
+      "summary": "Thin wrapper delegating booking-status retrieval to the injected repository.",
+      "tags": ["use-case", "technician"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/technician/domain/use_case/get_custom_package_categories_use_case.dart",
+      "type": "file",
+      "name": "get_custom_package_categories_use_case.dart",
+      "filePath": "lib/features/technician/domain/use_case/get_custom_package_categories_use_case.dart",
+      "summary": "Use case that retrieves available custom package categories via ITechnicianRepository.getCustomPackageCategories.",
+      "tags": ["use-case", "job-card", "service"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/technician/domain/use_case/get_custom_package_categories_use_case.dart:GetCustomPackageCategoriesUseCase",
+      "type": "class",
+      "name": "GetCustomPackageCategoriesUseCase",
+      "filePath": "lib/features/technician/domain/use_case/get_custom_package_categories_use_case.dart",
+      "lineRange": [4, 12],
+      "summary": "Thin wrapper delegating custom package category retrieval to the injected repository.",
+      "tags": ["use-case", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/technician/domain/use_case/get_custom_package_items_use_case.dart",
+      "type": "file",
+      "name": "get_custom_package_items_use_case.dart",
+      "filePath": "lib/features/technician/domain/use_case/get_custom_package_items_use_case.dart",
+      "summary": "Use case that retrieves custom package items for a job card and category via ITechnicianRepository.getCustomPackageItems.",
+      "tags": ["use-case", "job-card", "service"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:lib/features/technician/domain/use_case/get_custom_package_items_use_case.dart:GetCustomPackageItemsUseCase",
+      "type": "class",
+      "name": "GetCustomPackageItemsUseCase",
+      "filePath": "lib/features/technician/domain/use_case/get_custom_package_items_use_case.dart",
+      "lineRange": [4, 18],
+      "summary": "Thin wrapper delegating custom package item retrieval (filtered by job card and category) to the injected repository.",
+      "tags": ["use-case", "job-card"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:lib/features/technician/domain/use_case/get_customer_appointments_use_case.dart",
+      "type": "file",
+      "name": "get_customer_appointments_use_case.dart",
+      "filePath": "lib/features/technician/domain/use_case/get_customer_appointments_use_case.dart",
+      "summary": "Use case that retrieves a customer's upcoming service appointments, delegating to the upcoming_service feature's remote data source rather than the technician repository directly.",
+      "tags": ["use-case", "scheduling", "service"],
+      "complexity": "simple",
+      "languageNotes": "Despite living in the technician feature's use_case folder, this class depends on UpcomingServiceRemoteDataSourceImpl from the separate upcoming_service feature, indicating cross-feature coupling."
+    },
+    {
+      "id": "class:lib/features/technician/domain/use_case/get_customer_appointments_use_case.dart:GetCustomerAppointmentsUseCase",
+      "type": "class",
+      "name": "GetCustomerAppointmentsUseCase",
+      "filePath": "lib/features/technician/domain/use_case/get_customer_appointments_use_case.dart",
+      "lineRange": [7, 25],
+      "summary": "Encapsulates fetching a customer's upcoming services by delegating to UpcomingServiceRemoteDataSourceImpl.getUpcomingServices, returning UpcomingServiceModel entries.",
+      "tags": ["use-case", "scheduling", "cross-feature"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    { "source": "file:lib/features/technician/data/model/technician_booking_status_model.dart", "target": "class:lib/features/technician/data/model/technician_booking_status_model.dart:TechnicianBookingStatusModel", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/model/technician_booking_status_model.dart", "target": "class:lib/features/technician/data/model/technician_booking_status_model.dart:TechnicianBookingStatusModel", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "class:lib/features/technician/data/model/technician_booking_status_model.dart:TechnicianBookingStatusModel", "target": "class:lib/features/technician/domain/entity/booking_status.dart:TechnicianBookingStatus", "type": "inherits", "direction": "forward", "weight": 0.9 },
+
+    { "source": "file:lib/features/technician/data/model/technician_slot_model.dart", "target": "class:lib/features/technician/data/model/technician_slot_model.dart:TechnicianSlotModel", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/model/technician_slot_model.dart", "target": "function:lib/features/technician/data/model/technician_slot_model.dart:_fromMap", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/model/technician_slot_model.dart", "target": "class:lib/features/technician/data/model/technician_slot_model.dart:TechnicianSlotModel", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "class:lib/features/technician/data/model/technician_slot_model.dart:TechnicianSlotModel", "target": "class:lib/features/technician/domain/entity/technician_slot_entity.dart:TechnicianSlotEntity", "type": "inherits", "direction": "forward", "weight": 0.9 },
+
+    { "source": "file:lib/features/technician/data/model/technician_summary_model.dart", "target": "class:lib/features/technician/data/model/technician_summary_model.dart:TechnicianSummaryModel", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/model/technician_summary_model.dart", "target": "class:lib/features/technician/data/model/technician_summary_model.dart:TechnicianSummaryModel", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "class:lib/features/technician/data/model/technician_summary_model.dart:TechnicianSummaryModel", "target": "class:lib/features/technician/domain/entity/technician_summary_entity.dart:TechnicianSummaryEntity", "type": "inherits", "direction": "forward", "weight": 0.9 },
+
+    { "source": "file:lib/features/technician/data/repository/technician_repository.dart", "target": "class:lib/features/technician/data/repository/technician_repository.dart:TechnicianRepository", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/repository/technician_repository.dart", "target": "function:lib/features/technician/data/repository/technician_repository.dart:searchNearby", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/repository/technician_repository.dart", "target": "function:lib/features/technician/data/repository/technician_repository.dart:getAvailableSlots", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/repository/technician_repository.dart", "target": "function:lib/features/technician/data/repository/technician_repository.dart:getAppointments", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/repository/technician_repository.dart", "target": "function:lib/features/technician/data/repository/technician_repository.dart:getBookingStatuses", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/repository/technician_repository.dart", "target": "function:lib/features/technician/data/repository/technician_repository.dart:updateAppointmentStatus", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/repository/technician_repository.dart", "target": "function:lib/features/technician/data/repository/technician_repository.dart:createServiceRequest", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/repository/technician_repository.dart", "target": "function:lib/features/technician/data/repository/technician_repository.dart:completeServiceRequest", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/repository/technician_repository.dart", "target": "function:lib/features/technician/data/repository/technician_repository.dart:getJobCardPackages", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/repository/technician_repository.dart", "target": "function:lib/features/technician/data/repository/technician_repository.dart:getCustomPackageCategories", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/repository/technician_repository.dart", "target": "function:lib/features/technician/data/repository/technician_repository.dart:getCustomPackageItems", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/repository/technician_repository.dart", "target": "function:lib/features/technician/data/repository/technician_repository.dart:addCustomPackageItem", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/repository/technician_repository.dart", "target": "function:lib/features/technician/data/repository/technician_repository.dart:deleteCustomPackageItem", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/repository/technician_repository.dart", "target": "function:lib/features/technician/data/repository/technician_repository.dart:getJobCardPackageLines", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/repository/technician_repository.dart", "target": "function:lib/features/technician/data/repository/technician_repository.dart:addPackageToJobCard", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/repository/technician_repository.dart", "target": "function:lib/features/technician/data/repository/technician_repository.dart:deletePackageFromJobCard", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/repository/technician_repository.dart", "target": "function:lib/features/technician/data/repository/technician_repository.dart:postChecklist", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/repository/technician_repository.dart", "target": "function:lib/features/technician/data/repository/technician_repository.dart:getPackagesOfJobCard", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/data/repository/technician_repository.dart", "target": "class:lib/features/technician/data/repository/technician_repository.dart:TechnicianRepository", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "class:lib/features/technician/data/repository/technician_repository.dart:TechnicianRepository", "target": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "type": "implements", "direction": "forward", "weight": 0.9 },
+    { "source": "function:lib/features/technician/data/repository/technician_repository.dart:searchNearby", "target": "class:lib/features/technician/domain/entity/technician_summary_entity.dart:TechnicianSummaryEntity", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "function:lib/features/technician/data/repository/technician_repository.dart:getAvailableSlots", "target": "class:lib/features/technician/domain/entity/technician_slot_entity.dart:TechnicianSlotEntity", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "function:lib/features/technician/data/repository/technician_repository.dart:getBookingStatuses", "target": "class:lib/features/technician/domain/entity/booking_status.dart:TechnicianBookingStatus", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "function:lib/features/technician/data/repository/technician_repository.dart:getJobCardPackages", "target": "class:lib/features/technician/domain/entity/job_card_package_entity.dart:JobCardPackageEntity", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "function:lib/features/technician/data/repository/technician_repository.dart:getCustomPackageCategories", "target": "class:lib/features/technician/domain/entity/custom_package_category_entity.dart:CustomPackageCategoryEntity", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "function:lib/features/technician/data/repository/technician_repository.dart:getCustomPackageItems", "target": "class:lib/features/technician/domain/entity/custom_package_item_entity.dart:CustomPackageItemEntity", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "function:lib/features/technician/data/repository/technician_repository.dart:getJobCardPackageLines", "target": "class:lib/features/technician/domain/entity/job_card_package_line_entity.dart:JobCardPackageLineEntity", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "function:lib/features/technician/data/repository/technician_repository.dart:createServiceRequest", "target": "class:lib/features/technician/domain/entity/operation_result_entity.dart:OperationResultEntity", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "function:lib/features/technician/data/repository/technician_repository.dart:getAppointments", "target": "class:lib/features/technician/domain/entity/technician_appointment_entity.dart:TechnicianAppointmentEntity", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+
+    { "source": "file:lib/features/technician/domain/entity/booking_status.dart", "target": "class:lib/features/technician/domain/entity/booking_status.dart:TechnicianBookingStatus", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/domain/entity/booking_status.dart", "target": "class:lib/features/technician/domain/entity/booking_status.dart:TechnicianBookingStatus", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/features/technician/domain/entity/custom_package_category_entity.dart", "target": "class:lib/features/technician/domain/entity/custom_package_category_entity.dart:CustomPackageCategoryEntity", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/domain/entity/custom_package_category_entity.dart", "target": "class:lib/features/technician/domain/entity/custom_package_category_entity.dart:CustomPackageCategoryEntity", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/features/technician/domain/entity/custom_package_item_entity.dart", "target": "class:lib/features/technician/domain/entity/custom_package_item_entity.dart:CustomPackageItemEntity", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/domain/entity/custom_package_item_entity.dart", "target": "class:lib/features/technician/domain/entity/custom_package_item_entity.dart:CustomPackageItemEntity", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/features/technician/domain/entity/job_card_entity.dart", "target": "class:lib/features/technician/domain/entity/job_card_entity.dart:JobCardEntity", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/domain/entity/job_card_entity.dart", "target": "class:lib/features/technician/domain/entity/job_card_entity.dart:JobCardEntity", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/features/technician/domain/entity/job_card_package_entity.dart", "target": "class:lib/features/technician/domain/entity/job_card_package_entity.dart:JobCardPackageEntity", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/domain/entity/job_card_package_entity.dart", "target": "class:lib/features/technician/domain/entity/job_card_package_entity.dart:JobCardPackageEntity", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/features/technician/domain/entity/job_card_package_line_entity.dart", "target": "class:lib/features/technician/domain/entity/job_card_package_line_entity.dart:JobCardPackageLineEntity", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/domain/entity/job_card_package_line_entity.dart", "target": "class:lib/features/technician/domain/entity/job_card_package_line_entity.dart:JobCardPackageLineEntity", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/features/technician/domain/entity/operation_result_entity.dart", "target": "class:lib/features/technician/domain/entity/operation_result_entity.dart:OperationResultEntity", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/domain/entity/operation_result_entity.dart", "target": "class:lib/features/technician/domain/entity/operation_result_entity.dart:OperationResultEntity", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/features/technician/domain/entity/technician_appointment_entity.dart", "target": "class:lib/features/technician/domain/entity/technician_appointment_entity.dart:TechnicianAppointmentEntity", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/domain/entity/technician_appointment_entity.dart", "target": "class:lib/features/technician/domain/entity/technician_appointment_entity.dart:TechnicianAppointmentEntity", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/features/technician/domain/entity/technician_slot_entity.dart", "target": "class:lib/features/technician/domain/entity/technician_slot_entity.dart:TechnicianSlotEntity", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/domain/entity/technician_slot_entity.dart", "target": "class:lib/features/technician/domain/entity/technician_slot_entity.dart:TechnicianSlotEntity", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/features/technician/domain/entity/technician_summary_entity.dart", "target": "class:lib/features/technician/domain/entity/technician_summary_entity.dart:TechnicianSummaryEntity", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/domain/entity/technician_summary_entity.dart", "target": "class:lib/features/technician/domain/entity/technician_summary_entity.dart:TechnicianSummaryEntity", "type": "exports", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/features/technician/domain/repository/i_technician_repository.dart", "target": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/domain/repository/i_technician_repository.dart", "target": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "target": "class:lib/features/technician/domain/entity/booking_status.dart:TechnicianBookingStatus", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "target": "class:lib/features/technician/domain/entity/operation_result_entity.dart:OperationResultEntity", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "target": "class:lib/features/technician/domain/entity/technician_summary_entity.dart:TechnicianSummaryEntity", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "target": "class:lib/features/technician/domain/entity/technician_slot_entity.dart:TechnicianSlotEntity", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "target": "class:lib/features/technician/domain/entity/technician_appointment_entity.dart:TechnicianAppointmentEntity", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "target": "class:lib/features/technician/domain/entity/job_card_entity.dart:JobCardEntity", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "target": "class:lib/features/technician/domain/entity/job_card_package_entity.dart:JobCardPackageEntity", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "target": "class:lib/features/technician/domain/entity/job_card_package_line_entity.dart:JobCardPackageLineEntity", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "target": "class:lib/features/technician/domain/entity/custom_package_category_entity.dart:CustomPackageCategoryEntity", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "target": "class:lib/features/technician/domain/entity/custom_package_item_entity.dart:CustomPackageItemEntity", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+
+    { "source": "file:lib/features/technician/domain/use_case/add_custom_package_item_use_case.dart", "target": "class:lib/features/technician/domain/use_case/add_custom_package_item_use_case.dart:AddCustomPackageItemUseCase", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/domain/use_case/add_custom_package_item_use_case.dart", "target": "class:lib/features/technician/domain/use_case/add_custom_package_item_use_case.dart:AddCustomPackageItemUseCase", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "class:lib/features/technician/domain/use_case/add_custom_package_item_use_case.dart:AddCustomPackageItemUseCase", "target": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:lib/features/technician/domain/use_case/add_custom_package_item_use_case.dart:AddCustomPackageItemUseCase", "target": "function:lib/features/technician/data/repository/technician_repository.dart:addCustomPackageItem", "type": "calls", "direction": "forward", "weight": 0.8 },
+    { "source": "class:lib/features/technician/domain/use_case/add_custom_package_item_use_case.dart:AddCustomPackageItemUseCase", "target": "class:lib/features/technician/domain/entity/operation_result_entity.dart:OperationResultEntity", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+
+    { "source": "file:lib/features/technician/domain/use_case/add_package_to_job_card_use_case.dart", "target": "class:lib/features/technician/domain/use_case/add_package_to_job_card_use_case.dart:AddPackageToJobCardUseCase", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/domain/use_case/add_package_to_job_card_use_case.dart", "target": "class:lib/features/technician/domain/use_case/add_package_to_job_card_use_case.dart:AddPackageToJobCardUseCase", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "class:lib/features/technician/domain/use_case/add_package_to_job_card_use_case.dart:AddPackageToJobCardUseCase", "target": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:lib/features/technician/domain/use_case/add_package_to_job_card_use_case.dart:AddPackageToJobCardUseCase", "target": "function:lib/features/technician/data/repository/technician_repository.dart:addPackageToJobCard", "type": "calls", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/features/technician/domain/use_case/complete_service_request_use_case.dart", "target": "class:lib/features/technician/domain/use_case/complete_service_request_use_case.dart:CompleteServiceRequestUseCase", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/domain/use_case/complete_service_request_use_case.dart", "target": "class:lib/features/technician/domain/use_case/complete_service_request_use_case.dart:CompleteServiceRequestUseCase", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "class:lib/features/technician/domain/use_case/complete_service_request_use_case.dart:CompleteServiceRequestUseCase", "target": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:lib/features/technician/domain/use_case/complete_service_request_use_case.dart:CompleteServiceRequestUseCase", "target": "function:lib/features/technician/data/repository/technician_repository.dart:completeServiceRequest", "type": "calls", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/features/technician/domain/use_case/create_job_card_use_case.dart", "target": "class:lib/features/technician/domain/use_case/create_job_card_use_case.dart:CreateJobCardUseCase", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/domain/use_case/create_job_card_use_case.dart", "target": "class:lib/features/technician/domain/use_case/create_job_card_use_case.dart:CreateJobCardUseCase", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "class:lib/features/technician/domain/use_case/create_job_card_use_case.dart:CreateJobCardUseCase", "target": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:lib/features/technician/domain/use_case/create_job_card_use_case.dart:CreateJobCardUseCase", "target": "function:lib/features/technician/data/repository/technician_repository.dart:createServiceRequest", "type": "calls", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/features/technician/domain/use_case/delete_custom_package_item_use_case.dart", "target": "class:lib/features/technician/domain/use_case/delete_custom_package_item_use_case.dart:DeleteCustomPackageItemUseCase", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/domain/use_case/delete_custom_package_item_use_case.dart", "target": "class:lib/features/technician/domain/use_case/delete_custom_package_item_use_case.dart:DeleteCustomPackageItemUseCase", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "class:lib/features/technician/domain/use_case/delete_custom_package_item_use_case.dart:DeleteCustomPackageItemUseCase", "target": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:lib/features/technician/domain/use_case/delete_custom_package_item_use_case.dart:DeleteCustomPackageItemUseCase", "target": "function:lib/features/technician/data/repository/technician_repository.dart:deleteCustomPackageItem", "type": "calls", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/features/technician/domain/use_case/delete_package_from_job_card_use_case.dart", "target": "class:lib/features/technician/domain/use_case/delete_package_from_job_card_use_case.dart:DeletePackageFromJobCardUseCase", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/domain/use_case/delete_package_from_job_card_use_case.dart", "target": "class:lib/features/technician/domain/use_case/delete_package_from_job_card_use_case.dart:DeletePackageFromJobCardUseCase", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "class:lib/features/technician/domain/use_case/delete_package_from_job_card_use_case.dart:DeletePackageFromJobCardUseCase", "target": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:lib/features/technician/domain/use_case/delete_package_from_job_card_use_case.dart:DeletePackageFromJobCardUseCase", "target": "function:lib/features/technician/data/repository/technician_repository.dart:deletePackageFromJobCard", "type": "calls", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/features/technician/domain/use_case/get_booking_statuses_use_case.dart", "target": "class:lib/features/technician/domain/use_case/get_booking_statuses_use_case.dart:GetBookingStatusesUseCase", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/domain/use_case/get_booking_statuses_use_case.dart", "target": "class:lib/features/technician/domain/use_case/get_booking_statuses_use_case.dart:GetBookingStatusesUseCase", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "class:lib/features/technician/domain/use_case/get_booking_statuses_use_case.dart:GetBookingStatusesUseCase", "target": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:lib/features/technician/domain/use_case/get_booking_statuses_use_case.dart:GetBookingStatusesUseCase", "target": "function:lib/features/technician/data/repository/technician_repository.dart:getBookingStatuses", "type": "calls", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/features/technician/domain/use_case/get_custom_package_categories_use_case.dart", "target": "class:lib/features/technician/domain/use_case/get_custom_package_categories_use_case.dart:GetCustomPackageCategoriesUseCase", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/domain/use_case/get_custom_package_categories_use_case.dart", "target": "class:lib/features/technician/domain/use_case/get_custom_package_categories_use_case.dart:GetCustomPackageCategoriesUseCase", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "class:lib/features/technician/domain/use_case/get_custom_package_categories_use_case.dart:GetCustomPackageCategoriesUseCase", "target": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:lib/features/technician/domain/use_case/get_custom_package_categories_use_case.dart:GetCustomPackageCategoriesUseCase", "target": "function:lib/features/technician/data/repository/technician_repository.dart:getCustomPackageCategories", "type": "calls", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/features/technician/domain/use_case/get_custom_package_items_use_case.dart", "target": "class:lib/features/technician/domain/use_case/get_custom_package_items_use_case.dart:GetCustomPackageItemsUseCase", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/domain/use_case/get_custom_package_items_use_case.dart", "target": "class:lib/features/technician/domain/use_case/get_custom_package_items_use_case.dart:GetCustomPackageItemsUseCase", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "class:lib/features/technician/domain/use_case/get_custom_package_items_use_case.dart:GetCustomPackageItemsUseCase", "target": "class:lib/features/technician/domain/repository/i_technician_repository.dart:ITechnicianRepository", "type": "depends_on", "direction": "forward", "weight": 0.6 },
+    { "source": "class:lib/features/technician/domain/use_case/get_custom_package_items_use_case.dart:GetCustomPackageItemsUseCase", "target": "function:lib/features/technician/data/repository/technician_repository.dart:getCustomPackageItems", "type": "calls", "direction": "forward", "weight": 0.8 },
+
+    { "source": "file:lib/features/technician/domain/use_case/get_customer_appointments_use_case.dart", "target": "class:lib/features/technician/domain/use_case/get_customer_appointments_use_case.dart:GetCustomerAppointmentsUseCase", "type": "contains", "direction": "forward", "weight": 1.0 },
+    { "source": "file:lib/features/technician/domain/use_case/get_customer_appointments_use_case.dart", "target": "class:lib/features/technician/domain/use_case/get_customer_appointments_use_case.dart:GetCustomerAppointmentsUseCase", "type": "exports", "direction": "forward", "weight": 0.8 },
+    { "source": "class:lib/features/technician/domain/use_case/get_customer_appointments_use_case.dart:GetCustomerAppointmentsUseCase", "target": "class:lib/features/technician/domain/entity/technician_appointment_entity.dart:TechnicianAppointmentEntity", "type": "depends_on", "direction": "forward", "weight": 0.6 }
+  ]
+}
