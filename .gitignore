@@ -46,3 +46,16 @@ app.*.map.json
 
 # understand-anything analysis scratch files (local only)
 .understand-anything/
+/.aider.chat.history.md
+/.aider.input.history
+/.aider.tags.cache.v4/72/e1/1cf2c194cdc2dd095827ed4e40e5.val
+/.aider.tags.cache.v4/06/05/9bc0fbab17b9aedc859963ee84fd.val
+/.aider.tags.cache.v4/2e/5c/47ab30054bf18b9f01eb1d71551e.val
+/.aider.tags.cache.v4/af/ad/162b592339103ef6c1f4697ae45b.val
+/.aider.tags.cache.v4/b9/e3/2097d0f5aa0e0f855a134dc3b2a5.val
+/.aider.tags.cache.v4/65/98/6305eb264eaec8a4c7978d49c487.val
+/.aider.tags.cache.v4/cache.db
+/.aider.tags.cache.v4/cache.db-shm
+/.aider.tags.cache.v4/cache.db-wal
+/.aider.tags.cache.v4/0e/9a/e49b09f563de20a9fdaf6e1e0c8f.val
+/.aider.tags.cache.v4/7b/64/ee322e7149577b30e19dcd1aa556.val
