@@ -49,6 +49,25 @@
   "name": "Name",
   "enterProperValue": "Please enter a proper value",
   "email": "Email",
+  "editProfile": "Edit Profile",
+  "logout": "Logout",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "deleteAccount": "Delete Account",
+  "accountDeletionRequestSubmitted": "Account deletion request submitted",
+  "confirmAccountDeletion": "Confirm Account Deletion",
+  "accountDeletionIrreversible30Days": "Account deletion is irreversible after 30 days.",
+  "accountDeletionSubmittedMessage": "Account deletion request submitted on {date}. Your data will be deleted within 30 days of the request.",
+  "@accountDeletionSubmittedMessage": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "accountDeletionEmailMissing": "Unable to submit deletion request because this account has no email address.",
+  "accountDeletionFailed": "Unable to submit account deletion request. Please try again.",
+  "pleaseLogInToViewYourProfile": "Please log in to view your profile",
   "enterValidEmail": "Please enter a valid email",
   "comment": "Comment",
   "submit": "Submit",

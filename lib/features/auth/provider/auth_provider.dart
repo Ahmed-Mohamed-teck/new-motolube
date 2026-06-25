@@ -7,6 +7,7 @@ import '../data/repository/auth_local_repository.dart';
 import '../data/repository/auth_repository.dart';
 import '../domain/repository/i_auth_local_repository.dart';
 import '../domain/repository/i_auth_repository.dart';
+import '../domain/use_case/delete_user_account_use_case.dart';
 import '../domain/use_case/get_stored_auth_use_case.dart';
 import '../domain/use_case/get_user_info_use_case.dart';
 import '../domain/use_case/is_registered_user.dart';
@@ -52,6 +53,12 @@ final verifyOtpUseCaseProvider = Provider<VerifyOtpUseCase>((ref) {
 
 final getUserInfoUseCaseProvider = Provider<GetUserInfoUseCase>((ref) {
   return GetUserInfoUseCase(ref.read(authRepositoryProvider));
+});
+
+final deleteUserAccountUseCaseProvider = Provider<DeleteUserAccountUseCase>((
+  ref,
+) {
+  return DeleteUserAccountUseCase(ref.read(authRepositoryProvider));
 });
 
 final saveAuthSessionUseCaseProvider = Provider<SaveAuthSessionUseCase>((ref) {

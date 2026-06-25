@@ -13,6 +13,10 @@ abstract class IAuthRepository {
     required String phone,
     String? email,
   });
-  Future<VerifyOtpResult> verifyOtp({required String phone, required String otp});
+  Future<VerifyOtpResult> verifyOtp({
+    required String phone,
+    required String otp,
+  });
   Future<User> getUserInfo({required String phoneNumber});
+  Future<void> deleteUserAccount(String email);
 }

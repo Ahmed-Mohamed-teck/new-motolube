@@ -20,24 +20,27 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(name) => "Available slots for ${name}";
+  static String m0(date) =>
+      "Account deletion request submitted on ${date}. Your data will be deleted within 30 days of the request.";
 
-  static String m1(distance) => "${distance} km away";
+  static String m1(name) => "Available slots for ${name}";
 
-  static String m2(message) => "Failed to load packages.\n${message}";
+  static String m2(distance) => "${distance} km away";
 
-  static String m3(price) => "${price} SAR";
+  static String m3(message) => "Failed to load packages.\n${message}";
 
-  static String m4(label) => "Selected category: ${label}";
+  static String m4(price) => "${price} SAR";
 
-  static String m5(latitude, longitude) =>
+  static String m5(label) => "Selected category: ${label}";
+
+  static String m6(latitude, longitude) =>
       "Selected location: (${latitude}, ${longitude})";
 
-  static String m6(route) => "Route \"${route}\" is not available.";
+  static String m7(route) => "Route \"${route}\" is not available.";
 
-  static String m7(model, plate) => "Car card for ${model}, plate ${plate}";
+  static String m8(model, plate) => "Car card for ${model}, plate ${plate}";
 
-  static String m8(plate) => "License plate ${plate}";
+  static String m9(plate) => "License plate ${plate}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -45,6 +48,19 @@ class MessageLookup extends MessageLookupByLibrary {
       "Please login to view your cars",
     ),
     "Profile": MessageLookupByLibrary.simpleMessage("Profile"),
+    "accountDeletionEmailMissing": MessageLookupByLibrary.simpleMessage(
+      "Unable to submit deletion request because this account has no email address.",
+    ),
+    "accountDeletionFailed": MessageLookupByLibrary.simpleMessage(
+      "Unable to submit account deletion request. Please try again.",
+    ),
+    "accountDeletionIrreversible30Days": MessageLookupByLibrary.simpleMessage(
+      "Account deletion is irreversible after 30 days.",
+    ),
+    "accountDeletionRequestSubmitted": MessageLookupByLibrary.simpleMessage(
+      "Account deletion request submitted",
+    ),
+    "accountDeletionSubmittedMessage": m0,
     "addCar": MessageLookupByLibrary.simpleMessage("Add Car"),
     "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
     "areYouOwnerThisCar": MessageLookupByLibrary.simpleMessage(
@@ -61,7 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "bookServiceAllow": MessageLookupByLibrary.simpleMessage("Allow"),
     "bookServiceAppointmentConfirmedTitle":
         MessageLookupByLibrary.simpleMessage("Appointment Confirmed"),
-    "bookServiceAvailableSlotsFor": m0,
+    "bookServiceAvailableSlotsFor": m1,
     "bookServiceCompleteAllStepsBeforeBooking":
         MessageLookupByLibrary.simpleMessage(
           "Please complete all steps before booking.",
@@ -73,8 +89,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "Unable to determine customer information.",
     ),
     "bookServiceDeny": MessageLookupByLibrary.simpleMessage("Deny"),
-    "bookServiceDistanceAway": m1,
-    "bookServiceFailedToLoadPackages": m2,
+    "bookServiceDistanceAway": m2,
+    "bookServiceFailedToLoadPackages": m3,
     "bookServiceLocationPermissionMessage":
         MessageLookupByLibrary.simpleMessage(
           "We need your location to show it on the map.",
@@ -99,7 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage(
           "Packages will load once you continue.",
         ),
-    "bookServicePriceSar": m3,
+    "bookServicePriceSar": m4,
     "bookServiceReadyToFindTechnicians": MessageLookupByLibrary.simpleMessage(
       "Ready to find technicians near your chosen location?",
     ),
@@ -126,8 +142,8 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage(
           "Please select a service package before continuing.",
         ),
-    "bookServiceSelectedCategory": m4,
-    "bookServiceSelectedLocation": m5,
+    "bookServiceSelectedCategory": m5,
+    "bookServiceSelectedLocation": m6,
     "bookServiceSelectedPackageUnavailable":
         MessageLookupByLibrary.simpleMessage(
           "Unable to determine the selected package.",
@@ -166,6 +182,7 @@ class MessageLookup extends MessageLookupByLibrary {
           "Unable to determine the technician information.",
         ),
     "bookServiceTryAgain": MessageLookupByLibrary.simpleMessage("Try Again"),
+    "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "carDetailing": MessageLookupByLibrary.simpleMessage("Car Detailing"),
     "carEvaluation": MessageLookupByLibrary.simpleMessage("Car Evaluation"),
     "carInfo": MessageLookupByLibrary.simpleMessage("Car Info"),
@@ -211,6 +228,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "companyNameHint": MessageLookupByLibrary.simpleMessage(
       "e.g. MotorLube Co.",
     ),
+    "confirmAccountDeletion": MessageLookupByLibrary.simpleMessage(
+      "Confirm Account Deletion",
+    ),
     "contactUsAppbar": MessageLookupByLibrary.simpleMessage("Contanct Us"),
     "contactUsInquirySentMessage": MessageLookupByLibrary.simpleMessage(
       "Your inquiry has been sent successfully.",
@@ -229,9 +249,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "crnLengthError": MessageLookupByLibrary.simpleMessage(
       "CRN must be 10 digits",
     ),
+    "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+    "deleteAccount": MessageLookupByLibrary.simpleMessage("Delete Account"),
     "didntReceiveOtp": MessageLookupByLibrary.simpleMessage(
       "Didn\'t receive the OTP?",
     ),
+    "editProfile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
     "email": MessageLookupByLibrary.simpleMessage("Email"),
     "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
     "english": MessageLookupByLibrary.simpleMessage("English"),
@@ -277,6 +300,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "loginWelcomeMessage": MessageLookupByLibrary.simpleMessage(
       "welcome back, Loging Motorlube",
     ),
+    "logout": MessageLookupByLibrary.simpleMessage("Logout"),
     "mailUsAt": MessageLookupByLibrary.simpleMessage("Mail us at"),
     "maintenanceNav": MessageLookupByLibrary.simpleMessage("Maintenance"),
     "majorServices": MessageLookupByLibrary.simpleMessage("Major Services"),
@@ -299,7 +323,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "View customer ratings",
     ),
     "managerHomeRatingsTitle": MessageLookupByLibrary.simpleMessage("Ratings"),
-    "managerHomeRouteUnavailable": m6,
+    "managerHomeRouteUnavailable": m7,
     "managerHomeTitle": MessageLookupByLibrary.simpleMessage("Manager"),
     "manufacturer": MessageLookupByLibrary.simpleMessage("Manufacturer"),
     "mobileServices": MessageLookupByLibrary.simpleMessage("Mobile Services"),
@@ -340,6 +364,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "plate": MessageLookupByLibrary.simpleMessage("Plate"),
     "plateLetters": MessageLookupByLibrary.simpleMessage("Plate Letters"),
     "plateNumbers": MessageLookupByLibrary.simpleMessage("Plate Numbers"),
+    "pleaseLogInToViewYourProfile": MessageLookupByLibrary.simpleMessage(
+      "Please log in to view your profile",
+    ),
     "profileAppbar": MessageLookupByLibrary.simpleMessage("Profile"),
     "profileNav": MessageLookupByLibrary.simpleMessage("Profile"),
     "promotionDescription": MessageLookupByLibrary.simpleMessage(
@@ -456,7 +483,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "userCarsCarModelLabel": MessageLookupByLibrary.simpleMessage("Car model"),
     "userCarsCarName": MessageLookupByLibrary.simpleMessage("Car name"),
-    "userCarsCardSemantics": m7,
+    "userCarsCardSemantics": m8,
     "userCarsChassis": MessageLookupByLibrary.simpleMessage("Chassis"),
     "userCarsChassisVin": MessageLookupByLibrary.simpleMessage("Chassis (VIN)"),
     "userCarsChooseFromGallery": MessageLookupByLibrary.simpleMessage(
@@ -489,7 +516,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "userCarsInvalidPlateNumber": MessageLookupByLibrary.simpleMessage(
       "Invalid plate number",
     ),
-    "userCarsLicensePlateSemantics": m8,
+    "userCarsLicensePlateSemantics": m9,
     "userCarsSaveVehicle": MessageLookupByLibrary.simpleMessage("Save Vehicle"),
     "userCarsSaving": MessageLookupByLibrary.simpleMessage("Saving..."),
     "userCarsTakePhoto": MessageLookupByLibrary.simpleMessage("Take a photo"),

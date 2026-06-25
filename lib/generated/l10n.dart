@@ -434,6 +434,111 @@ class S {
     return Intl.message('Email', name: 'email', desc: '', args: []);
   }
 
+  /// `Edit Profile`
+  String get editProfile {
+    return Intl.message(
+      'Edit Profile',
+      name: 'editProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message('Logout', name: 'logout', desc: '', args: []);
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message('Delete', name: 'delete', desc: '', args: []);
+  }
+
+  /// `Delete Account`
+  String get deleteAccount {
+    return Intl.message(
+      'Delete Account',
+      name: 'deleteAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account deletion request submitted`
+  String get accountDeletionRequestSubmitted {
+    return Intl.message(
+      'Account deletion request submitted',
+      name: 'accountDeletionRequestSubmitted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm Account Deletion`
+  String get confirmAccountDeletion {
+    return Intl.message(
+      'Confirm Account Deletion',
+      name: 'confirmAccountDeletion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account deletion is irreversible after 30 days.`
+  String get accountDeletionIrreversible30Days {
+    return Intl.message(
+      'Account deletion is irreversible after 30 days.',
+      name: 'accountDeletionIrreversible30Days',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account deletion request submitted on {date}. Your data will be deleted within 30 days of the request.`
+  String accountDeletionSubmittedMessage(String date) {
+    return Intl.message(
+      'Account deletion request submitted on $date. Your data will be deleted within 30 days of the request.',
+      name: 'accountDeletionSubmittedMessage',
+      desc: '',
+      args: [date],
+    );
+  }
+
+  /// `Unable to submit deletion request because this account has no email address.`
+  String get accountDeletionEmailMissing {
+    return Intl.message(
+      'Unable to submit deletion request because this account has no email address.',
+      name: 'accountDeletionEmailMissing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to submit account deletion request. Please try again.`
+  String get accountDeletionFailed {
+    return Intl.message(
+      'Unable to submit account deletion request. Please try again.',
+      name: 'accountDeletionFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please log in to view your profile`
+  String get pleaseLogInToViewYourProfile {
+    return Intl.message(
+      'Please log in to view your profile',
+      name: 'pleaseLogInToViewYourProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Please enter a valid email`
   String get enterValidEmail {
     return Intl.message(

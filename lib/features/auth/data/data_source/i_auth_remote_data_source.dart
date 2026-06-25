@@ -13,4 +13,5 @@ abstract class AuthRemoteDataSource {
   Future<RegisterResponse> register(RegisterRequest request);
   Future<VerifyOtpResponse> verifyOtp(VerifyOtpRequest request);
   Future<UserModel> getUserInfo(String phoneNumber);
+  Future<void> deleteUserAccount(String email);
 }

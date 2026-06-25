@@ -14,11 +14,13 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final Dio dio;
   AuthRemoteDataSourceImpl(this.dio);
 
-
   @override
   Future<bool> isUserRegisteredUser(String phoneNumber) async {
     try {
-      final res = await dio.post(isUserRegisteredEndPoint,data: {'mobileNumber': phoneNumber});
+      final res = await dio.post(
+        isUserRegisteredEndPoint,
+        data: {'mobileNumber': phoneNumber},
+      );
       final data = res.data as Map<String, dynamic>;
       return data['isRegistered'] as bool;
     } on DioException catch (e) {
@@ -28,8 +30,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       rethrow; // Rethrow other errors
     }
   }
-
-
 
   @override
   Future<SendOtpResponse> sendOtp(SendOtpRequest request) async {
@@ -85,5 +85,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
       rethrow;
     }
+  }
+
+  @override
+  Future<void> deleteUserAccount(String email) async {
+    await dio.get(deleteUserAccountEndPoint(email));
   }
 }

@@ -1,7 +1,6 @@
 import '../../domain/entity/otp_info.dart';
 import '../../domain/entity/register_result.dart';
 import '../../domain/entity/user_entity.dart';
-import '../../domain/entity/user_type.dart';
 import '../../domain/entity/verify_otp_result.dart';
 import '../../domain/repository/i_auth_repository.dart';
 import '../data_source/i_auth_remote_data_source.dart';
@@ -12,7 +11,6 @@ import '../model/verify_otp_request.dart';
 class AuthRepositoryImpl implements IAuthRepository {
   final AuthRemoteDataSource remote;
   AuthRepositoryImpl(this.remote);
-
 
   @override
   Future<bool> isUserRegisteredUser(String phoneNumber) {
@@ -43,8 +41,13 @@ class AuthRepositoryImpl implements IAuthRepository {
   }
 
   @override
-  Future<VerifyOtpResult> verifyOtp({required String phone, required String otp}) async {
-    final res = await remote.verifyOtp(VerifyOtpRequest(mobileNumber: phone, otp: otp));
+  Future<VerifyOtpResult> verifyOtp({
+    required String phone,
+    required String otp,
+  }) async {
+    final res = await remote.verifyOtp(
+      VerifyOtpRequest(mobileNumber: phone, otp: otp),
+    );
     return res.toEntity();
   }
 
@@ -54,7 +57,8 @@ class AuthRepositoryImpl implements IAuthRepository {
     return res.toEntity();
   }
 
-
-
-
+  @override
+  Future<void> deleteUserAccount(String email) {
+    return remote.deleteUserAccount(email);
+  }
 }

@@ -20,24 +20,27 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
-  static String m0(name) => "المواعيد المتاحة لـ ${name}";
+  static String m0(date) =>
+      "تم تقديم طلب حذف الحساب بتاريخ ${date}. سيتم حذف بياناتك خلال 30 يوما من تقديم الطلب.";
 
-  static String m1(distance) => "يبعد ${distance} كم";
+  static String m1(name) => "المواعيد المتاحة لـ ${name}";
 
-  static String m2(message) => "فشل تحميل الباقات.\n${message}";
+  static String m2(distance) => "يبعد ${distance} كم";
 
-  static String m3(price) => "${price} ر.س";
+  static String m3(message) => "فشل تحميل الباقات.\n${message}";
 
-  static String m4(label) => "الفئة المحددة: ${label}";
+  static String m4(price) => "${price} ر.س";
 
-  static String m5(latitude, longitude) =>
+  static String m5(label) => "الفئة المحددة: ${label}";
+
+  static String m6(latitude, longitude) =>
       "الموقع المحدد: (${latitude}, ${longitude})";
 
-  static String m6(route) => "المسار \"${route}\" غير متاح.";
+  static String m7(route) => "المسار \"${route}\" غير متاح.";
 
-  static String m7(model, plate) => "بطاقة سيارة لـ ${model}، لوحة ${plate}";
+  static String m8(model, plate) => "بطاقة سيارة لـ ${model}، لوحة ${plate}";
 
-  static String m8(plate) => "لوحة المركبة ${plate}";
+  static String m9(plate) => "لوحة المركبة ${plate}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -45,6 +48,19 @@ class MessageLookup extends MessageLookupByLibrary {
       "يرجى تسجيل الدخول لعرض سياراتك",
     ),
     "Profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
+    "accountDeletionEmailMissing": MessageLookupByLibrary.simpleMessage(
+      "تعذر تقديم طلب حذف الحساب لأن الحساب لا يحتوي على بريد إلكتروني.",
+    ),
+    "accountDeletionFailed": MessageLookupByLibrary.simpleMessage(
+      "تعذر تقديم طلب حذف الحساب. يرجى المحاولة مرة أخرى.",
+    ),
+    "accountDeletionIrreversible30Days": MessageLookupByLibrary.simpleMessage(
+      "سيتم حذف الحساب نهائيا بعد 30 يوما",
+    ),
+    "accountDeletionRequestSubmitted": MessageLookupByLibrary.simpleMessage(
+      "تم تقديم طلب حذف الحساب",
+    ),
+    "accountDeletionSubmittedMessage": m0,
     "addCar": MessageLookupByLibrary.simpleMessage("إضافة سيارة"),
     "arabic": MessageLookupByLibrary.simpleMessage("العربية"),
     "areYouOwnerThisCar": MessageLookupByLibrary.simpleMessage(
@@ -61,7 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "bookServiceAllow": MessageLookupByLibrary.simpleMessage("سماح"),
     "bookServiceAppointmentConfirmedTitle":
         MessageLookupByLibrary.simpleMessage("تم تأكيد الموعد"),
-    "bookServiceAvailableSlotsFor": m0,
+    "bookServiceAvailableSlotsFor": m1,
     "bookServiceCompleteAllStepsBeforeBooking":
         MessageLookupByLibrary.simpleMessage(
           "يرجى إكمال جميع الخطوات قبل الحجز.",
@@ -73,8 +89,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "تعذر تحديد معلومات العميل.",
     ),
     "bookServiceDeny": MessageLookupByLibrary.simpleMessage("رفض"),
-    "bookServiceDistanceAway": m1,
-    "bookServiceFailedToLoadPackages": m2,
+    "bookServiceDistanceAway": m2,
+    "bookServiceFailedToLoadPackages": m3,
     "bookServiceLocationPermissionMessage":
         MessageLookupByLibrary.simpleMessage(
           "نحتاج إلى موقعك لعرضه على الخريطة.",
@@ -99,7 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage(
           "سيتم تحميل الباقات بمجرد المتابعة.",
         ),
-    "bookServicePriceSar": m3,
+    "bookServicePriceSar": m4,
     "bookServiceReadyToFindTechnicians": MessageLookupByLibrary.simpleMessage(
       "هل أنت مستعد للعثور على فنيين بالقرب من موقعك المحدد؟",
     ),
@@ -124,8 +140,8 @@ class MessageLookup extends MessageLookupByLibrary {
         MessageLookupByLibrary.simpleMessage(
           "يرجى اختيار باقة خدمة قبل المتابعة.",
         ),
-    "bookServiceSelectedCategory": m4,
-    "bookServiceSelectedLocation": m5,
+    "bookServiceSelectedCategory": m5,
+    "bookServiceSelectedLocation": m6,
     "bookServiceSelectedPackageUnavailable":
         MessageLookupByLibrary.simpleMessage("تعذر تحديد الباقة المحددة."),
     "bookServiceSelectedVehicleUnavailable":
@@ -158,6 +174,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "bookServiceTryAgain": MessageLookupByLibrary.simpleMessage(
       "حاول مرة أخرى",
     ),
+    "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "carDetailing": MessageLookupByLibrary.simpleMessage("تنظيف السيارات"),
     "carEvaluation": MessageLookupByLibrary.simpleMessage("تقييم السيارات"),
     "carInfo": MessageLookupByLibrary.simpleMessage("معلومات السيارة"),
@@ -201,6 +218,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "companyNameHint": MessageLookupByLibrary.simpleMessage(
       "مثال: شركة الخليج للسيارات",
     ),
+    "confirmAccountDeletion": MessageLookupByLibrary.simpleMessage(
+      "تأكيد حذف الحساب",
+    ),
     "contactUsAppbar": MessageLookupByLibrary.simpleMessage("اتصل بنا"),
     "contactUsInquirySentMessage": MessageLookupByLibrary.simpleMessage(
       "تم إرسال استفسارك بنجاح.",
@@ -217,9 +237,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "crnLengthError": MessageLookupByLibrary.simpleMessage(
       "يجب أن يكون رقم السجل التجاري 10 أرقام",
     ),
+    "delete": MessageLookupByLibrary.simpleMessage("حذف"),
+    "deleteAccount": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
     "didntReceiveOtp": MessageLookupByLibrary.simpleMessage(
       "لم تستلم رمز التحقق؟",
     ),
+    "editProfile": MessageLookupByLibrary.simpleMessage("تعديل الملف الشخصي"),
     "email": MessageLookupByLibrary.simpleMessage("البريد الإلكتروني"),
     "endDate": MessageLookupByLibrary.simpleMessage("تاريخ الانتهاء"),
     "english": MessageLookupByLibrary.simpleMessage("الإنجليزية"),
@@ -263,6 +286,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "loginWelcomeMessage": MessageLookupByLibrary.simpleMessage(
       "مرحبا بك، سجل دخولك لموتورلوب",
     ),
+    "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "mailUsAt": MessageLookupByLibrary.simpleMessage("راسلنا على"),
     "maintenanceNav": MessageLookupByLibrary.simpleMessage("الصيانة"),
     "majorServices": MessageLookupByLibrary.simpleMessage("الخدمات الرئيسية"),
@@ -289,7 +313,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "managerHomeRatingsTitle": MessageLookupByLibrary.simpleMessage(
       "التقييمات",
     ),
-    "managerHomeRouteUnavailable": m6,
+    "managerHomeRouteUnavailable": m7,
     "managerHomeTitle": MessageLookupByLibrary.simpleMessage("الإدارة"),
     "manufacturer": MessageLookupByLibrary.simpleMessage("الشركة المصنعة"),
     "mobileServices": MessageLookupByLibrary.simpleMessage("الخدمات المتنقلة"),
@@ -330,6 +354,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "plate": MessageLookupByLibrary.simpleMessage("اللوحة"),
     "plateLetters": MessageLookupByLibrary.simpleMessage("حروف اللوحة"),
     "plateNumbers": MessageLookupByLibrary.simpleMessage("أرقام اللوحة"),
+    "pleaseLogInToViewYourProfile": MessageLookupByLibrary.simpleMessage(
+      "يرجى تسجيل الدخول لعرض ملفك الشخصي",
+    ),
     "profileAppbar": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
     "profileNav": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
     "promotionDescription": MessageLookupByLibrary.simpleMessage("وصف العرض"),
@@ -446,7 +473,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "موديل السيارة",
     ),
     "userCarsCarName": MessageLookupByLibrary.simpleMessage("اسم السيارة"),
-    "userCarsCardSemantics": m7,
+    "userCarsCardSemantics": m8,
     "userCarsChassis": MessageLookupByLibrary.simpleMessage("رقم الهيكل"),
     "userCarsChassisVin": MessageLookupByLibrary.simpleMessage(
       "رقم الهيكل (VIN)",
@@ -481,7 +508,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "userCarsInvalidPlateNumber": MessageLookupByLibrary.simpleMessage(
       "رقم اللوحة غير صالح",
     ),
-    "userCarsLicensePlateSemantics": m8,
+    "userCarsLicensePlateSemantics": m9,
     "userCarsSaveVehicle": MessageLookupByLibrary.simpleMessage("حفظ المركبة"),
     "userCarsSaving": MessageLookupByLibrary.simpleMessage("جارٍ الحفظ..."),
     "userCarsTakePhoto": MessageLookupByLibrary.simpleMessage("التقاط صورة"),

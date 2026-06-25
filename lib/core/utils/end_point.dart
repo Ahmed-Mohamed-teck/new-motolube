@@ -16,6 +16,8 @@ String getCarsForCustomerEndPoint(String customerOracleId) =>
     '$baseUrl/MotorLubeApp/customer/vehicles?customerId=$customerOracleId';
 String getUserInfoEndPoint(String phone) =>
     '$baseUrl/UserManagement/user?mobileNumber=$phone';
+String deleteUserAccountEndPoint(String email) =>
+    '$baseUrl/MotorLubeApp/DeleteUserAccount/${Uri.encodeComponent(email)}';
 const String setTechnicianLocationEndPoint =
     '$baseUrl/MotorLubeApp/technician/setlocation';
 const String searchNearbyTechniciansEndPoint =
@@ -32,6 +34,7 @@ String getPackagesForVehicleByCategoryEndPoint({
   final encodedCategory = Uri.encodeComponent(category);
   return '$baseUrl/MotorLubeApp/getPackagesForVehicle/$customerId/$vehicleId/1000?category=$encodedCategory';
 }
+
 const String getCustomerAppointmentsEndPoint =
     '$baseUrl/MotorLubeApp/getCustomerAppointment';
 const String getTechnicianAppointmentsEndPoint =
@@ -48,8 +51,7 @@ const String createAppointmentEndPoint =
     '$baseUrl/MotorLubeApp/createAppointment';
 const String initiatePaymentEndPoint =
     'https://interface.taajeer.com:1027/api/Payments/initiate';
-const String getCouponsEndPoint =
-    '$baseUrl/MotorLubeApp/GetCuoponList/x';
+const String getCouponsEndPoint = '$baseUrl/MotorLubeApp/GetCuoponList/x';
 String addCouponEndPoint({
   required String appUserId,
   required String companyName,
@@ -62,6 +64,7 @@ String addCouponEndPoint({
   return '$baseUrl/MotorLubeApp/AddCouponHeader/'
       '$appUserId/$companyName/$fromDate/$toDate/$discountRate/$couponCounts/$domain';
 }
+
 String getPaymentStatusEndPoint(String transactionId) =>
     '$baseUrl/Payments/status?transactionId=${Uri.encodeComponent(transactionId)}';
 const String getMainCategoriesEndPoint =
