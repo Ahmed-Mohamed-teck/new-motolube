@@ -18,7 +18,7 @@ class UserCars extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen<AuthState>(authViewModelProvider, (previous, next) {
-      if (next is UnauthenticatedState) {
+      if (next is! AuthenticatedState) {
         ref.invalidate(userCarsViewModelProvider);
       }
     });
@@ -26,11 +26,10 @@ class UserCars extends ConsumerWidget {
     final authState = ref.watch(authViewModelProvider);
 
     // Provide a friendly prompt when the user is logged out
-    if (authState is UnauthenticatedState) {
-      return  EmptyCarsCard(
+    if (authState is! AuthenticatedState) {
+      return EmptyCarsCard(
         onTap: () {
           navigatorKey.currentState?.pushNamed('loginScreen');
-
         },
       );
     }
@@ -38,7 +37,7 @@ class UserCars extends ConsumerWidget {
     final state = ref.watch(userCarsViewModelProvider);
 
     // Only attempt to fetch data when authenticated
-    if (authState is AuthenticatedState && state is UserCarsInitial) {
+    if (state is UserCarsInitial) {
       final customerId = authState.user.oracleId;
       if (customerId.isNotEmpty) {
         Future.microtask(
@@ -210,9 +209,10 @@ class _EmptyCars extends StatelessWidget {
     final theme = Theme.of(context);
     return LayoutBuilder(
       builder: (context, constraints) {
-        final width = constraints.maxWidth.isFinite
-            ? constraints.maxWidth
-            : MediaQuery.of(context).size.width;
+        final width =
+            constraints.maxWidth.isFinite
+                ? constraints.maxWidth
+                : MediaQuery.of(context).size.width;
         return SizedBox(
           width: width,
           child: Card(
@@ -249,10 +249,8 @@ class _EmptyCars extends StatelessWidget {
   }
 }
 
-
-
 class EmptyCarsCard extends StatelessWidget {
-   EmptyCarsCard({
+  EmptyCarsCard({
     super.key,
     required this.onTap,
     this.icon = Icons.directions_car_filled_rounded,
@@ -274,9 +272,7 @@ class EmptyCarsCard extends StatelessWidget {
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
-            side: BorderSide(
-              color: Colors.grey.withOpacity(0.2),
-            ),
+            side: BorderSide(color: Colors.grey.withOpacity(0.2)),
           ),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(24, 28, 24, 24),
@@ -290,11 +286,7 @@ class EmptyCarsCard extends StatelessWidget {
                     color: Color(0xFFF3F4F6),
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(
-                    icon,
-                    size: 36,
-                    color: Colors.grey[600],
-                  ),
+                  child: Icon(icon, size: 36, color: Colors.grey[600]),
                 ),
                 const SizedBox(height: 20),
 
@@ -327,7 +319,9 @@ class EmptyCarsCard extends StatelessWidget {
                     onPressed: onTap,
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 8),
+                        horizontal: 20,
+                        vertical: 8,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18),
                       ),

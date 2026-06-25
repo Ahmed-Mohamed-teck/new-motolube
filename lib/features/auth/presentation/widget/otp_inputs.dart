@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../utils/otp_code_utils.dart';
 
 class OtpInput extends StatefulWidget {
-  const OtpInput({super.key, this.length = 6, this.onChanged, this.boxSize = 48});
+  const OtpInput({
+    super.key,
+    this.length = 6,
+    this.onChanged,
+    this.boxSize = 48,
+  });
 
   final int length;
   final double boxSize;
@@ -34,7 +42,10 @@ class _OtpInputState extends State<OtpInput> {
   }
 
   void _notify() {
-    final code = _controllers.map((c) => c.text).join();
+    final code = otpCodeFromFields(
+      _controllers.map((c) => c.text).toList(),
+      Directionality.of(context),
+    );
     widget.onChanged?.call(code);
   }
 
@@ -49,17 +60,43 @@ class _OtpInputState extends State<OtpInput> {
             controller: _controllers[index],
             focusNode: _focusNodes[index],
             textAlign: TextAlign.center,
+            textDirection: TextDirection.ltr,
             keyboardType: TextInputType.number,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'[0-9٠-٩۰-۹]')),
+              LengthLimitingTextInputFormatter(1),
+            ],
             maxLength: 1,
             decoration: const InputDecoration(
               counterText: '',
               border: OutlineInputBorder(),
             ),
             onChanged: (value) {
-              if (value.length == 1 && index < widget.length - 1) {
-                _focusNodes[index + 1].requestFocus();
-              } else if (value.isEmpty && index > 0) {
-                _focusNodes[index - 1].requestFocus();
+              final digit = normalizeOtpDigits(value);
+              if (digit != value) {
+                _controllers[index].value = TextEditingValue(
+                  text: digit,
+                  selection: TextSelection.collapsed(offset: digit.length),
+                );
+              }
+
+              final isRtl = Directionality.of(context) == TextDirection.rtl;
+              if (digit.length == 1) {
+                if (isRtl) {
+                  if (index > 0) _focusNodes[index - 1].requestFocus();
+                } else {
+                  if (index < widget.length - 1) {
+                    _focusNodes[index + 1].requestFocus();
+                  }
+                }
+              } else if (value.isEmpty) {
+                if (isRtl) {
+                  if (index < widget.length - 1) {
+                    _focusNodes[index + 1].requestFocus();
+                  }
+                } else {
+                  if (index > 0) _focusNodes[index - 1].requestFocus();
+                }
               }
               _notify();
             },

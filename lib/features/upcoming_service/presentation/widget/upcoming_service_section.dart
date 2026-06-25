@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:newmotorlube/features/home/presentaion/screen/base_home_screen.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../generated/l10n.dart';
@@ -19,23 +18,14 @@ class UpcomingServiceSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen<AuthState>(authViewModelProvider, (previous, next) {
-      if (next is UnauthenticatedState) {
+      if (next is! AuthenticatedState) {
         ref.invalidate(upcomingServiceViewModelProvider);
       }
     });
 
     final authState = ref.watch(authViewModelProvider);
-    final state = ref.watch(upcomingServiceViewModelProvider);
 
-    if (authState is AuthenticatedState && state is UpcomingServiceInitial) {
-      Future.microtask(
-        () => ref
-            .read(upcomingServiceViewModelProvider.notifier)
-            .fetchUpcomingServices(),
-      );
-    }
-
-    if (authState is UnauthenticatedState) {
+    if (authState is! AuthenticatedState) {
       return _LoginPromptCard(
         onTap: () {
           navigatorKey.currentState?.pushNamed('loginScreen');
@@ -43,13 +33,24 @@ class UpcomingServiceSection extends ConsumerWidget {
       );
     }
 
+    final state = ref.watch(upcomingServiceViewModelProvider);
+
+    if (state is UpcomingServiceInitial) {
+      Future.microtask(
+        () =>
+            ref
+                .read(upcomingServiceViewModelProvider.notifier)
+                .fetchUpcomingServices(),
+      );
+    }
+
     if (state is UpcomingServiceLoading || state is UpcomingServiceInitial) {
       return Column(
-        children: List.generate(
-          2,
-          (_) => const _UpcomingServiceLoadingCard(),
-        ).expand((widget) => [widget, const SizedBox(height: 12)]).toList()
-          ..removeLast(),
+        children:
+            List.generate(2, (_) => const _UpcomingServiceLoadingCard())
+                .expand((widget) => [widget, const SizedBox(height: 12)])
+                .toList()
+              ..removeLast(),
       );
     }
 
@@ -58,10 +59,11 @@ class UpcomingServiceSection extends ConsumerWidget {
       if (services.isEmpty) {
         return const _UpcomingServiceEmpty();
       }
-      final children = services
-          .map((service) => _mapToBookingCard(context, service))
-          .expand((widget) => [widget, const SizedBox(height: 12)])
-          .toList();
+      final children =
+          services
+              .map((service) => _mapToBookingCard(context, service))
+              .expand((widget) => [widget, const SizedBox(height: 12)])
+              .toList();
       if (children.isNotEmpty) {
         children.removeLast();
       }
@@ -85,7 +87,9 @@ Widget _mapToBookingCard(BuildContext context, UpcomingServiceEntity service) {
   final dateLabel = _formatDate(context, service);
   final timeLabel = _formatTime(service);
   final branchLabel = _valueOrFallback(
-    service.branchLabel.isNotEmpty ? service.branchLabel : service.location ?? '',
+    service.branchLabel.isNotEmpty
+        ? service.branchLabel
+        : service.location ?? '',
     fallback: s.upcomingServicesLocationFallback,
   );
   final technicianLabel = _valueOrFallback(
@@ -102,9 +106,10 @@ Widget _mapToBookingCard(BuildContext context, UpcomingServiceEntity service) {
     carCandidate,
     fallback: s.upcomingServicesVehiclePlaceholder,
   );
-  final packageCandidate = service.packageTitle.isNotEmpty
-      ? service.packageTitle
-      : service.serviceName;
+  final packageCandidate =
+      service.packageTitle.isNotEmpty
+          ? service.packageTitle
+          : service.serviceName;
   final package = _valueOrFallback(
     packageCandidate,
     fallback: s.upcomingServicesServicePlaceholder,
@@ -127,10 +132,10 @@ Widget _mapToBookingCard(BuildContext context, UpcomingServiceEntity service) {
     statusBg: statusColors.$1,
     statusFg: statusColors.$2,
     onTap: () {
-      Navigator.of(context, rootNavigator: true).pushNamed(
-        'bookingDetailScreen',
-        arguments: service,
-      );
+      Navigator.of(
+        context,
+        rootNavigator: true,
+      ).pushNamed('bookingDetailScreen', arguments: service);
     },
   );
 }
@@ -266,19 +271,14 @@ class _UpcomingServiceErrorCard extends StatelessWidget {
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: BorderSide(
-          color: theme.colorScheme.error.withOpacity(0.3),
-        ),
+        side: BorderSide(color: theme.colorScheme.error.withOpacity(0.3)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(
-              Icons.error_outline,
-              color: theme.colorScheme.error,
-            ),
+            Icon(Icons.error_outline, color: theme.colorScheme.error),
             const SizedBox(width: 12),
             Expanded(
               child: Text(
@@ -319,10 +319,7 @@ class _LoginPromptCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(
-                  Icons.lock_outline,
-                  color: theme.colorScheme.primary,
-                ),
+                Icon(Icons.lock_outline, color: theme.colorScheme.primary),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(

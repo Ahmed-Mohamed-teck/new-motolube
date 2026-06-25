@@ -27,6 +27,7 @@ class AuthViewModel extends Notifier<AuthState> {
   Timer? _timer;
   int _remaining = 0;
   int _expiresIn = 0;
+  int _operationId = 0;
 
   @override
   AuthState build() {
@@ -37,6 +38,7 @@ class AuthViewModel extends Notifier<AuthState> {
     _logoutUseCase = ref.read(logoutUseCaseProvider);
     _saveAuthSessionUseCase = ref.read(saveAuthSessionUseCaseProvider);
     _getStoredAuthUseCase = ref.read(getStoredAuthUseCaseProvider);
+    ref.onDispose(() => _timer?.cancel());
     return InitailAuthState();
   }
 
@@ -44,15 +46,38 @@ class AuthViewModel extends Notifier<AuthState> {
     _otp = otp;
   }
 
+  int _startOperation() => ++_operationId;
+
+  bool _isCurrentOperation(int operationId) => operationId == _operationId;
+
+  void _resetOtpFlow() {
+    _timer?.cancel();
+    _phone = null;
+    _otp = '';
+    _remaining = 0;
+    _expiresIn = 0;
+  }
+
+  Future<void> skipAuthentication() async {
+    final operationId = _startOperation();
+    _resetOtpFlow();
+    state = const UnauthenticatedState();
+    await _logoutUseCase.call();
+    if (!_isCurrentOperation(operationId)) return;
+  }
+
   Future<void> onLoginPressed(String phone) async {
+    final operationId = _startOperation();
     state = const CheckingState();
     _phone = phone;
     try {
       final isRegistered = await ref
           .read(isRegisterUseCaseProvider)
           .call(phone);
+      if (!_isCurrentOperation(operationId)) return;
       if (isRegistered) {
         final info = await _sendOtpUseCase(phone);
+        if (!_isCurrentOperation(operationId)) return;
         _startTimer(info.expiresIn);
         state = AwaitingOtpState(
           phone: phone,
@@ -63,8 +88,10 @@ class AuthViewModel extends Notifier<AuthState> {
         state = RegistrationState();
       }
     } on UnregisteredUserException {
+      if (!_isCurrentOperation(operationId)) return;
       state = const RegistrationState();
     } catch (e) {
+      if (!_isCurrentOperation(operationId)) return;
       state = ErrorState(e.toString());
     }
   }
@@ -75,6 +102,7 @@ class AuthViewModel extends Notifier<AuthState> {
     required String phone,
     String? email,
   }) async {
+    final operationId = _startOperation();
     state = const CheckingState();
     try {
       await _registerUserUseCase(
@@ -83,7 +111,9 @@ class AuthViewModel extends Notifier<AuthState> {
         phone: phone,
         email: email,
       );
+      if (!_isCurrentOperation(operationId)) return;
       final info = await _sendOtpUseCase(phone);
+      if (!_isCurrentOperation(operationId)) return;
       _phone = phone;
       _startTimer(info.expiresIn);
       state = AwaitingOtpState(
@@ -92,7 +122,9 @@ class AuthViewModel extends Notifier<AuthState> {
         remainingSeconds: _remaining,
       );
     } on UserAlreadyRegisteredException {
+      if (!_isCurrentOperation(operationId)) return;
       final info = await _sendOtpUseCase(phone);
+      if (!_isCurrentOperation(operationId)) return;
       _phone = phone;
       _startTimer(info.expiresIn);
       state = AwaitingOtpState(
@@ -101,6 +133,7 @@ class AuthViewModel extends Notifier<AuthState> {
         remainingSeconds: _remaining,
       );
     } catch (e) {
+      if (!_isCurrentOperation(operationId)) return;
       state = ErrorState(e.toString());
     }
   }
@@ -108,6 +141,7 @@ class AuthViewModel extends Notifier<AuthState> {
   Future<void> onVerifyPressed() async {
     final phone = _phone;
     if (phone == null) return;
+    final operationId = _startOperation();
     state = VerifyingState(
       phone: phone,
       expiresIn: _expiresIn,
@@ -115,7 +149,12 @@ class AuthViewModel extends Notifier<AuthState> {
     );
     try {
       final result = await _verifyOtpUseCase(phone: phone, otp: _otp);
+      if (!_isCurrentOperation(operationId)) return;
       await _saveAuthSessionUseCase(result);
+      if (!_isCurrentOperation(operationId)) {
+        await _logoutUseCase.call();
+        return;
+      }
       state = AuthenticatedState(
         jwtToken: result.tokens.jwtToken,
         firebaseToken: result.tokens.firebaseToken,
@@ -133,6 +172,7 @@ class AuthViewModel extends Notifier<AuthState> {
         ),
       );
     } on InvalidOtpException {
+      if (!_isCurrentOperation(operationId)) return;
       state = AwaitingOtpState(
         phone: phone,
         expiresIn: _expiresIn,
@@ -140,6 +180,7 @@ class AuthViewModel extends Notifier<AuthState> {
         errorMessage: 'Invalid or expired OTP',
       );
     } catch (e) {
+      if (!_isCurrentOperation(operationId)) return;
       state = ErrorState('Verification failed');
     }
   }
@@ -166,17 +207,21 @@ class AuthViewModel extends Notifier<AuthState> {
           phone: current.phone,
           expiresIn: current.expiresIn,
           remainingSeconds: _remaining,
+          errorMessage: current.errorMessage,
         );
       }
     });
   }
 
   Future<void> authenticating() async {
+    final operationId = _startOperation();
     state = AuthenticatingState();
     final stored = await _getStoredAuthUseCase();
+    if (!_isCurrentOperation(operationId)) return;
     if (stored != null) {
       try {
         final user = await _getUserInfoUseCase.call(stored.phoneNumber);
+        if (!_isCurrentOperation(operationId)) return;
         state = AuthenticatedState(
           jwtToken: stored.jwtToken,
           firebaseToken: stored.firebaseToken,
@@ -198,6 +243,7 @@ class AuthViewModel extends Notifier<AuthState> {
         );
       } catch (e) {
         await _logoutUseCase.call();
+        if (!_isCurrentOperation(operationId)) return;
         state = AuthenticationFailedState(appLang.authenticationErrorMessage);
       }
     } else {
@@ -206,7 +252,10 @@ class AuthViewModel extends Notifier<AuthState> {
   }
 
   Future<void> unAuthenticate() async {
+    final operationId = _startOperation();
+    _resetOtpFlow();
     await _logoutUseCase.call();
+    if (!_isCurrentOperation(operationId)) return;
     state = const UnauthenticatedState();
   }
 }

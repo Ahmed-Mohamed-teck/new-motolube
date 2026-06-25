@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/providers/global_lang_provider.dart';
 import '../../../../core/utils/ui_components/shared_ui.dart';
 import '../../provider/auth_provider.dart';
+import '../utils/otp_code_utils.dart';
 import '../view_model/auth_state.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -20,14 +21,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _emailController = TextEditingController();
 
   // 6-digit OTP controllers/focus nodes
-  final List<TextEditingController> _otpCtrls =
-  List.generate(6, (_) => TextEditingController());
+  final List<TextEditingController> _otpCtrls = List.generate(
+    6,
+    (_) => TextEditingController(),
+  );
   final List<FocusNode> _otpNodes = List.generate(6, (_) => FocusNode());
 
   // UI helpers
   bool _wasOnOtpBefore = false; // remember if we entered OTP flow
-  bool _stayOnOtp = false;      // keep showing OTP during transient states
-  bool _pendingClearOtp = false; // clear boxes *only* after a resend (fresh OTP)
+  bool _stayOnOtp = false; // keep showing OTP during transient states
+  bool _pendingClearOtp =
+      false; // clear boxes *only* after a resend (fresh OTP)
 
   @override
   void dispose() {
@@ -113,23 +117,24 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     VoidCallback? buttonAction;
     final isLoading = state is CheckingState || state is VerifyingState;
 
-    if (showOtp) {
+    if (showOtpUI) {
       buttonText = appLang.verify;
       buttonAction = isLoading ? null : vm.onVerifyPressed;
     } else if (showName) {
       buttonText = appLang.register;
-      buttonAction = isLoading
-          ? null
-          : () => vm.onRegisterPressed(
-        firstName: _firstNameController.text,
-        lastName: _lastNameController.text,
-        phone: _phoneController.text,
-        email: _emailController.text,
-      );
+      buttonAction =
+          isLoading
+              ? null
+              : () => vm.onRegisterPressed(
+                firstName: _firstNameController.text,
+                lastName: _lastNameController.text,
+                phone: _phoneController.text,
+                email: _emailController.text,
+              );
     } else {
       buttonText = appLang.login;
       buttonAction =
-      isLoading ? null : () => vm.onLoginPressed(_phoneController.text);
+          isLoading ? null : () => vm.onLoginPressed(_phoneController.text);
     }
 
     String phone = '';
@@ -143,7 +148,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     }
 
     void _notifyOtp() {
-      final code = _otpCtrls.map((c) => c.text).join();
+      final code = otpCodeFromFields(
+        _otpCtrls.map((c) => c.text).toList(),
+        Directionality.of(context),
+      );
       vm.onOtpChanged(code);
     }
 
@@ -152,13 +160,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         backgroundColor: const Color(0xffDEBB33),
         elevation: 0,
         actions: [
-          TextButton(onPressed: (){
-            Navigator.pushReplacementNamed(context, 'baseHomeScreen');
-          }, child: Text(appLang.skip,
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),))
+          TextButton(
+            onPressed: () async {
+              await vm.skipAuthentication();
+              if (!mounted) return;
+              Navigator.pushReplacementNamed(context, 'baseHomeScreen');
+            },
+            child: Text(
+              appLang.skip,
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
         ],
         leading: IconButton(
           icon: const Icon(Icons.public, color: Colors.black),
@@ -188,7 +203,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   color: Colors.white,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 24,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisSize: MainAxisSize.min,
@@ -199,7 +217,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     if (!showOtpUI) ...[
                       Text(
                         appLang.loginWelcomeMessage,
-                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 24),
@@ -214,7 +235,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         children: [
                           // Country code
 
-
                           // Phone input
                           Expanded(
                             child: TextFormField(
@@ -223,7 +243,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               decoration: InputDecoration(
                                 hintText: '5XXXXXXXX',
                                 contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 14, horizontal: 12,
+                                  vertical: 14,
+                                  horizontal: 12,
                                 ),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(8),
@@ -243,7 +264,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           decoration: InputDecoration(
                             hintText: appLang.firstNameHint,
                             contentPadding: const EdgeInsets.symmetric(
-                                vertical: 14, horizontal: 12),
+                              vertical: 14,
+                              horizontal: 12,
+                            ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
@@ -257,7 +280,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           decoration: InputDecoration(
                             hintText: appLang.lastNameHint,
                             contentPadding: const EdgeInsets.symmetric(
-                                vertical: 14, horizontal: 12),
+                              vertical: 14,
+                              horizontal: 12,
+                            ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
@@ -281,7 +306,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           decoration: InputDecoration(
                             hintText: appLang.userEmail,
                             contentPadding: const EdgeInsets.symmetric(
-                                vertical: 14, horizontal: 12),
+                              vertical: 14,
+                              horizontal: 12,
+                            ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
@@ -295,7 +322,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       Text(
                         '${appLang.enterOtpSentTo} $phone',
                         textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       const SizedBox(height: 16),
 
@@ -309,14 +339,28 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               controller: _otpCtrls[i],
                               focusNode: _otpNodes[i],
                               textAlign: TextAlign.center,
+                              textDirection: TextDirection.ltr,
                               keyboardType: TextInputType.number,
-                              inputFormatters:  [
-                                FilteringTextInputFormatter.digitsOnly,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                  RegExp(r'[0-9٠-٩۰-۹]'),
+                                ),
                                 LengthLimitingTextInputFormatter(1),
                               ],
                               onChanged: (v) {
-                                final isRtl = Directionality.of(context) == TextDirection.rtl;
-                                if (v.isNotEmpty) {
+                                final digit = normalizeOtpDigits(v);
+                                if (digit != v) {
+                                  _otpCtrls[i].value = TextEditingValue(
+                                    text: digit,
+                                    selection: TextSelection.collapsed(
+                                      offset: digit.length,
+                                    ),
+                                  );
+                                }
+                                final isRtl =
+                                    Directionality.of(context) ==
+                                    TextDirection.rtl;
+                                if (digit.isNotEmpty) {
                                   // Move to next field
                                   if (isRtl) {
                                     if (i > 0) _otpNodes[i - 1].requestFocus();
@@ -339,7 +383,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                               ),
-                              style: const TextStyle(fontSize: 24, letterSpacing: 2),
+                              style: const TextStyle(
+                                fontSize: 24,
+                                letterSpacing: 2,
+                              ),
                             ),
                           );
                         }),
@@ -374,19 +421,21 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                           Text(appLang.didntReceiveOtp),
+                          Text(appLang.didntReceiveOtp),
                           TextButton(
-                            onPressed: (state is VerifyingState) || secondsRemaining > 0
-                                ? null
-                                : () {
-                              // Mark that the next AwaitingOtpState is a *fresh* OTP
-                              _pendingClearOtp = true;
-                              _stayOnOtp = true;
-                              _wasOnOtpBefore = true;
-                              setState(() {});
-                              vm.onResendOtp();
-                            },
-                            child:  Text(appLang.resendOTP),
+                            onPressed:
+                                (state is VerifyingState) ||
+                                        secondsRemaining > 0
+                                    ? null
+                                    : () {
+                                      // Mark that the next AwaitingOtpState is a *fresh* OTP
+                                      _pendingClearOtp = true;
+                                      _stayOnOtp = true;
+                                      _wasOnOtpBefore = true;
+                                      setState(() {});
+                                      vm.onResendOtp();
+                                    },
+                            child: Text(appLang.resendOTP),
                           ),
                         ],
                       ),
@@ -397,25 +446,26 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     SizedBox(
                       height: 50,
                       child: ElevatedButton(
-                        onPressed: (state is VerifyingState)
-                            ? null
-                            : (showOtp ? vm.onVerifyPressed : buttonAction),
+                        onPressed: isLoading ? null : buttonAction,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.amber[600],
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
                           ),
                         ),
-                        child: (state is VerifyingState)
-                            ? const SizedBox(
-                          height: 22,
-                          width: 22,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                            : Text(
-                          buttonText,
-                          style: const TextStyle(fontSize: 16),
-                        ),
+                        child:
+                            isLoading
+                                ? const SizedBox(
+                                  height: 22,
+                                  width: 22,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                  ),
+                                )
+                                : Text(
+                                  buttonText,
+                                  style: const TextStyle(fontSize: 16),
+                                ),
                       ),
                     ),
                   ],
