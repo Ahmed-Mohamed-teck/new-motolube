@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pinput/pinput.dart';
+
 import '../../../../core/providers/global_lang_provider.dart';
 import '../../../../core/utils/ui_components/shared_ui.dart';
 import '../../provider/auth_provider.dart';
-import '../utils/otp_code_utils.dart';
 import '../view_model/auth_state.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -20,12 +21,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   final _lastNameController = TextEditingController();
   final _emailController = TextEditingController();
 
-  // 6-digit OTP controllers/focus nodes
-  final List<TextEditingController> _otpCtrls = List.generate(
-    6,
-    (_) => TextEditingController(),
-  );
-  final List<FocusNode> _otpNodes = List.generate(6, (_) => FocusNode());
+  final _otpController = TextEditingController();
+  final _otpFocusNode = FocusNode();
 
   // UI helpers
   bool _wasOnOtpBefore = false; // remember if we entered OTP flow
@@ -39,23 +36,20 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     _firstNameController.dispose();
     _lastNameController.dispose();
     _emailController.dispose();
-    for (final c in _otpCtrls) c.dispose();
-    for (final n in _otpNodes) n.dispose();
+    _otpController.dispose();
+    _otpFocusNode.dispose();
     super.dispose();
   }
 
   void _clearOtpFields() {
-    for (final c in _otpCtrls) c.clear();
+    _otpController.clear();
+    ref.read(authViewModelProvider.notifier).onOtpChanged('');
   }
 
   void _focusFirstOtp() {
-    if (_otpNodes.isNotEmpty) {
-      Future.microtask(() {
-        final isRtl = Directionality.of(context) == TextDirection.rtl;
-        final firstNode = isRtl ? _otpNodes.last : _otpNodes.first;
-        firstNode.requestFocus();
-      });
-    }
+    Future.microtask(() {
+      if (mounted) _otpFocusNode.requestFocus();
+    });
   }
 
   @override
@@ -147,13 +141,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       secondsRemaining = state.remainingSeconds;
     }
 
-    void _notifyOtp() {
-      final code = otpCodeFromFields(
-        _otpCtrls.map((c) => c.text).toList(),
-        Directionality.of(context),
-      );
-      vm.onOtpChanged(code);
-    }
+    final otpErrorMessage =
+        state is AwaitingOtpState ? state.errorMessage : null;
+    final hasOtpError = otpErrorMessage != null && otpErrorMessage.isNotEmpty;
 
     return Scaffold(
       appBar: AppBar(
@@ -329,89 +319,86 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       ),
                       const SizedBox(height: 16),
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: List.generate(6, (i) {
-                          return SizedBox(
-                            width: 48,
+                      LayoutBuilder(
+                        builder: (context, constraints) {
+                          const otpLength = 6;
+                          const separatorWidth = 8.0;
+                          final pinWidth =
+                              ((constraints.maxWidth -
+                                          (separatorWidth * (otpLength - 1))) /
+                                      otpLength)
+                                  .clamp(42.0, 48.0)
+                                  .toDouble();
+                          final borderRadius = BorderRadius.circular(12);
+                          final defaultPinTheme = PinTheme(
+                            width: pinWidth,
                             height: 64,
-                            child: TextField(
-                              controller: _otpCtrls[i],
-                              focusNode: _otpNodes[i],
-                              textAlign: TextAlign.center,
-                              textDirection: TextDirection.ltr,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                  RegExp(r'[0-9٠-٩۰-۹]'),
-                                ),
-                                LengthLimitingTextInputFormatter(1),
-                              ],
-                              onChanged: (v) {
-                                final digit = normalizeOtpDigits(v);
-                                if (digit != v) {
-                                  _otpCtrls[i].value = TextEditingValue(
-                                    text: digit,
-                                    selection: TextSelection.collapsed(
-                                      offset: digit.length,
-                                    ),
-                                  );
-                                }
-                                final isRtl =
-                                    Directionality.of(context) ==
-                                    TextDirection.rtl;
-                                if (digit.isNotEmpty) {
-                                  // Move to next field
-                                  if (isRtl) {
-                                    if (i > 0) _otpNodes[i - 1].requestFocus();
-                                  } else {
-                                    if (i < 5) _otpNodes[i + 1].requestFocus();
-                                  }
-                                } else {
-                                  // Move to previous field on delete
-                                  if (isRtl) {
-                                    if (i < 5) _otpNodes[i + 1].requestFocus();
-                                  } else {
-                                    if (i > 0) _otpNodes[i - 1].requestFocus();
-                                  }
-                                }
-                                _notifyOtp(); // ← won't be cleared now unless resend triggered
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.zero,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                              ),
-                              style: const TextStyle(
-                                fontSize: 24,
-                                letterSpacing: 2,
-                              ),
+                            textStyle: const TextStyle(
+                              fontSize: 24,
+                              letterSpacing: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey.shade500),
+                              borderRadius: borderRadius,
                             ),
                           );
-                        }),
+
+                          return Directionality(
+                            textDirection: TextDirection.ltr,
+                            child: Pinput(
+                              length: otpLength,
+                              controller: _otpController,
+                              focusNode: _otpFocusNode,
+                              enabled: state is! VerifyingState,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                              ],
+                              defaultPinTheme: defaultPinTheme,
+                              focusedPinTheme: defaultPinTheme
+                                  .copyDecorationWith(
+                                    border: Border.all(
+                                      color: Colors.amber.shade700,
+                                      width: 2,
+                                    ),
+                                    borderRadius: borderRadius,
+                                  ),
+                              submittedPinTheme: defaultPinTheme
+                                  .copyDecorationWith(
+                                    border: Border.all(
+                                      color: Colors.amber.shade600,
+                                    ),
+                                    borderRadius: borderRadius,
+                                  ),
+                              errorPinTheme: defaultPinTheme.copyDecorationWith(
+                                border: Border.all(
+                                  color: Colors.red,
+                                  width: 1.5,
+                                ),
+                                borderRadius: borderRadius,
+                              ),
+                              forceErrorState: hasOtpError,
+                              separatorBuilder:
+                                  (_) => const SizedBox(width: separatorWidth),
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              onChanged: vm.onOtpChanged,
+                            ),
+                          );
+                        },
                       ),
 
                       const SizedBox(height: 12),
 
                       // error text (if any)
-                      Builder(
-                        builder: (_) {
-                          if (state is AwaitingOtpState &&
-                              state.errorMessage != null &&
-                              state.errorMessage!.isNotEmpty) {
-                            return Padding(
-                              padding: const EdgeInsets.only(bottom: 4),
-                              child: Text(
-                                state.errorMessage!,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(color: Colors.red),
-                              ),
-                            );
-                          }
-                          return const SizedBox.shrink();
-                        },
-                      ),
+                      if (hasOtpError)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 4),
+                          child: Text(
+                            otpErrorMessage,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(color: Colors.red),
+                          ),
+                        ),
 
                       Text(
                         '${appLang.expiresIn} ${secondsRemaining}s',
