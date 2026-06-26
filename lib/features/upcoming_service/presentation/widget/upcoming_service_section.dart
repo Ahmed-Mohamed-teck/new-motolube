@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+import '../../../../core/widget/error_widget.dart';
 import '../../../../generated/l10n.dart';
 import '../../../../main.dart';
 import '../../../auth/provider/auth_provider.dart';
@@ -75,7 +76,13 @@ class UpcomingServiceSection extends ConsumerWidget {
     }
 
     if (state is UpcomingServiceError) {
-      return _UpcomingServiceErrorCard(message: state.message);
+      return ErrorStateWidget(
+        onRetry:
+            () =>
+                ref
+                    .read(upcomingServiceViewModelProvider.notifier)
+                    .fetchUpcomingServices(),
+      );
     }
 
     return const SizedBox.shrink();
@@ -215,7 +222,7 @@ class _UpcomingServiceLoadingCard extends StatelessWidget {
         locationLabel: s.upcomingServicesLoadingLocation,
         technicianLabel: s.upcomingServicesLoadingTechnician,
         statusText: s.upcomingServicesLoadingStatus,
-        statusBg: theme.colorScheme.surfaceVariant,
+        statusBg: theme.colorScheme.surfaceContainerHighest,
         statusFg: baseFg,
       ),
     );
@@ -233,7 +240,7 @@ class _UpcomingServiceEmpty extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
         side: BorderSide(
-          color: theme.colorScheme.outlineVariant.withOpacity(0.3),
+          color: theme.colorScheme.outlineVariant.withValues(alpha: 0.3),
         ),
       ),
       child: Padding(
@@ -259,42 +266,6 @@ class _UpcomingServiceEmpty extends StatelessWidget {
   }
 }
 
-class _UpcomingServiceErrorCard extends StatelessWidget {
-  const _UpcomingServiceErrorCard({required this.message});
-
-  final String message;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Card(
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: theme.colorScheme.error.withOpacity(0.3)),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(Icons.error_outline, color: theme.colorScheme.error),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                '${S.of(context).upcomingServicesErrorPrefix}\n$message',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.error,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class _LoginPromptCard extends StatelessWidget {
   const _LoginPromptCard({required this.onTap});
 
@@ -308,7 +279,7 @@ class _LoginPromptCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
         side: BorderSide(
-          color: theme.colorScheme.outlineVariant.withOpacity(0.3),
+          color: theme.colorScheme.outlineVariant.withValues(alpha: 0.3),
         ),
       ),
       child: Padding(

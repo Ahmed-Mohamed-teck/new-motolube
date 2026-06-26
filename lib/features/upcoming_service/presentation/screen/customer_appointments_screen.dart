@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../generated/l10n.dart';
 import '../../../../main.dart';
+import '../../../../core/widget/error_widget.dart';
 import '../../../../core/widget/internal_app_bar.dart';
 import '../../../auth/presentation/view_model/auth_state.dart';
 import '../../../auth/provider/auth_provider.dart';
@@ -41,14 +42,18 @@ class _CustomerAppointmentsScreenState
     final authState = ref.read(authViewModelProvider);
     final isAuthed = authState is AuthenticatedState;
     if (isAuthed) {
-      ref
-          .read(upcomingServiceViewModelProvider.notifier)
-          .fetchUpcomingServices(
-            fromDate: _fromDate,
-            toDate: _toDate,
-            statusId: _statusId,
-          );
+      _fetchUpcomingServices();
     }
+  }
+
+  Future<void> _fetchUpcomingServices() {
+    return ref
+        .read(upcomingServiceViewModelProvider.notifier)
+        .fetchUpcomingServices(
+          fromDate: _fromDate,
+          toDate: _toDate,
+          statusId: _statusId,
+        );
   }
 
   @override
@@ -112,13 +117,7 @@ class _CustomerAppointmentsScreenState
               onReset: _resetFilters,
               onApply: () {
                 setState(() {}); // Rebuild to apply filters locally
-                ref
-                    .read(upcomingServiceViewModelProvider.notifier)
-                    .fetchUpcomingServices(
-                      fromDate: _fromDate,
-                      toDate: _toDate,
-                      statusId: _statusId,
-                    );
+                _fetchUpcomingServices();
               },
             ),
             Expanded(
@@ -178,14 +177,7 @@ class _CustomerAppointmentsScreenState
               .toList()
             ..removeLast();
       return RefreshIndicator(
-        onRefresh:
-            () => ref
-                .read(upcomingServiceViewModelProvider.notifier)
-                .fetchUpcomingServices(
-                  fromDate: _fromDate,
-                  toDate: _toDate,
-                  statusId: _statusId,
-                ),
+        onRefresh: _fetchUpcomingServices,
         child: ListView(
           physics: const AlwaysScrollableScrollPhysics(),
           padding: const EdgeInsets.all(16),
@@ -203,11 +195,7 @@ class _CustomerAppointmentsScreenState
     }
 
     if (servicesState is UpcomingServiceError) {
-      return ListView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        padding: const EdgeInsets.all(16),
-        children: [_UpcomingServiceErrorCard(message: servicesState.message)],
-      );
+      return ErrorStateWidget(onRetry: _fetchUpcomingServices);
     }
 
     return const SizedBox.shrink();
@@ -358,13 +346,7 @@ class _CustomerAppointmentsScreenState
           rootNavigator: true,
         ).pushNamed('bookingDetailScreen', arguments: service);
         if (result == true && mounted) {
-          await ref
-              .read(upcomingServiceViewModelProvider.notifier)
-              .fetchUpcomingServices(
-                fromDate: _fromDate,
-                toDate: _toDate,
-                statusId: _statusId,
-              );
+          await _fetchUpcomingServices();
         }
       },
     );
@@ -441,7 +423,7 @@ class _UpcomingServiceLoadingCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
         side: BorderSide(
-          color: theme.colorScheme.outlineVariant.withOpacity(0.2),
+          color: theme.colorScheme.outlineVariant.withValues(alpha: 0.2),
         ),
       ),
       child: Padding(
@@ -456,14 +438,14 @@ class _UpcomingServiceLoadingCard extends StatelessWidget {
             _SkeletonLine(
               width: 100,
               height: 12,
-              color: baseFg.withOpacity(0.7),
+              color: baseFg.withValues(alpha: 0.7),
             ),
             const SizedBox(height: 12),
             Row(
               children: [
                 Chip(
                   label: Text(s.upcomingServicesLoadingStatus),
-                  backgroundColor: theme.colorScheme.surfaceVariant,
+                  backgroundColor: theme.colorScheme.surfaceContainerHighest,
                   labelStyle: TextStyle(color: baseFg),
                 ),
               ],
@@ -492,7 +474,7 @@ class _SkeletonLine extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: color.withOpacity(0.2),
+        color: color.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(8),
       ),
     );
@@ -510,7 +492,7 @@ class _UpcomingServiceEmpty extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
         side: BorderSide(
-          color: theme.colorScheme.outlineVariant.withOpacity(0.3),
+          color: theme.colorScheme.outlineVariant.withValues(alpha: 0.3),
         ),
       ),
       child: Padding(
@@ -527,42 +509,6 @@ class _UpcomingServiceEmpty extends StatelessWidget {
               child: Text(
                 S.of(context).upcomingServicesEmptyMessage,
                 style: theme.textTheme.bodyLarge,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _UpcomingServiceErrorCard extends StatelessWidget {
-  const _UpcomingServiceErrorCard({required this.message});
-
-  final String message;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Card(
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-        side: BorderSide(color: theme.colorScheme.error.withOpacity(0.3)),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(Icons.error_outline, color: theme.colorScheme.error),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                '${S.of(context).upcomingServicesErrorPrefix}\n$message',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: theme.colorScheme.error,
-                ),
               ),
             ),
           ],
@@ -589,7 +535,7 @@ class _LoginPromptCard extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
             side: BorderSide(
-              color: theme.colorScheme.outlineVariant.withOpacity(0.3),
+              color: theme.colorScheme.outlineVariant.withValues(alpha: 0.3),
             ),
           ),
           child: Padding(
@@ -808,7 +754,7 @@ class _FilterButton extends StatelessWidget {
         side: BorderSide(
           color:
               enabled
-                  ? theme.colorScheme.primary.withOpacity(0.35)
+                  ? theme.colorScheme.primary.withValues(alpha: 0.35)
                   : Colors.grey.shade300,
         ),
       ),
