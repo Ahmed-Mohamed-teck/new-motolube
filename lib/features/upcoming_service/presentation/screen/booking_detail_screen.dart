@@ -536,12 +536,29 @@ class _AcceptedPaymentLogos extends StatelessWidget {
   const _AcceptedPaymentLogos();
 
   static const _logos = [
-    (path: 'assets/svg/mada-logo.svg', semanticLabel: 'Mada', width: 70.0),
-    (path: 'assets/svg/visa-logo.svg', semanticLabel: 'Visa', width: 70.0),
+    (
+      path: 'assets/svg/mada-logo.svg',
+      semanticLabel: 'Mada',
+      width: 112.0,
+      height: 48.0,
+      tileWidth: 116.0,
+      tileHeight: 52.0,
+    ),
+    (
+      path: 'assets/svg/visa-logo.svg',
+      semanticLabel: 'Visa',
+      width: 70.0,
+      height: 32.0,
+      tileWidth: 78.0,
+      tileHeight: 38.0,
+    ),
     (
       path: 'assets/svg/master-logo.svg',
       semanticLabel: 'Mastercard',
       width: 58.0,
+      height: 32.0,
+      tileWidth: 78.0,
+      tileHeight: 38.0,
     ),
   ];
 
@@ -568,13 +585,13 @@ class _AcceptedPaymentLogos extends StatelessWidget {
               _logos
                   .map(
                     (logo) => SizedBox(
-                      width: 78,
-                      height: 34,
+                      width: logo.tileWidth,
+                      height: logo.tileHeight,
                       child: Center(
                         child: SvgPicture.asset(
                           logo.path,
                           width: logo.width,
-                          height: 28,
+                          height: logo.height,
                           fit: BoxFit.contain,
                           semanticsLabel: logo.semanticLabel,
                         ),
