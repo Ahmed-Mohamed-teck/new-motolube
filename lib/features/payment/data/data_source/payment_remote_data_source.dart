@@ -5,6 +5,7 @@ import '../model/payment_initiation_request_model.dart';
 import '../model/payment_initiation_response_model.dart';
 import '../model/payment_status_response_model.dart';
 import 'i_payment_remote_data_source.dart';
+import '../../../../core/providers/global_lang_provider.dart';
 
 class PaymentRemoteDataSource implements IPaymentRemoteDataSource {
   PaymentRemoteDataSource(this._dio);
@@ -39,7 +40,7 @@ class PaymentRemoteDataSource implements IPaymentRemoteDataSource {
       throw Exception(
         message?.isNotEmpty == true
             ? message!
-            : 'Failed to initiate payment. Please try again.',
+            : appLang.failedToInitiatePayment,
       );
     }
   }
@@ -71,7 +72,7 @@ class PaymentRemoteDataSource implements IPaymentRemoteDataSource {
       throw Exception(
         message?.isNotEmpty == true
             ? message!
-            : 'Failed to verify payment status. Please try again.',
+            : appLang.failedToVerifyPaymentStatus,
       );
     }
   }

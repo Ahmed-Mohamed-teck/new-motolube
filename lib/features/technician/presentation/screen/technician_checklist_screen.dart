@@ -5,6 +5,7 @@ import 'package:newmotorlube/core/widget/internal_app_bar.dart';
 
 import '../../domain/entity/technician_appointment_entity.dart';
 import '../../provider/technician_provider.dart';
+import '../../../../generated/l10n.dart';
 
 class TechnicianChecklistScreen extends ConsumerStatefulWidget {
   const TechnicianChecklistScreen({super.key, required this.appointment});
@@ -72,7 +73,7 @@ class _TechnicianChecklistScreenState
         _createDefaultChecklist();
       }
     } catch (error) {
-      _showSnack('Failed to load checklist: $error');
+      _showSnack(S.of(context).failedToLoadChecklistError(error.toString()));
     } finally {
       if (mounted) {
         setState(() => _isLoading = false);
@@ -159,14 +160,14 @@ class _TechnicianChecklistScreenState
       );
       if (!mounted) return;
       if (result.success) {
-        _showSnack(result.message.isNotEmpty ? result.message : 'Checklist submitted.');
+        _showSnack(result.message.isNotEmpty ? result.message : S.of(context).checklistSubmittedMessage);
         Navigator.of(context).pop(true);
       } else {
-        _showSnack(result.message.isNotEmpty ? result.message : 'Failed to submit checklist.');
+        _showSnack(result.message.isNotEmpty ? result.message : S.of(context).failedToSubmitChecklistMessage);
       }
     } catch (error) {
       if (!mounted) return;
-      _showSnack('Failed to save checklist: $error');
+      _showSnack(S.of(context).failedToSaveChecklistError(error.toString()));
     } finally {
       if (mounted) {
         setState(() => _isSaving = false);
@@ -177,7 +178,7 @@ class _TechnicianChecklistScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const InternalAppBar(title: 'Vehicle checklist'),
+      appBar: InternalAppBar(title: S.of(context).vehicleChecklistTitle),
       body:
           _isLoading
               ? const Center(child: CircularProgressIndicator())
@@ -189,13 +190,13 @@ class _TechnicianChecklistScreenState
                   if (_items.isEmpty)
                     Column(
                       children: [
-                        const Text('No checklist found.'),
+                        Text(S.of(context).noChecklistFound),
                         TextButton.icon(
                           onPressed: () {
                             setState(_createDefaultChecklist);
                           },
                           icon: const Icon(Icons.playlist_add),
-                          label: const Text('Create default checklist'),
+                          label: Text(S.of(context).createDefaultChecklistButtonLabel),
                         ),
                       ],
                     )
@@ -225,7 +226,7 @@ class _TechnicianChecklistScreenState
                               child: CircularProgressIndicator(strokeWidth: 2),
                             )
                             : const Icon(Icons.save_outlined),
-                    label: Text(_isSaving ? 'Saving...' : 'Save checklist'),
+                    label: Text(_isSaving ? S.of(context).savingEllipsis : S.of(context).saveChecklistButtonLabel),
                   ),
                 ],
               ),
@@ -235,16 +236,16 @@ class _TechnicianChecklistScreenState
   Widget _buildLegend() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
+      children: [
         Text(
-          'Legend',
-          style: TextStyle(fontWeight: FontWeight.w600),
+          S.of(context).legendTitle,
+          style: const TextStyle(fontWeight: FontWeight.w600),
         ),
-        SizedBox(height: 4),
-        Text('C - Clean'),
-        Text('R - Replace'),
-        Text('I - Inspect'),
-        Text('X - Not applicable'),
+        const SizedBox(height: 4),
+        Text(S.of(context).legendCleanLabel),
+        Text(S.of(context).legendReplaceLabel),
+        Text(S.of(context).legendInspectLabel),
+        Text(S.of(context).legendNotApplicableLabel),
       ],
     );
   }
@@ -318,9 +319,9 @@ class _ChecklistCard extends StatelessWidget {
             ),
             TextField(
               controller: item.controller,
-              decoration: const InputDecoration(
-                labelText: 'Comment',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: S.of(context).commentLabel,
+                border: const OutlineInputBorder(),
               ),
             ),
           ],

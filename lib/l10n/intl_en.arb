@@ -13,21 +13,21 @@
   "contactUsAppbar": "Contanct Us",
   "profileAppbar": "Profile",
   "moreAppbar": "More",
-  "next":"next",
-  "start":"start",
-  "basicServices":"Basic Services",
-  "majorServices":"Major Services",
-  "carRepair":"Car Repair",
-  "batteires":"Batteries",
-  "carEvaluation":"Car Evaluation",
-  "towiling":"Towiling",
-  "mobileServices":"Mobile Services",
-  "oiling":"Oiling",
-  "flatTyre":"Flat Tyre",
-  "carWash":"Car Wash",
-  "insuranceClaims":"Insurance Claims",
-  "carDetailing":"Car Detailing",
-  "ourServices":"Our Services",
+  "next": "next",
+  "start": "start",
+  "basicServices": "Basic Services",
+  "majorServices": "Major Services",
+  "carRepair": "Car Repair",
+  "batteires": "Batteries",
+  "carEvaluation": "Car Evaluation",
+  "towiling": "Towiling",
+  "mobileServices": "Mobile Services",
+  "oiling": "Oiling",
+  "flatTyre": "Flat Tyre",
+  "carWash": "Car Wash",
+  "insuranceClaims": "Insurance Claims",
+  "carDetailing": "Car Detailing",
+  "ourServices": "Our Services",
   "bestOffers": "Best Offers",
   "more": "More",
   "yourCars": "Your Cars",
@@ -98,12 +98,12 @@
   "characterVinLimitError": "VIN must be 17 characters",
   "areYouOwnerThisCar": "Are you the owner of this car?",
   "no": "No",
-    "yes": "Yes",
+  "yes": "Yes",
   "companyName": "Company Name",
   "companyNameHint": "e.g. MotorLube Co.",
   "companyNameError": "Please enter company name",
   "crn": "Commercial Registration Number (CRN)",
-    "crnHint": "e.g. 1234567890",
+  "crnHint": "e.g. 1234567890",
   "manufacturer": "Manufacturer",
   "crnError": "Please enter Commercial Registration Number (CRN)",
   "crnLengthError": "CRN must be 10 digits",
@@ -116,14 +116,13 @@
   "lastName": "Last Name",
   "lastNameHint": "Enter last name",
   "userEmail": "User Email",
-    "userEmailHint": "Enter user email",
+  "userEmailHint": "Enter user email",
   "notValidUserEmail": "User email is not valid",
-  "enterOtpSentTo":"Enter the OTP sent to",
+  "enterOtpSentTo": "Enter the OTP sent to",
   "expiresIn": "Expires in",
   "didntReceiveOtp": "Didn't receive the OTP?",
-  "resendOTP": "Resend OTP"
-
-  ,"changeLanguage": "Change Language",
+  "resendOTP": "Resend OTP",
+  "changeLanguage": "Change Language",
   "english": "English",
   "arabic": "Arabic",
   "bookServiceStepSelectVehicle": "Select Vehicle",
@@ -216,7 +215,6 @@
   "PleaseLoginToViewYourCarsMessage": "Please login to view your cars",
   "userCarsEmptyDescription": "We couldn’t find any cars matching your search .",
   "logInToContinue": "Log in to continue",
-
   "upcomingServicesBookingDetailsTitle": "Booking Details",
   "upcomingServicesServicePackageLabel": "Service Package",
   "upcomingServicesServiceLocationLabel": "Service Location",
@@ -357,5 +355,339 @@
   "chatInputHint": "Type a message",
   "chatSendLabel": "Send",
   "chatErrorLoading": "Unable to load chat messages.",
-  "chatMissingBookingId": "Missing booking id for chat."
+  "chatMissingBookingId": "Missing booking id for chat.",
+  "backOnline": "Back Online",
+  "noInternetConnection": "No Internet Connection",
+  "languageArabic": "العربية",
+  "languageEnglish": "English",
+  "somethingWentWrong": "Something went wrong.",
+  "phoneNumberHint": "5XXXXXXXX",
+  "couponListTitle": "Coupons",
+  "refreshTooltip": "Refresh",
+  "createCouponTooltip": "Create coupon",
+  "addCouponButtonLabel": "Add coupon",
+  "noCouponsAvailable": "No coupons available.",
+  "couponDefaultLabel": "Coupon",
+  "couponDiscountLabel": "Discount",
+  "pleaseSelectDateRange": "Please select date range",
+  "createCouponScreenTitle": "Create Coupon",
+  "companyNameLabel": "Company Name",
+  "requiredFieldError": "Required",
+  "discountPercentageLabel": "Discount %",
+  "enterNumberError": "Enter number",
+  "couponCountLabel": "Coupon count",
+  "enterCountError": "Enter count",
+  "fromDateLabel": "From",
+  "selectStartDateLabel": "Select start date",
+  "pickDateButtonLabel": "Pick",
+  "toDateLabel": "To",
+  "selectEndDateLabel": "Select end date",
+  "createButtonLabel": "Create",
+  "noServicesAvailable": "No services available right now.",
+  "unableToLoadServices": "Unable to load services",
+  "retryButtonLabel": "Retry",
+  "technicianAppError": "Technician users should use the MotorLube Technician app.",
+  "managerUserLabel": "Manager user",
+  "creditManagerUserLabel": "Credit manager user",
+  "customerUserLabel": "Customer user",
+  "allButtonLabel": "All",
+  "showingBookingsNeedingApproval": "Showing bookings that need approval",
+  "connectionTimedOutMessage": "Connection timed out. Please try again.",
+  "anyDateLabel": "Any date",
+  "customerDefaultLabel": "Customer",
+  "vehicleNotSetLabel": "Vehicle not set",
+  "plateUnavailableLabel": "Plate unavailable",
+  "branchNotAssignedLabel": "Branch not assigned",
+  "scheduledStatusLabel": "Scheduled",
+  "scheduleNotSetLabel": "Schedule not set",
+  "noBookingsNeedApproval": "No bookings need approval right now.",
+  "newBookingsWillAppearMessage": "New bookings that require approval will appear here automatically.",
+  "unableToLoadBookings": "Unable to load bookings",
+  "signInRequiredTitle": "Sign in required",
+  "signInAsCreditManagerMessage": "Please sign in as a credit manager to view bookings that need approval.",
+  "filterApprovalsTitle": "Filter approvals",
+  "pickDateRangeInstruction": "Pick a date range and apply to refresh.",
+  "resetButtonLabel": "Reset",
+  "applyFiltersButtonLabel": "Apply filters",
+  "completePayment": "Complete Payment",
+  "unableToInitiatePayment": "Unable to initiate payment.",
+  "failedToInitiatePayment": "Failed to initiate payment. Please try again.",
+  "failedToVerifyPaymentStatus": "Failed to verify payment status. Please try again.",
+  "appName": "Motor Lube",
+  "appVersion": "V 1.0.0",
+  "promotionsTitle": "Promotions",
+  "promotionsLoadErrorFallback": "Failed to load promotions",
+  "noPromotionsFound": "No promotions found.",
+  "deleteTooltip": "Delete",
+  "promotionTitle": "promotion",
+  "loadingEllipsis": "Loading...",
+  "unavailableLabel": "Unavailable",
+  "noStatusesLabel": "No statuses",
+  "loadingBookingStatusesMessage": "Loading booking statuses...",
+  "noStatusesAvailableMessage": "No statuses available.",
+  "statusIdLabel": "Status ID {id}",
+  "@statusIdLabel": {
+    "placeholders": {
+      "id": {
+        "type": "int"
+      }
+    }
+  },
+  "statusesSelectedCount": "{count} statuses selected",
+  "@statusesSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noMaintenanceRequestsYet": "No maintenance requests yet.",
+  "assignedAppointmentsWillAppearHere": "You will see all assigned appointments here once customers book services.",
+  "unableToLoadRequests": "Unable to load requests",
+  "signInAsTechnicianMessage": "Please sign in as a technician to view assigned maintenance requests.",
+  "planYourDay": "Plan your day",
+  "tapFilterToRefineJobs": "Tap a filter to refine assigned jobs.",
+  "statusLabel": "Status",
+  "failedToLoadChecklistError": "Failed to load checklist: {error}",
+  "@failedToLoadChecklistError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "checklistSubmittedMessage": "Checklist submitted.",
+  "failedToSubmitChecklistMessage": "Failed to submit checklist.",
+  "failedToSaveChecklistError": "Failed to save checklist: {error}",
+  "@failedToSaveChecklistError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "vehicleChecklistTitle": "Vehicle checklist",
+  "noChecklistFound": "No checklist found.",
+  "createDefaultChecklistButtonLabel": "Create default checklist",
+  "savingEllipsis": "Saving...",
+  "saveChecklistButtonLabel": "Save checklist",
+  "legendTitle": "Legend",
+  "legendCleanLabel": "C - Clean",
+  "legendReplaceLabel": "R - Replace",
+  "legendInspectLabel": "I - Inspect",
+  "legendNotApplicableLabel": "X - Not applicable",
+  "commentLabel": "Comment",
+  "statusUpdatedSuccessfully": "Status updated successfully.",
+  "appointmentDetailsTitle": "Appointment Details",
+  "managePackagesButtonLabel": "Manage packages",
+  "noBookingStatusesAvailableMessage": "No booking statuses available.",
+  "jobCardNumberUnavailableMessage": "Job card number unavailable.",
+  "unableToDetermineTechnicianIdMessage": "Unable to determine technician identifier.",
+  "alreadyOnStatusMessage": "Already on {label}.",
+  "@alreadyOnStatusMessage": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "missingFirebaseIdForTechnicianMessage": "Missing FireBaseId for technician.",
+  "jobCardCreatedMessage": "Job card {srNumber} created.",
+  "@jobCardCreatedMessage": {
+    "placeholders": {
+      "srNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "serviceRequestCreatedMessage": "Service request created.",
+  "jobCardNumberMissingMessage": "Job card number is missing.",
+  "userIdentifierMissingMessage": "User identifier is missing.",
+  "jobCardCompletedSuccessfullyMessage": "Job card completed successfully.",
+  "bookingStatusTitle": "Booking status",
+  "statusCodeLabel": "Status {code}",
+  "@statusCodeLabel": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "maintenancePackageDefaultLabel": "Maintenance package",
+  "branchFieldLabel": "Branch",
+  "notAssignedLabel": "Not assigned",
+  "vehicleFieldLabel": "Vehicle",
+  "plateFieldLabel": "Plate",
+  "scheduleFieldLabel": "Schedule",
+  "vinFieldLabel": "VIN",
+  "technicianFieldLabel": "Technician",
+  "jobCardOpenLoadingPackagesMessage": "Job card is open, loading package details...",
+  "creatingJobCardMessage": "Creating job card... packages will appear shortly.",
+  "openJobCardToViewPackagesMessage": "Open a job card to view its associated packages.",
+  "jobCardPackagesTitle": "Job card packages",
+  "refreshPackagesTooltip": "Refresh packages",
+  "noPackagesFoundForJobCardMessage": "No packages found for this job card.",
+  "selectPackageLabel": "Select package",
+  "packageCodeFallbackLabel": "Package {code}",
+  "@packageCodeFallbackLabel": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "addPackageToJobCardButtonLabel": "Add package to job card",
+  "includedLabel": "Included",
+  "emergencyTagLabel": "Emergency",
+  "customTagLabel": "Custom",
+  "packageCodeLabel": "Code: {code}",
+  "@packageCodeLabel": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "linePriceLabel": "Line price",
+  "customPackageManagerTitle": "Custom Package Manager",
+  "addItemsOrServicesTitle": "Add items or services",
+  "resolvingPackageLineIdMessage": "Resolving package line ID...",
+  "quantityLabel": "Quantity",
+  "packageLineUnavailableLabel": "Package line is unavailable",
+  "addItemButtonLabel": "Add item",
+  "packageNoLineIdMessage": "This package does not expose a line ID. Unable to add items.",
+  "noCategoriesAvailableMessage": "No categories available.",
+  "categoryLabel": "Category",
+  "refreshCategoriesTooltip": "Refresh categories",
+  "selectCategoryToLoadItemsMessage": "Select a category to load items.",
+  "noItemsForCategoryMessage": "No items available for the selected category.",
+  "itemsCountLabel": "Items ({count})",
+  "@itemsCountLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "pleaseSelectCategoryMessage": "Please select a category.",
+  "pleaseSelectItemToAddMessage": "Please select an item to add.",
+  "enterQuantityMessage": "Enter a quantity.",
+  "quantityMustBeGreaterThanZeroMessage": "Quantity must be greater than zero.",
+  "packageLineIdUnavailableMessage": "Package line ID is unavailable.",
+  "waitForCurrentDeleteActionMessage": "Please wait for the current delete action to finish.",
+  "lineIdentifierUnavailableMessage": "Line identifier unavailable for this item.",
+  "removeItemTitle": "Remove item",
+  "deleteItemConfirmation": "Delete \"{name}\" from this package?",
+  "@deleteItemConfirmation": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cancelButtonLabel": "Cancel",
+  "deleteButtonLabel": "Delete",
+  "unableToResolvePackageLineIdMessage": "Unable to resolve package line ID.",
+  "jobCardNumberLabel": "Job card: {jobCardNumber}",
+  "@jobCardNumberLabel": {
+    "placeholders": {
+      "jobCardNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "standardTagLabel": "Standard",
+  "lineIdChipLabel": "Line: {lineId}",
+  "@lineIdChipLabel": {
+    "placeholders": {
+      "lineId": {
+        "type": "String"
+      }
+    }
+  },
+  "notApplicableAbbreviation": "N/A",
+  "packageItemsTitle": "Package items",
+  "noLineItemsFoundMessage": "No line items found for this package.",
+  "lineNumberFallbackLabel": "Line {number}",
+  "@lineNumberFallbackLabel": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "srLineIdLabel": "SR Line ID: {srLine}",
+  "@srLineIdLabel": {
+    "placeholders": {
+      "srLine": {
+        "type": "String"
+      }
+    }
+  },
+  "quantityValueLabel": "Qty: {quantity}",
+  "@quantityValueLabel": {
+    "placeholders": {
+      "quantity": {
+        "type": "int"
+      }
+    }
+  },
+  "deleteItemTooltip": "Delete item",
+  "jobCardTitle": "Job Card {srNumber}",
+  "@jobCardTitle": {
+    "placeholders": {
+      "srNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "waitForCurrentActionMessage": "Please wait for the current action to complete.",
+  "removePackageTitle": "Remove package",
+  "removePackageConfirmation": "Are you sure you want to remove \"{name}\" from SR {srNumber}?",
+  "@removePackageConfirmation": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "srNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "removeButtonLabel": "Remove",
+  "packagesAppliedTitle": "Packages applied",
+  "pricePrefixedLabel": "Price: {price}",
+  "@pricePrefixedLabel": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "pricePrefixedIncludedLabel": "Price: Included",
+  "manageButtonLabel": "Manage",
+  "totalPriceLabel": "Total price",
+  "missingPaymentUrlMessage": "Missing payment URL. Please try again later.",
+  "paymentSuccessfulTitle": "Payment Successful",
+  "paymentCompletedMessage": "Your payment has been completed successfully.",
+  "paymentFailedTitle": "Payment Failed",
+  "paymentNotCompletedMessage": "The payment was not completed. Please try again.",
+  "okButtonLabel": "OK",
+  "cancelAppointmentTitle": "Cancel appointment?",
+  "cancelAppointmentConfirmation": "Are you sure you want to cancel this appointment?",
+  "noButtonLabel": "No",
+  "yesCancelButtonLabel": "Yes, cancel",
+  "appointmentCancelledSuccessfully": "Appointment cancelled successfully.",
+  "checkoutDetailsLabel": "Checkout details",
+  "amountDueLabel": "Amount due",
+  "discountLabel": "Discount",
+  "appliedCouponLabel": "Applied coupon",
+  "payNowButtonLabel": "Pay Now",
+  "cancellingEllipsis": "Cancelling...",
+  "cancelAppointmentButtonLabel": "Cancel appointment",
+  "cannotCancelAfterJobCardOpened": "Cannot cancel after job card is opened.",
+  "cancellationStatusUnavailable": "Cancellation status is unavailable right now.",
+  "upcomingServicesLoadingPlate": "0000 AAA",
+  "upcomingServicesLoadingDate": "00 Mon 0000",
+  "upcomingServicesLoadingTime": "00:00 AM"
 }

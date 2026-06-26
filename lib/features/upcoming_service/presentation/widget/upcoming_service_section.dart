@@ -208,10 +208,10 @@ class _UpcomingServiceLoadingCard extends StatelessWidget {
     return Skeletonizer(
       child: BookingSummaryCard(
         carTitle: s.upcomingServicesLoadingVehicle,
-        plate: '0000 AAA',
+        plate: s.upcomingServicesLoadingPlate,
         packageTitle: s.upcomingServicesLoadingPackage,
-        dateLabel: '00 Mon 0000',
-        timeLabel: '00:00 AM',
+        dateLabel: s.upcomingServicesLoadingDate,
+        timeLabel: s.upcomingServicesLoadingTime,
         locationLabel: s.upcomingServicesLoadingLocation,
         technicianLabel: s.upcomingServicesLoadingTechnician,
         statusText: s.upcomingServicesLoadingStatus,

@@ -13,21 +13,21 @@
   "contactUsAppbar": "اتصل بنا",
   "profileAppbar": "الملف الشخصي",
   "moreAppbar": "المزيد",
-  "next":"التالي",
-  "start":"ابدأ",
-  "basicServices":"الخدمات الأساسية",
-  "majorServices":"الخدمات الرئيسية",
-  "carRepair":"إصلاح السيارات",
-  "batteires":"بطاريات السيارات",
-  "carEvaluation":"تقييم السيارات",
-  "towiling":"تولينغ",
-  "mobileServices":"الخدمات المتنقلة",
-  "oiling":"الزيت",
-  "flatTyre":"إصلاح الإطارات",
-  "carWash":"غسيل السيارات",
-  "insuranceClaims":"تأمين السيارات",
-  "carDetailing":"تنظيف السيارات",
-  "ourServices":"خدماتنا",
+  "next": "التالي",
+  "start": "ابدأ",
+  "basicServices": "الخدمات الأساسية",
+  "majorServices": "الخدمات الرئيسية",
+  "carRepair": "إصلاح السيارات",
+  "batteires": "بطاريات السيارات",
+  "carEvaluation": "تقييم السيارات",
+  "towiling": "تولينغ",
+  "mobileServices": "الخدمات المتنقلة",
+  "oiling": "الزيت",
+  "flatTyre": "إصلاح الإطارات",
+  "carWash": "غسيل السيارات",
+  "insuranceClaims": "تأمين السيارات",
+  "carDetailing": "تنظيف السيارات",
+  "ourServices": "خدماتنا",
   "bestOffers": "أفضل العروض",
   "more": "المزيد",
   "yourCars": "سياراتك",
@@ -98,7 +98,7 @@
   "characterVinLimitError": "رقم الهيكل يجب أن يكون 17 حرفًا",
   "areYouOwnerThisCar": "هل أنت مالك هذه السيارة؟",
   "no": "لا",
-    "yes": "نعم",
+  "yes": "نعم",
   "companyName": "اسم الشركة",
   "companyNameHint": "مثال: شركة الخليج للسيارات",
   "companyNameError": "يرجى إدخال اسم الشركة",
@@ -116,13 +116,12 @@
   "lastName": "اسم العائلة",
   "lastNameHint": "أدخل اسم العائلة",
   "userEmail": "البريد الإلكتروني للمستخدم",
-    "userEmailHint": "أدخل البريد الإلكتروني للمستخدم",
+  "userEmailHint": "أدخل البريد الإلكتروني للمستخدم",
   "notValidUserEmail": "البريد الإلكتروني للمستخدم غير صالح",
-  "enterOtpSentTo":"أدخل رمز التحقق المرسل إلى",
+  "enterOtpSentTo": "أدخل رمز التحقق المرسل إلى",
   "expiresIn": "ينتهي في",
   "didntReceiveOtp": "لم تستلم رمز التحقق؟",
   "resendOTP": "إعادة إرسال رمز التحقق",
-
   "changeLanguage": "تغيير اللغة",
   "english": "الإنجليزية",
   "arabic": "العربية",
@@ -356,5 +355,339 @@
   "chatInputHint": "اكتب رسالة",
   "chatSendLabel": "إرسال",
   "chatErrorLoading": "تعذر تحميل رسائل المحادثة.",
-  "chatMissingBookingId": "معرّف الحجز مفقود للمحادثة."
+  "chatMissingBookingId": "معرّف الحجز مفقود للمحادثة.",
+  "backOnline": "متصل الآن",
+  "noInternetConnection": "لا يوجد اتصال بالإنترنت",
+  "languageArabic": "العربية",
+  "languageEnglish": "English",
+  "somethingWentWrong": "حدث خطأ ما.",
+  "phoneNumberHint": "5XXXXXXXX",
+  "couponListTitle": "القسائم",
+  "refreshTooltip": "تحديث",
+  "createCouponTooltip": "إنشاء قسيمة",
+  "addCouponButtonLabel": "إضافة قسيمة",
+  "noCouponsAvailable": "لا توجد قسائم متاحة.",
+  "couponDefaultLabel": "قسيمة",
+  "couponDiscountLabel": "الخصم",
+  "pleaseSelectDateRange": "يرجى تحديد الفترة الزمنية",
+  "createCouponScreenTitle": "إنشاء قسيمة",
+  "companyNameLabel": "اسم الشركة",
+  "requiredFieldError": "مطلوب",
+  "discountPercentageLabel": "نسبة الخصم %",
+  "enterNumberError": "أدخل رقمًا",
+  "couponCountLabel": "عدد القسائم",
+  "enterCountError": "أدخل العدد",
+  "fromDateLabel": "من",
+  "selectStartDateLabel": "اختر تاريخ البدء",
+  "pickDateButtonLabel": "اختيار",
+  "toDateLabel": "إلى",
+  "selectEndDateLabel": "اختر تاريخ الانتهاء",
+  "createButtonLabel": "إنشاء",
+  "noServicesAvailable": "لا توجد خدمات متاحة حاليًا.",
+  "unableToLoadServices": "تعذر تحميل الخدمات",
+  "retryButtonLabel": "إعادة المحاولة",
+  "technicianAppError": "يجب على مستخدمي الفنيين استخدام تطبيق Motor Lube للفنيين.",
+  "managerUserLabel": "مستخدم مدير",
+  "creditManagerUserLabel": "مستخدم مدير الائتمان",
+  "customerUserLabel": "مستخدم عميل",
+  "allButtonLabel": "الكل",
+  "showingBookingsNeedingApproval": "عرض الحجوزات التي تحتاج إلى موافقة",
+  "connectionTimedOutMessage": "انتهت مهلة الاتصال. يرجى المحاولة مرة أخرى.",
+  "anyDateLabel": "أي تاريخ",
+  "customerDefaultLabel": "عميل",
+  "vehicleNotSetLabel": "لم يتم تحديد المركبة",
+  "plateUnavailableLabel": "اللوحة غير متاحة",
+  "branchNotAssignedLabel": "لم يتم تحديد الفرع",
+  "scheduledStatusLabel": "مجدول",
+  "scheduleNotSetLabel": "لم يتم تحديد الجدول",
+  "noBookingsNeedApproval": "لا توجد حجوزات تحتاج إلى موافقة حاليًا.",
+  "newBookingsWillAppearMessage": "ستظهر هنا تلقائيًا الحجوزات الجديدة التي تتطلب موافقة.",
+  "unableToLoadBookings": "تعذر تحميل الحجوزات",
+  "signInRequiredTitle": "تسجيل الدخول مطلوب",
+  "signInAsCreditManagerMessage": "يرجى تسجيل الدخول كمدير ائتمان لعرض الحجوزات التي تحتاج إلى موافقة.",
+  "filterApprovalsTitle": "تصفية الموافقات",
+  "pickDateRangeInstruction": "اختر فترة زمنية وطبّق لتحديث البيانات.",
+  "resetButtonLabel": "إعادة تعيين",
+  "applyFiltersButtonLabel": "تطبيق الفلاتر",
+  "completePayment": "إتمام الدفع",
+  "unableToInitiatePayment": "تعذر بدء عملية الدفع.",
+  "failedToInitiatePayment": "فشل بدء عملية الدفع. يرجى المحاولة مرة أخرى.",
+  "failedToVerifyPaymentStatus": "فشل التحقق من حالة الدفع. يرجى المحاولة مرة أخرى.",
+  "appName": "موتور لوب",
+  "appVersion": "V 1.0.0",
+  "promotionsTitle": "العروض",
+  "promotionsLoadErrorFallback": "فشل تحميل العروض",
+  "noPromotionsFound": "لا توجد عروض.",
+  "deleteTooltip": "حذف",
+  "promotionTitle": "العرض",
+  "loadingEllipsis": "جارٍ التحميل...",
+  "unavailableLabel": "غير متاح",
+  "noStatusesLabel": "لا توجد حالات",
+  "loadingBookingStatusesMessage": "جارٍ تحميل حالات الحجز...",
+  "noStatusesAvailableMessage": "لا توجد حالات متاحة.",
+  "statusIdLabel": "رقم الحالة {id}",
+  "@statusIdLabel": {
+    "placeholders": {
+      "id": {
+        "type": "int"
+      }
+    }
+  },
+  "statusesSelectedCount": "{count} حالات محددة",
+  "@statusesSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noMaintenanceRequestsYet": "لا توجد طلبات صيانة حتى الآن.",
+  "assignedAppointmentsWillAppearHere": "ستظهر هنا جميع المواعيد المخصصة لك بعد أن يقوم العملاء بحجز الخدمات.",
+  "unableToLoadRequests": "تعذر تحميل الطلبات",
+  "signInAsTechnicianMessage": "يرجى تسجيل الدخول كفني لعرض طلبات الصيانة المخصصة لك.",
+  "planYourDay": "خطط ليومك",
+  "tapFilterToRefineJobs": "اضغط على أحد الفلاتر لتحديد المهام المخصصة لك.",
+  "statusLabel": "الحالة",
+  "failedToLoadChecklistError": "فشل تحميل قائمة الفحص: {error}",
+  "@failedToLoadChecklistError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "checklistSubmittedMessage": "تم إرسال قائمة الفحص.",
+  "failedToSubmitChecklistMessage": "فشل إرسال قائمة الفحص.",
+  "failedToSaveChecklistError": "فشل حفظ قائمة الفحص: {error}",
+  "@failedToSaveChecklistError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "vehicleChecklistTitle": "قائمة فحص المركبة",
+  "noChecklistFound": "لم يتم العثور على قائمة فحص.",
+  "createDefaultChecklistButtonLabel": "إنشاء قائمة فحص افتراضية",
+  "savingEllipsis": "جارٍ الحفظ...",
+  "saveChecklistButtonLabel": "حفظ قائمة الفحص",
+  "legendTitle": "الدليل",
+  "legendCleanLabel": "C - نظيف",
+  "legendReplaceLabel": "R - استبدال",
+  "legendInspectLabel": "I - فحص",
+  "legendNotApplicableLabel": "X - غير ينطبق",
+  "commentLabel": "تعليق",
+  "statusUpdatedSuccessfully": "تم تحديث الحالة بنجاح.",
+  "appointmentDetailsTitle": "تفاصيل الموعد",
+  "managePackagesButtonLabel": "إدارة الباقات",
+  "noBookingStatusesAvailableMessage": "لا توجد حالات حجز متاحة.",
+  "jobCardNumberUnavailableMessage": "رقم بطاقة العمل غير متاح.",
+  "unableToDetermineTechnicianIdMessage": "تعذر تحديد معرف الفني.",
+  "alreadyOnStatusMessage": "موجود حاليًا في حالة {label}.",
+  "@alreadyOnStatusMessage": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
+  "missingFirebaseIdForTechnicianMessage": "معرف Firebase مفقود للفني.",
+  "jobCardCreatedMessage": "تم إنشاء بطاقة العمل {srNumber}.",
+  "@jobCardCreatedMessage": {
+    "placeholders": {
+      "srNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "serviceRequestCreatedMessage": "تم إنشاء طلب الخدمة.",
+  "jobCardNumberMissingMessage": "رقم بطاقة العمل مفقود.",
+  "userIdentifierMissingMessage": "معرف المستخدم مفقود.",
+  "jobCardCompletedSuccessfullyMessage": "تم إنجاز بطاقة العمل بنجاح.",
+  "bookingStatusTitle": "حالة الحجز",
+  "statusCodeLabel": "الحالة {code}",
+  "@statusCodeLabel": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "maintenancePackageDefaultLabel": "باقة الصيانة",
+  "branchFieldLabel": "الفرع",
+  "notAssignedLabel": "لم يتم التعيين",
+  "vehicleFieldLabel": "المركبة",
+  "plateFieldLabel": "اللوحة",
+  "scheduleFieldLabel": "الجدول",
+  "vinFieldLabel": "رقم الهيكل",
+  "technicianFieldLabel": "الفني",
+  "jobCardOpenLoadingPackagesMessage": "بطاقة العمل مفتوحة، جارٍ تحميل تفاصيل الباقة...",
+  "creatingJobCardMessage": "جارٍ إنشاء بطاقة العمل... ستظهر الباقات قريبًا.",
+  "openJobCardToViewPackagesMessage": "افتح بطاقة عمل لعرض الباقات المرتبطة بها.",
+  "jobCardPackagesTitle": "باقات بطاقة العمل",
+  "refreshPackagesTooltip": "تحديث الباقات",
+  "noPackagesFoundForJobCardMessage": "لا توجد باقات لهذه بطاقة العمل.",
+  "selectPackageLabel": "اختر الباقة",
+  "packageCodeFallbackLabel": "باقة {code}",
+  "@packageCodeFallbackLabel": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "addPackageToJobCardButtonLabel": "إضافة باقة إلى بطاقة العمل",
+  "includedLabel": "مشمول",
+  "emergencyTagLabel": "حالة طارئة",
+  "customTagLabel": "مخصص",
+  "packageCodeLabel": "الرمز: {code}",
+  "@packageCodeLabel": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "linePriceLabel": "سعر البند",
+  "customPackageManagerTitle": "إدارة الباقات المخصصة",
+  "addItemsOrServicesTitle": "إضافة عناصر أو خدمات",
+  "resolvingPackageLineIdMessage": "جارٍ تحديد رقم بند الباقة...",
+  "quantityLabel": "الكمية",
+  "packageLineUnavailableLabel": "بند الباقة غير متاح",
+  "addItemButtonLabel": "إضافة عنصر",
+  "packageNoLineIdMessage": "لا توفر هذه الباقة رقم بند. لا يمكن إضافة عناصر.",
+  "noCategoriesAvailableMessage": "لا توجد فئات متاحة.",
+  "categoryLabel": "الفئة",
+  "refreshCategoriesTooltip": "تحديث الفئات",
+  "selectCategoryToLoadItemsMessage": "اختر فئة لتحميل العناصر.",
+  "noItemsForCategoryMessage": "لا توجد عناصر متاحة للفئة المحددة.",
+  "itemsCountLabel": "العناصر ({count})",
+  "@itemsCountLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "pleaseSelectCategoryMessage": "يرجى اختيار فئة.",
+  "pleaseSelectItemToAddMessage": "يرجى اختيار عنصر لإضافته.",
+  "enterQuantityMessage": "أدخل الكمية.",
+  "quantityMustBeGreaterThanZeroMessage": "يجب أن تكون الكمية أكبر من صفر.",
+  "packageLineIdUnavailableMessage": "رقم بند الباقة غير متاح.",
+  "waitForCurrentDeleteActionMessage": "يرجى الانتظار حتى تنتهي عملية الحذف الحالية.",
+  "lineIdentifierUnavailableMessage": "معرف البند غير متاح لهذا العنصر.",
+  "removeItemTitle": "إزالة العنصر",
+  "deleteItemConfirmation": "حذف \"{name}\" من هذه الباقة؟",
+  "@deleteItemConfirmation": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cancelButtonLabel": "إلغاء",
+  "deleteButtonLabel": "حذف",
+  "unableToResolvePackageLineIdMessage": "تعذر تحديد رقم بند الباقة.",
+  "jobCardNumberLabel": "بطاقة العمل: {jobCardNumber}",
+  "@jobCardNumberLabel": {
+    "placeholders": {
+      "jobCardNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "standardTagLabel": "عادي",
+  "lineIdChipLabel": "البند: {lineId}",
+  "@lineIdChipLabel": {
+    "placeholders": {
+      "lineId": {
+        "type": "String"
+      }
+    }
+  },
+  "notApplicableAbbreviation": "غير متاح",
+  "packageItemsTitle": "عناصر الباقة",
+  "noLineItemsFoundMessage": "لا توجد بنود لهذه الباقة.",
+  "lineNumberFallbackLabel": "البند {number}",
+  "@lineNumberFallbackLabel": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "srLineIdLabel": "رقم بند طلب الخدمة: {srLine}",
+  "@srLineIdLabel": {
+    "placeholders": {
+      "srLine": {
+        "type": "String"
+      }
+    }
+  },
+  "quantityValueLabel": "الكمية: {quantity}",
+  "@quantityValueLabel": {
+    "placeholders": {
+      "quantity": {
+        "type": "int"
+      }
+    }
+  },
+  "deleteItemTooltip": "حذف العنصر",
+  "jobCardTitle": "بطاقة العمل {srNumber}",
+  "@jobCardTitle": {
+    "placeholders": {
+      "srNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "waitForCurrentActionMessage": "يرجى الانتظار حتى تنتهي العملية الحالية.",
+  "removePackageTitle": "إزالة الباقة",
+  "removePackageConfirmation": "هل أنت متأكد أنك تريد إزالة \"{name}\" من طلب الخدمة {srNumber}؟",
+  "@removePackageConfirmation": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "srNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "removeButtonLabel": "إزالة",
+  "packagesAppliedTitle": "الباقات المطبقة",
+  "pricePrefixedLabel": "السعر: {price}",
+  "@pricePrefixedLabel": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "pricePrefixedIncludedLabel": "السعر: مشمول",
+  "manageButtonLabel": "إدارة",
+  "totalPriceLabel": "السعر الإجمالي",
+  "missingPaymentUrlMessage": "رابط الدفع مفقود. يرجى المحاولة مرة أخرى لاحقًا.",
+  "paymentSuccessfulTitle": "تمت عملية الدفع بنجاح",
+  "paymentCompletedMessage": "تمت عملية الدفع بنجاح.",
+  "paymentFailedTitle": "فشلت عملية الدفع",
+  "paymentNotCompletedMessage": "لم تكتمل عملية الدفع. يرجى المحاولة مرة أخرى.",
+  "okButtonLabel": "حسنًا",
+  "cancelAppointmentTitle": "إلغاء الموعد؟",
+  "cancelAppointmentConfirmation": "هل أنت متأكد أنك تريد إلغاء هذا الموعد؟",
+  "noButtonLabel": "لا",
+  "yesCancelButtonLabel": "نعم، إلغاء",
+  "appointmentCancelledSuccessfully": "تم إلغاء الموعد بنجاح.",
+  "checkoutDetailsLabel": "تفاصيل الدفع",
+  "amountDueLabel": "المبلغ المستحق",
+  "discountLabel": "الخصم",
+  "appliedCouponLabel": "القسيمة المطبقة",
+  "payNowButtonLabel": "ادفع الآن",
+  "cancellingEllipsis": "جارٍ الإلغاء...",
+  "cancelAppointmentButtonLabel": "إلغاء الموعد",
+  "cannotCancelAfterJobCardOpened": "لا يمكن الإلغاء بعد فتح بطاقة العمل.",
+  "cancellationStatusUnavailable": "حالة الإلغاء غير متاحة حاليًا.",
+  "upcomingServicesLoadingPlate": "0000 AAA",
+  "upcomingServicesLoadingDate": "00 Mon 0000",
+  "upcomingServicesLoadingTime": "00:00 AM"
 }

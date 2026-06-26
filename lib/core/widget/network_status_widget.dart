@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 
+import '../../generated/l10n.dart';
+
 class NetworkStatusWidget extends StatefulWidget {
   final Widget child;
 
@@ -90,7 +92,7 @@ class NetworkStatusWidgetState extends State<NetworkStatusWidget> {
                 padding: const EdgeInsets.all(8.0),
                 child: Center(
                   child: Text(
-                    _isConnected ? 'Back Online' : 'No Internet Connection',
+                    _isConnected ? S.of(context).backOnline : S.of(context).noInternetConnection,
                     style: const TextStyle(color: Colors.white),
                   ),
                 ),

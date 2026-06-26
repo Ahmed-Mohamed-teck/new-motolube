@@ -8,6 +8,7 @@ import '../../../auth/provider/auth_provider.dart';
 import '../../provider/coupon_providers.dart';
 import '../../../../legacy/coupon_header_model.dart';
 import '../view_model/coupon_state.dart';
+import '../../../../core/providers/global_lang_provider.dart';
 
 class CouponListScreen extends ConsumerStatefulWidget {
   const CouponListScreen({super.key});
@@ -24,16 +25,16 @@ class _CouponListScreenState extends ConsumerState<CouponListScreen> {
     final state = ref.watch(couponNotifierProvider);
     return Scaffold(
       appBar: InternalAppBar(
-        title: 'Coupons',
+        title: appLang.couponListTitle,
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: () => ref.read(couponNotifierProvider.notifier).load(),
-            tooltip: 'Refresh',
+            tooltip: appLang.refreshTooltip,
           ),
           IconButton(
             icon: const Icon(Icons.add),
-            tooltip: 'Create coupon',
+            tooltip: appLang.createCouponTooltip,
             onPressed: () async {
               final created = await Navigator.of(context).push<CouponHeaderModel?>(
                 MaterialPageRoute(builder: (_) => const CreateCouponScreen()),
@@ -56,7 +57,7 @@ class _CouponListScreenState extends ConsumerState<CouponListScreen> {
           }
         },
         icon: const Icon(Icons.add),
-        label: const Text('Add coupon'),
+        label: Text(appLang.addCouponButtonLabel),
       ),
     );
   }
@@ -72,7 +73,7 @@ class _CouponListScreenState extends ConsumerState<CouponListScreen> {
       return Center(child: Text(state.message));
     }
     if (state is CouponEmpty) {
-      return const Center(child: Text('No coupons available.'));
+      return Center(child: Text(appLang.noCouponsAvailable));
     }
     if (state is CouponLoaded) {
       final coupons = state.coupons;
@@ -86,8 +87,8 @@ class _CouponListScreenState extends ConsumerState<CouponListScreen> {
             final c = coupons[index];
             return Card(
               child: ListTile(
-                title: Text(c.companyName.isNotEmpty ? c.companyName : 'Coupon'),
-                subtitle: Text('Discount: ${c.discountRate.toStringAsFixed(2)}%'),
+                title: Text(c.companyName.isNotEmpty ? c.companyName : appLang.couponDefaultLabel),
+                subtitle: Text('${appLang.couponDiscountLabel}: ${c.discountRate.toStringAsFixed(2)}%'),
                 trailing: const Icon(Icons.chevron_right),
               ),
             );
@@ -218,7 +219,7 @@ class _CreateCouponScreenState extends ConsumerState<CreateCouponScreen> {
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate()) return;
     if (_fromDate == null || _toDate == null) {
-      setState(() => _error = 'Please select date range');
+      setState(() => _error = appLang.pleaseSelectDateRange);
       return;
     }
     setState(() {
@@ -255,7 +256,7 @@ class _CreateCouponScreenState extends ConsumerState<CreateCouponScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const InternalAppBar(title: 'Create Coupon'),
+      appBar: InternalAppBar(title: appLang.createCouponScreenTitle),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Form(
@@ -264,37 +265,37 @@ class _CreateCouponScreenState extends ConsumerState<CreateCouponScreen> {
             children: [
               TextFormField(
                 controller: _companyController,
-                decoration: const InputDecoration(labelText: 'Company Name'),
-                validator: (v) => v == null || v.isEmpty ? 'Required' : null,
+                decoration: InputDecoration(labelText: appLang.companyNameLabel),
+                validator: (v) => v == null || v.isEmpty ? appLang.requiredFieldError : null,
               ),
               const SizedBox(height: 16,),
               TextFormField(
                 controller: _discountController,
-                decoration: const InputDecoration(labelText: 'Discount %'),
+                decoration: InputDecoration(labelText: appLang.discountPercentageLabel),
                 keyboardType: TextInputType.number,
                 validator: (v) =>
-                    v == null || double.tryParse(v) == null ? 'Enter number' : null,
+                    v == null || double.tryParse(v) == null ? appLang.enterNumberError : null,
               ),
               const SizedBox(height: 16,),
 
               TextFormField(
                 controller: _countController,
-                decoration: const InputDecoration(labelText: 'Coupon count'),
+                decoration: InputDecoration(labelText: appLang.couponCountLabel),
                 keyboardType: TextInputType.number,
                 validator: (v) =>
-                    v == null || int.tryParse(v) == null ? 'Enter count' : null,
+                    v == null || int.tryParse(v) == null ? appLang.enterCountError : null,
               ),
               const SizedBox(height: 8),
               Row(
                 children: [
                   Expanded(
                     child: Text(_fromDate != null
-                        ? 'From: ${_fromDate!.toLocal().toString().split(' ').first}'
-                        : 'Select start date'),
+                        ? '${appLang.fromDateLabel}: ${_fromDate!.toLocal().toString().split(' ').first}'
+                        : appLang.selectStartDateLabel),
                   ),
                   TextButton(
                     onPressed: () => _pickDate(isFrom: true),
-                    child: const Text('Pick'),
+                    child: Text(appLang.pickDateButtonLabel),
                   ),
                 ],
               ),
@@ -302,12 +303,12 @@ class _CreateCouponScreenState extends ConsumerState<CreateCouponScreen> {
                 children: [
                   Expanded(
                     child: Text(_toDate != null
-                        ? 'To: ${_toDate!.toLocal().toString().split(' ').first}'
-                        : 'Select end date'),
+                        ? '${appLang.toDateLabel}: ${_toDate!.toLocal().toString().split(' ').first}'
+                        : appLang.selectEndDateLabel),
                   ),
                   TextButton(
                     onPressed: () => _pickDate(isFrom: false),
-                    child: const Text('Pick'),
+                    child: Text(appLang.pickDateButtonLabel),
                   ),
                 ],
               ),
@@ -324,7 +325,7 @@ class _CreateCouponScreenState extends ConsumerState<CreateCouponScreen> {
                         width: 18,
                         child: CircularProgressIndicator(strokeWidth: 2),
                       )
-                    : const Text('Create'),
+                    : Text(appLang.createButtonLabel),
               ),
             ],
           ),

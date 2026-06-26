@@ -60,11 +60,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     ref.listen<AuthState>(authViewModelProvider, (prev, next) {
       if (next is ErrorState) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("something went wrong"),
+          SnackBar(
+            content: Text(appLang.somethingWentWrong),
             behavior: SnackBarBehavior.floating,
-            margin: EdgeInsets.only(top: 10, left: 16, right: 16),
-            duration: Duration(seconds: 3),
+            margin: const EdgeInsets.only(top: 10, left: 16, right: 16),
+            duration: const Duration(seconds: 3),
           ),
         );
       }
@@ -231,7 +231,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                               controller: _phoneController,
                               keyboardType: TextInputType.phone,
                               decoration: InputDecoration(
-                                hintText: '5XXXXXXXX',
+                                hintText: appLang.phoneNumberHint,
                                 contentPadding: const EdgeInsets.symmetric(
                                   vertical: 14,
                                   horizontal: 12,

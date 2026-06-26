@@ -186,16 +186,16 @@ class _RoleSpecificHome extends StatelessWidget {
     String message;
     switch (userType) {
       case UserType.technician:
-        message = 'Technician users should use the MotorLube Technician app.';
+        message = appLang.technicianAppError;
         break;
       case UserType.manager:
-        message = 'Manager user';
+        message = appLang.managerUserLabel;
         break;
       case UserType.creditManager:
-        message = 'Credit manager user';
+        message = appLang.creditManagerUserLabel;
         break;
       default:
-        message = 'Customer user';
+        message = appLang.customerUserLabel;
     }
 
     return Center(

@@ -13,6 +13,7 @@ import '../widget/maintenance_request_card.dart';
 import '../widget/status_picker_sheet.dart';
 import 'technician_appointment_details_screen.dart';
 import '../view_model/technician_appointments_state.dart';
+import '../../../../generated/l10n.dart';
 
 class TechnicianHomeScreen extends ConsumerStatefulWidget {
   const TechnicianHomeScreen({super.key});
@@ -93,16 +94,16 @@ class _TechnicianHomeScreenState extends ConsumerState<TechnicianHomeScreen> {
         !statusLoading && statusErrorMessage == null && statuses.isNotEmpty;
     final statusValueLabel =
         statusLoading
-            ? 'Loading...'
+            ? S.of(context).loadingEllipsis
             : statusErrorMessage != null
-            ? 'Unavailable'
-            : (statuses.isEmpty ? 'No statuses' : _statusLabelFor(statuses));
+            ? S.of(context).unavailableLabel
+            : (statuses.isEmpty ? S.of(context).noStatusesLabel : _statusLabelFor(statuses));
     final statusHelperText =
         statusLoading
-            ? 'Loading booking statuses...'
+            ? S.of(context).loadingBookingStatusesMessage
             : statusErrorMessage != null
             ? _humanizeMessage(statusErrorMessage)
-            : (statuses.isEmpty ? 'No statuses available.' : null);
+            : (statuses.isEmpty ? S.of(context).noStatusesAvailableMessage : null);
     final statusHelperIsError = statusErrorMessage != null;
     final statusRetryCallback =
         statusErrorMessage != null ? _retryStatuses : null;
@@ -171,9 +172,9 @@ class _TechnicianHomeScreenState extends ConsumerState<TechnicianHomeScreen> {
 
   String _humanizeMessage(String message) {
     if (message.toLowerCase().contains('timeout')) {
-      return 'Connection timed out. Please try again.';
+      return S.of(context).connectionTimedOutMessage;
     }
-    return message.isNotEmpty ? message : 'Something went wrong.';
+    return message.isNotEmpty ? message : S.of(context).somethingWentWrong;
   }
 
   String _statusLabelFor(List<TechnicianBookingStatus> statuses) {
@@ -186,8 +187,8 @@ class _TechnicianHomeScreenState extends ConsumerState<TechnicianHomeScreen> {
       }
     }
     if (labels.isEmpty) {
-      if (ids.length == 1) return 'Status ID ${ids.first}';
-      return '${ids.length} statuses selected';
+      if (ids.length == 1) return S.of(context).statusIdLabel(ids.first);
+      return S.of(context).statusesSelectedCount(ids.length);
     }
     if (labels.length <= 2) return labels.join(', ');
     return '${labels.take(2).join(', ')} +${labels.length - 2} more';
@@ -270,7 +271,7 @@ class _TechnicianHomeScreenState extends ConsumerState<TechnicianHomeScreen> {
   }
 
   String _formatDateLabel(DateTime? value) {
-    if (value == null) return 'Any date';
+    if (value == null) return S.of(context).anyDateLabel;
     return DateFormat('dd-MMM-yyyy').format(value);
   }
 
@@ -322,25 +323,25 @@ class _AppointmentsListView extends StatelessWidget {
           name:
               appointment.customerName.isNotEmpty
                   ? appointment.customerName
-                  : 'Customer',
+                  : S.of(context).customerDefaultLabel,
           car:
               appointment.displayCar.isNotEmpty
                   ? appointment.displayCar
-                  : 'Vehicle not set',
+                  : S.of(context).vehicleNotSetLabel,
           plate:
               appointment.displayPlate.isNotEmpty
                   ? appointment.displayPlate
-                  : 'Plate unavailable',
-          timeRange: _timeRangeText(appointment),
+                  : S.of(context).plateUnavailableLabel,
+          timeRange: _timeRangeText(appointment, context),
           branch:
               appointment.branchName.isNotEmpty
                   ? appointment.branchName
-                  : 'Branch not assigned',
+                  : S.of(context).branchNotAssignedLabel,
           service: appointment.packageLabel,
           status:
               appointment.statusLabel.isNotEmpty
                   ? appointment.statusLabel
-                  : 'Scheduled',
+                  : S.of(context).scheduledStatusLabel,
           statusColor: _statusColor(appointment),
           onViewDetails: () => onViewDetails(appointment),
         );
@@ -376,7 +377,10 @@ class _AppointmentsListView extends StatelessWidget {
     return AppColors.lightPrimary;
   }
 
-  static String _timeRangeText(TechnicianAppointmentEntity appointment) {
+  static String _timeRangeText(
+    TechnicianAppointmentEntity appointment,
+    BuildContext context,
+  ) {
     final parts = <String>[];
     final date = appointment.bookingDate;
     if (date != null) {
@@ -387,7 +391,9 @@ class _AppointmentsListView extends StatelessWidget {
     if (appointment.slotTime.trim().isNotEmpty) {
       parts.add(appointment.slotTime.trim());
     }
-    return parts.isNotEmpty ? parts.join(' • ') : 'Schedule not set';
+    return parts.isNotEmpty
+        ? parts.join(' • ')
+        : S.of(context).scheduleNotSetLabel;
   }
 }
 
@@ -419,13 +425,13 @@ class _EmptyAppointmentsView extends StatelessWidget {
             Icon(Icons.inbox, size: 56, color: Colors.grey.shade400),
             const SizedBox(height: 16),
             Text(
-              'No maintenance requests yet.',
+              S.of(context).noMaintenanceRequestsYet,
               style: Theme.of(context).textTheme.titleMedium,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 8),
             Text(
-              'You will see all assigned appointments here once customers book services.',
+              S.of(context).assignedAppointmentsWillAppearHere,
               style: Theme.of(
                 context,
               ).textTheme.bodyMedium?.copyWith(color: Colors.grey.shade600),
@@ -456,7 +462,7 @@ class _ErrorAppointmentsView extends StatelessWidget {
             Icon(Icons.wifi_off, size: 56, color: Colors.orange.shade400),
             const SizedBox(height: 16),
             Text(
-              'Unable to load requests',
+              S.of(context).unableToLoadRequests,
               style: Theme.of(context).textTheme.titleMedium,
               textAlign: TextAlign.center,
             ),
@@ -472,7 +478,7 @@ class _ErrorAppointmentsView extends StatelessWidget {
             ElevatedButton.icon(
               onPressed: onRetry,
               icon: const Icon(Icons.refresh),
-              label: const Text('Retry'),
+              label: Text(S.of(context).retryButtonLabel),
             ),
           ],
         ),
@@ -500,13 +506,13 @@ class _UnauthorizedView extends StatelessWidget {
               Icon(Icons.lock_outline, size: 56, color: Colors.grey.shade400),
               const SizedBox(height: 16),
               Text(
-                'Sign in required',
+                S.of(context).signInRequiredTitle,
                 style: Theme.of(context).textTheme.titleMedium,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 8),
               Text(
-                'Please sign in as a technician to view assigned maintenance requests.',
+                S.of(context).signInAsTechnicianMessage,
                 style: Theme.of(
                   context,
                 ).textTheme.bodyMedium?.copyWith(color: Colors.grey.shade600),
@@ -572,14 +578,14 @@ class _FilterBar extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Plan your day',
+                      S.of(context).planYourDay,
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Tap a filter to refine assigned jobs.',
+                      S.of(context).tapFilterToRefineJobs,
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: Colors.grey.shade600,
                       ),
@@ -590,7 +596,7 @@ class _FilterBar extends StatelessWidget {
               TextButton.icon(
                 onPressed: onReset,
                 icon: const Icon(Icons.refresh, size: 16),
-                label: const Text('Reset'),
+                label: Text(S.of(context).resetButtonLabel),
               ),
             ],
           ),
@@ -600,14 +606,14 @@ class _FilterBar extends StatelessWidget {
             runSpacing: 12,
             children: [
               _FilterButton(
-                label: 'From',
+                label: S.of(context).fromDateLabel,
                 value: fromDateLabel,
                 icon: Icons.calendar_today,
                 onTap: onSelectFromDate,
                 enabled: true,
               ),
               _FilterButton(
-                label: 'To',
+                label: S.of(context).toDateLabel,
                 value: toDateLabel,
                 icon: Icons.event,
                 onTap: onSelectToDate,
@@ -617,7 +623,7 @@ class _FilterBar extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           _FilterButton(
-            label: 'Status',
+            label: S.of(context).statusLabel,
             value: statusLabel,
             icon: Icons.flag_outlined,
             onTap: onSelectStatus,
@@ -643,7 +649,7 @@ class _FilterBar extends StatelessWidget {
                   if (statusHelperIsError && onRetryStatus != null)
                     TextButton(
                       onPressed: onRetryStatus,
-                      child: const Text('Retry'),
+                      child: Text(S.of(context).retryButtonLabel),
                     ),
                 ],
               ),
@@ -655,7 +661,7 @@ class _FilterBar extends StatelessWidget {
             child: ElevatedButton.icon(
               onPressed: onApply,
               icon: const Icon(Icons.filter_alt),
-              label: const Text('Apply filters'),
+              label: Text(S.of(context).applyFiltersButtonLabel),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 shape: RoundedRectangleBorder(

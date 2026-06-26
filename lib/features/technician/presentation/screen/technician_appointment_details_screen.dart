@@ -94,7 +94,7 @@ class _TechnicianAppointmentDetailsScreenState
             }
             _hasUpdates = true;
           });
-          _showSnack('Status updated successfully.');
+          _showSnack(S.of(context).statusUpdatedSuccessfully);
           ref
               .read(technicianAppointmentUpdateViewModelProvider.notifier)
               .reset();
@@ -185,7 +185,7 @@ class _TechnicianAppointmentDetailsScreenState
       },
       child: Scaffold(
         appBar: InternalAppBar(
-          title: 'Appointment Details',
+          title: S.of(context).appointmentDetailsTitle,
           onBack: () => Navigator.of(context).pop(_hasUpdates),
           actions: [
             if (showChatAction)
@@ -243,12 +243,12 @@ class _TechnicianAppointmentDetailsScreenState
                               OutlinedButton.icon(
                                 onPressed: _openChecklistScreen,
                                 icon: const Icon(Icons.checklist),
-                                label: const Text('Vehicle checklist'),
+                                label: Text(S.of(context).vehicleChecklistTitle),
                               ),
                               TextButton.icon(
                                 onPressed: _openJobCardManagementScreen,
                                 icon: const Icon(Icons.admin_panel_settings_outlined),
-                                label: const Text('Manage packages'),
+                                label: Text(S.of(context).managePackagesButtonLabel),
                               ),
                             ],
                           ),
@@ -276,7 +276,7 @@ class _TechnicianAppointmentDetailsScreenState
                                 () => ref.invalidate(
                                   technicianJobCardPackagesProvider(srNumber),
                                 ),
-                            child: const Text('Retry'),
+                            child: Text(S.of(context).retryButtonLabel),
                           ),
                         ),
                       ),
@@ -292,8 +292,8 @@ class _TechnicianAppointmentDetailsScreenState
                     () => ref.invalidate(technicianBookingStatusesProvider),
               )
             else if (visibleStatuses.isEmpty)
-              const _StatusHelperCard.error(
-                message: 'No booking statuses available.',
+              _StatusHelperCard.error(
+                message: S.of(context).noBookingStatusesAvailableMessage,
               )
             else
               _buildStatusFlow(
@@ -316,12 +316,12 @@ class _TechnicianAppointmentDetailsScreenState
   Future<void> _handleAddPackage(JobCardPackageEntity package) async {
     final srNumber = _sanitizeSrNumber();
     if (srNumber == null || srNumber.isEmpty) {
-      _showSnack('Job card number unavailable.');
+      _showSnack(S.of(context).jobCardNumberUnavailableMessage);
       return;
     }
     final userId = await _fetchFirebaseId();
     if (userId.isEmpty) {
-      _showSnack('Unable to determine technician identifier.');
+      _showSnack(S.of(context).unableToDetermineTechnicianIdMessage);
       return;
     }
     await ref.read(jobCardOperationViewModelProvider.notifier).addPackage(
@@ -335,12 +335,12 @@ class _TechnicianAppointmentDetailsScreenState
   Future<void> _openJobCardManagementScreen() async {
     final srNumber = _sanitizeSrNumber();
     if (srNumber == null || srNumber.isEmpty) {
-      _showSnack('Job card number unavailable.');
+      _showSnack(S.of(context).jobCardNumberUnavailableMessage);
       return;
     }
     final userId = await _fetchFirebaseId();
     if (userId.isEmpty) {
-      _showSnack('Unable to determine technician identifier.');
+      _showSnack(S.of(context).unableToDetermineTechnicianIdMessage);
       return;
     }
     await Navigator.of(context, rootNavigator: true).push(
@@ -357,7 +357,7 @@ class _TechnicianAppointmentDetailsScreenState
   Future<void> _openChecklistScreen() async {
     final srNumber = _sanitizeSrNumber();
     if (srNumber == null || srNumber.isEmpty) {
-      _showSnack('Job card number unavailable.');
+      _showSnack(S.of(context).jobCardNumberUnavailableMessage);
       return;
     }
     await Navigator.of(context, rootNavigator: true).push(
@@ -422,7 +422,7 @@ class _TechnicianAppointmentDetailsScreenState
     final currentIndex = _resolveCurrentStatusIndex(statuses) ?? 0;
     if (statusId <= currentStatusId || _isCreatingSr) {
       if (statusId == currentStatusId) {
-        _showSnack('Already on ${status.label}.');
+        _showSnack(S.of(context).alreadyOnStatusMessage(status.label));
       }
       return;
     }
@@ -711,7 +711,7 @@ class _TechnicianAppointmentDetailsScreenState
       final authRepo = ref.read(authLocalRepositoryProvider);
       final stored = await authRepo.getStoredAuth();
       if (stored == null || stored.fireBaseId.isEmpty) {
-        _showSnack('Missing FireBaseId for technician.');
+        _showSnack(S.of(context).missingFirebaseIdForTechnicianMessage);
         return false;
       }
       final useCase = ref.read(createJobCardUseCaseProvider);
@@ -742,9 +742,9 @@ class _TechnicianAppointmentDetailsScreenState
           setState(() => _srNumber = normalized);
           ref.invalidate(technicianJobCardPackagesProvider(normalized));
         }
-        _showSnack('Job card ${results.first.srNumber} created.');
+        _showSnack(S.of(context).jobCardCreatedMessage(results.first.srNumber));
       } else {
-        _showSnack('Service request created.');
+        _showSnack(S.of(context).serviceRequestCreatedMessage);
       }
       return true;
     } catch (error) {
@@ -760,12 +760,12 @@ class _TechnicianAppointmentDetailsScreenState
   Future<bool> _completeServiceRequest() async {
     final sr = _sanitizeSrNumber();
     if (sr == null || sr.isEmpty) {
-      _showSnack('Job card number is missing.');
+      _showSnack(S.of(context).jobCardNumberMissingMessage);
       return false;
     }
     final userId = await _fetchFirebaseId();
     if (userId.isEmpty) {
-      _showSnack('User identifier is missing.');
+      _showSnack(S.of(context).userIdentifierMissingMessage);
       return false;
     }
     setState(() => _isCompletingSr = true);
@@ -780,7 +780,7 @@ class _TechnicianAppointmentDetailsScreenState
           setState(() => _srNumber = normalized);
         }
       }
-      _showSnack('Job card completed successfully.');
+      _showSnack(S.of(context).jobCardCompletedSuccessfullyMessage);
       return true;
     } catch (error) {
       _showSnack(_humanizeMessage(error.toString()));
@@ -813,9 +813,9 @@ class _TechnicianAppointmentDetailsScreenState
 
   String _humanizeMessage(String message) {
     if (message.toLowerCase().contains('timeout')) {
-      return 'Connection timed out. Please try again.';
+      return S.of(context).connectionTimedOutMessage;
     }
-    return message.isNotEmpty ? message : 'Something went wrong.';
+    return message.isNotEmpty ? message : S.of(context).somethingWentWrong;
   }
 
   Widget _buildStatusFlow(
@@ -832,7 +832,7 @@ class _TechnicianAppointmentDetailsScreenState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Booking status',
+              S.of(context).bookingStatusTitle,
               style: Theme.of(
                 context,
               ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
@@ -899,7 +899,9 @@ class _TechnicianAppointmentDetailsScreenState
       ignoring: !enabled,
       child: ChoiceChip(
         label: Text(
-          status.label.isNotEmpty ? status.label : 'Status ${status.code}',
+          status.label.isNotEmpty
+              ? status.label
+              : S.of(context).statusCodeLabel(status.code),
         ),
         selected: isSelected,
         onSelected: (_) {
@@ -974,14 +976,14 @@ class _HeaderCard extends StatelessWidget {
                   Text(
                     appointment.customerName.isNotEmpty
                         ? appointment.customerName
-                        : 'Customer',
+                        : S.of(context).customerDefaultLabel,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: 4),
                   Text(
                     appointment.packageLabel.isNotEmpty
                         ? appointment.packageLabel
-                        : 'Maintenance package',
+                        : S.of(context).maintenancePackageDefaultLabel,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Colors.grey.shade600,
                     ),
@@ -999,7 +1001,7 @@ class _HeaderCard extends StatelessWidget {
                     child: Text(
                       appointment.statusLabel.isNotEmpty
                           ? appointment.statusLabel
-                          : 'Status',
+                          : S.of(context).statusLabel,
                       style: TextStyle(
                         color: statusColor,
                         fontWeight: FontWeight.w600,
@@ -1035,34 +1037,34 @@ class _InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final rows = <_DetailRowData>[
       _DetailRowData(
-        'Branch',
+        S.of(context).branchFieldLabel,
         appointment.branchName.isNotEmpty
             ? appointment.branchName
-            : 'Not assigned',
+            : S.of(context).notAssignedLabel,
       ),
       _DetailRowData(
-        'Vehicle',
+        S.of(context).vehicleFieldLabel,
         appointment.displayCar.isNotEmpty
             ? appointment.displayCar
-            : 'Vehicle not set',
+            : S.of(context).vehicleNotSetLabel,
       ),
       _DetailRowData(
-        'Plate',
+        S.of(context).plateFieldLabel,
         appointment.displayPlate.isNotEmpty
             ? appointment.displayPlate
-            : 'Unavailable',
+            : S.of(context).unavailableLabel,
       ),
       _DetailRowData(
-        'Schedule',
+        S.of(context).scheduleFieldLabel,
         '${_formatDate(appointment)}'
             '${appointment.slotTime.isNotEmpty ? ' · ${appointment.slotTime}' : ''}',
       ),
       _DetailRowData(
-        'VIN',
+        S.of(context).vinFieldLabel,
         appointment.vin.isNotEmpty ? appointment.vin : '--',
       ),
       _DetailRowData(
-        'Technician',
+        S.of(context).technicianFieldLabel,
         appointment.technicianNameEn.isNotEmpty
             ? appointment.technicianNameEn
             : appointment.technicianNameAr.isNotEmpty
@@ -1123,10 +1125,10 @@ class _JobCardPackagesPlaceholder extends StatelessWidget {
   Widget build(BuildContext context) {
     final subtitle =
         hasOpenJobCard
-            ? 'Job card is open, loading package details...'
+            ? S.of(context).jobCardOpenLoadingPackagesMessage
             : isCreatingSr
-            ? 'Creating job card... packages will appear shortly.'
-            : 'Open a job card to view its associated packages.';
+            ? S.of(context).creatingJobCardMessage
+            : S.of(context).openJobCardToViewPackagesMessage;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -1134,7 +1136,7 @@ class _JobCardPackagesPlaceholder extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Job card packages',
+              S.of(context).jobCardPackagesTitle,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 8),
@@ -1205,7 +1207,7 @@ class _JobCardPackagesSection extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Job card packages',
+                        S.of(context).jobCardPackagesTitle,
                         style: Theme.of(context).textTheme.titleMedium
                             ?.copyWith(fontWeight: FontWeight.w600),
                       ),
@@ -1220,7 +1222,7 @@ class _JobCardPackagesSection extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  tooltip: 'Refresh packages',
+                  tooltip: S.of(context).refreshPackagesTooltip,
                   onPressed: onRetry,
                   icon: const Icon(Icons.refresh),
                 ),
@@ -1230,15 +1232,15 @@ class _JobCardPackagesSection extends StatelessWidget {
             if (packages.isEmpty)
               _JobCardPackagesMessage(
                 icon: Icons.inventory_2_outlined,
-                message: 'No packages found for this job card.',
+                message: S.of(context).noPackagesFoundForJobCardMessage,
               )
             else ...[
               DropdownButtonFormField<String>(
                 value: selected?.packageId ?? packages.first.packageId,
                 isExpanded: true,
-                decoration: const InputDecoration(
-                  labelText: 'Select package',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: S.of(context).selectPackageLabel,
+                  border: const OutlineInputBorder(),
                 ),
                 items:
                     packages
@@ -1248,7 +1250,7 @@ class _JobCardPackagesSection extends StatelessWidget {
                             child: Text(
                               pkg.displayName.isNotEmpty
                                   ? pkg.displayName
-                                  : 'Package ${pkg.packageCode}',
+                                  : S.of(context).packageCodeFallbackLabel(pkg.packageCode),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
@@ -1284,7 +1286,7 @@ class _JobCardPackagesSection extends StatelessWidget {
                                 child: CircularProgressIndicator(strokeWidth: 2),
                               )
                               : const Icon(Icons.add_circle_outline),
-                      label: const Text('Add package to job card'),
+                      label: Text(S.of(context).addPackageToJobCardButtonLabel),
                     ),
                   ),
                 ],
@@ -1316,13 +1318,14 @@ class _SelectedPackageDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final price = _effectivePrice;
-    final priceText = price > 0 ? currencyFormat.format(price) : 'Included';
+    final priceText =
+        price > 0 ? currencyFormat.format(price) : S.of(context).includedLabel;
     final tags = <Widget>[];
     if (package.isEmergency) {
-      tags.add(const _PackageTag(label: 'Emergency', color: Color(0xFFB42318)));
+      tags.add(_PackageTag(label: S.of(context).emergencyTagLabel, color: const Color(0xFFB42318)));
     }
     if (package.isCustomPackage) {
-      tags.add(const _PackageTag(label: 'Custom', color: Color(0xFF027A48)));
+      tags.add(_PackageTag(label: S.of(context).customTagLabel, color: const Color(0xFF027A48)));
     }
 
     return Column(
@@ -1334,7 +1337,7 @@ class _SelectedPackageDetails extends StatelessWidget {
               child: Text(
                 package.displayName.isNotEmpty
                     ? package.displayName
-                    : 'Package ${package.packageCode}',
+                    : S.of(context).packageCodeFallbackLabel(package.packageCode),
                 style: Theme.of(
                   context,
                 ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
@@ -1351,7 +1354,7 @@ class _SelectedPackageDetails extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          'Code: ${package.packageCode}',
+          S.of(context).packageCodeLabel(package.packageCode),
           style: Theme.of(
             context,
           ).textTheme.bodySmall?.copyWith(color: Colors.grey.shade600),
@@ -1362,10 +1365,10 @@ class _SelectedPackageDetails extends StatelessWidget {
         ],
         const SizedBox(height: 12),
         _PackageDetailRow(
-          'Line price',
+          S.of(context).linePriceLabel,
           currencyFormat.format(package.linePrice),
         ),
-        
+
       ],
     );
   }
@@ -1498,7 +1501,7 @@ class _StatusHelperCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Booking status',
+              S.of(context).bookingStatusTitle,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 12),
@@ -1516,7 +1519,7 @@ class _StatusHelperCard extends StatelessWidget {
                     ),
                   ),
                   if (onRetry != null)
-                    TextButton(onPressed: onRetry, child: const Text('Retry')),
+                    TextButton(onPressed: onRetry, child: Text(S.of(context).retryButtonLabel)),
                 ],
               ),
           ],

@@ -10,6 +10,7 @@ import '../../domain/entity/job_card_package_line_entity.dart';
 import '../../provider/technician_provider.dart';
 import '../view_model/job_card_operation_state.dart';
 import 'technician_custom_package_screen.dart';
+import '../../../../generated/l10n.dart';
 
 class TechnicianJobCardManagementScreen extends ConsumerStatefulWidget {
   const TechnicianJobCardManagementScreen({
@@ -106,7 +107,7 @@ class _TechnicianJobCardManagementScreenState
 
     return Scaffold(
       appBar: InternalAppBar(
-        title: 'Job Card ${widget.srNumber}',
+        title: S.of(context).jobCardTitle(widget.srNumber),
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
@@ -145,7 +146,7 @@ class _TechnicianJobCardManagementScreenState
                     padding: const EdgeInsets.all(16),
                     child: _JobCardPackagesMessage(
                       icon: Icons.error_outline,
-                      message: _humanizeMessage(error.toString()),
+                      message: _humanizeMessage(context, error.toString()),
                       action: TextButton(
                         onPressed:
                             () => ref.invalidate(
@@ -153,7 +154,7 @@ class _TechnicianJobCardManagementScreenState
                                 widget.srNumber,
                               ),
                             ),
-                        child: const Text('Retry'),
+                        child: Text(S.of(context).retryButtonLabel),
                       ),
                     ),
                   ),
@@ -183,11 +184,11 @@ class _TechnicianJobCardManagementScreenState
   Future<void> _handleAddPackage(JobCardPackageEntity package) async {
     final srNumber = widget.srNumber.trim();
     if (srNumber.isEmpty) {
-      _showSnack('Job card number unavailable.');
+      _showSnack(S.of(context).jobCardNumberUnavailableMessage);
       return;
     }
     if (widget.userId.isEmpty) {
-      _showSnack('Unable to determine technician identifier.');
+      _showSnack(S.of(context).unableToDetermineTechnicianIdMessage);
       return;
     }
     await ref.read(jobCardOperationViewModelProvider.notifier).addPackage(
@@ -202,7 +203,7 @@ class _TechnicianJobCardManagementScreenState
     JobCardPackageEntity package,
   ) async {
     if (widget.userId.isEmpty) {
-      _showSnack('Unable to determine technician identifier.');
+      _showSnack(S.of(context).unableToDetermineTechnicianIdMessage);
       return;
     }
     await Navigator.of(context, rootNavigator: true).push(
@@ -229,16 +230,16 @@ class _TechnicianJobCardManagementScreenState
 
   Future<void> _confirmDeletePackage(JobCardPackageEntity package) async {
     if (_deletingPackageLineId != null) {
-      _showSnack('Please wait for the current action to complete.');
+      _showSnack(S.of(context).waitForCurrentActionMessage);
       return;
     }
     if (widget.userId.isEmpty) {
-      _showSnack('Unable to determine technician identifier.');
+      _showSnack(S.of(context).unableToDetermineTechnicianIdMessage);
       return;
     }
     final lineId = package.lineId.trim();
     if (lineId.isEmpty) {
-      _showSnack('Package line ID is unavailable.');
+      _showSnack(S.of(context).packageLineIdUnavailableMessage);
       return;
     }
     final packageName =
@@ -249,18 +250,18 @@ class _TechnicianJobCardManagementScreenState
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Remove package'),
+          title: Text(S.of(context).removePackageTitle),
           content: Text(
-            'Are you sure you want to remove "$packageName" from SR ${widget.srNumber}?',
+            S.of(context).removePackageConfirmation(packageName, widget.srNumber),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('Cancel'),
+              child: Text(S.of(context).cancelButtonLabel),
             ),
             FilledButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('Remove'),
+              child: Text(S.of(context).removeButtonLabel),
             ),
           ],
         );
@@ -399,7 +400,7 @@ class _JobCardPackagesSection extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Job card packages',
+                        S.of(context).jobCardPackagesTitle,
                         style: Theme.of(context).textTheme.titleMedium
                             ?.copyWith(fontWeight: FontWeight.w600),
                       ),
@@ -414,7 +415,7 @@ class _JobCardPackagesSection extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  tooltip: 'Refresh packages',
+                  tooltip: S.of(context).refreshPackagesTooltip,
                   onPressed: onRetry,
                   icon: const Icon(Icons.refresh),
                 ),
@@ -424,15 +425,15 @@ class _JobCardPackagesSection extends StatelessWidget {
             if (packages.isEmpty)
               _JobCardPackagesMessage(
                 icon: Icons.inventory_2_outlined,
-                message: 'No packages found for this job card.',
+                message: S.of(context).noPackagesFoundForJobCardMessage,
               )
             else ...[
               DropdownButtonFormField<String>(
                 value: selected?.packageId ?? packages.first.packageId,
                 isExpanded: true,
-                decoration: const InputDecoration(
-                  labelText: 'Select package',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: S.of(context).selectPackageLabel,
+                  border: const OutlineInputBorder(),
                 ),
                 items:
                     packages
@@ -442,7 +443,7 @@ class _JobCardPackagesSection extends StatelessWidget {
                             child: Text(
                               pkg.displayName.isNotEmpty
                                   ? pkg.displayName
-                                  : 'Package ${pkg.packageCode}',
+                                  : S.of(context).packageCodeFallbackLabel(pkg.packageCode),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
@@ -478,7 +479,7 @@ class _JobCardPackagesSection extends StatelessWidget {
                                 child: CircularProgressIndicator(strokeWidth: 2),
                               )
                               : const Icon(Icons.add_circle_outline),
-                      label: const Text('Add package to job card'),
+                      label: Text(S.of(context).addPackageToJobCardButtonLabel),
                     ),
                   ),
                 ],
@@ -510,13 +511,14 @@ class _SelectedPackageDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final price = _effectivePrice;
-    final priceText = price > 0 ? currencyFormat.format(price) : 'Included';
+    final priceText =
+        price > 0 ? currencyFormat.format(price) : S.of(context).includedLabel;
     final tags = <Widget>[];
     if (package.isEmergency) {
-      tags.add(const _PackageTag(label: 'Emergency', color: Color(0xFFB42318)));
+      tags.add(_PackageTag(label: S.of(context).emergencyTagLabel, color: const Color(0xFFB42318)));
     }
     if (package.isCustomPackage) {
-      tags.add(const _PackageTag(label: 'Custom', color: Color(0xFF027A48)));
+      tags.add(_PackageTag(label: S.of(context).customTagLabel, color: const Color(0xFF027A48)));
     }
 
     return Column(
@@ -528,7 +530,7 @@ class _SelectedPackageDetails extends StatelessWidget {
               child: Text(
                 package.displayName.isNotEmpty
                     ? package.displayName
-                    : 'Package ${package.packageCode}',
+                    : S.of(context).packageCodeFallbackLabel(package.packageCode),
                 style: Theme.of(
                   context,
                 ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
@@ -545,7 +547,7 @@ class _SelectedPackageDetails extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          'Code: ${package.packageCode}',
+          S.of(context).packageCodeLabel(package.packageCode),
           style: Theme.of(
             context,
           ).textTheme.bodySmall?.copyWith(color: Colors.grey.shade600),
@@ -556,7 +558,7 @@ class _SelectedPackageDetails extends StatelessWidget {
         ],
         const SizedBox(height: 12),
         _PackageDetailRow(
-          'Line price',
+          S.of(context).linePriceLabel,
           currencyFormat.format(package.linePrice),
         ),
 
@@ -693,7 +695,7 @@ class _PackagesCard extends StatelessWidget {
             if (packages.isEmpty) {
               return _MessageWithAction(
                 icon: Icons.inventory_2_outlined,
-                message: 'No packages found for this job card.',
+                message: S.of(context).noPackagesFoundForJobCardMessage,
                 onRetry: onRetry,
               );
             }
@@ -705,7 +707,7 @@ class _PackagesCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Packages applied',
+                  S.of(context).packagesAppliedTitle,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                   ),
@@ -724,17 +726,17 @@ class _PackagesCard extends StatelessWidget {
                         pkg.lineId == deletingLineId;
                     final packagePrice = _effectivePackagePrice(pkg);
                     final subtitleChildren = <Widget>[
-                      Text('Code: ${pkg.packageCode}'),
+                      Text(S.of(context).packageCodeLabel(pkg.packageCode)),
                       Text(
                         packagePrice > 0
-                            ? 'Price: ${currencyFormat.format(packagePrice)}'
-                            : 'Price: Included',
+                            ? S.of(context).pricePrefixedLabel(currencyFormat.format(packagePrice))
+                            : S.of(context).pricePrefixedIncludedLabel,
                       ),
                     ];
                     if (pkg.lineId.isNotEmpty) {
                       subtitleChildren.add(
                         Text(
-                          'Line ID: ${pkg.lineId}',
+                          S.of(context).lineIdChipLabel(pkg.lineId),
                           style: Theme.of(
                             context,
                           ).textTheme.bodySmall?.copyWith(
@@ -763,7 +765,7 @@ class _PackagesCard extends StatelessWidget {
                                             onManageCustomPackage?.call(pkg);
                                           },
                                   icon: const Icon(Icons.build_outlined),
-                                  label: const Text('Manage'),
+                                  label: Text(S.of(context).manageButtonLabel),
                                 ),
                               if (hasDeleteAction)
                                 TextButton.icon(
@@ -774,7 +776,7 @@ class _PackagesCard extends StatelessWidget {
                                             onDeletePackage?.call(pkg);
                                           },
                                   icon: const Icon(Icons.delete_outline),
-                                  label: const Text('Remove'),
+                                  label: Text(S.of(context).removeButtonLabel),
                                   style: TextButton.styleFrom(
                                     foregroundColor: Colors.red.shade700,
                                   ),
@@ -797,7 +799,7 @@ class _PackagesCard extends StatelessWidget {
                                   child: Text(
                                     pkg.displayName.isNotEmpty
                                         ? pkg.displayName
-                                        : 'Package ${pkg.packageCode}',
+                                        : S.of(context).packageCodeFallbackLabel(pkg.packageCode),
                                     style: Theme.of(context).textTheme.titleSmall
                                         ?.copyWith(fontWeight: FontWeight.w600),
                                   ),
@@ -813,7 +815,7 @@ class _PackagesCard extends StatelessWidget {
                                   Text(
                                     packagePrice > 0
                                         ? currencyFormat.format(packagePrice)
-                                        : 'Included',
+                                        : S.of(context).includedLabel,
                                     style: Theme.of(context).textTheme.bodyMedium
                                         ?.copyWith(fontWeight: FontWeight.w700),
                                   ),
@@ -833,7 +835,7 @@ class _PackagesCard extends StatelessWidget {
           loading: () => const LinearProgressIndicator(minHeight: 2),
           error: (error, _) => _MessageWithAction(
             icon: Icons.error_outline,
-            message: _humanizeMessage(error.toString()),
+            message: _humanizeMessage(context, error.toString()),
             onRetry: onRetry,
           ),
         ),
@@ -854,7 +856,7 @@ class _AppliedPackagesTotalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final totalText =
-        totalPrice > 0 ? currencyFormat.format(totalPrice) : 'Included';
+        totalPrice > 0 ? currencyFormat.format(totalPrice) : S.of(context).includedLabel;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
@@ -866,7 +868,7 @@ class _AppliedPackagesTotalWidget extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            'Total price',
+            S.of(context).totalPriceLabel,
             style: Theme.of(
               context,
             ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
@@ -928,7 +930,7 @@ class _MessageWithAction extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: TextButton(
             onPressed: onRetry,
-            child: const Text('Retry'),
+            child: Text(S.of(context).retryButtonLabel),
           ),
         ),
       ],
@@ -936,9 +938,9 @@ class _MessageWithAction extends StatelessWidget {
   }
 }
 
-String _humanizeMessage(String message) {
+String _humanizeMessage(BuildContext context, String message) {
   if (message.toLowerCase().contains('timeout')) {
-    return 'Connection timed out. Please try again.';
+    return S.of(context).connectionTimedOutMessage;
   }
-  return message.isNotEmpty ? message : 'Something went wrong.';
+  return message.isNotEmpty ? message : S.of(context).somethingWentWrong;
 }

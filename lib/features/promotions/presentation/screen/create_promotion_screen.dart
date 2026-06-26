@@ -101,7 +101,7 @@ class _CreatePromotionScreenState extends ConsumerState<CreatePromotionScreen> {
     final isLoading = ref.watch(promotionViewModelProvider).isLoading;
 
     return Scaffold(
-      appBar: const InternalAppBar(title: 'promotion'),
+      appBar: InternalAppBar(title: appLang.promotionTitle),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(

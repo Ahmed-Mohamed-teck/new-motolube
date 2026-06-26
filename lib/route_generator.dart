@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'generated/l10n.dart';
 import 'package:newmotorlube/features/promotions/presentation/screen/create_promotion_screen.dart';
 import 'package:newmotorlube/features/promotions/presentation/screen/promotions_list_screen.dart';
 import 'features/auth/presentation/screens/auth_screen.dart';
@@ -92,9 +93,9 @@ class RouteGenerator {
   }
 
   static Route<dynamic> _errorRoute(String arg) {
-    return MaterialPageRoute(builder: (_) {
+    return MaterialPageRoute(builder: (context) {
       return Scaffold(
-        appBar:  AppBar(title: Text('error'),),
+        appBar:  AppBar(title: Text(S.of(context).errorTitle),),
         body: Center(
           child: Text(
             '$arg + Error',

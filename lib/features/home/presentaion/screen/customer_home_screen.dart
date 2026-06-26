@@ -80,7 +80,7 @@ class _CustomerHomeScreenState extends State<CustomerHomeScreen> {
                 withSubTitle: true,
                 title: appLang.upcomingService,
                 subTitle: Text(
-                  'All',
+                  appLang.allButtonLabel,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Theme.of(context).colorScheme.primary,
                     fontWeight: FontWeight.bold,

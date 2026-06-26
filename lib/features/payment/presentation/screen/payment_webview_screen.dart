@@ -4,6 +4,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
+import '../../../../generated/l10n.dart';
+
 enum PaymentWebViewResult { success, failure, cancelled }
 
 class PaymentWebViewScreen extends StatefulWidget {
@@ -45,7 +47,7 @@ class _PaymentWebViewScreenState extends State<PaymentWebViewScreen> {
       onWillPop: _handleWillPop,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Complete Payment'),
+          title: Text(S.of(context).completePayment),
           actions: [
             IconButton(
               icon: const Icon(Icons.close),

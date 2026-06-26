@@ -8,6 +8,7 @@ import '../../domain/entity/job_card_package_entity.dart';
 import '../../domain/entity/job_card_package_line_entity.dart';
 import '../../provider/technician_provider.dart';
 import '../view_model/job_card_operation_state.dart';
+import '../../../../generated/l10n.dart';
 
 class TechnicianCustomPackageScreen extends ConsumerStatefulWidget {
   const TechnicianCustomPackageScreen({
@@ -98,8 +99,8 @@ class _TechnicianCustomPackageScreenState
         actionState.operationType == JobCardOperationType.deleteCustomItem;
 
     return Scaffold(
-      appBar: const InternalAppBar(
-        title: 'Custom Package Manager',
+      appBar: InternalAppBar(
+        title: S.of(context).customPackageManagerTitle,
       ),
       body: ListView(
         padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
@@ -120,7 +121,7 @@ class _TechnicianCustomPackageScreenState
           ),
           const SizedBox(height: 16),
           Text(
-            'Add items or services',
+            S.of(context).addItemsOrServicesTitle,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.w600,
             ),
@@ -140,7 +141,7 @@ class _TechnicianCustomPackageScreenState
                   Expanded(
                     child: Text(
                       _lineIdError == null
-                          ? 'Resolving package line ID...'
+                          ? S.of(context).resolvingPackageLineIdMessage
                           : _lineIdError!,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: _lineIdError == null
@@ -151,7 +152,7 @@ class _TechnicianCustomPackageScreenState
                   ),
                   if (!_isResolvingLineId)
                     IconButton(
-                      tooltip: 'Retry',
+                      tooltip: S.of(context).retryButtonLabel,
                       onPressed: _loadPackageLineId,
                       icon: const Icon(Icons.refresh),
                     ),
@@ -166,9 +167,9 @@ class _TechnicianCustomPackageScreenState
           TextFormField(
             controller: _qtyController,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
-            decoration: const InputDecoration(
-              labelText: 'Quantity',
-              border: OutlineInputBorder(),
+            decoration: InputDecoration(
+              labelText: S.of(context).quantityLabel,
+              border: const OutlineInputBorder(),
             ),
           ),
           const SizedBox(height: 16),
@@ -186,15 +187,15 @@ class _TechnicianCustomPackageScreenState
                 : const Icon(Icons.add),
             label: Text(
               _resolvedLineId.isEmpty
-                  ? 'Package line is unavailable'
-                  : 'Add item',
+                  ? S.of(context).packageLineUnavailableLabel
+                  : S.of(context).addItemButtonLabel,
             ),
           ),
           if (_resolvedLineId.isEmpty)
             Padding(
               padding: const EdgeInsets.only(top: 8),
               child: Text(
-                'This package does not expose a line ID. Unable to add items.',
+                S.of(context).packageNoLineIdMessage,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: Colors.red.shade700,
                 ),
@@ -213,7 +214,7 @@ class _TechnicianCustomPackageScreenState
       data: (categories) {
         if (categories.isEmpty) {
           return _StatusMessage(
-            message: 'No categories available.',
+            message: S.of(context).noCategoriesAvailableMessage,
             icon: Icons.category_outlined,
             onRetry: () =>
                 ref.invalidate(customPackageCategoriesProvider),
@@ -232,9 +233,9 @@ class _TechnicianCustomPackageScreenState
         return DropdownButtonFormField<String>(
           value: _selectedCategoryId,
           decoration: InputDecoration(
-            labelText: 'Category',
+            labelText: S.of(context).categoryLabel,
             suffixIcon: IconButton(
-              tooltip: 'Refresh categories',
+              tooltip: S.of(context).refreshCategoriesTooltip,
               onPressed: () =>
                   ref.invalidate(customPackageCategoriesProvider),
               icon: const Icon(Icons.refresh),
@@ -278,7 +279,7 @@ class _TechnicianCustomPackageScreenState
   ) {
     if (_selectedCategoryId == null) {
       return Text(
-        'Select a category to load items.',
+        S.of(context).selectCategoryToLoadItemsMessage,
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
           color: Colors.grey.shade600,
         ),
@@ -291,7 +292,7 @@ class _TechnicianCustomPackageScreenState
       data: (items) {
         if (items.isEmpty) {
           return _StatusMessage(
-            message: 'No items available for the selected category.',
+            message: S.of(context).noItemsForCategoryMessage,
             icon: Icons.inventory_2_outlined,
             onRetry: () =>
                 ref.invalidate(
@@ -307,7 +308,7 @@ class _TechnicianCustomPackageScreenState
         return DropdownButtonFormField<String>(
           value: _selectedItemId,
           decoration: InputDecoration(
-            labelText: 'Items (${items.length})',
+            labelText: S.of(context).itemsCountLabel(items.length),
             border: const OutlineInputBorder(),
           ),
           isExpanded: true,
@@ -365,25 +366,25 @@ class _TechnicianCustomPackageScreenState
     final itemId = _selectedItemId;
     final qtyText = _qtyController.text.trim();
     if (categoryId == null || categoryId.isEmpty) {
-      _showSnack('Please select a category.');
+      _showSnack(S.of(context).pleaseSelectCategoryMessage);
       return;
     }
     if (itemId == null || itemId.isEmpty) {
-      _showSnack('Please select an item to add.');
+      _showSnack(S.of(context).pleaseSelectItemToAddMessage);
       return;
     }
     if (qtyText.isEmpty) {
-      _showSnack('Enter a quantity.');
+      _showSnack(S.of(context).enterQuantityMessage);
       return;
     }
     final qtyValue = double.tryParse(qtyText);
     if (qtyValue == null || qtyValue <= 0) {
-      _showSnack('Quantity must be greater than zero.');
+      _showSnack(S.of(context).quantityMustBeGreaterThanZeroMessage);
       return;
     }
     final lineId = _resolvedLineId;
     if (lineId.isEmpty) {
-      _showSnack('Package line ID is unavailable.');
+      _showSnack(S.of(context).packageLineIdUnavailableMessage);
       return;
     }
     FocusScope.of(context).unfocus();
@@ -401,7 +402,7 @@ class _TechnicianCustomPackageScreenState
 
   Future<void> _onDeleteLine(JobCardPackageLineEntity line) async {
     if (_deletingLineId != null) {
-      _showSnack('Please wait for the current delete action to finish.');
+      _showSnack(S.of(context).waitForCurrentDeleteActionMessage);
       return;
     }
     final srLineId = line.srLineId.trim().isNotEmpty
@@ -410,25 +411,27 @@ class _TechnicianCustomPackageScreenState
             ? line.lineId.trim()
             : line.packageLineId.trim();
     if (srLineId.isEmpty) {
-      _showSnack('Line identifier unavailable for this item.');
+      _showSnack(S.of(context).lineIdentifierUnavailableMessage);
       return;
     }
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Remove item'),
+          title: Text(S.of(context).removeItemTitle),
           content: Text(
-            'Delete "${line.itemDescription.isNotEmpty ? line.itemDescription : line.itemCode}" from this package?',
+            S.of(context).deleteItemConfirmation(
+              line.itemDescription.isNotEmpty ? line.itemDescription : line.itemCode,
+            ),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('Cancel'),
+              child: Text(S.of(context).cancelButtonLabel),
             ),
             FilledButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('Delete'),
+              child: Text(S.of(context).deleteButtonLabel),
             ),
           ],
         );
@@ -502,7 +505,7 @@ class _TechnicianCustomPackageScreenState
         setState(() => _packageLineId = resolved);
       } else {
         setState(() {
-          _lineIdError = 'Unable to resolve package line ID.';
+          _lineIdError = S.of(context).unableToResolvePackageLineIdMessage;
         });
       }
     } catch (error) {
@@ -532,9 +535,9 @@ class _TechnicianCustomPackageScreenState
 
   String _humanizeMessage(String message) {
     if (message.toLowerCase().contains('timeout')) {
-      return 'Connection timed out. Please try again.';
+      return S.of(context).connectionTimedOutMessage;
     }
-    return message.isNotEmpty ? message : 'Something went wrong.';
+    return message.isNotEmpty ? message : S.of(context).somethingWentWrong;
   }
 }
 
@@ -558,14 +561,14 @@ class _PackageSummaryCard extends StatelessWidget {
             Text(
               package.displayName.isNotEmpty
                   ? package.displayName
-                  : 'Package ${package.packageCode}',
+                  : S.of(context).packageCodeFallbackLabel(package.packageCode),
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w600,
               ),
             ),
             const SizedBox(height: 4),
             Text(
-              'Job card: $jobCardNumber',
+              S.of(context).jobCardNumberLabel(jobCardNumber),
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: Colors.grey.shade600,
               ),
@@ -573,9 +576,9 @@ class _PackageSummaryCard extends StatelessWidget {
             const SizedBox(height: 8),
             Row(
               children: [
-                _Chip(label: package.isCustomPackage ? 'Custom' : 'Standard'),
+                _Chip(label: package.isCustomPackage ? S.of(context).customTagLabel : S.of(context).standardTagLabel),
                 const SizedBox(width: 8),
-                _Chip(label: 'Line: ${package.lineId.isNotEmpty ? package.lineId : 'N/A'}'),
+                _Chip(label: S.of(context).lineIdChipLabel(package.lineId.isNotEmpty ? package.lineId : S.of(context).notApplicableAbbreviation)),
               ],
             ),
           ],
@@ -612,14 +615,14 @@ class _PackageLinesSection extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    'Package items',
+                    S.of(context).packageItemsTitle,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
                 IconButton(
-                  tooltip: 'Refresh',
+                  tooltip: S.of(context).refreshTooltip,
                   onPressed: onRetry,
                   icon: const Icon(Icons.refresh),
                 ),
@@ -630,7 +633,7 @@ class _PackageLinesSection extends StatelessWidget {
               data: (lines) {
                 if (lines.isEmpty) {
                   return _StatusMessage(
-                    message: 'No line items found for this package.',
+                    message: S.of(context).noLineItemsFoundMessage,
                     icon: Icons.inventory_2_outlined,
                     onRetry: onRetry,
                   );
@@ -655,7 +658,7 @@ class _PackageLinesSection extends StatelessWidget {
                                 title: Text(
                                   line.itemCode.isNotEmpty
                                       ? line.itemCode
-                                      : 'Line ${line.lineNumber}',
+                                      : S.of(context).lineNumberFallbackLabel(line.lineNumber),
                                 ),
                                 subtitle: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -663,7 +666,7 @@ class _PackageLinesSection extends StatelessWidget {
                                     Text(line.itemDescription),
                                     if (srLine.isNotEmpty)
                                       Text(
-                                        'SR Line ID: $srLine',
+                                        S.of(context).srLineIdLabel(srLine),
                                         style: Theme.of(
                                           context,
                                         ).textTheme.bodySmall?.copyWith(
@@ -676,10 +679,10 @@ class _PackageLinesSection extends StatelessWidget {
                                   mainAxisSize: MainAxisSize.min,
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    Text('Qty: ${line.quantity}'),
+                                    Text(S.of(context).quantityValueLabel(line.quantity)),
                                     const SizedBox(height: 6),
                                     IconButton(
-                                      tooltip: 'Delete item',
+                                      tooltip: S.of(context).deleteItemTooltip,
                                       onPressed:
                                           isDeleting
                                               ? null
@@ -774,7 +777,7 @@ class _StatusMessage extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: TextButton(
                     onPressed: onRetry,
-                    child: const Text('Retry'),
+                    child: Text(S.of(context).retryButtonLabel),
                   ),
                 ),
             ],

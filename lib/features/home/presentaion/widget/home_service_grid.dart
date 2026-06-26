@@ -4,6 +4,8 @@ import 'package:newmotorlube/features/home/provider/home_provider.dart' as home;
 import 'package:newmotorlube/features/home/presentaion/view_model/main_categories_state.dart';
 import 'package:newmotorlube/features/home/presentaion/screen/base_home_screen.dart';
 
+import 'package:newmotorlube/generated/l10n.dart';
+
 import 'home_service_card.dart';
 
 class HomeServiceGrid extends ConsumerWidget {
@@ -95,7 +97,7 @@ class HomeServiceGrid extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
       child: Text(
-        'No services available right now.',
+        S.of(context).noServicesAvailable,
         style: Theme.of(context).textTheme.bodyMedium,
       ),
     );
@@ -113,7 +115,7 @@ class HomeServiceGrid extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Unable to load services',
+                S.of(context).unableToLoadServices,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(height: 4),
@@ -133,7 +135,7 @@ class HomeServiceGrid extends ConsumerWidget {
                         .fetchCategories();
                   },
                   icon: const Icon(Icons.refresh),
-                  label: const Text('Retry'),
+                  label: Text(S.of(context).retryButtonLabel),
                 ),
               ),
             ],

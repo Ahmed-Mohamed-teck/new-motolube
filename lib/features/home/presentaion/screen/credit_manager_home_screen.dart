@@ -12,6 +12,7 @@ import '../../../technician/presentation/screen/technician_appointment_details_s
 import '../../../technician/provider/technician_provider.dart';
 import '../../../technician/presentation/view_model/technician_appointments_state.dart';
 import '../../../technician/presentation/widget/maintenance_request_card.dart';
+import '../../../../generated/l10n.dart';
 
 class CreditManagerHomeScreen extends ConsumerStatefulWidget {
   const CreditManagerHomeScreen({super.key});
@@ -129,7 +130,7 @@ class _CreditManagerHomeScreenState
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: _StatusPill(label: 'Showing bookings that need approval'),
+            child: _StatusPill(label: S.of(context).showingBookingsNeedingApproval),
           ),
           Expanded(
             child: RefreshIndicator(
@@ -144,9 +145,9 @@ class _CreditManagerHomeScreenState
 
   String _humanizeMessage(String message) {
     if (message.toLowerCase().contains('timeout')) {
-      return 'Connection timed out. Please try again.';
+      return S.of(context).connectionTimedOutMessage;
     }
-    return message.isNotEmpty ? message : 'Something went wrong.';
+    return message.isNotEmpty ? message : S.of(context).somethingWentWrong;
   }
 
   Future<void> _pickDate({required bool isFromDate}) async {
@@ -187,7 +188,7 @@ class _CreditManagerHomeScreenState
   }
 
   String _formatDateLabel(DateTime? value) {
-    if (value == null) return 'Any date';
+    if (value == null) return S.of(context).anyDateLabel;
     return DateFormat('dd-MMM-yyyy').format(value);
   }
 
@@ -233,25 +234,25 @@ class _AppointmentsListView extends StatelessWidget {
           name:
               appointment.customerName.isNotEmpty
                   ? appointment.customerName
-                  : 'Customer',
+                  : S.of(context).customerDefaultLabel,
           car:
               appointment.displayCar.isNotEmpty
                   ? appointment.displayCar
-                  : 'Vehicle not set',
+                  : S.of(context).vehicleNotSetLabel,
           plate:
               appointment.displayPlate.isNotEmpty
                   ? appointment.displayPlate
-                  : 'Plate unavailable',
-          timeRange: _timeRangeText(appointment),
+                  : S.of(context).plateUnavailableLabel,
+          timeRange: _timeRangeText(context, appointment),
           branch:
               appointment.branchName.isNotEmpty
                   ? appointment.branchName
-                  : 'Branch not assigned',
+                  : S.of(context).branchNotAssignedLabel,
           service: appointment.packageLabel,
           status:
               appointment.statusLabel.isNotEmpty
                   ? appointment.statusLabel
-                  : 'Scheduled',
+                  : S.of(context).scheduledStatusLabel,
           statusColor: _statusColor(appointment),
           onViewDetails: () => onViewDetails(appointment),
         );
@@ -287,7 +288,7 @@ class _AppointmentsListView extends StatelessWidget {
     return AppColors.lightPrimary;
   }
 
-  static String _timeRangeText(TechnicianAppointmentEntity appointment) {
+  static String _timeRangeText(BuildContext context, TechnicianAppointmentEntity appointment) {
     final parts = <String>[];
     final date = appointment.bookingDate;
     if (date != null) {
@@ -298,7 +299,7 @@ class _AppointmentsListView extends StatelessWidget {
     if (appointment.slotTime.trim().isNotEmpty) {
       parts.add(appointment.slotTime.trim());
     }
-    return parts.isNotEmpty ? parts.join(' • ') : 'Schedule not set';
+    return parts.isNotEmpty ? parts.join(' • ') : S.of(context).scheduleNotSetLabel;
   }
 }
 
@@ -330,13 +331,13 @@ class _EmptyAppointmentsView extends StatelessWidget {
             Icon(Icons.inbox, size: 56, color: Colors.grey.shade400),
             const SizedBox(height: 16),
             Text(
-              'No bookings need approval right now.',
+              S.of(context).noBookingsNeedApproval,
               style: Theme.of(context).textTheme.titleMedium,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 8),
             Text(
-              'New bookings that require approval will appear here automatically.',
+              S.of(context).newBookingsWillAppearMessage,
               style: Theme.of(
                 context,
               ).textTheme.bodyMedium?.copyWith(color: Colors.grey.shade600),
@@ -367,7 +368,7 @@ class _ErrorAppointmentsView extends StatelessWidget {
             Icon(Icons.wifi_off, size: 56, color: Colors.orange.shade400),
             const SizedBox(height: 16),
             Text(
-              'Unable to load bookings',
+              S.of(context).unableToLoadBookings,
               style: Theme.of(context).textTheme.titleMedium,
               textAlign: TextAlign.center,
             ),
@@ -383,7 +384,7 @@ class _ErrorAppointmentsView extends StatelessWidget {
             ElevatedButton.icon(
               onPressed: onRetry,
               icon: const Icon(Icons.refresh),
-              label: const Text('Retry'),
+              label: Text(S.of(context).retryButtonLabel),
             ),
           ],
         ),
@@ -411,13 +412,13 @@ class _UnauthorizedView extends StatelessWidget {
               Icon(Icons.lock_outline, size: 56, color: Colors.grey.shade400),
               const SizedBox(height: 16),
               Text(
-                'Sign in required',
+                S.of(context).signInRequiredTitle,
                 style: Theme.of(context).textTheme.titleMedium,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 8),
               Text(
-                'Please sign in as a credit manager to view bookings that need approval.',
+                S.of(context).signInAsCreditManagerMessage,
                 style: Theme.of(
                   context,
                 ).textTheme.bodyMedium?.copyWith(color: Colors.grey.shade600),
@@ -469,14 +470,14 @@ class _ApprovalFilterBar extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Filter approvals',
+                      S.of(context).filterApprovalsTitle,
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Pick a date range and apply to refresh.',
+                      S.of(context).pickDateRangeInstruction,
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: Colors.grey.shade600,
                       ),
@@ -487,7 +488,7 @@ class _ApprovalFilterBar extends StatelessWidget {
               TextButton.icon(
                 onPressed: onReset,
                 icon: const Icon(Icons.refresh, size: 16),
-                label: const Text('Reset'),
+                label: Text(S.of(context).resetButtonLabel),
               ),
             ],
           ),
@@ -497,14 +498,14 @@ class _ApprovalFilterBar extends StatelessWidget {
             runSpacing: 12,
             children: [
               _FilterButton(
-                label: 'From',
+                label: S.of(context).fromDateLabel,
                 value: fromDateLabel,
                 icon: Icons.calendar_today,
                 onTap: onSelectFromDate,
                 enabled: true,
               ),
               _FilterButton(
-                label: 'To',
+                label: S.of(context).toDateLabel,
                 value: toDateLabel,
                 icon: Icons.event,
                 onTap: onSelectToDate,
@@ -518,7 +519,7 @@ class _ApprovalFilterBar extends StatelessWidget {
             child: ElevatedButton.icon(
               onPressed: onApply,
               icon: const Icon(Icons.filter_alt),
-              label: const Text('Apply filters'),
+              label: Text(S.of(context).applyFiltersButtonLabel),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 shape: RoundedRectangleBorder(

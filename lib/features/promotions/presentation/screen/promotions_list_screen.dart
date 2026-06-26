@@ -7,6 +7,7 @@ import '../../../../core/widget/internal_app_bar.dart';
 import '../../domain/entity/promotion_entity.dart';
 import '../../provider/promotion_providers.dart';
 import '../view_model/promotion_list_notifier.dart';
+import '../../../../generated/l10n.dart';
 
 class PromotionsListScreen extends ConsumerStatefulWidget {
   const PromotionsListScreen({super.key});
@@ -37,7 +38,7 @@ class _PromotionsListScreenState extends ConsumerState<PromotionsListScreen> {
 
     return Scaffold(
       appBar: InternalAppBar(
-        title: 'Promotions',
+        title: S.of(context).promotionsTitle,
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -55,12 +56,12 @@ class _PromotionsListScreenState extends ConsumerState<PromotionsListScreen> {
     }
     if (state is ErrorViewState) {
       return _ErrorView(
-        message: state.errorMessage ?? 'Failed to load promotions',
+        message: state.errorMessage ?? S.of(context).promotionsLoadErrorFallback,
         onRetry: notifier.load,
       );
     }
     if (state is EmptyViewState) {
-      return const Center(child: Text('No promotions found.'));
+      return Center(child: Text(S.of(context).noPromotionsFound));
     }
     if (state is LoadedViewState<List<PromotionEntity>>) {
       final promotions = state.data;
@@ -151,7 +152,7 @@ class _PromotionCard extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.delete, color: Colors.red),
               onPressed: onDelete,
-              tooltip: 'Delete',
+              tooltip: S.of(context).deleteTooltip,
             ),
           ],
         ),
@@ -247,7 +248,7 @@ class _ErrorView extends StatelessWidget {
           const SizedBox(height: 8),
           ElevatedButton(
             onPressed: onRetry,
-            child: const Text('Retry'),
+            child: Text(S.of(context).retryButtonLabel),
           ),
         ],
       ),

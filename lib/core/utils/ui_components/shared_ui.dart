@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/current_locale_provider.dart';
+import '../../../generated/l10n.dart';
 
 Future<dynamic> buildShowLangBottomSheet(BuildContext context, WidgetRef ref) {
   return showModalBottomSheet(

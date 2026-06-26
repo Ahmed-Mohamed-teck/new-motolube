@@ -52,7 +52,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
     }
 
     if (result.paymentUrl.isEmpty) {
-      _showSnack('Missing payment URL. Please try again later.');
+      _showSnack(S.of(context).missingPaymentUrlMessage);
       ref.read(paymentViewModelProvider.notifier).reset();
       return;
     }
@@ -82,14 +82,14 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
     switch (outcome) {
       case PaymentWebViewResult.success:
         await _showStatusDialog(
-          title: 'Payment Successful',
-          message: 'Your payment has been completed successfully.',
+          title: S.of(context).paymentSuccessfulTitle,
+          message: S.of(context).paymentCompletedMessage,
         );
         break;
       case PaymentWebViewResult.failure:
         await _showStatusDialog(
-          title: 'Payment Failed',
-          message: 'The payment was not completed. Please try again.',
+          title: S.of(context).paymentFailedTitle,
+          message: S.of(context).paymentNotCompletedMessage,
           isSuccess: false,
         );
         break;
@@ -172,7 +172,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text('OK'),
+              child: Text(S.of(context).okButtonLabel),
             ),
           ],
         );
@@ -208,18 +208,18 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Cancel appointment?'),
-          content: const Text(
-            'Are you sure you want to cancel this appointment?',
+          title: Text(S.of(context).cancelAppointmentTitle),
+          content: Text(
+            S.of(context).cancelAppointmentConfirmation,
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: const Text('No'),
+              child: Text(S.of(context).noButtonLabel),
             ),
             FilledButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: const Text('Yes, cancel'),
+              child: Text(S.of(context).yesCancelButtonLabel),
             ),
           ],
         );
@@ -269,7 +269,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
       (prev, next) {
         if (!mounted) return;
         if (next is UpcomingServiceActionSuccess) {
-          _showSnack('Appointment cancelled successfully.');
+          _showSnack(S.of(context).appointmentCancelledSuccessfully);
           Navigator.of(context).pop(true);
           ref.read(upcomingServiceActionViewModelProvider.notifier).reset();
         } else if (next is UpcomingServiceActionError) {
@@ -431,23 +431,23 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const _SectionLabel('Checkout details'),
+                      _SectionLabel(S.of(context).checkoutDetailsLabel),
                       const SizedBox(height: 12),
                       _KeyValueRow(
-                        label: 'Amount due',
+                        label: S.of(context).amountDueLabel,
                         value: _formatCurrency(service.srTotal),
                       ),
                       if (service.discount > 0) ...[
                         const SizedBox(height: 10),
                         _KeyValueRow(
-                          label: 'Discount',
+                          label: S.of(context).discountLabel,
                           value: '-${_formatCurrency(service.discount)}',
                         ),
                       ],
                       if (service.couponNumber.trim().isNotEmpty) ...[
                         const SizedBox(height: 10),
                         _KeyValueRow(
-                          label: 'Applied coupon',
+                          label: S.of(context).appliedCouponLabel,
                           value: service.couponNumber.trim(),
                         ),
                       ],
@@ -464,7 +464,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                             height: 20,
                             child: CircularProgressIndicator(strokeWidth: 2),
                           )
-                          : const Text('Pay Now'),
+                          : Text(S.of(context).payNowButtonLabel),
                 ),
               ],
               const SizedBox(height: 12),
@@ -490,7 +490,9 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                             color: Colors.red,
                           ),
                   label: Text(
-                    isCancelling ? 'Cancelling...' : 'Cancel appointment',
+                    isCancelling
+                        ? S.of(context).cancellingEllipsis
+                        : S.of(context).cancelAppointmentButtonLabel,
                     style: const TextStyle(color: Colors.red),
                   ),
                   style: OutlinedButton.styleFrom(
@@ -503,7 +505,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                 ),
               ] else if (statusLower.contains('open job card')) ...[
                 Text(
-                  'Cannot cancel after job card is opened.',
+                  S.of(context).cannotCancelAfterJobCardOpened,
                   style: Theme.of(
                     context,
                   ).textTheme.bodySmall?.copyWith(color: Colors.red),
@@ -515,7 +517,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                 ),
               ] else if (cancelStatusId == null) ...[
                 Text(
-                  'Cancellation status is unavailable right now.',
+                  S.of(context).cancellationStatusUnavailable,
                   style: Theme.of(
                     context,
                   ).textTheme.bodySmall?.copyWith(color: Colors.orange),

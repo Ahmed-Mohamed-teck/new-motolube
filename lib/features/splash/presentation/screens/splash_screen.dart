@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:newmotorlube/core/providers/general_providers.dart';
-import 'package:newmotorlube/core/utils/constant.dart';
 
 import '../../../../main.dart';
 import '../../provider/splash_provider.dart';
 import '../view_model/splash_state.dart';
+import '../../../../generated/l10n.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -50,9 +49,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    appPrefsWithCache.getString(kAppLanguage) == 'ar'
-                        ? 'موتور لوب'
-                        : 'Motor Lube',
+                    S.of(context).appName,
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -83,7 +80,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 24.0),
                   child: Text(
-                    'V 1.0.0',
+                    S.of(context).appVersion,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
