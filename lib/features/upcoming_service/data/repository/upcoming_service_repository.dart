@@ -6,10 +6,7 @@ import '../../domain/repository/i_upcoming_service_repository.dart';
 import '../data_source/i_upcoming_service_remote_data_source.dart';
 
 class UpcomingServiceRepository implements IUpcomingServiceRepository {
-  UpcomingServiceRepository(
-    this._remoteDataSource,
-    this._authLocalRepository,
-  );
+  UpcomingServiceRepository(this._remoteDataSource, this._authLocalRepository);
 
   final IUpcomingServiceRemoteDataSource _remoteDataSource;
   final IAuthLocalRepository _authLocalRepository;
@@ -34,9 +31,11 @@ class UpcomingServiceRepository implements IUpcomingServiceRepository {
       // Ignore and fallback to default static value
     }
 
-    final DateFormat formatter = DateFormat('dd-MMM-yyyy');
-    final String? formattedFrom = fromDate != null ? formatter.format(fromDate) : null;
-    final String? formattedTo = toDate != null ? formatter.format(toDate) : null;
+    final DateFormat formatter = DateFormat('dd-MMM-yyyy', 'en_US');
+    final String? formattedFrom =
+        fromDate != null ? formatter.format(fromDate) : null;
+    final String? formattedTo =
+        toDate != null ? formatter.format(toDate) : null;
     final String? statusText = statusId != null ? statusId.toString() : null;
 
     final models = await _remoteDataSource.getUpcomingServices(
