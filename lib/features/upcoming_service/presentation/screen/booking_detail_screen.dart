@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../core/widget/internal_app_bar.dart';
@@ -209,9 +210,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
       builder: (context) {
         return AlertDialog(
           title: Text(S.of(context).cancelAppointmentTitle),
-          content: Text(
-            S.of(context).cancelAppointmentConfirmation,
-          ),
+          content: Text(S.of(context).cancelAppointmentConfirmation),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
@@ -455,6 +454,8 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
+                const _AcceptedPaymentLogos(),
+                const SizedBox(height: 12),
                 ElevatedButton(
                   onPressed: isProcessingPayment ? null : _handlePayment,
                   child:
@@ -525,6 +526,62 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
               ],
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _AcceptedPaymentLogos extends StatelessWidget {
+  const _AcceptedPaymentLogos();
+
+  static const _logos = [
+    (path: 'assets/svg/mada-logo.svg', semanticLabel: 'Mada', width: 70.0),
+    (path: 'assets/svg/visa-logo.svg', semanticLabel: 'Visa', width: 70.0),
+    (
+      path: 'assets/svg/master-logo.svg',
+      semanticLabel: 'Mastercard',
+      width: 58.0,
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Semantics(
+      label: 'Accepted payment methods: Mada, Visa, Mastercard',
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        decoration: BoxDecoration(
+          color: theme.colorScheme.surface,
+          border: Border.all(color: theme.dividerColor.withValues(alpha: 0.45)),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Wrap(
+          alignment: WrapAlignment.center,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          spacing: 12,
+          runSpacing: 8,
+          children:
+              _logos
+                  .map(
+                    (logo) => SizedBox(
+                      width: 78,
+                      height: 34,
+                      child: Center(
+                        child: SvgPicture.asset(
+                          logo.path,
+                          width: logo.width,
+                          height: 28,
+                          fit: BoxFit.contain,
+                          semanticsLabel: logo.semanticLabel,
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList(),
         ),
       ),
     );
