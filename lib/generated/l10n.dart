@@ -28,9 +28,10 @@ class S {
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false)
-        ? locale.languageCode
-        : locale.toString();
+    final name =
+        (locale.countryCode?.isEmpty ?? false)
+            ? locale.languageCode
+            : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -1664,6 +1665,176 @@ class S {
     );
   }
 
+  /// `Plan your day`
+  String get upcomingServicesFilterTitle {
+    return Intl.message(
+      'Plan your day',
+      name: 'upcomingServicesFilterTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tap a filter to refine your appointments.`
+  String get upcomingServicesFilterSubtitle {
+    return Intl.message(
+      'Tap a filter to refine your appointments.',
+      name: 'upcomingServicesFilterSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Any status`
+  String get upcomingServicesFilterAnyStatus {
+    return Intl.message(
+      'Any status',
+      name: 'upcomingServicesFilterAnyStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Any date`
+  String get upcomingServicesFilterAnyDate {
+    return Intl.message(
+      'Any date',
+      name: 'upcomingServicesFilterAnyDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Loading booking statuses...`
+  String get upcomingServicesFilterLoadingStatuses {
+    return Intl.message(
+      'Loading booking statuses...',
+      name: 'upcomingServicesFilterLoadingStatuses',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No statuses available.`
+  String get upcomingServicesFilterNoStatuses {
+    return Intl.message(
+      'No statuses available.',
+      name: 'upcomingServicesFilterNoStatuses',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `From`
+  String get upcomingServicesFilterFrom {
+    return Intl.message(
+      'From',
+      name: 'upcomingServicesFilterFrom',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `To`
+  String get upcomingServicesFilterTo {
+    return Intl.message(
+      'To',
+      name: 'upcomingServicesFilterTo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Status`
+  String get upcomingServicesFilterStatus {
+    return Intl.message(
+      'Status',
+      name: 'upcomingServicesFilterStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply filters`
+  String get upcomingServicesFilterApply {
+    return Intl.message(
+      'Apply filters',
+      name: 'upcomingServicesFilterApply',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Status {id}`
+  String upcomingServicesStatusFallback(String id) {
+    return Intl.message(
+      'Status $id',
+      name: 'upcomingServicesStatusFallback',
+      desc: '',
+      args: [id],
+    );
+  }
+
+  /// `Connection timed out. Please try again.`
+  String get upcomingServicesConnectionTimedOut {
+    return Intl.message(
+      'Connection timed out. Please try again.',
+      name: 'upcomingServicesConnectionTimedOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select booking statuses`
+  String get bookingStatusPickerTitle {
+    return Intl.message(
+      'Select booking statuses',
+      name: 'bookingStatusPickerTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear`
+  String get bookingStatusPickerClear {
+    return Intl.message(
+      'Clear',
+      name: 'bookingStatusPickerClear',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply`
+  String get bookingStatusPickerApply {
+    return Intl.message(
+      'Apply',
+      name: 'bookingStatusPickerApply',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Apply ({count})`
+  String bookingStatusPickerApplyCount(int count) {
+    return Intl.message(
+      'Apply ($count)',
+      name: 'bookingStatusPickerApplyCount',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `ID {id}`
+  String bookingStatusPickerStatusId(String id) {
+    return Intl.message(
+      'ID $id',
+      name: 'bookingStatusPickerStatusId',
+      desc: '',
+      args: [id],
+    );
+  }
+
   /// `Back`
   String get back {
     return Intl.message('Back', name: 'back', desc: '', args: []);
@@ -1679,6 +1850,16 @@ class S {
     return Intl.message(
       'Something went wrong',
       name: 'commonErrorTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something went wrong.`
+  String get commonSomethingWentWrong {
+    return Intl.message(
+      'Something went wrong.',
+      name: 'commonSomethingWentWrong',
       desc: '',
       args: [],
     );

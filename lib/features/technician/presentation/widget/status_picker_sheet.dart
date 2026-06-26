@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/theme/app_colors.dart';
+import '../../../../generated/l10n.dart';
 import '../../domain/entity/booking_status.dart';
 
 class StatusPickerSheet extends StatefulWidget {
@@ -52,6 +53,7 @@ class _StatusPickerSheetState extends State<StatusPickerSheet> {
   @override
   Widget build(BuildContext context) {
     final maxHeight = MediaQuery.of(context).size.height * 0.7;
+    final s = S.of(context);
     return SafeArea(
       top: false,
       child: SizedBox(
@@ -70,7 +72,7 @@ class _StatusPickerSheetState extends State<StatusPickerSheet> {
               ),
               const SizedBox(height: 12),
               Text(
-                'Select booking statuses',
+                s.bookingStatusPickerTitle,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               const SizedBox(height: 12),
@@ -100,10 +102,12 @@ class _StatusPickerSheetState extends State<StatusPickerSheet> {
                       ),
                       title: Text(
                         status.label.isNotEmpty
-                            ? status.label
-                            : 'Status ${status.code}',
+                            ? _statusLabel(context, status.label)
+                            : s.upcomingServicesStatusFallback(status.code),
                       ),
-                      subtitle: Text('ID ${status.code}'),
+                      subtitle: Text(
+                        s.bookingStatusPickerStatusId(status.code),
+                      ),
                       trailing:
                           widget.allowMultiple
                               ? Checkbox(
@@ -126,7 +130,7 @@ class _StatusPickerSheetState extends State<StatusPickerSheet> {
                 children: [
                   TextButton(
                     onPressed: _clearSelection,
-                    child: const Text('Clear'),
+                    child: Text(s.bookingStatusPickerClear),
                   ),
                   const Spacer(),
                   ElevatedButton.icon(
@@ -134,8 +138,8 @@ class _StatusPickerSheetState extends State<StatusPickerSheet> {
                     icon: const Icon(Icons.done),
                     label: Text(
                       widget.allowMultiple && _selection.isNotEmpty
-                          ? 'Apply (${_selection.length})'
-                          : 'Apply',
+                          ? s.bookingStatusPickerApplyCount(_selection.length)
+                          : s.bookingStatusPickerApply,
                     ),
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
@@ -154,5 +158,17 @@ class _StatusPickerSheetState extends State<StatusPickerSheet> {
         ),
       ),
     );
+  }
+
+  String _statusLabel(BuildContext context, String status) {
+    final s = S.of(context);
+    final lower = status.toLowerCase();
+    if (lower.contains('expired')) return s.upcomingServicesStatusExpired;
+    if (lower.contains('upcoming')) return s.upcomingServicesStatusUpcoming;
+    if (lower.contains('pending')) return s.upcomingServicesStatusPending;
+    if (lower.contains('complete')) return s.upcomingServicesStatusCompleted;
+    if (lower.contains('cancel')) return s.upcomingServicesStatusCancelled;
+    if (lower.contains('new')) return s.upcomingServicesStatusNew;
+    return status.isEmpty ? s.upcomingServicesStatusPending : status;
   }
 }

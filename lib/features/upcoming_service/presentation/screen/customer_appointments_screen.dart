@@ -77,14 +77,14 @@ class _CustomerAppointmentsScreenState
         !statusLoading && statusErrorMessage == null && statuses.isNotEmpty;
     final statusLabel =
         _statusId == null
-            ? 'Any status'
-            : _statusLabelFor(statuses, _statusId!);
+            ? s.upcomingServicesFilterAnyStatus
+            : _statusLabelFor(s, statuses, _statusId!);
     final statusHelperText =
         statusLoading
-            ? 'Loading booking statuses...'
+            ? s.upcomingServicesFilterLoadingStatuses
             : statusErrorMessage != null
             ? _humanizeMessage(statusErrorMessage)
-            : (statuses.isEmpty ? 'No statuses available.' : null);
+            : (statuses.isEmpty ? s.upcomingServicesFilterNoStatuses : null);
     final statusHelperIsError = statusErrorMessage != null;
     final statusRetryCallback =
         statusErrorMessage != null ? _retryStatuses : null;
@@ -95,8 +95,8 @@ class _CustomerAppointmentsScreenState
         child: Column(
           children: [
             _FilterBar(
-              fromDateLabel: _formatDateLabel(_fromDate),
-              toDateLabel: _formatDateLabel(_toDate),
+              fromDateLabel: _formatDateLabel(s, _fromDate),
+              toDateLabel: _formatDateLabel(s, _toDate),
               statusLabel: statusLabel,
               statusEnabled: statusButtonEnabled,
               statusLoading: statusLoading,
@@ -171,19 +171,21 @@ class _CustomerAppointmentsScreenState
           children: const [_UpcomingServiceEmpty()],
         );
       }
-      final children = services
-          .map((service) => _mapToBookingCard(service))
-          .expand((widget) => [widget, const SizedBox(height: 12)])
-          .toList()
-        ..removeLast();
+      final children =
+          services
+              .map((service) => _mapToBookingCard(service))
+              .expand((widget) => [widget, const SizedBox(height: 12)])
+              .toList()
+            ..removeLast();
       return RefreshIndicator(
-        onRefresh: () => ref
-            .read(upcomingServiceViewModelProvider.notifier)
-            .fetchUpcomingServices(
-              fromDate: _fromDate,
-              toDate: _toDate,
-              statusId: _statusId,
-            ),
+        onRefresh:
+            () => ref
+                .read(upcomingServiceViewModelProvider.notifier)
+                .fetchUpcomingServices(
+                  fromDate: _fromDate,
+                  toDate: _toDate,
+                  statusId: _statusId,
+                ),
         child: ListView(
           physics: const AlwaysScrollableScrollPhysics(),
           padding: const EdgeInsets.all(16),
@@ -204,9 +206,7 @@ class _CustomerAppointmentsScreenState
       return ListView(
         physics: const AlwaysScrollableScrollPhysics(),
         padding: const EdgeInsets.all(16),
-        children: [
-          _UpcomingServiceErrorCard(message: servicesState.message),
-        ],
+        children: [_UpcomingServiceErrorCard(message: servicesState.message)],
       );
     }
 
@@ -217,7 +217,9 @@ class _CustomerAppointmentsScreenState
     final now = DateTime.now();
     final fallback = DateTime(now.year, now.month, now.day);
     final initialDate =
-        isFromDate ? (_fromDate ?? fallback) : (_toDate ?? _fromDate ?? fallback);
+        isFromDate
+            ? (_fromDate ?? fallback)
+            : (_toDate ?? _fromDate ?? fallback);
     final picked = await showDatePicker(
       context: context,
       initialDate: initialDate,
@@ -274,27 +276,31 @@ class _CustomerAppointmentsScreenState
     });
   }
 
-  String _formatDateLabel(DateTime? value) {
-    if (value == null) return 'Any date';
+  String _formatDateLabel(S s, DateTime? value) {
+    if (value == null) return s.upcomingServicesFilterAnyDate;
     return DateFormat('dd-MMM-yyyy').format(value);
   }
 
-  String _statusLabelFor(List<TechnicianBookingStatus> statuses, int id) {
+  String _statusLabelFor(S s, List<TechnicianBookingStatus> statuses, int id) {
     final match = statuses.firstWhere(
       (status) => int.tryParse(status.code) == id,
-      orElse: () => TechnicianBookingStatus(
-        code: id.toString(),
-        label: 'Status $id',
-      ),
+      orElse:
+          () => TechnicianBookingStatus(
+            code: id.toString(),
+            label: s.upcomingServicesStatusFallback(id.toString()),
+          ),
     );
-    return match.label.isNotEmpty ? match.label : 'Status ${match.code}';
+    return match.label.isNotEmpty
+        ? _statusLabel(context, match.label)
+        : s.upcomingServicesStatusFallback(match.code);
   }
 
   String _humanizeMessage(String message) {
+    final s = S.of(context);
     if (message.toLowerCase().contains('timeout')) {
-      return 'Connection timed out. Please try again.';
+      return s.upcomingServicesConnectionTimedOut;
     }
-    return message.isNotEmpty ? message : 'Something went wrong.';
+    return message.isNotEmpty ? message : s.commonSomethingWentWrong;
   }
 
   Widget _mapToBookingCard(UpcomingServiceEntity service) {
@@ -302,7 +308,9 @@ class _CustomerAppointmentsScreenState
     final dateLabel = _formatDate(context, service);
     final timeLabel = _formatTime(service);
     final branchLabel = _valueOrFallback(
-      service.branchLabel.isNotEmpty ? service.branchLabel : service.location ?? '',
+      service.branchLabel.isNotEmpty
+          ? service.branchLabel
+          : service.location ?? '',
       fallback: s.upcomingServicesLocationFallback,
     );
     final technicianLabel = _valueOrFallback(
@@ -319,9 +327,10 @@ class _CustomerAppointmentsScreenState
       carCandidate,
       fallback: s.upcomingServicesVehiclePlaceholder,
     );
-    final packageCandidate = service.packageTitle.isNotEmpty
-        ? service.packageTitle
-        : service.serviceName;
+    final packageCandidate =
+        service.packageTitle.isNotEmpty
+            ? service.packageTitle
+            : service.serviceName;
     final package = _valueOrFallback(
       packageCandidate,
       fallback: s.upcomingServicesServicePlaceholder,
@@ -344,12 +353,14 @@ class _CustomerAppointmentsScreenState
       statusBg: statusColors.$1,
       statusFg: statusColors.$2,
       onTap: () async {
-        final result = await Navigator.of(context, rootNavigator: true).pushNamed(
-          'bookingDetailScreen',
-          arguments: service,
-        );
+        final result = await Navigator.of(
+          context,
+          rootNavigator: true,
+        ).pushNamed('bookingDetailScreen', arguments: service);
         if (result == true && mounted) {
-          await ref.read(upcomingServiceViewModelProvider.notifier).fetchUpcomingServices(
+          await ref
+              .read(upcomingServiceViewModelProvider.notifier)
+              .fetchUpcomingServices(
                 fromDate: _fromDate,
                 toDate: _toDate,
                 statusId: _statusId,
@@ -359,63 +370,62 @@ class _CustomerAppointmentsScreenState
     );
   }
 
-String _formatDate(BuildContext context, UpcomingServiceEntity service) {
-  final date = service.appointmentDate;
-  if (date != null) {
-    return DateFormat('dd MMM yyyy').format(date);
+  String _formatDate(BuildContext context, UpcomingServiceEntity service) {
+    final date = service.appointmentDate;
+    if (date != null) {
+      return DateFormat('dd MMM yyyy').format(date);
+    }
+    final raw = service.appointmentDateText.trim();
+    if (raw.isNotEmpty) {
+      return raw;
+    }
+    return S.of(context).upcomingServicesDateFallback;
   }
-  final raw = service.appointmentDateText.trim();
-  if (raw.isNotEmpty) {
-    return raw;
-  }
-  return S.of(context).upcomingServicesDateFallback;
-}
 
-String _formatTime(UpcomingServiceEntity service) {
-  final slot = service.timeSlot?.trim() ?? '';
-  if (slot.isNotEmpty) {
-    return slot;
+  String _formatTime(UpcomingServiceEntity service) {
+    final slot = service.timeSlot?.trim() ?? '';
+    if (slot.isNotEmpty) {
+      return slot;
+    }
+    final date = service.appointmentDate;
+    if (date != null && (date.hour != 0 || date.minute != 0)) {
+      return DateFormat('hh:mm a').format(date);
+    }
+    return '';
   }
-  final date = service.appointmentDate;
-  if (date != null && (date.hour != 0 || date.minute != 0)) {
-    return DateFormat('hh:mm a').format(date);
-  }
-  return '';
-}
 
-String _valueOrFallback(String value, {required String fallback}) {
-  final trimmed = value.trim();
-  return trimmed.isNotEmpty ? trimmed : fallback;
-}
-
-String _statusLabel(BuildContext context, String status) {
-  final s = S.of(context);
-  final lower = status.toLowerCase();
-  if (lower.contains('expired')) return s.upcomingServicesStatusExpired;
-  if (lower.contains('upcoming')) return s.upcomingServicesStatusUpcoming;
-  if (lower.contains('pending')) return s.upcomingServicesStatusPending;
-  if (lower.contains('complete')) return s.upcomingServicesStatusCompleted;
-  if (lower.contains('cancel')) return s.upcomingServicesStatusCancelled;
-  if (lower.contains('new')) return s.upcomingServicesStatusNew;
-  return status.isEmpty ? s.upcomingServicesStatusPending : status;
-}
-
-(Color, Color) _statusColorsForStatus(String status) {
-  final normalized = status.toLowerCase();
-  if (normalized.contains('complete')) {
-    return (const Color(0xFFE5F5EB), const Color(0xFF1E8052));
+  String _valueOrFallback(String value, {required String fallback}) {
+    final trimmed = value.trim();
+    return trimmed.isNotEmpty ? trimmed : fallback;
   }
-  if (normalized.contains('cancel') || normalized.contains('expire')) {
-    return (const Color(0xFFFDE7E6), const Color(0xFFBE3A2E));
-  }
-  if (normalized.contains('schedule') ||
-      normalized.contains('confirm') ||
-      normalized.contains('book')) {
-    return (const Color(0xFFE2ECFF), const Color(0xFF0F4AA3));
-  }
-  return (const Color(0xFFF1F2F4), const Color(0xFF44474F));
-}
 
+  String _statusLabel(BuildContext context, String status) {
+    final s = S.of(context);
+    final lower = status.toLowerCase();
+    if (lower.contains('expired')) return s.upcomingServicesStatusExpired;
+    if (lower.contains('upcoming')) return s.upcomingServicesStatusUpcoming;
+    if (lower.contains('pending')) return s.upcomingServicesStatusPending;
+    if (lower.contains('complete')) return s.upcomingServicesStatusCompleted;
+    if (lower.contains('cancel')) return s.upcomingServicesStatusCancelled;
+    if (lower.contains('new')) return s.upcomingServicesStatusNew;
+    return status.isEmpty ? s.upcomingServicesStatusPending : status;
+  }
+
+  (Color, Color) _statusColorsForStatus(String status) {
+    final normalized = status.toLowerCase();
+    if (normalized.contains('complete')) {
+      return (const Color(0xFFE5F5EB), const Color(0xFF1E8052));
+    }
+    if (normalized.contains('cancel') || normalized.contains('expire')) {
+      return (const Color(0xFFFDE7E6), const Color(0xFFBE3A2E));
+    }
+    if (normalized.contains('schedule') ||
+        normalized.contains('confirm') ||
+        normalized.contains('book')) {
+      return (const Color(0xFFE2ECFF), const Color(0xFF0F4AA3));
+    }
+    return (const Color(0xFFF1F2F4), const Color(0xFF44474F));
+  }
 }
 
 class _UpcomingServiceLoadingCard extends StatelessWidget {
@@ -443,7 +453,11 @@ class _UpcomingServiceLoadingCard extends StatelessWidget {
             const SizedBox(height: 8),
             _SkeletonLine(width: 160, height: 12, color: baseFg),
             const SizedBox(height: 8),
-            _SkeletonLine(width: 100, height: 12, color: baseFg.withOpacity(0.7)),
+            _SkeletonLine(
+              width: 100,
+              height: 12,
+              color: baseFg.withOpacity(0.7),
+            ),
             const SizedBox(height: 12),
             Row(
               children: [
@@ -534,19 +548,14 @@ class _UpcomingServiceErrorCard extends StatelessWidget {
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: BorderSide(
-          color: theme.colorScheme.error.withOpacity(0.3),
-        ),
+        side: BorderSide(color: theme.colorScheme.error.withOpacity(0.3)),
       ),
       child: Padding(
         padding: const EdgeInsets.all(20),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Icon(
-              Icons.error_outline,
-              color: theme.colorScheme.error,
-            ),
+            Icon(Icons.error_outline, color: theme.colorScheme.error),
             const SizedBox(width: 12),
             Expanded(
               child: Text(
@@ -591,10 +600,7 @@ class _LoginPromptCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Icon(
-                      Icons.lock_outline,
-                      color: theme.colorScheme.primary,
-                    ),
+                    Icon(Icons.lock_outline, color: theme.colorScheme.primary),
                     const SizedBox(width: 12),
                     Expanded(
                       child: Text(
@@ -655,6 +661,7 @@ class _FilterBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final s = S.of(context);
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 16, 16, 8),
       padding: const EdgeInsets.all(18),
@@ -673,14 +680,14 @@ class _FilterBar extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Plan your day',
+                      s.upcomingServicesFilterTitle,
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Tap a filter to refine your appointments.',
+                      s.upcomingServicesFilterSubtitle,
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: Colors.grey.shade600,
                       ),
@@ -691,7 +698,7 @@ class _FilterBar extends StatelessWidget {
               TextButton.icon(
                 onPressed: onReset,
                 icon: const Icon(Icons.refresh, size: 16),
-                label: const Text('Reset'),
+                label: Text(s.bookServiceReset),
               ),
             ],
           ),
@@ -701,14 +708,14 @@ class _FilterBar extends StatelessWidget {
             runSpacing: 12,
             children: [
               _FilterButton(
-                label: 'From',
+                label: s.upcomingServicesFilterFrom,
                 value: fromDateLabel,
                 icon: Icons.calendar_today,
                 onTap: onSelectFromDate,
                 enabled: true,
               ),
               _FilterButton(
-                label: 'To',
+                label: s.upcomingServicesFilterTo,
                 value: toDateLabel,
                 icon: Icons.event,
                 onTap: onSelectToDate,
@@ -718,7 +725,7 @@ class _FilterBar extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           _FilterButton(
-            label: 'Status',
+            label: s.upcomingServicesFilterStatus,
             value: statusLabel,
             icon: Icons.flag_outlined,
             onTap: onSelectStatus,
@@ -744,7 +751,7 @@ class _FilterBar extends StatelessWidget {
                   if (statusHelperIsError && onRetryStatus != null)
                     TextButton(
                       onPressed: onRetryStatus,
-                      child: const Text('Retry'),
+                      child: Text(s.commonRetry),
                     ),
                 ],
               ),
@@ -756,7 +763,7 @@ class _FilterBar extends StatelessWidget {
             child: ElevatedButton.icon(
               onPressed: onApply,
               icon: const Icon(Icons.filter_alt),
-              label: const Text('Apply filters'),
+              label: Text(s.upcomingServicesFilterApply),
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 shape: RoundedRectangleBorder(

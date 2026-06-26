@@ -242,9 +242,48 @@
   "upcomingServicesServicePlaceholder": "الخدمة",
   "upcomingServicesVehiclePlaceholder": "المركبة",
   "upcomingService": "الخدمة القادمة",
+  "upcomingServicesFilterTitle": "خطط يومك",
+  "upcomingServicesFilterSubtitle": "اضغط على عامل تصفية لتحسين مواعيدك.",
+  "upcomingServicesFilterAnyStatus": "أي حالة",
+  "upcomingServicesFilterAnyDate": "أي تاريخ",
+  "upcomingServicesFilterLoadingStatuses": "جارٍ تحميل حالات الحجز...",
+  "upcomingServicesFilterNoStatuses": "لا توجد حالات متاحة.",
+  "upcomingServicesFilterFrom": "من",
+  "upcomingServicesFilterTo": "إلى",
+  "upcomingServicesFilterStatus": "الحالة",
+  "upcomingServicesFilterApply": "تطبيق عوامل التصفية",
+  "upcomingServicesStatusFallback": "الحالة {id}",
+  "@upcomingServicesStatusFallback": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "upcomingServicesConnectionTimedOut": "انتهت مهلة الاتصال. يرجى المحاولة مرة أخرى.",
+  "bookingStatusPickerTitle": "اختر حالات الحجز",
+  "bookingStatusPickerClear": "مسح",
+  "bookingStatusPickerApply": "تطبيق",
+  "bookingStatusPickerApplyCount": "تطبيق ({count})",
+  "@bookingStatusPickerApplyCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "bookingStatusPickerStatusId": "المعرّف {id}",
+  "@bookingStatusPickerStatusId": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
   "back": "رجوع",
   "book": "احجز",
   "commonErrorTitle": "حدث خطأ ما",
+  "commonSomethingWentWrong": "حدث خطأ ما.",
   "commonErrorDescription": "يرجى التحقق من اتصالك بالإنترنت أو إعادة المحاولة.",
   "commonRetry": "إعادة المحاولة",
   "userCarsTakePhoto": "التقاط صورة",

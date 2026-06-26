@@ -36,11 +36,17 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m6(latitude, longitude) =>
       "Selected location: (${latitude}, ${longitude})";
 
-  static String m7(route) => "Route \"${route}\" is not available.";
+  static String m7(count) => "Apply (${count})";
 
-  static String m8(model, plate) => "Car card for ${model}, plate ${plate}";
+  static String m8(id) => "ID ${id}";
 
-  static String m9(plate) => "License plate ${plate}";
+  static String m9(route) => "Route \"${route}\" is not available.";
+
+  static String m10(id) => "Status ${id}";
+
+  static String m11(model, plate) => "Car card for ${model}, plate ${plate}";
+
+  static String m12(plate) => "License plate ${plate}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -182,6 +188,13 @@ class MessageLookup extends MessageLookupByLibrary {
           "Unable to determine the technician information.",
         ),
     "bookServiceTryAgain": MessageLookupByLibrary.simpleMessage("Try Again"),
+    "bookingStatusPickerApply": MessageLookupByLibrary.simpleMessage("Apply"),
+    "bookingStatusPickerApplyCount": m7,
+    "bookingStatusPickerClear": MessageLookupByLibrary.simpleMessage("Clear"),
+    "bookingStatusPickerStatusId": m8,
+    "bookingStatusPickerTitle": MessageLookupByLibrary.simpleMessage(
+      "Select booking statuses",
+    ),
     "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "carDetailing": MessageLookupByLibrary.simpleMessage("Car Detailing"),
     "carEvaluation": MessageLookupByLibrary.simpleMessage("Car Evaluation"),
@@ -221,6 +234,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Something went wrong",
     ),
     "commonRetry": MessageLookupByLibrary.simpleMessage("Retry"),
+    "commonSomethingWentWrong": MessageLookupByLibrary.simpleMessage(
+      "Something went wrong.",
+    ),
     "companyName": MessageLookupByLibrary.simpleMessage("Company Name"),
     "companyNameError": MessageLookupByLibrary.simpleMessage(
       "Please enter company name",
@@ -323,7 +339,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "View customer ratings",
     ),
     "managerHomeRatingsTitle": MessageLookupByLibrary.simpleMessage("Ratings"),
-    "managerHomeRouteUnavailable": m7,
+    "managerHomeRouteUnavailable": m9,
     "managerHomeTitle": MessageLookupByLibrary.simpleMessage("Manager"),
     "manufacturer": MessageLookupByLibrary.simpleMessage("Manufacturer"),
     "mobileServices": MessageLookupByLibrary.simpleMessage("Mobile Services"),
@@ -399,6 +415,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "upcomingServicesBookingDetailsTitle": MessageLookupByLibrary.simpleMessage(
       "Booking Details",
     ),
+    "upcomingServicesConnectionTimedOut": MessageLookupByLibrary.simpleMessage(
+      "Connection timed out. Please try again.",
+    ),
     "upcomingServicesDateFallback": MessageLookupByLibrary.simpleMessage(
       "Date to be confirmed",
     ),
@@ -408,6 +427,31 @@ class MessageLookup extends MessageLookupByLibrary {
     "upcomingServicesErrorPrefix": MessageLookupByLibrary.simpleMessage(
       "Unable to load upcoming services.",
     ),
+    "upcomingServicesFilterAnyDate": MessageLookupByLibrary.simpleMessage(
+      "Any date",
+    ),
+    "upcomingServicesFilterAnyStatus": MessageLookupByLibrary.simpleMessage(
+      "Any status",
+    ),
+    "upcomingServicesFilterApply": MessageLookupByLibrary.simpleMessage(
+      "Apply filters",
+    ),
+    "upcomingServicesFilterFrom": MessageLookupByLibrary.simpleMessage("From"),
+    "upcomingServicesFilterLoadingStatuses":
+        MessageLookupByLibrary.simpleMessage("Loading booking statuses..."),
+    "upcomingServicesFilterNoStatuses": MessageLookupByLibrary.simpleMessage(
+      "No statuses available.",
+    ),
+    "upcomingServicesFilterStatus": MessageLookupByLibrary.simpleMessage(
+      "Status",
+    ),
+    "upcomingServicesFilterSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Tap a filter to refine your appointments.",
+    ),
+    "upcomingServicesFilterTitle": MessageLookupByLibrary.simpleMessage(
+      "Plan your day",
+    ),
+    "upcomingServicesFilterTo": MessageLookupByLibrary.simpleMessage("To"),
     "upcomingServicesLoadingLocation": MessageLookupByLibrary.simpleMessage(
       "Loading location",
     ),
@@ -449,6 +493,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "upcomingServicesStatusExpired": MessageLookupByLibrary.simpleMessage(
       "Expired",
     ),
+    "upcomingServicesStatusFallback": m10,
     "upcomingServicesStatusNew": MessageLookupByLibrary.simpleMessage(
       "New Booking",
     ),
@@ -483,7 +528,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "userCarsCarModelLabel": MessageLookupByLibrary.simpleMessage("Car model"),
     "userCarsCarName": MessageLookupByLibrary.simpleMessage("Car name"),
-    "userCarsCardSemantics": m8,
+    "userCarsCardSemantics": m11,
     "userCarsChassis": MessageLookupByLibrary.simpleMessage("Chassis"),
     "userCarsChassisVin": MessageLookupByLibrary.simpleMessage("Chassis (VIN)"),
     "userCarsChooseFromGallery": MessageLookupByLibrary.simpleMessage(
@@ -516,7 +561,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "userCarsInvalidPlateNumber": MessageLookupByLibrary.simpleMessage(
       "Invalid plate number",
     ),
-    "userCarsLicensePlateSemantics": m9,
+    "userCarsLicensePlateSemantics": m12,
     "userCarsSaveVehicle": MessageLookupByLibrary.simpleMessage("Save Vehicle"),
     "userCarsSaving": MessageLookupByLibrary.simpleMessage("Saving..."),
     "userCarsTakePhoto": MessageLookupByLibrary.simpleMessage("Take a photo"),

@@ -36,11 +36,17 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m6(latitude, longitude) =>
       "الموقع المحدد: (${latitude}, ${longitude})";
 
-  static String m7(route) => "المسار \"${route}\" غير متاح.";
+  static String m7(count) => "تطبيق (${count})";
 
-  static String m8(model, plate) => "بطاقة سيارة لـ ${model}، لوحة ${plate}";
+  static String m8(id) => "المعرّف ${id}";
 
-  static String m9(plate) => "لوحة المركبة ${plate}";
+  static String m9(route) => "المسار \"${route}\" غير متاح.";
+
+  static String m10(id) => "الحالة ${id}";
+
+  static String m11(model, plate) => "بطاقة سيارة لـ ${model}، لوحة ${plate}";
+
+  static String m12(plate) => "لوحة المركبة ${plate}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -174,6 +180,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "bookServiceTryAgain": MessageLookupByLibrary.simpleMessage(
       "حاول مرة أخرى",
     ),
+    "bookingStatusPickerApply": MessageLookupByLibrary.simpleMessage("تطبيق"),
+    "bookingStatusPickerApplyCount": m7,
+    "bookingStatusPickerClear": MessageLookupByLibrary.simpleMessage("مسح"),
+    "bookingStatusPickerStatusId": m8,
+    "bookingStatusPickerTitle": MessageLookupByLibrary.simpleMessage(
+      "اختر حالات الحجز",
+    ),
     "cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "carDetailing": MessageLookupByLibrary.simpleMessage("تنظيف السيارات"),
     "carEvaluation": MessageLookupByLibrary.simpleMessage("تقييم السيارات"),
@@ -211,6 +224,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "commonErrorTitle": MessageLookupByLibrary.simpleMessage("حدث خطأ ما"),
     "commonRetry": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
+    "commonSomethingWentWrong": MessageLookupByLibrary.simpleMessage(
+      "حدث خطأ ما.",
+    ),
     "companyName": MessageLookupByLibrary.simpleMessage("اسم الشركة"),
     "companyNameError": MessageLookupByLibrary.simpleMessage(
       "يرجى إدخال اسم الشركة",
@@ -313,7 +329,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "managerHomeRatingsTitle": MessageLookupByLibrary.simpleMessage(
       "التقييمات",
     ),
-    "managerHomeRouteUnavailable": m7,
+    "managerHomeRouteUnavailable": m9,
     "managerHomeTitle": MessageLookupByLibrary.simpleMessage("الإدارة"),
     "manufacturer": MessageLookupByLibrary.simpleMessage("الشركة المصنعة"),
     "mobileServices": MessageLookupByLibrary.simpleMessage("الخدمات المتنقلة"),
@@ -387,6 +403,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "upcomingServicesBookingDetailsTitle": MessageLookupByLibrary.simpleMessage(
       "تفاصيل الحجز",
     ),
+    "upcomingServicesConnectionTimedOut": MessageLookupByLibrary.simpleMessage(
+      "انتهت مهلة الاتصال. يرجى المحاولة مرة أخرى.",
+    ),
     "upcomingServicesDateFallback": MessageLookupByLibrary.simpleMessage(
       "سيتم تأكيد التاريخ لاحقًا",
     ),
@@ -396,6 +415,31 @@ class MessageLookup extends MessageLookupByLibrary {
     "upcomingServicesErrorPrefix": MessageLookupByLibrary.simpleMessage(
       "تعذر تحميل الخدمات القادمة.",
     ),
+    "upcomingServicesFilterAnyDate": MessageLookupByLibrary.simpleMessage(
+      "أي تاريخ",
+    ),
+    "upcomingServicesFilterAnyStatus": MessageLookupByLibrary.simpleMessage(
+      "أي حالة",
+    ),
+    "upcomingServicesFilterApply": MessageLookupByLibrary.simpleMessage(
+      "تطبيق عوامل التصفية",
+    ),
+    "upcomingServicesFilterFrom": MessageLookupByLibrary.simpleMessage("من"),
+    "upcomingServicesFilterLoadingStatuses":
+        MessageLookupByLibrary.simpleMessage("جارٍ تحميل حالات الحجز..."),
+    "upcomingServicesFilterNoStatuses": MessageLookupByLibrary.simpleMessage(
+      "لا توجد حالات متاحة.",
+    ),
+    "upcomingServicesFilterStatus": MessageLookupByLibrary.simpleMessage(
+      "الحالة",
+    ),
+    "upcomingServicesFilterSubtitle": MessageLookupByLibrary.simpleMessage(
+      "اضغط على عامل تصفية لتحسين مواعيدك.",
+    ),
+    "upcomingServicesFilterTitle": MessageLookupByLibrary.simpleMessage(
+      "خطط يومك",
+    ),
+    "upcomingServicesFilterTo": MessageLookupByLibrary.simpleMessage("إلى"),
     "upcomingServicesLoadingLocation": MessageLookupByLibrary.simpleMessage(
       "جارٍ تحميل الموقع",
     ),
@@ -437,6 +481,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "upcomingServicesStatusExpired": MessageLookupByLibrary.simpleMessage(
       "منتهية",
     ),
+    "upcomingServicesStatusFallback": m10,
     "upcomingServicesStatusNew": MessageLookupByLibrary.simpleMessage(
       "حجز جديد",
     ),
@@ -473,7 +518,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "موديل السيارة",
     ),
     "userCarsCarName": MessageLookupByLibrary.simpleMessage("اسم السيارة"),
-    "userCarsCardSemantics": m8,
+    "userCarsCardSemantics": m11,
     "userCarsChassis": MessageLookupByLibrary.simpleMessage("رقم الهيكل"),
     "userCarsChassisVin": MessageLookupByLibrary.simpleMessage(
       "رقم الهيكل (VIN)",
@@ -508,7 +553,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "userCarsInvalidPlateNumber": MessageLookupByLibrary.simpleMessage(
       "رقم اللوحة غير صالح",
     ),
-    "userCarsLicensePlateSemantics": m9,
+    "userCarsLicensePlateSemantics": m12,
     "userCarsSaveVehicle": MessageLookupByLibrary.simpleMessage("حفظ المركبة"),
     "userCarsSaving": MessageLookupByLibrary.simpleMessage("جارٍ الحفظ..."),
     "userCarsTakePhoto": MessageLookupByLibrary.simpleMessage("التقاط صورة"),

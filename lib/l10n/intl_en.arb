@@ -243,9 +243,48 @@
   "upcomingServicesServicePlaceholder": "Service",
   "upcomingServicesVehiclePlaceholder": "Vehicle",
   "upcomingService": "Upcoming Service",
+  "upcomingServicesFilterTitle": "Plan your day",
+  "upcomingServicesFilterSubtitle": "Tap a filter to refine your appointments.",
+  "upcomingServicesFilterAnyStatus": "Any status",
+  "upcomingServicesFilterAnyDate": "Any date",
+  "upcomingServicesFilterLoadingStatuses": "Loading booking statuses...",
+  "upcomingServicesFilterNoStatuses": "No statuses available.",
+  "upcomingServicesFilterFrom": "From",
+  "upcomingServicesFilterTo": "To",
+  "upcomingServicesFilterStatus": "Status",
+  "upcomingServicesFilterApply": "Apply filters",
+  "upcomingServicesStatusFallback": "Status {id}",
+  "@upcomingServicesStatusFallback": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "upcomingServicesConnectionTimedOut": "Connection timed out. Please try again.",
+  "bookingStatusPickerTitle": "Select booking statuses",
+  "bookingStatusPickerClear": "Clear",
+  "bookingStatusPickerApply": "Apply",
+  "bookingStatusPickerApplyCount": "Apply ({count})",
+  "@bookingStatusPickerApplyCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "bookingStatusPickerStatusId": "ID {id}",
+  "@bookingStatusPickerStatusId": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
   "back": "Back",
   "book": "Book",
   "commonErrorTitle": "Something went wrong",
+  "commonSomethingWentWrong": "Something went wrong.",
   "commonErrorDescription": "Please check your internet connection or try again.",
   "commonRetry": "Retry",
   "userCarsTakePhoto": "Take a photo",
