@@ -120,7 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "amountDueLabel": MessageLookupByLibrary.simpleMessage("المبلغ المستحق"),
     "anyDateLabel": MessageLookupByLibrary.simpleMessage("أي تاريخ"),
     "appName": MessageLookupByLibrary.simpleMessage("موتور لوب"),
-    "appVersion": MessageLookupByLibrary.simpleMessage("V 1.0.0"),
+    "appVersion": MessageLookupByLibrary.simpleMessage("V 2.0.0"),
     "appliedCouponLabel": MessageLookupByLibrary.simpleMessage(
       "القسيمة المطبقة",
     ),

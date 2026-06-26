@@ -414,7 +414,7 @@
   "failedToInitiatePayment": "فشل بدء عملية الدفع. يرجى المحاولة مرة أخرى.",
   "failedToVerifyPaymentStatus": "فشل التحقق من حالة الدفع. يرجى المحاولة مرة أخرى.",
   "appName": "موتور لوب",
-  "appVersion": "V 1.0.0",
+  "appVersion": "V 2.0.0",
   "promotionsTitle": "العروض",
   "promotionsLoadErrorFallback": "فشل تحميل العروض",
   "noPromotionsFound": "لا توجد عروض.",

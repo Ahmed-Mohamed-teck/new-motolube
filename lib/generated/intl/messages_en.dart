@@ -120,7 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "amountDueLabel": MessageLookupByLibrary.simpleMessage("Amount due"),
     "anyDateLabel": MessageLookupByLibrary.simpleMessage("Any date"),
     "appName": MessageLookupByLibrary.simpleMessage("Motor Lube"),
-    "appVersion": MessageLookupByLibrary.simpleMessage("V 1.0.0"),
+    "appVersion": MessageLookupByLibrary.simpleMessage("V 2.0.0"),
     "appliedCouponLabel": MessageLookupByLibrary.simpleMessage(
       "Applied coupon",
     ),

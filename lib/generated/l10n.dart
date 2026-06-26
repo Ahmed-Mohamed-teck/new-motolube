@@ -2829,9 +2829,9 @@ class S {
     return Intl.message('Motor Lube', name: 'appName', desc: '', args: []);
   }
 
-  /// `V 1.0.0`
+  /// `V 2.0.0`
   String get appVersion {
-    return Intl.message('V 1.0.0', name: 'appVersion', desc: '', args: []);
+    return Intl.message('V 2.0.0', name: 'appVersion', desc: '', args: []);
   }
 
   /// `Promotions`

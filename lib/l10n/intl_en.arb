@@ -414,7 +414,7 @@
   "failedToInitiatePayment": "Failed to initiate payment. Please try again.",
   "failedToVerifyPaymentStatus": "Failed to verify payment status. Please try again.",
   "appName": "Motor Lube",
-  "appVersion": "V 1.0.0",
+  "appVersion": "V 2.0.0",
   "promotionsTitle": "Promotions",
   "promotionsLoadErrorFallback": "Failed to load promotions",
   "noPromotionsFound": "No promotions found.",
