@@ -18,8 +18,6 @@ String getUserInfoEndPoint(String phone) =>
     '$baseUrl/UserManagement/user?mobileNumber=$phone';
 String deleteUserAccountEndPoint(String email) =>
     '$baseUrl/MotorLubeApp/DeleteUserAccount/${Uri.encodeComponent(email)}';
-const String setTechnicianLocationEndPoint =
-    '$baseUrl/MotorLubeApp/technician/setlocation';
 const String searchNearbyTechniciansEndPoint =
     '$baseUrl/MotorLubeApp/technician/search/nearby';
 const String getTechnicianAvailableSlotsEndPoint =

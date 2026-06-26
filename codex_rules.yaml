@@ -43,7 +43,7 @@ rules:
       - "lib/features/auth/**"
     instructions: |
       * `AuthRemoteDataSourceImpl` owns every HTTP call related to registration, OTP validation, and user info (`lib/features/auth/data/data_source/auth_remote_data_source.dart`). Extend it when the API surface grows and keep error mapping close to the transport layer.
-      * Persist/clear sessions through `SaveAuthSessionUseCase` and `AuthLocalRepositoryImpl`, which write to `SecureStore`. That keeps the interceptor and `TechnicianLocationService` in sync with the authenticated identity.
+      * Persist/clear sessions through `SaveAuthSessionUseCase` and `AuthLocalRepositoryImpl`, which write to `SecureStore`. That keeps the interceptor in sync with the authenticated identity.
       * Expand `AuthViewModel` (`lib/features/auth/presentation/view_model/auth_view_model.dart`) and the corresponding `AuthState` classes instead of introducing unrelated providers; screens such as `customer_home_screen.dart` and `more_screen.dart` listen to that single source of truth.
 
   - id: user_cars
@@ -75,13 +75,3 @@ rules:
       * Job-card mutations are orchestrated via `JobCardOperationViewModel` and the `JobCardOperationState`/`JobCardOperationType` sealed classes. When a new operation type is needed, add it there so listeners like `TechnicianCustomPackageScreen` can react uniformly (show loading indicators, success banners, etc.).
       * Reuse helpers such as `sanitizeJobCardId`/`findJobCardId` in `lib/features/technician/domain/utils/job_card_utils.dart` instead of duplicating parsing logic, and keep line identifiers in sync with server responses by following the `_linesRequest` caching key pattern.
       * Screens such as `technician_custom_package_screen.dart` or `technician_appointment_details_screen.dart` should never call repositories directly—drive everything from providers so test doubles can be injected and the views remain declarative.
-
-  - id: technician_tracking
-    description: Background technician location updates.
-    globs:
-      - "lib/features/technician/service/**"
-      - "lib/main.dart"
-    instructions: |
-      * `TechnicianTrackingCoordinator` is the only component responsible for starting/stopping location tracking. If you need to tweak background behavior, do it there so every screen automatically inherits the change through the `MaterialApp.builder`.
-      * Permission flows rely on `Geolocator` and `permission_handler` (`_ensureLocationPermission` / `_ensureNotificationPermission`). Update both the dialog copy and localization keys when adjusting the UX, and keep any new prompts non-blocking so sign-out logic can still stop tracking.
-      * `TechnicianLocationService` depends on the authenticated technician’s oracle id and JWT; read those from the active `AuthState` rather than hitting storage directly so the coordinator can react to state changes (sign-in, sign-out, technician vs. customer) in real time.

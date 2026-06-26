@@ -5,8 +5,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:newmotorlube/core/utils/theme/themes.dart';
 import 'package:newmotorlube/route_generator.dart';
-import 'features/technician/service/technician_location_service.dart';
-import 'features/technician/service/technician_tracking_coordinator.dart';
 
 import 'core/providers/current_locale_provider.dart';
 import 'core/providers/general_providers.dart';
@@ -19,7 +17,6 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await TechnicianLocationService.initialize();
   await initializeSharedPreferences();
 
   runApp(ProviderScope(child: MyApp()));
@@ -61,11 +58,6 @@ class _MyAppState extends ConsumerState<MyApp> {
       theme: getThemeData(context),
       initialRoute: 'splashScreen',
       onGenerateRoute: RouteGenerator.generateRoute,
-      builder:
-          (context, child) => TechnicianTrackingCoordinator(
-            navigatorKey: navigatorKey,
-            child: child ?? const SizedBox.shrink(),
-          ),
     );
   }
 }

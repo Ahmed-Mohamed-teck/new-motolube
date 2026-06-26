@@ -20,7 +20,6 @@ import '../../../force_update/provider/force_update_provider.dart';
 import '../../../user_cars/presentation/screen/user_cars_list_screen.dart';
 import '../../../more/presentation/screen/more_screen.dart';
 import '../../../auth/domain/entity/user_type.dart';
-import '../../../technician/presentation/screen/technician_home_screen.dart';
 
 final currentNavBottomIndexProvider = StateProvider<int>((ref) {
   return 0; // Default index
@@ -177,9 +176,6 @@ class _RoleSpecificHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (userType == UserType.technician) {
-      return const TechnicianHomeScreen();
-    }
     if (userType == UserType.manager) {
       return const ManagerHomeScreen();
     }
@@ -189,6 +185,9 @@ class _RoleSpecificHome extends StatelessWidget {
 
     String message;
     switch (userType) {
+      case UserType.technician:
+        message = 'Technician users should use the MotorLube Technician app.';
+        break;
       case UserType.manager:
         message = 'Manager user';
         break;
