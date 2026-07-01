@@ -47,6 +47,9 @@ class _CustomerAppointmentsScreenState
   }
 
   Future<void> _fetchUpcomingServices() {
+    if (ref.read(authViewModelProvider) is! AuthenticatedState) {
+      return Future.value();
+    }
     return ref
         .read(upcomingServiceViewModelProvider.notifier)
         .fetchUpcomingServices(
@@ -67,9 +70,15 @@ class _CustomerAppointmentsScreenState
     });
 
     final authState = ref.watch(authViewModelProvider);
+    final isAuthenticated = authState is AuthenticatedState;
     final s = S.of(context);
     final servicesState = ref.watch(upcomingServiceViewModelProvider);
-    final statusesAsync = ref.watch(technicianBookingStatusesProvider);
+    final statusesAsync =
+        isAuthenticated
+            ? ref.watch(technicianBookingStatusesProvider)
+            : const AsyncValue<List<TechnicianBookingStatus>>.data(
+              <TechnicianBookingStatus>[],
+            );
     final statuses = statusesAsync.maybeWhen(
       data: (value) => value,
       orElse: () => const <TechnicianBookingStatus>[],

@@ -39,6 +39,37 @@ void main() {
     expect(remote.toDate, '30-Jun-2026');
     expect(remote.statusId, '7');
   });
+
+  test('does not call remote when stored auth is missing', () async {
+    final remote = _FakeUpcomingServiceRemoteDataSource();
+    final auth = _FakeAuthLocalRepository(null);
+    final repository = UpcomingServiceRepository(remote, auth);
+
+    final result = await repository.getUpcomingServices();
+
+    expect(result, isEmpty);
+    expect(remote.callCount, 0);
+  });
+
+  test('does not call remote when stored oracle id is empty', () async {
+    final remote = _FakeUpcomingServiceRemoteDataSource();
+    final auth = _FakeAuthLocalRepository(
+      const StoredAuth(
+        jwtToken: 'token',
+        firebaseToken: 'firebase-token',
+        fireBaseId: 'firebase-id',
+        phoneNumber: '0500000000',
+        oracleId: '',
+        userType: UserType.customer,
+      ),
+    );
+    final repository = UpcomingServiceRepository(remote, auth);
+
+    final result = await repository.getUpcomingServices();
+
+    expect(result, isEmpty);
+    expect(remote.callCount, 0);
+  });
 }
 
 class _FakeUpcomingServiceRemoteDataSource
@@ -47,6 +78,7 @@ class _FakeUpcomingServiceRemoteDataSource
   String? fromDate;
   String? toDate;
   String? statusId;
+  int callCount = 0;
 
   @override
   Future<List<UpcomingServiceModel>> getUpcomingServices({
@@ -55,6 +87,7 @@ class _FakeUpcomingServiceRemoteDataSource
     String? toDate,
     String? statusId,
   }) async {
+    callCount++;
     this.userId = userId;
     this.fromDate = fromDate;
     this.toDate = toDate;

@@ -11,15 +11,13 @@ class UpcomingServiceRepository implements IUpcomingServiceRepository {
   final IUpcomingServiceRemoteDataSource _remoteDataSource;
   final IAuthLocalRepository _authLocalRepository;
 
-  static const _defaultUserId = '7744';
-
   @override
   Future<List<UpcomingServiceEntity>> getUpcomingServices({
     DateTime? fromDate,
     DateTime? toDate,
     int? statusId,
   }) async {
-    String userId = _defaultUserId;
+    String? userId;
 
     try {
       final storedAuth = await _authLocalRepository.getStoredAuth();
@@ -28,7 +26,11 @@ class UpcomingServiceRepository implements IUpcomingServiceRepository {
         userId = oracleId;
       }
     } catch (_) {
-      // Ignore and fallback to default static value
+      return const <UpcomingServiceEntity>[];
+    }
+
+    if (userId == null) {
+      return const <UpcomingServiceEntity>[];
     }
 
     final DateFormat formatter = DateFormat('dd-MMM-yyyy', 'en_US');
