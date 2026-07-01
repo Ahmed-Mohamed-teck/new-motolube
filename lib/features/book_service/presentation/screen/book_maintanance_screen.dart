@@ -28,6 +28,7 @@ import 'package:newmotorlube/features/technician/domain/entity/technician_slot_e
 import 'package:newmotorlube/features/technician/domain/entity/technician_summary_entity.dart';
 import 'package:newmotorlube/features/upcoming_service/provider/upcoming_service_provider.dart';
 import 'package:newmotorlube/generated/l10n.dart';
+import 'package:newmotorlube/main.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../home/provider/home_provider.dart' as home;
@@ -971,7 +972,7 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
             buttonText: S.of(context).upcomingServicesViewButton,
             centered: true,
             onLogin: () {
-              Navigator.of(context).pushNamed('loginScreen');
+              navigatorKey.currentState?.pushNamed('loginScreen');
             },
           );
         }
