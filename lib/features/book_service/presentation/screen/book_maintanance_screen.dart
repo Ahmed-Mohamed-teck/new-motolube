@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:newmotorlube/core/providers/global_lang_provider.dart';
 import 'package:newmotorlube/core/widget/error_widget.dart';
+import 'package:newmotorlube/core/widget/login_prompt_card.dart';
 import 'package:newmotorlube/features/auth/provider/auth_provider.dart';
 import 'package:newmotorlube/features/book_service/domain/entity/create_appointment_result.dart';
 import 'package:newmotorlube/features/book_service/presentation/view_model/service_packages_state.dart';
@@ -965,7 +966,14 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
         }
 
         if (authState is! AuthenticatedState) {
-          return Center(child: Text(S.of(context).bookServiceSignInToSelectCar));
+          return LoginPromptCard(
+            message: S.of(context).bookServiceSignInToSelectCar,
+            buttonText: S.of(context).upcomingServicesViewButton,
+            centered: true,
+            onLogin: () {
+              Navigator.of(context).pushNamed('loginScreen');
+            },
+          );
         }
 
         if (state is UserCarsLoading || state is UserCarsInitial) {

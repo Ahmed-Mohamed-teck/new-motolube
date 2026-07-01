@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../generated/l10n.dart';
 import '../../../../main.dart';
+import '../../../../core/widget/login_prompt_card.dart';
 import '../../../auth/provider/auth_provider.dart';
 import '../../../auth/presentation/view_model/auth_state.dart';
 import '../../provider/user_cars_provider.dart';
@@ -33,7 +34,14 @@ class UserCarsListScreen extends ConsumerWidget {
 
     if (authState is! AuthenticatedState) {
       return Scaffold(
-        body: Center(child: Text(l10n.PleaseLoginToViewYourCarsMessage)),
+        body: LoginPromptCard(
+          message: l10n.PleaseLoginToViewYourCarsMessage,
+          buttonText: l10n.upcomingServicesViewButton,
+          centered: true,
+          onLogin: () {
+            navigatorKey.currentState?.pushNamed('loginScreen');
+          },
+        ),
       );
     }
 
