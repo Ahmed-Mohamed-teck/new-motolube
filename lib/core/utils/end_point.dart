@@ -1,4 +1,4 @@
-const String baseUrl = 'https://interface.taajeer.com:1027/api';
+const String baseUrl = 'https://interface.taajeer.com:1026/api';
 const String isRegisteredUserEndPoint = '$baseUrl/UserManagement/login';
 
 const String sendOtpEndPoint = '$baseUrl/UserManagement/sendOtp';
@@ -48,7 +48,7 @@ String getPackagesBySrEndPoint(String srNumber) =>
 const String createAppointmentEndPoint =
     '$baseUrl/MotorLubeApp/createAppointment';
 const String initiatePaymentEndPoint =
-    'https://interface.taajeer.com:1027/api/Payments/initiate';
+    'https://interface.taajeer.com:1026/api/Payments/initiate';
 const String getCouponsEndPoint = '$baseUrl/MotorLubeApp/GetCuoponList/x';
 String addCouponEndPoint({
   required String appUserId,

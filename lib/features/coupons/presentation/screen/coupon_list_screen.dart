@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-
 import '../../../../core/widget/internal_app_bar.dart';
-import '../../../auth/data/repository/auth_local_repository.dart';
 import '../../../auth/provider/auth_provider.dart';
+import '../../data/model/coupon_header_model.dart';
 import '../../provider/coupon_providers.dart';
-import '../../../../legacy/coupon_header_model.dart';
 import '../view_model/coupon_state.dart';
 import '../../../../core/providers/global_lang_provider.dart';
 

@@ -9,20 +9,6 @@ class ManagerHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = S.of(context);
     final cards = <_ManagerCard>[
-      // _ManagerCard(
-      //   title: 'Customers',
-      //   description: 'Customers control panel',
-      //   icon: Icons.person,
-      //   color: Colors.blue,
-      //   routeName: 'adminCustomersPage',
-      // ),
-      // _ManagerCard(
-      //   title: 'Technicians',
-      //   description: 'Technicians control panel',
-      //   icon: Icons.engineering,
-      //   color: Colors.green,
-      //   routeName: 'adminTechPage',
-      // ),
       _ManagerCard(
         title: l10n.managerHomeCouponsTitle,
         description: l10n.managerHomeCouponsDescription,

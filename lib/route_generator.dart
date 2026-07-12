@@ -21,9 +21,6 @@ class RouteGenerator {
     final args = settings.arguments;
 
     switch (settings.name) {
-      // case '/':
-      //   return MaterialPageRoute(
-      //       builder: (_) => BasePage(currentIndex: 0, key: UniqueKey()));
 
       case 'splashScreen':
         return MaterialPageRoute(builder: (_) => const SplashScreen());
@@ -80,17 +77,6 @@ class RouteGenerator {
 
 
 
-  /// Error Widget for invalid navigation
-  static Widget _errorWidget(String message) {
-    return Scaffold(
-      appBar:  AppBar(title: Text('error'),),
-      body: Center(
-        child: Text(
-          message,
-        ),
-      ),
-    );
-  }
 
   static Route<dynamic> _errorRoute(String arg) {
     return MaterialPageRoute(builder: (context) {
