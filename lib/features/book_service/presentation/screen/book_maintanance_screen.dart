@@ -657,12 +657,14 @@ class _HorizontalStepperScreenState extends ConsumerState<BookServiceScreen> {
   }
 
   String _formatDateForApi(DateTime date) {
-    final formatter = DateFormat('dd-MMM-yyyy');
+    final formatter = DateFormat('dd-MMM-yyyy', 'en_US');
     return formatter.format(date).toUpperCase();
   }
 
   String _formatDateForAppointment(DateTime date) {
-    return DateFormat('dd-MMM-yyyy').format(date).toLowerCase();
+    return DateFormat('dd-MMM-yyyy', 'en_US')
+        .format(date)
+        .toLowerCase();
   }
 
   String _formatDateForDisplay(DateTime date) {
