@@ -50,6 +50,8 @@ const String createAppointmentEndPoint =
     '$baseUrl/MotorLubeApp/createAppointment';
 const String initiatePaymentEndPoint =
     'https://interface.taajeer.com:1026/api/Payments/initiate';
+const String registerDeviceEndPoint =
+    'https://interface.taajeer.com:1026/api/Device/register';
 const String getCouponsEndPoint = '$baseUrl/MotorLubeApp/GetCuoponList/x';
 String addCouponEndPoint({
   required String appUserId,

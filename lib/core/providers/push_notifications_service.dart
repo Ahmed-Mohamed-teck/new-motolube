@@ -53,6 +53,8 @@ class PushNotificationsService {
     }
   }
 
+  Stream<String> get onTokenRefresh => _messaging.onTokenRefresh;
+
   Future<void> _requestPermission() async {
     final settings = await _messaging.requestPermission(
       alert: true,

@@ -2,6 +2,7 @@ import 'user_type.dart';
 
 class User {
   final String oracleId;
+  final String userId;
   final String? firstName;
   final String? lastName;
   final String? name;
@@ -15,6 +16,7 @@ class User {
 
   const User({
     required this.oracleId,
+    this.userId = '',
     this.firstName,
     this.lastName,
     this.name,
@@ -30,6 +32,7 @@ class User {
   User copyWith({String? email, String? photoBase64}) {
     return User(
       oracleId: oracleId,
+      userId: userId,
       firstName: firstName,
       lastName: lastName,
       name: name,
