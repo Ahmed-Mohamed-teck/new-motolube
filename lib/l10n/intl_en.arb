@@ -702,5 +702,21 @@
   "cancellationStatusUnavailable": "Cancellation status is unavailable right now.",
   "upcomingServicesLoadingPlate": "0000 AAA",
   "upcomingServicesLoadingDate": "00 Mon 0000",
-  "upcomingServicesLoadingTime": "00:00 AM"
+  "upcomingServicesLoadingTime": "00:00 AM",
+  "invoicesTitle": "Invoices",
+  "invoicesMenuDescription": "View and download your invoices",
+  "invoicesSignInMessage": "Please sign in to view your invoices.",
+  "invoicesEmptyTitle": "No invoices yet",
+  "invoicesEmptyDescription": "Your completed invoices will appear here. Pull to refresh or check again later.",
+  "invoiceNumberLabel": "Invoice number",
+  "invoiceServiceRequestLabel": "Service request",
+  "invoiceDateLabel": "Date",
+  "invoiceTotalLabel": "Total",
+  "invoiceOpenPdfButton": "Open PDF",
+  "invoiceRefreshTooltip": "Refresh invoices",
+  "invoiceRefreshButton": "Refresh",
+  "invoiceFileUnavailableMessage": "The invoice PDF is not available yet. Please check again later.",
+  "invoiceOpenFailedMessage": "Unable to open the invoice PDF.",
+  "invoiceValueUnavailable": "Not available",
+  "invoiceCurrencySymbol": "SAR "
 }

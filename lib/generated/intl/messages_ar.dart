@@ -456,6 +456,38 @@ class MessageLookup extends MessageLookupByLibrary {
     "homeNav": MessageLookupByLibrary.simpleMessage("الرئيسية"),
     "includedLabel": MessageLookupByLibrary.simpleMessage("مشمول"),
     "insuranceClaims": MessageLookupByLibrary.simpleMessage("تأمين السيارات"),
+    "invoiceCurrencySymbol": MessageLookupByLibrary.simpleMessage("ر.س "),
+    "invoiceDateLabel": MessageLookupByLibrary.simpleMessage("التاريخ"),
+    "invoiceFileUnavailableMessage": MessageLookupByLibrary.simpleMessage(
+      "ملف الفاتورة غير متاح حاليًا. يرجى التحقق مرة أخرى لاحقًا.",
+    ),
+    "invoiceNumberLabel": MessageLookupByLibrary.simpleMessage("رقم الفاتورة"),
+    "invoiceOpenFailedMessage": MessageLookupByLibrary.simpleMessage(
+      "تعذر فتح ملف الفاتورة.",
+    ),
+    "invoiceOpenPdfButton": MessageLookupByLibrary.simpleMessage("فتح PDF"),
+    "invoiceRefreshButton": MessageLookupByLibrary.simpleMessage("تحديث"),
+    "invoiceRefreshTooltip": MessageLookupByLibrary.simpleMessage(
+      "تحديث الفواتير",
+    ),
+    "invoiceServiceRequestLabel": MessageLookupByLibrary.simpleMessage(
+      "طلب الخدمة",
+    ),
+    "invoiceTotalLabel": MessageLookupByLibrary.simpleMessage("الإجمالي"),
+    "invoiceValueUnavailable": MessageLookupByLibrary.simpleMessage("غير متاح"),
+    "invoicesEmptyDescription": MessageLookupByLibrary.simpleMessage(
+      "ستظهر فواتيرك المكتملة هنا. اسحب للتحديث أو تحقق مرة أخرى لاحقًا.",
+    ),
+    "invoicesEmptyTitle": MessageLookupByLibrary.simpleMessage(
+      "لا توجد فواتير حتى الآن",
+    ),
+    "invoicesMenuDescription": MessageLookupByLibrary.simpleMessage(
+      "عرض وتحميل فواتيرك",
+    ),
+    "invoicesSignInMessage": MessageLookupByLibrary.simpleMessage(
+      "يرجى تسجيل الدخول لعرض فواتيرك.",
+    ),
+    "invoicesTitle": MessageLookupByLibrary.simpleMessage("الفواتير"),
     "itemsCountLabel": m13,
     "jobCardCompletedSuccessfullyMessage": MessageLookupByLibrary.simpleMessage(
       "تم إنجاز بطاقة العمل بنجاح.",

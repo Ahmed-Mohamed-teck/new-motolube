@@ -702,5 +702,21 @@
   "cancellationStatusUnavailable": "حالة الإلغاء غير متاحة حاليًا.",
   "upcomingServicesLoadingPlate": "0000 AAA",
   "upcomingServicesLoadingDate": "00 Mon 0000",
-  "upcomingServicesLoadingTime": "00:00 AM"
+  "upcomingServicesLoadingTime": "00:00 AM",
+  "invoicesTitle": "الفواتير",
+  "invoicesMenuDescription": "عرض وتحميل فواتيرك",
+  "invoicesSignInMessage": "يرجى تسجيل الدخول لعرض فواتيرك.",
+  "invoicesEmptyTitle": "لا توجد فواتير حتى الآن",
+  "invoicesEmptyDescription": "ستظهر فواتيرك المكتملة هنا. اسحب للتحديث أو تحقق مرة أخرى لاحقًا.",
+  "invoiceNumberLabel": "رقم الفاتورة",
+  "invoiceServiceRequestLabel": "طلب الخدمة",
+  "invoiceDateLabel": "التاريخ",
+  "invoiceTotalLabel": "الإجمالي",
+  "invoiceOpenPdfButton": "فتح PDF",
+  "invoiceRefreshTooltip": "تحديث الفواتير",
+  "invoiceRefreshButton": "تحديث",
+  "invoiceFileUnavailableMessage": "ملف الفاتورة غير متاح حاليًا. يرجى التحقق مرة أخرى لاحقًا.",
+  "invoiceOpenFailedMessage": "تعذر فتح ملف الفاتورة.",
+  "invoiceValueUnavailable": "غير متاح",
+  "invoiceCurrencySymbol": "ر.س "
 }

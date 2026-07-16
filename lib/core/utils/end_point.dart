@@ -1,4 +1,4 @@
-const String baseUrl = 'https://interface.taajeer.com:1026/api';
+const String baseUrl = 'https://interface.taajeer.com:1027/api';
 const String isRegisteredUserEndPoint = '$baseUrl/UserManagement/login';
 
 const String sendOtpEndPoint = '$baseUrl/UserManagement/sendOtp';
@@ -70,3 +70,22 @@ String getPaymentStatusEndPoint(String transactionId) =>
     '$baseUrl/Payments/status?transactionId=${Uri.encodeComponent(transactionId)}';
 const String getMainCategoriesEndPoint =
     '$baseUrl/MotorLubeApp/GetMainCategories';
+String getCustomerInvoicesEndPoint(String oraclePartyId) =>
+    '$baseUrl/MotorLubeApp/GetCustomerInvoices/${Uri.encodeComponent(oraclePartyId)}';
+
+const String invoiceDocumentsBaseUrl =
+    'https://services.taajeer.com/mlApp/WsInv';
+
+Uri invoiceDocumentUri(String fileName) {
+  final trimmedFileName = fileName.trim();
+  final providedUri = Uri.tryParse(trimmedFileName);
+  if (providedUri != null && providedUri.hasScheme) return providedUri;
+
+  final baseUri = Uri.parse(invoiceDocumentsBaseUrl);
+  return baseUri.replace(
+    pathSegments: <String>[
+      ...baseUri.pathSegments.where((segment) => segment.isNotEmpty),
+      trimmedFileName,
+    ],
+  );
+}

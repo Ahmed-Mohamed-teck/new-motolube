@@ -4283,6 +4283,151 @@ class S {
       args: [],
     );
   }
+
+  /// `Invoices`
+  String get invoicesTitle {
+    return Intl.message('Invoices', name: 'invoicesTitle', desc: '', args: []);
+  }
+
+  /// `View and download your invoices`
+  String get invoicesMenuDescription {
+    return Intl.message(
+      'View and download your invoices',
+      name: 'invoicesMenuDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please sign in to view your invoices.`
+  String get invoicesSignInMessage {
+    return Intl.message(
+      'Please sign in to view your invoices.',
+      name: 'invoicesSignInMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No invoices yet`
+  String get invoicesEmptyTitle {
+    return Intl.message(
+      'No invoices yet',
+      name: 'invoicesEmptyTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your completed invoices will appear here. Pull to refresh or check again later.`
+  String get invoicesEmptyDescription {
+    return Intl.message(
+      'Your completed invoices will appear here. Pull to refresh or check again later.',
+      name: 'invoicesEmptyDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invoice number`
+  String get invoiceNumberLabel {
+    return Intl.message(
+      'Invoice number',
+      name: 'invoiceNumberLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Service request`
+  String get invoiceServiceRequestLabel {
+    return Intl.message(
+      'Service request',
+      name: 'invoiceServiceRequestLabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date`
+  String get invoiceDateLabel {
+    return Intl.message('Date', name: 'invoiceDateLabel', desc: '', args: []);
+  }
+
+  /// `Total`
+  String get invoiceTotalLabel {
+    return Intl.message('Total', name: 'invoiceTotalLabel', desc: '', args: []);
+  }
+
+  /// `Open PDF`
+  String get invoiceOpenPdfButton {
+    return Intl.message(
+      'Open PDF',
+      name: 'invoiceOpenPdfButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refresh invoices`
+  String get invoiceRefreshTooltip {
+    return Intl.message(
+      'Refresh invoices',
+      name: 'invoiceRefreshTooltip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refresh`
+  String get invoiceRefreshButton {
+    return Intl.message(
+      'Refresh',
+      name: 'invoiceRefreshButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The invoice PDF is not available yet. Please check again later.`
+  String get invoiceFileUnavailableMessage {
+    return Intl.message(
+      'The invoice PDF is not available yet. Please check again later.',
+      name: 'invoiceFileUnavailableMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to open the invoice PDF.`
+  String get invoiceOpenFailedMessage {
+    return Intl.message(
+      'Unable to open the invoice PDF.',
+      name: 'invoiceOpenFailedMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not available`
+  String get invoiceValueUnavailable {
+    return Intl.message(
+      'Not available',
+      name: 'invoiceValueUnavailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SAR `
+  String get invoiceCurrencySymbol {
+    return Intl.message(
+      'SAR ',
+      name: 'invoiceCurrencySymbol',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -15,6 +15,7 @@ import 'features/user_cars/presentation/screen/add_new_car_screen.dart';
 import 'features/user_cars/presentation/screen/user_car_details_screen.dart';
 import 'features/chat/presentation/screen/chat_screen.dart';
 import 'features/coupons/presentation/screen/coupon_list_screen.dart';
+import 'features/invoices/presentation/screen/customer_invoices_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -67,6 +68,10 @@ class RouteGenerator {
       case 'customerAppointmentsScreen':
         return MaterialPageRoute(
           builder: (_) => const CustomerAppointmentsScreen(),
+        );
+      case 'customerInvoicesScreen':
+        return MaterialPageRoute(
+          builder: (_) => const CustomerInvoicesScreen(),
         );
 
       default:

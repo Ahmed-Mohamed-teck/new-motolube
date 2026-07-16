@@ -472,6 +472,42 @@ class MessageLookup extends MessageLookupByLibrary {
     "homeNav": MessageLookupByLibrary.simpleMessage("Home"),
     "includedLabel": MessageLookupByLibrary.simpleMessage("Included"),
     "insuranceClaims": MessageLookupByLibrary.simpleMessage("Insurance Claims"),
+    "invoiceCurrencySymbol": MessageLookupByLibrary.simpleMessage("SAR "),
+    "invoiceDateLabel": MessageLookupByLibrary.simpleMessage("Date"),
+    "invoiceFileUnavailableMessage": MessageLookupByLibrary.simpleMessage(
+      "The invoice PDF is not available yet. Please check again later.",
+    ),
+    "invoiceNumberLabel": MessageLookupByLibrary.simpleMessage(
+      "Invoice number",
+    ),
+    "invoiceOpenFailedMessage": MessageLookupByLibrary.simpleMessage(
+      "Unable to open the invoice PDF.",
+    ),
+    "invoiceOpenPdfButton": MessageLookupByLibrary.simpleMessage("Open PDF"),
+    "invoiceRefreshButton": MessageLookupByLibrary.simpleMessage("Refresh"),
+    "invoiceRefreshTooltip": MessageLookupByLibrary.simpleMessage(
+      "Refresh invoices",
+    ),
+    "invoiceServiceRequestLabel": MessageLookupByLibrary.simpleMessage(
+      "Service request",
+    ),
+    "invoiceTotalLabel": MessageLookupByLibrary.simpleMessage("Total"),
+    "invoiceValueUnavailable": MessageLookupByLibrary.simpleMessage(
+      "Not available",
+    ),
+    "invoicesEmptyDescription": MessageLookupByLibrary.simpleMessage(
+      "Your completed invoices will appear here. Pull to refresh or check again later.",
+    ),
+    "invoicesEmptyTitle": MessageLookupByLibrary.simpleMessage(
+      "No invoices yet",
+    ),
+    "invoicesMenuDescription": MessageLookupByLibrary.simpleMessage(
+      "View and download your invoices",
+    ),
+    "invoicesSignInMessage": MessageLookupByLibrary.simpleMessage(
+      "Please sign in to view your invoices.",
+    ),
+    "invoicesTitle": MessageLookupByLibrary.simpleMessage("Invoices"),
     "itemsCountLabel": m13,
     "jobCardCompletedSuccessfullyMessage": MessageLookupByLibrary.simpleMessage(
       "Job card completed successfully.",
