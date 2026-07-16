@@ -197,10 +197,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   horizontal: 24,
                   vertical: 24,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
+                child: SingleChildScrollView(
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
                     const SizedBox(height: 8),
 
                     // Hide welcome/login copy when OTP UI is showing
@@ -455,7 +458,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                 ),
                       ),
                     ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
