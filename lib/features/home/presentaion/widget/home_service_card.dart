@@ -6,6 +6,7 @@ class HomeServiceCard extends StatelessWidget {
   final String? iconPath;
   final String? photoUrl;
   final bool isLoading;
+  final VoidCallback? onTap;
 
   const HomeServiceCard({
     super.key,
@@ -13,65 +14,120 @@ class HomeServiceCard extends StatelessWidget {
     this.iconPath,
     this.photoUrl,
     this.isLoading = false,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Colors.white,
-      elevation: 1,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+    final theme = Theme.of(context);
+    final borderRadius = BorderRadius.circular(20);
+
+    final card = DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: borderRadius,
+        boxShadow:
+            isLoading
+                ? null
+                : [
+                  BoxShadow(
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.06),
+                    blurRadius: 16,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildImage(context),
-          const SizedBox(height: 8),
-          _buildTitle(context),
-        ],
+      child: Material(
+        color: theme.colorScheme.surface,
+        surfaceTintColor: Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius: borderRadius,
+          side: BorderSide(
+            color: theme.colorScheme.outlineVariant.withValues(alpha: 0.32),
+          ),
+        ),
+        clipBehavior: Clip.antiAlias,
+        child: InkWell(
+          onTap: isLoading ? null : onTap,
+          borderRadius: borderRadius,
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildImage(context),
+                const SizedBox(height: 10),
+                Expanded(child: _buildTitle(context)),
+              ],
+            ),
+          ),
+        ),
       ),
+    );
+
+    if (isLoading) {
+      return ExcludeSemantics(child: card);
+    }
+
+    return Semantics(
+      button: onTap != null,
+      label: title,
+      excludeSemantics: true,
+      child: card,
     );
   }
 
   Widget _buildImage(BuildContext context) {
+    final theme = Theme.of(context);
+
     if (isLoading) {
       return Container(
-        width: 40,
-        height: 40,
+        width: 64,
+        height: 64,
         decoration: BoxDecoration(
-          color: Colors.grey.shade200,
-          borderRadius: BorderRadius.circular(8),
+          color: theme.colorScheme.surfaceContainerHighest,
+          shape: BoxShape.circle,
         ),
       );
     }
 
-    if (photoUrl != null && photoUrl!.trim().isNotEmpty) {
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(8),
-        child: Image.network(
-          photoUrl!,
-          width: 40,
-          height: 40,
-          fit: BoxFit.cover,
-          errorBuilder: (_, __, ___) => _defaultIcon(context),
+    return Container(
+      width: 64,
+      height: 64,
+      decoration: BoxDecoration(
+        color: theme.colorScheme.primary.withValues(alpha: 0.09),
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: theme.colorScheme.primary.withValues(alpha: 0.12),
         ),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: Padding(
+        padding: const EdgeInsets.all(13),
+        child: _buildImageContent(context),
+      ),
+    );
+  }
+
+  Widget _buildImageContent(BuildContext context) {
+    if (photoUrl != null && photoUrl!.trim().isNotEmpty) {
+      return Image.network(
+        photoUrl!,
+        width: double.infinity,
+        height: double.infinity,
+        fit: BoxFit.contain,
+        excludeFromSemantics: true,
+        frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+          if (wasSynchronouslyLoaded || frame != null) {
+            return child;
+          }
+          return _defaultIcon(context);
+        },
+        errorBuilder: (_, __, ___) => _defaultIcon(context),
       );
     }
 
     if (iconPath != null && iconPath!.isNotEmpty) {
-      return SizedBox(
-        width: 40,
-        height: 40,
-        child: SvgPicture.asset(
-          iconPath!,
-          width: 40,
-          height: 40,
-          fit: BoxFit.contain,
-        ),
-      );
+      return SvgPicture.asset(iconPath!, fit: BoxFit.contain);
     }
 
     return _defaultIcon(context);
@@ -79,32 +135,39 @@ class HomeServiceCard extends StatelessWidget {
 
   Widget _buildTitle(BuildContext context) {
     if (isLoading) {
-      return Container(
-        height: 10,
-        width: 60,
-        decoration: BoxDecoration(
-          color: Colors.grey.shade200,
-          borderRadius: BorderRadius.circular(4),
+      return Align(
+        alignment: Alignment.topCenter,
+        child: Container(
+          height: 12,
+          width: 72,
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.surfaceContainerHighest,
+            borderRadius: BorderRadius.circular(6),
+          ),
         ),
       );
     }
 
-    return Text(
-      title,
-      textAlign: TextAlign.center,
-      maxLines: 2,
-      overflow: TextOverflow.ellipsis,
-      style: Theme.of(context).textTheme.titleSmall?.copyWith(
-            fontWeight: FontWeight.w500,
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
+    return Align(
+      alignment: Alignment.topCenter,
+      child: Text(
+        title,
+        textAlign: TextAlign.center,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+          height: 1.2,
+          fontWeight: FontWeight.w700,
+          color: Theme.of(context).colorScheme.onSurface,
+        ),
+      ),
     );
   }
 
   Widget _defaultIcon(BuildContext context) {
     return Icon(
-      Icons.miscellaneous_services,
-      size: 32,
+      Icons.home_repair_service_rounded,
+      size: 34,
       color: Theme.of(context).colorScheme.primary,
     );
   }

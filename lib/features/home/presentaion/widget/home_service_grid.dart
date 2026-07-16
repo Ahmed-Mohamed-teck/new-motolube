@@ -50,84 +50,135 @@ class HomeServiceGrid extends ConsumerWidget {
   ) {
     final locale = Localizations.localeOf(context);
 
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      padding: const EdgeInsets.all(8.0),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 4,
-        mainAxisSpacing: 2.0,
-        crossAxisSpacing: 2.0,
-        childAspectRatio: .75,
-      ),
-      itemCount: state.categories.length,
-      itemBuilder: (context, index) {
-        final category = state.categories[index];
-        final title = category.titleForLocale(locale);
+    return SizedBox(
+      height: 148,
+      child: ListView.separated(
+        key: const PageStorageKey<String>('home-services-horizontal-list'),
+        scrollDirection: Axis.horizontal,
+        primary: false,
+        physics: const BouncingScrollPhysics(),
+        padding: const EdgeInsetsDirectional.fromSTEB(16, 6, 16, 6),
+        itemCount: state.categories.length,
+        separatorBuilder: (_, __) => const SizedBox(width: 10),
+        itemBuilder: (context, index) {
+          final category = state.categories[index];
+          final title = category.titleForLocale(locale);
 
-        return GestureDetector(
-          onTap: () {
-            ref.read(home.selectedMainCategoryProvider.notifier).state =
-                category;
-            ref.read(currentNavBottomIndexProvider.notifier).state = 2;
-          },
-          child: HomeServiceCard(title: title, photoUrl: category.photoUrl),
-        );
-      },
+          return SizedBox(
+            width: 120,
+            child: HomeServiceCard(
+              key: ValueKey<String>('home-service-${category.id}'),
+              title: title,
+              photoUrl: category.photoUrl,
+              onTap: () {
+                ref.read(home.selectedMainCategoryProvider.notifier).state =
+                    category;
+                ref.read(currentNavBottomIndexProvider.notifier).state = 2;
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 
   Widget _buildLoadingGrid() {
-    return GridView.count(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      crossAxisCount: 4,
-      mainAxisSpacing: 2.0,
-      crossAxisSpacing: 2.0,
-      childAspectRatio: .75,
-      padding: const EdgeInsets.all(8.0),
-      children: List.generate(
-        8,
-        (_) => const HomeServiceCard(title: '', isLoading: true),
+    return SizedBox(
+      height: 148,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        primary: false,
+        physics: const NeverScrollableScrollPhysics(),
+        padding: const EdgeInsetsDirectional.fromSTEB(16, 6, 16, 6),
+        itemCount: 4,
+        separatorBuilder: (_, __) => const SizedBox(width: 10),
+        itemBuilder:
+            (_, index) => const SizedBox(
+              width: 120,
+              child: HomeServiceCard(title: '', isLoading: true),
+            ),
       ),
     );
   }
 
   Widget _buildEmptyState(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-      child: Text(
-        S.of(context).noServicesAvailable,
-        style: Theme.of(context).textTheme.bodyMedium,
+      padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: theme.colorScheme.primary.withValues(alpha: 0.06),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: theme.colorScheme.primary.withValues(alpha: 0.14),
+          ),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              Icons.home_repair_service_outlined,
+              color: theme.colorScheme.primary,
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                S.of(context).noServicesAvailable,
+                style: theme.textTheme.bodyMedium,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildErrorState(BuildContext context, WidgetRef ref, String message) {
+    final theme = Theme.of(context);
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+      padding: const EdgeInsetsDirectional.fromSTEB(16, 8, 16, 8),
       child: Card(
-        color: Colors.white,
-        elevation: 1,
+        margin: EdgeInsets.zero,
+        color: theme.colorScheme.surface,
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+          side: BorderSide(
+            color: theme.colorScheme.error.withValues(alpha: 0.2),
+          ),
+        ),
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.all(16),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(
-                S.of(context).unableToLoadServices,
-                style: Theme.of(context).textTheme.titleMedium,
+              Row(
+                children: [
+                  Icon(Icons.error_outline, color: theme.colorScheme.error),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      S.of(context).unableToLoadServices,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 4),
+              const SizedBox(height: 8),
               Text(
                 message,
-                style: Theme.of(
-                  context,
-                ).textTheme.bodySmall?.copyWith(color: Colors.grey[700]),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.68),
+                ),
               ),
               const SizedBox(height: 8),
               Align(
-                alignment: Alignment.centerLeft,
+                alignment: AlignmentDirectional.centerStart,
                 child: TextButton.icon(
                   onPressed: () {
                     ref
