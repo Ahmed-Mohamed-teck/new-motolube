@@ -6,6 +6,7 @@ import '../../domain/repository/i_auth_repository.dart';
 import '../data_source/i_auth_remote_data_source.dart';
 import '../model/register_request.dart';
 import '../model/send_otp_request.dart';
+import '../model/update_user_profile_request.dart';
 import '../model/verify_otp_request.dart';
 
 class AuthRepositoryImpl implements IAuthRepository {
@@ -55,6 +56,25 @@ class AuthRepositoryImpl implements IAuthRepository {
   Future<User> getUserInfo({required String phoneNumber}) async {
     final res = await remote.getUserInfo(phoneNumber);
     return res.toEntity();
+  }
+
+  @override
+  Future<void> updateUserProfile({
+    required String oracleId,
+    required String fireBaseId,
+    required String photoBase64,
+    required String? email,
+    required int userType,
+  }) {
+    return remote.updateUserProfile(
+      UpdateUserProfileRequest(
+        oracleId: oracleId,
+        fireBaseId: fireBaseId,
+        photoBase64: photoBase64,
+        email: email,
+        userType: userType,
+      ),
+    );
   }
 
   @override

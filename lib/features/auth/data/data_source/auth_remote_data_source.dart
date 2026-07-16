@@ -5,6 +5,7 @@ import '../model/register_request.dart';
 import '../model/register_response.dart';
 import '../model/send_otp_request.dart';
 import '../model/send_otp_response.dart';
+import '../model/update_user_profile_request.dart';
 import '../model/user_model.dart';
 import '../model/verify_opt_response.dart';
 import '../model/verify_otp_request.dart';
@@ -85,6 +86,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
       rethrow;
     }
+  }
+
+  @override
+  Future<void> updateUserProfile(UpdateUserProfileRequest request) async {
+    await dio.post(updateUserProfileEndPoint, data: request.toJson());
   }
 
   @override

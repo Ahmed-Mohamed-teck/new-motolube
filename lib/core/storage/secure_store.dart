@@ -39,6 +39,10 @@ class SecureStore {
   Future<String?> oracleId() => _storage.read(key: 'oracleId');
   Future<String?> userType() => _storage.read(key: 'userType');
 
+  Future<void> updateUserEmail(String? userEmail) {
+    return _storage.write(key: 'userEmail', value: userEmail ?? '');
+  }
+
   Future<void> clear() async {
     await _storage.deleteAll();
   }

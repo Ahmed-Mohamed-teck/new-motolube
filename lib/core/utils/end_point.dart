@@ -4,6 +4,7 @@ const String isRegisteredUserEndPoint = '$baseUrl/UserManagement/login';
 const String sendOtpEndPoint = '$baseUrl/UserManagement/sendOtp';
 const String registerEndPoint = '$baseUrl/UserManagement/customer/register';
 const String verifyOtpEndPoint = '$baseUrl/UserManagement/verifyOtp';
+const String updateUserProfileEndPoint = '$baseUrl/UserManagement/update';
 
 const String isUserRegisteredEndPoint = '$baseUrl/UserManagement/login';
 

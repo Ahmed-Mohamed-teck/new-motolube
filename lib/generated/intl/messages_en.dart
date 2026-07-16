@@ -296,6 +296,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "carWash": MessageLookupByLibrary.simpleMessage("Car Wash"),
     "categoryLabel": MessageLookupByLibrary.simpleMessage("Category"),
     "changeLanguage": MessageLookupByLibrary.simpleMessage("Change Language"),
+    "changeProfilePhoto": MessageLookupByLibrary.simpleMessage(
+      "Change profile photo",
+    ),
     "characterVinLimit": MessageLookupByLibrary.simpleMessage(
       "VIN must be 17 characters",
     ),
@@ -701,6 +704,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "pricePrefixedLabel": m22,
     "profileAppbar": MessageLookupByLibrary.simpleMessage("Profile"),
     "profileNav": MessageLookupByLibrary.simpleMessage("Profile"),
+    "profilePhotoRequired": MessageLookupByLibrary.simpleMessage(
+      "Please select a profile photo.",
+    ),
+    "profilePhotoSelectionFailed": MessageLookupByLibrary.simpleMessage(
+      "Unable to select this photo. Please try again.",
+    ),
+    "profileUpdateFailed": MessageLookupByLibrary.simpleMessage(
+      "Unable to update your profile. Please try again.",
+    ),
+    "profileUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "Profile updated successfully.",
+    ),
     "promotionDescription": MessageLookupByLibrary.simpleMessage(
       "Promotion Description",
     ),
@@ -740,6 +755,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Resolving package line ID...",
     ),
     "retryButtonLabel": MessageLookupByLibrary.simpleMessage("Retry"),
+    "saveChanges": MessageLookupByLibrary.simpleMessage("Save changes"),
     "saveChecklistButtonLabel": MessageLookupByLibrary.simpleMessage(
       "Save checklist",
     ),

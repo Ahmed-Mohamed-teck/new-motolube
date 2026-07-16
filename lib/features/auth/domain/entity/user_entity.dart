@@ -11,6 +11,7 @@ class User {
   final UserType userType;
   final String fireBaseId;
   final String? customer_id;
+  final String? photoBase64;
 
   const User({
     required this.oracleId,
@@ -23,5 +24,22 @@ class User {
     required this.userType,
     this.fireBaseId = '',
     this.customer_id = '',
+    this.photoBase64,
   });
+
+  User copyWith({String? email, String? photoBase64}) {
+    return User(
+      oracleId: oracleId,
+      firstName: firstName,
+      lastName: lastName,
+      name: name,
+      mobileNo: mobileNo,
+      email: email,
+      isVerified: isVerified,
+      userType: userType,
+      fireBaseId: fireBaseId,
+      customer_id: customer_id,
+      photoBase64: photoBase64 ?? this.photoBase64,
+    );
+  }
 }

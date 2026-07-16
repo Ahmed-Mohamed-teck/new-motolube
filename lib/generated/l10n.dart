@@ -444,6 +444,66 @@ class S {
     );
   }
 
+  /// `Change profile photo`
+  String get changeProfilePhoto {
+    return Intl.message(
+      'Change profile photo',
+      name: 'changeProfilePhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select a profile photo.`
+  String get profilePhotoRequired {
+    return Intl.message(
+      'Please select a profile photo.',
+      name: 'profilePhotoRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to select this photo. Please try again.`
+  String get profilePhotoSelectionFailed {
+    return Intl.message(
+      'Unable to select this photo. Please try again.',
+      name: 'profilePhotoSelectionFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save changes`
+  String get saveChanges {
+    return Intl.message(
+      'Save changes',
+      name: 'saveChanges',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile updated successfully.`
+  String get profileUpdatedSuccessfully {
+    return Intl.message(
+      'Profile updated successfully.',
+      name: 'profileUpdatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unable to update your profile. Please try again.`
+  String get profileUpdateFailed {
+    return Intl.message(
+      'Unable to update your profile. Please try again.',
+      name: 'profileUpdateFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Logout`
   String get logout {
     return Intl.message('Logout', name: 'logout', desc: '', args: []);

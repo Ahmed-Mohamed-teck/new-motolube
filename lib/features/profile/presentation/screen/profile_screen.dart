@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:newmotorlube/core/providers/general_providers.dart';
 import 'package:newmotorlube/core/providers/secure_storage.dart';
@@ -22,8 +26,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   String? _name;
   String? _phone;
   String? _email;
+  String? _profilePhotoBase64;
+  Uint8List? _profilePhotoBytes;
   bool _deleteAccountSubmitted = false;
   bool _isSubmittingDelete = false;
+  bool _isUpdatingProfile = false;
   DateTime? _deletedDate;
 
   @override
@@ -34,9 +41,19 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
 
   Future<void> _loadProfileData() async {
     final store = ref.read(secureStoreProvider);
-    final name = await store.userName();
-    final phone = await store.phoneNumber();
-    final email = await store.userEmail();
+    final authState = ref.read(authViewModelProvider);
+    final authenticatedUser =
+        authState is AuthenticatedState ? authState.user : null;
+    final name = authenticatedUser?.name ?? await store.userName();
+    final phone = authenticatedUser?.mobileNo ?? await store.phoneNumber();
+    final email = authenticatedUser?.email ?? await store.userEmail();
+    final profilePhotoBase64 =
+        authenticatedUser == null
+            ? null
+            : authenticatedUser.photoBase64 ??
+                appPrefsWithCache.getString(
+                  _profilePhotoStorageKey(authenticatedUser.oracleId),
+                );
     final deletedDateValue = appPrefsWithCache.getString(_deletedDateKey);
     final deletedDate =
         deletedDateValue == null ? null : DateTime.tryParse(deletedDateValue);
@@ -45,6 +62,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         _name = name;
         _phone = phone;
         _email = email;
+        _profilePhotoBase64 = profilePhotoBase64;
+        _profilePhotoBytes = _decodePhoto(profilePhotoBase64);
         _deleteAccountSubmitted =
             appPrefsWithCache.getBool(_deleteAccountSubmittedKey) ?? false;
         _deletedDate = deletedDate;
@@ -88,25 +107,38 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                             CircleAvatar(
                               radius: 60,
                               backgroundColor: Colors.grey[300],
-                              child: const Icon(
-                                Icons.person,
-                                size: 60,
-                                color: Colors.white,
-                              ),
+                              backgroundImage:
+                                  _profilePhotoBytes == null
+                                      ? null
+                                      : MemoryImage(_profilePhotoBytes!),
+                              child:
+                                  _profilePhotoBytes == null
+                                      ? const Icon(
+                                        Icons.person,
+                                        size: 60,
+                                        color: Colors.white,
+                                      )
+                                      : null,
                             ),
                             Positioned(
                               bottom: 0,
                               right: 0,
-                              child: Container(
-                                padding: const EdgeInsets.all(4),
-                                decoration: BoxDecoration(
-                                  color: context.appColors.secondary,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Icon(
-                                  Icons.camera_alt,
-                                  color: context.appColors.surface,
-                                  size: 20,
+                              child: GestureDetector(
+                                onTap:
+                                    _isUpdatingProfile
+                                        ? null
+                                        : () => _editProfile(authState),
+                                child: Container(
+                                  padding: const EdgeInsets.all(4),
+                                  decoration: BoxDecoration(
+                                    color: context.appColors.secondary,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Icon(
+                                    Icons.camera_alt,
+                                    color: context.appColors.surface,
+                                    size: 20,
+                                  ),
                                 ),
                               ),
                             ),
@@ -123,10 +155,20 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       _buildInfoTile(Icons.email, appLang.email, _email ?? ''),
                       const SizedBox(height: 40),
                       ElevatedButton.icon(
-                        onPressed: () {
-                          // Navigate to edit profile screen
-                        },
-                        icon: const Icon(Icons.edit),
+                        onPressed:
+                            _isUpdatingProfile
+                                ? null
+                                : () => _editProfile(authState),
+                        icon:
+                            _isUpdatingProfile
+                                ? const SizedBox(
+                                  width: 18,
+                                  height: 18,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                  ),
+                                )
+                                : const Icon(Icons.edit),
                         label: Text(appLang.editProfile),
                         style: ElevatedButton.styleFrom(
                           minimumSize: const Size(double.infinity, 45),
@@ -136,15 +178,18 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                       _buildDeleteAccountSection(authState),
                       const SizedBox(height: 16),
                       OutlinedButton.icon(
-                        onPressed: () async {
-                          await authVm.unAuthenticate();
-                          if (!mounted) return;
-                          Navigator.pushNamedAndRemoveUntil(
-                            context,
-                            'loginScreen',
-                            (route) => false,
-                          );
-                        },
+                        onPressed:
+                            _isUpdatingProfile
+                                ? null
+                                : () async {
+                                  await authVm.unAuthenticate();
+                                  if (!mounted) return;
+                                  Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    'loginScreen',
+                                    (route) => false,
+                                  );
+                                },
                         icon: const Icon(Icons.logout),
                         label: Text(appLang.logout),
                         style: OutlinedButton.styleFrom(
@@ -360,6 +405,63 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     return null;
   }
 
+  Future<void> _editProfile(AuthenticatedState authState) async {
+    final draft = await showDialog<_ProfileUpdateDraft>(
+      context: context,
+      builder:
+          (dialogContext) => _EditProfileDialog(
+            initialEmail: _email ?? authState.user.email,
+            initialPhotoBase64:
+                _profilePhotoBase64 ?? authState.user.photoBase64,
+          ),
+    );
+    if (draft == null || !mounted) return;
+
+    setState(() {
+      _isUpdatingProfile = true;
+    });
+
+    try {
+      await ref
+          .read(authViewModelProvider.notifier)
+          .updateProfile(email: draft.email, photoBase64: draft.photoBase64);
+      await appPrefsWithCache.setString(
+        _profilePhotoStorageKey(authState.user.oracleId),
+        draft.photoBase64,
+      );
+
+      if (!mounted) return;
+      setState(() {
+        _email = draft.email;
+        _profilePhotoBase64 = draft.photoBase64;
+        _profilePhotoBytes = _decodePhoto(draft.photoBase64);
+      });
+      _showSnackBar(S.of(context).profileUpdatedSuccessfully);
+    } catch (_) {
+      if (!mounted) return;
+      _showSnackBar(S.of(context).profileUpdateFailed);
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isUpdatingProfile = false;
+        });
+      }
+    }
+  }
+
+  String _profilePhotoStorageKey(String oracleId) =>
+      'profilePhotoBase64_$oracleId';
+
+  Uint8List? _decodePhoto(String? value) {
+    if (value == null || value.isEmpty) return null;
+    try {
+      final encoded = value.contains(',') ? value.split(',').last : value;
+      return base64Decode(encoded);
+    } on FormatException {
+      return null;
+    }
+  }
+
   void _showSnackBar(String message) {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
@@ -400,6 +502,196 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _ProfileUpdateDraft {
+  final String? email;
+  final String photoBase64;
+
+  const _ProfileUpdateDraft({required this.email, required this.photoBase64});
+}
+
+class _EditProfileDialog extends StatefulWidget {
+  final String? initialEmail;
+  final String? initialPhotoBase64;
+
+  const _EditProfileDialog({
+    required this.initialEmail,
+    required this.initialPhotoBase64,
+  });
+
+  @override
+  State<_EditProfileDialog> createState() => _EditProfileDialogState();
+}
+
+class _EditProfileDialogState extends State<_EditProfileDialog> {
+  final _formKey = GlobalKey<FormState>();
+  final _imagePicker = ImagePicker();
+  late final TextEditingController _emailController;
+  String? _photoBase64;
+  Uint8List? _photoBytes;
+  String? _photoError;
+  bool _isPickingPhoto = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _emailController = TextEditingController(text: widget.initialEmail ?? '');
+    _photoBase64 = widget.initialPhotoBase64;
+    _photoBytes = _decodePhoto(widget.initialPhotoBase64);
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _pickPhoto() async {
+    if (_isPickingPhoto) return;
+    setState(() {
+      _isPickingPhoto = true;
+      _photoError = null;
+    });
+
+    try {
+      final photo = await _imagePicker.pickImage(
+        source: ImageSource.gallery,
+        maxWidth: 1024,
+        maxHeight: 1024,
+        imageQuality: 80,
+      );
+      if (photo == null) return;
+      final bytes = await photo.readAsBytes();
+      if (!mounted) return;
+      setState(() {
+        _photoBytes = bytes;
+        _photoBase64 = base64Encode(bytes);
+      });
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        _photoError = S.of(context).profilePhotoSelectionFailed;
+      });
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isPickingPhoto = false;
+        });
+      }
+    }
+  }
+
+  void _submit() {
+    final isFormValid = _formKey.currentState?.validate() ?? false;
+    final hasPhoto = _photoBase64?.isNotEmpty ?? false;
+    setState(() {
+      _photoError = hasPhoto ? null : S.of(context).profilePhotoRequired;
+    });
+    if (!isFormValid || !hasPhoto) return;
+
+    final email = _emailController.text.trim();
+    Navigator.of(context).pop(
+      _ProfileUpdateDraft(
+        email: email.isEmpty ? null : email,
+        photoBase64: _photoBase64!,
+      ),
+    );
+  }
+
+  String? _validateEmail(String? value) {
+    final email = value?.trim() ?? '';
+    if (email.isEmpty) return null;
+    final isValid = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$').hasMatch(email);
+    return isValid ? null : S.of(context).enterValidEmail;
+  }
+
+  Uint8List? _decodePhoto(String? value) {
+    if (value == null || value.isEmpty) return null;
+    try {
+      final encoded = value.contains(',') ? value.split(',').last : value;
+      return base64Decode(encoded);
+    } on FormatException {
+      return null;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final appLang = S.of(context);
+    return AlertDialog(
+      title: Text(appLang.editProfile),
+      content: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              InkWell(
+                onTap: _isPickingPhoto ? null : _pickPhoto,
+                customBorder: const CircleBorder(),
+                child: CircleAvatar(
+                  radius: 52,
+                  backgroundColor: Colors.grey[300],
+                  backgroundImage:
+                      _photoBytes == null ? null : MemoryImage(_photoBytes!),
+                  child:
+                      _isPickingPhoto
+                          ? const CircularProgressIndicator()
+                          : _photoBytes == null
+                          ? const Icon(
+                            Icons.add_a_photo_outlined,
+                            size: 38,
+                            color: Colors.white,
+                          )
+                          : null,
+                ),
+              ),
+              TextButton.icon(
+                onPressed: _isPickingPhoto ? null : _pickPhoto,
+                icon: const Icon(Icons.photo_library_outlined),
+                label: Text(appLang.changeProfilePhoto),
+              ),
+              if (_photoError != null)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Text(
+                    _photoError!,
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.error,
+                      fontSize: 12,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              TextFormField(
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
+                textInputAction: TextInputAction.done,
+                decoration: InputDecoration(
+                  labelText: appLang.email,
+                  prefixIcon: const Icon(Icons.email_outlined),
+                ),
+                validator: _validateEmail,
+                onFieldSubmitted: (_) => _submit(),
+              ),
+            ],
+          ),
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: Text(appLang.cancel),
+        ),
+        ElevatedButton.icon(
+          onPressed: _isPickingPhoto ? null : _submit,
+          icon: const Icon(Icons.save_outlined),
+          label: Text(appLang.saveChanges),
+        ),
+      ],
     );
   }
 }

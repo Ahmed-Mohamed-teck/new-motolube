@@ -18,5 +18,12 @@ abstract class IAuthRepository {
     required String otp,
   });
   Future<User> getUserInfo({required String phoneNumber});
+  Future<void> updateUserProfile({
+    required String oracleId,
+    required String fireBaseId,
+    required String photoBase64,
+    required String? email,
+    required int userType,
+  });
   Future<void> deleteUserAccount(String email);
 }

@@ -288,6 +288,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "carWash": MessageLookupByLibrary.simpleMessage("غسيل السيارات"),
     "categoryLabel": MessageLookupByLibrary.simpleMessage("الفئة"),
     "changeLanguage": MessageLookupByLibrary.simpleMessage("تغيير اللغة"),
+    "changeProfilePhoto": MessageLookupByLibrary.simpleMessage(
+      "تغيير صورة الملف الشخصي",
+    ),
     "characterVinLimit": MessageLookupByLibrary.simpleMessage(
       "رقم الهيكل 17 حرفًا",
     ),
@@ -687,6 +690,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "pricePrefixedLabel": m22,
     "profileAppbar": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
     "profileNav": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
+    "profilePhotoRequired": MessageLookupByLibrary.simpleMessage(
+      "يرجى اختيار صورة للملف الشخصي.",
+    ),
+    "profilePhotoSelectionFailed": MessageLookupByLibrary.simpleMessage(
+      "تعذر اختيار هذه الصورة. يرجى المحاولة مرة أخرى.",
+    ),
+    "profileUpdateFailed": MessageLookupByLibrary.simpleMessage(
+      "تعذر تحديث ملفك الشخصي. يرجى المحاولة مرة أخرى.",
+    ),
+    "profileUpdatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+      "تم تحديث الملف الشخصي بنجاح.",
+    ),
     "promotionDescription": MessageLookupByLibrary.simpleMessage("وصف العرض"),
     "promotionName": MessageLookupByLibrary.simpleMessage("اسم العرض"),
     "promotionSavedSuccessfully": MessageLookupByLibrary.simpleMessage(
@@ -720,6 +735,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "جارٍ تحديد رقم بند الباقة...",
     ),
     "retryButtonLabel": MessageLookupByLibrary.simpleMessage("إعادة المحاولة"),
+    "saveChanges": MessageLookupByLibrary.simpleMessage("حفظ التغييرات"),
     "saveChecklistButtonLabel": MessageLookupByLibrary.simpleMessage(
       "حفظ قائمة الفحص",
     ),

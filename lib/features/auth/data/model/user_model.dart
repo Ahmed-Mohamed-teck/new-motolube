@@ -12,6 +12,7 @@ class UserModel {
   final UserType userType;
   final String fireBaseId;
   final String? customer_id;
+  final String? photoBase64;
 
   UserModel({
     required this.oracleId,
@@ -24,6 +25,7 @@ class UserModel {
     required this.userType,
     this.fireBaseId = '',
     this.customer_id = '',
+    this.photoBase64,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
@@ -43,6 +45,7 @@ class UserModel {
     customer_id:
         (json['customer_id'] ?? json['customerId'] ?? json['customerID'] ?? '')
             .toString(),
+    photoBase64: json['photoBase64'] as String?,
   );
 
   User toEntity() => User(
@@ -56,6 +59,7 @@ class UserModel {
     userType: userType,
     fireBaseId: fireBaseId,
     customer_id: customer_id,
+    photoBase64: photoBase64,
   );
 }
 

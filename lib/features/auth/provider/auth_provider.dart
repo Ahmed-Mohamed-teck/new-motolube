@@ -15,6 +15,7 @@ import '../domain/use_case/log_out_use_case.dart';
 import '../domain/use_case/register_user_use_case.dart';
 import '../domain/use_case/save_auth_session_use_case.dart';
 import '../domain/use_case/send_otp_use_case.dart';
+import '../domain/use_case/update_user_profile_use_case.dart';
 import '../domain/use_case/verify_otp_use_case.dart';
 import '../presentation/view_model/auth_state.dart';
 import '../presentation/view_model/auth_view_model.dart';
@@ -59,6 +60,12 @@ final deleteUserAccountUseCaseProvider = Provider<DeleteUserAccountUseCase>((
   ref,
 ) {
   return DeleteUserAccountUseCase(ref.read(authRepositoryProvider));
+});
+
+final updateUserProfileUseCaseProvider = Provider<UpdateUserProfileUseCase>((
+  ref,
+) {
+  return UpdateUserProfileUseCase(ref.read(authRepositoryProvider));
 });
 
 final saveAuthSessionUseCaseProvider = Provider<SaveAuthSessionUseCase>((ref) {

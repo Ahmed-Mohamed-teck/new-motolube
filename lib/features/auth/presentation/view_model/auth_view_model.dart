@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:newmotorlube/core/providers/global_lang_provider.dart';
+import 'package:newmotorlube/core/providers/secure_storage.dart';
+import 'package:newmotorlube/core/storage/secure_store.dart';
 import '../../domain/entity/auth_exception.dart';
 import '../../domain/entity/user_entity.dart';
 import '../../domain/use_case/get_stored_auth_use_case.dart';
@@ -9,6 +11,7 @@ import '../../domain/use_case/log_out_use_case.dart';
 import '../../domain/use_case/register_user_use_case.dart';
 import '../../domain/use_case/save_auth_session_use_case.dart';
 import '../../domain/use_case/send_otp_use_case.dart';
+import '../../domain/use_case/update_user_profile_use_case.dart';
 import '../../domain/use_case/verify_otp_use_case.dart';
 import '../../provider/auth_provider.dart';
 import 'auth_state.dart';
@@ -21,6 +24,8 @@ class AuthViewModel extends Notifier<AuthState> {
   late final LogoutUseCase _logoutUseCase;
   late final SaveAuthSessionUseCase _saveAuthSessionUseCase;
   late final GetStoredAuthUseCase _getStoredAuthUseCase;
+  late final UpdateUserProfileUseCase _updateUserProfileUseCase;
+  late final SecureStore _secureStore;
 
   String? _phone;
   String _otp = '';
@@ -38,6 +43,8 @@ class AuthViewModel extends Notifier<AuthState> {
     _logoutUseCase = ref.read(logoutUseCaseProvider);
     _saveAuthSessionUseCase = ref.read(saveAuthSessionUseCaseProvider);
     _getStoredAuthUseCase = ref.read(getStoredAuthUseCaseProvider);
+    _updateUserProfileUseCase = ref.read(updateUserProfileUseCaseProvider);
+    _secureStore = ref.read(secureStoreProvider);
     ref.onDispose(() => _timer?.cancel());
     return InitailAuthState();
   }
@@ -169,6 +176,7 @@ class AuthViewModel extends Notifier<AuthState> {
           userType: result.user.userType,
           fireBaseId: result.user.fireBaseId,
           customer_id: result.user.customer_id,
+          photoBase64: result.user.photoBase64,
         ),
       );
     } on InvalidOtpException {
@@ -239,6 +247,7 @@ class AuthViewModel extends Notifier<AuthState> {
                     ? user.fireBaseId
                     : stored.fireBaseId,
             customer_id: user.customer_id,
+            photoBase64: user.photoBase64,
           ),
         );
       } catch (e) {
@@ -257,5 +266,31 @@ class AuthViewModel extends Notifier<AuthState> {
     await _logoutUseCase.call();
     if (!_isCurrentOperation(operationId)) return;
     state = const UnauthenticatedState();
+  }
+
+  Future<void> updateProfile({
+    required String? email,
+    required String photoBase64,
+  }) async {
+    final current = state;
+    if (current is! AuthenticatedState) {
+      throw StateError('The user must be authenticated to update a profile.');
+    }
+
+    await _updateUserProfileUseCase(
+      oracleId: current.user.oracleId,
+      fireBaseId: current.user.fireBaseId,
+      photoBase64: photoBase64,
+      email: email,
+      userType: current.user.userType.value,
+    );
+    await _secureStore.updateUserEmail(email);
+
+    if (!identical(state, current)) return;
+    state = AuthenticatedState(
+      jwtToken: current.jwtToken,
+      firebaseToken: current.firebaseToken,
+      user: current.user.copyWith(email: email, photoBase64: photoBase64),
+    );
   }
 }
