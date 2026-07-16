@@ -13,6 +13,7 @@ import '../../../technician/presentation/widget/status_picker_sheet.dart';
 import '../../../technician/provider/technician_provider.dart';
 import '../../domain/entity/upcoming_service_entity.dart';
 import '../../provider/upcoming_service_provider.dart';
+import '../util/upcoming_service_status_label.dart';
 import '../view_model/upcoming_service_state.dart';
 import '../widget/booking_card.dart';
 
@@ -288,7 +289,7 @@ class _CustomerAppointmentsScreenState
           ),
     );
     return match.label.isNotEmpty
-        ? _statusLabel(context, match.label)
+        ? upcomingServiceStatusLabel(s, match.label)
         : s.upcomingServicesStatusFallback(match.code);
   }
 
@@ -333,7 +334,7 @@ class _CustomerAppointmentsScreenState
       fallback: s.upcomingServicesServicePlaceholder,
     );
     final statusRaw = service.status.trim();
-    final statusLabel = _statusLabel(context, statusRaw);
+    final statusLabel = upcomingServiceStatusLabel(s, statusRaw);
     final statusColors = _statusColorsForStatus(
       statusRaw.isEmpty ? 'pending' : statusRaw,
     );
@@ -388,18 +389,6 @@ class _CustomerAppointmentsScreenState
   String _valueOrFallback(String value, {required String fallback}) {
     final trimmed = value.trim();
     return trimmed.isNotEmpty ? trimmed : fallback;
-  }
-
-  String _statusLabel(BuildContext context, String status) {
-    final s = S.of(context);
-    final lower = status.toLowerCase();
-    if (lower.contains('expired')) return s.upcomingServicesStatusExpired;
-    if (lower.contains('upcoming')) return s.upcomingServicesStatusUpcoming;
-    if (lower.contains('pending')) return s.upcomingServicesStatusPending;
-    if (lower.contains('complete')) return s.upcomingServicesStatusCompleted;
-    if (lower.contains('cancel')) return s.upcomingServicesStatusCancelled;
-    if (lower.contains('new')) return s.upcomingServicesStatusNew;
-    return status.isEmpty ? s.upcomingServicesStatusPending : status;
   }
 
   (Color, Color) _statusColorsForStatus(String status) {

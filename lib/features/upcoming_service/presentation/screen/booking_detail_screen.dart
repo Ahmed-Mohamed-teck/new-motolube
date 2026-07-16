@@ -15,6 +15,7 @@ import '../../../technician/provider/technician_provider.dart';
 import '../../../technician/domain/entity/booking_status.dart';
 import '../../domain/entity/upcoming_service_entity.dart';
 import '../../provider/upcoming_service_provider.dart';
+import '../util/upcoming_service_status_label.dart';
 import '../view_model/upcoming_service_action_state.dart';
 import '../../../../core/utils/helper_fuc.dart';
 
@@ -304,7 +305,7 @@ class _BookingDetailScreenState extends ConsumerState<BookingDetailScreen> {
       service.plateText,
       fallback: s.upcomingServicesPlateFallback,
     );
-    final statusLabel = _statusLabel(context, service.status);
+    final statusLabel = upcomingServiceStatusLabel(s, service.status);
     final dateLabel = _formatDate(context, service);
     final timeLabel = _formatTime(service);
     final packageCandidate =
@@ -764,18 +765,6 @@ String _formatTime(UpcomingServiceEntity service) {
 String _valueOrFallback(String? value, {required String fallback}) {
   final trimmed = value?.trim() ?? '';
   return trimmed.isNotEmpty ? trimmed : fallback;
-}
-
-String _statusLabel(BuildContext context, String status) {
-  final s = S.of(context);
-  final lower = status.toLowerCase();
-  if (lower.contains('expired')) return s.upcomingServicesStatusExpired;
-  if (lower.contains('upcoming')) return s.upcomingServicesStatusUpcoming;
-  if (lower.contains('pending')) return s.upcomingServicesStatusPending;
-  if (lower.contains('complete')) return s.upcomingServicesStatusCompleted;
-  if (lower.contains('cancel')) return s.upcomingServicesStatusCancelled;
-  if (lower.contains('new')) return s.upcomingServicesStatusNew;
-  return status.isEmpty ? s.upcomingServicesStatusPending : status;
 }
 
 (Color, Color) _statusColors(BuildContext context, String status) {

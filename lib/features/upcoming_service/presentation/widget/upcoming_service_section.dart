@@ -10,6 +10,7 @@ import '../../../auth/provider/auth_provider.dart';
 import '../../../auth/presentation/view_model/auth_state.dart';
 import '../../domain/entity/upcoming_service_entity.dart';
 import '../../provider/upcoming_service_provider.dart';
+import '../util/upcoming_service_status_label.dart';
 import 'booking_card.dart';
 import '../view_model/upcoming_service_state.dart';
 
@@ -122,7 +123,7 @@ Widget _mapToBookingCard(BuildContext context, UpcomingServiceEntity service) {
     fallback: s.upcomingServicesServicePlaceholder,
   );
   final statusRaw = service.status.trim();
-  final statusLabel = _statusLabel(context, statusRaw);
+  final statusLabel = upcomingServiceStatusLabel(s, statusRaw);
   final statusColors = _statusColorsForStatus(
     statusRaw.isEmpty ? 'pending' : statusRaw,
   );
@@ -174,18 +175,6 @@ String _formatTime(UpcomingServiceEntity service) {
 String _valueOrFallback(String value, {required String fallback}) {
   final trimmed = value.trim();
   return trimmed.isNotEmpty ? trimmed : fallback;
-}
-
-String _statusLabel(BuildContext context, String status) {
-  final s = S.of(context);
-  final lower = status.toLowerCase();
-  if (lower.contains('expired')) return s.upcomingServicesStatusExpired;
-  if (lower.contains('upcoming')) return s.upcomingServicesStatusUpcoming;
-  if (lower.contains('pending')) return s.upcomingServicesStatusPending;
-  if (lower.contains('complete')) return s.upcomingServicesStatusCompleted;
-  if (lower.contains('cancel')) return s.upcomingServicesStatusCancelled;
-  if (lower.contains('new')) return s.upcomingServicesStatusNew;
-  return status.isEmpty ? s.upcomingServicesStatusPending : status;
 }
 
 (Color, Color) _statusColorsForStatus(String status) {

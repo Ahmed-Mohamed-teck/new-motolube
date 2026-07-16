@@ -890,21 +890,40 @@ class MessageLookup extends MessageLookupByLibrary {
     "upcomingServicesServicePlaceholder": MessageLookupByLibrary.simpleMessage(
       "الخدمة",
     ),
+    "upcomingServicesStatusAccepted": MessageLookupByLibrary.simpleMessage(
+      "مقبولة",
+    ),
+    "upcomingServicesStatusArrived": MessageLookupByLibrary.simpleMessage(
+      "وصلت",
+    ),
     "upcomingServicesStatusCancelled": MessageLookupByLibrary.simpleMessage(
       "ملغاة",
     ),
     "upcomingServicesStatusCompleted": MessageLookupByLibrary.simpleMessage(
       "مكتملة",
     ),
+    "upcomingServicesStatusEnRoute": MessageLookupByLibrary.simpleMessage(
+      "في الطريق",
+    ),
     "upcomingServicesStatusExpired": MessageLookupByLibrary.simpleMessage(
       "منتهية",
     ),
     "upcomingServicesStatusFallback": m29,
-    "upcomingServicesStatusNew": MessageLookupByLibrary.simpleMessage(
-      "حجز جديد",
+    "upcomingServicesStatusNeedsApproval": MessageLookupByLibrary.simpleMessage(
+      "تحتاج موافقة",
+    ),
+    "upcomingServicesStatusNew": MessageLookupByLibrary.simpleMessage("جديدة"),
+    "upcomingServicesStatusOpen": MessageLookupByLibrary.simpleMessage(
+      "مفتوحة",
+    ),
+    "upcomingServicesStatusPaid": MessageLookupByLibrary.simpleMessage(
+      "مدفوعة",
     ),
     "upcomingServicesStatusPending": MessageLookupByLibrary.simpleMessage(
       "قيد الانتظار",
+    ),
+    "upcomingServicesStatusRejected": MessageLookupByLibrary.simpleMessage(
+      "مرفوضة",
     ),
     "upcomingServicesStatusUpcoming": MessageLookupByLibrary.simpleMessage(
       "قادمة",

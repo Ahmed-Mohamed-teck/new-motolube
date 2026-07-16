@@ -916,21 +916,36 @@ class MessageLookup extends MessageLookupByLibrary {
     "upcomingServicesServicePlaceholder": MessageLookupByLibrary.simpleMessage(
       "Service",
     ),
+    "upcomingServicesStatusAccepted": MessageLookupByLibrary.simpleMessage(
+      "Accepted",
+    ),
+    "upcomingServicesStatusArrived": MessageLookupByLibrary.simpleMessage(
+      "Arrived",
+    ),
     "upcomingServicesStatusCancelled": MessageLookupByLibrary.simpleMessage(
       "Cancelled",
     ),
     "upcomingServicesStatusCompleted": MessageLookupByLibrary.simpleMessage(
       "Completed",
     ),
+    "upcomingServicesStatusEnRoute": MessageLookupByLibrary.simpleMessage(
+      "En Route",
+    ),
     "upcomingServicesStatusExpired": MessageLookupByLibrary.simpleMessage(
       "Expired",
     ),
     "upcomingServicesStatusFallback": m29,
-    "upcomingServicesStatusNew": MessageLookupByLibrary.simpleMessage(
-      "New Booking",
+    "upcomingServicesStatusNeedsApproval": MessageLookupByLibrary.simpleMessage(
+      "Needs Approval",
     ),
+    "upcomingServicesStatusNew": MessageLookupByLibrary.simpleMessage("New"),
+    "upcomingServicesStatusOpen": MessageLookupByLibrary.simpleMessage("Open"),
+    "upcomingServicesStatusPaid": MessageLookupByLibrary.simpleMessage("Paid"),
     "upcomingServicesStatusPending": MessageLookupByLibrary.simpleMessage(
       "Pending",
+    ),
+    "upcomingServicesStatusRejected": MessageLookupByLibrary.simpleMessage(
+      "Rejected",
     ),
     "upcomingServicesStatusUpcoming": MessageLookupByLibrary.simpleMessage(
       "Upcoming",

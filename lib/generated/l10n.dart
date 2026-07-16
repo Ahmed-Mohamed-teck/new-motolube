@@ -1534,11 +1534,81 @@ class S {
     );
   }
 
-  /// `New Booking`
+  /// `New`
   String get upcomingServicesStatusNew {
     return Intl.message(
-      'New Booking',
+      'New',
       name: 'upcomingServicesStatusNew',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accepted`
+  String get upcomingServicesStatusAccepted {
+    return Intl.message(
+      'Accepted',
+      name: 'upcomingServicesStatusAccepted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Rejected`
+  String get upcomingServicesStatusRejected {
+    return Intl.message(
+      'Rejected',
+      name: 'upcomingServicesStatusRejected',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `En Route`
+  String get upcomingServicesStatusEnRoute {
+    return Intl.message(
+      'En Route',
+      name: 'upcomingServicesStatusEnRoute',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Arrived`
+  String get upcomingServicesStatusArrived {
+    return Intl.message(
+      'Arrived',
+      name: 'upcomingServicesStatusArrived',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open`
+  String get upcomingServicesStatusOpen {
+    return Intl.message(
+      'Open',
+      name: 'upcomingServicesStatusOpen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Paid`
+  String get upcomingServicesStatusPaid {
+    return Intl.message(
+      'Paid',
+      name: 'upcomingServicesStatusPaid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Needs Approval`
+  String get upcomingServicesStatusNeedsApproval {
+    return Intl.message(
+      'Needs Approval',
+      name: 'upcomingServicesStatusNeedsApproval',
       desc: '',
       args: [],
     );
