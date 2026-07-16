@@ -718,5 +718,8 @@
   "invoiceFileUnavailableMessage": "The invoice PDF is not available yet. Please check again later.",
   "invoiceOpenFailedMessage": "Unable to open the invoice PDF.",
   "invoiceValueUnavailable": "Not available",
-  "invoiceCurrencySymbol": "SAR "
+  "invoiceCurrencySymbol": "SAR ",
+  "moreDocumentsSectionTitle": "Documents",
+  "morePreferencesSectionTitle": "Preferences",
+  "moreLanguageDescription": "Switch the app display language"
 }

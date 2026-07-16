@@ -582,7 +582,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "model": MessageLookupByLibrary.simpleMessage("الموديل"),
     "more": MessageLookupByLibrary.simpleMessage("المزيد"),
     "moreAppbar": MessageLookupByLibrary.simpleMessage("المزيد"),
+    "moreDocumentsSectionTitle": MessageLookupByLibrary.simpleMessage(
+      "المستندات",
+    ),
+    "moreLanguageDescription": MessageLookupByLibrary.simpleMessage(
+      "تغيير لغة عرض التطبيق",
+    ),
     "moreNav": MessageLookupByLibrary.simpleMessage("المزيد"),
+    "morePreferencesSectionTitle": MessageLookupByLibrary.simpleMessage(
+      "التفضيلات",
+    ),
     "myCarsNav": MessageLookupByLibrary.simpleMessage("سياراتي"),
     "name": MessageLookupByLibrary.simpleMessage("الاسم"),
     "newBookingsWillAppearMessage": MessageLookupByLibrary.simpleMessage(

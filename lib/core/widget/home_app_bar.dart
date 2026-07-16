@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../features/auth/presentation/view_model/auth_state.dart';
 import '../../features/auth/provider/auth_provider.dart';
+import '../../features/auth/domain/entity/user_type.dart';
 import '../../features/home/presentaion/screen/base_home_screen.dart';
 import '../../main.dart';
 import '../providers/global_lang_provider.dart';
@@ -14,13 +15,16 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authState = ref.watch(authViewModelProvider);
     final navIndex = ref.watch(currentNavBottomIndexProvider);
+    final isCustomer =
+        authState is! AuthenticatedState ||
+        authState.user.userType == UserType.customer;
     String appBarTitle = appLang.homeAppbar;
     switch (navIndex) {
       case 0:
         appBarTitle = appLang.homeAppbar;
         break;
       case 1:
-        appBarTitle = appLang.myCarsNav;
+        appBarTitle = isCustomer ? appLang.myCarsNav : appLang.moreAppbar;
         break;
       case 2:
         appBarTitle = appLang.maintenanceNav;
@@ -29,7 +33,7 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
         appBarTitle = appLang.contactUsAppbar;
         break;
       case 4:
-        appBarTitle = appLang.profileAppbar;
+        appBarTitle = appLang.moreAppbar;
         break;
       default:
         appBarTitle = appLang.homeAppbar;

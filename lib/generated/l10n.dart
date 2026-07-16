@@ -4428,6 +4428,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Documents`
+  String get moreDocumentsSectionTitle {
+    return Intl.message(
+      'Documents',
+      name: 'moreDocumentsSectionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Preferences`
+  String get morePreferencesSectionTitle {
+    return Intl.message(
+      'Preferences',
+      name: 'morePreferencesSectionTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Switch the app display language`
+  String get moreLanguageDescription {
+    return Intl.message(
+      'Switch the app display language',
+      name: 'moreLanguageDescription',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

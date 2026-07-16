@@ -718,5 +718,8 @@
   "invoiceFileUnavailableMessage": "ملف الفاتورة غير متاح حاليًا. يرجى التحقق مرة أخرى لاحقًا.",
   "invoiceOpenFailedMessage": "تعذر فتح ملف الفاتورة.",
   "invoiceValueUnavailable": "غير متاح",
-  "invoiceCurrencySymbol": "ر.س "
+  "invoiceCurrencySymbol": "ر.س ",
+  "moreDocumentsSectionTitle": "المستندات",
+  "morePreferencesSectionTitle": "التفضيلات",
+  "moreLanguageDescription": "تغيير لغة عرض التطبيق"
 }
