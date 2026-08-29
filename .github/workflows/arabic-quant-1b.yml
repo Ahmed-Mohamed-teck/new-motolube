@@ -1,0 +1,88 @@
+name: Arabic 1B quantization pilot
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "research/arabic_quant_1b/**"
+      - ".github/workflows/arabic-quant-1b.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  experiment:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 330
+
+    steps:
+      - name: Checkout experiment branch
+        uses: actions/checkout@v4
+
+      - name: Record environment
+        run: |
+          mkdir -p research/arabic_quant_1b/results research/arabic_quant_1b/logs
+          {
+            date -u
+            uname -a
+            lscpu
+            free -h
+            df -h
+            python --version
+          } > research/arabic_quant_1b/results/environment.txt
+
+      - name: Install build and Python dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends build-essential cmake git wget ca-certificates
+          python -m pip install --upgrade pip
+          python -m pip install numpy pandas scipy scikit-learn requests
+          python -m pip freeze > research/arabic_quant_1b/results/python_packages.txt
+
+      - name: Build pinned llama.cpp
+        working-directory: research/arabic_quant_1b
+        run: |
+          git clone --depth 1 --branch b3930 https://github.com/ggml-org/llama.cpp.git llama.cpp
+          cmake -S llama.cpp -B llama.cpp/build -DCMAKE_BUILD_TYPE=Release -DLLAMA_CURL=OFF -DGGML_NATIVE=ON
+          cmake --build llama.cpp/build --config Release --parallel 2 --target llama-server
+          ./llama.cpp/build/bin/llama-server --version | tee results/llama_server_version.txt || true
+
+      - name: Download fixed public benchmark and model representations
+        working-directory: research/arabic_quant_1b
+        run: |
+          mkdir -p data models
+          wget --tries=6 --timeout=60 --read-timeout=120 -O data/ArabicMMLU.csv \
+            https://raw.githubusercontent.com/mbzuai-nlp/ArabicMMLU/main/data/ArabicMMLU.csv
+          wget --tries=6 --timeout=60 --read-timeout=120 -O models/granite-3.0-1b-a400m-instruct-f16.gguf \
+            https://huggingface.co/bartowski/granite-3.0-1b-a400m-instruct-GGUF/resolve/main/granite-3.0-1b-a400m-instruct-f16.gguf
+          wget --tries=6 --timeout=60 --read-timeout=120 -O models/granite-3.0-1b-a400m-instruct-Q8_0.gguf \
+            https://huggingface.co/bartowski/granite-3.0-1b-a400m-instruct-GGUF/resolve/main/granite-3.0-1b-a400m-instruct-Q8_0.gguf
+          wget --tries=6 --timeout=60 --read-timeout=120 -O models/granite-3.0-1b-a400m-instruct-Q4_K_M.gguf \
+            https://huggingface.co/bartowski/granite-3.0-1b-a400m-instruct-GGUF/resolve/main/granite-3.0-1b-a400m-instruct-Q4_K_M.gguf
+          ls -lh data models | tee results/downloaded_files.txt
+          df -h | tee -a results/downloaded_files.txt
+
+      - name: Run paired 500-question experiment
+        working-directory: research/arabic_quant_1b
+        run: |
+          python run_experiment.py --sample-size 500 --ctx-size 2048 --threads 2 --bootstrap 10000 2>&1 | tee results/console.log
+
+      - name: Package compact result bundle
+        if: always()
+        working-directory: research/arabic_quant_1b
+        run: |
+          tar -czf arabic_quant_1b_results.tar.gz results logs run_experiment.py || true
+          ls -lh arabic_quant_1b_results.tar.gz || true
+
+      - name: Upload experiment artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arabic-quant-1b-results
+          path: |
+            research/arabic_quant_1b/results
+            research/arabic_quant_1b/logs
+            research/arabic_quant_1b/run_experiment.py
+            research/arabic_quant_1b/arabic_quant_1b_results.tar.gz
+          if-no-files-found: warn
+          retention-days: 14
