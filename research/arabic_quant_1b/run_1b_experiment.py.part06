@@ -1,0 +1,41 @@
+
+    metadata: dict[str, Any] = {
+        "model_repo": "bartowski/granite-3.0-1b-a400m-instruct-GGUF",
+        "dataset": "mbzuai-nlp/ArabicMMLU",
+        "seed": args.seed,
+        "n": args.n,
+        "threads": args.threads,
+        "model_files": {},
+    }
+    frames: dict[str, pd.DataFrame] = {}
+    base_port = 8091
+    for offset, variant in enumerate(("f16", "q8", "q4")):
+        path = args.model_dir / MODEL_FILES[variant]
+        if not path.exists():
+            raise FileNotFoundError(path)
+        metadata["model_files"][variant] = {
+            "filename": path.name,
+            "bytes": path.stat().st_size,
+            "sha256": file_sha256(path),
+        }
+        frames[variant] = run_model(
+            variant=variant,
+            model_path=path,
+            server_bin=args.server_bin,
+            questions=questions,
+            output_dir=args.output_dir,
+            port=base_port + offset,
+            threads=args.threads,
+        )
+
+    summary = analyze(frames, args.output_dir, args.seed)
+    (args.output_dir / "summary.json").write_text(
+        json.dumps({"metadata": metadata, "results": summary}, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    write_report(summary, metadata, args.output_dir)
+    print("RESULT_JSON=" + json.dumps(summary, ensure_ascii=False), flush=True)
+
+
+if __name__ == "__main__":
+    main()
