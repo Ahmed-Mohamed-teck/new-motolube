@@ -1,0 +1,100 @@
+                ordered = sorted((probs.get(label, 0.0) for label in LABELS), reverse=True)
+                margin = ordered[0] - ordered[1] if len(ordered) >= 2 else float("nan")
+                record = {
+                    "qid": q.qid,
+                    "subject": q.subject,
+                    "country": q.country,
+                    "level": q.level,
+                    "question": q.question,
+                    "gold": q.gold,
+                    "prediction": pred,
+                    "correct": int(pred == q.gold),
+                    "p_A": probs.get("A", float("nan")),
+                    "p_B": probs.get("B", float("nan")),
+                    "p_C": probs.get("C", float("nan")),
+                    "p_D": probs.get("D", float("nan")),
+                    "max_prob": max(probs.values()) if probs else float("nan"),
+                    "margin": margin,
+                    "entropy": entropy(probs),
+                    "prompt_chars": len(prompt),
+                    "tokens_evaluated": timings.get("prompt_n", response.get("tokens_evaluated")),
+                    "prompt_ms": timings.get("prompt_ms"),
+                    "wall_ms": (time.time() - t0) * 1000.0,
+                }
+                records.append(record)
+                if i % 20 == 0 or i == len(questions):
+                    elapsed = time.time() - started
+                    acc = sum(r["correct"] for r in records) / len(records)
+                    print(f"[{variant}] {i}/{len(questions)} accuracy={acc:.4f} elapsed={elapsed/60:.1f}m", flush=True)
+                    pd.DataFrame(records).to_csv(output_dir / f"predictions_{variant}.csv", index=False)
+            return pd.DataFrame(records)
+        finally:
+            if proc.poll() is None:
+                proc.send_signal(signal.SIGTERM)
+                try:
+                    proc.wait(timeout=30)
+                except subprocess.TimeoutExpired:
+                    proc.kill()
+                    proc.wait(timeout=10)
+
+
+def wilson_interval(k: int, n: int, z: float = 1.959963984540054) -> tuple[float, float]:
+    if n == 0:
+        return float("nan"), float("nan")
+    p = k / n
+    denom = 1 + z * z / n
+    center = (p + z * z / (2 * n)) / denom
+    spread = z * math.sqrt(p * (1 - p) / n + z * z / (4 * n * n)) / denom
+    return center - spread, center + spread
+
+
+def bootstrap_accuracy_delta(a: np.ndarray, b: np.ndarray, seed: int, reps: int = 5000) -> tuple[float, float]:
+    rng = np.random.default_rng(seed)
+    n = len(a)
+    deltas = np.empty(reps, dtype=float)
+    for i in range(reps):
+        idx = rng.integers(0, n, n)
+        deltas[i] = float(np.mean(b[idx] - a[idx]))
+    return float(np.quantile(deltas, 0.025)), float(np.quantile(deltas, 0.975))
+
+
+def exact_mcnemar_p(correct_to_wrong: int, wrong_to_correct: int) -> float:
+    n = correct_to_wrong + wrong_to_correct
+    if n == 0:
+        return 1.0
+    return float(binomtest(min(correct_to_wrong, wrong_to_correct), n=n, p=0.5, alternative="two-sided").pvalue)
+
+
+def analyze(frames: dict[str, pd.DataFrame], output_dir: Path, seed: int) -> dict[str, Any]:
+    merged = frames["f16"].copy()
+    keep = ["qid", "prediction", "correct", "max_prob", "margin", "entropy", "tokens_evaluated", "wall_ms"]
+    merged = merged.rename(columns={c: f"{c}_f16" for c in keep if c != "qid"})
+    for variant in ("q8", "q4"):
+        sub = frames[variant][keep].rename(columns={c: f"{c}_{variant}" for c in keep if c != "qid"})
+        merged = merged.merge(sub, on="qid", how="inner", validate="one_to_one")
+    # Recover common descriptive columns from the F16 source.
+    base_cols = frames["f16"][["qid", "subject", "country", "level", "question", "gold", "prompt_chars"]]
+    merged = base_cols.merge(merged, on="qid", how="inner", validate="one_to_one")
+
+    merged["q8_flip"] = ((merged.correct_f16 == 1) & (merged.correct_q8 == 0)).astype(int)
+    merged["q4_flip"] = ((merged.correct_f16 == 1) & (merged.correct_q4 == 0)).astype(int)
+    merged["q8_recovery"] = ((merged.correct_f16 == 0) & (merged.correct_q8 == 1)).astype(int)
+    merged["q4_recovery"] = ((merged.correct_f16 == 0) & (merged.correct_q4 == 1)).astype(int)
+    merged.to_csv(output_dir / "paired_results.csv", index=False)
+
+    n = len(merged)
+    summary: dict[str, Any] = {
+        "n_questions": n,
+        "accuracy": {},
+        "paired_transitions": {},
+        "predictor": {},
+        "routing": [],
+    }
+    for variant in ("f16", "q8", "q4"):
+        correct = merged[f"correct_{variant}"].to_numpy(dtype=float)
+        summary["accuracy"][variant] = float(correct.mean())
+
+    f16_correct = int(merged.correct_f16.sum())
+    for variant in ("q8", "q4"):
+        ctw = int(merged[f"{variant}_flip"].sum())
+        wtc = int(merged[f"{variant}_recovery"].sum())
