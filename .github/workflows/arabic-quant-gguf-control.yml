@@ -24,7 +24,6 @@ jobs:
       HF_HUB_DISABLE_TELEMETRY: "1"
       HF_HUB_DISABLE_XET: "1"
       TOKENIZERS_PARALLELISM: "false"
-      CMAKE_ARGS: "-DGGML_NATIVE=OFF"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -33,12 +32,12 @@ jobs:
         with:
           python-version: "3.11"
           cache: pip
-      - name: Install GGUF runtime and analysis dependencies
+      - name: Install prebuilt GGUF runtime and analysis dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y cmake ninja-build build-essential
           python -m pip install --upgrade pip
-          python -m pip install --upgrade --prefer-binary llama-cpp-python huggingface-hub pandas numpy scipy
+          python -m pip install --upgrade --only-binary=:all: llama-cpp-python \
+            --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu
+          python -m pip install --upgrade huggingface-hub pandas numpy scipy
       - name: Run F16 versus Q4_K_M and label-permutation control
         run: |
           python research/arabic_quant_pilot/run_gguf_label_control.py \
