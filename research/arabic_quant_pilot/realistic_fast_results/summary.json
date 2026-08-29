@@ -1,0 +1,153 @@
+{
+  "run": {
+    "model_repo": "bartowski/Qwen2.5-0.5B-Instruct-GGUF",
+    "f16_file": "Qwen2.5-0.5B-Instruct-f16.gguf",
+    "q4_file": "Qwen2.5-0.5B-Instruct-Q4_K_M.gguf",
+    "sample_size": 240,
+    "seed": 20260829,
+    "batch_size": 4,
+    "threads": 4,
+    "max_chars": 1400,
+    "github_run_id": "33236890986",
+    "determinism_control_items": 50,
+    "determinism_exact_matches": 50,
+    "determinism_passed": true,
+    "runtime": {
+      "f16": {
+        "elapsed_seconds": 359.41670363699996,
+        "invalid_outputs": 0,
+        "complete_probability_vectors": 0
+      },
+      "q4": {
+        "elapsed_seconds": 223.20941138199998,
+        "invalid_outputs": 0,
+        "complete_probability_vectors": 0
+      }
+    }
+  },
+  "paired": {
+    "n": 240,
+    "f16_accuracy": 0.3125,
+    "q4_accuracy": 0.2916666666666667,
+    "accuracy_delta_q4_minus_f16": -0.020833333333333315,
+    "accuracy_delta_bootstrap_95ci": [
+      -0.05,
+      0.008333333333333333
+    ],
+    "correct_to_wrong": 9,
+    "wrong_to_correct": 4,
+    "net_correctness_loss": 5,
+    "correct_to_wrong_rate_among_f16_correct": 0.12,
+    "correct_to_wrong_wilson_95ci": [
+      0.06443371823944515,
+      0.2125964020474873
+    ],
+    "prediction_changes": 19,
+    "prediction_change_rate": 0.07916666666666666,
+    "prediction_change_wilson_95ci": [
+      0.05126524186067317,
+      0.12032764075680552
+    ],
+    "mcnemar_exact_p": 0.266845703125,
+    "f16_correct": 75,
+    "q4_correct": 70
+  },
+  "predictor": {
+    "status": "ok",
+    "positives": 9,
+    "negatives": 231,
+    "prevalence": 0.0375,
+    "folds": 5,
+    "models": {
+      "logistic": {
+        "auroc": 0.5411255411255411,
+        "auprc": 0.06291864221254925,
+        "recall_at_5pct": 0.1111111111111111,
+        "precision_at_5pct": 0.08333333333333333,
+        "lift_at_5pct": 2.2222222222222223,
+        "recall_at_10pct": 0.2222222222222222,
+        "precision_at_10pct": 0.08333333333333333,
+        "lift_at_10pct": 2.2222222222222223,
+        "recall_at_15pct": 0.2222222222222222,
+        "precision_at_15pct": 0.05555555555555555,
+        "lift_at_15pct": 1.4814814814814814,
+        "recall_at_20pct": 0.3333333333333333,
+        "precision_at_20pct": 0.0625,
+        "lift_at_20pct": 1.6666666666666667
+      },
+      "random_forest": {
+        "auroc": 0.5993265993265994,
+        "auprc": 0.07425717014892048,
+        "recall_at_5pct": 0.1111111111111111,
+        "precision_at_5pct": 0.08333333333333333,
+        "lift_at_5pct": 2.2222222222222223,
+        "recall_at_10pct": 0.2222222222222222,
+        "precision_at_10pct": 0.08333333333333333,
+        "lift_at_10pct": 2.2222222222222223,
+        "recall_at_15pct": 0.3333333333333333,
+        "precision_at_15pct": 0.08333333333333333,
+        "lift_at_15pct": 2.2222222222222223,
+        "recall_at_20pct": 0.4444444444444444,
+        "precision_at_20pct": 0.08333333333333333,
+        "lift_at_20pct": 2.2222222222222223
+      }
+    },
+    "selected_model": "random_forest"
+  },
+  "routing": [
+    {
+      "budget": 0.0,
+      "routed": 0,
+      "hybrid_accuracy": 0.2916666666666667,
+      "gain_vs_q4": 0.0,
+      "flips_recovered": 0,
+      "flip_recall": 0.0,
+      "harmful_reversions": 0
+    },
+    {
+      "budget": 0.05,
+      "routed": 12,
+      "hybrid_accuracy": 0.2916666666666667,
+      "gain_vs_q4": 0.0,
+      "flips_recovered": 1,
+      "flip_recall": 0.1111111111111111,
+      "harmful_reversions": 1
+    },
+    {
+      "budget": 0.1,
+      "routed": 24,
+      "hybrid_accuracy": 0.29583333333333334,
+      "gain_vs_q4": 0.004166666666666652,
+      "flips_recovered": 2,
+      "flip_recall": 0.2222222222222222,
+      "harmful_reversions": 1
+    },
+    {
+      "budget": 0.15,
+      "routed": 36,
+      "hybrid_accuracy": 0.3,
+      "gain_vs_q4": 0.008333333333333304,
+      "flips_recovered": 3,
+      "flip_recall": 0.3333333333333333,
+      "harmful_reversions": 1
+    },
+    {
+      "budget": 0.2,
+      "routed": 48,
+      "hybrid_accuracy": 0.30416666666666664,
+      "gain_vs_q4": 0.012499999999999956,
+      "flips_recovered": 4,
+      "flip_recall": 0.4444444444444444,
+      "harmful_reversions": 1
+    },
+    {
+      "budget": 0.3,
+      "routed": 72,
+      "hybrid_accuracy": 0.30833333333333335,
+      "gain_vs_q4": 0.016666666666666663,
+      "flips_recovered": 5,
+      "flip_recall": 0.5555555555555556,
+      "harmful_reversions": 1
+    }
+  ]
+}
