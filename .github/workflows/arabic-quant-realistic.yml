@@ -53,23 +53,40 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p tools/llama
-          python - <<'PY' > /tmp/llama_asset_url.txt
+          python - <<'PY'
+          import json
           import requests
-          release = requests.get(
-              "https://api.github.com/repos/ggml-org/llama.cpp/releases/latest",
+
+          releases = requests.get(
+              "https://api.github.com/repos/ggml-org/llama.cpp/releases?per_page=30",
               timeout=60,
           ).json()
-          matches = [
-              asset["browser_download_url"]
-              for asset in release.get("assets", [])
-              if asset.get("name", "").endswith("bin-ubuntu-x64.tar.gz")
-          ]
-          if not matches:
-              raise SystemExit("Ubuntu x64 CPU llama.cpp asset was not found")
-          print(matches[0])
+          selected = None
+          for release in releases:
+              for asset in release.get("assets", []):
+                  name = asset.get("name", "")
+                  if "bin-ubuntu-x64" in name and (name.endswith(".tar.gz") or name.endswith(".zip")):
+                      selected = {
+                          "url": asset["browser_download_url"],
+                          "name": name,
+                      }
+                      break
+              if selected:
+                  break
+          if not selected:
+              raise SystemExit("Ubuntu x64 CPU llama.cpp asset was not found in recent releases")
+          with open("/tmp/llama_asset.json", "w", encoding="utf-8") as f:
+              json.dump(selected, f)
+          print(selected)
           PY
-          curl --fail --location "$(cat /tmp/llama_asset_url.txt)" --output /tmp/llama.tar.gz
-          tar -xzf /tmp/llama.tar.gz -C tools/llama
+          ASSET_URL="$(python -c 'import json; print(json.load(open("/tmp/llama_asset.json"))["url"])')"
+          ASSET_NAME="$(python -c 'import json; print(json.load(open("/tmp/llama_asset.json"))["name"])')"
+          curl --fail --location "$ASSET_URL" --output "/tmp/$ASSET_NAME"
+          case "$ASSET_NAME" in
+            *.tar.gz) tar -xzf "/tmp/$ASSET_NAME" -C tools/llama ;;
+            *.zip) unzip -q "/tmp/$ASSET_NAME" -d tools/llama ;;
+            *) echo "Unsupported archive: $ASSET_NAME"; exit 1 ;;
+          esac
           SERVER_BIN="$(find tools/llama -type f -name llama-server | head -n 1)"
           test -n "$SERVER_BIN"
           chmod +x "$SERVER_BIN"
