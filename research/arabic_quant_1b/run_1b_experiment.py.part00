@@ -1,0 +1,100 @@
+#!/usr/bin/env python3
+"""Reproducible Arabic quantization-induced answer-flip pilot on a 1B GGUF model.
+
+The script starts llama.cpp server sequentially for F16, Q8_0 and Q4_K_M,
+queries the same fixed ArabicMMLU sample, and measures paired answer transitions.
+"""
+from __future__ import annotations
+
+import argparse
+import csv
+import hashlib
+import json
+import math
+import os
+import random
+import signal
+import subprocess
+import sys
+import time
+import urllib.error
+import urllib.request
+from collections import defaultdict
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any, Iterable
+
+import numpy as np
+import pandas as pd
+from scipy.stats import binomtest
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import average_precision_score, roc_auc_score
+from sklearn.model_selection import StratifiedKFold, cross_val_predict
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+
+LABELS = ("A", "B", "C", "D")
+MODEL_FILES = {
+    "f16": "granite-3.0-1b-a400m-instruct-f16.gguf",
+    "q8": "granite-3.0-1b-a400m-instruct-Q8_0.gguf",
+    "q4": "granite-3.0-1b-a400m-instruct-Q4_K_M.gguf",
+}
+
+
+@dataclass
+class Question:
+    qid: str
+    subject: str
+    country: str
+    level: str
+    context: str
+    question: str
+    options: dict[str, str]
+    gold: str
+
+
+def clean(value: Any) -> str:
+    if value is None:
+        return ""
+    text = str(value).strip()
+    if text.lower() in {"nan", "none", "null"}:
+        return ""
+    return text
+
+
+def is_zero_shot(value: Any) -> bool:
+    return clean(value).lower() in {"0", "0.0", "false", "no"}
+
+
+def load_questions(csv_path: Path, n: int, seed: int) -> list[Question]:
+    rows: list[Question] = []
+    seen: set[str] = set()
+    with csv_path.open("r", encoding="utf-8-sig", newline="") as f:
+        reader = csv.DictReader(f)
+        for idx, row in enumerate(reader):
+            if not is_zero_shot(row.get("is_few_shot")):
+                continue
+            gold = clean(row.get("Answer Key")).upper()
+            if gold not in LABELS:
+                continue
+            opts = {label: clean(row.get(f"Option {i}")) for i, label in enumerate(LABELS, 1)}
+            if any(not opts[label] for label in LABELS):
+                continue
+            if clean(row.get("Option 5")):
+                continue
+            question = clean(row.get("Question"))
+            context = clean(row.get("Context"))
+            if not question or len(question) > 650 or len(context) > 450:
+                continue
+            key = question + "\n" + "\n".join(opts.values())
+            if key in seen:
+                continue
+            seen.add(key)
+            rows.append(
+                Question(
+                    qid=f"ammlu-{idx}",
+                    subject=clean(row.get("Subject")) or "Unknown",
+                    country=clean(row.get("Country")),
+                    level=clean(row.get("Level")),
+                    context=context,
+                    question=question,
