@@ -1,0 +1,100 @@
+        for value in obj:
+            yield from walk_probability_nodes(value)
+
+
+def extract_probabilities(response: dict[str, Any]) -> dict[str, float]:
+    probs: dict[str, float] = {}
+    source = response.get("completion_probabilities", response)
+    for node in walk_probability_nodes(source):
+        token = normalize_label(str(node.get("token", node.get("tok_str", ""))))
+        if token not in LABELS:
+            continue
+        if "prob" in node:
+            value = float(node["prob"])
+        else:
+            value = math.exp(float(node["logprob"]))
+        if math.isfinite(value) and value >= 0:
+            probs[token] = max(probs.get(token, 0.0), value)
+    total = sum(probs.values())
+    if total > 0:
+        probs = {k: v / total for k, v in probs.items()}
+    return probs
+
+
+def entropy(probs: dict[str, float]) -> float:
+    values = [probs.get(label, 0.0) for label in LABELS]
+    s = sum(values)
+    if s <= 0:
+        return float("nan")
+    values = [v / s for v in values]
+    return -sum(v * math.log(max(v, 1e-12)) for v in values)
+
+
+def answer_one(port: int, prompt: str, attempts: int = 3) -> tuple[str, dict[str, float], dict[str, Any]]:
+    payload = {
+        "prompt": prompt,
+        "n_predict": 1,
+        "temperature": -1.0,
+        "seed": 20260829,
+        "n_probs": 16,
+        "post_sampling_probs": True,
+        "cache_prompt": False,
+        "grammar": 'root ::= "A" | "B" | "C" | "D"',
+        "stream": False,
+    }
+    last_error: Exception | None = None
+    for attempt in range(attempts):
+        try:
+            response = http_json(f"http://127.0.0.1:{port}/completion", payload, timeout=240)
+            pred = normalize_label(str(response.get("content", "")))
+            probs = extract_probabilities(response)
+            if not pred and probs:
+                pred = max(probs, key=probs.get)
+            if pred in LABELS:
+                return pred, probs, response
+            raise ValueError(f"Invalid model output: {response.get('content')!r}")
+        except Exception as exc:  # noqa: BLE001
+            last_error = exc
+            time.sleep(2 ** attempt)
+    raise RuntimeError(f"Inference failed after {attempts} attempts: {last_error}")
+
+
+def file_sha256(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        for block in iter(lambda: f.read(8 * 1024 * 1024), b""):
+            h.update(block)
+    return h.hexdigest()
+
+
+def run_model(
+    variant: str,
+    model_path: Path,
+    server_bin: Path,
+    questions: list[Question],
+    output_dir: Path,
+    port: int,
+    threads: int,
+) -> pd.DataFrame:
+    log_path = output_dir / f"server_{variant}.log"
+    command = [
+        str(server_bin),
+        "-m", str(model_path),
+        "-c", "1024",
+        "-t", str(threads),
+        "-tb", str(threads),
+        "-np", "1",
+        "--host", "127.0.0.1",
+        "--port", str(port),
+    ]
+    with log_path.open("w", encoding="utf-8") as log_file:
+        proc = subprocess.Popen(command, stdout=log_file, stderr=subprocess.STDOUT, text=True)
+        try:
+            wait_for_server(port, proc)
+            records: list[dict[str, Any]] = []
+            started = time.time()
+            for i, q in enumerate(questions, 1):
+                prompt = build_prompt(q)
+                t0 = time.time()
+                pred, probs, response = answer_one(port, prompt)
+                timings = response.get("timings", {}) or {}
