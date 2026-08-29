@@ -1,0 +1,100 @@
+                    options=opts,
+                    gold=gold,
+                )
+            )
+
+    if len(rows) < n:
+        raise RuntimeError(f"Only {len(rows)} eligible questions found; requested {n}.")
+
+    # Deterministic round-robin sampling by subject to avoid one large subject dominating.
+    rng = random.Random(seed)
+    by_subject: dict[str, list[Question]] = defaultdict(list)
+    for row in rows:
+        by_subject[row.subject].append(row)
+    for group in by_subject.values():
+        rng.shuffle(group)
+    subjects = sorted(by_subject)
+    rng.shuffle(subjects)
+    selected: list[Question] = []
+    pointer = 0
+    while len(selected) < n:
+        subject = subjects[pointer % len(subjects)]
+        if by_subject[subject]:
+            selected.append(by_subject[subject].pop())
+        pointer += 1
+        if pointer > len(rows) * 2:
+            break
+    if len(selected) != n:
+        raise RuntimeError(f"Sampling stopped at {len(selected)} instead of {n}.")
+    return selected
+
+
+def build_prompt(q: Question) -> str:
+    metadata = "، ".join(part for part in [q.subject, q.level, q.country] if part)
+    body = f"المجال: {metadata}\n" if metadata else ""
+    if q.context:
+        body += f"السياق: {q.context}\n"
+    body += f"السؤال: {q.question}\n"
+    for label in LABELS:
+        body += f"{label}. {q.options[label]}\n"
+    body += "اختر الإجابة الصحيحة. اكتب حرفًا واحدًا فقط من A أو B أو C أو D."
+    return (
+        "<|start_of_role|>system<|end_of_role|>"
+        "أنت مساعد دقيق. أجب بحرف واحد فقط دون شرح."
+        "<|end_of_text|>\n"
+        "<|start_of_role|>user<|end_of_role|>"
+        + body
+        + "<|end_of_text|>\n"
+        "<|start_of_role|>assistant<|end_of_role|>"
+    )
+
+
+def http_json(url: str, payload: dict[str, Any] | None = None, timeout: int = 180) -> dict[str, Any]:
+    data = None
+    headers = {}
+    if payload is not None:
+        data = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+        headers["Content-Type"] = "application/json"
+    req = urllib.request.Request(url, data=data, headers=headers, method="POST" if data else "GET")
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        return json.loads(resp.read().decode("utf-8"))
+
+
+def wait_for_server(port: int, proc: subprocess.Popen[str], timeout: int = 240) -> None:
+    deadline = time.time() + timeout
+    last_error: Exception | None = None
+    while time.time() < deadline:
+        if proc.poll() is not None:
+            tail = ""
+            if proc.stderr:
+                try:
+                    tail = proc.stderr.read()[-5000:]
+                except Exception:
+                    pass
+            raise RuntimeError(f"llama-server exited with {proc.returncode}.\n{tail}")
+        try:
+            result = http_json(f"http://127.0.0.1:{port}/health", timeout=5)
+            if result.get("status") in {"ok", "loading model"}:
+                if result.get("status") == "ok":
+                    return
+        except Exception as exc:  # noqa: BLE001
+            last_error = exc
+        time.sleep(2)
+    raise TimeoutError(f"Server did not become healthy: {last_error}")
+
+
+def normalize_label(text: str) -> str:
+    text = clean(text).upper()
+    for char in text:
+        if char in LABELS:
+            return char
+    return ""
+
+
+def walk_probability_nodes(obj: Any) -> Iterable[dict[str, Any]]:
+    if isinstance(obj, dict):
+        if any(k in obj for k in ("token", "tok_str")) and any(k in obj for k in ("prob", "logprob")):
+            yield obj
+        for value in obj.values():
+            yield from walk_probability_nodes(value)
+    elif isinstance(obj, list):
