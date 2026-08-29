@@ -1,0 +1,86 @@
+name: Arabic Quantization Pilot
+
+on:
+  push:
+    branches:
+      - research-arabic-quant-pilot-20260829
+    paths:
+      - research/arabic_quant_pilot/run_experiment.py
+      - research/arabic_quant_pilot/requirements.txt
+      - .github/workflows/arabic-quant-pilot.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arabic-quant-pilot-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    env:
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      HF_HUB_DISABLE_XET: "1"
+      TOKENIZERS_PARALLELISM: "false"
+    steps:
+      - name: Checkout research branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: research/arabic_quant_pilot/requirements.txt
+
+      - name: Install CPU PyTorch
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --index-url https://download.pytorch.org/whl/cpu torch==2.7.1
+
+      - name: Install experiment dependencies
+        run: python -m pip install -r research/arabic_quant_pilot/requirements.txt
+
+      - name: Record runner resources
+        run: |
+          lscpu
+          free -h
+          python --version
+
+      - name: Run paired Arabic benchmark
+        run: |
+          python research/arabic_quant_pilot/run_experiment.py \
+            --model-id Qwen/Qwen3-0.6B \
+            --sample-size 1200 \
+            --seed 20260829 \
+            --batch-size 8 \
+            --max-length 384 \
+            --group-size 128 \
+            --output-dir research/arabic_quant_pilot/results
+
+      - name: Upload complete result bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arabic-quant-pilot-results
+          path: research/arabic_quant_pilot/results/
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Commit measured results to the isolated branch
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/arabic_quant_pilot/results
+          if git diff --cached --quiet; then
+            echo "No result changes to commit"
+          else
+            git commit -m "Add measured Arabic quantization pilot results [skip ci]"
+            git push origin HEAD:${GITHUB_REF_NAME}
+          fi
