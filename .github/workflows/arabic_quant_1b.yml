@@ -1,0 +1,109 @@
+name: Arabic Quantization 1B Pilot
+
+on:
+  push:
+    branches:
+      - research-arabic-quant-1b-20260829
+    paths:
+      - "research/arabic_quant_1b/**"
+      - ".github/workflows/arabic_quant_1b.yml"
+  pull_request:
+    paths:
+      - "research/arabic_quant_1b/**"
+      - ".github/workflows/arabic_quant_1b.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  run-pilot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 330
+    env:
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      TOKENIZERS_PARALLELISM: "false"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install analysis dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy pandas scipy scikit-learn huggingface_hub hf_xet
+
+      - name: Assemble and validate experiment script
+        run: |
+          cat research/arabic_quant_1b/run_1b_experiment.py.part* > /tmp/run_1b_experiment.py
+          python -m py_compile /tmp/run_1b_experiment.py
+          wc -l -c /tmp/run_1b_experiment.py
+
+      - name: Build llama.cpp server
+        run: |
+          git clone --depth 1 --branch b10679 https://github.com/ggml-org/llama.cpp.git
+          cmake -S llama.cpp -B llama.cpp/build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DLLAMA_CURL=OFF \
+            -DGGML_NATIVE=ON
+          cmake --build llama.cpp/build --config Release -j4 --target llama-server
+          llama.cpp/build/bin/llama-server --version
+
+      - name: Download F16, Q8 and Q4 model variants
+        run: |
+          mkdir -p models data results_1b
+          python - <<'PY'
+          from huggingface_hub import hf_hub_download
+          repo = "bartowski/granite-3.0-1b-a400m-instruct-GGUF"
+          files = [
+              "granite-3.0-1b-a400m-instruct-f16.gguf",
+              "granite-3.0-1b-a400m-instruct-Q8_0.gguf",
+              "granite-3.0-1b-a400m-instruct-Q4_K_M.gguf",
+          ]
+          for filename in files:
+              path = hf_hub_download(repo_id=repo, filename=filename, local_dir="models")
+              print(path)
+          PY
+          ls -lh models/*.gguf
+
+      - name: Download ArabicMMLU
+        run: |
+          curl -L --fail --retry 5 --retry-delay 5 \
+            -o data/ArabicMMLU.csv \
+            https://raw.githubusercontent.com/mbzuai-nlp/ArabicMMLU/main/data/ArabicMMLU.csv
+          wc -l -c data/ArabicMMLU.csv
+
+      - name: Run paired 1B experiment
+        run: |
+          python /tmp/run_1b_experiment.py \
+            --csv data/ArabicMMLU.csv \
+            --model-dir models \
+            --server-bin llama.cpp/build/bin/llama-server \
+            --output-dir results_1b \
+            --n 600 \
+            --seed 20260829 \
+            --threads 4
+
+      - name: Print final report
+        if: always()
+        run: |
+          if [ -f results_1b/REPORT_AR.md ]; then cat results_1b/REPORT_AR.md; fi
+          if [ -f results_1b/summary.json ]; then
+            echo "--- SUMMARY JSON ---"
+            cat results_1b/summary.json
+          fi
+
+      - name: Upload complete results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arabic-quant-1b-results
+          path: |
+            results_1b/**
+            /tmp/run_1b_experiment.py
+          if-no-files-found: warn
+          retention-days: 14
