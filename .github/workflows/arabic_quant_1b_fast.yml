@@ -1,0 +1,78 @@
+name: Arabic Quantization 1B Fast Check
+
+on:
+  push:
+    branches:
+      - research-arabic-quant-1b-20260829
+    paths:
+      - ".github/workflows/arabic_quant_1b_fast.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fast-check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy pandas scipy scikit-learn requests huggingface_hub hf_xet
+
+      - name: Build llama.cpp
+        working-directory: research/arabic_quant_1b
+        run: |
+          git clone --depth 1 --branch b10679 https://github.com/ggml-org/llama.cpp.git llama.cpp
+          cmake -S llama.cpp -B llama.cpp/build -DCMAKE_BUILD_TYPE=Release -DLLAMA_CURL=OFF -DGGML_NATIVE=ON
+          cmake --build llama.cpp/build --config Release -j4 --target llama-server
+
+      - name: Download models and ArabicMMLU
+        working-directory: research/arabic_quant_1b
+        run: |
+          mkdir -p models data results
+          python - <<'PY'
+          from huggingface_hub import hf_hub_download
+          repo = "bartowski/granite-3.0-1b-a400m-instruct-GGUF"
+          for name in [
+              "granite-3.0-1b-a400m-instruct-f16.gguf",
+              "granite-3.0-1b-a400m-instruct-Q8_0.gguf",
+              "granite-3.0-1b-a400m-instruct-Q4_K_M.gguf",
+          ]:
+              print(hf_hub_download(repo_id=repo, filename=name, local_dir="models"))
+          PY
+          curl -L --fail --retry 5 -o data/ArabicMMLU.csv https://raw.githubusercontent.com/mbzuai-nlp/ArabicMMLU/main/data/ArabicMMLU.csv
+
+      - name: Run fast paired check
+        working-directory: research/arabic_quant_1b
+        run: |
+          rm -rf results/* logs || true
+          python run_experiment.py --sample-size 120 --ctx-size 1024 --threads 4 --bootstrap 3000 2>&1 | tee results/console.log
+
+      - name: Print report
+        if: always()
+        working-directory: research/arabic_quant_1b
+        run: |
+          test -f results/REPORT_AR.md && cat results/REPORT_AR.md || true
+          test -f results/summary.json && cat results/summary.json || true
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arabic-quant-1b-fast-results
+          path: |
+            research/arabic_quant_1b/results
+            research/arabic_quant_1b/logs
+            research/arabic_quant_1b/run_experiment.py
+          if-no-files-found: warn
+          retention-days: 14
