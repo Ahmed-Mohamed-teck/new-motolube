@@ -1,0 +1,100 @@
+            }
+        )
+    pd.DataFrame(subject_rows).sort_values(["q4_flips", "n"], ascending=False).to_csv(
+        output_dir / "subject_breakdown.csv", index=False
+    )
+    return summary
+
+
+def write_report(summary: dict[str, Any], metadata: dict[str, Any], output_dir: Path) -> None:
+    acc = summary["accuracy"]
+    q8 = summary["paired_transitions"]["q8"]
+    q4 = summary["paired_transitions"]["q4"]
+    pred = summary["predictor"]
+    lines = [
+        "# تقرير تجربة التكميم على نموذج عربي/متعدد اللغات بحجم 1B",
+        "",
+        "## التصميم",
+        "",
+        f"- النموذج: `{metadata['model_repo']}` — Granite MoE، إجمالي يقارب 1B/1.3B معامل و400M معامل نشط.",
+        f"- عدد أسئلة الاختبار الثابتة: **{summary['n_questions']}** من ArabicMMLU.",
+        "- المقارنة: F16 مقابل Q8_0 مقابل Q4_K_M، بنفس الأسئلة ونفس الـprompt والاستدلال الحتمي.",
+        "- المهمة: اختيار من متعدد؛ الإجابة مقيدة بحرف واحد A/B/C/D.",
+        "",
+        "## الدقة",
+        "",
+        "| النسخة | الدقة | الفرق عن F16 |",
+        "|---|---:|---:|",
+        f"| F16 | {acc['f16']*100:.2f}% | — |",
+        f"| Q8_0 | {acc['q8']*100:.2f}% | {q8['accuracy_delta_vs_f16']*100:+.2f} نقطة |",
+        f"| Q4_K_M | {acc['q4']*100:.2f}% | {q4['accuracy_delta_vs_f16']*100:+.2f} نقطة |",
+        "",
+        "## التحولات الزوجية سؤالًا بسؤال",
+        "",
+        "| المقارنة | F16 صحيح → النسخة خطأ | F16 خطأ → النسخة صحيح | معدل السقوط بين إجابات F16 الصحيحة | McNemar p |",
+        "|---|---:|---:|---:|---:|",
+        f"| Q8_0 | {q8['f16_correct_to_wrong']} | {q8['f16_wrong_to_correct']} | {q8['flip_rate_given_f16_correct']*100:.2f}% | {q8['mcnemar_exact_p']:.4g} |",
+        f"| Q4_K_M | {q4['f16_correct_to_wrong']} | {q4['f16_wrong_to_correct']} | {q4['flip_rate_given_f16_correct']*100:.2f}% | {q4['mcnemar_exact_p']:.4g} |",
+        "",
+        "## التنبؤ بالخطر والإصلاح الانتقائي",
+        "",
+    ]
+    if "auroc" in pred:
+        lines += [
+            f"- نسبة حالات F16 صحيح → Q4 خطأ: **{pred['positive_rate']*100:.2f}%** ({pred['positives']} حالة).",
+            f"- AUROC لمتنبئ الخطر المعتمد على إشارات Q4 فقط: **{pred['auroc']:.3f}**.",
+            f"- AUPRC: **{pred['auprc']:.3f}** مقابل خط أساس عشوائي {pred['positive_rate']:.3f}.",
+        ]
+    else:
+        lines += [f"- عدد التحولات الإيجابية: {pred.get('positives', 0)}؛ لم يكن كافيًا لتقييم Logistic Regression بثبات."]
+    lines += [
+        "",
+        "| ميزانية الرجوع إلى F16 | الدقة النهائية | نسبة أخطاء Q4 المسترجعة | دقة التوجيه العشوائي المتوقعة |",
+        "|---:|---:|---:|---:|",
+    ]
+    for row in summary["routing"]:
+        recall = "—" if row["q4_flip_recall"] is None else f"{row['q4_flip_recall']*100:.2f}%"
+        lines.append(
+            f"| {row['budget']*100:.0f}% | {row['risk_routing_accuracy']*100:.2f}% | {recall} | {row['random_routing_accuracy_mean']*100:.2f}% |"
+        )
+    lines += [
+        "",
+        "## القيود",
+        "",
+        "هذه تجربة تحقق مبدئية على نموذج واحد ومهمة اختيار من متعدد. لا تكفي وحدها لإثبات الهلوسة النصية الحرة، ولا لادعاء التعميم على كل النماذج العربية. قيمتها الأساسية هي اختبار وجود التحولات الناتجة عن التكميم على نموذج مُدرّب مسبقًا بحجم 1B تقريبًا قبل توسيع الرسالة.",
+        "",
+    ]
+    (output_dir / "REPORT_AR.md").write_text("\n".join(lines), encoding="utf-8")
+
+
+def parse_args() -> argparse.Namespace:
+    p = argparse.ArgumentParser()
+    p.add_argument("--csv", type=Path, required=True)
+    p.add_argument("--model-dir", type=Path, required=True)
+    p.add_argument("--server-bin", type=Path, required=True)
+    p.add_argument("--output-dir", type=Path, required=True)
+    p.add_argument("--n", type=int, default=360)
+    p.add_argument("--seed", type=int, default=20260829)
+    p.add_argument("--threads", type=int, default=max(1, min(2, os.cpu_count() or 1)))
+    return p.parse_args()
+
+
+def main() -> None:
+    args = parse_args()
+    args.output_dir.mkdir(parents=True, exist_ok=True)
+    questions = load_questions(args.csv, args.n, args.seed)
+    pd.DataFrame(
+        [
+            {
+                "qid": q.qid,
+                "subject": q.subject,
+                "country": q.country,
+                "level": q.level,
+                "context": q.context,
+                "question": q.question,
+                "gold": q.gold,
+                **{f"option_{label}": q.options[label] for label in LABELS},
+            }
+            for q in questions
+        ]
+    ).to_csv(args.output_dir / "sample.csv", index=False)
