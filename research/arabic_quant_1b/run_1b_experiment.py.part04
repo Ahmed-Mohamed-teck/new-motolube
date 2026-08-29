@@ -1,0 +1,100 @@
+        lo, hi = wilson_interval(ctw, f16_correct)
+        d_lo, d_hi = bootstrap_accuracy_delta(
+            merged.correct_f16.to_numpy(dtype=float),
+            merged[f"correct_{variant}"].to_numpy(dtype=float),
+            seed + (8 if variant == "q8" else 4),
+        )
+        summary["paired_transitions"][variant] = {
+            "f16_correct_to_wrong": ctw,
+            "f16_wrong_to_correct": wtc,
+            "flip_rate_given_f16_correct": ctw / f16_correct if f16_correct else None,
+            "flip_rate_95ci": [lo, hi],
+            "accuracy_delta_vs_f16": summary["accuracy"][variant] - summary["accuracy"]["f16"],
+            "accuracy_delta_bootstrap_95ci": [d_lo, d_hi],
+            "mcnemar_exact_p": exact_mcnemar_p(ctw, wtc),
+        }
+
+    # Quantized-only risk predictor; no F16 output is used as a feature.
+    y = merged.q4_flip.to_numpy(dtype=int)
+    feature_cols = ["max_prob_q4", "margin_q4", "entropy_q4", "tokens_evaluated_q4", "prompt_chars"]
+    X = merged[feature_cols].replace([np.inf, -np.inf], np.nan)
+    X = X.fillna(X.median(numeric_only=True)).fillna(0.0).to_numpy(dtype=float)
+    positives = int(y.sum())
+    negatives = int((1 - y).sum())
+    if positives >= 5 and negatives >= 5:
+        folds = min(5, positives, negatives)
+        cv = StratifiedKFold(n_splits=folds, shuffle=True, random_state=seed)
+        clf = make_pipeline(
+            StandardScaler(),
+            LogisticRegression(class_weight="balanced", max_iter=3000, random_state=seed),
+        )
+        risk = cross_val_predict(clf, X, y, cv=cv, method="predict_proba")[:, 1]
+        summary["predictor"] = {
+            "positive_rate": float(y.mean()),
+            "positives": positives,
+            "folds": folds,
+            "auroc": float(roc_auc_score(y, risk)),
+            "auprc": float(average_precision_score(y, risk)),
+            "features": feature_cols,
+        }
+    else:
+        # Deterministic fallback score based on low margin/high entropy.
+        margin = merged.margin_q4.fillna(merged.margin_q4.median()).fillna(0).to_numpy(float)
+        ent = merged.entropy_q4.fillna(merged.entropy_q4.median()).fillna(0).to_numpy(float)
+        risk = -margin + ent
+        summary["predictor"] = {
+            "positive_rate": float(y.mean()) if n else 0.0,
+            "positives": positives,
+            "skipped": "Too few positive or negative examples for cross-validated logistic regression.",
+            "score": "-margin + entropy",
+        }
+
+    merged["q4_risk"] = risk
+    merged.to_csv(output_dir / "paired_results_with_risk.csv", index=False)
+
+    rng = np.random.default_rng(seed)
+    total_flips = int(merged.q4_flip.sum())
+    for budget in (0.0, 0.05, 0.10, 0.20, 0.30):
+        k = int(round(n * budget))
+        routed = np.zeros(n, dtype=bool)
+        if k > 0:
+            routed[np.argsort(-risk)[:k]] = True
+        final_correct = np.where(routed, merged.correct_f16.to_numpy(), merged.correct_q4.to_numpy())
+        recovered = int((routed & (merged.q4_flip.to_numpy() == 1)).sum())
+
+        random_accs: list[float] = []
+        random_recovered: list[int] = []
+        if k > 0:
+            for _ in range(500):
+                idx = rng.choice(n, size=k, replace=False)
+                mask = np.zeros(n, dtype=bool)
+                mask[idx] = True
+                random_accs.append(float(np.where(mask, merged.correct_f16, merged.correct_q4).mean()))
+                random_recovered.append(int((mask & (merged.q4_flip.to_numpy() == 1)).sum()))
+        else:
+            random_accs = [float(merged.correct_q4.mean())]
+            random_recovered = [0]
+
+        summary["routing"].append(
+            {
+                "budget": budget,
+                "routed_questions": k,
+                "risk_routing_accuracy": float(final_correct.mean()),
+                "q4_flips_recovered": recovered,
+                "q4_flip_recall": recovered / total_flips if total_flips else None,
+                "random_routing_accuracy_mean": float(np.mean(random_accs)),
+                "random_q4_flips_recovered_mean": float(np.mean(random_recovered)),
+            }
+        )
+
+    # Subject-level diagnostic, only descriptive due to smaller counts.
+    subject_rows = []
+    for subject, group in merged.groupby("subject"):
+        subject_rows.append(
+            {
+                "subject": subject,
+                "n": len(group),
+                "f16_accuracy": group.correct_f16.mean(),
+                "q8_accuracy": group.correct_q8.mean(),
+                "q4_accuracy": group.correct_q4.mean(),
+                "q4_flips": int(group.q4_flip.sum()),
