@@ -1,0 +1,69 @@
+name: Arabic Quantization Smoke Validation
+
+on:
+  push:
+    branches:
+      - research-arabic-quant-pilot-20260829
+    paths:
+      - .github/workflows/arabic-quant-smoke.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arabic-quant-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      HF_HUB_DISABLE_XET: "1"
+      TOKENIZERS_PARALLELISM: "false"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: research/arabic_quant_pilot/requirements.txt
+      - name: Install runtime
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --index-url https://download.pytorch.org/whl/cpu torch==2.7.1
+          python -m pip install -r research/arabic_quant_pilot/requirements.txt
+      - name: Run validation subset
+        run: |
+          python research/arabic_quant_pilot/run_experiment.py \
+            --model-id Qwen/Qwen3-0.6B \
+            --sample-size 240 \
+            --seed 20260829 \
+            --batch-size 16 \
+            --max-length 256 \
+            --group-size 128 \
+            --output-dir research/arabic_quant_pilot/smoke_results
+      - name: Upload validation bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arabic-quant-smoke-results
+          path: research/arabic_quant_pilot/smoke_results/
+          if-no-files-found: warn
+      - name: Commit validation results
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin ${GITHUB_REF_NAME}
+          git add research/arabic_quant_pilot/smoke_results
+          if git diff --cached --quiet; then
+            echo "No validation result changes"
+          else
+            git commit -m "Add Arabic quantization smoke results [skip ci]"
+            git push origin HEAD:${GITHUB_REF_NAME}
+          fi

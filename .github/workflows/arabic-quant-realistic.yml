@@ -1,0 +1,152 @@
+name: Realistic Arabic Quantization Validation
+
+on:
+  push:
+    branches:
+      - research-arabic-quant-pilot-20260829
+    paths:
+      - research/arabic_quant_pilot/run_gguf_validation.py
+      - .github/workflows/arabic-quant-realistic.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arabic-quant-realistic-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  realistic-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    env:
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      HF_HUB_DISABLE_XET: "1"
+      PYTHONUNBUFFERED: "1"
+    steps:
+      - name: Checkout isolated research branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install analysis dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install \
+            numpy==2.2.6 \
+            pandas==2.3.2 \
+            scipy==1.16.1 \
+            scikit-learn==1.7.1 \
+            requests==2.32.5 \
+            huggingface-hub==0.34.4 \
+            tabulate==0.9.0
+
+      - name: Download current llama.cpp CPU server
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p tools/llama
+          python - <<'PY'
+          import json
+          import requests
+
+          releases = requests.get(
+              "https://api.github.com/repos/ggml-org/llama.cpp/releases?per_page=30",
+              timeout=60,
+          ).json()
+          selected = None
+          for release in releases:
+              for asset in release.get("assets", []):
+                  name = asset.get("name", "")
+                  if "bin-ubuntu-x64" in name and (name.endswith(".tar.gz") or name.endswith(".zip")):
+                      selected = {
+                          "url": asset["browser_download_url"],
+                          "name": name,
+                      }
+                      break
+              if selected:
+                  break
+          if not selected:
+              raise SystemExit("Ubuntu x64 CPU llama.cpp asset was not found in recent releases")
+          with open("/tmp/llama_asset.json", "w", encoding="utf-8") as f:
+              json.dump(selected, f)
+          print(selected)
+          PY
+          ASSET_URL="$(python -c 'import json; print(json.load(open("/tmp/llama_asset.json"))["url"])')"
+          ASSET_NAME="$(python -c 'import json; print(json.load(open("/tmp/llama_asset.json"))["name"])')"
+          curl --fail --location "$ASSET_URL" --output "/tmp/$ASSET_NAME"
+          case "$ASSET_NAME" in
+            *.tar.gz) tar -xzf "/tmp/$ASSET_NAME" -C tools/llama ;;
+            *.zip) unzip -q "/tmp/$ASSET_NAME" -d tools/llama ;;
+            *) echo "Unsupported archive: $ASSET_NAME"; exit 1 ;;
+          esac
+          SERVER_BIN="$(find tools/llama -type f -name llama-server | head -n 1)"
+          test -n "$SERVER_BIN"
+          chmod +x "$SERVER_BIN"
+          SERVER_DIR="$(dirname "$SERVER_BIN")"
+          echo "SERVER_BIN=$GITHUB_WORKSPACE/$SERVER_BIN" >> "$GITHUB_ENV"
+          echo "LD_LIBRARY_PATH=$GITHUB_WORKSPACE/$SERVER_DIR:${LD_LIBRARY_PATH:-}" >> "$GITHUB_ENV"
+          "$SERVER_BIN" --version
+
+      - name: Download paired F16 and Q4_K_M GGUF files
+        run: |
+          python - <<'PY'
+          from huggingface_hub import hf_hub_download
+          repo = "bartowski/Qwen2.5-0.5B-Instruct-GGUF"
+          files = [
+              "Qwen2.5-0.5B-Instruct-f16.gguf",
+              "Qwen2.5-0.5B-Instruct-Q4_K_M.gguf",
+          ]
+          for filename in files:
+              path = hf_hub_download(repo_id=repo, filename=filename, local_dir="models")
+              print(path)
+          PY
+          ls -lh models/*.gguf
+
+      - name: Record runner resources
+        run: |
+          lscpu
+          free -h
+          df -h
+
+      - name: Run production-style paired validation
+        run: |
+          python research/arabic_quant_pilot/run_gguf_validation.py \
+            --server-bin "$SERVER_BIN" \
+            --f16-model models/Qwen2.5-0.5B-Instruct-f16.gguf \
+            --q4-model models/Qwen2.5-0.5B-Instruct-Q4_K_M.gguf \
+            --sample-size 800 \
+            --seed 20260829 \
+            --batch-size 4 \
+            --threads 4 \
+            --max-chars 1800 \
+            --output-dir research/arabic_quant_pilot/realistic_results
+
+      - name: Upload measured result bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: realistic-arabic-quantization-results
+          path: research/arabic_quant_pilot/realistic_results/
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Commit measured results to isolated branch
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add research/arabic_quant_pilot/realistic_results
+          if git diff --cached --quiet; then
+            echo "No result changes to commit"
+          else
+            git commit -m "Add realistic F16 versus Q4 Arabic validation [skip ci]"
+            git push origin HEAD:${GITHUB_REF_NAME}
+          fi

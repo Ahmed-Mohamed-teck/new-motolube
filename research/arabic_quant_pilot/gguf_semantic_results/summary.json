@@ -1,0 +1,119 @@
+{
+  "run": {
+    "repo_id": "prithivMLmods/Qwen3-0.6B-GGUF",
+    "model_files": {
+      "f16": "Qwen3_0.6B.F16.gguf",
+      "q4km": "Qwen3_0.6B.Q4_K_M.gguf"
+    },
+    "sample_size": 100,
+    "condition_rows": 200,
+    "seed": 20260831,
+    "n_ctx": 512,
+    "n_threads": 4,
+    "github_run_id": "33235758960",
+    "scoring": "full option text, mean conditional token log-probability",
+    "duplicate_option_items_excluded_from_source": 1,
+    "f16": {
+      "variant": "f16",
+      "model_file": "Qwen3_0.6B.F16.gguf",
+      "elapsed_seconds": 1473.090027264,
+      "candidate_evaluations": 722,
+      "truncated_candidate_evaluations": 14
+    },
+    "q4km": {
+      "variant": "q4km",
+      "model_file": "Qwen3_0.6B.Q4_K_M.gguf",
+      "elapsed_seconds": 993.5604153920001,
+      "candidate_evaluations": 722,
+      "truncated_candidate_evaluations": 14
+    }
+  },
+  "original": {
+    "n": 100,
+    "f16_accuracy": 0.42,
+    "q4km_accuracy": 0.41,
+    "accuracy_delta": -0.010000000000000009,
+    "correct_to_wrong": 6,
+    "wrong_to_correct": 5,
+    "net_loss": 1,
+    "prediction_changes": 22,
+    "prediction_change_rate": 0.22,
+    "prediction_change_wilson_95ci": [
+      0.150012823846054,
+      0.31070353514985793
+    ],
+    "conditional_flip_rate": 0.14285714285714285,
+    "conditional_flip_wilson_95ci": [
+      0.06715967015962647,
+      0.27841089474444775
+    ],
+    "mcnemar_exact_p": 1.0,
+    "f16_prediction_distribution": {
+      "1": 37,
+      "2": 26,
+      "3": 17,
+      "4": 20
+    },
+    "q4km_prediction_distribution": {
+      "1": 42,
+      "2": 25,
+      "3": 19,
+      "4": 14
+    }
+  },
+  "permuted": {
+    "n": 100,
+    "f16_accuracy": 0.38,
+    "q4km_accuracy": 0.34,
+    "accuracy_delta": -0.03999999999999998,
+    "correct_to_wrong": 8,
+    "wrong_to_correct": 4,
+    "net_loss": 4,
+    "prediction_changes": 20,
+    "prediction_change_rate": 0.2,
+    "prediction_change_wilson_95ci": [
+      0.1333669333310325,
+      0.2888291655931589
+    ],
+    "conditional_flip_rate": 0.21052631578947367,
+    "conditional_flip_wilson_95ci": [
+      0.11074791842995879,
+      0.363457794753274
+    ],
+    "mcnemar_exact_p": 0.3876953125,
+    "f16_prediction_distribution": {
+      "1": 27,
+      "2": 32,
+      "3": 15,
+      "4": 25,
+      "5": 1
+    },
+    "q4km_prediction_distribution": {
+      "1": 29,
+      "2": 36,
+      "3": 21,
+      "4": 13,
+      "5": 1
+    }
+  },
+  "semantic_consistency": {
+    "f16": {
+      "consistent": 63,
+      "total": 100,
+      "rate": 0.63,
+      "wilson_95ci": [
+        0.5322052958094291,
+        0.7181763946567546
+      ]
+    },
+    "q4km": {
+      "consistent": 68,
+      "total": 100,
+      "rate": 0.68,
+      "wilson_95ci": [
+        0.5833738138954762,
+        0.7633085267500092
+      ]
+    }
+  }
+}

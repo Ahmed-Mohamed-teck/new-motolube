@@ -1,0 +1,9 @@
+{
+  "model_id": "Qwen/Qwen3-0.6B",
+  "sample_size": 240,
+  "seed": 20260829,
+  "batch_size": 16,
+  "max_length": 256,
+  "group_size": 128,
+  "output_dir": "research/arabic_quant_pilot/smoke_results"
+}

@@ -1,0 +1,70 @@
+name: Arabic Quantization GGUF Control
+
+on:
+  push:
+    branches:
+      - research-arabic-quant-pilot-20260829
+    paths:
+      - research/arabic_quant_pilot/run_gguf_label_control.py
+      - .github/workflows/arabic-quant-gguf-control.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: arabic-quant-gguf-control-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gguf-control:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      HF_HUB_DISABLE_XET: "1"
+      TOKENIZERS_PARALLELISM: "false"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install prebuilt GGUF runtime and analysis dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --upgrade --only-binary=:all: llama-cpp-python \
+            --extra-index-url https://abetlen.github.io/llama-cpp-python/whl/cpu
+          python -m pip install --upgrade huggingface-hub pandas numpy scipy
+      - name: Run F16 versus Q4_K_M and label-permutation control
+        run: |
+          python research/arabic_quant_pilot/run_gguf_label_control.py \
+            --input-csv research/arabic_quant_pilot/smoke_results/per_question_results.csv \
+            --output-dir research/arabic_quant_pilot/gguf_control_results \
+            --repo-id prithivMLmods/Qwen3-0.6B-GGUF \
+            --seed 20260830 \
+            --n-ctx 512 \
+            --n-threads 4
+      - name: Upload GGUF control bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arabic-quant-gguf-control-results
+          path: research/arabic_quant_pilot/gguf_control_results/
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Commit measured GGUF control results
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin ${GITHUB_REF_NAME}
+          git add research/arabic_quant_pilot/gguf_control_results
+          if git diff --cached --quiet; then
+            echo "No GGUF result changes"
+          else
+            git commit -m "Add measured GGUF quantization control results [skip ci]"
+            git push origin HEAD:${GITHUB_REF_NAME}
+          fi
